@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Mar 8, 2024
                                     <i class="far fa-clock clock"></i>
-                                    1 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class="">  </div>
+<div class=""> You are given an integer array <code>pref</code> of size <code>n</code>. Your task is to find and return an array <code>arr</code> of size <code>n</code> that satisfies the following condition: each element <code>pref[i]</code> equals the XOR of all elements from <code>arr[0]</code> to <code>arr[i]</code>. In other words, <code>pref[i] = arr[0] ^ arr[1] ^ ... ^ arr[i]</code> where <code>^</code> denotes the bitwise XOR operation. It is guaranteed that there is a unique solution. </div>
 
 
 
@@ -317,72 +317,90 @@
     <div class="problem-guide-tags">
 
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
         </div> 
     </div>
 
     
     <div class="problem-guide-content">
 
-        <div id="" 
+        <div id="Problem" 
             class="problem-guide-topic-content" 
             style="display: block;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Input:</b> You are given a single array `pref` of integers.</div>
+                        <div class=""> <b>Example:</b> pref = [3, 1, 2, 6]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= pref.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= pref[i] &lt;= 10^6</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Output:</b> Return an array `arr` that satisfies the condition: `pref[i] = arr[0] ^ arr[1] ^ ... ^ arr[i]`.</div>
+                        <div class=""> <b>Example:</b> Output: [3, 2, 0, 6]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The answer will always be unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> We need to find an array `arr` such that the cumulative XOR of its elements matches the corresponding values in `pref`.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Initialize an empty array `arr` of the same size as `pref`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Set `arr[0]` equal to `pref[0]` since the first element is directly equal.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. For each subsequent index `i`, calculate `arr[i]` as `pref[i] ^ pref[i-1]`. This is because `pref[i]` represents the cumulative XOR of `arr[0]` to `arr[i]`, and `pref[i-1]` represents the cumulative XOR of `arr[0]` to `arr[i-1]`, so XORing them will give the value of `arr[i]`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the array `arr`.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> Consider the following constraints while designing the solution.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The array `pref` has at least one element.</div>
+                            
+                                <div style="margin-left: 20px;"> • The XOR operation is associative and commutative.</div>
                             
                         </div>
                     </div>        
@@ -390,10 +408,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
+                                <div style="margin-left: 20px;"> • The input array `pref` is valid and contains at least one element.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element of `pref` is non-negative and less than or equal to 10^6.</div>
+                            
                         </div>
                     </div>     
                     
                     <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> pref = [3, 1, 2, 6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> To solve this, we find `arr` such that each `pref[i]` is the cumulative XOR of `arr[0]` to `arr[i]`. From `pref`, we can derive `arr` as follows: `arr[0] = 3`, `arr[1] = 3 ^ 1 = 2`, `arr[2] = 2 ^ 2 = 0`, `arr[3] = 0 ^ 6 = 6`. Thus, the result is `[3, 2, 0, 6]`.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> pref = [10]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the array `arr` will be equal to `pref[0]` because there is only one element. Thus, the result is `[10]`.</div>                                
+                                <br/>
                             
                     </div>                         
                     
@@ -401,33 +431,45 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Approach" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> </div>
+                        <div class=""> <b>Approach:</b> The solution is based on the property of the XOR operation. By using the cumulative XOR relationship, we can deduce each element of the array `arr` from the `pref` array.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
+                                <div style="margin-left: 20px;"> • The problem involves working with the XOR operation, which is associative and commutative.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We can solve the problem iteratively by using the property of XOR to derive each element of `arr` from the prefix XOR values in `pref`.</div>
                             
                         </div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1. Create an array `arr` of the same length as `pref`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Set `arr[0]` equal to `pref[0]`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. For each subsequent element `i`, calculate `arr[i] = pref[i] ^ pref[i-1]`.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the `arr` array.</div>
                             
                         </div>
                     </div>
@@ -436,14 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • There are no empty inputs as `pref` always has at least one element.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle arrays of size up to 100,000 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
+                                <div style="margin-left: 20px;"> • Handle cases where `pref` has a single element, as `arr` will just be equal to `pref`.</div>
+                            
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure the solution is efficient and runs in O(n) time complexity.</div>
                             
                         </div>                                                                        
                     </div>
@@ -452,54 +502,133 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Steps" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initial Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 XOR Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Result</button>
                     
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Steps">
 
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findArray(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pref) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(pref.size());
+</span></span><span style="display:flex;"><span>    res[<span style="color:#666">0</span>] <span style="color:#666">=</span> pref[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> pref.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        res[i] <span style="color:#666">=</span> pref[i] <span style="color:#666">^</span> pref[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findArray(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pref) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Function definition for &#39;findArray&#39;, which takes a reference to a vector of integers &#39;pref&#39; and returns a vector of integers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Vector Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(pref.size());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A new vector &#39;res&#39; is initialized with the same size as &#39;pref&#39;, which will store the reconstructed array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Initial Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res[<span style="color:#666">0</span>] <span style="color:#666">=</span> pref[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The first element of the result vector &#39;res&#39; is set to the first element of the &#39;pref&#39; vector, since it&#39;s directly copied. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> pref.size(); i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A for loop is initiated to iterate through the &#39;pref&#39; vector starting from the second element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : XOR Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i] <span style="color:#666">=</span> pref[i] <span style="color:#666">^</span> pref[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each iteration, the XOR operation is performed between the current element and the previous element of &#39;pref&#39; to reconstruct the original array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the reconstructed array &#39;res&#39; as the result. </div>
+                        </div>
+                    
                 </div>
             </div>
         </div> 
         
-        <div id="" 
+        <div id="Complexity" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Average Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the `pref` array. We iterate through `pref` once, and each operation inside the loop takes constant time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), as we need to store the result array `arr`.</div>    
                     </div>
 
                 </div>
@@ -574,8 +703,8 @@
         }        
 
         function buttons() {
-            const slides = document.getElementById('stepsSlides-');
-            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
             let currentIndex = 0;
             let startX = 0;
             let isDragging = false;
@@ -617,7 +746,7 @@
 
             updateSlides(currentIndex);
 
-            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
             if (initialTag) {
                 initialTag.classList.add('problem-guide-tag-active');
             }

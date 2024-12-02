@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 24, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode155s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode154s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/133.webp" 
            alt="A graph with nodes gently duplicating and glowing, forming an identical copy with soft edges." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a node in a singly linked list, and you are asked to delete this node from the list. The node is guaranteed to be not the last node in the list. After the deletion, the values before the node should remain in the same order, and the values after the node should also remain in the same order. </div>
+<div class=""> You are given a reference to a node in a connected, undirected graph. Each node in the graph contains a value (integer) and a list of its neighbors. Your task is to return a deep copy of the entire graph starting from the given node. </div>
 
 
 
@@ -372,43 +372,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are provided with the head of the linked list and a specific node to delete. The node will not be the last node in the list.</div>
-                        <div class=""> <b>Example:</b> Input: head = [1,2,3,4,5], node = 3</div>
+                        <div class=""> <b>Input:</b> The input is a graph represented by an adjacency list, where each list describes the neighbors of a node.</div>
+                        <div class=""> <b>Example:</b> [[2,4],[1,3],[2,4],[1,3]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The linked list will have at least two nodes.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= adjList.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • The value of each node is unique.</div>
+                                <div style="margin-left: 20px;"> • Each node in the graph is unique.</div>
                             
-                                <div style="margin-left: 20px;"> • The node to be deleted is guaranteed to not be the tail node.</div>
+                                <div style="margin-left: 20px;"> • There are no repeated edges or self-loops in the graph.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> After deleting the given node, return the modified linked list with the node removed.</div>
-                        <div class=""> <b>Example:</b> Output: [1,2,4,5]</div>
+                        <div class=""> <b>Output:</b> The output is the deep copy of the graph starting from the given node.</div>
+                        <div class=""> <b>Example:</b> [[2,4],[1,3],[2,4],[1,3]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be the same structure as the input graph, but with distinct node objects.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To delete the given node, we will copy the value of the next node into the current node and then delete the next node.</div>
+                        <div class=""> <b>Goal:</b> The goal is to create a deep copy of the graph by copying each node and its neighbors while ensuring that no node is visited more than once.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Copy the value of the next node into the current node.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a hashmap to store copies of each node as they are encountered.</div>
                             
-                                <div style="margin-left: 20px;"> • Point the current node&#39;s next to the node after the next node.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a recursive approach to visit each node and copy it.</div>
                             
-                                <div style="margin-left: 20px;"> • Delete the next node.</div>
+                                <div style="margin-left: 20px;"> • 3. For each node, create a new copy and recursively copy its neighbors.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The list will not be empty, and the given node will not be the last node in the list.</div>
+                        <div class=""> <b>Goal:</b> The input graph has no self-loops or duplicate edges, and the graph is always connected.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= Node.val &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • The graph will always be connected.</div>
                             
                         </div>
                     </div>        
@@ -416,21 +422,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The list is not empty.</div>
+                                <div style="margin-left: 20px;"> • The graph is always connected.</div>
                             
-                                <div style="margin-left: 20px;"> • The node to be deleted is not the last node.</div>
+                                <div style="margin-left: 20px;"> • There are no duplicate edges or self-loops.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [1,2,3,4,5], node = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The node to be deleted is 3. After deleting 3, the list becomes [1,2,4,5].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[2,4],[1,3],[2,4],[1,3]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The graph has 4 nodes and 4 edges, where each node is connected to its respective neighbors.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [10,20,30,40], node = 20</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The node to be deleted is 20. After deleting 20, the list becomes [10,30,40].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This graph consists of a single node with no neighbors.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,18 +460,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can delete the given node by copying the value of the next node into the current node and adjusting the next pointer. This avoids the need for traversing the list from the start.</div>
+                        <div class=""> <b>Approach:</b> The solution uses a depth-first search (DFS) approach, leveraging recursion and a hashmap to track visited nodes and avoid revisiting nodes during the copy process.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since we are not given access to the head of the list, we cannot traverse the list from the start.</div>
+                                <div style="margin-left: 20px;"> • We need to create a new node for each existing node in the graph.</div>
                             
-                                <div style="margin-left: 20px;"> • The next node must exist, so we can safely copy its value into the current node.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that we don&#39;t revisit nodes that have already been copied.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By copying the next node&#39;s value into the current node and removing the next node, the list remains in the correct order.</div>
+                                <div style="margin-left: 20px;"> • A recursive DFS approach will be efficient for this problem as we need to traverse the entire graph and copy each node and its neighbors.</div>
                             
                         </div>
                     </div>
@@ -473,13 +479,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Get the next node from the current node.</div>
+                                <div style="margin-left: 20px;"> • 1. Define a hashmap to store copies of nodes by their value.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Copy the value of the next node into the current node.</div>
+                                <div style="margin-left: 20px;"> • 2. Implement a recursive function that, for each node, copies the node and recursively copies its neighbors.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Update the current node&#39;s next pointer to skip the next node and point to the node after it.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Delete the next node to free up memory.</div>
+                                <div style="margin-left: 20px;"> • 3. Ensure each node is copied only once by checking the hashmap before creating a new copy.</div>
                             
                         </div>
                     </div>
@@ -488,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The list will always have at least two nodes, so there are no empty list cases.</div>
+                                <div style="margin-left: 20px;"> • If the input graph is empty, return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work efficiently even for lists with up to 1000 nodes.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 100 nodes and avoid stack overflow or memory issues.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The node to be deleted is guaranteed not to be the last node in the list.</div>
+                                <div style="margin-left: 20px;"> • If the graph contains only one node, return a copy of that single node with no neighbors.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the node is not the last node, so no need to check for that.</div>
+                                <div style="margin-left: 20px;"> • The graph is always connected, so no need to handle disconnected graphs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,13 +524,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Map Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Next Node Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Copy Data from Next Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Null Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Delete Next Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Helper Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Lookup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Node Creation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Insertion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Graph Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 List Insertion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -535,11 +559,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">deleteNode</span>(ListNode<span style="color:#666">*</span> node) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> nxt <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>    <span style="color:#666">*</span>node <span style="color:#666">=</span> <span style="color:#666">*</span>nxt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">delete</span> nxt;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, Node<span style="color:#666">*&gt;</span> mp;
+</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">cloneGraph</span>(Node<span style="color:#666">*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> node;
+</span></span><span style="display:flex;"><span>    Node <span style="color:#666">*</span> ans;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> copy(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">copy</span>(Node<span style="color:#666">*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(node<span style="color:#666">-&gt;</span>val)) <span style="color:#a2f;font-weight:bold">return</span> mp[node<span style="color:#666">-&gt;</span>val];
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> ans <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(node<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    mp[node<span style="color:#666">-&gt;</span>val] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: node<span style="color:#666">-&gt;</span>neighbors) {
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> n <span style="color:#666">=</span> copy(it);
+</span></span><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>neighbors.push_back(n);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -547,43 +583,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Map Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">deleteNode</span>(ListNode<span style="color:#666">*</span> node) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, Node<span style="color:#666">*&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `deleteNode` function which takes a pointer to a node (`node`) in a singly linked list as input and deletes it. </div>
+                            <div class=""> Declare a map to store the copied nodes. The key is the node&#39;s value, and the value is the node object itself. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Next Node Assignment</b></div>
+                            <div class=""> <b>2 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> nxt <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">cloneGraph</span>(Node<span style="color:#666">*</span> node) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the next node (`node-&gt;next`) to a temporary variable `nxt`. </div>
+                            <div class=""> Define the function `cloneGraph` that takes a `Node` pointer and returns a cloned graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Copy Data from Next Node</b></div>
+                            <div class=""> <b>3 : Null Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">*</span>node <span style="color:#666">=</span> <span style="color:#666">*</span>nxt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> node;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Copies the data and the next pointer of the next node (`nxt`) into the current node (`node`). This effectively overwrites the current node with the next node&#39;s data. </div>
+                            <div class=""> Check if the input node is NULL. If it is, return NULL as there is nothing to clone. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Delete Next Node</b></div>
+                            <div class=""> <b>4 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">delete</span> nxt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    Node <span style="color:#666">*</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Deletes the next node (`nxt`). Since its data has already been copied to the current node, the node is effectively removed from the list. </div>
+                            <div class=""> Declare a pointer `ans` which will store the cloned graph. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">=</span> copy(node);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the helper function `copy` to clone the graph starting from the given node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the cloned graph. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Helper Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">copy</span>(Node<span style="color:#666">*</span> node) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the helper function `copy` that clones the graph recursively. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Map Lookup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(node<span style="color:#666">-&gt;</span>val)) <span style="color:#a2f;font-weight:bold">return</span> mp[node<span style="color:#666">-&gt;</span>val];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the node has already been cloned (present in the map). If it is, return the existing clone. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Node Creation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    Node<span style="color:#666">*</span> ans <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(node<span style="color:#666">-&gt;</span>val);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create a new node with the same value as the input node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Map Insertion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[node<span style="color:#666">-&gt;</span>val] <span style="color:#666">=</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Insert the new node into the map to store it for future reference. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Graph Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: node<span style="color:#666">-&gt;</span>neighbors) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through each neighbor of the current node to clone them. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        Node<span style="color:#666">*</span> n <span style="color:#666">=</span> copy(it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call `copy` on each neighbor to clone it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : List Insertion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>neighbors.push_back(n);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the cloned neighbor to the `neighbors` list of the current cloned node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the cloned node after its neighbors have been cloned and added. </div>
                         </div>
                     
                 </div>
@@ -603,16 +739,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> Since we are only modifying the node and its next pointer, the time complexity is constant.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(N), where N is the number of nodes in the graph.</div>
+                        <div class=""> <b>Average Case:</b> O(N &#43; E), where E is the number of edges in the graph, as every edge needs to be visited once.</div>
+                        <div class=""> <b>Worst Case:</b> O(N &#43; E), where N is the number of nodes and E is the number of edges.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of nodes and edges because we traverse each node and each edge once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> We are only modifying the linked list in place, so the space complexity is constant.</div>    
+                        <div class=""> <b>Best Case:</b> O(N), as we store a copy of each node in the hashmap.</div>
+                        <div class=""> <b>Worst Case:</b> O(N), where N is the number of nodes, for the space used by the recursive stack and the hashmap storing copies of the nodes.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(N) due to the storage requirements for the copied nodes and the recursion stack.</div>    
                     </div>
 
                 </div>

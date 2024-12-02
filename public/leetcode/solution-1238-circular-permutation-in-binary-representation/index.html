@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -300,7 +300,7 @@
 
 
 
-<div class=""> You are given a bag with items, where each item has a number written on it, which could be 1, 0, or -1. You are also given the counts of items with 1s, 0s, and -1s, as well as a positive integer k. Your task is to pick exactly k items from the bag, maximizing the sum of the numbers written on the selected items. </div>
+<div class=""> Given two integers n and start, return a permutation of the integers from 0 to 2^n - 1 such that: p[0] = start, each pair of adjacent elements differ by exactly one bit in their binary representation, and p[0] and p[2^n - 1] also differ by exactly one bit. </div>
 
 
 
@@ -351,47 +351,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of four non-negative integers: numOnes, numZeros, numNegOnes, and an integer k.</div>
-                        <div class=""> <b>Example:</b> For numOnes = 5, numZeros = 3, numNegOnes = 2, k = 4.</div>
+                        <div class=""> <b>Input:</b> You are given two integers n and start.</div>
+                        <div class=""> <b>Example:</b> n = 2, start = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= numOnes, numZeros, numNegOnes &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 16</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= numOnes &#43; numZeros &#43; numNegOnes</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt; 2^n</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum possible sum of the k selected items.</div>
-                        <div class=""> <b>Example:</b> For numOnes = 5, numZeros = 3, numNegOnes = 2, k = 4, the output is 5.</div>
+                        <div class=""> <b>Output:</b> Return a permutation p of integers from 0 to 2^n - 1 such that the required conditions are satisfied.</div>
+                        <div class=""> <b>Example:</b> [3, 2, 0, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sum will be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The output should be a permutation of length 2^n.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Maximize the sum of selected items by picking the most valuable items, prioritizing 1s first, then 0s, and finally -1s.</div>
+                        <div class=""> <b>Goal:</b> Generate a valid permutation where adjacent numbers differ by one bit.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. First, pick as many 1s as possible from the bag until reaching k items.</div>
+                                <div style="margin-left: 20px;"> • Loop through all possible numbers from 0 to 2^n - 1.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If k items are still not picked, choose 0s next (as they do not affect the sum).</div>
+                                <div style="margin-left: 20px;"> • For each number, calculate the corresponding Gray code using the formula.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If k items are still left, select -1s (which decrease the sum).</div>
+                                <div style="margin-left: 20px;"> • Generate the permutation based on the Gray code while ensuring that adjacent numbers differ by exactly one bit.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure that the problem is solvable within the given limits.</div>
+                        <div class=""> <b>Goal:</b> The problem guarantees that n is between 1 and 16, and start is between 0 and 2^n - 1.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= numOnes, numZeros, numNegOnes &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 16</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= numOnes &#43; numZeros &#43; numNegOnes</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt; 2^n</div>
                             
                         </div>
                     </div>        
@@ -399,19 +399,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array size is manageable, as the maximum sum of numOnes, numZeros, and numNegOnes is 150.</div>
+                                <div style="margin-left: 20px;"> • It is assumed that the generated permutation will be in the correct format, starting at the given &#39;start&#39; value.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For numOnes = 5, numZeros = 3, numNegOnes = 2, k = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Select 4 items with 1s to maximize the sum, which gives a total sum of 5.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For numOnes = 4, numZeros = 2, numNegOnes = 1, k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Select 3 items with 1s to maximize the sum, which gives a total sum of 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 3, start = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary representations of the permutation are (010, 110, 111, 101, 100, 000, 001, 011).</div>                                
                                 <br/>
                             
                     </div>                         
@@ -435,20 +431,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to select items with the highest possible values (1s first), followed by zeros, and finally, -1s, ensuring that exactly k items are selected.</div>
+                        <div class=""> <b>Approach:</b> We can generate a circular permutation using Gray code, which ensures that adjacent elements differ by only one bit.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Selecting 1s first is optimal as they contribute the most to the sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • Zeros do not affect the sum, so we can use them as fillers if needed.</div>
-                            
-                                <div style="margin-left: 20px;"> • Negatives should be avoided if possible, as they reduce the sum.</div>
+                                <div style="margin-left: 20px;"> • Gray code is a binary numeral system where two successive values differ in only one bit.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to carefully prioritize the selection to maximize the sum.</div>
+                                <div style="margin-left: 20px;"> • This problem can be efficiently solved by generating the Gray code sequence for the range 0 to 2^n - 1.</div>
                             
                         </div>
                     </div>
@@ -456,11 +448,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Start by selecting as many 1s as possible.</div>
+                                <div style="margin-left: 20px;"> • Start with the given start value.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If additional items are needed, select 0s (since they do not impact the sum).</div>
+                                <div style="margin-left: 20px;"> • Generate the Gray code for each integer from 0 to 2^n - 1.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If still more items are needed, select -1s, which will reduce the sum.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the sequence starts at the given start and ends in a valid manner, differing by exactly one bit from the first element.</div>
                             
                         </div>
                     </div>
@@ -469,22 +461,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If k is 0, the sum will always be 0, regardless of the contents of the bag.</div>
+                                <div style="margin-left: 20px;"> • Not applicable since n and start are always defined.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, the solution should ensure that the selection logic is efficient to handle up to 150 items.</div>
+                                <div style="margin-left: 20px;"> • The largest possible value for n is 16, resulting in a permutation of length 65536.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If k is exactly the sum of available 1s and 0s, no negative numbers will be selected.</div>
+                                <div style="margin-left: 20px;"> • When start is 0 or 2^n - 1, ensure that the permutation starts and ends with valid elements differing by one bit.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where there are no 1s or no -1s efficiently.</div>
+                                <div style="margin-left: 20px;"> • Time and space complexities must be optimized for the upper bound of n.</div>
                             
                         </div>                                                                        
                     </div>
@@ -503,23 +495,13 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Add Positive Items</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Remaining Selection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Gray Code Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Check for Zero Items</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Add Zero Items</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check for Negative Items</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Subtract Negative Items</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Remaining Negative Selection</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Result</button>
                     
                 </div>
 
@@ -528,18 +510,11 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kItemsWithMaximumSum</span>(<span style="color:#0b0;font-weight:bold">int</span> one, <span style="color:#0b0;font-weight:bold">int</span> zero, <span style="color:#0b0;font-weight:bold">int</span> neg, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    sum <span style="color:#666">+=</span> min(one, k);
-</span></span><span style="display:flex;"><span>    k <span style="color:#666">-=</span> min(one, k);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        k <span style="color:#666">-=</span> min(zero, k);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> min(neg, k);
-</span></span><span style="display:flex;"><span>        k <span style="color:#666">-=</span> min(neg, k);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> circularPermutation(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> start) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        res.push_back(start <span style="color:#666">^</span> i <span style="color:#666">^</span> i <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -550,100 +525,50 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kItemsWithMaximumSum</span>(<span style="color:#0b0;font-weight:bold">int</span> one, <span style="color:#0b0;font-weight:bold">int</span> zero, <span style="color:#0b0;font-weight:bold">int</span> neg, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> circularPermutation(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> start) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;kItemsWithMaximumSum&#39; that takes four arguments: &#39;one&#39;, &#39;zero&#39;, &#39;neg&#39; representing counts of 1s, 0s, and negative numbers, and &#39;k&#39; representing the number of items to select. </div>
+                            <div class=""> The function `circularPermutation` is defined to generate a circular permutation of `n` elements starting from the number `start`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable &#39;sum&#39; to 0, which will accumulate the maximum sum by selecting the appropriate number of items. </div>
+                            <div class=""> A vector `res` is initialized to store the resulting circular permutation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Add Positive Items</b></div>
+                            <div class=""> <b>3 : Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sum <span style="color:#666">+=</span> min(one, k);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the minimum of &#39;one&#39; and &#39;k&#39; to &#39;sum&#39;, representing the positive numbers that can be selected. </div>
+                            <div class=""> A loop is set up to iterate over all possible values for the permutation. The loop runs from `0` to `2^n - 1` (i.e., `1 &lt;&lt; n`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Update Remaining Selection</b></div>
+                            <div class=""> <b>4 : Gray Code Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    k <span style="color:#666">-=</span> min(one, k);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(start <span style="color:#666">^</span> i <span style="color:#666">^</span> i <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decreases &#39;k&#39; by the number of positive items selected, to track the remaining items to select. </div>
+                            <div class=""> The Gray code formula `start ^ i ^ (i &gt;&gt; 1)` is used to generate the next number in the circular permutation, and it is added to the result vector `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Check for Zero Items</b></div>
+                            <div class=""> <b>5 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if there are still items left to select (if &#39;k&#39; is greater than 0). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Add Zero Items</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        k <span style="color:#666">-=</span> min(zero, k);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Subtracts the minimum of &#39;zero&#39; and &#39;k&#39; from &#39;k&#39;, selecting zeros if any remaining items are left to choose. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Check for Negative Items</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if there are still items to be selected after choosing positive and zero items. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Subtract Negative Items</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> min(neg, k);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Subtracts the minimum of &#39;neg&#39; and &#39;k&#39; from &#39;sum&#39;, selecting negative values if necessary. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Update Remaining Negative Selection</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        k <span style="color:#666">-=</span> min(neg, k);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Decreases &#39;k&#39; by the number of negative items selected. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the accumulated &#39;sum&#39; as the result, which represents the maximum sum achievable by selecting &#39;k&#39; items. </div>
+                            <div class=""> The function returns the vector `res`, which contains the generated circular permutation. </div>
                         </div>
                     
                 </div>
@@ -663,16 +588,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant as the number of operations is minimal for each input set.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(2^n)</div>
+                        <div class=""> <b>Average Case:</b> O(2^n)</div>
+                        <div class=""> <b>Worst Case:</b> O(2^n)</div> 
+                        <div class=""> <b>Description:</b> The solution requires generating all 2^n elements in the permutation, each of which is processed once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as no extra space is needed beyond the input values.</div>    
+                        <div class=""> <b>Best Case:</b> O(2^n)</div>
+                        <div class=""> <b>Worst Case:</b> O(2^n)</div> 
+                        <div class=""> <b>Description:</b> Space is required to store the output permutation of length 2^n.</div>    
                     </div>
 
                 </div>

@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an array &rsquo;nums&rsquo; consisting of positive integers. A subarray is called complete if the number of distinct elements in the subarray is equal to the number of distinct elements in the entire array. Return the total number of complete subarrays. </div>
+<div class=""> You are given a network of computers, each labeled from 0 to n-1, and a list of direct connections between these computers. The network is initially connected in some way, but some computers are not directly connected. You can remove cables from existing direct connections and reconnect them between disconnected computers to minimize the number of operations required to make the entire network fully connected. The task is to determine the minimum number of operations needed. If it&rsquo;s not possible to connect all the computers, return -1. </div>
 
 
 
@@ -360,45 +360,59 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 0-indexed array &#39;nums&#39; containing positive integers.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [1, 2, 1, 3, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of two parts: the number of computers n, and a list of connections between computers. Each connection is represented as a pair of integers, where each pair [ai, bi] indicates that computer ai is directly connected to computer bi.</div>
+                        <div class=""> <b>Example:</b> For n = 5 and connections = [[0,1], [0,2], [3,4]], we have a network with 5 computers, and only the first three computers are connected directly.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 2000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= connections.length &lt;= min(n * (n - 1) / 2, 10^5)</div>
+                            
+                                <div style="margin-left: 20px;"> • connections[i].length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • ai != bi</div>
+                            
+                                <div style="margin-left: 20px;"> • There are no repeated connections.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of complete subarrays.</div>
-                        <div class=""> <b>Example:</b> Output: 6</div>
+                        <div class=""> <b>Output:</b> The output should be the minimum number of cable reconfigurations needed to make the entire network connected. If it is impossible, return -1.</div>
+                        <div class=""> <b>Example:</b> For n = 5, connections = [[0,1], [0,2], [3,4]], the output would be 1, as we can move one cable between disconnected components to connect all the computers.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Count the number of subarrays where the number of distinct elements equals the number of distinct elements in the entire array.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine if all computers can be connected with the given cables, and if so, calculate the minimum number of moves needed to achieve full connectivity.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Identify the number of distinct elements in the entire array.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a union-find (disjoint-set) data structure to track the connected components.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window technique to examine all possible subarrays.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through the given connections and join the connected computers.</div>
                             
-                                <div style="margin-left: 20px;"> • For each subarray, check if it contains all the distinct elements.</div>
+                                <div style="margin-left: 20px;"> • 3. Count the number of disconnected components.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If there are fewer connections than the number of components minus one, return -1 (impossible to connect).</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Otherwise, return the number of reconfigurations required, which is the number of additional cables needed to connect all components.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution works within the given constraints.</div>
+                        <div class=""> <b>Goal:</b> The problem guarantees valid input values and specifies the upper limit of n and connections.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 2000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= connections.length &lt;= min(n * (n - 1) / 2, 10^5)</div>
+                            
+                                <div style="margin-left: 20px;"> • No two computers are connected by more than one cable.</div>
                             
                         </div>
                     </div>        
@@ -406,19 +420,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array contains only positive integers.</div>
+                                <div style="margin-left: 20px;"> • The network may initially have some connected components, and you need to figure out how to connect them all.</div>
+                            
+                                <div style="margin-left: 20px;"> • You can freely remove and place cables between disconnected computers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 1, 3, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The distinct elements are {1, 2, 3}. The complete subarrays are the ones that contain all these elements.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For n = 4 and connections = [[0,1], [0,2], [1,2]], the output is 1.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are 4 computers, and the given connections form 3 connected components: {0, 1, 2}, {3}. You need to add one cable to connect computer 3 to the existing network.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [4, 4, 4, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since there&#39;s only one distinct element (4), every subarray is a complete subarray.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For n = 6 and connections = [[0,1], [0,2], [0,3], [1,2], [1,3]], the output is 2.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are 6 computers, and the given connections form 1 connected component for computers {0, 1, 2, 3}, leaving computers {4, 5} disconnected. You need 2 additional connections to make the network fully connected.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For n = 6 and connections = [[0,1], [0,2], [0,3], [1,2]], the output is -1.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The given connections only form 4 connected computers, leaving 2 disconnected computers. Since there are not enough cables to connect them, it is impossible to connect the entire network.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +462,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, we can use a sliding window technique to find subarrays containing all the distinct elements of the array.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we&#39;ll use the union-find (disjoint-set) data structure to keep track of connected components and determine the number of reconfigurations required.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of distinct elements in the entire array is key to determining if a subarray is complete.</div>
+                                <div style="margin-left: 20px;"> • The problem asks us to connect all computers using the minimum number of cable reconfigurations.</div>
+                            
+                                <div style="margin-left: 20px;"> • The union-find data structure can help track and merge connected components efficiently.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a sliding window can help us efficiently track subarrays while checking if they meet the distinct element requirement.</div>
+                                <div style="margin-left: 20px;"> • We need to check if the number of connections is sufficient to connect all components and count the number of moves needed.</div>
                             
                         </div>
                     </div>
@@ -459,13 +481,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Determine the number of distinct elements in the entire array.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a union-find structure to track the connected components.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use a sliding window to iterate through all possible subarrays.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through the connections and unify the pairs of computers.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: For each subarray, maintain a frequency count of its elements and check if it contains all the distinct elements from the full array.</div>
+                                <div style="margin-left: 20px;"> • 3. Count the number of disconnected components (union-find &#39;find&#39; operations).</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If a subarray is complete, increment the count of complete subarrays.</div>
+                                <div style="margin-left: 20px;"> • 4. Check if the number of connections is sufficient (must be at least n - 1).</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. If sufficient, return the number of moves, which is the number of disconnected components minus one.</div>
                             
                         </div>
                     </div>
@@ -474,22 +498,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will always contain at least one element.</div>
+                                <div style="margin-left: 20px;"> • There should always be valid input values with n &gt;= 1 and at least one connection.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, the algorithm needs to efficiently count complete subarrays.</div>
+                                <div style="margin-left: 20px;"> • The solution needs to handle large inputs up to 10^5 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array has only one distinct element, every subarray is a complete subarray.</div>
+                                <div style="margin-left: 20px;"> • If there are fewer connections than n - 1, it is impossible to connect all computers.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays up to 1000 elements long.</div>
+                                <div style="margin-left: 20px;"> • The constraints ensure that no two computers are connected by more than one cable, and there are no redundant connections.</div>
                             
                         </div>                                                                        
                     </div>
@@ -508,39 +532,13 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Union-Find Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Union Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Distinct Elements Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Insert Distinct Elements</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Required Elements Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Array Size Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Outer Loop for Subarray Exploration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Early Exit Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Inner Loop for Sliding Window</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Count Valid Subarrays</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Decrease Frequency of Left Element</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Remove Element if Frequency is Zero</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Increment Window Start</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Move Left Pointer</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
                     
                 </div>
 
@@ -549,26 +547,11 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCompleteSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dist;
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
-</span></span><span style="display:flex;"><span>        dist.insert(x);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, req <span style="color:#666">=</span> dist.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mp[nums[i]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.size() <span style="color:#666">&lt;</span> req) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(mp.size() <span style="color:#666">&gt;=</span> req) {
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">+=</span> (n <span style="color:#666">-</span> i);
-</span></span><span style="display:flex;"><span>            mp[nums[j]]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[nums[j]] <span style="color:#666">==</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>                mp.erase(nums[j]);
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">makeConnected</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> grid.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(grid[i][<span style="color:#666">0</span>], grid[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> grid.size() <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span>uf<span style="color:#666">-&gt;</span>cnt <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -579,180 +562,50 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCompleteSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">makeConnected</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `countCompleteSubarrays` is declared, which takes a vector of integers `nums` as input. It returns an integer representing the count of subarrays that contain all distinct elements. </div>
+                            <div class=""> The function &#39;makeConnected&#39; is declared. It takes an integer &#39;n&#39; representing the number of nodes and a 2D vector &#39;grid&#39; representing the edges between nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Union-Find Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `cnt` is initialized to 0. This will keep track of the number of complete subarrays. </div>
+                            <div class=""> An instance of the Union-Find (UF) class is created with &#39;n&#39; nodes. This data structure is used to efficiently track and merge connected components of the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Set Initialization</b></div>
+                            <div class=""> <b>3 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dist;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> grid.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A set `dist` is initialized to store all distinct elements in the `nums` vector. </div>
+                            <div class=""> A loop is set up to iterate over all the edges in the &#39;grid&#39; array. Each edge connects two nodes in the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Map Initialization</b></div>
+                            <div class=""> <b>4 : Union Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(grid[i][<span style="color:#666">0</span>], grid[i][<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A map `mp` is initialized to store the frequency of elements within the sliding window of subarrays. </div>
+                            <div class=""> For each edge in the grid, the &#39;uni&#39; method is called to unify the two nodes connected by the edge. This merges their respective connected components in the Union-Find structure. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Distinct Elements Count</b></div>
+                            <div class=""> <b>5 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> grid.size() <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span>uf<span style="color:#666">-&gt;</span>cnt <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A `for` loop iterates through each element `x` in the `nums` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Insert Distinct Elements</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dist.insert(x);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each element `x` is inserted into the `dist` set to determine the number of distinct elements in the input vector `nums`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Required Elements Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, req <span style="color:#666">=</span> dist.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The variable `req` is assigned the number of distinct elements in `nums` (i.e., the size of the `dist` set), which represents the number of unique elements needed in each subarray. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Array Size Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The variable `j` is initialized to 0, which will be used to mark the start of the sliding window. The variable `n` stores the size of the `nums` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Outer Loop for Subarray Exploration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The outer `for` loop starts from the first element and iterates through the entire `nums` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Map Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[nums[i]]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> For each element `nums[i]`, its frequency is incremented in the `mp` map, tracking the number of occurrences of elements in the current subarray. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Early Exit Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.size() <span style="color:#666">&lt;</span> req) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the size of the `mp` map (i.e., the number of distinct elements in the current subarray) is less than the required number of distinct elements (`req`), the loop continues to the next iteration without further processing. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Inner Loop for Sliding Window</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(mp.size() <span style="color:#666">&gt;=</span> req) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Once the sliding window contains all the required distinct elements, a `while` loop begins to reduce the window size from the left side. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Count Valid Subarrays</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">+=</span> (n <span style="color:#666">-</span> i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The number of valid subarrays ending at index `i` is added to `cnt`. All subarrays from the current position `i` to the end of the vector are valid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Decrease Frequency of Left Element</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[nums[j]]<span style="color:#666">--</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The frequency of the element at index `j` is decremented as the sliding window shrinks from the left side. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Remove Element if Frequency is Zero</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[nums[j]] <span style="color:#666">==</span> <span style="color:#666">0</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the frequency of the element at index `j` reaches zero, it is removed from the map `mp`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Increment Window Start</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                mp.erase(nums[j]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The element `nums[j]` is erased from the map `mp` to ensure that only active elements are being considered. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Move Left Pointer</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The left pointer `j` is incremented to shrink the sliding window from the left side. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Return Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The total count `cnt` of valid subarrays is returned from the function. </div>
+                            <div class=""> The function checks if there are fewer edges than required to connect all nodes (n-1 edges for n nodes). If so, it returns -1 indicating it’s not possible to connect all nodes. Otherwise, it returns the number of connected components minus one. </div>
                         </div>
                     
                 </div>
@@ -772,16 +625,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The worst-case time complexity is O(n^2) due to iterating through each subarray. In practice, the sliding window optimization can help reduce this.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n &#43; m), where n is the number of computers and m is the number of connections. Each union/find operation is near constant time (amortized O(α(n))) with path compression and union by rank.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the need to store the frequency counts of elements in the current subarray.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the union-find data structure, where n is the number of computers.</div>    
                     </div>
 
                 </div>

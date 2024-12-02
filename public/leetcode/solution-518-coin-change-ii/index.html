@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given an array arr of positive integers. Consider all binary trees such that each node has either 0 or 2 children, the values of arr correspond to the values of each leaf in an in-order traversal of the tree, and the value of each non-leaf node is equal to the product of the largest leaf values in its left and right subtrees. Return the smallest possible sum of the values of the non-leaf nodes among all possible binary trees. </div>
+<div class=""> Given a set of coins of different denominations, determine how many distinct combinations of these coins sum up to the target amount. </div>
 
 
 
@@ -370,49 +370,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an array arr of integers where each integer represents a leaf node value in a binary tree.</div>
-                        <div class=""> <b>Example:</b> Input: arr = [5,3,8]</div>
+                        <div class=""> <b>Input:</b> You are given an array `coins` containing different coin denominations and an integer `amount` representing the target sum.</div>
+                        <div class=""> <b>Example:</b> amount = 8, coins = [3, 4, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= arr.length &lt;= 40</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= coins.length &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 15</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= coins[i] &lt;= 5000</div>
                             
-                                <div style="margin-left: 20px;"> • The answer fits into a 32-bit signed integer.</div>
+                                <div style="margin-left: 20px;"> • All values in coins are unique</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= amount &lt;= 5000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the smallest possible sum of the values of each non-leaf node in the tree.</div>
-                        <div class=""> <b>Example:</b> Output: 75</div>
+                        <div class=""> <b>Output:</b> The output should be an integer representing the number of distinct combinations of coins that can sum up to the target amount.</div>
+                        <div class=""> <b>Example:</b> 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sum of non-leaf node values should fit in a 32-bit signed integer.</div>
+                                <div style="margin-left: 20px;"> • The output should be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the binary tree that minimizes the sum of non-leaf node values, considering all possible binary trees that can be formed from the given leaf values.</div>
+                        <div class=""> <b>Goal:</b> To calculate the number of distinct combinations that sum up to the target amount.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a stack with a value greater than any leaf node.</div>
+                                <div style="margin-left: 20px;"> • 1. Use dynamic programming to calculate the number of ways to make each amount up to the target.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array of leaf values, and for each value, check if it can form a valid tree node by combining with the previous elements in the stack.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize a DP array where dp[i] stores the number of ways to make amount i.</div>
                             
-                                <div style="margin-left: 20px;"> • For each valid combination, compute the product of the current non-leaf node values and accumulate the result.</div>
+                                <div style="margin-left: 20px;"> • 3. For each coin, update the DP array by considering using that coin multiple times.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the solution is efficient even for the largest input sizes.</div>
+                        <div class=""> <b>Goal:</b> The constraints for the input and output of the problem.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array should have between 2 and 40 elements.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= coins.length &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • Each element in the array is between 1 and 15.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= coins[i] &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= amount &lt;= 5000</div>
                             
                         </div>
                     </div>        
@@ -420,21 +424,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree will be a full binary tree with 0 or 2 children per node.</div>
+                                <div style="margin-left: 20px;"> • The `coins` array contains unique values.</div>
                             
-                                <div style="margin-left: 20px;"> • It is assumed that the values in the array will always be valid positive integers within the specified range.</div>
+                                <div style="margin-left: 20px;"> • The `amount` is guaranteed to be within the specified range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [5,3,8]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The goal is to arrange the leaf nodes in such a way that the sum of non-leaf nodes is minimized. The smallest possible non-leaf node sum is 75, as calculated by the optimal tree structure.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> amount = 8, coins = [3, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are three distinct ways to make up the amount 8 using the coins [3, 4, 5]: 5&#43;3, 4&#43;4, and 3&#43;3&#43;3.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [10,15,12]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal binary tree for this set of leaf nodes produces the minimum sum of non-leaf node values, which is 330.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> amount = 6, coins = [2, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is only one way to make the amount 6: 2&#43;2&#43;2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +462,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves using a stack to help compute the smallest sum by simulating the process of building a binary tree and evaluating the cost for each non-leaf node.</div>
+                        <div class=""> <b>Approach:</b> The solution uses dynamic programming to count the number of ways to make the target amount.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to optimize the tree structure such that the non-leaf node values are minimized.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved using dynamic programming as it is a variant of the coin change problem.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a stack allows us to easily manage and combine leaf nodes while maintaining an efficient calculation of the product of the largest values from each subtree.</div>
+                                <div style="margin-left: 20px;"> • We need to maintain a DP table to track the number of ways to make each possible amount.</div>
                             
                         </div>
                     </div>
@@ -475,11 +479,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start with an empty stack and iterate through the leaf values in the array.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a DP array `dp` of size (amount &#43; 1) with all elements set to 0, except `dp[0]` which should be 1 (base case).</div>
                             
-                                <div style="margin-left: 20px;"> • For each leaf node, combine it with previous elements in the stack while ensuring that the product of the non-leaf nodes is minimized.</div>
-                            
-                                <div style="margin-left: 20px;"> • Keep track of the sum of the non-leaf nodes and return the final result after processing all leaf values.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate over each coin and for each coin, update the DP table by adding `dp[amount - coin]` to `dp[amount]`.</div>
                             
                         </div>
                     </div>
@@ -488,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the input will have at least 2 elements, so no need to handle empty arrays.</div>
+                                <div style="margin-left: 20px;"> • If the amount is 0, return 1 as there is one way to make the amount 0 (by not using any coins).</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle inputs with up to 40 leaf nodes efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle cases where the amount is large (up to 5000) efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where all elements in the array are equal, as this might affect the structure of the binary tree.</div>
+                                <div style="margin-left: 20px;"> • If no combination of coins can form the amount, return 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution runs within the time limits for the largest input sizes.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles cases where the amount is 0 correctly.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,29 +522,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Stack Manipulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Stack Pop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursion with Coin Inclusion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Cost Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Memoization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Stack Push</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Static Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Additional Processing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Static Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Cost Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Main Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Memo Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Recursive Call</button>
                     
                 </div>
 
@@ -551,25 +559,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mctFromLeafValues</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">5001</span>][<span style="color:#666">301</span>];
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> amnt, <span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> amnt <span style="color:#666">==</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[amnt][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[amnt][idx];
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; amnt &lt;&lt; &#34; &#34; &lt;&lt; idx &lt;&lt; &#34; &#34; &lt;&lt; nums[idx]&lt;&lt; &#34;\n&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> dp(amnt, idx <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> nums[idx])
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> dp(amnt <span style="color:#666">-</span> nums[idx], idx);
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk <span style="color:#666">=</span> { INT_MAX };
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : arr) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(stk.back() <span style="color:#666">&lt;=</span> a) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> stk.back();
-</span></span><span style="display:flex;"><span>            stk.pop_back();
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> mid <span style="color:#666">*</span> min(stk.back(), a);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        stk.push_back(a);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> stk.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> stk[i] <span style="color:#666">*</span> stk[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[amnt][idx] <span style="color:#666">=</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> b <span style="color:#666">&lt;</span> a;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">change</span>(<span style="color:#0b0;font-weight:bold">int</span> amount, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> coins) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> coins;
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end(), cmp);
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(amount, <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -577,123 +588,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mctFromLeafValues</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">5001</span>][<span style="color:#666">301</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function definition begins the implementation of the `mctFromLeafValues` function, which takes a vector of integers `arr` and returns an integer. </div>
+                            <div class=""> This initializes a 2D array `memo` that will store the results of subproblems, where `memo[amnt][idx]` represents the number of ways to make the amount `amnt` from the first `idx` coins. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes the result variable `res`, which will store the total cost of the minimum cost tree. </div>
+                            <div class=""> This declares a vector `nums` to hold the coins available to make the desired amount. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Stack Initialization</b></div>
+                            <div class=""> <b>3 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk <span style="color:#666">=</span> { INT_MAX };
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> amnt, <span style="color:#0b0;font-weight:bold">int</span> idx) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A stack `stk` is initialized with the maximum possible integer (`INT_MAX`) as a sentinel value to handle edge cases when processing the tree structure. </div>
+                            <div class=""> This is the recursive function `dp` which calculates the number of ways to make the amount `amnt` starting from coin index `idx`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Setup</b></div>
+                            <div class=""> <b>4 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : arr) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> amnt <span style="color:#666">==</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This `for` loop iterates through the elements in the input vector `arr`. </div>
+                            <div class=""> If all coins have been considered (`idx` reaches the size of `nums`), return `1` if the remaining amount is zero, otherwise `0`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Condition</b></div>
+                            <div class=""> <b>5 : Memoization Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(stk.back() <span style="color:#666">&lt;=</span> a) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[amnt][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[amnt][idx];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This `while` loop checks if the current stack&#39;s top value is less than or equal to the current element `a`. If true, it processes the current stack element. </div>
+                            <div class=""> Check if the subproblem has already been computed by checking the `memo` table. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Stack Manipulation</b></div>
+                            <div class=""> <b>6 : Recursion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> stk.back();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> dp(amnt, idx <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The top value of the stack is stored in `mid` for further calculations. </div>
+                            <div class=""> Recursively call `dp` to calculate the number of ways to make the amount `amnt` without using the current coin (`idx &#43; 1`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Stack Pop</b></div>
+                            <div class=""> <b>7 : Recursion with Coin Inclusion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop_back();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> nums[idx]) res <span style="color:#666">+=</span> dp(amnt <span style="color:#666">-</span> nums[idx], idx);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line removes the top element from the stack after processing it. </div>
+                            <div class=""> If the current coin can be used (i.e., `amnt &gt;= nums[idx]`), recursively call `dp` including the current coin and subtract its value from `amnt`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Cost Calculation</b></div>
+                            <div class=""> <b>8 : Memoization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> mid <span style="color:#666">*</span> min(stk.back(), a);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[amnt][idx] <span style="color:#666">=</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The result variable `res` is updated by adding the product of the `mid` value and the minimum of the stack&#39;s new top value and the current element `a`. </div>
+                            <div class=""> Store the computed result in `memo[amnt][idx]` to avoid redundant calculations in future calls. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Stack Push</b></div>
+                            <div class=""> <b>9 : Static Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.push_back(a);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After the inner `while` loop, the current element `a` is pushed onto the stack. </div>
+                            <div class=""> This is a static comparator function used to sort the coins in descending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Additional Processing</b></div>
+                            <div class=""> <b>10 : Static Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> stk.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> b <span style="color:#666">&lt;</span> a;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A second `for` loop starts at index 2 to process the remaining stack elements after the main loop finishes. </div>
+                            <div class=""> The comparator function sorts coins in descending order to prioritize larger coins first. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Cost Calculation</b></div>
+                            <div class=""> <b>11 : Main Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> stk[i] <span style="color:#666">*</span> stk[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">change</span>(<span style="color:#0b0;font-weight:bold">int</span> amount, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> coins) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line adds the product of each adjacent pair of stack elements to the result `res`. </div>
+                            <div class=""> This is the main function where the coin change problem is solved using the `dp` function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> coins;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The final result `res` is returned, which contains the minimum cost of the tree. </div>
+                            <div class=""> Assign the `coins` vector to the class member `nums`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(nums.begin(), nums.end(), cmp);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the coins in descending order using the `cmp` function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Memo Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize the `memo` table to `-1` to indicate that no subproblems have been solved yet. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(amount, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start the recursive `dp` function from the first coin (`idx = 0`) with the given `amount`. </div>
                         </div>
                     
                 </div>
@@ -713,16 +754,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of leaf nodes due to the stack-based approach.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * amount)</div>
+                        <div class=""> <b>Average Case:</b> O(n * amount)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * amount)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * amount), where n is the number of coins and amount is the target sum.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required for the stack.</div>    
+                        <div class=""> <b>Best Case:</b> O(amount)</div>
+                        <div class=""> <b>Worst Case:</b> O(amount)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(amount) due to the DP array storing the number of combinations for each amount.</div>    
                     </div>
 
                 </div>

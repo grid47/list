@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1297s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1295s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/779.webp" 
            alt="A sequence where the kth symbol is found, glowing softly as it is located." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an array <code>nums</code>. The array is originally sorted in non-decreasing order and then rotated some number of positions (including zero). Your task is to determine if the array could have been rotated from a sorted array. Return <code>true</code> if the array can be rotated to become sorted, and <code>false</code> otherwise. </div>
+<div class=""> We build a sequence of rows starting with the string &lsquo;0&rsquo; in the first row. For each subsequent row, every occurrence of &lsquo;0&rsquo; from the previous row is replaced with &lsquo;01&rsquo;, and every occurrence of &lsquo;1&rsquo; is replaced with &lsquo;10&rsquo;. Given two integers n and k, return the k-th (1-indexed) symbol in the n-th row. </div>
 
 
 
@@ -371,47 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a single array `nums` of length `n`.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [4,5,6,7,1,2,3]</div>
+                        <div class=""> <b>Input:</b> The input consists of two integers n and k, where n represents the row number and k represents the position of the symbol in that row.</div>
+                        <div class=""> <b>Example:</b> Input: n = 3, k = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 2^n - 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return `true` if the array can be rotated to become sorted in non-decreasing order. Otherwise, return `false`.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output is the k-th (1-indexed) symbol in the n-th row of the sequence.</div>
+                        <div class=""> <b>Example:</b> Output: 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The returned value will be either true or false.</div>
+                                <div style="margin-left: 20px;"> • The output must be either 0 or 1, depending on the symbol at position k in row n.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine if the array can be rotated to match a sorted sequence.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine the k-th symbol in the n-th row without explicitly constructing the entire row.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse the array from the first to the last element.</div>
+                                <div style="margin-left: 20px;"> • If n is 1, return 0 (base case).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Count how many times the array decreases (i.e., when `nums[i] &gt; nums[i&#43;1]`).</div>
+                                <div style="margin-left: 20px;"> • If k is even, recursively find the symbol in the previous row at the index k / 2, and invert it.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If there is more than one decrease, the array cannot be a rotated sorted array, and return `false`.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If there is zero or one decrease, return `true`.</div>
+                                <div style="margin-left: 20px;"> • If k is odd, recursively find the symbol in the previous row at the index (k &#43; 1) / 2, and return it as is.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should handle arrays of size up to 100 elements efficiently.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle large values of n and k efficiently. We cannot construct the entire row for large n due to exponential growth in size.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works in linear time, O(n).</div>
+                                <div style="margin-left: 20px;"> • n is guaranteed to be at most 30, meaning we can handle 2^n symbols.</div>
+                            
+                                <div style="margin-left: 20px;"> • k must be a valid index for the n-th row, i.e., 1 &lt;= k &lt;= 2^n - 1.</div>
                             
                         </div>
                     </div>        
@@ -419,21 +419,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array can contain duplicate elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • There is no need to handle edge cases for empty arrays as the length of `nums` is always at least 1.</div>
+                                <div style="margin-left: 20px;"> • Both n and k are valid inputs, with k within the range for the n-th row.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3,4,5,1,2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This array can be viewed as a rotation of [1,2,3,4,5]. Hence, the array can be rotated back into a sorted array, and the output is `true`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: n = 1, k = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first row is &#39;0&#39;, so the 1st symbol is &#39;0&#39;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2,1,3,4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This array cannot be rotated into a sorted array because there is a drop between `2` and `1` and it cannot be rotated to become sorted. Hence, the output is `false`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: n = 3, k = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Row 3 is &#39;0110&#39;, and the 4th symbol is &#39;1&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3: Input: n = 2, k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Row 2 is &#39;01&#39;, and the 2nd symbol is &#39;1&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,16 +459,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by checking how many times the array decreases while traversing it. If there is at most one decrease, the array can be rotated into a sorted order.</div>
+                        <div class=""> <b>Approach:</b> The approach involves leveraging the recursive pattern of the sequence generation. Instead of generating entire rows, we recursively find the k-th symbol in the previous row and determine its value.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can check for decreases in the array and count how many times the order is violated.</div>
+                                <div style="margin-left: 20px;"> • The sequence generation follows a recursive pattern, where each row depends on the previous one.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • If we encounter more than one decrease, the array cannot be rotated into a sorted form. We need to keep track of the number of decreases.</div>
+                                <div style="margin-left: 20px;"> • Instead of constructing the entire row, we can solve this problem by recursively narrowing down the position of the desired symbol.</div>
                             
                         </div>
                     </div>
@@ -474,13 +476,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a counter `cnt` to zero.</div>
+                                <div style="margin-left: 20px;"> • Start from the n-th row and the k-th position.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Traverse the array and compare adjacent elements. If `nums[i] &gt; nums[i&#43;1]`, increment the counter `cnt`.</div>
+                                <div style="margin-left: 20px;"> • If n is 1, return 0 (base case).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If `cnt` exceeds 1, return `false`.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Otherwise, return `true`.</div>
+                                <div style="margin-left: 20px;"> • Otherwise, recursively compute the symbol by using the previous row&#39;s position based on whether k is odd or even.</div>
                             
                         </div>
                     </div>
@@ -489,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the array will have at least one element, so there will be no need to handle empty inputs.</div>
+                                <div style="margin-left: 20px;"> • There will always be valid values for n and k, as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, the solution should efficiently handle arrays of up to 100 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient enough to handle n = 30, where the row size is 2^30.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements in the array are identical, the array is trivially sorted, so the result will be `true`.</div>
+                                <div style="margin-left: 20px;"> • When k is 1 or 2^n - 1, the solution must handle these boundary cases.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles arrays where elements are repeated or where there are only small changes between consecutive elements.</div>
+                                <div style="margin-left: 20px;"> • n is guaranteed to be at most 30, so handling up to 2^30 symbols is feasible.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,23 +521,13 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Recursive Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Recursive Case</button>
                     
                 </div>
 
@@ -546,18 +536,10 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">1</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">&gt;</span>nums[i]){
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[n<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">&gt;</span>nums[<span style="color:#666">0</span>]){
-</span></span><span style="display:flex;"><span>        cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt<span style="color:#666">&lt;=</span><span style="color:#666">1</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kthGrammar</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>)   <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (k<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> kthGrammar(n <span style="color:#666">-</span> <span style="color:#666">1</span>,       k <span style="color:#666">/</span> <span style="color:#666">2</span>) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>          <span style="color:#a2f;font-weight:bold">return</span> kthGrammar(n <span style="color:#666">-</span> <span style="color:#666">1</span>, (k <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -565,93 +547,43 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kthGrammar</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a function to check if the input array can be sorted by at most one rotation. </div>
+                            <div class=""> Defines the function `kthGrammar` which takes two arguments: `n` (the row number) and `k` (the position in the row). It returns the value at the k-th position of the n-th row in a binary grammar sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>)   <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `n` to store the size of the input vector `nums`. </div>
+                            <div class=""> The base case: when n equals 1, the first row of the grammar sequence is always [0]. Therefore, it returns 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Recursive Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (k<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> kthGrammar(n <span style="color:#666">-</span> <span style="color:#666">1</span>,       k <span style="color:#666">/</span> <span style="color:#666">2</span>) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a counter `cnt` to track the number of discontinuities in the array. </div>
+                            <div class=""> If k is even, the function calls itself recursively with n-1 and k/2, then returns the complement (1 if 0, 0 if 1) of the result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Recursive Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">1</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>          <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">kthGrammar</span>(n <span style="color:#666">-</span> <span style="color:#666">1</span>, (k <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the array to check for descending pairs of elements. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">&gt;</span>nums[i]){
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the current pair of elements violates the non-decreasing order. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments the counter if a discontinuity is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[n<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">&gt;</span>nums[<span style="color:#666">0</span>]){
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the last element is greater than the first, indicating a discontinuity across the circular boundary. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments the counter if a discontinuity is found at the circular boundary. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt<span style="color:#666">&lt;=</span><span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns true if there is at most one discontinuity in the array. </div>
+                            <div class=""> If k is odd, the function calls itself recursively with n-1 and (k&#43;1)/2, and returns the same value (0 if 0, 1 if 1). </div>
                         </div>
                     
                 </div>
@@ -671,16 +603,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the array.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as we scan through the array once.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as we still only need to scan the array once.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear, as we traverse the array only once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n), as we reduce the problem size by half at each step.</div>
+                        <div class=""> <b>Average Case:</b> O(log n), since the recursive depth is logarithmic.</div>
+                        <div class=""> <b>Worst Case:</b> O(log n), as the maximum depth of recursion is log n.</div> 
+                        <div class=""> <b>Description:</b> Time complexity is logarithmic due to the halving nature of the recursion.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as no extra space is required.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as the algorithm uses a constant amount of extra space.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we are only using a few variables to track the state of the array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), when no recursion depth is needed.</div>
+                        <div class=""> <b>Worst Case:</b> O(log n), as the recursion depth can be at most log n.</div> 
+                        <div class=""> <b>Description:</b> Space complexity is logarithmic due to recursion stack.</div>    
                     </div>
 
                 </div>

@@ -306,7 +306,7 @@
 
 
 
-<div class=""> You are given two 24-hour formatted times, <code>current</code> and <code>correct</code>. Each time is represented in the format &lsquo;HH:MM&rsquo;, where HH is the hour (00 to 23) and MM is the minutes (00 to 59). In one operation, you can increase the current time by 1, 5, 15, or 60 minutes. Your task is to determine the minimum number of operations required to convert the <code>current</code> time to the <code>correct</code> time. </div>
+<div class=""> Given a binary string s and a positive integer n, determine if the binary representation of all integers from 1 to n (inclusive) are substrings of s. A substring is defined as a contiguous sequence of characters within a string. Return true if all the binary representations of the integers in the range [1, n] are present as substrings of s, otherwise return false. </div>
 
 
 
@@ -357,47 +357,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two strings `current` and `correct`, both in the format &#39;HH:MM&#39;, where the time is represented as a 24-hour clock.</div>
-                        <div class=""> <b>Example:</b> current = &#39;08:30&#39;, correct = &#39;09:20&#39;</div>
+                        <div class=""> <b>Input:</b> You are given a binary string s and a positive integer n.</div>
+                        <div class=""> <b>Example:</b> s = &#39;110101&#39;, n = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • current and correct are in the format &#39;HH:MM&#39;</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • current &lt;= correct</div>
+                                <div style="margin-left: 20px;"> • s[i] is either &#39;0&#39; or &#39;1&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of operations needed to convert the `current` time to the `correct` time.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return true if the binary representation of all integers from 1 to n are substrings of s, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input strings `current` and `correct` will always be valid 24-hour time strings.</div>
+                                <div style="margin-left: 20px;"> • The output is a boolean value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the difference in minutes between `current` and `correct`, then apply the largest operations first (60 minutes, 15 minutes, 5 minutes, and 1 minute) to minimize the number of operations.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if the binary representation of all integers from 1 to n are substrings of s.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Convert the current and correct times to minutes.</div>
+                                <div style="margin-left: 20px;"> • For each number i from 1 to n, convert the number to its binary representation.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the difference between the two times in minutes.</div>
+                                <div style="margin-left: 20px;"> • Check if the binary representation of i is a substring of s.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the available operations (60, 15, 5, and 1 minute) to minimize the number of operations.</div>
+                                <div style="margin-left: 20px;"> • If any number’s binary representation is not a substring of s, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • If all numbers’ binary representations are substrings of s, return true.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input strings `current` and `correct` will always be valid and follow the 24-hour time format.</div>
+                        <div class=""> <b>Goal:</b> You need to consider the constraints for string length and number size, especially given the potentially large value of n.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The strings will always be valid 24-hour formatted times.</div>
+                                <div style="margin-left: 20px;"> • The length of s can be as large as 1000 characters.</div>
                             
-                                <div style="margin-left: 20px;"> • current is less than or equal to correct.</div>
+                                <div style="margin-left: 20px;"> • The value of n can be up to 10^9, so an efficient solution is needed.</div>
                             
                         </div>
                     </div>        
@@ -405,19 +409,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The time difference will always be positive or zero.</div>
+                                <div style="margin-left: 20px;"> • The input string s is guaranteed to be valid and consist only of &#39;0&#39;s and &#39;1&#39;s.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: current = &#39;08:30&#39;, correct = &#39;09:20&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The difference is 50 minutes. We can first add 60 minutes (to make it 09:30), and then subtract 10 minutes to reach 09:20. This requires 2 operations.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;0110&#39;, n = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary representations of 1, 2, and 3 are &#39;1&#39;, &#39;10&#39;, and &#39;11&#39;, respectively. All these are substrings of &#39;0110&#39;, so the output is true.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: current = &#39;06:10&#39;, correct = &#39;07:05&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The difference is 55 minutes. First, add 60 minutes (to make it 07:10), then subtract 5 minutes to reach 07:05. This requires 2 operations.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;0110&#39;, n = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary representation of 4 is &#39;100&#39;, which is not a substring of &#39;0110&#39;, so the output is false.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,16 +445,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves converting both times into minutes, finding the difference, and applying the largest possible operations to minimize the number of steps required.</div>
+                        <div class=""> <b>Approach:</b> The solution involves converting numbers from 1 to n into their binary representations and checking if each of these representations exists as a substring within s.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The time difference is key to solving this problem.</div>
+                                <div style="margin-left: 20px;"> • This problem requires checking the presence of binary representations as substrings, which can be done efficiently using string operations.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using the largest increments (60 minutes) first can quickly reduce the time difference.</div>
+                                <div style="margin-left: 20px;"> • We need to consider how to handle the large range of n values efficiently.</div>
                             
                         </div>
                     </div>
@@ -458,11 +462,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Convert both `current` and `correct` times into minutes by extracting the hour and minute values.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through each number from 1 to n.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the time difference.</div>
+                                <div style="margin-left: 20px;"> • 2. Convert each number to its binary representation.</div>
                             
-                                <div style="margin-left: 20px;"> • Apply the operations (60, 15, 5, and 1 minute) in descending order of value to minimize the operations.</div>
+                                <div style="margin-left: 20px;"> • 3. Use string operations to check if the binary representation is a substring of s.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If all numbers&#39; binary representations are substrings, return true. Otherwise, return false.</div>
                             
                         </div>
                     </div>
@@ -471,22 +477,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input is guaranteed to be valid and will always contain two time strings.</div>
+                                <div style="margin-left: 20px;"> • There are no empty inputs in this case, as s is a non-empty binary string and n is a positive integer.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The time difference between `current` and `correct` is manageable, as no time will exceed 1440 minutes (24 hours).</div>
+                                <div style="margin-left: 20px;"> • If n is very large (e.g., 10^9), it is impractical to check all numbers, and the solution should use an optimized approach to avoid performance issues.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When `current` is equal to `correct`, the output should be 0 operations.</div>
+                                <div style="margin-left: 20px;"> • When n is 1, the only number to check is 1, which is always a substring of any valid binary string s.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • current &lt;= correct.</div>
+                                <div style="margin-left: 20px;"> • For large values of n, an optimized solution that reduces unnecessary checks should be used.</div>
                             
                         </div>                                                                        
                     </div>
@@ -503,25 +509,17 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 For Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Binary Conversion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Access Modifier</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Substring Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return False</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Answer</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Difference</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return True</button>
                     
                 </div>
 
@@ -530,18 +528,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getTime</span>(string <span style="color:#666">&amp;</span>s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stoi(s.substr(<span style="color:#666">0</span>, <span style="color:#666">2</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span> <span style="color:#666">+</span> stoi(s.substr(<span style="color:#666">3</span>));
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> convertTime(string current, string correct) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> diff <span style="color:#666">=</span> getTime(correct) <span style="color:#666">-</span> getTime(current), ops[<span style="color:#666">4</span>] <span style="color:#666">=</span> {<span style="color:#666">60</span>,<span style="color:#666">15</span>,<span style="color:#666">5</span>,<span style="color:#666">1</span>}, ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">op</span> : ops) {
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> diff <span style="color:#666">/</span> op;
-</span></span><span style="display:flex;"><span>        diff <span style="color:#666">%=</span> op;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">queryString</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n; i <span style="color:#666">&gt;</span> n <span style="color:#666">/</span> <span style="color:#666">2</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        string b <span style="color:#666">=</span> bitset<span style="color:#666">&lt;</span><span style="color:#666">32</span><span style="color:#666">&gt;</span>(i).to_string();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.find(b.substr(b.find(<span style="color:#b44">&#39;1&#39;</span>))) <span style="color:#666">==</span> string<span style="color:#666">::</span>npos)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -549,103 +542,63 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Class Declaration</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">queryString</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the declaration of the class `Solution`, which contains the methods to solve the problem. </div>
+                            <div class=""> Declares the function `queryString` which takes a string `s` and an integer `n`, and returns a boolean value indicating whether all binary representations of numbers from `n` to `n/2` are substrings of `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Declaration</b></div>
+                            <div class=""> <b>2 : For Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getTime</span>(string <span style="color:#666">&amp;</span>s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n; i <span style="color:#666">&gt;</span> n <span style="color:#666">/</span> <span style="color:#666">2</span>; i<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `getTime` is defined to convert a time string `s` into an integer representing the total minutes. </div>
+                            <div class=""> Initializes a for loop to iterate through all numbers from `n` down to `n/2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Return Statement</b></div>
+                            <div class=""> <b>3 : Binary Conversion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">stoi</span>(s.substr(<span style="color:#666">0</span>, <span style="color:#666">2</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span> <span style="color:#666">+</span> stoi(s.substr(<span style="color:#666">3</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string b <span style="color:#666">=</span> bitset<span style="color:#666">&lt;</span><span style="color:#666">32</span><span style="color:#666">&gt;</span>(i).to_string();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line of code converts the given time string `s` (in HH:MM format) into total minutes by extracting the hours and minutes separately. </div>
+                            <div class=""> Converts the current integer `i` into its 32-bit binary string representation using `bitset&lt;32&gt;`, ensuring the binary string is of fixed length. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Access Modifier</b></div>
+                            <div class=""> <b>4 : Substring Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.find(b.substr(b.find(<span style="color:#b44">&#39;1&#39;</span>))) <span style="color:#666">==</span> string<span style="color:#666">::</span>npos)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This marks the beginning of the public section, where methods accessible outside the class will be defined. </div>
+                            <div class=""> Checks if the binary string `b` (after removing leading zeros) is found as a substring in the given string `s`. If it is not found, the function returns `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Function Declaration</b></div>
+                            <div class=""> <b>5 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">convertTime</span>(string current, string correct) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `convertTime` function is defined, which takes two time strings, `current` and `correct`, and calculates the number of operations to convert one into the other. </div>
+                            <div class=""> Returns `false` if any binary representation from `n` to `n/2` is not found as a substring in `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> diff <span style="color:#666">=</span> getTime(correct) <span style="color:#666">-</span> getTime(current), ops[<span style="color:#666">4</span>] <span style="color:#666">=</span> {<span style="color:#666">60</span>,<span style="color:#666">15</span>,<span style="color:#666">5</span>,<span style="color:#666">1</span>}, ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The difference in minutes between the correct and current times is calculated. The array `ops` contains the available operation durations (60, 15, 5, and 1 minute). The variable `ans` is initialized to 0 to keep track of the number of operations. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">op</span> : ops) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A for loop iterates over each operation in `ops` to calculate how many times each operation can be performed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Update Answer</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> diff <span style="color:#666">/</span> op;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> For each operation `op`, the number of times it can be applied is added to `ans`, and the difference `diff` is reduced accordingly. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Update Difference</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        diff <span style="color:#666">%=</span> op;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After performing the division, the remainder (`diff`) is updated to reflect the remaining time that couldn&#39;t be covered by the current operation. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the total number of operations needed to convert the `current` time to the `correct` time. </div>
+                            <div class=""> Returns `true` if all binary representations from `n` to `n/2` are found as substrings in `s`. </div>
                         </div>
                     
                 </div>
@@ -665,16 +618,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as only a constant number of operations are needed regardless of the time difference.</div>
-                        <div class=""> <b>Average Case:</b> O(1), since the number of available operations is fixed.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), the operations do not depend on the size of the input times.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant because the solution always involves a fixed number of operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n) because for each number up to n, its binary representation takes O(log n) time to compute and check as a substring.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as no additional space is required.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), since only a few variables are used.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since the solution only uses a few variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(log n) due to the space needed for storing the binary representation of each number.</div>    
                     </div>
 
                 </div>

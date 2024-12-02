@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Apr 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    1 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class="">  </div>
+<div class=""> You are given a 0-indexed integer array nums, containing distinct numbers, an integer start, and an integer goal. There is an integer x, initially set to start, and you need to transform x into goal by repeatedly performing operations. You can use any number from the array nums in the following ways: x + nums[i], x - nums[i], or x ^ nums[i] (bitwise-XOR). You can perform each operation any number of times in any order. If the resulting number goes outside the range 0 &lt;= x &lt;= 1000, no further operations can be performed. The task is to determine the minimum number of operations required to convert x from start to goal, or return -1 if it is not possible. </div>
 
 
 
@@ -317,72 +317,98 @@
     <div class="problem-guide-tags">
 
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
         </div> 
     </div>
 
     
     <div class="problem-guide-content">
 
-        <div id="" 
+        <div id="Problem" 
             class="problem-guide-topic-content" 
             style="display: block;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Input:</b> You are provided with the following input parameters:</div>
+                        <div class=""> <b>Example:</b> Input: nums = [4, 5, 6], start = 3, goal = 9</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i], goal &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • start != goal</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements in nums are distinct.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Output:</b> Return the minimum number of operations required to transform start to goal using the operations described, or -1 if it is not possible.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result must be a non-negative integer or -1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> The goal is to determine the minimum number of operations to transform the number start into goal using the operations provided. The strategy involves exploring all possible transformations using a breadth-first search (BFS) approach.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1. Initialize a queue and a set to track seen numbers.</div>
+                            
+                                <div style="margin-left: 20px;"> • 2. Perform a breadth-first search, starting with the value &#39;start&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. For each number x, generate new numbers by performing the operations x &#43; nums[i], x - nums[i], and x ^ nums[i], ensuring they are within the allowed range (0 &lt;= x &lt;= 1000).</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Check if any of the new numbers equal goal, and return the current number of operations.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. If no solution is found, return -1.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> The algorithm should handle edge cases efficiently, especially those involving large inputs or impossible transformations.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Ensure the algorithm performs efficiently for up to 1000 elements in nums.</div>
+                            
+                                <div style="margin-left: 20px;"> • Handle cases where it is impossible to transform start into goal.</div>
                             
                         </div>
                     </div>        
@@ -390,10 +416,28 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
+                                <div style="margin-left: 20px;"> • The numbers in the nums array are distinct.</div>
+                            
+                                <div style="margin-left: 20px;"> • Both start and goal are integers within the range [0, 1000].</div>
+                            
+                                <div style="margin-left: 20px;"> • If no valid transformation sequence exists, return -1.</div>
+                            
                         </div>
                     </div>     
                     
                     <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2,4,12], start = 2, goal = 12</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can go from 2 → 14 → 12 with the following operations: 2 &#43; 12 = 14, then 14 - 2 = 12. This requires 2 operations.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3,5,7], start = 0, goal = -4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can go from 0 → 3 → -4 with the following operations: 0 &#43; 3 = 3, then 3 - 7 = -4. This requires 2 operations.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2,8,16], start = 0, goal = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is impossible to reach 1 starting from 0 with the given nums, so the output is -1.</div>                                
+                                <br/>
                             
                     </div>                         
                     
@@ -401,33 +445,49 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Approach" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> </div>
+                        <div class=""> <b>Approach:</b> The problem is best solved using a breadth-first search (BFS) strategy. BFS is ideal here as it explores all possible transformations level by level, ensuring the minimum number of operations is found.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
+                                <div style="margin-left: 20px;"> • We need to explore all possible transformations of x from start to goal.</div>
+                            
+                                <div style="margin-left: 20px;"> • BFS will allow us to find the shortest path of transformations.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Since BFS explores level by level, it ensures we find the minimum number of operations to reach the goal.</div>
                             
                         </div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a queue and a set to track visited numbers.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Start BFS from the &#39;start&#39; value.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: For each number in the queue, generate new numbers by performing the allowed operations (&#43;, -, ^).</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If a new number equals the goal, return the number of operations.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: If no solution is found, return -1.</div>
                             
                         </div>
                     </div>
@@ -436,14 +496,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • There will always be at least one number in nums, so no need to handle empty input.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Handle cases where nums contains a large number of elements efficiently (up to 1000).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
+                                <div style="margin-left: 20px;"> • Ensure the algorithm handles edge cases like unreachable goals or cases where transformations take the number out of the allowed range.</div>
+                            
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The BFS should be optimized to avoid unnecessary computations and to handle the constraints efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -452,54 +520,391 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Steps" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Set Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Set Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Queue Size</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Counting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Conditional Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Set Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Set Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Queue Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Set Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Set Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Queue Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Set Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Set Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Queue Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Return Statement</button>
                     
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Steps">
 
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> goal) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> seen;
+</span></span><span style="display:flex;"><span>    q.push(start);
+</span></span><span style="display:flex;"><span>    seen.insert(start);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> op <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        op<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: nums) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>((x <span style="color:#666">+</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">-</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">^</span> it) <span style="color:#666">==</span> goal)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> op;
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">+</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">+</span> it);                        
+</span></span><span style="display:flex;"><span>                    q.push(x <span style="color:#666">+</span> it);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">-</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">-</span> it);
+</span></span><span style="display:flex;"><span>                    q.push(x <span style="color:#666">-</span> it);
+</span></span><span style="display:flex;"><span>                }             
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">^</span> it) <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">^</span> it);
+</span></span><span style="display:flex;"><span>                    q.push(x <span style="color:#666">^</span> it);
+</span></span><span style="display:flex;"><span>                }                    
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> goal) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize the function &#39;minimumOperations&#39; which takes in a vector &#39;nums&#39; and two integers &#39;start&#39; and &#39;goal&#39; to calculate the minimum operations required. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Queue Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a queue &#39;q&#39; for BFS traversal to explore the different possible values. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Set Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> seen;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create a set &#39;seen&#39; to store the values that have already been processed, ensuring no value is revisited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Queue Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(start);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the initial &#39;start&#39; value into the queue to begin the BFS search. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Set Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    seen.insert(start);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Insert the &#39;start&#39; value into the &#39;seen&#39; set to mark it as processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> op <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a variable &#39;op&#39; to track the number of operations (steps) taken to reach the goal. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a while loop that continues until all possible values are explored. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Queue Size</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the current size of the queue, which represents the number of elements to be processed in this iteration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Counting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        op<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the operation count as a new level of BFS is processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through each element at the current level in the BFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Queue Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> q.front();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Get the front element of the queue to process. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Queue Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the front element from the queue after processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: nums) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through each element in the &#39;nums&#39; vector to apply the operations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Conditional Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>((x <span style="color:#666">+</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">-</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">^</span> it) <span style="color:#666">==</span> goal)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if any operation (&#43;, -, or ^) applied to the current value &#39;x&#39; results in the &#39;goal&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> op;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the &#39;goal&#39; is reached, return the number of operations (steps) taken. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Set Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">+</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the result of adding &#39;it&#39; to &#39;x&#39; has not been processed yet and falls within the valid range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Set Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">+</span> it);                        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Insert the new value into the &#39;seen&#39; set to mark it as processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Queue Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(x <span style="color:#666">+</span> it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the new value into the queue for further processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Set Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">-</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the result of subtracting &#39;it&#39; from &#39;x&#39; has not been processed yet and falls within the valid range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Set Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">-</span> it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Insert the new value into the &#39;seen&#39; set to mark it as processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Queue Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(x <span style="color:#666">-</span> it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the new value into the queue for further processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Set Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">^</span> it) <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the result of XOR&#39;ing &#39;it&#39; with &#39;x&#39; has not been processed yet and falls within the valid range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Set Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">^</span> it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Insert the new XOR&#39;d value into the &#39;seen&#39; set. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Queue Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(x <span style="color:#666">^</span> it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the new XOR&#39;d value into the queue for further processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return -1 if the goal cannot be reached with the available operations. </div>
+                        </div>
+                    
                 </div>
             </div>
         </div> 
         
-        <div id="" 
+        <div id="Complexity" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Average Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the number of elements in nums, as we explore all possible transformations in BFS.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the queue and the set used to track visited numbers.</div>    
                     </div>
 
                 </div>
@@ -574,8 +979,8 @@
         }        
 
         function buttons() {
-            const slides = document.getElementById('stepsSlides-');
-            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
             let currentIndex = 0;
             let startX = 0;
             let isDragging = false;
@@ -617,7 +1022,7 @@
 
             updateSlides(currentIndex);
 
-            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
             if (initialTag) {
                 initialTag.classList.add('problem-guide-tag-active');
             }

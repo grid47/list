@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    9 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are given a string expression in the form &lsquo;<!-- raw HTML omitted -->+<!-- raw HTML omitted -->&rsquo;, where <!-- raw HTML omitted --> and <!-- raw HTML omitted --> represent positive integers. Your task is to add a pair of parentheses to the expression such that the resulting expression evaluates to the smallest possible value. The parentheses must be placed around the &lsquo;+&rsquo; operator. If there are multiple valid solutions yielding the same result, any of them can be returned. </div>
+<div class=""> You are given a grid of size m x n where each cell is either land (1) or sea (0). Your task is to determine the number of land cells that are completely enclosed by sea cells. A land cell is considered enclosed if it cannot reach the boundary of the grid via other land cells. </div>
 
 
 
@@ -361,51 +361,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string expression containing exactly one &#39;&#43;&#39; symbol, with digits from &#39;1&#39; to &#39;9&#39;.</div>
-                        <div class=""> <b>Example:</b> expression = &#39;345&#43;56&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of an m x n grid, where grid[i][j] is either 1 (land) or 0 (sea).</div>
+                        <div class=""> <b>Example:</b> grid = [[0, 0, 0, 0], [1, 0, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= expression.length &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 500</div>
                             
-                                <div style="margin-left: 20px;"> • expression consists of digits from &#39;1&#39; to &#39;9&#39; and a single &#39;&#43;&#39;</div>
-                            
-                                <div style="margin-left: 20px;"> • expression starts and ends with digits</div>
+                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the expression after adding a pair of parentheses such that the result of the expression is minimized.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;3(45&#43;56)&#39;</div>
+                        <div class=""> <b>Output:</b> Return the number of land cells that are completely enclosed by sea cells, i.e., they cannot reach the boundary of the grid.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result fits within a signed 32-bit integer.</div>
+                                <div style="margin-left: 20px;"> • The returned number should be an integer representing the count of enclosed land cells.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the expression by placing parentheses around the &#39;&#43;&#39; operator. To achieve this, we need to consider the placement of parentheses that minimizes the product after the addition.</div>
+                        <div class=""> <b>Goal:</b> To determine which land cells are enclosed, we need to find and mark all the land cells connected to the boundary of the grid, and then count the remaining land cells.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Find the position of the &#39;&#43;&#39; symbol in the expression.</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the boundary of the grid and mark all land cells connected to it using depth-first search (DFS).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Try different placements of the parentheses around the &#39;&#43;&#39; and calculate the resulting value.</div>
+                                <div style="margin-left: 20px;"> • 2. After marking the reachable land cells, the remaining unmarked land cells are enclosed.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Return the expression that yields the smallest result.</div>
+                                <div style="margin-left: 20px;"> • 3. Count and return the number of enclosed land cells.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle up to 10 characters in the input expression.</div>
+                        <div class=""> <b>Goal:</b> Make sure the algorithm works efficiently within the grid size constraints and correctly identifies enclosed land cells.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • expression contains exactly one &#39;&#43;&#39;</div>
-                            
-                                <div style="margin-left: 20px;"> • expression contains only digits from &#39;1&#39; to &#39;9&#39;</div>
-                            
-                                <div style="margin-left: 20px;"> • expression length is between 3 and 10 characters</div>
+                                <div style="margin-left: 20px;"> • The grid can be as large as 500 x 500, so the solution should handle grids of this size.</div>
                             
                         </div>
                     </div>        
@@ -413,25 +407,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The expression is always a valid mathematical string with exactly one &#39;&#43;&#39; symbol.</div>
-                            
-                                <div style="margin-left: 20px;"> • The length of the expression is guaranteed to be between 3 and 10 characters.</div>
+                                <div style="margin-left: 20px;"> • The input grid is valid and contains only 0s and 1s.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: expression = &#39;345&#43;56&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can place parentheses around &#39;345&#39; and &#39;56&#39;, resulting in &#39;3(45&#43;56)&#39;, which evaluates to 3 * (45 &#43; 56) = 3 * 101 = 303, which is the smallest possible value.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[0, 0, 0, 0], [1, 0, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the 1s in positions (1, 0), (1, 2), and (2, 1) are enclosed by 0s. The land cell at position (2, 2) is not enclosed because it is connected to the boundary. Thus, the output is 3.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: expression = &#39;123&#43;45&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, placing parentheses around &#39;12&#39; and &#39;45&#39; results in &#39;1(23&#43;45)&#39; which evaluates to 1 * (23 &#43; 45) = 1 * 68 = 68, the smallest value.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: expression = &#39;100&#43;200&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this case, the expression &#39;100&#43;200&#39; becomes &#39;(100&#43;200)&#39;, which evaluates to 300, the only possible solution.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 0, 0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, all the 1s are either connected to the boundary or can reach the boundary through other land cells. Therefore, no land cells are enclosed, and the output is 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -455,16 +443,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to explore various positions for the parentheses around the &#39;&#43;&#39; symbol and calculate the resulting expressions. We then select the one that produces the smallest value.</div>
+                        <div class=""> <b>Approach:</b> The approach uses depth-first search (DFS) to mark all land cells connected to the boundary, then counts the remaining unmarked land cells.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The parentheses need to be placed around the &#39;&#43;&#39; symbol to affect the addition operation.</div>
+                                <div style="margin-left: 20px;"> • Boundary cells can directly or indirectly reach the edge, so any land cell connected to the boundary is not enclosed.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use brute force to check all possible valid parentheses placements and calculate the result to find the minimum.</div>
+                                <div style="margin-left: 20px;"> • The problem requires marking the land cells that are connected to the boundary using DFS and then counting the unmarked ones.</div>
                             
                         </div>
                     </div>
@@ -472,15 +460,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Identify the position of the &#39;&#43;&#39; symbol in the expression.</div>
+                                <div style="margin-left: 20px;"> • 1. Loop through the boundary of the grid and perform a DFS for each land cell (1).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Split the expression into two parts based on the &#39;&#43;&#39; symbol.</div>
+                                <div style="margin-left: 20px;"> • 2. For each DFS, mark the connected land cells by changing their value to a different number (e.g., 2).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Test different placements of parentheses around the &#39;&#43;&#39; symbol.</div>
+                                <div style="margin-left: 20px;"> • 3. After the boundary DFS traversal, loop through the grid again and count the land cells that are still 1 (i.e., they are enclosed).</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Calculate the result for each placement and keep track of the smallest result.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the expression that produces the smallest result.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the count of these enclosed land cells.</div>
                             
                         </div>
                     </div>
@@ -489,22 +475,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs as the problem guarantees valid expressions.</div>
+                                <div style="margin-left: 20px;"> • If the grid is empty or contains no land cells, the output should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since the length of the input is limited to 10 characters, handling large inputs is not an issue.</div>
+                                <div style="margin-left: 20px;"> • For large grids (e.g., 500 x 500), the algorithm should still run within time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The &#39;&#43;&#39; symbol may be at different positions in the expression, but this doesn&#39;t affect the approach.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where all cells are sea cells (0) or all cells are land cells (1).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The expression always contains exactly one &#39;&#43;&#39; symbol.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles the maximum grid size efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,61 +507,45 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Grid Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping Through Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Boundary Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition for DFS</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Count Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Count Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Count Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Count Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Looping Through Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Helper Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 DFS Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Looping Through Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Exit DFS</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mark Visited Cell</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 DFS Recursive Calls</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 DFS Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 DFS Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Returning Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Building Result String</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Building Result String</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Building Result String</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Building Result String</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Building Result String</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Building Result String</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Returning Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 DFS Recursive Call</button>
                     
                 </div>
 
@@ -584,55 +554,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">minimizeResult</span>(string exp) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numEnclaves</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                dfs(grid, i, j);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) cnt<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> pos <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">0</span>, y <span style="color:#666">=</span> <span style="color:#666">0</span>, p <span style="color:#666">=</span> <span style="color:#666">0</span>, q <span style="color:#666">=</span> <span style="color:#666">0</span>;        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> exp.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(exp[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span>) pos <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pos <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>            y <span style="color:#666">=</span> y <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> exp[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (exp[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;+&#39;</span>){
-</span></span><span style="display:flex;"><span>            q <span style="color:#666">=</span> q <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> exp[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> q;
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; y &lt;&lt; &#34; &#34; &lt;&lt; pos &lt;&lt; &#34; &#34; &lt;&lt; q &lt;&lt; &#34;\n&#34;;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>}; <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        x <span style="color:#666">=</span> x <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (i <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> exp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span><span style="color:#666">:</span> <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        y <span style="color:#666">=</span> y <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>)pow(<span style="color:#666">10</span>, pos <span style="color:#666">-</span> i);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> pos <span style="color:#666">+</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> exp.size(); j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            p <span style="color:#666">=</span> p <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (exp[j] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
-</span></span><span style="display:flex;"><span>            q<span style="color:#666">=</span> q <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>)pow(<span style="color:#666">10</span>, exp.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> j);
-</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; x &lt;&lt; &#34; &#34; &lt;&lt; y &lt;&lt; &#34; &#34; &lt;&lt; p &lt;&lt; &#34; &#34; &lt;&lt; q &lt;&lt; &#34; &#34; &lt;&lt; ans &lt;&lt; &#34;\n&#34;;                  
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>((x<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>x) <span style="color:#666">*</span> (y <span style="color:#666">+</span> p) <span style="color:#666">*</span> (q<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>q) <span style="color:#666">&lt;</span> ans) {
-</span></span><span style="display:flex;"><span>                ans <span style="color:#666">=</span> (x<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>x) <span style="color:#666">*</span> (y <span style="color:#666">+</span> p) <span style="color:#666">*</span> (q<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>q);
-</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// cout &lt;&lt; x &lt;&lt; &#34; &#34; &lt;&lt; y &lt;&lt; &#34; &#34; &lt;&lt; p &lt;&lt; &#34; &#34; &lt;&lt; q &lt;&lt; &#34; &#34; &lt;&lt; ans &lt;&lt; &#34;\n&#34;;                    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                res <span style="color:#666">=</span> {i, j};
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        p <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        q <span style="color:#666">=</span> tmp;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; res[0] &lt;&lt; &#34; &#34; &lt;&lt; res[1];
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    string ret <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> res[<span style="color:#666">0</span>]) ret <span style="color:#666">+=</span> exp[i<span style="color:#666">++</span>];
-</span></span><span style="display:flex;"><span>    ret <span style="color:#666">+=</span> <span style="color:#b44">&#39;(&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> res[<span style="color:#666">1</span>]) ret <span style="color:#666">+=</span> exp[i<span style="color:#666">++</span>];
-</span></span><span style="display:flex;"><span>    ret <span style="color:#666">+=</span> <span style="color:#b44">&#39;)&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> exp.size()) ret <span style="color:#666">+=</span> exp[i<span style="color:#666">++</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -640,283 +584,203 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">minimizeResult</span>(string exp) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numEnclaves</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;minimizeResult&#39;, which takes a string representing a mathematical expression and returns the minimized result after placing parentheses optimally. </div>
+                            <div class=""> Defines the function `numEnclaves`, which takes a 2D grid as input and returns the number of enclaves (connected regions of 1&#39;s that are not connected to the boundary). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Grid Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> pos <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable &#39;pos&#39; to -1, which will store the index of the &#39;&#43;&#39; operator in the expression. </div>
+                            <div class=""> Stores the number of rows `m` and columns `n` in the grid, which are used to iterate over the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">0</span>, y <span style="color:#666">=</span> <span style="color:#666">0</span>, p <span style="color:#666">=</span> <span style="color:#666">0</span>, q <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes variables &#39;x&#39;, &#39;y&#39;, &#39;p&#39;, and &#39;q&#39; to 0. These variables will be used to break down and calculate parts of the expression. </div>
+                            <div class=""> Starts the first loop to iterate through each row of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Looping Through Expression</b></div>
+                            <div class=""> <b>4 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> exp.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through each character of the expression string &#39;exp&#39;. </div>
+                            <div class=""> Starts the inner loop to iterate through each column of the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Boundary Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(exp[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span>) pos <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current character is a &#39;&#43;&#39; operator and stores its position in &#39;pos&#39;. </div>
+                            <div class=""> Checks if the current cell is on the boundary of the grid (first row, first column, last row, or last column). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Condition for DFS</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pos <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the &#39;&#43;&#39; operator hasn&#39;t been encountered yet. </div>
+                            <div class=""> If the current boundary cell contains a 1 (representing land), it calls the `dfs` function to mark all connected land cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Mathematical Operations</b></div>
+                            <div class=""> <b>7 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            y <span style="color:#666">=</span> y <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> exp[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dfs(grid, i, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If no &#39;&#43;&#39; operator is found, the character is added to the variable &#39;y&#39; by converting it to an integer. </div>
+                            <div class=""> Calls the helper function `dfs` to mark all connected 1&#39;s from the current cell as visited (by setting them to 2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Condition Check</b></div>
+                            <div class=""> <b>8 : Count Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (exp[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;+&#39;</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the character is not a &#39;&#43;&#39;, it is part of the second number after the &#39;&#43;&#39; operator. </div>
+                            <div class=""> Initializes a counter `cnt` to store the number of remaining land cells that are not connected to the boundary. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Mathematical Operations</b></div>
+                            <div class=""> <b>9 : Count Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q <span style="color:#666">=</span> q <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> exp[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the current character to the variable &#39;q&#39;, representing the second number in the expression. </div>
+                            <div class=""> Starts a loop to iterate through each row again to count the remaining land cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Assignment</b></div>
+                            <div class=""> <b>10 : Count Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the value of &#39;q&#39; into &#39;tmp&#39; to preserve its original value for later use. </div>
+                            <div class=""> Starts an inner loop to iterate through each column of the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Variable Initialization</b></div>
+                            <div class=""> <b>11 : Count Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>}; <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) cnt<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a vector &#39;res&#39; to store the optimal indices for placing parentheses, and initializes &#39;ans&#39; to a large value (INT_MAX) to track the minimum result. </div>
+                            <div class=""> Increments the counter `cnt` whenever a land cell (1) is found that is not connected to the boundary. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Looping Through Expression</b></div>
+                            <div class=""> <b>12 : Return Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through the expression before the &#39;&#43;&#39; operator. </div>
+                            <div class=""> Returns the final count of the enclaves (land cells not connected to the boundary). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Mathematical Operations</b></div>
+                            <div class=""> <b>13 : Helper Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        x <span style="color:#666">=</span> x <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (i <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> exp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span><span style="color:#666">:</span> <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the first part of the first number in the expression by adding digits before the &#39;&#43;&#39; operator. </div>
+                            <div class=""> Defines the helper function `dfs` that uses Depth-First Search to mark connected land cells starting from position `(i, j)`. It modifies the grid to mark visited cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Mathematical Operations</b></div>
+                            <div class=""> <b>14 : DFS Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        y <span style="color:#666">=</span> y <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>)pow(<span style="color:#666">10</span>, pos <span style="color:#666">-</span> i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the remaining part of the second number after the &#39;&#43;&#39; operator. </div>
+                            <div class=""> Checks for out-of-bounds conditions or if the current cell is not land (value is not 1). If any of these conditions are true, the function exits. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Looping Through Expression</b></div>
+                            <div class=""> <b>15 : Exit DFS</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> pos <span style="color:#666">+</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> exp.size(); j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a nested loop to iterate through the expression after the &#39;&#43;&#39; operator. </div>
+                            <div class=""> Exits the DFS function if the cell is invalid or already visited. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Mathematical Operations</b></div>
+                            <div class=""> <b>16 : Mark Visited Cell</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            p <span style="color:#666">=</span> p <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (exp[j] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the current character in the second part of the expression (after the &#39;&#43;&#39;) to the variable &#39;p&#39;. </div>
+                            <div class=""> Marks the current cell as visited by setting its value to 2. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Mathematical Operations</b></div>
+                            <div class=""> <b>17 : DFS Recursive Calls</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q<span style="color:#666">=</span> q <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>)pow(<span style="color:#666">10</span>, exp.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> j);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the remaining part of &#39;q&#39; after the current digit is processed. </div>
+                            <div class=""> Recursively calls `dfs` on the cell below the current cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Condition Check</b></div>
+                            <div class=""> <b>18 : DFS Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((x<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>x) <span style="color:#666">*</span> (y <span style="color:#666">+</span> p) <span style="color:#666">*</span> (q<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>q) <span style="color:#666">&lt;</span> ans) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current combination of &#39;x&#39;, &#39;y&#39;, &#39;p&#39;, and &#39;q&#39; produces a smaller result. </div>
+                            <div class=""> Recursively calls `dfs` on the cell to the right of the current cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Variable Assignment</b></div>
+                            <div class=""> <b>19 : DFS Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ans <span style="color:#666">=</span> (x<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>x) <span style="color:#666">*</span> (y <span style="color:#666">+</span> p) <span style="color:#666">*</span> (q<span style="color:#666">==</span><span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span>q);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the minimum result &#39;ans&#39; if the current combination yields a smaller value. </div>
+                            <div class=""> Recursively calls `dfs` on the cell above the current cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>20 : Variable Assignment</b></div>
+                            <div class=""> <b>20 : DFS Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">=</span> {i, j};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the indices of the optimal parentheses placement in &#39;res&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Returning Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string ret <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes an empty string &#39;ret&#39; to store the result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Building Result String</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes an index &#39;i&#39; to start building the result string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Building Result String</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> res[<span style="color:#666">0</span>]) ret <span style="color:#666">+=</span> exp[i<span style="color:#666">++</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the part before the first parenthesis to &#39;ret&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Building Result String</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ret <span style="color:#666">+=</span> <span style="color:#b44">&#39;(&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the opening parenthesis to &#39;ret&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Building Result String</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> res[<span style="color:#666">1</span>]) ret <span style="color:#666">+=</span> exp[i<span style="color:#666">++</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the part inside the parentheses to &#39;ret&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Building Result String</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ret <span style="color:#666">+=</span> <span style="color:#b44">&#39;)&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the closing parenthesis to &#39;ret&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>27 : Building Result String</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> exp.size()) ret <span style="color:#666">+=</span> exp[i<span style="color:#666">++</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the remaining part of the expression to &#39;ret&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>28 : Returning Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the final string with the parentheses placed optimally. </div>
+                            <div class=""> Recursively calls `dfs` on the cell to the left of the current cell. </div>
                         </div>
                     
                 </div>
@@ -936,16 +800,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The algorithm performs linear passes over the expression to find the optimal placement of parentheses.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we are iterating over every cell in the grid, performing a DFS traversal for each boundary land cell.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear due to storing intermediate results of expressions.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the recursion stack used by DFS.</div>    
                     </div>
 
                 </div>

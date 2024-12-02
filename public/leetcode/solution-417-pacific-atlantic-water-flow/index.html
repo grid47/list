@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    9 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a circular integer array <code>nums</code> of length <code>n</code>. A circular array means that the end of the array connects back to the beginning. Your task is to find the maximum possible sum of a non-empty subarray of <code>nums</code>, which can wrap around the array. Formally, you need to find the maximum sum of a subarray where the subarray can either be within the linear array or it can wrap around from the end to the beginning. </div>
+<div class=""> You are given an m x n grid representing an island, where each cell contains an integer representing the height above sea level. The island borders both the Pacific and Atlantic Oceans. The Pacific Ocean touches the left and top edges of the grid, and the Atlantic Ocean touches the right and bottom edges. Water can flow from one cell to an adjacent cell if the adjacent cell&rsquo;s height is less than or equal to the current cell&rsquo;s height. The task is to find all the cells where water can flow to both oceans. </div>
 
 
 
@@ -372,47 +372,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array `nums` representing the circular array.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [2, -1, 3, -2]</div>
+                        <div class=""> <b>Input:</b> The input is a 2D integer grid representing the heights of the island cells.</div>
+                        <div class=""> <b>Example:</b> Input: heights = [[3,4,5],[6,7,8],[1,2,3]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 3 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 200</div>
                             
-                                <div style="margin-left: 20px;"> • -3 * 10^4 &lt;= nums[i] &lt;= 3 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= heights[r][c] &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum possible sum of a non-empty subarray of `nums`. The subarray can wrap around from the end of the array to the beginning.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> Return a list of coordinates that represent the cells where water can flow to both the Pacific and Atlantic Oceans.</div>
+                        <div class=""> <b>Example:</b> Output: [[0,2],[1,1],[2,0]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will have at least one element.</div>
+                                <div style="margin-left: 20px;"> • The output should be a list of valid cell coordinates.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the maximum sum of a subarray that can be either a linear subarray or one that wraps around the end and the start of the array.</div>
+                        <div class=""> <b>Goal:</b> The goal is to identify all the cells where water can flow to both oceans.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • First, compute the maximum sum subarray for the normal linear case using Kadane&#39;s algorithm.</div>
+                                <div style="margin-left: 20px;"> • Use depth-first search (DFS) to explore cells from the borders of both oceans.</div>
                             
-                                <div style="margin-left: 20px;"> • Then, compute the minimum sum subarray for the array, and subtract it from the total sum of the array to account for the case where the subarray wraps around.</div>
+                                <div style="margin-left: 20px;"> • Mark cells that can reach the Pacific Ocean from the top and left borders.</div>
                             
-                                <div style="margin-left: 20px;"> • The result is the maximum of the linear subarray sum and the wrapped subarray sum (only if the array contains at least one non-negative element).</div>
+                                <div style="margin-left: 20px;"> • Mark cells that can reach the Atlantic Ocean from the bottom and right borders.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return cells that can reach both oceans.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array will contain at least one element and follow the given constraints.</div>
+                        <div class=""> <b>Goal:</b> The problem&#39;s constraints ensure that the grid is not too large to process efficiently with DFS.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array length `n` will be between 1 and 30,000.</div>
+                                <div style="margin-left: 20px;"> • The grid can have a size of up to 200x200.</div>
                             
-                                <div style="margin-left: 20px;"> • Each element in the array `nums[i]` will be between -30,000 and 30,000.</div>
+                                <div style="margin-left: 20px;"> • Heights are non-negative integers less than or equal to 100,000.</div>
                             
                         </div>
                     </div>        
@@ -420,19 +422,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • We assume that the input array contains valid integers and is not empty.</div>
+                                <div style="margin-left: 20px;"> • The grid represents a valid island structure.</div>
+                            
+                                <div style="margin-left: 20px;"> • Water can flow to any neighboring cell that is lower or equal in height.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, -1, 3, -2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the maximum sum subarray that can be found is [3], which has a sum of 3. The subarray [2, -1, 3] is also valid, but its sum is smaller (4). The array does not contain any subarrays that wrap around, so the final result is 3.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5, -3, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the best subarray is [5, 5], which wraps around and sums to 10. The maximum sum subarray without wrapping would be [5], summing to 5. Therefore, the result is 10.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: heights = [[3,4,5],[6,7,8],[1,2,3]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the cells that can flow to both the Pacific and Atlantic oceans are (0,2), (1,1), and (2,0). Water flows from these cells to both oceans as demonstrated in the DFS exploration.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +456,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved by finding two possible cases for the maximum sum: one where the subarray is within the array, and one where it wraps around the end and the beginning of the array. To handle both cases, we use Kadane’s algorithm for the linear case and compute the total sum minus the minimum subarray sum for the circular case.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we use DFS to explore the cells that can reach the Pacific and Atlantic Oceans, marking them as we go.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to compute the maximum subarray sum for both linear and circular subarrays.</div>
+                                <div style="margin-left: 20px;"> • The problem asks to find all cells that can reach both oceans.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can perform DFS starting from the borders of the grid where water can reach the ocean.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Kadane&#39;s algorithm is a good fit for finding the maximum sum subarray in a linear array. To handle the circular case, we can compute the total sum of the array and subtract the minimum subarray sum.</div>
+                                <div style="margin-left: 20px;"> • By marking the cells reachable from the Pacific and Atlantic Oceans separately, we can identify cells that are reachable from both.</div>
                             
                         </div>
                     </div>
@@ -473,13 +475,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Use Kadane’s algorithm to find the maximum subarray sum for the normal array (non-circular case).</div>
+                                <div style="margin-left: 20px;"> • Perform DFS for the Pacific Ocean from the top and left borders.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Compute the total sum of the array.</div>
+                                <div style="margin-left: 20px;"> • Perform DFS for the Atlantic Ocean from the bottom and right borders.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Use Kadane’s algorithm to find the minimum subarray sum for the array.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: The result is the maximum of the normal maximum subarray sum and the total sum minus the minimum subarray sum (for the circular case).</div>
+                                <div style="margin-left: 20px;"> • For each cell, check if it is marked in both the Pacific and Atlantic reachable grids, and add it to the result list.</div>
                             
                         </div>
                     </div>
@@ -488,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the array will contain at least one element, so we do not need to handle empty inputs.</div>
+                                <div style="margin-left: 20px;"> • If the grid has no rows or columns, the result should be an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle large arrays with up to 30,000 elements.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle grids with the maximum size efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array consists entirely of negative numbers, the best solution is just the single largest negative number.</div>
+                                <div style="margin-left: 20px;"> • All cells have the same height: In this case, all cells can reach both oceans.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work within the given constraints for both time and space.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the maximum constraints of 200x200 grid size.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,23 +524,53 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 2D Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 2D Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Accumulate Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Max Subarray Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Max Subarray Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Min Subarray Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Min Subarray Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Nested Loop Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Nested Loop Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Push Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 DFS Marking</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 DFS Recursive Calls</button>
                     
                 </div>
 
@@ -549,18 +579,38 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSubarraySumCircular</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], lmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> gmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], gmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
-</span></span><span style="display:flex;"><span>        lmax <span style="color:#666">=</span> max(nums[i], lmax <span style="color:#666">+</span> nums[i]);
-</span></span><span style="display:flex;"><span>        gmax <span style="color:#666">=</span> max(lmax, gmax);
-</span></span><span style="display:flex;"><span>        lmin <span style="color:#666">=</span> min(nums[i], lmin <span style="color:#666">+</span> nums[i]);
-</span></span><span style="display:flex;"><span>        gmin <span style="color:#666">=</span> min(lmin, gmin);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pacificAtlantic(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> heights) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> heights.size(), n <span style="color:#666">=</span> heights[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> pac(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> atl(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dfs(heights, pac, <span style="color:#666">0</span>, j);
+</span></span><span style="display:flex;"><span>        dfs(heights, atl, m <span style="color:#666">-</span><span style="color:#666">1</span>, j);            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> gmax <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> max(gmax, sum <span style="color:#666">-</span> gmin)<span style="color:#666">:</span> gmax;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dfs(heights, pac, j, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        dfs(heights, atl, j, n <span style="color:#666">-</span> <span style="color:#666">1</span>);            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pac[i][j] <span style="color:#666">&amp;&amp;</span> atl[i][j])
+</span></span><span style="display:flex;"><span>            ans.push_back({i, j});
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> h, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>vis, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vis[i][j] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> h.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> h[<span style="color:#666">0</span>].size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -571,110 +621,260 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSubarraySumCircular</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pacificAtlantic(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> heights) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;maxSubarraySumCircular&#39; which takes a vector of integers &#39;nums&#39; and returns an integer representing the maximum sum of a subarray in a circular array. </div>
+                            <div class=""> This line declares the `pacificAtlantic` function, which takes a 2D vector representing the elevation map and returns a 2D vector with the coordinates that can reach both oceans. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], lmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> heights.size(), n <span style="color:#666">=</span> heights[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;lmax&#39; and &#39;lmin&#39; to the first element of the array, representing the current maximum and minimum subarray sums respectively. </div>
+                            <div class=""> Here, we initialize variables `m` and `n` to represent the number of rows and columns in the heights matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : 2D Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> gmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], gmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> pac(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;gmax&#39; and &#39;gmin&#39; to the first element of the array, representing the global maximum and minimum subarray sums respectively. </div>
+                            <div class=""> This initializes a 2D boolean vector `pac` to track whether each cell can reach the Pacific Ocean. Initially, all values are set to `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : 2D Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> atl(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;sum&#39; to the first element of the array, which will store the total sum of all elements in the array. </div>
+                            <div class=""> Similarly, this initializes the 2D boolean vector `atl` to track whether each cell can reach the Atlantic Ocean. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Looping</b></div>
+                            <div class=""> <b>5 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop from the second element to the end of the array to compute the maximum and minimum subarray sums dynamically. </div>
+                            <div class=""> This starts a loop to iterate over each column in the first and last row to perform DFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Accumulate Sum</b></div>
+                            <div class=""> <b>6 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(heights, pac, <span style="color:#666">0</span>, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current element &#39;nums[i]&#39; to the &#39;sum&#39; to keep track of the total sum of the array. </div>
+                            <div class=""> This calls the `dfs` function to mark all cells reachable from the Pacific Ocean (starting from the first row). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Max Subarray Calculation</b></div>
+                            <div class=""> <b>7 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lmax <span style="color:#666">=</span> max(nums[i], lmax <span style="color:#666">+</span> nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(heights, atl, m <span style="color:#666">-</span><span style="color:#666">1</span>, j);            
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update &#39;lmax&#39; to be the maximum of the current element &#39;nums[i]&#39; or the sum of the previous maximum subarray and the current element. </div>
+                            <div class=""> Similarly, this calls the `dfs` function to mark all cells reachable from the Atlantic Ocean (starting from the last row). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Max Subarray Update</b></div>
+                            <div class=""> <b>8 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gmax <span style="color:#666">=</span> max(lmax, gmax);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update &#39;gmax&#39; to the maximum value between &#39;lmax&#39; and the global maximum subarray sum so far. </div>
+                            <div class=""> This starts a loop to iterate over each row in the first and last column to perform DFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Min Subarray Calculation</b></div>
+                            <div class=""> <b>9 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lmin <span style="color:#666">=</span> min(nums[i], lmin <span style="color:#666">+</span> nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(heights, pac, j, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update &#39;lmin&#39; to be the minimum of the current element &#39;nums[i]&#39; or the sum of the previous minimum subarray and the current element. </div>
+                            <div class=""> This calls the `dfs` function to mark all cells reachable from the Pacific Ocean (starting from the first column). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Min Subarray Update</b></div>
+                            <div class=""> <b>10 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gmin <span style="color:#666">=</span> min(lmin, gmin);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(heights, atl, j, n <span style="color:#666">-</span> <span style="color:#666">1</span>);            
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update &#39;gmin&#39; to the minimum value between &#39;lmin&#39; and the global minimum subarray sum so far. </div>
+                            <div class=""> This calls the `dfs` function to mark all cells reachable from the Atlantic Ocean (starting from the last column). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> gmax <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> max(gmax, sum <span style="color:#666">-</span> gmin)<span style="color:#666">:</span> gmax;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the maximum value between &#39;gmax&#39; and the difference between the total sum of the array and &#39;gmin&#39; if &#39;gmax&#39; is greater than 0. Otherwise, return &#39;gmax&#39;. This step considers both circular and non-circular subarrays. </div>
+                            <div class=""> This initializes a vector `ans` to store the coordinates of cells that can reach both the Pacific and Atlantic oceans. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Nested Loop Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This starts a loop to iterate over each row. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Nested Loop Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This starts a nested loop to iterate over each column. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pac[i][j] <span style="color:#666">&amp;&amp;</span> atl[i][j])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if a cell can reach both the Pacific and Atlantic oceans. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Push Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans.push_back({i, j});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a cell can reach both oceans, its coordinates are added to the `ans` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Finally, the function returns the list of coordinates that can reach both the Pacific and Atlantic oceans. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> h, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>vis, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This declares the `dfs` function, which performs depth-first search to mark reachable cells for a given ocean. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : DFS Marking</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis[i][j] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This marks the current cell as visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the top neighbor cell is within bounds, has not been visited, and is higher or equal in elevation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the condition is true, it recursively calls `dfs` for the top neighbor. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the left neighbor cell is within bounds, has not been visited, and is higher or equal in elevation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the condition is true, it recursively calls `dfs` for the left neighbor. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> h.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the bottom neighbor cell is within bounds, has not been visited, and is higher or equal in elevation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the condition is true, it recursively calls `dfs` for the bottom neighbor. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> h[<span style="color:#666">0</span>].size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the right neighbor cell is within bounds, has not been visited, and is higher or equal in elevation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the condition is true, it recursively calls `dfs` for the right neighbor. </div>
                         </div>
                     
                 </div>
@@ -694,16 +894,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the array at most three times: once for the total sum, once for the maximum subarray sum, and once for the minimum subarray sum.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n), where m is the number of rows and n is the number of columns in the grid.</div>
+                        <div class=""> <b>Average Case:</b> O(m * n), as DFS will explore each cell in the worst case.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n), since we may need to explore all cells.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the size of the grid.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) because we use only a few extra variables to store the sum and intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n), as the worst-case space is determined by the grid size.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n), as we need space for the DFS stack and the two boolean grids for marking cells.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the size of the grid due to the storage of the DFS stack and the visited grids.</div>    
                     </div>
 
                 </div>

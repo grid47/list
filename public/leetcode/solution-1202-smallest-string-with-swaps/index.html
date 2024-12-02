@@ -303,7 +303,7 @@
 
 
 
-<div class=""> You are given a regular convex polygon with <code>n</code> vertices. Each vertex has one monkey. Every monkey can move either clockwise or anticlockwise to a neighboring vertex. A collision occurs if two monkeys land on the same vertex or cross paths on an edge. Your task is to return the number of ways the monkeys can move such that at least one collision happens, modulo 10^9 + 7. </div>
+<div class=""> You are given a string s and an array of pairs of indices pairs where each pair pairs[i] = [a, b] represents two indices in the string. You can swap the characters at any of these index pairs any number of times. Your task is to return the lexicographically smallest string that can be obtained after performing the swaps. </div>
 
 
 
@@ -354,41 +354,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a single integer `n`, which represents the number of vertices in the polygon.</div>
-                        <div class=""> <b>Example:</b> n = 4</div>
+                        <div class=""> <b>Input:</b> You are given a string s and a 2D array pairs where each pair represents two indices in the string that can be swapped.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;zaxy&#34;, pairs = [[0,3],[1,2]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= pairs.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= pairs[i][0], pairs[i][1] &lt; s.length</div>
+                            
+                                <div style="margin-left: 20px;"> • s only contains lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of ways the monkeys can move such that at least one collision happens, modulo 10^9 &#43; 7.</div>
-                        <div class=""> <b>Example:</b> 6</div>
+                        <div class=""> <b>Output:</b> Return the lexicographically smallest string that can be obtained by swapping the characters at the given pairs of indices.</div>
+                        <div class=""> <b>Example:</b> Output: &#34;axyz&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To calculate the number of collision-producing moves for the monkeys.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the lexicographically smallest string by performing the allowed swaps.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Start by calculating the total number of possible movements for the monkeys, which is 2^n.</div>
+                                <div style="margin-left: 20px;"> • Use Union-Find (Disjoint Set Union) to group indices that can be connected through the given pairs.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Subtract the number of valid movements where no collision occurs (this can be derived from symmetry).</div>
+                                <div style="margin-left: 20px;"> • For each group, sort the indices and the characters in those positions.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. The result is the number of ways that at least one collision will happen.</div>
+                                <div style="margin-left: 20px;"> • Assign the sorted characters back to the indices to form the smallest possible string.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The number of vertices `n` can be as large as 10^9, so the solution needs to be efficient in calculating the result for large inputs.</div>
+                        <div class=""> <b>Goal:</b> The problem has constraints to ensure that the input size is manageable.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= pairs.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= pairs[i][0], pairs[i][1] &lt; s.length</div>
+                            
+                                <div style="margin-left: 20px;"> • s only contains lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -396,21 +408,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The monkeys always move simultaneously and only to neighboring vertices.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of possible ways to move can be extremely large, so the result must be computed modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • It is assumed that the input string s only contains lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `n = 4`, there are 16 possible ways the monkeys can move. Among them, 6 ways result in a collision, where at least two monkeys either meet on the same vertex or cross paths.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;zaxy&#34;, pairs = [[0,3],[1,2]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Swap s[0] and s[3], s = &#34;yazx&#34;. Swap s[1] and s[2], s = &#34;axyz&#34;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `n = 5`, the total possible movements are 32. Out of them, 10 lead to a collision.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;xyza&#34;, pairs = [[0,3],[1,2],[0,2]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Swap s[0] and s[3], s = &#34;ayzx&#34;. Swap s[0] and s[2], s = &#34;axyz&#34;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;acdb&#34;, pairs = [[0,1],[1,2],[2,3]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Swap s[0] and s[1], s = &#34;cabd&#34;. Swap s[1] and s[2], s = &#34;cdab&#34;. Swap s[2] and s[3], s = &#34;abcd&#34;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -434,18 +448,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To calculate the number of ways that result in at least one collision, we compute the total number of movements and subtract the number of movements that avoid a collision.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we use a Union-Find data structure to group indices that can be swapped and then sort the characters in those groups.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The total number of movements is 2^n, where `n` is the number of monkeys (vertices).</div>
+                                <div style="margin-left: 20px;"> • Union-Find allows us to efficiently group indices that can be swapped together.</div>
                             
-                                <div style="margin-left: 20px;"> • We need to count the number of movements that lead to no collision and subtract it from the total.</div>
+                                <div style="margin-left: 20px;"> • Sorting the characters within each group gives the lexicographically smallest arrangement.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The key observation is that the monkeys either move clockwise or anticlockwise, and we need to count how many such configurations avoid any collisions.</div>
+                                <div style="margin-left: 20px;"> • The solution can be broken down into finding connected components and sorting them to get the smallest string.</div>
                             
                         </div>
                     </div>
@@ -453,11 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the total number of possible movements: `2^n`.</div>
+                                <div style="margin-left: 20px;"> • Use Union-Find to identify groups of indices that can be swapped.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Subtract the number of movements where no monkeys collide.</div>
+                                <div style="margin-left: 20px;"> • For each group, extract the characters from those indices and sort them.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Use modular arithmetic to return the result modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • Place the sorted characters back in the positions of their corresponding indices in the original string.</div>
                             
                         </div>
                     </div>
@@ -466,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input `n` is guaranteed to be at least 3, so there are no empty inputs.</div>
+                                <div style="margin-left: 20px;"> • Ensure the string is not empty, as this case is out of bounds based on the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The value of `n` can be as large as 10^9, so the solution needs to be optimized for large values.</div>
+                                <div style="margin-left: 20px;"> • Make sure the solution is efficient enough to handle large inputs (strings and pairs up to 10^5 in length).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Special values such as `n = 3` can be handled directly by the formula for total possible movements.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where all indices are part of the same group or no indices can be swapped.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution needs to handle very large inputs efficiently, using modular exponentiation.</div>
+                                <div style="margin-left: 20px;"> • The solution must account for up to 10^5 indices and swap pairs efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -498,29 +512,41 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Union-Find Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Through Pairs</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Squaring the Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Union-Find Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Odd Exponent Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Empty Line</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Handling Odd Exponent</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Union-Find Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Odd Exponent Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Final Result Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Through Groups</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Sorting Indices</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Calculating Power of 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Character Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Adjusting Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Fill Character Vector</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Character Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Character Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Assign Sorted Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Assign Character from Sorted List</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Convert to String</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Statement</button>
                     
                 </div>
 
@@ -529,26 +555,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">smallestStringWithSwaps</span>(string s, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pairs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>    UF uf <span style="color:#666">=</span> UF(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">each</span>: pairs)
+</span></span><span style="display:flex;"><span>        uf.join(each[<span style="color:#666">0</span>], each[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grps <span style="color:#666">=</span> uf.pairs();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#b44">&#39;-&#39;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">grp</span> : grps) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">power</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> power(a, n<span style="color:#666">/</span><span style="color:#666">2</span>) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> y <span style="color:#666">=</span> (res <span style="color:#666">*</span> res) <span style="color:#666">%</span>mod;
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; (int) y &lt;&lt; &#34; &#34; ;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>        y <span style="color:#666">=</span> (a <span style="color:#666">*</span> y) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> y;            
+</span></span><span style="display:flex;"><span>        sort(grp.begin(), grp.end());
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> chr;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">g</span> : grp) chr.push_back(s[g]);
+</span></span><span style="display:flex;"><span>        sort(chr.begin(), chr.end(), [](<span style="color:#0b0;font-weight:bold">unsigned</span> <span style="color:#0b0;font-weight:bold">char</span> c1, <span style="color:#0b0;font-weight:bold">unsigned</span> <span style="color:#0b0;font-weight:bold">char</span> c2){ <span style="color:#a2f;font-weight:bold">return</span> std<span style="color:#666">::</span>tolower(c1) <span style="color:#666">&lt;</span> std<span style="color:#666">::</span>tolower(c2); });
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: grp)
+</span></span><span style="display:flex;"><span>            ans[x] <span style="color:#666">=</span> chr[i<span style="color:#666">++</span>];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> y <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">monkeyMove</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> power(<span style="color:#666">2</span>, n);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (res <span style="color:#666">-</span> <span style="color:#666">2</span>)<span style="color:#666">&lt;</span><span style="color:#666">0</span><span style="color:#666">?</span> mod <span style="color:#666">-</span> <span style="color:#a0a000">res</span>:res<span style="color:#666">-</span><span style="color:#666">2</span> ;
+</span></span><span style="display:flex;"><span>    string ret(ans.begin(), ans.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -556,123 +584,183 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">smallestStringWithSwaps</span>(string s, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pairs) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes the constant &#39;mod&#39; to the value 1e9 &#43; 7, which is commonly used in competitive programming for modulo operations to prevent overflow. </div>
+                            <div class=""> Define the function `smallestStringWithSwaps` which takes a string `s` and a list of index pairs `pairs`. The goal is to sort the characters of `s` based on these index pairs, ensuring that the swaps respect the connected components defined by the pairs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">power</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the definition of the &#39;power&#39; function that takes two integers, &#39;a&#39; (base) and &#39;n&#39; (exponent), and calculates a^n modulo mod using recursion. </div>
+                            <div class=""> Store the length of the input string `s` in the variable `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Base Case</b></div>
+                            <div class=""> <b>3 : Union-Find Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UF uf <span style="color:#666">=</span> UF(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the exponent &#39;n&#39; is 0. The base case of exponentiation is that any number raised to the power of 0 is 1. </div>
+                            <div class=""> Initialize a union-find data structure `uf` with `n` elements to manage the connected components of the indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Recursive Call</b></div>
+                            <div class=""> <b>4 : Loop Through Pairs</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> power(a, n<span style="color:#666">/</span><span style="color:#666">2</span>) <span style="color:#666">%</span> mod;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">each</span>: pairs)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This recursive step calls the &#39;power&#39; function on the halved exponent (n/2) and stores the result in &#39;res&#39;. The result is then taken modulo &#39;mod&#39;. </div>
+                            <div class=""> Loop through each pair in the `pairs` vector, representing index pairs that can be swapped. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Squaring the Result</b></div>
+                            <div class=""> <b>5 : Union-Find Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> y <span style="color:#666">=</span> (res <span style="color:#666">*</span> res) <span style="color:#666">%</span>mod;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        uf.join(each[<span style="color:#666">0</span>], each[<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After the recursive call, the result &#39;res&#39; is squared to get the intermediate value &#39;y&#39;. This operation is also taken modulo &#39;mod&#39;. </div>
+                            <div class=""> For each pair, join the two indices into the same connected component using the union-find `join` operation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Odd Exponent Check</b></div>
+                            <div class=""> <b>6 : Empty Line</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the exponent &#39;n&#39; is odd using bitwise AND operation. If true, it means &#39;n&#39; is odd, and further adjustment is needed. </div>
+                            <div class=""> Empty line for readability, separating sections of code. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Handling Odd Exponent</b></div>
+                            <div class=""> <b>7 : Union-Find Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        y <span style="color:#666">=</span> (a <span style="color:#666">*</span> y) <span style="color:#666">%</span> mod;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grps <span style="color:#666">=</span> uf.pairs();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;n&#39; is odd, we multiply the result &#39;y&#39; by the base &#39;a&#39; and take the result modulo &#39;mod&#39; to adjust for the odd exponent. </div>
+                            <div class=""> Get the connected components from the union-find data structure and store them in the vector `grps`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Odd Exponent Result</b></div>
+                            <div class=""> <b>8 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> y;            
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#b44">&#39;-&#39;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After adjusting for the odd exponent, the function returns the final result &#39;y&#39;. </div>
+                            <div class=""> Initialize a vector `ans` of size `n`, filled with `&#39;-&#39;`, to store the result after sorting and swapping characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Final Result Return</b></div>
+                            <div class=""> <b>9 : Loop Through Groups</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> y <span style="color:#666">%</span> mod;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">grp</span> : grps) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the exponent is even, we simply return the squared result &#39;y&#39; modulo &#39;mod&#39;. </div>
+                            <div class=""> Iterate through each group of connected indices in `grps` to sort the characters in those positions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Function Definition</b></div>
+                            <div class=""> <b>10 : Sorting Indices</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">monkeyMove</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sort(grp.begin(), grp.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the definition of the &#39;monkeyMove&#39; function that takes an integer &#39;n&#39; and calculates the number of ways the monkey can move using the &#39;power&#39; function. </div>
+                            <div class=""> Sort the indices in the current group to arrange them in ascending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Calculating Power of 2</b></div>
+                            <div class=""> <b>11 : Character Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> power(<span style="color:#666">2</span>, n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> chr;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates 2 raised to the power &#39;n&#39; using the &#39;power&#39; function and stores the result in &#39;res&#39;. </div>
+                            <div class=""> Initialize an empty vector `chr` to store the characters corresponding to the current group of indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Adjusting Result</b></div>
+                            <div class=""> <b>12 : Fill Character Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (res <span style="color:#666">-</span> <span style="color:#666">2</span>)<span style="color:#666">&lt;</span><span style="color:#666">0</span><span style="color:#666">?</span> mod <span style="color:#666">-</span> <span style="color:#a0a000">res</span>:res<span style="color:#666">-</span><span style="color:#666">2</span> ;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">g</span> : grp) chr.push_back(s[g]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line adjusts the result: if the result &#39;res - 2&#39; is negative, it returns &#39;mod - res&#39;, otherwise, it returns &#39;res - 2&#39;. This ensures the result is non-negative and modulo &#39;mod&#39;. </div>
+                            <div class=""> Push the characters from the string `s` corresponding to the current group of indices into the vector `chr`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Character Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sort(chr.begin(), chr.end(), [](<span style="color:#0b0;font-weight:bold">unsigned</span> <span style="color:#0b0;font-weight:bold">char</span> c1, <span style="color:#0b0;font-weight:bold">unsigned</span> <span style="color:#0b0;font-weight:bold">char</span> c2){ <span style="color:#a2f;font-weight:bold">return</span> std<span style="color:#666">::</span>tolower(c1) <span style="color:#666">&lt;</span> std<span style="color:#666">::</span>tolower(c2); });
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the characters in `chr` lexicographically, ignoring case, to ensure case-insensitive sorting. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Character Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize an index `i` to keep track of the position in the sorted character vector `chr`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Assign Sorted Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: grp)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each index `x` in the current group `grp`, assign the corresponding character from `chr` to the result vector `ans`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Assign Character from Sorted List</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[x] <span style="color:#666">=</span> chr[i<span style="color:#666">++</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the character at position `i` from the sorted `chr` vector to the corresponding position `x` in the result vector `ans`, and increment `i`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Convert to String</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#00a000">ret</span>(ans.begin(), ans.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Convert the result vector `ans` into a string `ret`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final string `ret` which is the result of the character swaps and sorting. </div>
                         </div>
                     
                 </div>
@@ -692,16 +780,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log n), due to the use of fast exponentiation to compute 2^n.</div>
-                        <div class=""> <b>Average Case:</b> O(log n), as the exponentiation method is logarithmic in complexity.</div>
-                        <div class=""> <b>Worst Case:</b> O(log n), as the computation of 2^n modulo 10^9 &#43; 7 uses efficient algorithms.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is logarithmic due to fast exponentiation.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The Union-Find operations take near constant time, and sorting the groups takes O(n log n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as there is no additional space needed beyond basic variables.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), since we only need to store a few variables.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as the solution only uses a few variables to store intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space needed for the Union-Find structure and the character arrays.</div>    
                     </div>
 
                 </div>

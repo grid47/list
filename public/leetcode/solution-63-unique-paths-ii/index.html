@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given the head of a singly linked list and two integers <code>left</code> and <code>right</code> where <code>left &lt;= right</code>, reverse the nodes of the linked list starting at position <code>left</code> and ending at position <code>right</code>. Return the modified linked list. </div>
+<div class=""> A robot starts at the top-left corner of an m x n grid and needs to reach the bottom-right corner. The grid contains obstacles (marked as 1) and empty cells (marked as 0). The robot can only move down or right and cannot pass through cells with obstacles. Determine the number of unique paths to the destination. </div>
 
 
 
@@ -371,55 +371,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The function receives the head of a singly linked list and two integers `left` and `right` representing the positions in the list to reverse.</div>
-                        <div class=""> <b>Example:</b> Input: head = [7,9,11,5,2], left = 3, right = 5</div>
+                        <div class=""> <b>Input:</b> An integer 2D array grid where grid[i][j] is either 0 (empty) or 1 (obstacle).</div>
+                        <div class=""> <b>Example:</b> Input: obstacleGrid = [[0,0,1],[0,0,0],[1,0,0]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of nodes in the list is n.</div>
+                                <div style="margin-left: 20px;"> • m == obstacleGrid.length</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • n == obstacleGrid[i].length</div>
                             
-                                <div style="margin-left: 20px;"> • -500 &lt;= Node.val &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= left &lt;= right &lt;= n</div>
+                                <div style="margin-left: 20px;"> • obstacleGrid[i][j] is 0 or 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the head of the modified singly linked list after reversing the specified section.</div>
-                        <div class=""> <b>Example:</b> Output: [7,9,2,5,11]</div>
+                        <div class=""> <b>Output:</b> Return the number of unique paths from the top-left to the bottom-right corner while avoiding obstacles.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output list retains all nodes from the original list.</div>
-                            
-                                <div style="margin-left: 20px;"> • The reversed portion is accurately modified while the rest remains untouched.</div>
+                                <div style="margin-left: 20px;"> • The result will always be less than or equal to 2 * 10^9.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Reverse the nodes of a singly linked list between positions `left` and `right` in a single traversal.</div>
+                        <div class=""> <b>Goal:</b> Calculate the total number of unique paths from start to destination while avoiding obstacles using dynamic programming.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create a dummy node pointing to the head of the list.</div>
+                                <div style="margin-left: 20px;"> • Initialize a DP table with dimensions m x n to store the number of ways to reach each cell.</div>
                             
-                                <div style="margin-left: 20px;"> • Traverse to the node immediately before position `left`.</div>
+                                <div style="margin-left: 20px;"> • Set dp[0][0] = 1 if grid[0][0] == 0; otherwise set dp[0][0] = 0.</div>
                             
-                                <div style="margin-left: 20px;"> • Perform in-place node re-linking to reverse the sublist between `left` and `right`.</div>
+                                <div style="margin-left: 20px;"> • For each cell (i, j), if grid[i][j] == 0, calculate dp[i][j] as the sum of paths from the top and left neighbors.</div>
                             
-                                <div style="margin-left: 20px;"> • Reconnect the reversed sublist to the remaining parts of the list.</div>
+                                <div style="margin-left: 20px;"> • If grid[i][j] == 1, set dp[i][j] = 0 as it is an obstacle.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return dp[m-1][n-1] as the final result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure proper handling of edge cases and valid inputs.</div>
+                        <div class=""> <b>Goal:</b> The grid size and obstacle placements must adhere to the constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Handle lists with a single node or where `left == right`.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • Ensure the function operates within O(1) space complexity apart from the input list.</div>
+                                <div style="margin-left: 20px;"> • obstacleGrid[i][j] is either 0 or 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • The result will always be less than or equal to 2 * 10^9.</div>
                             
                         </div>
                     </div>        
@@ -427,21 +429,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input list is non-circular and contains valid node values.</div>
+                                <div style="margin-left: 20px;"> • The robot starts at grid[0][0] and ends at grid[m-1][n-1].</div>
                             
-                                <div style="margin-left: 20px;"> • `left` and `right` are always within valid bounds.</div>
+                                <div style="margin-left: 20px;"> • A cell marked with 1 is an obstacle and cannot be part of any path.</div>
+                            
+                                <div style="margin-left: 20px;"> • The robot can only move down or right.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [3,6,1,8,5], left = 2, right = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Reverse the sublist from position 2 to 4. Resulting list is [3,8,1,6,5].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: obstacleGrid = [[0,0,1],[0,0,0],[1,0,0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are three unique paths from the top-left to the bottom-right corner avoiding obstacles.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [10], left = 1, right = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since the list contains a single node and `left == right`, the list remains [10].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: obstacleGrid = [[0,0,0],[0,1,0],[0,1,0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is only one unique path that avoids obstacles.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -465,20 +469,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Reverse a sublist in the linked list using in-place re-linking. Maintain pointers to manage the reversed sublist and the unaffected portions efficiently.</div>
+                        <div class=""> <b>Approach:</b> Use a dynamic programming approach to calculate the total paths, where cells with obstacles are marked as 0.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Reversing a sublist can be done by adjusting the next pointers of the nodes within the range.</div>
+                                <div style="margin-left: 20px;"> • The problem requires handling obstacles, making it different from the regular unique paths problem.</div>
                             
-                                <div style="margin-left: 20px;"> • A dummy node helps handle edge cases cleanly, such as reversing from the head of the list.</div>
+                                <div style="margin-left: 20px;"> • Cells with obstacles contribute 0 paths and block traversal.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Minimize traversal by reversing the sublist in-place.</div>
-                            
-                                <div style="margin-left: 20px;"> • Optimize space usage to O(1) by not using additional data structures.</div>
+                                <div style="margin-left: 20px;"> • Dynamic programming can be adapted by marking obstacle cells as 0.</div>
                             
                         </div>
                     </div>
@@ -486,13 +488,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a dummy node pointing to the head of the list.</div>
+                                <div style="margin-left: 20px;"> • Initialize a DP table with dimensions m x n, set dp[0][0] = 1 if the starting cell is empty.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a pointer to traverse to the node just before the reversal starts.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the grid; for each cell, calculate dp[i][j] = dp[i-1][j] &#43; dp[i][j-1] if grid[i][j] is empty.</div>
                             
-                                <div style="margin-left: 20px;"> • Iteratively reverse the next pointers of nodes in the specified range.</div>
+                                <div style="margin-left: 20px;"> • Set dp[i][j] = 0 for cells with obstacles.</div>
                             
-                                <div style="margin-left: 20px;"> • Reconnect the reversed sublist to the preceding and succeeding parts of the list.</div>
+                                <div style="margin-left: 20px;"> • Return dp[m-1][n-1] as the total number of paths.</div>
                             
                         </div>
                     </div>
@@ -501,22 +503,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input list is NULL.</div>
+                                <div style="margin-left: 20px;"> • Not applicable as input is guaranteed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • List has 500 nodes and requires reversing a large sublist.</div>
+                                <div style="margin-left: 20px;"> • Maximum grid size with m = 100 and n = 100, with scattered obstacles.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input values at the boundary of valid ranges, e.g., `left = 1`, `right = n`.</div>
+                                <div style="margin-left: 20px;"> • A grid where the start or end cell is blocked (grid[0][0] or grid[m-1][n-1] = 1).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure nodes outside the reversal range remain unmodified.</div>
+                                <div style="margin-left: 20px;"> • Ensure the algorithm handles all obstacles efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -535,31 +537,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Edge Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Get Grid Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Dummy Node Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize DP Table</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Pointer Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Handle Starting Obstacle</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Pointer Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Starting Cell</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Iteration, Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Fill First Row</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Pointer Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Fill First Column</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pointer Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Fill the Rest of the DP Table</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Iteration, Pointer Manipulation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pointer Manipulation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pointer Manipulation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Pointer Manipulation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pointer Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return the Bottom-Right Corner Value</button>
                     
                 </div>
 
@@ -568,28 +560,38 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">reverseBetween</span>(ListNode<span style="color:#666">*</span> head, <span style="color:#0b0;font-weight:bold">int</span> left, <span style="color:#0b0;font-weight:bold">int</span> right) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>head) <span style="color:#a2f;font-weight:bold">return</span> head;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">uniquePathsWithObstacles</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> obstacleGrid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> obstacleGrid.size(), n <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> dummy <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    dummy<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> prev <span style="color:#666">=</span> dummy;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> left <span style="color:#666">-</span> <span style="color:#666">1</span>; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        prev <span style="color:#666">=</span> prev<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Handle the case where the starting cell is an obstacle
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> curr <span style="color:#666">=</span> prev<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> next <span style="color:#666">=</span> curr<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Initialize the first cell as 1, as there&#39;s only one way to reach it
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dp[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> right <span style="color:#666">-</span> left; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        curr<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> next<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>        next<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> prev<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>        prev<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> next;
-</span></span><span style="display:flex;"><span>        next <span style="color:#666">=</span> curr<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Fill the first row
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dp[<span style="color:#666">0</span>][j] <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>][j] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[<span style="color:#666">0</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dummy<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Fill the first column
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> obstacleGrid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Fill the rest of the DP table
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> dp[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[m <span style="color:#666">-</span> <span style="color:#666">1</span>][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -600,142 +602,102 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">reverseBetween</span>(ListNode<span style="color:#666">*</span> head, <span style="color:#0b0;font-weight:bold">int</span> left, <span style="color:#0b0;font-weight:bold">int</span> right) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">uniquePathsWithObstacles</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> obstacleGrid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a function `reverseBetween` that takes a linked list `head`, a starting position `left`, and an ending position `right` as input and returns the modified linked list. </div>
+                            <div class=""> This line declares a function named `uniquePathsWithObstacles` that takes a 2D vector `obstacleGrid` representing the grid with obstacles as input and returns the number of unique paths. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Edge Case Check</b></div>
+                            <div class=""> <b>2 : Get Grid Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>head) <span style="color:#a2f;font-weight:bold">return</span> head;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> obstacleGrid.size(), n <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the input linked list is empty. If so, returns the head directly. </div>
+                            <div class=""> This line gets the dimensions of the grid, `m` for rows and `n` for columns. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Dummy Node Initialization</b></div>
+                            <div class=""> <b>3 : Initialize DP Table</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> dummy <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a dummy node to simplify the reversal process, especially when reversing from the beginning of the list. </div>
+                            <div class=""> This line initializes a 2D DP table `dp` of size `m x n` to store the number of unique paths to reach each cell. All elements are initially set to 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Pointer Assignment</b></div>
+                            <div class=""> <b>4 : Handle Starting Obstacle</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dummy<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sets the `next` pointer of the dummy node to the head of the original linked list. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : Pointer Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> prev <span style="color:#666">=</span> dummy;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes a `prev` pointer to the dummy node, which will be used to track the node before the reversal range. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Loop Iteration, Pointer Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> left <span style="color:#666">-</span> <span style="color:#666">1</span>; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        prev <span style="color:#666">=</span> prev<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates `left - 1` times to move the `prev` pointer to the node just before the start of the reversal range. </div>
+                            <div class=""> This condition checks if the starting cell is an obstacle. If so, there are no possible paths, so the function returns 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Pointer Initialization</b></div>
+                            <div class=""> <b>5 : Initialize Starting Cell</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> curr <span style="color:#666">=</span> prev<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a `curr` pointer to the first node in the reversal range. </div>
+                            <div class=""> If the starting cell is not an obstacle, it&#39;s initialized with 1, as there&#39;s only one way to reach it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Pointer Initialization</b></div>
+                            <div class=""> <b>6 : Fill First Row</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> next <span style="color:#666">=</span> curr<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dp[<span style="color:#666">0</span>][j] <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>][j] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[<span style="color:#666">0</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a `next` pointer to the node after `curr`, which will be used to temporarily store the next node during the reversal process. </div>
+                            <div class=""> This loop fills the first row of the DP table. For each cell, if it&#39;s not an obstacle, the number of paths to reach it is the same as the number of paths to reach the cell to its left. Otherwise, it&#39;s 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Loop Iteration, Pointer Manipulation</b></div>
+                            <div class=""> <b>7 : Fill First Column</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> right <span style="color:#666">-</span> left; <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> obstacleGrid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates `right - left` times to reverse the nodes in the specified range. </div>
+                            <div class=""> This loop fills the first column of the DP table. For each cell, if it&#39;s not an obstacle, the number of paths to reach it is the same as the number of paths to reach the cell above it. Otherwise, it&#39;s 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pointer Manipulation</b></div>
+                            <div class=""> <b>8 : Fill the Rest of the DP Table</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        curr<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> next<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> dp[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the `next` pointer of the current node `curr` to the node after the next node. </div>
+                            <div class=""> This nested loop fills the rest of the DP table. For each cell `(i, j)` that is not an obstacle, the number of paths to reach it is the sum of the number of paths to reach the cell above it and the cell to its left. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Pointer Manipulation</b></div>
+                            <div class=""> <b>9 : Return the Bottom-Right Corner Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        next<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> prev<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[m <span style="color:#666">-</span> <span style="color:#666">1</span>][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the `next` pointer of the next node `next` to the node that `prev` currently points to, effectively reversing the link. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Pointer Manipulation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        prev<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> next;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sets the `next` pointer of the `prev` node to the current `next` node, linking it to the reversed portion. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Pointer Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        next <span style="color:#666">=</span> curr<span style="color:#666">-&gt;</span>next;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves the `next` pointer to the next node to be reversed in the next iteration. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dummy<span style="color:#666">-&gt;</span>next;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the head of the modified linked list, which is the `next` pointer of the dummy node. </div>
+                            <div class=""> After filling the DP table, the function returns the value at the bottom-right corner `dp[m - 1][n - 1]`, which represents the total number of unique paths from the top-left to the bottom-right corner. </div>
                         </div>
                     
                 </div>
@@ -755,16 +717,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The entire list may need to be traversed in the worst case, where `right = n`.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> Each cell is visited exactly once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The solution uses constant space for pointers and variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The DP table requires O(m * n) space.</div>    
                     </div>
 
                 </div>

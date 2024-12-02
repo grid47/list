@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 16, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> Given an integer n in base 10 and a base k, convert n to base k and return the sum of the digits in base 10. </div>
+<div class=""> Given an array of unique integers, where each integer is greater than 1, we can create a binary tree using these integers. The value of each non-leaf node must be the product of the values of its children. The goal is to return the number of distinct binary trees that can be constructed. Since the result may be large, return the answer modulo 10^9 + 7. </div>
 
 
 
@@ -360,45 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer n (in base 10) and a base k (2 &lt;= k &lt;= 10).</div>
-                        <div class=""> <b>Example:</b> n = 45, k = 7</div>
+                        <div class=""> <b>Input:</b> The input consists of a single array of unique integers, arr, where each integer is strictly greater than 1.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [3, 6]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= k &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= arr[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • All the values of arr are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a single integer representing the sum of the digits of n after converting it to base k, in base 10.</div>
-                        <div class=""> <b>Example:</b> 10</div>
+                        <div class=""> <b>Output:</b> The output should be an integer representing the number of distinct binary trees that can be constructed, modulo 10^9 &#43; 7.</div>
+                        <div class=""> <b>Example:</b> Output: 5</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output must be an integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the sum of the digits of a number after converting it from base 10 to base k.</div>
+                        <div class=""> <b>Goal:</b> To solve this problem, we need to calculate the number of valid binary trees that can be formed by using the integers from the input array. The non-leaf nodes should be the product of their children, and each integer in the array can be used multiple times.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Convert the number n from base 10 to base k.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Sort the array of integers.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the digits of the resulting base k number.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Use dynamic programming to calculate the number of valid binary trees for each number in the array, considering that each number can be the product of other integers in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the sum of the digits in base 10.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Use a map to store the number of binary trees for each number. For each number, check if it can be the product of any two smaller numbers in the array, and update the count accordingly.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Return the sum of all the counts modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input values n and k are constrained within the specified range to ensure that the problem can be solved efficiently.</div>
+                        <div class=""> <b>Goal:</b> The problem involves calculating the number of binary trees that can be formed from the integers in the array, with constraints on the input size and integer values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle input arrays of size up to 1000 efficiently.</div>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= k &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient given that integer values can go up to 10^9.</div>
                             
                         </div>
                     </div>        
@@ -406,15 +412,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The base k will be a valid integer between 2 and 10.</div>
+                                <div style="margin-left: 20px;"> • The input array contains unique integers, and each integer is greater than 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • The binary tree structure allows for repeated use of the integers from the array.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 45, k = 7</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We first convert 45 from base 10 to base 7, resulting in &#39;63&#39;. The sum of the digits is 6 &#43; 3 = 10, which is the final answer.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [3, 6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the number of distinct binary trees that can be constructed is 5. The possible trees are [3], [6], [3, 3, 3], [6, 3, 2], and [6, 2, 3].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [2, 4, 5, 10]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the possible binary trees are: [2], [4], [5], [10], [4, 2, 2], [10, 2, 5], and [10, 5, 2]. The total count is 7.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,16 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will convert the number n from base 10 to base k and then sum the digits of the resulting base k number.</div>
+                        <div class=""> <b>Approach:</b> The approach involves using dynamic programming to count the number of binary trees that can be made from each number in the array. By considering each number as a possible root and checking for valid products among smaller numbers, we can efficiently compute the solution.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The conversion from base 10 to base k is straightforward using division and modulus operations.</div>
+                                <div style="margin-left: 20px;"> • We need to calculate how many ways we can factor each number in the array using smaller numbers from the array.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can convert n to base k by repeatedly dividing n by k and storing the remainders. These remainders represent the digits in base k.</div>
+                                <div style="margin-left: 20px;"> • Dynamic programming is ideal for this problem since we can build the solution incrementally by considering smaller subproblems first.</div>
                             
                         </div>
                     </div>
@@ -455,11 +467,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to hold the sum of the digits.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Sort the input array to ensure that we process smaller numbers first.</div>
                             
-                                <div style="margin-left: 20px;"> • Perform division and modulus operations to convert n to base k, collecting the digits.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each number in the array, initialize its count as 1 (itself being a valid tree).</div>
                             
-                                <div style="margin-left: 20px;"> • Add the digits to the sum variable and return the result.</div>
+                                <div style="margin-left: 20px;"> • Step 3: For each pair of smaller numbers that can multiply to give the current number, update the count of binary trees that can be formed with the current number as the root.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Sum the counts for all numbers in the array and return the result modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>
@@ -468,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • n should always be at least 1, so there are no empty inputs.</div>
+                                <div style="margin-left: 20px;"> • The problem does not have empty input cases since the array always contains at least one element.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the function handles values of n up to 100 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle arrays with up to 1000 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider values of n that are already in base 10 or are powers of k.</div>
+                                <div style="margin-left: 20px;"> • Consider cases where the array has only one element, or where no valid products can be formed.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the number is correctly converted to base k and that the sum is calculated properly.</div>
+                                <div style="margin-left: 20px;"> • The solution must compute the result efficiently even for large arrays and large integer values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -502,15 +516,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Digit Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Base Division</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Count Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Root Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Factor Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Count Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Store Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Final Result Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Final Sum Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -519,14 +549,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumBase</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res<span style="color:#666">=</span><span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n<span style="color:#666">!=</span><span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        res<span style="color:#666">+=</span>(n<span style="color:#666">%</span>k);
-</span></span><span style="display:flex;"><span>        n<span style="color:#666">/=</span>k;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numFactoredBinaryTrees</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+</span></span><span style="display:flex;"><span>    sort(arr.begin(), arr.end());
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> rootWithCount;
+</span></span><span style="display:flex;"><span>    rootWithCount[arr[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> count <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">j</span> : rootWithCount) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> root <span style="color:#666">=</span> j.first;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((arr[i] <span style="color:#666">%</span> root <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> (rootWithCount.find(arr[i]<span style="color:#666">/</span>root) <span style="color:#666">!=</span> rootWithCount.end())) {
+</span></span><span style="display:flex;"><span>                count <span style="color:#666">+=</span> rootWithCount[root] <span style="color:#666">*</span> rootWithCount[arr[i]<span style="color:#666">/</span>root];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        rootWithCount[arr[i]] <span style="color:#666">=</span> count;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> no <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: rootWithCount) no <span style="color:#666">=</span> (no <span style="color:#666">+</span> it.second) <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>)(<span style="color:#666">1e9</span><span style="color:#666">+</span><span style="color:#666">7</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> no;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -537,60 +576,140 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumBase</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numFactoredBinaryTrees</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `sumBase` which takes two parameters, `n` (the number) and `k` (the base), and returns the sum of the digits of `n` in base `k`. </div>
+                            <div class=""> The function `numFactoredBinaryTrees` is defined to take an array `arr` as input, where each element represents a potential factor to form binary trees. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res<span style="color:#666">=</span><span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(arr.begin(), arr.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `res` to store the running sum of the digits in base `k`. </div>
+                            <div class=""> The array `arr` is sorted in ascending order, which helps in ensuring that smaller numbers (potential roots) are considered first when counting possible trees. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : While Loop</b></div>
+                            <div class=""> <b>3 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n<span style="color:#666">!=</span><span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> rootWithCount;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a while loop that continues as long as `n` is not zero, processing each digit of `n` in base `k`. </div>
+                            <div class=""> An unordered map `rootWithCount` is initialized to store the number of binary trees that can be rooted at each element in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Digit Calculation</b></div>
+                            <div class=""> <b>4 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res<span style="color:#666">+=</span>(n<span style="color:#666">%</span>k);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    rootWithCount[arr[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the current digit in base `k` by taking the remainder of `n` when divided by `k`, and adds it to `res`. </div>
+                            <div class=""> The first element in the sorted array is initialized with a count of 1, meaning that it can form one tree by itself. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Base Division</b></div>
+                            <div class=""> <b>5 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n<span style="color:#666">/=</span>k;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Divides `n` by `k` to remove the current digit and move to the next one in the next iteration. </div>
+                            <div class=""> The loop iterates over each element `arr[i]` in the sorted array, calculating how many binary trees can be rooted at that element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Count Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> count <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the accumulated sum `res`, which is the sum of the digits of `n` in base `k`. </div>
+                            <div class=""> A variable `count` is initialized to 1, representing the minimum number of binary trees that can be rooted at `arr[i]` (itself as a single node tree). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">j</span> : rootWithCount) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This inner loop iterates over the map `rootWithCount` to check which previously encountered roots can combine with `arr[i]` to form a binary tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Root Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> root <span style="color:#666">=</span> j.first;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `root` variable is assigned the key from the map `rootWithCount`, representing a previously encountered potential root for binary trees. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Factor Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((arr[i] <span style="color:#666">%</span> root <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> (rootWithCount.find(arr[i]<span style="color:#666">/</span>root) <span style="color:#666">!=</span> rootWithCount.end())) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This condition checks if `arr[i]` can be factored by the current `root` and if the factor `arr[i] / root` also exists in the map `rootWithCount`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Count Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                count <span style="color:#666">+=</span> rootWithCount[root] <span style="color:#666">*</span> rootWithCount[arr[i]<span style="color:#666">/</span>root];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the factorization condition holds, the number of binary trees rooted at `arr[i]` is updated by adding the product of the tree counts for `root` and `arr[i] / root`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Store Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        rootWithCount[arr[i]] <span style="color:#666">=</span> count;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> After processing all possible factors, the final count of binary trees rooted at `arr[i]` is stored in the map `rootWithCount`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Final Result Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> no <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The variable `no` is initialized to 0, which will hold the final result — the total number of binary trees that can be formed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Final Sum Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: rootWithCount) no <span style="color:#666">=</span> (no <span style="color:#666">+</span> it.second) <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>)(<span style="color:#666">1e9</span><span style="color:#666">+</span><span style="color:#666">7</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The map `rootWithCount` is iterated over, and the total count of binary trees is calculated by summing up all the values. The result is taken modulo 1e9 &#43; 7 to avoid overflow. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> no;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The final result `no`, which contains the total number of binary trees, is returned. </div>
                         </div>
                     
                 </div>
@@ -610,16 +729,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log n)</div>
-                        <div class=""> <b>Average Case:</b> O(log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is logarithmic in n, as we repeatedly divide n by k until it becomes 0.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2), where n is the number of integers in the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n^2), where n is the number of integers in the array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2), where n is the number of integers in the array.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is quadratic due to the nested loop that checks for factor pairs for each number in the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(log n) due to the storage required for the digits of the base k representation.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of integers in the array, for storing the number of binary trees for each number.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of integers in the array, for storing the number of binary trees for each number.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear because we need to store the number of valid binary trees for each number.</div>    
                     </div>
 
                 </div>

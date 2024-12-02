@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 2, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -300,7 +300,7 @@
 
 
 
-<div class=""> Given a string <code>s</code> and an integer <code>k</code>, partition the string into groups of size <code>k</code>. If the last group has fewer than <code>k</code> characters, append a <code>fill</code> character to complete it. Return an array of the groups. </div>
+<div class=""> Given three integers x, y, and bound, find all powerful integers that are less than or equal to bound. A powerful integer can be expressed in the form x^i + y^j for non-negative integers i and j. Return the results as a list with no duplicates, and the order of the elements does not matter. </div>
 
 
 
@@ -351,51 +351,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s` of lowercase English letters, an integer `k` representing the group size, and a `fill` character to complete the last group if necessary.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;hello&#34;, k = 3, fill = &#34;z&#34;</div>
+                        <div class=""> <b>Input:</b> Three integers x, y, and bound.</div>
+                        <div class=""> <b>Example:</b> Input: x = 2, y = 3, bound = 20</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= x, y &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • fill is a lowercase English letter.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= bound &lt;= 10^6</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an array of strings, each representing a group formed by partitioning the input string `s` into parts of size `k`, with the last group potentially filled using the `fill` character.</div>
-                        <div class=""> <b>Example:</b> Output: [&#34;hel&#34;, &#34;loz&#34;]</div>
+                        <div class=""> <b>Output:</b> A list of all unique powerful integers less than or equal to bound.</div>
+                        <div class=""> <b>Example:</b> Output: [2, 3, 4, 5, 9, 10, 17]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The returned array will have as many elements as necessary to divide the string into groups of size `k`.</div>
+                                <div style="margin-left: 20px;"> • Each powerful integer must appear only once in the list.</div>
+                            
+                                <div style="margin-left: 20px;"> • The integers in the output can be in any order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Partition the string into groups and handle the last group by appending the `fill` character if necessary.</div>
+                        <div class=""> <b>Goal:</b> Compute all unique powerful integers less than or equal to the given bound.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty list for the result.</div>
+                                <div style="margin-left: 20px;"> • Iterate over possible values of i such that x^i &lt;= bound.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string and divide it into groups of size `k`.</div>
+                                <div style="margin-left: 20px;"> • For each i, iterate over possible values of j such that x^i &#43; y^j &lt;= bound.</div>
                             
-                                <div style="margin-left: 20px;"> • If the last group contains fewer than `k` characters, append `fill` characters to complete it.</div>
+                                <div style="margin-left: 20px;"> • If x or y is 1, break early to avoid infinite loops.</div>
+                            
+                                <div style="margin-left: 20px;"> • Store the resulting sums in a set to ensure uniqueness.</div>
+                            
+                                <div style="margin-left: 20px;"> • Convert the set to a list and return it.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input constraints ensure that the string can be processed within the problem&#39;s limits.</div>
+                        <div class=""> <b>Goal:</b> Ensure the inputs are valid and the solution operates within computational limits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the string is at most 100.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= x, y &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • The group size `k` is between 1 and 100.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= bound &lt;= 10^6</div>
                             
-                                <div style="margin-left: 20px;"> • The `fill` character is a lowercase English letter.</div>
+                                <div style="margin-left: 20px;"> • The result must contain no duplicate integers.</div>
                             
                         </div>
                     </div>        
@@ -403,17 +407,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • x and y are positive integers.</div>
                             
-                                <div style="margin-left: 20px;"> • The input values for `k` and `fill` are valid.</div>
+                                <div style="margin-left: 20px;"> • The values of x and y can be 1, which simplifies the calculation.</div>
+                            
+                                <div style="margin-left: 20px;"> • The bound is non-negative.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;hello&#34;, k = 3, fill = &#34;z&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string is divided into two groups. The first group is &#39;hel&#39;. The second group is &#39;lo&#39;, but since the length is less than `k`, we append &#39;z&#39; to make it &#39;loz&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: x = 3, y = 2, bound = 25</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The powerful integers are calculated as follows: 
+3^0 &#43; 2^0 = 2, 3^1 &#43; 2^0 = 4, 3^0 &#43; 2^1 = 3, 3^1 &#43; 2^1 = 5, 3^2 &#43; 2^0 = 9, 3^2 &#43; 2^1 = 11, 3^0 &#43; 2^2 = 6, 3^1 &#43; 2^2 = 10, 3^2 &#43; 2^2 = 13, ...
+Output: [2, 3, 4, 5, 6, 9, 10, 11, 13]</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: x = 1, y = 1, bound = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since x and y are both 1, only one unique powerful integer can be formed: 1 &#43; 1 = 2. Output: [2]</div>                                
                                 <br/>
                             
                     </div>                         
@@ -437,16 +449,20 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, iterate through the string in steps of size `k`, create the groups, and handle the last group by filling it if necessary.</div>
+                        <div class=""> <b>Approach:</b> Use nested loops to calculate all possible values of x^i &#43; y^j within the bound, ensuring no duplicates by using a set.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to divide the string into smaller chunks of size `k`. The last chunk may need additional characters to complete.</div>
+                                <div style="margin-left: 20px;"> • Both x and y can potentially grow exponentially, so the number of iterations depends on the logarithmic scale of the bound.</div>
+                            
+                                <div style="margin-left: 20px;"> • Using a set ensures uniqueness of results.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a simple loop with string slicing or manual indexing will help form the groups. Special attention is needed for the last group to ensure it is filled properly.</div>
+                                <div style="margin-left: 20px;"> • Iterate over all possible powers of x and y while ensuring their sum remains within the bound.</div>
+                            
+                                <div style="margin-left: 20px;"> • Break early when either x or y equals 1 since their powers do not grow.</div>
                             
                         </div>
                     </div>
@@ -454,13 +470,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start by iterating through the string in increments of `k`.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty set to store results.</div>
                             
-                                <div style="margin-left: 20px;"> • For each iteration, take a slice of `k` characters.</div>
+                                <div style="margin-left: 20px;"> • Iterate over possible values of i for x, stopping when x^i &gt; bound.</div>
                             
-                                <div style="margin-left: 20px;"> • If the slice is less than `k` characters, append the `fill` character to complete it.</div>
+                                <div style="margin-left: 20px;"> • For each i, iterate over possible values of j for y, stopping when x^i &#43; y^j &gt; bound.</div>
                             
-                                <div style="margin-left: 20px;"> • Add the completed group to the result list.</div>
+                                <div style="margin-left: 20px;"> • Add the sum x^i &#43; y^j to the set.</div>
+                            
+                                <div style="margin-left: 20px;"> • Break the inner loop early if y == 1 to avoid infinite iteration.</div>
+                            
+                                <div style="margin-left: 20px;"> • Break the outer loop early if x == 1 to avoid infinite iteration.</div>
+                            
+                                <div style="margin-left: 20px;"> • Convert the set to a list and return it.</div>
                             
                         </div>
                     </div>
@@ -469,22 +491,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty string should return an empty list of groups.</div>
+                                <div style="margin-left: 20px;"> • If bound is 0, the result should be an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Test cases with maximum string lengths should be handled efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large values of bound, ensure the algorithm terminates efficiently by breaking early when x == 1 or y == 1.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When `k` is 1, each group is just a single character of the string.</div>
+                                <div style="margin-left: 20px;"> • If x == 1 and y == 1, the only valid output is [2] (if bound &gt;= 2).</div>
+                            
+                                <div style="margin-left: 20px;"> • If x or y is 1, the respective loop becomes constant.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the number of groups and the size of the last group are computed correctly.</div>
+                                <div style="margin-left: 20px;"> • Ensure that x^i and y^j are calculated without overflow within the constraints of bound.</div>
                             
                         </div>                                                                        
                     </div>
@@ -503,13 +527,19 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Filling the Matrix</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Set Insertion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Break Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Outer Loop Break</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
                     
                 </div>
 
@@ -518,11 +548,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> divideString(string s, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">char</span> fill) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res((s.size() <span style="color:#666">+</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> k, string(k, fill));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>        res[i <span style="color:#666">/</span> k][i <span style="color:#666">%</span> k] <span style="color:#666">=</span> s[i];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> powerfulIntegers(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> bound) {
+</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> bound; i <span style="color:#666">*=</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">+</span> j <span style="color:#666">&lt;=</span> bound; j <span style="color:#666">*=</span> y) {
+</span></span><span style="display:flex;"><span>            s.insert(i <span style="color:#666">+</span> j);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(y <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(s.begin(), s.end());
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -533,50 +568,80 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> divideString(string s, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">char</span> fill) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> powerfulIntegers(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> bound) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function definition for `divideString`. It takes three parameters: a string `s`, an integer `k` (the size of each chunk), and a character `fill` to pad the chunks if necessary. </div>
+                            <div class=""> This is the function header where `x`, `y`, and `bound` are the input parameters. It defines the function that will generate all powerful integers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Initialization</b></div>
+                            <div class=""> <b>2 : Set Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res((s.size() <span style="color:#666">+</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> k, string(k, fill));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes a vector `res` with enough rows to store the divided strings. The size of each row is `k`, and it is filled with the `fill` character. The number of rows is calculated by dividing the size of the input string by `k` and rounding up. </div>
+                            <div class=""> A set `s` is initialized to store the unique powerful integers found during the process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Iteration</b></div>
+                            <div class=""> <b>3 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> bound; i <span style="color:#666">*=</span> x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over each character in the input string `s`. </div>
+                            <div class=""> Start a loop with `i` initialized to 1. It will multiply `i` by `x` in each iteration to generate powers of `x` up to the bound. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Filling the Matrix</b></div>
+                            <div class=""> <b>4 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i <span style="color:#666">/</span> k][i <span style="color:#666">%</span> k] <span style="color:#666">=</span> s[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">+</span> j <span style="color:#666">&lt;=</span> bound; j <span style="color:#666">*=</span> y) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line places the character `s[i]` into the appropriate position in the 2D vector `res`. The row is determined by `i / k` and the column by `i % k`. </div>
+                            <div class=""> Start an inner loop with `j` initialized to 1. It multiplies `j` by `y` to generate powers of `y` while ensuring that the sum `i &#43; j` does not exceed the bound. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Return</b></div>
+                            <div class=""> <b>5 : Set Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s.insert(i <span style="color:#666">+</span> j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Once all characters have been placed into the vector, the function returns the 2D vector `res`. </div>
+                            <div class=""> Add the sum of `i &#43; j` to the set `s`. This ensures all combinations of `x^i &#43; y^j` are stored without duplicates. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Break Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(y <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If `y` is 1, the loop breaks early because further powers of `y` will always be 1, leading to redundant results. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Outer Loop Break</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If `x` is 1, the outer loop breaks early because further powers of `x` will always be 1, leading to redundant results. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(s.begin(), s.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Convert the set `s` into a vector and return it as the result, containing all the unique powerful integers. </div>
                         </div>
                     
                 </div>
@@ -596,16 +661,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in relation to the size of the string, as we process each character exactly once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log(bound))</div>
+                        <div class=""> <b>Average Case:</b> O(log(bound)^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(log(bound)^2)</div> 
+                        <div class=""> <b>Description:</b> The worst case involves nested loops iterating logarithmically with respect to x and y.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is also linear, as we store the result array, which has a size proportional to the input string.</div>    
+                        <div class=""> <b>Description:</b> Space complexity is determined by the size of the set storing results, which is O(n), where n is the number of unique results.</div>    
                     </div>
 
                 </div>

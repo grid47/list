@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given two gene strings, <code>startGene</code> and <code>endGene</code>, both consisting of 8 characters. You also have a gene bank of valid gene strings that can be mutated into one another. A mutation is defined as changing one character at a time, and the mutated gene string must exist in the gene bank. Your task is to determine the minimum number of mutations needed to transform <code>startGene</code> into <code>endGene</code>. If transformation is impossible, return -1. </div>
+<div class=""> You are given the root of a binary tree. Imagine yourself standing on the right side of the tree, and return the values of the nodes you can see when viewed from the right, ordered from top to bottom. </div>
 
 
 
@@ -372,53 +372,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given three inputs: `startGene` (an 8-character gene string), `endGene` (an 8-character gene string), and a `bank` (a list of valid gene strings).</div>
-                        <div class=""> <b>Example:</b> startGene = &#39;AACCGGTT&#39;, endGene = &#39;AACCGGTA&#39;, bank = [&#39;AACCGGTA&#39;]</div>
+                        <div class=""> <b>Input:</b> The input is a binary tree represented by the root node. The tree is defined as a TreeNode with properties: val, left, and right.</div>
+                        <div class=""> <b>Example:</b> root = [3,1,4,null,2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= bank.length &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 100].</div>
                             
-                                <div style="margin-left: 20px;"> • startGene.length == endGene.length == bank[i].length == 8</div>
-                            
-                                <div style="margin-left: 20px;"> • startGene, endGene, and bank[i] consist of only the characters [&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;]</div>
+                                <div style="margin-left: 20px;"> • -100 &lt;= Node.val &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of mutations needed to transform `startGene` to `endGene`. If it&#39;s not possible, return -1.</div>
-                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Output:</b> Return an array of integers representing the values of the nodes visible from the right side of the tree, ordered from top to bottom.</div>
+                        <div class=""> <b>Example:</b> [3,4,2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If no mutation path exists, return -1.</div>
+                                <div style="margin-left: 20px;"> • The output should be an array of integers.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the shortest path from `startGene` to `endGene` by performing valid mutations and using the gene bank.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the nodes that are visible from the right side of the binary tree.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Check if `endGene` exists in the gene bank. If not, return -1.</div>
+                                <div style="margin-left: 20px;"> • Use level-order traversal (breadth-first search) of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a breadth-first search (BFS) to explore all possible gene strings starting from `startGene`.</div>
+                                <div style="margin-left: 20px;"> • At each level, record the last node encountered in that level, as it is the one visible from the right.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each gene string, generate all possible mutations by changing one character at a time.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If a mutated gene string exists in the gene bank, add it to the BFS queue.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Keep track of the number of mutations, and return the result when `endGene` is reached.</div>
+                                <div style="margin-left: 20px;"> • Return the recorded nodes in the order they are encountered from top to bottom.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should handle cases with small to moderate bank sizes and up to 10 valid mutations.</div>
+                        <div class=""> <b>Goal:</b> The input tree will contain between 0 and 100 nodes, with each node&#39;s value between -100 and 100.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the gene bank is between 0 and 10.</div>
+                                <div style="margin-left: 20px;"> • The tree can have a maximum of 100 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • All gene strings are 8 characters long and consist of the characters [&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;].</div>
+                                <div style="margin-left: 20px;"> • Node values are between -100 and 100.</div>
                             
                         </div>
                     </div>        
@@ -426,21 +420,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The startGene is always valid.</div>
-                            
-                                <div style="margin-left: 20px;"> • Mutations are only allowed if the resulting gene string exists in the bank.</div>
+                                <div style="margin-left: 20px;"> • The binary tree is well-formed and follows the structure of a TreeNode.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: startGene = &#39;AACCGGTT&#39;, endGene = &#39;AACCGGTA&#39;, bank = [&#39;AACCGGTA&#39;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We mutate the last character from &#39;T&#39; to &#39;A&#39;, which results in the endGene after one mutation.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [3,1,4,null,2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, when viewed from the right side, the visible nodes are 3 (root), 4 (right child of root), and 2 (right child of node 1). The output is [3, 4, 2].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: startGene = &#39;AACCGGTT&#39;, endGene = &#39;AAACGGTA&#39;, bank = [&#39;AACCGGTA&#39;,&#39;AACCGCTA&#39;,&#39;AAACGGTA&#39;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The solution involves two mutations: first from &#39;AACCGGTT&#39; to &#39;AACCGGTA&#39;, and then from &#39;AACCGGTA&#39; to &#39;AAACGGTA&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1, null, 2, null, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the right-side view is simply the nodes 1, 2, and 3, which are all in a straight line from top to bottom. The output is [1, 2, 3].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = []</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> If the tree is empty, the right-side view is also empty, so the output is [].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,16 +460,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use a breadth-first search (BFS) approach to find the shortest path from `startGene` to `endGene` by exploring all possible valid mutations in the gene bank.</div>
+                        <div class=""> <b>Approach:</b> The approach is to use level-order traversal (BFS) to process nodes level by level and keep track of the last node at each level. These are the nodes visible from the right side.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This is a shortest path problem, and BFS is ideal because it explores all nodes at the present depth level before moving to nodes at the next depth level.</div>
+                                <div style="margin-left: 20px;"> • Each level of the tree is processed, and the last node in each level will be visible from the right side.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to generate all possible gene strings from the current string by changing one character at a time, and check if the mutated string is in the gene bank.</div>
+                                <div style="margin-left: 20px;"> • Level-order traversal is efficient for this problem because it processes nodes level by level, allowing us to easily pick the last node from each level.</div>
                             
                         </div>
                     </div>
@@ -481,13 +477,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a queue for BFS with `startGene`.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue to perform a breadth-first search (BFS) on the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a set for fast look-up of valid mutations from the bank.</div>
+                                <div style="margin-left: 20px;"> • For each level, traverse through all nodes, and record the last node at each level.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each gene string, generate all possible mutations and push valid ones to the queue.</div>
+                                <div style="margin-left: 20px;"> • Push all children of the current nodes onto the queue, then proceed to the next level.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Track the number of mutations and stop when `endGene` is found.</div>
+                                <div style="margin-left: 20px;"> • Return the list of last nodes from each level.</div>
                             
                         </div>
                     </div>
@@ -496,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the gene bank is empty, return -1 unless `startGene` is equal to `endGene`.</div>
+                                <div style="margin-left: 20px;"> • If the tree is empty, return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the BFS approach handles up to 10 valid mutations efficiently.</div>
+                                <div style="margin-left: 20px;"> • If the tree has a large number of nodes, the solution should still work efficiently, processing each node exactly once.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the `startGene` is equal to `endGene`, return 0 because no mutation is needed.</div>
+                                <div style="margin-left: 20px;"> • Handle trees where all nodes are on one side, such as a left-leaning or right-leaning tree.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where no valid mutations exist or where the gene bank is empty.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the time complexity remains linear with respect to the number of nodes.</div>
                             
                         </div>                                                                        
                     </div>
@@ -528,57 +524,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case Check</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Enqueue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Push Root to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 While Loop - Level Traversal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Result Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Queue Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Queue Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Inner While Loop - Process Nodes at Current Level</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 For Each Level</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue Front Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Front Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Node from Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Dequeue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Push Node Value to Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Check Goal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Left Child Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Set Erase</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Right Child Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Push Rightmost Value to Answer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Copy String</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Character Mutation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Conditional Insertions</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Character Mutation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Conditional Insertions</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Character Mutation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Conditional Insertions</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Character Mutation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Conditional Insertions</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Increment Step</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Result</button>
                     
                 </div>
 
@@ -587,36 +563,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMutation</span>(string startGene, string endGene, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> bank) {
-</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> st{bank.begin(), bank.end()};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>st.count(endGene)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>    q.push(startGene);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>, s;
-</span></span><span style="display:flex;"><span>    string cur, t;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rightSideView(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    list<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push_back(root);
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        s <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(s<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> endGene) <span style="color:#a2f;font-weight:bold">return</span> step;
-</span></span><span style="display:flex;"><span>            st.erase(cur);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">8</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>                t <span style="color:#666">=</span> cur;
-</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;A&#39;</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
-</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;T&#39;</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
-</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;G&#39;</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
-</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;C&#39;</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);                    
-</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> tmp <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop_front();
+</span></span><span style="display:flex;"><span>            res.push_back(tmp<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>left) q.push_back(tmp<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right) q.push_back(tmp<span style="color:#666">-&gt;</span>right);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        ans.push_back(res.back());
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -624,263 +588,163 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMutation</span>(string startGene, string endGene, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> bank) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rightSideView(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the function to compute the minimum mutations required for gene transformation. </div>
+                            <div class=""> Define the function &#39;rightSideView&#39; which takes a pointer to the root node of a binary tree and returns a vector of integers representing the rightmost value at each level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Set Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> st{bank.begin(), bank.end()};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a set with the bank to allow O(1) lookups for gene sequences. </div>
+                            <div class=""> Initialize an empty vector &#39;ans&#39; to store the rightmost values from each level of the binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Base Condition</b></div>
+                            <div class=""> <b>3 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>st.count(endGene)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the end gene is in the bank; if not, returns -1 as transformation is impossible. </div>
+                            <div class=""> Check if the tree is empty (root is null). If it is, return the empty vector &#39;ans&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>4 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    list<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a queue for BFS traversal of gene mutations. </div>
+                            <div class=""> Initialize a queue &#39;q&#39; (implemented as a list) to help with the level-order traversal of the binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Enqueue</b></div>
+                            <div class=""> <b>5 : Push Root to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(startGene);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push_back(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the starting gene to the BFS queue. </div>
+                            <div class=""> Add the root node to the queue to start the traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>, s;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes variables for BFS steps and queue size. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Variable Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string cur, t;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Declares strings to hold the current gene and temporary mutations. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : While Loop</b></div>
+                            <div class=""> <b>6 : While Loop - Level Traversal</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates as long as the queue is not empty. </div>
+                            <div class=""> Start a while loop that runs as long as the queue is not empty, indicating there are still nodes to process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Queue Size</b></div>
+                            <div class=""> <b>7 : Result Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s <span style="color:#666">=</span> q.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the current queue size for level-wise processing. </div>
+                            <div class=""> Initialize an empty vector &#39;res&#39; to store the values of the current level of nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : For Each Level</b></div>
+                            <div class=""> <b>8 : Queue Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(s<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Processes all nodes at the current level in the BFS. </div>
+                            <div class=""> Store the current size of the queue in &#39;sz&#39;, which represents the number of nodes at the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Front Element</b></div>
+                            <div class=""> <b>9 : Inner While Loop - Process Nodes at Current Level</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">=</span> q.front();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Gets the current gene at the front of the queue. </div>
+                            <div class=""> Process each node at the current level by iterating over the queue based on the number of nodes (sz). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Dequeue</b></div>
+                            <div class=""> <b>10 : Queue Front Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> tmp <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the processed gene from the queue. </div>
+                            <div class=""> Get the node at the front of the queue to process it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Check Goal</b></div>
+                            <div class=""> <b>11 : Pop Node from Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> endGene) <span style="color:#a2f;font-weight:bold">return</span> step;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop_front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the number of steps if the current gene matches the end gene. </div>
+                            <div class=""> Remove the node from the front of the queue after processing it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Set Erase</b></div>
+                            <div class=""> <b>12 : Push Node Value to Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            st.erase(cur);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(tmp<span style="color:#666">-&gt;</span>val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the current gene from the set to avoid revisiting. </div>
+                            <div class=""> Add the value of the current node (tmp) to the &#39;res&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Loop</b></div>
+                            <div class=""> <b>13 : Left Child Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">8</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>left) q.push_back(tmp<span style="color:#666">-&gt;</span>left);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through each character of the current gene to mutate. </div>
+                            <div class=""> If the current node has a left child, add it to the queue for the next level of traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Copy String</b></div>
+                            <div class=""> <b>14 : Right Child Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t <span style="color:#666">=</span> cur;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right) q.push_back(tmp<span style="color:#666">-&gt;</span>right);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a copy of the current gene for mutation. </div>
+                            <div class=""> If the current node has a right child, add it to the queue for the next level of traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Character Mutation</b></div>
+                            <div class=""> <b>15 : Push Rightmost Value to Answer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;A&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(res.back());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Mutates the ith character of the gene to &#39;A&#39;. </div>
+                            <div class=""> After processing all nodes at the current level, add the rightmost node value (the last value in &#39;res&#39;) to the &#39;ans&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Conditional Insertions</b></div>
+                            <div class=""> <b>16 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Character Mutation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;T&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Mutates the ith character of the gene to &#39;T&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Conditional Insertions</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Character Mutation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;G&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Mutates the ith character of the gene to &#39;G&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Conditional Insertions</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Character Mutation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;C&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Mutates the ith character of the gene to &#39;C&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Conditional Insertions</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Increment Step</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments the step counter for the next level of BFS. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns -1 if the end gene is not reachable from the start gene. </div>
+                            <div class=""> Return the vector &#39;ans&#39; containing the rightmost value at each level of the binary tree. </div>
                         </div>
                     
                 </div>
@@ -900,16 +764,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), if startGene is equal to endGene.</div>
-                        <div class=""> <b>Average Case:</b> O(N * 8), where N is the number of gene strings in the bank and each mutation takes O(8) time (since the length of each gene string is 8).</div>
-                        <div class=""> <b>Worst Case:</b> O(N * 8), where N is the number of possible gene mutations.</div> 
-                        <div class=""> <b>Description:</b> BFS explores each possible mutation in the gene bank.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> We visit each node once during the BFS traversal, making the time complexity O(n), where n is the number of nodes in the tree.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), if no mutations are required.</div>
-                        <div class=""> <b>Worst Case:</b> O(N), where N is the number of gene strings stored in the queue and the bank.</div> 
-                        <div class=""> <b>Description:</b> The space complexity depends on the number of nodes in the BFS queue.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space used by the queue during the BFS traversal, where n is the number of nodes in the tree.</div>    
                     </div>
 
                 </div>

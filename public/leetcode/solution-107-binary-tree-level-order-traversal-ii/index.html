@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given a 32-bit unsigned integer, reverse its bits and return the result as an unsigned integer. </div>
+<div class=""> Given the root of a binary tree, return the bottom-up level order traversal of its nodes&rsquo; values. This means that for each level, starting from the leaf level and moving towards the root, you should collect the node values from left to right. </div>
 
 
 
@@ -371,43 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 32-bit unsigned integer.</div>
-                        <div class=""> <b>Example:</b> n = 00000000000000000000000010011010</div>
+                        <div class=""> <b>Input:</b> The input consists of a binary tree represented by its root node.</div>
+                        <div class=""> <b>Example:</b> root = [5,3,8,1,4,7,9]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input is a 32-bit unsigned integer.</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 2000].</div>
+                            
+                                <div style="margin-left: 20px;"> • -1000 &lt;= Node.val &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the 32-bit unsigned integer obtained by reversing the bits of the input integer.</div>
-                        <div class=""> <b>Example:</b> n = 11259375</div>
+                        <div class=""> <b>Output:</b> Return a list of lists representing the node values at each level from bottom to top.</div>
+                        <div class=""> <b>Example:</b> [[1, 4], [3, 8], [5]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be returned as an unsigned integer.</div>
+                                <div style="margin-left: 20px;"> • The output should represent the nodes&#39; values level by level from leaf to root.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to reverse the bits of the given 32-bit unsigned integer and return the result.</div>
+                        <div class=""> <b>Goal:</b> The goal is to perform a bottom-up level order traversal of the binary tree, ensuring each level is collected in the correct order, from leaf to root.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Perform bitwise manipulations to reverse the bits of the integer.</div>
+                                <div style="margin-left: 20px;"> • Use a queue to perform a breadth-first traversal of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Apply bit shifting and masking to reverse pairs, nibbles, bytes, etc.</div>
+                                <div style="margin-left: 20px;"> • For each level, collect the values into a list and store it.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Return the result after all bitwise reversals.</div>
+                                <div style="margin-left: 20px;"> • Since we need the levels from bottom to top, push each level&#39;s result onto a stack.</div>
+                            
+                                <div style="margin-left: 20px;"> • Finally, pop the elements from the stack to return the bottom-up level order.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem constraints ensure that the input is a valid 32-bit unsigned integer.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle up to 2000 nodes in the tree efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input must be a 32-bit unsigned integer.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle the maximum number of nodes, 2000, efficiently.</div>
                             
                         </div>
                     </div>        
@@ -415,15 +419,31 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input is a valid 32-bit unsigned integer.</div>
+                                <div style="margin-left: 20px;"> • The binary tree is non-empty, or it is an empty tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 00000000000000000000000010011010</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary string represents the integer 250. Reversing the bits results in the output integer 11259375, whose binary representation is 0000000000000000101011001010000.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [3,9,20,null,null,15,7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the binary tree can be visualized as:
+
+        3
+       /  \
+      9   20
+          /  \
+         15   7
+
+The bottom-up level order traversal is: [[15,7], [9,20], [3]].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the binary tree consists of a single node 1. The bottom-up level order traversal is simply: [[1]].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = []</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> If the tree is empty, the bottom-up level order traversal should return an empty list: [].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -447,16 +467,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we use bitwise operations to reverse the bits of the integer efficiently.</div>
+                        <div class=""> <b>Approach:</b> The approach for solving this problem involves using a breadth-first search (BFS) to explore the tree level by level. Since we need the result in bottom-up order, we can utilize a stack to reverse the order after performing the traversal.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can use a series of bitwise operations like shifting and masking to reverse the bits.</div>
+                                <div style="margin-left: 20px;"> • A level order traversal typically uses a queue, but we need the result in reverse order (bottom-up).</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Reversing bits requires operations that progressively swap and shift bits to their correct positions.</div>
+                                <div style="margin-left: 20px;"> • We can store the level order results in a stack and then pop the stack to get the desired bottom-up order.</div>
                             
                         </div>
                     </div>
@@ -464,11 +484,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Mask and shift the bits in pairs, nibbles, bytes, etc., progressively moving the bits to their correct reversed positions.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty queue and push the root of the tree into it.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Combine the shifted bits using bitwise OR operations.</div>
+                                <div style="margin-left: 20px;"> • While the queue is not empty, process each level of the tree by iterating over the nodes at that level.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Return the final reversed integer.</div>
+                                <div style="margin-left: 20px;"> • For each node, push its children into the queue and store the node&#39;s value for that level.</div>
+                            
+                                <div style="margin-left: 20px;"> • Push the list of values for each level into a stack.</div>
+                            
+                                <div style="margin-left: 20px;"> • After processing all levels, pop the elements from the stack and return them as the result.</div>
                             
                         </div>
                     </div>
@@ -477,22 +501,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input is always a 32-bit unsigned integer, so no empty inputs are possible.</div>
+                                <div style="margin-left: 20px;"> • If the root is null (empty tree), return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input is a fixed 32-bit integer, so no large inputs are required.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should be efficient enough to handle trees with up to 2000 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the input is a valid unsigned 32-bit integer (i.e., values between 0 and 4294967295).</div>
+                                <div style="margin-left: 20px;"> • Handle trees where all nodes are on one side (skewed trees).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input is always a 32-bit unsigned integer.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works for both balanced and unbalanced trees.</div>
                             
                         </div>                                                                        
                     </div>
@@ -511,17 +535,43 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Bitwise Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Bitwise Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Bitwise Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Bitwise Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Bitwise Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Level Storage</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Queue Size</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Node Value Collection</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Conditional Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Conditional Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Stack Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Loop Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Stack Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Stack Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Value</button>
                     
                 </div>
 
@@ -530,13 +580,38 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">uint32_t</span> <span style="color:#00a000">reverseBits</span>(<span style="color:#0b0;font-weight:bold">uint32_t</span> n) {
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xffffffff</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">16</span> <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xffffffff</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">16</span>;
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x00ff00ff</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">8</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xff00ff00</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">8</span>;
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x0f0f0f0f</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">4</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xf0f0f0f0</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">4</span>;
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x33333333</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">2</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xcccccccc</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x55555555</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">1</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xaaaaaaaa</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>;        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrderBottom(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;        
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    q.push(root);        
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> stk;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> tmp <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            ans.push_back(tmp<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>left)   q.push(tmp<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right)  q.push(tmp<span style="color:#666">-&gt;</span>right);                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        stk.push(ans);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        ans.push_back(stk.top());
+</span></span><span style="display:flex;"><span>        stk.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;      
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -547,70 +622,200 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">uint32_t</span> <span style="color:#00a000">reverseBits</span>(<span style="color:#0b0;font-weight:bold">uint32_t</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrderBottom(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;reverseBits&#39; which takes a 32-bit unsigned integer &#39;n&#39; and returns its bit-reversed value. </div>
+                            <div class=""> Define the function &#39;levelOrderBottom&#39; to return the bottom-up level order traversal of the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Bitwise Operation</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xffffffff</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">16</span> <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xffffffff</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">16</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Perform a bitwise AND operation with &#39;0xffffffff&#39; to isolate all bits, then shift the left and right halves of &#39;n&#39; to reverse their positions. </div>
+                            <div class=""> Declare a vector to store the final level-order traversal results. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Bitwise Operation</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x00ff00ff</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">8</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xff00ff00</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">8</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Shift the nibbles (4-bit sections) of &#39;n&#39; by 8 positions, swapping each pair of adjacent nibbles. </div>
+                            <div class=""> Declare a queue to process tree nodes level by level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Bitwise Operation</b></div>
+                            <div class=""> <b>4 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x0f0f0f0f</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">4</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xf0f0f0f0</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">4</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Shift the 4-bit blocks of &#39;n&#39; by 4 positions, swapping adjacent blocks. </div>
+                            <div class=""> Check if the tree is empty. If yes, return an empty result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Bitwise Operation</b></div>
+                            <div class=""> <b>5 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x33333333</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">2</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xcccccccc</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Shift the 2-bit pairs of &#39;n&#39; by 2 positions, swapping each pair of bits. </div>
+                            <div class=""> Push the root node into the queue to begin the level-order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Bitwise Operation</b></div>
+                            <div class=""> <b>6 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0x55555555</span>) <span style="color:#666">&lt;&lt;</span> <span style="color:#666">1</span>  <span style="color:#666">|</span> (n <span style="color:#666">&amp;</span> <span style="color:#666">0xaaaaaaaa</span>) <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>;        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Shift individual bits of &#39;n&#39; by 1 position, swapping bits in each pair. </div>
+                            <div class=""> Declare a stack to store the levels temporarily in reverse order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Loop Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty())
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the bit-reversed value of &#39;n&#39;. </div>
+                            <div class=""> Start a loop to process each level of the tree until the queue is empty. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Level Storage</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare a vector to store values of the current level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Queue Size</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Get the size of the current level by checking the number of nodes in the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Loop Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through all nodes of the current level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> tmp <span style="color:#666">=</span> q.front();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Fetch the front node from the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the front node from the queue after processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Node Value Collection</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans.push_back(tmp<span style="color:#666">-&gt;</span>val);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the value of the current node to the level vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Conditional Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>left)   q.push(tmp<span style="color:#666">-&gt;</span>left);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node has a left child, add it to the queue for processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Conditional Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right)  q.push(tmp<span style="color:#666">-&gt;</span>right);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node has a right child, add it to the queue for processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Stack Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.push(ans);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the current level vector onto the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Loop Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty())
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to retrieve levels from the stack in reverse order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Stack Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(stk.top());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the top level vector from the stack to the result vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Stack Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the top level from the stack after adding it to the result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Return Value</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;      
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final bottom-up level order traversal vector. </div>
                         </div>
                     
                 </div>
@@ -630,16 +835,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(1), as the number of operations is constant due to the fixed size of the input (32 bits).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the number of nodes in the tree, since each node is processed exactly once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1), as we only need a fixed amount of space to store the result.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space used by the queue and the stack to store the nodes and their values.</div>    
                     </div>
 
                 </div>

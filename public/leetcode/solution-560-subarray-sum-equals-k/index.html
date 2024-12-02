@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1199s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1197s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/560.webp" 
            alt="An array where subarrays that sum to `k` are highlighted, each valid sum softly glowing as it is found." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given a contaminated binary tree, recover it and implement a class to search for specific values in the tree. </div>
+<div class=""> Given an array nums of integers and an integer k, find the total number of contiguous subarrays whose sum equals k. </div>
 
 
 
@@ -371,47 +371,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a list of operations. Each operation is either the initialization of a tree or a search for a target value.</div>
-                        <div class=""> <b>Example:</b> [[[-1, null, -1]], [1], [2]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array nums containing integers and an integer k.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [2, 1, 3, 4, 1], k = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The tree has at most 10^4 nodes.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • Each node value is -1 initially.</div>
+                                <div style="margin-left: 20px;"> • -1000 &lt;= nums[i] &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^7 &lt;= k &lt;= 10^7</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a list where each entry corresponds to the result of a &#39;find&#39; operation, indicating whether the target exists in the tree.</div>
-                        <div class=""> <b>Example:</b> [null, false, true]</div>
+                        <div class=""> <b>Output:</b> The output should be a single integer representing the number of subarrays whose sum equals k.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result of the &#39;find&#39; operation is either true or false.</div>
+                                <div style="margin-left: 20px;"> • The result should be an integer representing the count of subarrays.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Recover the tree&#39;s original values and search for specific targets efficiently.</div>
+                        <div class=""> <b>Goal:</b> To find all subarrays whose sum equals k, we can maintain a running sum and use a hash map to track how many times each sum has occurred.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize the tree with the given contaminated root.</div>
+                                <div style="margin-left: 20px;"> • Initialize a hash map to store the frequency of sums and a variable to store the result.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Recover the values of each node using depth-first traversal.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array, updating the running sum.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Implement the &#39;find&#39; operation by checking if the target exists in the recovered set of values.</div>
+                                <div style="margin-left: 20px;"> • Check if the difference between the current running sum and k exists in the hash map. If it does, increment the result by the frequency of that sum.</div>
+                            
+                                <div style="margin-left: 20px;"> • Update the hash map to reflect the new sum after processing each element.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints for the problem involve tree size and the values to search for.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the array can have up to 20,000 elements and that the values in the array can be both positive and negative.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= tree size &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • Target value is between 0 and 10^6</div>
+                                <div style="margin-left: 20px;"> • -1000 &lt;= nums[i] &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^7 &lt;= k &lt;= 10^7</div>
                             
                         </div>
                     </div>        
@@ -419,17 +425,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input tree has been contaminated (all node values are initially -1).</div>
+                                <div style="margin-left: 20px;"> • The input array is non-empty.</div>
                             
-                                <div style="margin-left: 20px;"> • Each node follows the given value rules in the original uncontaminated tree.</div>
+                                <div style="margin-left: 20px;"> • The integer k is within the specified range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [[[-1, null, -1]], [1], [2]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after recovering the tree, the result of searching for 1 is &#39;false&#39; and 2 is &#39;true&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, 1, 3, 4, 1], k = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays that sum to 4 are [2, 1, 3], [4], and [1, 3]. Therefore, the result is 3.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, -1, 2, 3, -2], k = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays that sum to 3 are [3] and [1, -1, 2, 3]. Hence, the result is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,16 +463,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved by first recovering the tree values using a recursive depth-first search and then using a set to store these values for efficient lookups.</div>
+                        <div class=""> <b>Approach:</b> This problem can be solved efficiently using a prefix sum and a hash map to track the frequency of sums encountered during the iteration.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The binary tree follows a specific value pattern which allows for recursive recovery.</div>
+                                <div style="margin-left: 20px;"> • The sum of any subarray can be represented as a difference between two prefix sums.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Use recursion to recover each node value, starting from the root. Then, store the recovered values in a set for efficient querying.</div>
+                                <div style="margin-left: 20px;"> • By keeping track of prefix sums using a hash map, we can determine how many times the sum equals k without iterating over all possible subarrays.</div>
                             
                         </div>
                     </div>
@@ -470,11 +480,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Define a helper function to recover the tree values using depth-first traversal.</div>
+                                <div style="margin-left: 20px;"> • Initialize a variable to store the result (subarray count).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a set to store recovered values as we traverse the tree.</div>
+                                <div style="margin-left: 20px;"> • Use a hash map to keep track of the number of times each prefix sum occurs.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Implement the &#39;find&#39; function to check if a target exists in the set of recovered values.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the array, maintaining a running sum.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each element, check if the difference between the running sum and k is already in the hash map.</div>
+                            
+                                <div style="margin-left: 20px;"> • If found, add the frequency of that sum to the result.</div>
+                            
+                                <div style="margin-left: 20px;"> • Finally, update the hash map with the current running sum.</div>
                             
                         </div>
                     </div>
@@ -483,22 +499,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input tree is empty, which should not happen according to the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • The input array will never be empty as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle trees with up to 10^4 nodes.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle input sizes up to 20,000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The root value is always 0 and must be recovered first.</div>
+                                <div style="margin-left: 20px;"> • If k is 0, the solution should handle subarrays that sum to zero.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle up to 10^4 nodes efficiently in both time and space.</div>
+                                <div style="margin-left: 20px;"> • The solution should work efficiently even when k is a large or small value within the allowed range.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,31 +531,25 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Member</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Hash Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialize Prefix Sum</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Prefix Sum Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Node Value Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Iterate Through Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Insert to Set</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Prefix Sum Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call (Left Child)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Check for Subarray Sum</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Call (Right Child)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Hash Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Constructor Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Call to recover</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Set Lookup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Result</button>
                     
                 </div>
 
@@ -548,171 +558,126 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> <span style="color:#666">*</span> <span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
-</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#0b0;font-weight:bold">int</span> val;
-</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     TreeNode <span style="color:#666">*</span>left;
-</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     TreeNode <span style="color:#666">*</span>right;
-</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#00a000">TreeNode</span>() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
-</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#00a000">TreeNode</span>(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
-</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#00a000">TreeNode</span>(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
-</span></span><span style="display:flex;"><span> <span style="color:#666">*</span> };
-</span></span><span style="display:flex;"><span> <span style="">*/</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">FindElements</span> {
-</span></span><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> set;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> recover(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> x;
-</span></span><span style="display:flex;"><span>    set.emplace(x);
-</span></span><span style="display:flex;"><span>    recover(root<span style="color:#666">-&gt;</span>left, <span style="color:#666">2</span><span style="color:#666">*</span>x<span style="color:#666">+</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    recover(root<span style="color:#666">-&gt;</span>right, <span style="color:#666">2</span><span style="color:#666">*</span>x<span style="color:#666">+</span><span style="color:#666">2</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">subarraySum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(sum <span style="color:#666">-</span> k)) cnt <span style="color:#666">+=</span> mp[sum <span style="color:#666">-</span> k];
+</span></span><span style="display:flex;"><span>        mp[sum] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>FindElements(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    recover(root, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> target) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> set.count(target);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your FindElements object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * FindElements* obj = new FindElements(root);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_1 = obj-&gt;find(target);
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Class Definition</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">FindElements</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">subarraySum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the `FindElements` class, which is used to recover the binary tree and search for specific elements. </div>
+                            <div class=""> Defines the function `subarraySum` which takes a vector of integers `nums` and an integer `k`, and returns the number of subarrays whose sum equals `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Data Member</b></div>
+                            <div class=""> <b>2 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> set;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This declares an unordered set `set` to store the recovered values from the binary tree for fast look-up. </div>
+                            <div class=""> Initializes the result variable `res` to store the count of subarrays that sum to `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Access Modifier</b></div>
+                            <div class=""> <b>3 : Hash Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This sets the section following it to public access, making the methods accessible outside the class. </div>
+                            <div class=""> Declares an unordered map `mp` to store prefix sums of the array. The key is the sum, and the value is its frequency of occurrence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Initialize Prefix Sum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">recover</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the `recover` function, which is used to traverse the tree and recover the values by assigning values based on the binary tree&#39;s structure. </div>
+                            <div class=""> Initializes the hash map with the base case, where a prefix sum of `0` occurs once (for the case of an exact match of `k` from the start of the array). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Base Case</b></div>
+                            <div class=""> <b>5 : Prefix Sum Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the base case of the recursion: if the node is `NULL`, the function returns without performing any operations. </div>
+                            <div class=""> Initializes `sum` to keep track of the running prefix sum and `cnt` to count the number of valid subarrays. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Node Value Assignment</b></div>
+                            <div class=""> <b>6 : Iterate Through Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> x;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This assigns the current node&#39;s value to `x`. </div>
+                            <div class=""> Begins a loop to iterate through the array `nums` to calculate prefix sums. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Insert to Set</b></div>
+                            <div class=""> <b>7 : Prefix Sum Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set.emplace(x);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This inserts the node&#39;s value `x` into the `set` for fast lookup during search operations. </div>
+                            <div class=""> Adds the current element `nums[i]` to the running `sum`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Recursive Call (Left Child)</b></div>
+                            <div class=""> <b>8 : Check for Subarray Sum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    recover(root<span style="color:#666">-&gt;</span>left, <span style="color:#666">2</span><span style="color:#666">*</span>x<span style="color:#666">+</span><span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(sum <span style="color:#666">-</span> k)) cnt <span style="color:#666">+=</span> mp[sum <span style="color:#666">-</span> k];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This recursively calls the `recover` function to process the left child of the current node, assigning it the value `2*x&#43;1`. </div>
+                            <div class=""> Checks if the prefix sum `sum - k` exists in the hash map. If it does, it means a subarray with sum `k` is found, so it adds the count of occurrences of `sum - k` to `cnt`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Recursive Call (Right Child)</b></div>
+                            <div class=""> <b>9 : Update Hash Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    recover(root<span style="color:#666">-&gt;</span>right, <span style="color:#666">2</span><span style="color:#666">*</span>x<span style="color:#666">+</span><span style="color:#666">2</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[sum] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This recursively calls the `recover` function to process the right child of the current node, assigning it the value `2*x&#43;2`. </div>
+                            <div class=""> Increments the frequency of the current prefix sum `sum` in the hash map `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Constructor Definition</b></div>
+                            <div class=""> <b>10 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FindElements(TreeNode<span style="color:#666">*</span> root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the constructor of the `FindElements` class, which initializes the tree recovery process. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Call to recover</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    recover(root, <span style="color:#666">0</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This calls the `recover` function to recover the tree starting from the root node with an initial value of 0. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> target) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This defines the `find` function, which checks if a given target value exists in the recovered tree. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Set Lookup</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> set.count(target);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This checks if the `target` value is present in the `set` and returns `true` if it is, or `false` otherwise. </div>
+                            <div class=""> Returns the total count of subarrays that sum to `k`. </div>
                         </div>
                     
                 </div>
@@ -732,16 +697,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(N), where N is the number of nodes in the tree (for the recovery operation).</div>
-                        <div class=""> <b>Average Case:</b> O(1) for each &#39;find&#39; operation (due to the set lookup).</div>
-                        <div class=""> <b>Worst Case:</b> O(N) for the recovery operation and O(1) for each &#39;find&#39; operation.</div> 
-                        <div class=""> <b>Description:</b> The time complexity of the recovery operation is O(N), where N is the number of nodes in the tree. The time complexity of each &#39;find&#39; operation is O(1) due to the set lookup.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in the size of the input array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(N) for the space used by the set storing the recovered values.</div>
-                        <div class=""> <b>Worst Case:</b> O(N), where N is the number of nodes in the tree (for storing the recovered values).</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(N) for storing the recovered tree values in the set.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the prefix sums in the hash map.</div>    
                     </div>
 
                 </div>

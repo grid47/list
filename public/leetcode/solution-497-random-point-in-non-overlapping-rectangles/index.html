@@ -323,7 +323,7 @@
 
 
 
-<div class=""> You are given two strings, s1 and s2, which contain the same length, and a third string baseStr. Each pair of corresponding characters from s1 and s2 represent equivalent characters. Your task is to return the lexicographically smallest equivalent string for baseStr, where each character is replaced with its lexicographically smallest equivalent based on the equivalency information from s1 and s2. </div>
+<div class=""> You are given an array of non-overlapping axis-aligned rectangles. Each rectangle is represented by its bottom-left and top-right corner. Your task is to design a system that can pick a random integer point from the space covered by one of the given rectangles. A point on the perimeter of a rectangle is considered inside the rectangle. </div>
 
 
 
@@ -374,51 +374,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two strings s1 and s2 of the same length, and a string baseStr. The strings s1 and s2 represent equivalency information where corresponding characters in the two strings are considered equivalent. The baseStr is the string that needs to be transformed according to these equivalencies.</div>
-                        <div class=""> <b>Example:</b> Input: s1 = &#34;abc&#34;, s2 = &#34;xyz&#34;, baseStr = &#34;def&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of rectangles, where each rectangle is represented by its bottom-left and top-right coordinates.</div>
+                        <div class=""> <b>Example:</b> [[[[1, 1, 4, 4], [-2, -2, 2, 2]]]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s1.length, s2.length, baseStr &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= rects.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • s1.length == s2.length</div>
+                                <div style="margin-left: 20px;"> • rects[i].length == 4</div>
                             
-                                <div style="margin-left: 20px;"> • s1, s2, and baseStr consist of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= ai &lt; xi &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= bi &lt; yi &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • xi - ai &lt;= 2000</div>
+                            
+                                <div style="margin-left: 20px;"> • yi - bi &lt;= 2000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the lexicographically smallest equivalent string derived from baseStr, with each character transformed according to the equivalency information provided by s1 and s2.</div>
-                        <div class=""> <b>Example:</b> Output: &#34;dff&#34;</div>
+                        <div class=""> <b>Output:</b> The output should return a random integer point inside the space covered by one of the rectangles.</div>
+                        <div class=""> <b>Example:</b> [2, 2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output string must be a valid transformation of baseStr, following the equivalency rules from s1 and s2.</div>
+                                <div style="margin-left: 20px;"> • The output is an array of two integers, representing the coordinates of the selected random point.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the lexicographically smallest string by transforming baseStr, using the equivalency relationships defined by s1 and s2.</div>
+                        <div class=""> <b>Goal:</b> The goal is to implement a system that can select a random point from the space covered by the given rectangles, ensuring equal probability for each point.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Create a union-find (disjoint set) data structure to track equivalencies between characters.</div>
+                                <div style="margin-left: 20px;"> • 1. For each rectangle, calculate the area it covers.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Process each pair of characters from s1 and s2, linking them in the union-find structure to establish equivalency.</div>
+                                <div style="margin-left: 20px;"> • 2. Create a prefix sum array to track the cumulative area of rectangles.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each character in baseStr, find its equivalent character from the union-find structure and replace it with the lexicographically smallest option.</div>
+                                <div style="margin-left: 20px;"> • 3. Use a random number generator to select a rectangle based on its area.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Pick a random point within the selected rectangle.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input strings are lowercase English letters and are of manageable length, ensuring the problem can be solved efficiently.</div>
+                        <div class=""> <b>Goal:</b> The constraints for this problem are as follows.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s1.length, s2.length, baseStr &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The input rectangles do not overlap.</div>
                             
-                                <div style="margin-left: 20px;"> • s1.length == s2.length</div>
-                            
-                                <div style="margin-left: 20px;"> • s1, s2, and baseStr consist of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle up to 10^4 pick calls.</div>
                             
                         </div>
                     </div>        
@@ -426,21 +432,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input strings s1, s2, and baseStr are all valid and follow the specified constraints.</div>
+                                <div style="margin-left: 20px;"> • All rectangles are non-overlapping and aligned to axes.</div>
                             
-                                <div style="margin-left: 20px;"> • The equivalency relations form an equivalence relation (reflexive, symmetric, and transitive).</div>
+                                <div style="margin-left: 20px;"> • The selected random points should be equally likely to be chosen from any of the given rectangles.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s1 = &#34;parker&#34;, s2 = &#34;morris&#34;, baseStr = &#34;parser&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The equivalency groups are [m, p], [a, o], [k, r, s], and [e, i]. The smallest lexicographically equivalent string is &#39;makkek&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s1 = &#34;hello&#34;, s2 = &#34;world&#34;, baseStr = &#34;hold&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The equivalency groups are [h, w], [d, e, o], and [l, r]. The transformed base string is &#39;hdld&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[[[1, 1, 4, 4], [-2, -2, 2, 2]]]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first rectangle covers the area from (1, 1) to (4, 4), and the second rectangle covers the area from (-2, -2) to (2, 2). The &#39;pick&#39; function randomly selects a point from one of these two rectangles, such as [2, 2] or [-1, -2].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,18 +466,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We solve this problem by modeling equivalencies using a union-find data structure. This helps efficiently group equivalent characters and ensures that we can replace each character in baseStr with its lexicographically smallest equivalent.</div>
+                        <div class=""> <b>Approach:</b> The solution involves calculating the area of each rectangle, storing cumulative areas, and then using these areas to select a rectangle randomly. After selecting a rectangle, a random point is chosen from within it.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each pair of corresponding characters in s1 and s2 represents an equivalency relation.</div>
+                                <div style="margin-left: 20px;"> • The solution needs to ensure that each point has equal probability of being selected.</div>
                             
-                                <div style="margin-left: 20px;"> • We can use a union-find data structure to group equivalent characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • A prefix sum of the areas will allow efficient selection of rectangles based on their area.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem is essentially about finding equivalence classes of characters, and then replacing characters in baseStr with their lexicographically smallest representatives.</div>
+                                <div style="margin-left: 20px;"> • Efficiently implementing this using a prefix sum array will allow fast lookups and selections.</div>
                             
                         </div>
                     </div>
@@ -483,11 +485,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a union-find data structure to track character equivalences.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a prefix sum array to store cumulative areas of rectangles.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each character pair (s1[i], s2[i]), union the corresponding characters to signify they are equivalent.</div>
+                                <div style="margin-left: 20px;"> • 2. For each pick call, randomly select a rectangle based on its area using the prefix sum array.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each character in baseStr, find its equivalent character using the union-find structure and replace it with the smallest lexicographical representative.</div>
+                                <div style="margin-left: 20px;"> • 3. Within the selected rectangle, pick a random integer point and return it.</div>
                             
                         </div>
                     </div>
@@ -496,22 +498,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem does not expect empty inputs, as the length of strings is at least 1.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that the input will contain at least one rectangle.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be efficient enough to handle inputs of up to 1000 characters.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle up to 10^4 pick calls, so the algorithm must be optimized for speed.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • In cases where all characters in baseStr are already equivalent, the baseStr remains unchanged.</div>
+                                <div style="margin-left: 20px;"> • Points on the perimeter should also be considered as valid points inside the rectangle.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must adhere to the time and space complexity constraints to handle inputs efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm is efficient enough to handle the upper limits of the input sizes.</div>
                             
                         </div>                                                                        
                     </div>
@@ -528,29 +530,39 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Character Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 String Length Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Access Specifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Union-Find Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Area Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Union Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Constructor Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Symmetric Union Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Input Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 String Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Base String Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Cumulative Area Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Character Conversion &amp; Find</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Random Selection</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Binary Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Rectangle Selection</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Random Coordinate Generation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Random Coordinate Generation</button>
                     
                 </div>
 
@@ -559,150 +571,211 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">cnv</span>(<span style="color:#0b0;font-weight:bold">char</span> x) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> rect;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> area(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> r) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (r[<span style="color:#666">2</span>] <span style="color:#666">-</span> r[<span style="color:#666">0</span>] <span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">*</span> (r[<span style="color:#666">3</span>] <span style="color:#666">-</span> r[<span style="color:#666">1</span>] <span style="color:#666">+</span><span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>string <span style="color:#00a000">smallestEquivalentString</span>(string s1, string s2, string base) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
-</span></span><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s1[i]), cnv(s2[i]));
-</span></span><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s2[i]), cnv(s1[i]));            
+</span></span><span style="display:flex;"><span>Solution(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> r) {
+</span></span><span style="display:flex;"><span>    rect <span style="color:#666">=</span> r;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">re</span> : r) {
+</span></span><span style="display:flex;"><span>        v.push_back(area(re) <span style="color:#666">+</span> (v.empty()<span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> v.back()));
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> base.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> uf<span style="color:#666">-&gt;</span>find(cnv(base[i])) <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pick() {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> rand() <span style="color:#666">%</span> v.back();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idz <span style="color:#666">=</span> upper_bound(v.begin(), v.end(), d) <span style="color:#666">-</span> v.begin();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> r <span style="color:#666">=</span> rect[idz];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {
+</span></span><span style="display:flex;"><span>        rand() <span style="color:#666">%</span> (r[<span style="color:#666">2</span>] <span style="color:#666">-</span> r[<span style="color:#666">0</span>] <span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">+</span> r[<span style="color:#666">0</span>],
+</span></span><span style="display:flex;"><span>        rand() <span style="color:#666">%</span> (r[<span style="color:#666">3</span>] <span style="color:#666">-</span> r[<span style="color:#666">1</span>] <span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">+</span> r[<span style="color:#666">1</span>]
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Solution object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Solution* obj = new Solution(rects);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * vector&lt;int&gt; param_1 = obj-&gt;pick();
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">cnv</span>(<span style="color:#0b0;font-weight:bold">char</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function `cnv` converts a character `x` to an integer corresponding to its position in the alphabet (0 for &#39;a&#39;, 1 for &#39;b&#39;, etc.). </div>
+                            <div class=""> Defines the `Solution` class, which will be used to encapsulate the logic for selecting random points within given rectangles. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Character Conversion</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `cnv` function subtracts the ASCII value of &#39;a&#39; from the character `x`, effectively mapping &#39;a&#39; to 0, &#39;b&#39; to 1, and so on. </div>
+                            <div class=""> Declares a vector `v` that will store the cumulative area of rectangles to assist in random point selection based on area weights. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Definition</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">smallestEquivalentString</span>(string s1, string s2, string base) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> rect;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `smallestEquivalentString`, which takes two strings `s1`, `s2`, and a `base` string, and returns the smallest equivalent string according to the character relationships defined in `s1` and `s2`. </div>
+                            <div class=""> Declares a 2D vector `rect`, which stores the coordinates of the rectangles given as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : String Length Calculation</b></div>
+                            <div class=""> <b>4 : Access Specifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the length of the string `s1` (which is the same as `s2`) and stores it in `n`. </div>
+                            <div class=""> Marks the following methods as public, allowing them to be accessed by objects of the `Solution` class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Union-Find Initialization</b></div>
+                            <div class=""> <b>5 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">area</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> r) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An instance of the Union-Find (disjoint-set) data structure is created. It is initialized to handle 26 elements, one for each letter of the alphabet. </div>
+                            <div class=""> Defines a helper method `area` to calculate the area of a given rectangle represented by the vector `r`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop Start</b></div>
+                            <div class=""> <b>6 : Area Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (r[<span style="color:#666">2</span>] <span style="color:#666">-</span> r[<span style="color:#666">0</span>] <span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">*</span> (r[<span style="color:#666">3</span>] <span style="color:#666">-</span> r[<span style="color:#666">1</span>] <span style="color:#666">+</span><span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each pair of characters from `s1` and `s2`. </div>
+                            <div class=""> Calculates the area of the rectangle using the formula `(width) * (height)`, where `r[0]`, `r[1]` are the coordinates of the bottom-left corner, and `r[2]`, `r[3]` are the coordinates of the top-right corner. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Union Operation</b></div>
+                            <div class=""> <b>7 : Constructor Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s1[i]), cnv(s2[i]));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> r) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character pair from `s1` and `s2`, the `uni` function is called to unify the corresponding sets of the two characters. </div>
+                            <div class=""> Defines the constructor of the `Solution` class that initializes the `rect` vector and calculates the cumulative areas of the rectangles. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Symmetric Union Operation</b></div>
+                            <div class=""> <b>8 : Input Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s2[i]), cnv(s1[i]));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    rect <span style="color:#666">=</span> r;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line ensures that the relationship is symmetric by also unifying the sets of `s2[i]` and `s1[i]`. </div>
+                            <div class=""> Assigns the input vector `r` to the class-level `rect` variable, which stores the rectangle data. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : String Initialization</b></div>
+                            <div class=""> <b>9 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">re</span> : r) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The result string `res` is initialized as an empty string, which will store the smallest equivalent string. </div>
+                            <div class=""> Iterates over each rectangle in the input `r` to compute the areas and accumulate them. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Base String Loop</b></div>
+                            <div class=""> <b>10 : Cumulative Area Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> base.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        v.push_back(area(re) <span style="color:#666">+</span> (v.empty()<span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> v.back()));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over each character in the base string `base`. </div>
+                            <div class=""> For each rectangle, calculates its area using the `area` method and adds it to the cumulative area vector `v`. If `v` is empty, it starts from 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Character Conversion &amp; Find</b></div>
+                            <div class=""> <b>11 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> uf<span style="color:#666">-&gt;</span>find(cnv(base[i])) <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pick() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character in `base`, the function `find` is used to find the representative of the character&#39;s set, and the result is converted back to a character. This character is then appended to the result string `res`. </div>
+                            <div class=""> Defines the `pick` method, which randomly selects a point from one of the rectangles based on their area probabilities. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Random Selection</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> rand() <span style="color:#666">%</span> v.back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the result string `res`, which contains the smallest equivalent string. </div>
+                            <div class=""> Generates a random number `d` between 0 and the total area of all rectangles (stored in the last element of `v`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Binary Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idz <span style="color:#666">=</span> upper_bound(v.begin(), v.end(), d) <span style="color:#666">-</span> v.begin();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Uses binary search (`upper_bound`) to find the rectangle corresponding to the randomly generated area `d`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Rectangle Selection</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> r <span style="color:#666">=</span> rect[idz];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Selects the rectangle corresponding to the index `idz` from the `rect` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts returning the randomly selected point within the chosen rectangle. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Random Coordinate Generation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        rand() <span style="color:#666">%</span> (r[<span style="color:#666">2</span>] <span style="color:#666">-</span> r[<span style="color:#666">0</span>] <span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">+</span> r[<span style="color:#666">0</span>],
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Generates a random x-coordinate within the bounds of the selected rectangle. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Random Coordinate Generation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        rand() <span style="color:#666">%</span> (r[<span style="color:#666">3</span>] <span style="color:#666">-</span> r[<span style="color:#666">1</span>] <span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">+</span> r[<span style="color:#666">1</span>]
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Generates a random y-coordinate within the bounds of the selected rectangle. </div>
                         </div>
                     
                 </div>
@@ -722,16 +795,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the union-find operations and character transformations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity for selecting a rectangle is O(log n) due to the use of binary search on the prefix sum array.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the union-find structure and baseStr.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to storing the prefix sum array and the rectangles.</div>    
                     </div>
 
                 </div>

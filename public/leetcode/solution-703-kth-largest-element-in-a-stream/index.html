@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -323,7 +323,7 @@
 
 
 
-<div class=""> Given a string s, your task is to split it into the maximum number of non-empty substrings such that all substrings are unique. You are allowed to split the string in any way, but each substring in the split must not repeat. </div>
+<div class=""> You are tasked with implementing a class that helps track the kth highest score in a dynamic list of test scores. Each time a new score is submitted, you need to return the kth highest score in the list. </div>
 
 
 
@@ -374,49 +374,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string s, where the length of s is between 1 and 16. The string contains only lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;abcab&#34;</div>
+                        <div class=""> <b>Input:</b> The class should be initialized with an integer k (the desired ranking) and a list of test scores. For each new score added to the stream, return the kth highest score in the list.</div>
+                        <div class=""> <b>Example:</b> KthLargest kthLargest = new KthLargest(2, [1, 3, 5, 7, 9]); kthLargest.add(6);</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 16</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters only</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length &#43; 1</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= nums[i] &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= val &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 10^4 calls will be made to the add method.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum number of unique substrings that the string can be split into.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> The method should return the kth largest number in the list after each new score is added.</div>
+                        <div class=""> <b>Example:</b> Output: [null, 5, 6, 7, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The substrings must be unique and non-empty.</div>
+                                <div style="margin-left: 20px;"> • The result after each call to add should be the kth largest score in the current list of test scores.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the maximum number of unique substrings by splitting the string. You should use backtracking to explore all possible splits and track the uniqueness of each substring.</div>
+                        <div class=""> <b>Goal:</b> Track the kth largest score dynamically using a priority queue or a min-heap to efficiently maintain the list of the top k scores.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Start by initializing an empty set to store unique substrings.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a priority queue (min-heap) to store the top k elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a backtracking approach to try different substrings at each position.</div>
+                                <div style="margin-left: 20px;"> • 2. Add each score to the heap.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each substring, check if it&#39;s already in the set of unique substrings. If not, add it to the set and continue exploring further.</div>
+                                <div style="margin-left: 20px;"> • 3. If the heap exceeds k elements, remove the smallest element.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. When a valid split is reached, keep track of the maximum number of unique substrings found.</div>
+                                <div style="margin-left: 20px;"> • 4. After each addition, the top of the heap will be the kth largest score.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle all input sizes within the given constraints and should work efficiently for the maximum string length of 16.</div>
+                        <div class=""> <b>Goal:</b> The problem must handle dynamic updates to the list of scores.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 16</div>
+                                <div style="margin-left: 20px;"> • The class must handle multiple calls to the add method efficiently.</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The list of scores can vary in size from 0 to 10,000.</div>
                             
                         </div>
                     </div>        
@@ -424,21 +430,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string s is non-empty.</div>
+                                <div style="margin-left: 20px;"> • The list will be dynamically updated with new scores.</div>
                             
-                                <div style="margin-left: 20px;"> • We are only dealing with lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The kth largest element should be returned after each new score is added.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;abcab&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> One possible maximal split is [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;ab&#39;]. In this split, all substrings are unique, and we have 4 unique substrings.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;aaaa&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The only valid split is [&#39;a&#39;], as all other possible splits repeat substrings. Hence, the maximum number of unique substrings is 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: KthLargest(2, [1, 3, 5, 7, 9])</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> When the 2nd largest element is requested after each new score is added, the following occurs: add(6) =&gt; 6 becomes the 2nd largest number, add(8) =&gt; 7 becomes the 2nd largest number, etc.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,18 +464,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves using backtracking to explore all possible splits of the string while ensuring that the substrings are unique. We will maintain a set of substrings to keep track of uniqueness.</div>
+                        <div class=""> <b>Approach:</b> The goal is to efficiently manage a dynamic list of scores and find the kth largest element after each insertion. A priority queue or min-heap can be used to keep track of the top k elements in the stream.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires checking different ways to split the string while ensuring uniqueness at each step.</div>
-                            
-                                <div style="margin-left: 20px;"> • Backtracking will help in exploring all possible splits.</div>
+                                <div style="margin-left: 20px;"> • A heap is a good choice to manage a dynamic list of top k elements efficiently.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using backtracking with a set for uniqueness seems to be a good strategy. The constraints are small enough (with string length ≤ 16) to allow exploring all possible splits.</div>
+                                <div style="margin-left: 20px;"> • Since we are only interested in the kth largest element, using a min-heap of size k ensures that the smallest element in the heap is always the kth largest.</div>
                             
                         </div>
                     </div>
@@ -481,13 +481,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a set to keep track of the substrings that have been seen.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize the KthLargest class with an integer k and a list of scores.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Define a backtracking function that tries to split the string at every possible position.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Use a priority queue (min-heap) to store the top k elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the substring is unique, add it to the set and explore further.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Add a new score to the heap and ensure the heap contains at most k elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Once all possible splits are explored, return the maximum size of the set as the result.</div>
+                                <div style="margin-left: 20px;"> • Step 4: After each insertion, return the smallest element in the heap, which represents the kth largest score.</div>
                             
                         </div>
                     </div>
@@ -496,22 +496,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string is empty, the result should be 0.</div>
+                                <div style="margin-left: 20px;"> • The list of scores may be empty initially, but k will always be valid.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Even though the string length is small, ensure that the backtracking approach can handle the largest possible input of length 16 efficiently.</div>
+                                <div style="margin-left: 20px;"> • If the number of scores is very large, ensure that the heap operations are optimized to handle up to 10,000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all characters in the string are the same, the maximum number of unique substrings will be 1.</div>
+                                <div style="margin-left: 20px;"> • If multiple scores have the same value, they should be treated as equal for the purposes of finding the kth largest score.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure the solution works efficiently within the time and space constraints, especially for the maximum input size.</div>
+                                <div style="margin-left: 20px;"> • Ensure the heap is only storing the top k elements at all times to maintain efficiency.</div>
                             
                         </div>                                                                        
                     </div>
@@ -528,45 +528,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Priority Queue Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 String Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Over Input Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Length Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push to Priority Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 String Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check Priority Queue Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Remove Smallest Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Top Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Empty Line</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Backtracking Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Push Value to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check Queue Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Updating Maximum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pop Smallest Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop (Backtracking)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Substring Construction</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Checking for Uniqueness</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Inserting Substring</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Removing Substring</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Kth Largest Element</button>
                     
                 </div>
 
@@ -575,236 +563,177 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>, n;
-</span></span><span style="display:flex;"><span>string s;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxUniqueSplit</span>(string s) {
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> cnt;
-</span></span><span style="display:flex;"><span>    string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s <span style="color:#666">=</span> s;
-</span></span><span style="display:flex;"><span>    bt(<span style="color:#666">0</span>, tmp, cnt);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, string tmp, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> cnt) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) {
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, (<span style="color:#0b0;font-weight:bold">int</span>)cnt.size());
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        tmp <span style="color:#666">+=</span> s[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>cnt.count(tmp)) {
-</span></span><span style="display:flex;"><span>            cnt.insert(tmp);
-</span></span><span style="display:flex;"><span>            bt(i <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#b44">&#34;&#34;</span>, cnt);
-</span></span><span style="display:flex;"><span>            cnt.erase(tmp);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> k;
+</span></span><span style="display:flex;"><span>KthLargest(<span style="color:#0b0;font-weight:bold">int</span> k, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>k <span style="color:#666">=</span> k;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: nums) {
+</span></span><span style="display:flex;"><span>        pq.push(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">add</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    pq.push(val);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> pq.top();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your KthLargest object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * KthLargest* obj = new KthLargest(k, nums);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;add(val);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Priority Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>, n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes the variable `mx` to store the maximum number of unique splits (set to 1 initially) and `n` to store the length of the string. </div>
+                            <div class=""> A min-heap priority queue &#39;pq&#39; is initialized to keep track of the K largest elements. The &#39;greater&lt;int&gt;&#39; ensures the smallest element is at the top. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> k;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This declares the string variable `s`, which will hold the input string for the unique splits calculation. </div>
+                            <div class=""> The variable &#39;k&#39; holds the value of K, which represents the number of largest elements to track. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Declaration</b></div>
+                            <div class=""> <b>3 : Constructor Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxUniqueSplit</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>KthLargest(<span style="color:#0b0;font-weight:bold">int</span> k, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the declaration of the main function `maxUniqueSplit`, which takes a string `s` and returns an integer, representing the maximum number of unique splits. </div>
+                            <div class=""> Constructor for the KthLargest class. It initializes &#39;k&#39; and populates the priority queue &#39;pq&#39; with the values from the input vector &#39;nums&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Set Initialization</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>k <span style="color:#666">=</span> k;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a set `cnt` to store the substrings that have been used as splits. The set automatically handles duplicate values. </div>
+                            <div class=""> Assign the input value &#39;k&#39; to the class variable &#39;k&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : String Initialization</b></div>
+                            <div class=""> <b>5 : Loop Over Input Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes an empty string `tmp` which will hold the current substring being considered for splitting. </div>
+                            <div class=""> Iterate over each element in the input array &#39;nums&#39; to populate the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Length Calculation</b></div>
+                            <div class=""> <b>6 : Push to Priority Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This sets the variable `n` to the size of the string `s`, which represents the length of the input string. </div>
+                            <div class=""> Push the current element &#39;x&#39; from the input array into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : String Assignment</b></div>
+                            <div class=""> <b>7 : Check Priority Queue Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s <span style="color:#666">=</span> s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&gt;</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This assigns the input string `s` to the class&#39;s string `s`. This line assumes that `s` is a member variable of a class. </div>
+                            <div class=""> Check if the priority queue contains more than &#39;k&#39; elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Recursive Call</b></div>
+                            <div class=""> <b>8 : Remove Smallest Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(<span style="color:#666">0</span>, tmp, cnt);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> pq.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calls the backtracking function `bt`, passing the initial index (`0`), the empty string `tmp`, and the set `cnt` to start the recursive process of finding unique splits. </div>
+                            <div class=""> Output the smallest element in the priority queue, which is at the top. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Pop Top Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the value of `mx`, which holds the maximum number of unique splits found by the backtracking function. </div>
+                            <div class=""> Remove the smallest element from the priority queue to maintain only the K largest elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Empty Line</b></div>
+                            <div class=""> <b>10 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">add</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is an empty line before the declaration of the backtracking function. </div>
+                            <div class=""> Method that adds a new value &#39;val&#39; to the priority queue and returns the current Kth largest element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Backtracking Function Declaration</b></div>
+                            <div class=""> <b>11 : Push Value to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, string tmp, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> cnt) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push(val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the declaration of the backtracking function `bt`, which takes the current index `idx`, a temporary string `tmp`, and a set of previously seen substrings `cnt`. </div>
+                            <div class=""> Push the new value &#39;val&#39; into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Base Case</b></div>
+                            <div class=""> <b>12 : Check Queue Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&gt;</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the base case of the recursion, which checks if the index `idx` has reached the length of the string `n`. If it has, the function processes the result. </div>
+                            <div class=""> Check if the size of the priority queue exceeds &#39;k&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Updating Maximum</b></div>
+                            <div class=""> <b>13 : Pop Smallest Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, (<span style="color:#0b0;font-weight:bold">int</span>)cnt.size());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This updates the value of `mx` to be the maximum of its current value and the size of the set `cnt`, which represents the number of unique substrings found so far. </div>
+                            <div class=""> Pop the smallest element from the priority queue to ensure it only contains the largest &#39;k&#39; elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class=""> <b>14 : Return Kth Largest Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> pq.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns from the backtracking function, ending the recursion for the current path. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Loop (Backtracking)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop iterates from the current index `idx` to the end of the string `n`, trying all possible substrings starting from `idx`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Substring Construction</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp <span style="color:#666">+=</span> s[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This appends the character `s[i]` to the string `tmp`, gradually building up the current substring. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Checking for Uniqueness</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>cnt.count(tmp)) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This checks if the substring `tmp` is already in the set `cnt`. If it is not, the substring is unique and can be considered for the next step. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Inserting Substring</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt.insert(tmp);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This inserts the substring `tmp` into the set `cnt`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bt(i <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#b44">&#34;&#34;</span>, cnt);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This recursively calls the backtracking function, passing the next index `i &#43; 1`, an empty string for the next substring, and the updated set `cnt`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Removing Substring</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt.erase(tmp);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This removes the substring `tmp` from the set `cnt` after the recursive call, ensuring that the set only contains substrings for the current path. </div>
+                            <div class=""> Return the top element of the priority queue, which is the Kth largest element. </div>
                         </div>
                     
                 </div>
@@ -824,16 +753,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) - If the string can be split in a way that no further exploration is needed.</div>
-                        <div class=""> <b>Average Case:</b> O(2^n) - In the worst case, backtracking explores all possible splits of the string.</div>
-                        <div class=""> <b>Worst Case:</b> O(2^n) - The backtracking approach explores all subsets of the string, where n is the length of the string.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is exponential due to the backtracking approach that explores all possible splits.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log k) for each add operation when the heap is not full.</div>
+                        <div class=""> <b>Average Case:</b> O(log k) for each add operation.</div>
+                        <div class=""> <b>Worst Case:</b> O(log k) for each add operation, where k is the number of elements in the heap.</div> 
+                        <div class=""> <b>Description:</b> The time complexity of adding a new score is logarithmic relative to k, the size of the heap.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) - Space is mainly used by the set of substrings and the recursion stack.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) - Space is required to store the set of substrings and recursive function calls.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear in the worst case due to the storage of substrings in a set and the recursion stack.</div>    
+                        <div class=""> <b>Best Case:</b> O(k), since the space required does not depend on the number of operations but only on k.</div>
+                        <div class=""> <b>Worst Case:</b> O(k), as we only need to store the top k elements in the heap.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is determined by the size of the heap, which stores the top k elements.</div>    
                     </div>
 
                 </div>

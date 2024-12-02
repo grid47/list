@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 21, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are given a strictly increasing array of integers, nums, and a positive integer diff. A triplet (i, j, k) is an arithmetic triplet if the following conditions hold: i &lt; j &lt; k, nums[j] - nums[i] == diff, and nums[k] - nums[j] == diff. Your task is to return the number of unique arithmetic triplets that can be formed from the given array. </div>
+<div class=""> You are given two arrays, <code>values</code> and <code>labels</code>, representing the value and label of items, respectively. Your goal is to choose a subset of items with the maximum sum of values such that the number of items selected is at most <code>numWanted</code> and no label appears more than <code>useLimit</code> times in the subset. Return the maximum possible sum of the values from the selected subset of items. </div>
 
 
 
@@ -361,51 +361,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a strictly increasing array nums, and an integer diff which specifies the common difference in the arithmetic triplet.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 3, 4, 6, 8, 9], diff = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of two arrays: `values` and `labels` of length `n`, where each element in `values` represents the value of the corresponding item, and each element in `labels` represents the label of the corresponding item. Additionally, you are given two integers: `numWanted` (the maximum number of items that can be selected) and `useLimit` (the maximum number of items that can be selected with the same label).</div>
+                        <div class=""> <b>Example:</b> Input: values = [10, 8, 5, 4, 3], labels = [1, 1, 2, 2, 3], numWanted = 3, useLimit = 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= nums.length &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • n == values.length == labels.length</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= diff &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= values[i], labels[i] &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • nums is strictly increasing</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= numWanted, useLimit &lt;= n</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer, representing the number of unique arithmetic triplets that satisfy the conditions described.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return the maximum sum of the values from the selected subset of items that satisfies the constraints on selection and label usage.</div>
+                        <div class=""> <b>Example:</b> Output: 18</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The maximum sum should be obtained by selecting the best possible combination of items while respecting the label constraints.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> We need to count the number of valid triplets where the difference between consecutive numbers is exactly the given diff.</div>
+                        <div class=""> <b>Goal:</b> The goal is to select the subset of items that yields the maximum sum of values while ensuring that no more than `numWanted` items are chosen and that no label appears more than `useLimit` times.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an array to keep track of the occurrences of potential triplet values.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the items by their values in descending order to prioritize the highest value items.</div>
                             
-                                <div style="margin-left: 20px;"> • For each number in the input array, check if the previous two numbers that form a valid triplet (with the given diff) have appeared before.</div>
+                                <div style="margin-left: 20px;"> • 2. Track the frequency of each label as items are selected.</div>
                             
-                                <div style="margin-left: 20px;"> • Accumulate the count of valid triplets and return the final result.</div>
+                                <div style="margin-left: 20px;"> • 3. Select items one by one while ensuring that the total number of selected items does not exceed `numWanted`, and no label appears more than `useLimit` times.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array nums is strictly increasing, and the length of the array is guaranteed to be at least 3. The value of diff is constrained between 1 and 50.</div>
+                        <div class=""> <b>Goal:</b> The solution must efficiently handle large inputs while adhering to the problem&#39;s constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • nums.length is between 3 and 200</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • Each value in nums is between 0 and 200</div>
+                                <div style="margin-left: 20px;"> • The solution should be optimized to handle up to 20,000 items.</div>
                             
-                                <div style="margin-left: 20px;"> • The diff value is between 1 and 50</div>
+                                <div style="margin-left: 20px;"> • The input arrays `values` and `labels` contain integer values between 0 and 20,000.</div>
                             
                         </div>
                     </div>        
@@ -413,17 +415,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array is guaranteed to be strictly increasing.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of triplets should be counted based on the difference condition, not the exact indices.</div>
+                                <div style="margin-left: 20px;"> • The input arrays `values` and `labels` are non-empty and contain valid values within the specified range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 3, 4, 6, 8, 9], diff = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the valid arithmetic triplets are (1, 3, 5), (3, 5, 7), and (4, 6, 8). These triplets are formed by choosing values where the difference between consecutive numbers is exactly 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: values = [10, 8, 5, 4, 3], labels = [1, 1, 2, 2, 3], numWanted = 3, useLimit = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal subset of items with the highest values while respecting the label constraints is the first, third, and fifth items, yielding a total value of 10 &#43; 5 &#43; 3 = 18.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: values = [9, 8, 7, 6, 5], labels = [0, 0, 1, 1, 0], numWanted = 3, useLimit = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the best subset is the first, second, and third items, which gives the maximum sum of values: 9 &#43; 8 &#43; 7 = 24.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: values = [5, 4, 3, 2, 1], labels = [1, 1, 2, 2, 3], numWanted = 3, useLimit = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subset chosen is the first, third, and fifth items with the sum of values: 5 &#43; 3 &#43; 1 = 9.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -447,18 +455,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We need to efficiently count the number of valid arithmetic triplets by checking if the conditions for triplet formation are met for each number in the array.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using a greedy approach where we prioritize selecting items with the highest values while ensuring that the label constraints are satisfied.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check if each number in the array can form an arithmetic triplet with the previous numbers.</div>
-                            
-                                <div style="margin-left: 20px;"> • We can use a frequency count to store potential triplet values.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that the number of items selected does not exceed `numWanted`, and no label appears more than `useLimit` times.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By iterating over the array, we can efficiently check for the existence of valid pairs and count the triplets.</div>
+                                <div style="margin-left: 20px;"> • Sorting the items by value and then iterating over them while respecting the label constraints will allow us to efficiently find the optimal solution.</div>
                             
                         </div>
                     </div>
@@ -466,13 +472,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create an array to track the occurrence of potential triplet values.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the items in descending order by value to maximize the sum.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the array nums, and for each element, check if the previous two values, nums[i] - diff and nums[i] - 2 * diff, have appeared.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate over the sorted items and select them if they do not violate the `useLimit` for their label.</div>
                             
-                                <div style="margin-left: 20px;"> • If they have appeared, increment the triplet count.</div>
+                                <div style="margin-left: 20px;"> • 3. Keep track of the count of items selected for each label and ensure that no label exceeds `useLimit`.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the count of valid triplets.</div>
+                                <div style="margin-left: 20px;"> • 4. Stop when `numWanted` items are selected.</div>
                             
                         </div>
                     </div>
@@ -481,22 +487,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the input will always contain at least three elements, so empty arrays are not possible.</div>
+                                <div style="margin-left: 20px;"> • If the input arrays `values` and `labels` are empty, the result should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays with up to 200 elements.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, the algorithm should handle up to 20,000 items efficiently, ensuring that the solution works within the time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If diff is large (close to 50) and nums values are also close to 200, the number of valid triplets might be small.</div>
+                                <div style="margin-left: 20px;"> • If all items have the same label, the solution should ensure that no more than `useLimit` items with the same label are selected.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that you handle cases where no valid triplets are found.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should respect the constraints on the number of items selected and the label limitations.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,17 +521,25 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization - Multimap</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization - Unordered Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop - Insert Values and Labels</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Counting Triplets</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Insert Pair into Multimap</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Marking Presence</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop - Process Values</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition - Label Usage Limit Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Add Value to Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Decrement numWanted</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
                     
                 </div>
 
@@ -534,15 +548,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">arithmeticTriplets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> diff) {
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">201</span>] <span style="color:#666">=</span> {}, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">n</span> : nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&gt;=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> diff)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> cnt[n <span style="color:#666">-</span> diff] <span style="color:#666">&amp;&amp;</span> cnt[n <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> diff];
-</span></span><span style="display:flex;"><span>    cnt[n] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">largestValsFromLabels</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> values, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> labels, <span style="color:#0b0;font-weight:bold">int</span> numWanted, <span style="color:#0b0;font-weight:bold">int</span> useLimit) {
+</span></span><span style="display:flex;"><span>    multimap<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> m;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> values.size(); i<span style="color:#666">++</span>) 
+</span></span><span style="display:flex;"><span>        s.insert({values[i], labels[i]});
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> rbegin(s); it <span style="color:#666">!=</span> rend(s) <span style="color:#666">&amp;&amp;</span> numWanted <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; it<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">++</span>m[it<span style="color:#666">-&gt;</span>second] <span style="color:#666">&lt;=</span> useLimit) {
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> it<span style="color:#666">-&gt;</span>first;
+</span></span><span style="display:flex;"><span>            <span style="color:#666">--</span>numWanted;                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>  }
 </span></span></code></pre></div>
                         </div>
                     </div>
@@ -552,70 +571,110 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">arithmeticTriplets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> diff) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">largestValsFromLabels</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> values, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> labels, <span style="color:#0b0;font-weight:bold">int</span> numWanted, <span style="color:#0b0;font-weight:bold">int</span> useLimit) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function starts by defining the input parameters, which are a vector of integers &#39;nums&#39; and an integer &#39;diff&#39; representing the difference between triplet elements. </div>
+                            <div class=""> This line defines the function `largestValsFromLabels`, which takes four parameters: `values`, `labels`, `numWanted`, and `useLimit`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization - Multimap</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">201</span>] <span style="color:#666">=</span> {}, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    multimap<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An array &#39;cnt&#39; is initialized to track the presence of numbers in the sequence, with a size of 201, as the problem restricts the numbers to a known range. &#39;res&#39; is initialized to store the final count of valid triplets. </div>
+                            <div class=""> A multimap `s` is initialized to store pairs of values and their corresponding labels, with the ability to store multiple values with the same key. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop</b></div>
+                            <div class=""> <b>3 : Variable Initialization - Unordered Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">n</span> : nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> m;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for loop iterates over each element &#39;n&#39; in the input array &#39;nums&#39;. </div>
+                            <div class=""> An unordered map `m` is initialized to count how many times a label has been used. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Condition Check</b></div>
+                            <div class=""> <b>4 : Loop - Insert Values and Labels</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&gt;=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> diff)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> values.size(); i<span style="color:#666">++</span>) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current number &#39;n&#39; is large enough to form a triplet. Specifically, it ensures that there is a possibility of forming a triplet with the required difference. </div>
+                            <div class=""> This loop iterates through the `values` vector and inserts each value with its corresponding label into the multimap `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Counting Triplets</b></div>
+                            <div class=""> <b>5 : Insert Pair into Multimap</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> cnt[n <span style="color:#666">-</span> diff] <span style="color:#666">&amp;&amp;</span> cnt[n <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> diff];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.insert({values[i], labels[i]});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition is met, the result counter &#39;res&#39; is incremented by 1, indicating a valid triplet. This is determined by checking if two previous numbers, &#39;n - diff&#39; and &#39;n - 2 * diff&#39;, have been seen before. </div>
+                            <div class=""> Each pair of value and label is inserted into the multimap `s`, where the value will be sorted in ascending order by default. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Marking Presence</b></div>
+                            <div class=""> <b>6 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cnt[n] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the current number &#39;n&#39; as present by setting &#39;cnt[n]&#39; to true. This helps track which numbers have been seen in the array. </div>
+                            <div class=""> The variable `res` is initialized to 0. It will hold the sum of the selected largest values. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Loop - Process Values</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> rbegin(s); it <span style="color:#666">!=</span> rend(s) <span style="color:#666">&amp;&amp;</span> numWanted <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; it<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the total count of valid arithmetic triplets found. </div>
+                            <div class=""> This loop iterates through the multimap `s` in reverse order, processing the largest values first. The loop continues until `numWanted` becomes 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Condition - Label Usage Limit Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">++</span>m[it<span style="color:#666">-&gt;</span>second] <span style="color:#666">&lt;=</span> useLimit) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This condition checks if the label of the current item has been used fewer times than the allowed limit (`useLimit`). If the condition is true, the value is included in the sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Add Value to Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> it<span style="color:#666">-&gt;</span>first;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The value (`it-&gt;first`) from the current multimap entry is added to the result sum `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Decrement numWanted</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#666">--</span>numWanted;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Since one value has been added to the result, `numWanted` is decremented to track how many more values need to be selected. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the result, which is the sum of the largest values that have been selected. </div>
                         </div>
                     
                 </div>
@@ -635,16 +694,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the array, since we iterate over the array once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The sorting step dominates the time complexity, which is O(n log n) where n is the number of items.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) as we need extra space to store the occurrence count for each number in the array.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the need to store the items and track their labels and counts.</div>    
                     </div>
 
                 </div>

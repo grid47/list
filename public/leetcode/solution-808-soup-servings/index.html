@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -289,7 +289,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1317s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1315s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/808.webp" 
            alt="Bowls of soup where servings are poured, glowing softly as each serving is calculated." 
@@ -312,7 +312,7 @@
 
 
 
-<div class=""> You are given the coordinates of a square on a chessboard. The coordinate is represented as a string where the first character is a letter representing the column (&lsquo;a&rsquo; to &lsquo;h&rsquo;) and the second character is a number representing the row (&lsquo;1&rsquo; to &lsquo;8&rsquo;). Determine if the square is white or black. A square is white if the sum of its row and column is even, and black if it is odd. </div>
+<div class=""> You have two types of soup: A and B, with an initial volume of n ml of each. You can serve soup using four possible operations, each with a 25% chance of being chosen randomly. When serving, the amounts of soups A and B used are specified by each operation. If there is insufficient soup for a full operation, serve as much as possible. The process stops when one of the soups runs out. Return the probability that soup A will be exhausted first, plus half the probability that both soups will be exhausted at the same time. </div>
 
 
 
@@ -363,53 +363,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string with two characters, where the first character represents the column (&#39;a&#39; to &#39;h&#39;) and the second character represents the row (&#39;1&#39; to &#39;8&#39;).</div>
-                        <div class=""> <b>Example:</b> coordinates = &#34;b2&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of a single integer n, which represents the initial amount (in ml) of both soup A and soup B.</div>
+                        <div class=""> <b>Example:</b> Input: n = 50</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • coordinates.length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • &#39;a&#39; &lt;= coordinates[0] &lt;= &#39;h&#39;</div>
-                            
-                                <div style="margin-left: 20px;"> • &#39;1&#39; &lt;= coordinates[1] &lt;= &#39;8&#39;</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= n &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if the square is white, and false if the square is black.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> Return the probability that soup A becomes empty first, plus half the probability that both soups become empty simultaneously. The answer must be accurate to 10^-5.</div>
+                        <div class=""> <b>Example:</b> Output: 0.62500</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean indicating whether the square is white (true) or black (false).</div>
+                                <div style="margin-left: 20px;"> • The answer will be considered correct if the error is within 10^-5 of the actual answer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine if the square represented by the input coordinates is white or black.</div>
+                        <div class=""> <b>Goal:</b> The goal is to calculate the probability of different outcomes where either soup A or both soups become empty based on random choices of operations.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Convert the column letter to a numeric value (a = 1, b = 2, ..., h = 8).</div>
+                                <div style="margin-left: 20px;"> • Represent the problem as a recursive dynamic programming problem, where each state tracks the remaining soup quantities of A and B.</div>
                             
-                                <div style="margin-left: 20px;"> • Convert the row number from a character to an integer.</div>
+                                <div style="margin-left: 20px;"> • Use memoization to store the results of already computed states to avoid redundant calculations.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the column and row values.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the sum is even, the square is white; if the sum is odd, the square is black.</div>
+                                <div style="margin-left: 20px;"> • Each recursive call simulates one of the four operations and computes the resulting probabilities, considering the constraints of the problem.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input coordinates will always be valid, and the square is always within the bounds of the chessboard.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the input is within the provided bounds and that the solution handles edge cases.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The string `coordinates` will always have length 2.</div>
-                            
-                                <div style="margin-left: 20px;"> • The column will always be between &#39;a&#39; and &#39;h&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • The row will always be between &#39;1&#39; and &#39;8&#39;.</div>
+                                <div style="margin-left: 20px;"> • n is between 0 and 10^9.</div>
                             
                         </div>
                     </div>        
@@ -417,21 +407,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input will always represent a valid square on the chessboard.</div>
+                                <div style="margin-left: 20px;"> • We assume that the operation probabilities are equal (0.25 for each of the four operations).</div>
                             
-                                <div style="margin-left: 20px;"> • The function needs to return a boolean indicating whether the square is white or black.</div>
+                                <div style="margin-left: 20px;"> • The process stops once either soup A or both soups are exhausted.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> coordinates = &#34;b2&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The column &#39;b&#39; corresponds to the value 2, and the row &#39;2&#39; is also 2. The sum of 2 &#43; 2 = 4, which is even, so the square is black (output is false).</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> coordinates = &#34;d5&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The column &#39;d&#39; corresponds to the value 4, and the row &#39;5&#39; is 5. The sum of 4 &#43; 5 = 9, which is odd, so the square is white (output is true).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 50</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> With 50 ml of soup A and B, there are four possible operations to serve the soup. Depending on the operation chosen, either soup A or both soups may be emptied. The probability of each outcome is calculated by simulating the operations and tracking when one or both soups become empty.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -455,18 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To determine if the square is white or black, we map the column letters to numbers and then check if the sum of the column and row is even or odd.</div>
+                        <div class=""> <b>Approach:</b> The approach leverages dynamic programming with memoization to efficiently calculate the probability of each possible outcome based on the operations performed. This avoids recalculating the same state multiple times.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to map the letter for the column to a corresponding integer to calculate the sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • This can be done by subtracting &#39;a&#39; from the column letter to get its numerical index.</div>
+                                <div style="margin-left: 20px;"> • The problem requires recursive thinking due to the multiple choices of operations and the changes in the soup quantities.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The sum of the column and row numbers will determine the color of the square.</div>
+                                <div style="margin-left: 20px;"> • Memoization can help optimize the recursive approach by storing the results of already calculated states and reusing them.</div>
                             
                         </div>
                     </div>
@@ -474,13 +458,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Convert the column letter to a numeric value by subtracting &#39;a&#39; from the column character and adding 1.</div>
+                                <div style="margin-left: 20px;"> • Define a recursive function that calculates the probability of A or both soups becoming empty, based on the remaining quantities of soup A and B.</div>
                             
-                                <div style="margin-left: 20px;"> • Convert the row number from character to integer.</div>
+                                <div style="margin-left: 20px;"> • Use memoization to store the results of each state (remaining soup quantities of A and B).</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the values for the column and row.</div>
+                                <div style="margin-left: 20px;"> • Handle base cases where one of the soups is empty and return the corresponding probability for those cases.</div>
                             
-                                <div style="margin-left: 20px;"> • If the sum is even, return true (square is white), otherwise return false (square is black).</div>
+                                <div style="margin-left: 20px;"> • Return the final probability after considering all operations.</div>
                             
                         </div>
                     </div>
@@ -489,22 +473,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty inputs, as coordinates are always valid.</div>
+                                <div style="margin-left: 20px;"> • If n = 0, both soups are already empty, so the result is 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No large inputs to handle, as the coordinates are always limited to 2 characters.</div>
+                                <div style="margin-left: 20px;"> • For very large values of n, the memoization approach ensures that we do not recompute the same states repeatedly.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider edge cases like &#39;a1&#39; and &#39;h8&#39; which are at opposite corners of the chessboard.</div>
+                                <div style="margin-left: 20px;"> • If n is very small (e.g., n = 1), the result depends on the available operations and how quickly one soup is exhausted.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the input follows the specified format and always represents a valid square on the chessboard.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for large values of n.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,13 +505,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Character Extraction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Row Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Check Parity</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Method Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Vector Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Method Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Base Case Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Base Case Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Memoization Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Memoization Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
                     
                 </div>
 
@@ -536,10 +538,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">squareIsWhite</span>(string cord) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> cord[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    x <span style="color:#666">+=</span> cord[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">%</span> <span style="color:#666">2</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;</span> mem;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> soupServings(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    mem.resize(<span style="color:#666">200</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span>(<span style="color:#666">200</span>, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">&gt;</span> <span style="color:#666">4800</span><span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span>f((n <span style="color:#666">+</span><span style="color:#666">24</span>)<span style="color:#666">/</span><span style="color:#666">25</span>, (n<span style="color:#666">+</span><span style="color:#666">24</span>)<span style="color:#666">/</span><span style="color:#666">25</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">f</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&lt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> b <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0.5</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[a][b] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[a][b];
+</span></span><span style="display:flex;"><span> mem[a][b] <span style="color:#666">=</span> <span style="color:#666">0.25</span> <span style="color:#666">*</span> (f(a<span style="color:#666">-</span><span style="color:#666">4</span>, b) <span style="color:#666">+</span> f(a<span style="color:#666">-</span><span style="color:#666">3</span>, b<span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#666">+</span> f(a <span style="color:#666">-</span> <span style="color:#666">2</span>, b <span style="color:#666">-</span><span style="color:#666">2</span>) <span style="color:#666">+</span> f(a<span style="color:#666">-</span><span style="color:#666">1</span>, b<span style="color:#666">-</span><span style="color:#666">3</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[a][b];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -547,43 +560,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">squareIsWhite</span>(string cord) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the `squareIsWhite` function, which takes a string `cord` representing the chessboard square (e.g., &#39;a1&#39;, &#39;h8&#39;). It returns a boolean indicating whether the square is white (true) or black (false). </div>
+                            <div class=""> This defines a class named &#39;Solution&#39; where the problem-solving method will be implemented. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Character Extraction</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> cord[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;</span> mem;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, the first character of the string `cord` (the column) is extracted, and its ASCII value is adjusted so that &#39;a&#39; corresponds to 1, &#39;b&#39; to 2, and so on. The result is stored in the variable `x`. </div>
+                            <div class=""> Declares a 2D vector &#39;mem&#39; to store the computed probabilities of soup servings. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Row Calculation</b></div>
+                            <div class=""> <b>3 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    x <span style="color:#666">+=</span> cord[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The second character of the string `cord` (the row) is extracted, and the character is converted to an integer by subtracting the ASCII value of &#39;0&#39;. This integer is added to the variable `x`, which now holds the combined sum of the column and row values. </div>
+                            <div class=""> This is the access modifier, making the following methods accessible from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Check Parity</b></div>
+                            <div class=""> <b>4 : Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">%</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">soupServings</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The sum `x` is checked for parity. If `x` is even, the square is white, and the function returns `true`. If `x` is odd, the square is black, and the function returns `false`. </div>
+                            <div class=""> This method calculates the probability of serving the soups until one runs out, given an initial amount &#39;n&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Vector Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mem.resize(<span style="color:#666">200</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span>(<span style="color:#666">200</span>, <span style="color:#666">0</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Resizes the &#39;mem&#39; vector to store 200 rows and columns, initializing all values to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Conditional Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">&gt;</span> <span style="color:#666">4800</span><span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span>f((n <span style="color:#666">+</span><span style="color:#666">24</span>)<span style="color:#666">/</span><span style="color:#666">25</span>, (n<span style="color:#666">+</span><span style="color:#666">24</span>)<span style="color:#666">/</span><span style="color:#666">25</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if &#39;n&#39; is greater than 4800, returning 1 if true, otherwise calling the function &#39;f&#39; with adjusted parameters. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Method Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">f</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This method is a helper recursive function that calculates the probability for each state of the soup servings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Base Case Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&lt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> b <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0.5</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if both soups are empty, returning a probability of 0.5 (equal chances of either soup running out first). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Base Case Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If soup &#39;a&#39; is empty, return a probability of 1 (soup &#39;b&#39; runs out first). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Base Case Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If soup &#39;b&#39; is empty, return a probability of 0 (soup &#39;a&#39; runs out first). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Memoization Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[a][b] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[a][b];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the probability for the current state has already been computed, return the stored value from &#39;mem&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Memoization Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> mem[a][b] <span style="color:#666">=</span> <span style="color:#666">0.25</span> <span style="color:#666">*</span> (f(a<span style="color:#666">-</span><span style="color:#666">4</span>, b) <span style="color:#666">+</span> f(a<span style="color:#666">-</span><span style="color:#666">3</span>, b<span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#666">+</span> f(a <span style="color:#666">-</span> <span style="color:#666">2</span>, b <span style="color:#666">-</span><span style="color:#666">2</span>) <span style="color:#666">+</span> f(a<span style="color:#666">-</span><span style="color:#666">1</span>, b<span style="color:#666">-</span><span style="color:#666">3</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively computes the probability for the current state by considering all possible moves and updates the &#39;mem&#39; vector with the result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[a][b];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the computed probability stored in &#39;mem&#39; for the current state (a, b). </div>
                         </div>
                     
                 </div>
@@ -603,16 +706,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The solution runs in constant time because it only involves a few arithmetic operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1) for small n values where the result can be computed directly.</div>
+                        <div class=""> <b>Average Case:</b> O(n^2) due to the recursive nature of the solution with memoization for a grid of possible states.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2), where n is the maximum possible value.</div> 
+                        <div class=""> <b>Description:</b> The time complexity depends on the number of unique states and the recursive depth of the function.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, as the solution only requires a fixed amount of space for the calculations.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), for very small n values where minimal space is needed.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2), since the memoization stores results for each pair of soup quantities.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is determined by the memoization table, which stores results for each pair of remaining soup quantities.</div>    
                     </div>
 
                 </div>

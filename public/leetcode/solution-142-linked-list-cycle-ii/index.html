@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 23, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode205s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode204s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/142.webp" 
            alt="A cycle in the linked list gently glowing, with the starting node illuminated to indicate the cycle&#39;s start." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given an integer array &rsquo;nums&rsquo;, find the length of the longest strictly increasing subsequence. A subsequence is a sequence derived by deleting some elements without changing the order of the remaining elements. </div>
+<div class=""> Given the head of a linked list, find the node where the cycle begins. If no cycle exists, return null. The list may contain a cycle, which occurs if a node can be revisited by following the &rsquo;next&rsquo; pointers continuously. </div>
 
 
 
@@ -371,45 +371,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is an array of integers, where the length of the array can be between 1 and 2500, and the values range from -10^4 to 10^4.</div>
-                        <div class=""> <b>Example:</b> nums = [10, 9, 2, 5, 3, 7, 101, 18]</div>
+                        <div class=""> <b>Input:</b> The input consists of a linked list and an index &#39;pos&#39; where the tail node connects. If &#39;pos&#39; is -1, there is no cycle.</div>
+                        <div class=""> <b>Example:</b> Input: head = [5, 3, 9, 4], pos = 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 2500</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the list is between 0 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • -10^4 &lt;= nums[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • Node values range between -10^5 and 10^5.</div>
+                            
+                                <div style="margin-left: 20px;"> • &#39;pos&#39; is either -1 or a valid index within the list.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the length of the longest strictly increasing subsequence.</div>
-                        <div class=""> <b>Example:</b> For nums = [10, 9, 2, 5, 3, 7, 101, 18], the output is 4.</div>
+                        <div class=""> <b>Output:</b> The output is the node where the cycle begins, or null if no cycle is detected.</div>
+                        <div class=""> <b>Example:</b> Output: tail connects to node index 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output is the node where the cycle begins, or null if no cycle exists.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the length of the longest strictly increasing subsequence in the array.</div>
+                        <div class=""> <b>Goal:</b> The goal is to detect the node where the cycle begins in the linked list.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a dp array to store the length of the longest subsequence ending at each index.</div>
+                                <div style="margin-left: 20px;"> • 1. Use two pointers, &#39;slow&#39; and &#39;fast&#39;, which start at the head of the list.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, comparing each element with previous elements to update the dp array.</div>
+                                <div style="margin-left: 20px;"> • 2. Move the slow pointer one step and the fast pointer two steps at a time.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the maximum value from the dp array as the length of the longest subsequence.</div>
+                                <div style="margin-left: 20px;"> • 3. If a cycle exists, slow and fast pointers will meet at some point.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Once a cycle is detected, reset one pointer to the head and keep the other at the meeting point.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Move both pointers one step at a time until they meet again. This is the start of the cycle.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should handle the input size and time complexity constraints efficiently.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently detect the cycle and identify the starting node without modifying the linked list.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array can have up to 2500 elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • The elements can range between -10^4 and 10^4.</div>
+                                <div style="margin-left: 20px;"> • The solution should run in linear time, O(n), and use constant space, O(1).</div>
                             
                         </div>
                     </div>        
@@ -417,23 +423,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should account for the possibility of duplicate values in the array.</div>
+                                <div style="margin-left: 20px;"> • The linked list may contain a cycle or it may be acyclic.</div>
+                            
+                                <div style="margin-left: 20px;"> • Nodes may contain integer values.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [10, 9, 2, 5, 3, 7, 101, 18]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest increasing subsequence is [2, 3, 7, 101], and its length is 4.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [0, 1, 0, 3, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest increasing subsequence is [0, 1, 2, 3], and its length is 4.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [7, 7, 7, 7, 7, 7, 7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since all the elements are the same, the longest increasing subsequence has a length of 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [5, 3, 9, 4], pos = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the linked list has a cycle where the tail connects to the 2nd node (index 2).</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,16 +457,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to find the length of the longest increasing subsequence using dynamic programming (DP). We will use a DP array to store the length of the longest subsequence at each index.</div>
+                        <div class=""> <b>Approach:</b> The solution uses Floyd&#39;s Cycle-Finding Algorithm (Tortoise and Hare) to detect the cycle and then find the starting node of the cycle.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A dynamic programming approach is ideal for this problem as we can build the solution incrementally.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved by detecting the cycle first and then finding the cycle&#39;s start node.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • To optimize, we can reduce the time complexity by using a binary search approach, which helps in finding the longest subsequence in O(n log n) time.</div>
+                                <div style="margin-left: 20px;"> • By using two pointers, one moving faster than the other, we can detect the cycle in O(n) time. Once the cycle is detected, finding the start node requires another O(n) pass.</div>
                             
                         </div>
                     </div>
@@ -474,13 +474,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a DP array where each element starts with a value of 1.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize two pointers, slow and fast, both pointing to the head of the list.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and for each element, compare it with previous elements to update the DP array.</div>
+                                <div style="margin-left: 20px;"> • 2. Move the slow pointer one step and the fast pointer two steps at a time.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element, use binary search to find the appropriate position to update the DP array efficiently.</div>
+                                <div style="margin-left: 20px;"> • 3. If the fast pointer reaches the end (nullptr), return null (no cycle).</div>
                             
-                                <div style="margin-left: 20px;"> • Return the maximum value from the DP array.</div>
+                                <div style="margin-left: 20px;"> • 4. If slow and fast pointers meet, a cycle exists.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Reset one pointer to the head and keep the other at the meeting point. Move both pointers one step at a time until they meet again, which is the start of the cycle.</div>
                             
                         </div>
                     </div>
@@ -489,22 +491,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, the result should be 0.</div>
+                                <div style="margin-left: 20px;"> • An empty linked list should return null since there is no cycle.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should be optimized to handle arrays up to 2500 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle large lists with up to 10^4 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array contains only one element, the longest increasing subsequence has a length of 1.</div>
+                                <div style="margin-left: 20px;"> • When the cycle begins at the very first node or is self-referential (the last node points to itself).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure to implement the solution within the O(n log n) time complexity to handle large inputs.</div>
+                                <div style="margin-left: 20px;"> • The solution should run in linear time (O(n)) and use constant space (O(1)).</div>
                             
                         </div>                                                                        
                     </div>
@@ -523,23 +525,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Variables</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize DP Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Pointer Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop - Iterating Through Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Cycle Detection Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop - Comparing Elements</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Move Slow Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Check for Increasing Subsequence</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Move Fast Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update DP Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Cycle Detection Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Track Maximum LIS Length</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 No Cycle Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 End Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Second Loop for Cycle Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Move Head Pointer</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Move Slow Pointer</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Cycle Start Node</button>
                     
                 </div>
 
@@ -548,17 +554,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lengthOfLIS</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size(), mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n, <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[j] <span style="color:#666">&lt;</span> nums[i]) {
-</span></span><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> max(dp[i], dp[j] <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>                mx <span style="color:#666">=</span> max(mx, dp[i]);
-</span></span><span style="display:flex;"><span>            }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode <span style="color:#666">*</span><span style="color:#00a000">detectCycle</span>(ListNode <span style="color:#666">*</span>head) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(head <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    ListNode <span style="color:#666">*</span>fast <span style="color:#666">=</span> head, <span style="color:#666">*</span>slow<span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(fast <span style="color:#666">&amp;&amp;</span> fast<span style="color:#666">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        slow <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        fast <span style="color:#666">=</span> fast<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(fast <span style="color:#666">==</span> slow) <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>(fast <span style="color:#666">&amp;&amp;</span> fast<span style="color:#666">-&gt;</span>next)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (head <span style="color:#666">!=</span> slow) {
+</span></span><span style="display:flex;"><span>        head <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        slow <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> slow;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -569,100 +581,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lengthOfLIS</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode <span style="color:#666">*</span><span style="color:#00a000">detectCycle</span>(ListNode <span style="color:#666">*</span>head) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `lengthOfLIS`, which computes the length of the longest increasing subsequence in the given vector `nums`. </div>
+                            <div class=""> This defines the `detectCycle` function that takes a pointer `head` to the start of the linked list and returns a pointer to the node where the cycle begins, or `NULL` if no cycle exists. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Initialize Variables</b></div>
+                            <div class=""> <b>2 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size(), mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(head <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the size of the input array `n` and the variable `mx` to track the length of the longest increasing subsequence. </div>
+                            <div class=""> If the list is empty (i.e., `head` is `NULL`), the function immediately returns `NULL`, as there can be no cycle in an empty list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialize DP Array</b></div>
+                            <div class=""> <b>3 : Pointer Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n, <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode <span style="color:#666">*</span>fast <span style="color:#666">=</span> head, <span style="color:#666">*</span>slow<span style="color:#666">=</span> head;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a dynamic programming array `dp` where each element is initialized to 1, representing the length of the longest increasing subsequence ending at that index. </div>
+                            <div class=""> Two pointers, `fast` and `slow`, are initialized to the head of the linked list. `fast` moves two steps at a time and `slow` moves one step at a time. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Outer Loop - Iterating Through Array</b></div>
+                            <div class=""> <b>4 : Cycle Detection Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(fast <span style="color:#666">&amp;&amp;</span> fast<span style="color:#666">-&gt;</span>next) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins the outer loop, which iterates through each element of the array `nums`. </div>
+                            <div class=""> This loop continues as long as `fast` and `fast-&gt;next` are valid, ensuring we do not run into null references while traversing the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Inner Loop - Comparing Elements</b></div>
+                            <div class=""> <b>5 : Move Slow Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        slow <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts the inner loop to compare each element `nums[j]` with `nums[i]` to check if an increasing subsequence can be extended. </div>
+                            <div class=""> The `slow` pointer moves one step forward in the linked list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Check for Increasing Subsequence</b></div>
+                            <div class=""> <b>6 : Move Fast Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[j] <span style="color:#666">&lt;</span> nums[i]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        fast <span style="color:#666">=</span> fast<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the element at index `j` is smaller than the element at index `i`. If true, this means `nums[i]` can extend the subsequence ending at `nums[j]`. </div>
+                            <div class=""> The `fast` pointer moves two steps forward in the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update DP Array</b></div>
+                            <div class=""> <b>7 : Cycle Detection Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> max(dp[i], dp[j] <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(fast <span style="color:#666">==</span> slow) <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the `dp[i]` value, taking the maximum of the current value and the value of `dp[j] &#43; 1`, indicating that `nums[i]` extends the subsequence ending at `nums[j]`. </div>
+                            <div class=""> If the `fast` and `slow` pointers meet at the same node, a cycle is detected, and the loop breaks. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Track Maximum LIS Length</b></div>
+                            <div class=""> <b>8 : No Cycle Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                mx <span style="color:#666">=</span> max(mx, dp[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>(fast <span style="color:#666">&amp;&amp;</span> fast<span style="color:#666">-&gt;</span>next)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the `mx` variable to store the length of the longest subsequence found so far. </div>
+                            <div class=""> If the `fast` pointer reaches the end of the list (`fast` or `fast-&gt;next` is `NULL`), no cycle exists, and the function returns `NULL`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : End Outer Loop</b></div>
+                            <div class=""> <b>9 : Second Loop for Cycle Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (head <span style="color:#666">!=</span> slow) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Ends the outer loop after iterating through all elements in the array `nums`. </div>
+                            <div class=""> This loop moves both `head` and `slow` pointers one step at a time to find the node where the cycle begins. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Result</b></div>
+                            <div class=""> <b>10 : Move Head Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        head <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the value of `mx`, which holds the length of the longest increasing subsequence found. </div>
+                            <div class=""> Moves the `head` pointer one step forward. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Move Slow Pointer</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        slow <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Moves the `slow` pointer one step forward. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Cycle Start Node</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> slow;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> At this point, both the `head` and `slow` pointers are at the node where the cycle starts, and this node is returned. </div>
                         </div>
                     
                 </div>
@@ -682,16 +714,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> In the best case, the time complexity is O(n log n), achieved using binary search. The worst case is O(n^2) with a dynamic programming approach.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), when the cycle is detected after moving through most of the list.</div>
+                        <div class=""> <b>Average Case:</b> O(n), the slow and fast pointers will meet at some point if a cycle exists.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), in the worst case, the fast pointer will traverse the entire list.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because each pointer moves at most n steps.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the size of the input array, due to the space used for the DP array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since no extra space is used.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as the solution only uses two pointers.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1), as only two pointers are used for cycle detection.</div>    
                     </div>
 
                 </div>

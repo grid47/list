@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 14, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given two integer arrays, <code>servers</code> and <code>tasks</code>. The <code>servers</code> array represents the weights of the servers, and the <code>tasks</code> array represents the processing times of tasks. Tasks are assigned to servers based on the smallest server weight and index. If no server is available, tasks wait for a server to become free. </div>
+<div class=""> Alice has a set of cards, each with a value written on it. She wants to rearrange these cards into groups, where each group consists of <code>groupSize</code> consecutive cards. Given an integer array <code>hand</code> where <code>hand[i]</code> represents the value on the ith card, and an integer <code>groupSize</code>, return <code>true</code> if she can rearrange the cards into groups of consecutive numbers, or <code>false</code> otherwise. </div>
 
 
 
@@ -360,53 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two arrays: `servers` and `tasks`. The `servers` array is a list of integers representing the weight of each server. The `tasks` array contains integers representing the processing times for tasks. At each second, a new task enters the queue and is assigned to the server based on availability and weight priorities.</div>
-                        <div class=""> <b>Example:</b> servers = [5, 1, 4, 3, 2], tasks = [2, 1, 2, 4, 5, 2, 1]</div>
+                        <div class=""> <b>Input:</b> You are given an integer array `hand` representing the values on the cards and an integer `groupSize` that denotes the required group size.</div>
+                        <div class=""> <b>Example:</b> Input: hand = [10, 12, 13, 11, 14, 15, 16], groupSize = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 2 * 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= hand.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= servers[i], tasks[j] &lt;= 2 * 10^5</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= hand[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= groupSize &lt;= hand.length</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> You need to return an array of indices representing which server each task is assigned to. The output should follow the task queue order.</div>
-                        <div class=""> <b>Example:</b> [1, 4, 1, 4, 1, 3, 2]</div>
+                        <div class=""> <b>Output:</b> Return `true` if it is possible to rearrange the cards into consecutive groups of size `groupSize`. Otherwise, return `false`.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output array will have the same length as the `tasks` array.</div>
+                                <div style="margin-left: 20px;"> • If the length of `hand` is not divisible by `groupSize`, return `false`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To simulate task assignments to servers based on availability, weight, and index priority.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine if we can group the cards into valid groups of consecutive numbers of size `groupSize`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a priority queue for free servers based on their weights and indices.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Count the frequency of each card in the hand using a map.</div>
                             
-                                <div style="margin-left: 20px;"> • For each task, check if there are any free servers available. If so, assign the task to the one with the smallest weight and index.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each unique card, attempt to form a group by selecting consecutive cards. Decrease their frequencies as you form groups.</div>
                             
-                                <div style="margin-left: 20px;"> • If no servers are available, check when the next server becomes free and assign tasks accordingly.</div>
+                                <div style="margin-left: 20px;"> • Step 3: If at any point, forming a group is not possible (e.g., not enough consecutive cards), return false.</div>
                             
-                                <div style="margin-left: 20px;"> • Keep track of task assignments and update the server statuses (free or busy).</div>
+                                <div style="margin-left: 20px;"> • Step 4: If all cards are grouped successfully, return true.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints specify the maximum number of servers and tasks that can be handled. Be mindful of large inputs and ensure the solution can handle them efficiently.</div>
+                        <div class=""> <b>Goal:</b> We must ensure that the solution can handle the large input size and check for possible groupings efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • servers.length == n</div>
+                                <div style="margin-left: 20px;"> • The length of `hand` must be divisible by `groupSize`.</div>
                             
-                                <div style="margin-left: 20px;"> • tasks.length == m</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 2 * 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= servers[i], tasks[j] &lt;= 2 * 10^5</div>
+                                <div style="margin-left: 20px;"> • Each card in the hand must have a value greater than or equal to 0.</div>
                             
                         </div>
                     </div>        
@@ -414,23 +412,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each server is initially free and available to process tasks.</div>
+                                <div style="margin-left: 20px;"> • The hand contains at least one card.</div>
                             
-                                <div style="margin-left: 20px;"> • Tasks are processed in the order they are added to the queue.</div>
-                            
-                                <div style="margin-left: 20px;"> • Servers will be used based on availability, weight, and index priority.</div>
+                                <div style="margin-left: 20px;"> • The values on the cards are non-negative integers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In the first example, we see that tasks are assigned based on server weights. Server 1 (weight 4) is assigned task 0, and the process continues in this manner for each task in the queue. Servers that become free are used for subsequent tasks.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hand = [10, 12, 13, 11, 14, 15, 16], groupSize = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The hand can be rearranged into three groups: [10, 11, 12], [13, 14, 15], and [16]. Therefore, the answer is `true`.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, server 1 is used for task 1 because it has the smallest weight (4), and after task completion, it gets assigned additional tasks as servers become free.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hand = [1, 2, 3, 4, 5], groupSize = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The length of the hand is 5, which is not divisible by 4, so it&#39;s impossible to divide the cards into groups of 4. Therefore, the answer is `false`.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hand = [1, 2, 3, 4, 6, 7], groupSize = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It&#39;s not possible to form the required groups because the card with value 5 is missing, which breaks the sequence. Therefore, the answer is `false`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,18 +454,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> This approach simulates the task assignment process by tracking server availability and using a priority queue for efficient task allocation based on server weight and index.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem, we first count the frequency of each card and attempt to group consecutive cards by checking if each value can form a valid group with its consecutive numbers.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Servers should be processed in order of their availability and weight.</div>
+                                <div style="margin-left: 20px;"> • If the length of the hand is not divisible by `groupSize`, it&#39;s impossible to form valid groups.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a priority queue to efficiently assign tasks to the smallest available server.</div>
+                                <div style="margin-left: 20px;"> • We need to efficiently manage card frequencies and check for possible consecutive sequences.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem requires efficient simulation with a focus on managing availability and task queueing. A priority queue is ideal for maintaining the smallest available server.</div>
+                                <div style="margin-left: 20px;"> • This problem can be tackled using a greedy approach by starting from the smallest card value and trying to form groups of consecutive numbers.</div>
                             
                         </div>
                     </div>
@@ -473,11 +473,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a priority queue to store free servers with their weights and indices.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Create a frequency map of all the cards in the hand.</div>
                             
-                                <div style="margin-left: 20px;"> • For each task, assign it to the server with the smallest weight and index.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Start from the smallest card and try to form a group of consecutive cards. Decrease their frequency as you form the group.</div>
                             
-                                <div style="margin-left: 20px;"> • Update the server status after a task is assigned and track when the server becomes free.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Repeat the process for all remaining cards, ensuring all cards are part of a valid group.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If at any point a valid group cannot be formed, return `false`. Otherwise, return `true`.</div>
                             
                         </div>
                     </div>
@@ -486,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no servers or no tasks, the result should be an empty array.</div>
+                                <div style="margin-left: 20px;"> • The input cannot be empty as there must be at least one card.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure the algorithm can handle large numbers of servers and tasks efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle large input sizes (up to 10^4 cards).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If servers or tasks contain extreme values, ensure proper handling of edge cases.</div>
+                                <div style="margin-left: 20px;"> • If the length of the hand is not divisible by `groupSize`, return `false`.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The approach should work efficiently with the given constraints (up to 2 * 10^5 servers and tasks).</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays where `groupSize` is larger than the number of unique cards efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,39 +520,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initial Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Server Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Counting Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Through Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Task Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Task Size Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Answer Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Card Deduction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Task Assignment Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Negative Count Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Server Availability Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return False</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Busy Server</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reset Card Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Push to Available Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Reassign Available Server</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Assign Task to Server</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Update Available Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Server Occupy</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Log Task Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return True</button>
                     
                 </div>
 
@@ -559,32 +549,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> assignTasks(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> servers, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> tasks) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isNStraightHand</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> hand, <span style="color:#0b0;font-weight:bold">int</span> groupSize) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: hand) mp[x]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;&gt;</span> avail, busy;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> servers.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        avail.push({<span style="color:#666">0</span>, servers[i], i});
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> tasks.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;        
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>; t <span style="color:#666">&lt;</span> m; t<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>busy.empty() <span style="color:#666">&amp;&amp;</span> (busy.top()[<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> t <span style="color:#666">||</span> avail.empty())) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> busy.top();
-</span></span><span style="display:flex;"><span>            busy.pop();
-</span></span><span style="display:flex;"><span>            avail.push({time <span style="color:#666">&lt;=</span> t<span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> time, w, idx});
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> groupSize; i<span style="color:#666">++</span>){
+</span></span><span style="display:flex;"><span>            mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">-=</span> mp[it.first];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> avail.top();
-</span></span><span style="display:flex;"><span>        avail.pop();
-</span></span><span style="display:flex;"><span>        busy.push({ max(time, (<span style="color:#0b0;font-weight:bold">long</span>)t) <span style="color:#666">+</span> tasks[t], w, idx});
-</span></span><span style="display:flex;"><span>        ans.push_back(idx);
+</span></span><span style="display:flex;"><span>        mp[it.first] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -592,173 +570,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initial Setup</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> assignTasks(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> servers, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> tasks) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isNStraightHand</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> hand, <span style="color:#0b0;font-weight:bold">int</span> groupSize) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `assignTasks` that takes in two vectors: `servers` representing the server capacities and `tasks` representing the tasks to be completed. </div>
+                            <div class=""> The function `isNStraightHand` takes a hand of cards and checks whether the cards can be grouped into valid straight sequences of the specified size. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Queue Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;&gt;</span> avail, busy;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares two priority queues: `avail` for tracking available servers and `busy` for tracking servers that are currently occupied with tasks. </div>
+                            <div class=""> A map `mp` is initialized to store the count of each card in the hand. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Server Assignment</b></div>
+                            <div class=""> <b>3 : Counting Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> servers.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: hand) mp[x]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Gets the number of servers by finding the size of the `servers` vector. </div>
+                            <div class=""> For each card in the hand, increment its count in the map `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Queue Population</b></div>
+                            <div class=""> <b>4 : Loop Through Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each server and pushes a tuple containing the initial time (0), the server&#39;s capacity, and the server index into the `avail` priority queue. </div>
+                            <div class=""> Iterate over each card in the map `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Task Counting</b></div>
+                            <div class=""> <b>5 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        avail.push({<span style="color:#666">0</span>, servers[i], i});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes each server into the `avail` queue with the initial time set to 0. </div>
+                            <div class=""> Check if the current card has not been used already. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Task Size Setup</b></div>
+                            <div class=""> <b>6 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> tasks.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> groupSize; i<span style="color:#666">++</span>){
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the number of tasks by finding the size of the `tasks` vector. </div>
+                            <div class=""> Loop through the group size and check if the following cards can form a valid group. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Answer Initialization</b></div>
+                            <div class=""> <b>7 : Card Deduction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">-=</span> mp[it.first];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a vector `ans` to store the indices of the servers assigned to each task. </div>
+                            <div class=""> Decrease the count of the card in the map for each card that should be part of the current group. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Task Assignment Loop</b></div>
+                            <div class=""> <b>8 : Negative Count Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>; t <span style="color:#666">&lt;</span> m; t<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each task in the `tasks` vector. </div>
+                            <div class=""> If any card required for the group has a negative count, it means the group cannot be formed, so return false. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Server Availability Check</b></div>
+                            <div class=""> <b>9 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>busy.empty() <span style="color:#666">&amp;&amp;</span> (busy.top()[<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> t <span style="color:#666">||</span> avail.empty())) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if any server is free or if there are available servers that need to be assigned tasks. </div>
+                            <div class=""> Return false if the cards cannot form a valid straight hand. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pop Busy Server</b></div>
+                            <div class=""> <b>10 : Reset Card Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> busy.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[it.first] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops the top of the `busy` queue to get the earliest available server. </div>
+                            <div class=""> Set the current card count to 0 after processing it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Push to Available Queue</b></div>
+                            <div class=""> <b>11 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            busy.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the server from the `busy` queue as it becomes free. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Reassign Available Server</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            avail.push({time <span style="color:#666">&lt;=</span> t<span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> time, w, idx});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pushes the server back into the `avail` queue with updated time. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Assign Task to Server</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> avail.top();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assigns the task to the server at the top of the `avail` queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Update Available Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        avail.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes the assigned server from the `avail` queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Server Occupy</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        busy.push({ max(time, (<span style="color:#0b0;font-weight:bold">long</span>)t) <span style="color:#666">+</span> tasks[t], w, idx});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pushes the server into the `busy` queue with the updated time when it will be free. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Log Task Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(idx);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the server index to the `ans` vector, indicating that the task has been assigned to this server. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the vector `ans` containing the indices of the servers to which tasks were assigned. </div>
+                            <div class=""> Return true if all cards can be grouped into valid straight hands. </div>
                         </div>
                     
                 </div>
@@ -778,16 +696,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m log n) where m is the number of tasks and n is the number of servers.</div>
-                        <div class=""> <b>Average Case:</b> O(m log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m log n)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, each task involves an insertion and extraction from the priority queue, leading to a time complexity of O(m log n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting of cards, which is O(n log n), followed by the greedy approach to form groups in O(n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m) due to the space required for the priority queues and the task assignments.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is dominated by the need to store the server states and task assignments.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the frequency map storing the count of each unique card.</div>    
                     </div>
 
                 </div>

@@ -323,7 +323,7 @@
 
 
 
-<div class=""> You are given an array of integers <code>nums</code> and an integer <code>x</code>. In each operation, you can either remove the leftmost or rightmost element from the array and subtract its value from <code>x</code>. The task is to determine the minimum number of operations required to reduce <code>x</code> to exactly 0, or return -1 if it&rsquo;s not possible. </div>
+<div class=""> You are implementing a calendar system where you can add events. Each event is represented by a start time and an end time, defined as a half-open interval [startTime, endTime). You need to ensure that no more than two events overlap at any given time, or else return false. Your task is to implement a class, MyCalendarTwo, that will book events while preventing triple bookings. </div>
 
 
 
@@ -374,51 +374,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two inputs: an integer array `nums` and an integer `x`.</div>
-                        <div class=""> <b>Example:</b> nums = [2, 3, 1, 4, 1], x = 5</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of method calls with parameters. The first call is always the initialization of the MyCalendarTwo object, followed by calls to the book method.</div>
+                        <div class=""> <b>Example:</b> Input: [&#34;MyCalendarTwo&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;] [[], [10, 20], [50, 60], [10, 40], [5, 15], [5, 10], [25, 55]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt; end &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= x &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • At most 1000 calls will be made to book.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of operations needed to reduce `x` to 0, or -1 if it&#39;s not possible.</div>
-                        <div class=""> <b>Example:</b> 2</div>
+                        <div class=""> <b>Output:</b> The output will be an array of boolean values for each call. The first call to the MyCalendarTwo constructor returns null. For each book method call, return true if the event can be booked without causing a triple booking, and false otherwise.</div>
+                        <div class=""> <b>Example:</b> Output: [null, true, true, true, false, true, true]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be a single integer: either the minimum number of operations or -1.</div>
+                                <div style="margin-left: 20px;"> • The response for each book method call is a boolean indicating whether the event was successfully booked or not.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine the minimum number of operations to reduce `x` to 0, by removing elements from either end of the array and subtracting their value from `x`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to design a method that tracks the number of overlapping events at any time and ensures that no more than two events overlap.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Calculate the total sum of elements in `nums`. If the sum is smaller than `x`, return -1 immediately.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a data structure to track the number of events occurring at any given time.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window approach to check the sum of subarrays of `nums` that can contribute to reducing `x` to 0.</div>
+                                <div style="margin-left: 20px;"> • 2. For each new booking, update the event count at the corresponding start and end times.</div>
                             
-                                <div style="margin-left: 20px;"> • Keep track of the longest subarray that matches the condition of reducing `x` to 0, and calculate the number of operations.</div>
+                                <div style="margin-left: 20px;"> • 3. Check if the number of overlapping events exceeds 2 at any point.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If more than two events overlap, revert the booking and return false. Otherwise, return true.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints are designed to ensure the solution can handle large arrays and large values of `x` efficiently.</div>
+                        <div class=""> <b>Goal:</b> The constraints define the input limits and behavior of the system.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt; end &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= x &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • At most 1000 calls will be made to book.</div>
                             
                         </div>
                     </div>        
@@ -426,21 +424,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array `nums` contains only positive integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The array has a length between 1 and 100,000, and `x` can be as large as 1 billion.</div>
+                                <div style="margin-left: 20px;"> • The start and end times of events are valid integers, and events are well-formed.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [2, 3, 1, 4, 1], x = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can remove the last two elements (4 &#43; 1 = 5) to reduce `x` to 0, requiring exactly 2 operations.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4, 5, 6, 7, 8], x = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, it’s impossible to remove elements from the array to sum to `x = 3`. Hence, the answer is -1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#34;MyCalendarTwo&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;, &#34;book&#34;] [[], [10, 20], [50, 60], [10, 40], [5, 15], [5, 10], [25, 55]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the first three events are successfully booked as they do not overlap more than twice. The fourth event fails as it causes a triple booking. The fifth event is booked because it only overlaps with one event at any time.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,20 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use a sliding window approach to find the longest subarray that can reduce `x` to 0 by removing elements from the array.</div>
+                        <div class=""> <b>Approach:</b> The approach involves using a data structure to track and manage overlapping events, ensuring no triple booking occurs.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be reduced to finding a subarray whose sum is equal to `sum(nums) - x`.</div>
-                            
-                                <div style="margin-left: 20px;"> • Using a sliding window or prefix sum technique will help optimize the solution for large inputs.</div>
+                                <div style="margin-left: 20px;"> • We need a way to efficiently count overlapping events at any point in time.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Start by checking if the sum of all elements in `nums` is smaller than `x`. If it is, return -1 immediately.</div>
-                            
-                                <div style="margin-left: 20px;"> • Otherwise, calculate the difference between the sum of the array and `x`.</div>
+                                <div style="margin-left: 20px;"> • We can use a map to track the number of active events at any given time. This will allow us to quickly determine if adding a new event causes a triple booking.</div>
                             
                         </div>
                     </div>
@@ -485,13 +473,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Compute the total sum of elements in `nums`.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a map to store the start and end times of events.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the target sum as `total_sum - x`.</div>
+                                <div style="margin-left: 20px;"> • 2. For each booking, increment the count at the start time and decrement at the end time.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window or prefix sum approach to find the longest subarray with the target sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • If such a subarray is found, the number of operations is `n - length of the subarray`. If no such subarray exists, return -1.</div>
+                                <div style="margin-left: 20px;"> • 3. Traverse the map to check if the number of active events exceeds 2 at any time. If it does, reject the booking.</div>
                             
                         </div>
                     </div>
@@ -500,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` is empty, return -1 immediately.</div>
+                                <div style="margin-left: 20px;"> • If no events are booked yet, any event can be booked.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large arrays, ensure that the algorithm handles the input within acceptable time limits.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution efficiently handles up to 1000 booking attempts.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `x` is greater than the sum of all elements in `nums`, return -1.</div>
+                                <div style="margin-left: 20px;"> • Consider events with very close start and end times that could overlap very slightly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently with up to 100,000 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle start and end times within the range of [0, 10^9].</div>
                             
                         </div>                                                                        
                     </div>
@@ -532,35 +518,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Empty Block</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 End Block</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Method Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 ForLoop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Variable</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Sum Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 If Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Map Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
                     
                 </div>
 
@@ -569,179 +555,191 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> <span style="color:#666">-</span>x;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">y</span>: nums) sum <span style="color:#666">+=</span> y;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (sum <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> n;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>MyCalendarTwo() {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        s <span style="color:#666">+=</span> nums[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(s <span style="color:#666">-</span> sum)) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[s <span style="color:#666">-</span> sum]);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">book</span>(<span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> end) {
+</span></span><span style="display:flex;"><span>    mp[start]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    mp[end]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> bkd <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span>mp.begin(); it <span style="color:#666">!=</span> mp.end(); it<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        bkd <span style="color:#666">+=</span> it<span style="color:#666">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(bkd <span style="color:#666">==</span> <span style="color:#666">3</span>) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            mp[start]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            mp[end]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        mp[s] <span style="color:#666">=</span> i;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#a0a000">res</span> :n <span style="color:#666">-</span> res;        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your MyCalendarTwo object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * MyCalendarTwo* obj = new MyCalendarTwo();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_1 = obj-&gt;book(start,end);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `minOperations` which takes an array and a target value as inputs. </div>
+                            <div class=""> Access modifier specifying that the following methods are publicly accessible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MyCalendarTwo() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the result variable `res` to -1 to track the maximum subarray length. </div>
+                            <div class=""> Constructor for the MyCalendarTwo class, initializing the object. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Empty Block</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> <span style="color:#666">-</span>x;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `sum` to -x to adjust the target for finding a subarray with a specific sum. </div>
+                            <div class=""> Empty line for spacing, no code here. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Looping</b></div>
+                            <div class=""> <b>4 : End Block</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">y</span>: nums) sum <span style="color:#666">+=</span> y;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the total sum of the array and adjusts `sum` for further processing. </div>
+                            <div class=""> Closing bracket to end the constructor. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">book</span>(<span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> end) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the size of the array in `n` for use in subsequent logic. </div>
+                            <div class=""> Declaring the &#39;book&#39; method, which checks if a new event can be booked. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Update Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (sum <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[start]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the total sum equals `x`. If true, the entire array is the solution. </div>
+                            <div class=""> Increments the count for the &#39;start&#39; time in the map, indicating the start of an event. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Map Initialization</b></div>
+                            <div class=""> <b>7 : Update Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[end]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a map to store prefix sums and their corresponding indices. </div>
+                            <div class=""> Decrements the count for the &#39;end&#39; time in the map, indicating the end of an event. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Map Update</b></div>
+                            <div class=""> <b>8 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> bkd <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds an initial entry to the map for handling prefix sums starting from the beginning. </div>
+                            <div class=""> Declares an integer variable &#39;bkd&#39; to keep track of the number of overlapping events. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Initialization</b></div>
+                            <div class=""> <b>9 : ForLoop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span>mp.begin(); it <span style="color:#666">!=</span> mp.end(); it<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the prefix sum variable `s` to zero. </div>
+                            <div class=""> Iterates over the events in the map to check the number of overlapping events. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Looping</b></div>
+                            <div class=""> <b>10 : Update Variable</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        bkd <span style="color:#666">+=</span> it<span style="color:#666">-&gt;</span>second;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the array to compute prefix sums and check for subarray matches. </div>
+                            <div class=""> Adds the value from the current map entry to &#39;bkd&#39; to track the current overlap count. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Sum Update</b></div>
+                            <div class=""> <b>11 : If Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s <span style="color:#666">+=</span> nums[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(bkd <span style="color:#666">==</span> <span style="color:#666">3</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the prefix sum `s` with the current element. </div>
+                            <div class=""> Checks if the number of overlapping events has reached 3 (i.e., more than 2 overlapping events). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Condition Check</b></div>
+                            <div class=""> <b>12 : Update Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(s <span style="color:#666">-</span> sum)) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[start]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if there exists a prefix sum in the map such that the difference equals the target sum. </div>
+                            <div class=""> Decrements the count for the &#39;start&#39; time, effectively canceling the booking. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Update Result</b></div>
+                            <div class=""> <b>13 : Update Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[s <span style="color:#666">-</span> sum]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[end]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates `res` to the maximum length of a valid subarray found so far. </div>
+                            <div class=""> Increments the count for the &#39;end&#39; time to reflect the cancellation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Map Update</b></div>
+                            <div class=""> <b>14 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[s] <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the current prefix sum and its index to the map for future reference. </div>
+                            <div class=""> Returns &#39;false&#39; to indicate that the booking cannot be made due to too many overlapping events. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Return</b></div>
+                            <div class=""> <b>15 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#a0a000">res</span> :n <span style="color:#666">-</span> res;        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the minimum operations needed by converting the subarray length to elements removed. </div>
+                            <div class=""> Returns &#39;true&#39; to indicate that the booking was successful. </div>
                         </div>
                     
                 </div>
@@ -761,16 +759,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear because we scan the array once using the sliding window technique.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log N)</div>
+                        <div class=""> <b>Average Case:</b> O(log N)</div>
+                        <div class=""> <b>Worst Case:</b> O(N)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we check all events for conflicts, making the time complexity O(N), where N is the number of events.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of intermediate results like prefix sums or hash maps.</div>    
+                        <div class=""> <b>Best Case:</b> O(N)</div>
+                        <div class=""> <b>Worst Case:</b> O(N)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(N) as we store the number of events in the calendar.</div>    
                     </div>
 
                 </div>

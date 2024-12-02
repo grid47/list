@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You have <code>n</code> cars on a straight road, each numbered from 0 to <code>n-1</code> from left to right, with each car positioned at a unique location. You are given a string <code>directions</code> where each character represents the direction of a car (&lsquo;L&rsquo; for left, &lsquo;R&rsquo; for right, and &lsquo;S&rsquo; for stationary). Each moving car has the same speed, and the cars can collide under the following conditions: Two cars moving in opposite directions (&lsquo;L&rsquo; and &lsquo;R&rsquo;) will collide, counting as 2 collisions. A moving car colliding with a stationary car (&lsquo;S&rsquo;) will result in 1 collision. After a collision, the cars involved stay at the collision point and no longer move. Your task is to calculate the total number of collisions that will happen. </div>
+<div class=""> You are given an array representing the preorder traversal of a binary search tree (BST). Your task is to construct the BST from this preorder traversal and return the root of the tree. </div>
 
 
 
@@ -362,45 +362,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a 0-indexed string `directions` of length `n`, where each character is one of &#39;L&#39;, &#39;R&#39;, or &#39;S&#39;, denoting the direction of each car.</div>
-                        <div class=""> <b>Example:</b> &#34;RSLSRL&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers representing the preorder traversal of a BST. The array will have a length of at least 1 and at most 100, with each integer between 1 and 1000.</div>
+                        <div class=""> <b>Example:</b> preorder = [10, 5, 1, 7, 15, 12]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= directions.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= preorder.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • directions[i] is one of &#39;L&#39;, &#39;R&#39;, or &#39;S&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= preorder[i] &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements in the preorder array are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the total number of collisions that will happen.</div>
-                        <div class=""> <b>Example:</b> 4</div>
+                        <div class=""> <b>Output:</b> Return the root of the binary search tree constructed from the given preorder traversal.</div>
+                        <div class=""> <b>Example:</b> Output: [10,5,15,1,7,null,12]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be an integer representing the total number of collisions.</div>
+                                <div style="margin-left: 20px;"> • The output is the root of the binary search tree in level-order traversal.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to count the number of collisions by checking when cars move in opposite directions or when moving cars collide with stationary cars.</div>
+                        <div class=""> <b>Goal:</b> The goal is to construct a binary search tree from the preorder traversal. Each node in the tree should satisfy the BST property where the left child is less than the parent and the right child is greater than the parent.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Find the first car that moves towards the left and the last car that moves towards the right.</div>
+                                <div style="margin-left: 20px;"> • Start with the first element of the preorder array as the root of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Count the number of cars between them that collide based on the direction of movement and whether they are stationary.</div>
+                                <div style="margin-left: 20px;"> • For each subsequent element, place it in the correct position in the tree following the BST rules.</div>
+                            
+                                <div style="margin-left: 20px;"> • Continue this process until all elements are placed in the tree.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string `directions` is at least 1 character long and at most 10^5 characters long. Each character in `directions` is one of &#39;L&#39;, &#39;R&#39;, or &#39;S&#39;.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution can handle up to the maximum constraint efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= directions.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • directions[i] is one of &#39;L&#39;, &#39;R&#39;, or &#39;S&#39;.</div>
+                                <div style="margin-left: 20px;"> • The preorder array will always have at least one element and at most 100 elements.</div>
                             
                         </div>
                     </div>        
@@ -408,15 +410,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string `directions` represents valid data with no other characters apart from &#39;L&#39;, &#39;R&#39;, or &#39;S&#39;.</div>
+                                <div style="margin-left: 20px;"> • The preorder array contains unique values and forms a valid BST.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> &#34;RSLSRL&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The cars move in opposite directions, causing collisions between moving cars and stationary cars as they meet, and we count these interactions to get the total number of collisions.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: preorder = [10, 5, 1, 7, 15, 12]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can construct the following BST: [10, 5, 15, 1, 7, null, 12]. The first element 10 becomes the root, then 5 goes to the left of 10, 1 goes to the left of 5, and so on.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: preorder = [15, 10, 5, 12, 20, 17]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this input, the BST would look like [15, 10, 20, 5, 12, null, 17]. Starting with 15 as the root, 10 goes to the left, 20 goes to the right, and so on.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -440,18 +446,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves scanning the `directions` string and identifying the range of cars that will collide based on their movement directions, counting the number of collisions based on specific rules.</div>
+                        <div class=""> <b>Approach:</b> We can use the preorder traversal of a BST to reconstruct the tree. We start with the first element as the root and use the properties of BSTs to place each subsequent element in the correct position.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Cars moving in opposite directions (R and L) will collide.</div>
-                            
-                                <div style="margin-left: 20px;"> • Cars moving towards a stationary car will cause a collision.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that each element is inserted in the correct position based on the BST rules.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to identify collisions between moving cars and stationary cars, and count collisions where two cars move towards each other.</div>
+                                <div style="margin-left: 20px;"> • The key idea is to use a recursive approach to insert nodes into the tree while maintaining the BST property.</div>
                             
                         </div>
                     </div>
@@ -459,9 +463,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Find the range of cars moving towards each other.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with the first element in the preorder array as the root of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Count collisions based on the direction of movement, considering stationary cars as well.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a helper function to recursively insert each element into the tree based on the BST property (left &lt; node &lt; right).</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Ensure that for each recursive call, the current node value is within the allowed bounds, which change based on the parent node&#39;s value.</div>
                             
                         </div>
                     </div>
@@ -470,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input is guaranteed to have at least one car.</div>
+                                <div style="margin-left: 20px;"> • The input array will never be empty, as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle strings of length up to 10^5 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should be optimized to handle the maximum input size (up to 100 elements).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string may contain only &#39;L&#39;, &#39;R&#39;, or &#39;S&#39;.</div>
+                                <div style="margin-left: 20px;"> • If all values are large (e.g., all greater than 500), the BST structure should still be correct.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string should not contain any other characters apart from &#39;L&#39;, &#39;R&#39;, or &#39;S&#39;.</div>
+                                <div style="margin-left: 20px;"> • The input array will always contain unique values, so there is no need to handle duplicates.</div>
                             
                         </div>                                                                        
                     </div>
@@ -502,29 +508,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Specifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Left Pointer Movement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Left Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Right Pointer Movement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Node Creation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Right Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Left Subtree Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Collision Counter Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Right Subtree Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop through Middle Cars</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Collision Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Increment Collision Counter</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Collision Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
                     
                 </div>
 
@@ -533,21 +533,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCollisions</span>(string dir) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> dir.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> dir.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> dir[l] <span style="color:#666">==</span> <span style="color:#b44">&#39;L&#39;</span>)
-</span></span><span style="display:flex;"><span>        l<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> bstFromPreorder(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pre, <span style="color:#0b0;font-weight:bold">int</span> bound <span style="color:#666">=</span> INT_MAX) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> pre.size() <span style="color:#666">||</span> pre[i] <span style="color:#666">&gt;</span> bound) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(r <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> dir[r] <span style="color:#666">==</span> <span style="color:#b44">&#39;R&#39;</span>)
-</span></span><span style="display:flex;"><span>        r<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> l; i <span style="color:#666">&lt;=</span> r; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dir[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;S&#39;</span>)
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(pre[i<span style="color:#666">++</span>]);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> bstFromPreorder(pre, root<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> bstFromPreorder(pre, bound);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -555,123 +550,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCollisions</span>(string dir) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Function definition starts. The function takes a string `dir` that represents the direction of cars (&#39;L&#39; for left, &#39;R&#39; for right, &#39;S&#39; for stopped) and returns an integer indicating the number of collisions. </div>
+                            <div class=""> Declares a Solution class to house the method for building the BST from the preorder traversal. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> dir.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two variables `l` and `r` to track the leftmost and rightmost car positions in the string `dir`. </div>
+                            <div class=""> Initializes a class member variable i to track the current index in the preorder vector while recursively constructing the BST. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Size Calculation</b></div>
+                            <div class=""> <b>3 : Access Specifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> dir.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the size of the input string `dir` and store it in the variable `n`. </div>
+                            <div class=""> Specifies that the following members are public and can be accessed from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Left Pointer Movement</b></div>
+                            <div class=""> <b>4 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> dir[l] <span style="color:#666">==</span> <span style="color:#b44">&#39;L&#39;</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">bstFromPreorder</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pre, <span style="color:#0b0;font-weight:bold">int</span> bound <span style="color:#666">=</span> INT_MAX) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move the left pointer `l` to the right while the car is moving left (&#39;L&#39;). </div>
+                            <div class=""> Declares the function `bstFromPreorder` which takes a vector of integers `pre` (representing the preorder traversal of a BST) and an optional `bound` parameter to limit node values during recursion. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Left Pointer Update</b></div>
+                            <div class=""> <b>5 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        l<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> pre.size() <span style="color:#666">||</span> pre[i] <span style="color:#666">&gt;</span> bound) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the left pointer `l` to skip over all left-moving cars (&#39;L&#39;). </div>
+                            <div class=""> Checks if the current index has reached the end of the preorder vector or if the current node value exceeds the allowed bound, indicating that no more nodes can be added under this subtree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Right Pointer Movement</b></div>
+                            <div class=""> <b>6 : Node Creation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(r <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> dir[r] <span style="color:#666">==</span> <span style="color:#b44">&#39;R&#39;</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(pre[i<span style="color:#666">++</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move the right pointer `r` to the left while the car is moving right (&#39;R&#39;). </div>
+                            <div class=""> Creates a new TreeNode with the current value from the preorder vector and increments the index i. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Right Pointer Update</b></div>
+                            <div class=""> <b>7 : Left Subtree Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        r<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> bstFromPreorder(pre, root<span style="color:#666">-&gt;</span>val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrement the right pointer `r` to skip over all right-moving cars (&#39;R&#39;). </div>
+                            <div class=""> Recursively constructs the left subtree by passing the current node&#39;s value as the new bound, ensuring that the left child is smaller than the current node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Collision Counter Initialization</b></div>
+                            <div class=""> <b>8 : Right Subtree Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> bstFromPreorder(pre, bound);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the collision counter `cnt` to 0. This will be used to count the number of collisions. </div>
+                            <div class=""> Recursively constructs the right subtree with the original bound, ensuring that the right child is larger than the current node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Loop through Middle Cars</b></div>
+                            <div class=""> <b>9 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> l; i <span style="color:#666">&lt;=</span> r; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the cars between the left and right pointers (from `l` to `r`). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Collision Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dir[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;S&#39;</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the car at position `i` is not stationary (&#39;S&#39;). If it&#39;s moving (&#39;L&#39; or &#39;R&#39;), it&#39;s a collision. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Increment Collision Counter</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the car at position `i` is moving (&#39;L&#39; or &#39;R&#39;), increment the collision counter `cnt`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return Collision Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final count of collisions detected. </div>
+                            <div class=""> Returns the root of the current subtree. </div>
                         </div>
                     
                 </div>
@@ -693,14 +658,14 @@
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We scan the directions string only once to determine the collisions.</div>                                               
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) in the best case when the tree is balanced, but it can be O(n^2) in the worst case when the tree is skewed (e.g., a sorted array).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The solution uses a constant amount of extra space as we only need a few variables for the calculation.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the recursion stack and the space used to store the tree.</div>    
                     </div>
 
                 </div>

@@ -15,6 +15,7 @@ youtube = "7XTGlO6b16A"
 youtube_upload_date="2024-08-04"
 youtube_thumbnail="https://i.ytimg.com/vi/7XTGlO6b16A/maxresdefault.jpg"
 comments = true
+index = 671
 +++
 
 

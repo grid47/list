@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> Given a string of lowercase letters and an integer limit, construct a new string such that no character appears more than the given limit times consecutively. The new string should be lexicographically largest while satisfying this condition. You can use any subset of characters from the given string. </div>
+<div class=""> You are given an m x n grid where each cell can be empty, contain a fresh orange, or a rotten orange. Every minute, any fresh orange that is adjacent to a rotten orange becomes rotten. The task is to determine the minimum number of minutes required for all fresh oranges to rot. If this is not possible, return -1. </div>
 
 
 
@@ -359,51 +359,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A string of lowercase English letters and an integer repeatLimit.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#39;bbaaccd&#39;, repeatLimit = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of a grid represented by a 2D array, where each element can be 0, 1, or 2.</div>
+                        <div class=""> <b>Example:</b> grid = [[2,1,1],[1,1,0],[0,1,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= repeatLimit &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • grid[i][j] can be 0, 1, or 2.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> A lexicographically largest string satisfying the condition that no character appears more than repeatLimit times consecutively.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;ccbbaa&#39;</div>
+                        <div class=""> <b>Output:</b> Return the minimum number of minutes required for all fresh oranges to rot. If it&#39;s impossible, return -1.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No character appears consecutively more than repeatLimit times.</div>
-                            
-                                <div style="margin-left: 20px;"> • Characters are used from the input string.</div>
+                                <div style="margin-left: 20px;"> • The grid has at least one cell and at most 100 cells.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Construct the lexicographically largest string that satisfies the repeatLimit constraint.</div>
+                        <div class=""> <b>Goal:</b> To calculate the minimum time required to rot all the fresh oranges using breadth-first search (BFS) from the rotten oranges.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count the frequency of each character in the string.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue with all the positions of rotten oranges.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a max-heap to process characters by their lexicographical order and frequency.</div>
+                                <div style="margin-left: 20px;"> • Perform BFS, and for each rotten orange, check its 4-directional neighbors.</div>
                             
-                                <div style="margin-left: 20px;"> • Construct the result string by adding characters within the repeatLimit constraint.</div>
+                                <div style="margin-left: 20px;"> • If a fresh orange is found, make it rotten and add its position to the queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Handle cases where the highest frequency character cannot continue by inserting the next highest character.</div>
+                                <div style="margin-left: 20px;"> • Keep track of the minutes elapsed while processing each level of BFS.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the number of minutes, or -1 if some fresh oranges cannot be rotted.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Conditions that the solution must satisfy.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the grid will not be too large to handle with a breadth-first search approach.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= repeatLimit &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • The input string consists of only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The grid contains only 0, 1, or 2.</div>
                             
                         </div>
                     </div>        
@@ -411,21 +411,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Input string is not empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • repeatLimit is at least 1.</div>
+                                <div style="margin-left: 20px;"> • The grid will always contain at least one cell.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;abcabc&#39;, repeatLimit = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The result is &#39;ccbbaa&#39;. Each character appears at most twice consecutively, and the string is lexicographically largest.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;xyzxxy&#39;, repeatLimit = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The result is &#39;yyxxyz&#39;. The character &#39;y&#39; appears 2 times consecutively, while &#39;x&#39; and &#39;z&#39; appear at most 2 times.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[2,1,1],[1,1,0],[0,1,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after 4 minutes all fresh oranges rot. The rotten orange at (0,0) spreads to adjacent cells and eventually rots all the fresh oranges.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,20 +443,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Utilize a max-heap to manage characters based on their lexicographical order and frequency. Construct the string incrementally while respecting the repeatLimit constraint.</div>
+                        <div class=""> <b>Approach:</b> This problem can be solved using a breadth-first search (BFS) algorithm to simulate the spreading of the rot from all initially rotten oranges.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The lexicographical order can be maintained using a max-heap.</div>
-                            
-                                <div style="margin-left: 20px;"> • The repeatLimit constraint requires careful tracking of character counts.</div>
+                                <div style="margin-left: 20px;"> • This problem is a variant of multi-source BFS where the rotten oranges are the sources.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A greedy approach prioritizing the largest available character should work.</div>
-                            
-                                <div style="margin-left: 20px;"> • If a character exceeds the repeatLimit, switch to the next largest character temporarily.</div>
+                                <div style="margin-left: 20px;"> • We will need to perform BFS from each rotten orange, updating the grid as fresh oranges become rotten.</div>
                             
                         </div>
                     </div>
@@ -470,15 +460,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a frequency array for the characters in the string.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Identify all the rotten oranges and add their positions to a queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Insert characters into a max-heap with their counts.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Perform BFS and spread the rot to adjacent fresh oranges.</div>
                             
-                                <div style="margin-left: 20px;"> • Iteratively construct the result string by popping characters from the heap.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Track the number of minutes required to rot all fresh oranges.</div>
                             
-                                <div style="margin-left: 20px;"> • If the current character exceeds the repeatLimit, switch to the next available character.</div>
-                            
-                                <div style="margin-left: 20px;"> • Reinsert characters into the heap as needed to handle remaining counts.</div>
+                                <div style="margin-left: 20px;"> • Step 4: If any fresh oranges are unreachable, return -1.</div>
                             
                         </div>
                     </div>
@@ -487,24 +475,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No valid result as the input string must have at least one character.</div>
+                                <div style="margin-left: 20px;"> • This problem doesn&#39;t have empty inputs since the grid is always provided.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An input string of length 10^5 with repeated characters.</div>
+                                <div style="margin-left: 20px;"> • The grid size is small enough (maximum 10x10) that BFS will work efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An input string with all characters the same, e.g., &#39;aaaa&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • An input string with all unique characters, e.g., &#39;abcd&#39;.</div>
+                                <div style="margin-left: 20px;"> • If the grid contains no fresh oranges, the result is 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure no character exceeds repeatLimit consecutively in the output.</div>
+                                <div style="margin-left: 20px;"> • The grid size is constrained (maximum 10x10), ensuring that a BFS approach is feasible.</div>
                             
                         </div>                                                                        
                     </div>
@@ -523,49 +509,61 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Character Frequency Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Grid Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Priority Queue Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Population - Rotten Oranges</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop for Frequency to Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Queue Population - Rotten Oranges</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Population - Rotten Oranges</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 String Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Population - Rotten Oranges</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Main Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Visited Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Extract Maximum Frequency Pair</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Time Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Maximum Frequency Pair</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Direction Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Store Remaining Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 BFS Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Repeat Characters</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 BFS - Queue Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Re-check Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 BFS - Processing Each Orange</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Process Next Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 BFS - Dequeue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Pop Next Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 BFS - Dequeue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Add Next Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 BFS - Visited Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Re-insert Reduced Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 BFS - Mark Visited</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Update First Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 BFS - Spread the Rot</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Re-add Second Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 BFS - Spread the Rot</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Re-add First Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 BFS - Spread the Rot</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Update First Character Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 BFS - Spread the Rot</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Re-add First Character to Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 BFS - Update and Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 BFS - Update and Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Max Time Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Max Time Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Max Time Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Max Time Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Max Time Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Return Result</button>
                     
                 </div>
 
@@ -574,34 +572,39 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">repeatLimitedString</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> repeatLimit) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> freq(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">ch</span>: s) freq[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(freq[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(make_pair((<span style="color:#0b0;font-weight:bold">char</span>) <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> i, freq[i]));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>        pq.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> p.second;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> repeatLimit <span style="color:#666">&amp;&amp;</span> cnt<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">++</span>) ans.push_back(p.first);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sp <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>            pq.pop();
-</span></span><span style="display:flex;"><span>            ans.push_back(sp.first);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sp.second <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>                sp.second<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>                pq.push(sp);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">orangesRotting</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>            q.push({i, j});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> vis(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>] <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> m <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> vis[x][y] <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                grid[x][y] <span style="color:#666">=</span> grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                q.push({x, y});
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            p.second <span style="color:#666">=</span> cnt;
-</span></span><span style="display:flex;"><span>            pq.push(p);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">&gt;</span> mx) mx <span style="color:#666">=</span> grid[i][j];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">-</span> <span style="color:#666">2</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -612,230 +615,290 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">repeatLimitedString</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> repeatLimit) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">orangesRotting</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define a function that takes a string `s` and an integer `repeatLimit` to return a new string with repeated characters, subject to the `repeatLimit`. </div>
+                            <div class=""> Defines the function `orangesRotting` which takes a 2D vector grid representing the oranges and their states (fresh, rotten, or empty). The goal is to compute the minimum time required to rot all fresh oranges. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> freq(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector `freq` to store the frequency of each character (26 letters from &#39;a&#39; to &#39;z&#39;). </div>
+                            <div class=""> Initializes a queue to hold the positions of the rotten oranges, which will be used to perform the BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Character Frequency Counting</b></div>
+                            <div class=""> <b>3 : Grid Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">ch</span>: s) freq[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through the input string `s` and increment the frequency count of each character. </div>
+                            <div class=""> Gets the dimensions of the grid, where `m` is the number of rows and `n` is the number of columns. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Priority Queue Setup</b></div>
+                            <div class=""> <b>4 : Queue Population - Rotten Oranges</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Create a priority queue `pq` to store pairs of characters and their corresponding frequencies in descending order. </div>
+                            <div class=""> Loops through each row of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop for Frequency to Queue</b></div>
+                            <div class=""> <b>5 : Queue Population - Rotten Oranges</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the frequency array to add characters with non-zero frequencies to the priority queue. </div>
+                            <div class=""> Loops through each column of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Queue Population</b></div>
+                            <div class=""> <b>6 : Queue Population - Rotten Oranges</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(freq[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(make_pair((<span style="color:#0b0;font-weight:bold">char</span>) <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> i, freq[i]));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">2</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a character has a non-zero frequency, push it to the priority queue along with its frequency. </div>
+                            <div class=""> Checks if the current cell contains a rotten orange (represented by 2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : String Initialization</b></div>
+                            <div class=""> <b>7 : Queue Population - Rotten Oranges</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push({i, j});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty string `ans` to build the final result. </div>
+                            <div class=""> Adds the position of the rotten orange to the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Main Loop</b></div>
+                            <div class=""> <b>8 : Visited Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> vis(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop that continues as long as there are characters in the priority queue. </div>
+                            <div class=""> Initializes a 2D vector `vis` to track visited positions to avoid revisiting cells during the BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Extract Maximum Frequency Pair</b></div>
+                            <div class=""> <b>9 : Time Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> pq.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the character with the highest frequency from the priority queue. </div>
+                            <div class=""> Initializes a time counter `t` to track the time taken for all fresh oranges to rot. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pop Maximum Frequency Pair</b></div>
+                            <div class=""> <b>10 : Direction Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the character-frequency pair from the priority queue. </div>
+                            <div class=""> Defines an array `dir` representing the four possible directions to move in the grid: up, right, down, and left. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Store Remaining Count</b></div>
+                            <div class=""> <b>11 : BFS Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> p.second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the remaining count of the character in the variable `cnt`. </div>
+                            <div class=""> Starts a while loop to perform BFS as long as there are rotten oranges in the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Repeat Characters</b></div>
+                            <div class=""> <b>12 : BFS - Queue Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> repeatLimit <span style="color:#666">&amp;&amp;</span> cnt<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">++</span>) ans.push_back(p.first);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the character `p.first` to the result string `ans` up to the `repeatLimit` number of times, decrementing the count. </div>
+                            <div class=""> Gets the current size of the queue, which corresponds to the number of oranges to process at the current time step. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Re-check Queue</b></div>
+                            <div class=""> <b>13 : BFS - Processing Each Orange</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>pq.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current character still has remaining counts and if there are other characters in the priority queue. </div>
+                            <div class=""> Processes each rotten orange in the current level of the BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Process Next Character</b></div>
+                            <div class=""> <b>14 : BFS - Dequeue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sp <span style="color:#666">=</span> pq.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the character with the second highest frequency from the priority queue. </div>
+                            <div class=""> Retrieves the position of the current rotten orange from the front of the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Pop Next Character</b></div>
+                            <div class=""> <b>15 : BFS - Dequeue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the second highest frequency character from the queue. </div>
+                            <div class=""> Removes the processed rotten orange from the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Add Next Character</b></div>
+                            <div class=""> <b>16 : BFS - Visited Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans.push_back(sp.first);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]]) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the second character to the result string `ans`. </div>
+                            <div class=""> Checks if the current orange has already been visited. If true, skips further processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Re-insert Reduced Character</b></div>
+                            <div class=""> <b>17 : BFS - Mark Visited</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sp.second <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the second character has more than one occurrence left, reduce its frequency and add it back to the queue. </div>
+                            <div class=""> Marks the current orange as visited. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Update First Character</b></div>
+                            <div class=""> <b>18 : BFS - Spread the Rot</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                sp.second<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrement the frequency of the second character. </div>
+                            <div class=""> Loops through each direction to spread the rot to adjacent oranges. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Re-add Second Character</b></div>
+                            <div class=""> <b>19 : BFS - Spread the Rot</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                pq.push(sp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>] <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the second character back into the priority queue after decrementing its frequency. </div>
+                            <div class=""> Calculates the new position (x, y) of the adjacent orange. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>20 : Re-add First Character</b></div>
+                            <div class=""> <b>20 : BFS - Spread the Rot</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> m <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> vis[x][y] <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Complete the process of re-adding the characters to the queue. </div>
+                            <div class=""> Checks if the new position is out of bounds, already visited, or not a fresh orange (i.e., not 1). If any condition is true, skips further processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>21 : Update First Character Frequency</b></div>
+                            <div class=""> <b>21 : BFS - Spread the Rot</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            p.second <span style="color:#666">=</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the frequency of the first character after adding it to the result. </div>
+                            <div class=""> If any condition is true, continue to the next adjacent orange. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>22 : Re-add First Character to Queue</b></div>
+                            <div class=""> <b>22 : BFS - Update and Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.push(p);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                grid[x][y] <span style="color:#666">=</span> grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the first character back into the priority queue with its updated frequency. </div>
+                            <div class=""> Updates the state of the adjacent orange, marking it as rotting (incrementing the value from 1 to 2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>23 : Return Result</b></div>
+                            <div class=""> <b>23 : BFS - Update and Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push({x, y});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final string `ans`. </div>
+                            <div class=""> Adds the new rotten orange to the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Max Time Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes `mx` to 2 (since rotten oranges have a value of 2) to keep track of the maximum time required. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Max Time Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loops through each row of the grid to calculate the maximum time required for all oranges to rot. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Max Time Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loops through each column of the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Max Time Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">&gt;</span> mx) mx <span style="color:#666">=</span> grid[i][j];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Updates the maximum time if a more rotten orange is found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Max Time Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if there are still fresh oranges left. If true, returns -1 to indicate it&#39;s impossible to rot all oranges. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>29 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">-</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the time taken to rot all oranges by subtracting 2 (the initial rotten state) from the maximum time. </div>
                         </div>
                     
                 </div>
@@ -855,16 +918,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log k)</div>
-                        <div class=""> <b>Average Case:</b> O(n log k)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log k)</div> 
-                        <div class=""> <b>Description:</b> Heap operations dominate the time complexity, where n is the string length and k is the number of distinct characters.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n) - In the best case, every cell is processed once.</div>
+                        <div class=""> <b>Average Case:</b> O(m * n) - The algorithm will process every cell in the grid.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n) - All cells need to be visited during the BFS.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the grid size.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k)</div>
-                        <div class=""> <b>Worst Case:</b> O(k)</div> 
-                        <div class=""> <b>Description:</b> Heap storage and frequency tracking require space proportional to the number of distinct characters.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n) - The space complexity is also linear in terms of the grid size.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n) - In the worst case, the BFS queue will contain all the cells.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear as we use extra space for the BFS queue.</div>    
                     </div>
 
                 </div>

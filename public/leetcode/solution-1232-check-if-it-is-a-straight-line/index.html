@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given an array <code>nums</code> consisting of positive integers. Starting with a <code>score = 0</code>, repeatedly select the smallest unmarked integer, add its value to the score, and mark it along with its adjacent elements (if any). Continue this until all elements are marked, then return the final score. </div>
+<div class=""> You are given an array of coordinates, where each coordinate represents a point in the 2D plane. Your task is to check if all the points in the array lie on the same straight line. </div>
 
 
 
@@ -359,51 +359,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a single integer array `nums` representing the array of positive integers.</div>
-                        <div class=""> <b>Example:</b> For example, `nums = [3, 2, 5, 4, 1]`.</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of points, where each point is represented by two integers [x, y].</div>
+                        <div class=""> <b>Example:</b> coordinates = [[2, 3], [4, 5], [6, 7], [8, 9], [10, 11]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= coordinates.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • coordinates[i].length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= coordinates[i][0], coordinates[i][1] &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • coordinates contains no duplicate point.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a single integer representing the final score achieved after applying the algorithm.</div>
-                        <div class=""> <b>Example:</b> For `nums = [3, 2, 5, 4, 1]`, the output is `6`.</div>
+                        <div class=""> <b>Output:</b> The output should be a boolean value indicating whether all points lie on the same straight line.</div>
+                        <div class=""> <b>Example:</b> true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is an integer representing the final score.</div>
+                                <div style="margin-left: 20px;"> • Return &#39;true&#39; if all points are collinear, otherwise return &#39;false&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to choose the smallest unmarked element, add its value to the score, and mark it along with its adjacent elements until all elements are marked.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if the slope between consecutive points remains the same across the entire list of points.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a score variable to 0.</div>
+                                <div style="margin-left: 20px;"> • Calculate the slope between the first two points.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a priority queue to efficiently find the smallest unmarked element.</div>
+                                <div style="margin-left: 20px;"> • For each subsequent point, calculate the slope between it and the first point.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Add the value of the chosen element to the score.</div>
+                                <div style="margin-left: 20px;"> • If the slopes are not equal, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Mark the chosen element and its adjacent elements (if they exist).</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Repeat the process until all elements are marked.</div>
+                                <div style="margin-left: 20px;"> • If all slopes are equal, return true.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array will have a length between 1 and 10^5. Each element in the array will be a positive integer between 1 and 10^6.</div>
+                        <div class=""> <b>Goal:</b> The input list contains no duplicate points, and the size of the list is between 2 and 1000.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • Ensure no duplicate points in the input array.</div>
                             
                         </div>
                     </div>        
@@ -411,15 +411,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array will always contain at least one integer, and each element will be between 1 and 10^6.</div>
+                                <div style="margin-left: 20px;"> • The input coordinates represent valid points in a 2D plane.</div>
+                            
+                                <div style="margin-left: 20px;"> • The points are given in no particular order.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For `nums = [3, 2, 5, 4, 1]`</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By following the algorithm, we first select `1`, then `2`, and finally `4`. The final score is `1 &#43; 2 &#43; 3 = 6`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> coordinates = [[2, 3], [4, 5], [6, 7], [8, 9], [10, 11]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The points have the same slope between consecutive pairs, meaning they lie on the same straight line, so the output is &#39;true&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> coordinates = [[1, 1], [2, 3], [3, 5], [4, 7]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The slope between the first two points is different from the slopes between the other points, meaning they do not lie on the same straight line, so the output is &#39;false&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -443,16 +449,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves selecting the smallest unmarked element using a priority queue and applying the algorithm to maximize the score.</div>
+                        <div class=""> <b>Approach:</b> To determine if the points are collinear, we calculate the slope between the first point and the second, then compare it to the slope between the first point and each subsequent point.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can use a priority queue (min-heap) to efficiently find the smallest unmarked element.</div>
+                                <div style="margin-left: 20px;"> • The slope between two points is given by the formula (y2 - y1) / (x2 - x1).</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The greedy approach ensures we select the smallest element at each step to maximize the score.</div>
+                                <div style="margin-left: 20px;"> • If the slopes between consecutive points are all equal, the points must lie on the same straight line.</div>
                             
                         </div>
                     </div>
@@ -460,13 +466,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a priority queue to store the elements along with their indices.</div>
+                                <div style="margin-left: 20px;"> • Calculate the slope between the first two points.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each element in the priority queue, check if it has already been marked.</div>
+                                <div style="margin-left: 20px;"> • For each subsequent point, calculate the slope between it and the first point.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If it is unmarked, add its value to the score and mark it and its adjacent elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Repeat this process until all elements are marked.</div>
+                                <div style="margin-left: 20px;"> • If all slopes are equal, return true. Otherwise, return false.</div>
                             
                         </div>
                     </div>
@@ -475,22 +479,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will always contain at least one element, so there will be no empty inputs.</div>
+                                <div style="margin-left: 20px;"> • Not applicable, as the input will always contain at least two points.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle large inputs efficiently with a time complexity of O(n log n).</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 1000 points efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements in `nums` are the same, the algorithm should still function correctly.</div>
+                                <div style="margin-left: 20px;"> • The coordinates can include negative values, but the slope calculation remains unaffected.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will always meet the specified constraints.</div>
+                                <div style="margin-left: 20px;"> • Ensure that there are no duplicate points in the input.</div>
                             
                         </div>                                                                        
                     </div>
@@ -509,35 +513,15 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Slope Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Priority Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iteration Over Points</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Size of Input</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Slope Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Hash Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Slope Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Push to Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Check Processed Indices</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 If Not Empty</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Add to Score</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mark Current Index</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Mark Adjacent Indices</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Mark Adjacent Indices</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Pop from Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Score</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return True</button>
                     
                 </div>
 
@@ -546,25 +530,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">findScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> score <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        pq.push({nums[i], i});
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> mp.count(pq.top()[<span style="color:#666">1</span>])) pq.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>            score <span style="color:#666">+=</span> pq.top()[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>            mp[pq.top()[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>            mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>            mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;                
-</span></span><span style="display:flex;"><span>            pq.pop();
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkStraightLine</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> cord) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> slopt <span style="color:#666">=</span> (cord[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#a0a000">INT_MAX</span>: (<span style="color:#0b0;font-weight:bold">double</span>)(cord[<span style="color:#666">1</span>][<span style="color:#666">1</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">1</span>]) <span style="color:#666">/</span> (<span style="color:#0b0;font-weight:bold">double</span>)(cord[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> cord.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> slp <span style="color:#666">=</span> (cord[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#a0a000">INT_MAX</span>: (<span style="color:#0b0;font-weight:bold">double</span>)(cord[i][<span style="color:#666">1</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">1</span>]) <span style="color:#666">/</span> (<span style="color:#0b0;font-weight:bold">double</span>)(cord[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(slp <span style="color:#666">!=</span> slopt) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> score;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -575,160 +547,60 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">findScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkStraightLine</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> cord) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function definition where we declare &#39;findScore&#39;, which takes a vector of integers as input and returns a long long score. </div>
+                            <div class=""> This is the function definition for `checkStraightLine`. The function takes a 2D vector of coordinates and checks whether the points lie on a straight line. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Slope Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> score <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> slopt <span style="color:#666">=</span> (cord[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#a0a000">INT_MAX</span>: (<span style="color:#0b0;font-weight:bold">double</span>)(cord[<span style="color:#666">1</span>][<span style="color:#666">1</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">1</span>]) <span style="color:#666">/</span> (<span style="color:#0b0;font-weight:bold">double</span>)(cord[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We initialize the &#39;score&#39; variable to 0, which will hold the total score. </div>
+                            <div class=""> The slope between the first two points is calculated. If the x-values of the points are the same, the slope is set to `INT_MAX` to represent an undefined slope (vertical line). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Priority Queue</b></div>
+                            <div class=""> <b>3 : Iteration Over Points</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> cord.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We declare a priority queue &#39;pq&#39; that will store vectors of integers, which will be sorted in increasing order based on the first element of the vectors. </div>
+                            <div class=""> The function iterates over all the remaining points starting from the third point. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Size of Input</b></div>
+                            <div class=""> <b>4 : Slope Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> slp <span style="color:#666">=</span> (cord[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span><span style="color:#a0a000">INT_MAX</span>: (<span style="color:#0b0;font-weight:bold">double</span>)(cord[i][<span style="color:#666">1</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">1</span>]) <span style="color:#666">/</span> (<span style="color:#0b0;font-weight:bold">double</span>)(cord[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> cord[<span style="color:#666">0</span>][<span style="color:#666">0</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We store the size of the input vector &#39;nums&#39; in the variable &#39;n&#39;. </div>
+                            <div class=""> For each point, the slope with respect to the first point is calculated. If the x-values are the same, the slope is set to `INT_MAX`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Hash Map</b></div>
+                            <div class=""> <b>5 : Slope Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(slp <span style="color:#666">!=</span> slopt) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We declare an unordered map &#39;mp&#39; to track which indices have already been processed. </div>
+                            <div class=""> If the calculated slope of any point does not match the slope of the first two points, the function returns `false`, indicating the points do not form a straight line. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop Initialization</b></div>
+                            <div class=""> <b>6 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is a loop that iterates through each element of the input vector &#39;nums&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Push to Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({nums[i], i});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We push a vector containing the current element &#39;nums[i]&#39; and its index &#39;i&#39; into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : While Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This is a while loop that continues until the priority queue is empty. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Check Processed Indices</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> mp.count(pq.top()[<span style="color:#666">1</span>])) pq.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We check if the top element of the priority queue has already been processed. If it has, we pop it from the queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : If Not Empty</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We proceed if the priority queue is not empty after cleaning out the processed elements. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Add to Score</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            score <span style="color:#666">+=</span> pq.top()[<span style="color:#666">0</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We add the value of the top element in the priority queue (which is the first element of the vector) to the score. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Mark Current Index</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[pq.top()[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We mark the current index as processed in the &#39;mp&#39; map. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Mark Adjacent Indices</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We mark the next index as processed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Mark Adjacent Indices</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;                
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We mark the previous index as processed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Pop from Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We remove the top element from the priority queue after processing it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return Score</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> score;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We return the calculated score after processing all elements. </div>
+                            <div class=""> If all slopes are the same, the function returns `true`, indicating the points form a straight line. </div>
                         </div>
                     
                 </div>
@@ -748,16 +620,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the use of a priority queue for selecting the smallest unmarked element.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> We iterate through the points exactly once, so the time complexity is O(n), where n is the number of points.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) because we need extra space for the priority queue and marking elements.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, as we only use a few variables for slope calculation.</div>    
                     </div>
 
                 </div>

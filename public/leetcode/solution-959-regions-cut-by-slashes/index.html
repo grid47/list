@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You are given an n x n grid, with the top-left cell at (0, 0) and the bottom-right cell at (n - 1, n - 1). A robot starts at a given position startPos = [startrow, startcol] on the grid, and a string s representing a sequence of movement instructions: &lsquo;L&rsquo; (move left), &lsquo;R&rsquo; (move right), &lsquo;U&rsquo; (move up), and &lsquo;D&rsquo; (move down). The robot can execute the instructions starting from any index i in s, but it stops if it moves off the grid or runs out of instructions. Your task is to return an array answer where answer[i] represents the number of instructions the robot can execute if it starts from the ith instruction. </div>
+<div class=""> You are given an n x n grid where each cell contains one of the following characters: &lsquo;/&rsquo;, &lsquo;', or &rsquo; &lsquo;. These characters divide the grid into different regions. Your task is to determine how many distinct regions the grid is divided into. </div>
 
 
 
@@ -362,47 +362,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given the size of the grid n, the starting position startPos, and a string s of instructions.</div>
-                        <div class=""> <b>Example:</b> n = 3, startPos = [0, 1], s = &#39;RRDDLU&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of strings representing the n x n grid, where each string corresponds to a row in the grid. Each character in the grid can be &#39;/&#39;, &#39;\&#39;, or &#39; &#39;.</div>
+                        <div class=""> <b>Example:</b> Input: grid = [&#34; /&#34;, &#34;\ &#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • startPos.length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= startrow, startcol &lt; n</div>
-                            
-                                <div style="margin-left: 20px;"> • s consists of &#39;L&#39;, &#39;R&#39;, &#39;U&#39;, and &#39;D&#39;.</div>
+                                <div style="margin-left: 20px;"> • grid[i][j] is either &#39;/&#39;, &#39;\&#39;, or &#39; &#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an array of integers where each element at index i represents the number of instructions that can be executed if the robot begins at the ith instruction in the sequence.</div>
-                        <div class=""> <b>Example:</b> For n = 3, startPos = [0, 1], s = &#39;RRDDLU&#39;, the output is [1, 5, 4, 3, 1, 0].</div>
+                        <div class=""> <b>Output:</b> Return the total number of distinct regions formed by the characters in the grid.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The function should return a non-negative integer representing the number of regions.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine how many instructions the robot can execute starting from each index in the instruction string while staying within the bounds of the grid.</div>
+                        <div class=""> <b>Goal:</b> The goal is to count the number of distinct regions formed by &#39;/&#39; and &#39;\&#39; characters in the grid, with the characters dividing the grid into different regions.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each instruction in the string s, simulate the robot&#39;s movement starting from that position, tracking the number of valid moves.</div>
+                                <div style="margin-left: 20px;"> • 1. Convert the grid into a larger grid where each cell in the original grid becomes a 3x3 subgrid.</div>
                             
-                                <div style="margin-left: 20px;"> • Stop the simulation if the robot moves off the grid or there are no more instructions to process.</div>
+                                <div style="margin-left: 20px;"> • 2. Mark regions in the larger grid based on the &#39;/&#39; and &#39;\&#39; characters.</div>
                             
-                                <div style="margin-left: 20px;"> • Store the number of valid instructions the robot can execute starting from each index and return the result.</div>
+                                <div style="margin-left: 20px;"> • 3. Use depth-first search (DFS) to count the number of distinct regions by traversing the grid and marking cells that are part of the same region.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must work efficiently for the maximum input size.</div>
+                        <div class=""> <b>Goal:</b> The input grid must adhere to the specified constraints: the grid is of size n x n, where 1 &lt;= n &lt;= 30, and each character in the grid is either &#39;/&#39;, &#39;\&#39;, or &#39; &#39;.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid size n and the instruction string length m are both capped at 500.</div>
+                                <div style="margin-left: 20px;"> • The grid will contain between 1 and 30 rows and columns.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each character in the grid will be either &#39;/&#39;, &#39;\&#39;, or &#39; &#39;.</div>
                             
                         </div>
                     </div>        
@@ -410,23 +410,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The robot will always start within the bounds of the grid.</div>
+                                <div style="margin-left: 20px;"> • The grid is a valid n x n matrix with characters &#39;/&#39;, &#39;\&#39;, and &#39; &#39;.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: n = 3, startPos = [0, 1], s = &#39;RRDDLU&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting from the initial position (0, 1), the robot can execute the following instructions starting from each index: 1 move from index 0 (&#39;R&#39;), 5 moves from index 1 (&#39;RDDLU&#39;), and so on.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [&#34; /&#34;, &#34;\ &#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the grid is divided into two distinct regions, one formed by the &#39;/&#39; and the other formed by the &#39;\&#39;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: n = 2, startPos = [1, 1], s = &#39;LURD&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> From position (1, 1), the robot can execute the following instructions starting from each index: 4 moves from index 0 (&#39;LURD&#39;), 1 move from index 1 (&#39;URD&#39;), and so on.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [&#34; /&#34;, &#34;  &#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the grid is divided into one region formed by the &#39;/&#39; character, and the second row is empty space.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3: n = 1, startPos = [0, 0], s = &#39;LRUD&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since the grid is of size 1x1, no moves can be executed, and the result is [0, 0, 0, 0].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [&#34;/\\&#34;, &#34;\/ &#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the grid is divided into five distinct regions due to the positioning of the &#39;\&#39; and &#39;/&#39; characters.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -450,18 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to simulate the robot&#39;s movement for each starting position and check how many valid moves it can make while staying within the grid.</div>
+                        <div class=""> <b>Approach:</b> The approach involves transforming the grid into a 3x3 matrix for each original grid cell, then counting the number of connected regions using depth-first search (DFS).</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check each instruction starting from every index in the string s.</div>
-                            
-                                <div style="margin-left: 20px;"> • We need to track the robot&#39;s position and stop when it moves off the grid.</div>
+                                <div style="margin-left: 20px;"> • Each cell in the grid can contribute to a new region or be part of an existing region depending on its connections with neighboring cells.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A simulation approach will work well here, ensuring that each instruction is processed for each possible starting point.</div>
+                                <div style="margin-left: 20px;"> • By expanding each cell into a 3x3 subgrid, we can simplify the problem of region counting by treating connected components as parts of the same region.</div>
                             
                         </div>
                     </div>
@@ -469,11 +467,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For each instruction in s, start simulating from the current index.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a larger grid where each cell in the original grid corresponds to a 3x3 block.</div>
                             
-                                <div style="margin-left: 20px;"> • Move the robot according to the instructions and check if it stays within the grid bounds.</div>
+                                <div style="margin-left: 20px;"> • 2. Based on whether the character is &#39;/&#39;, &#39;\&#39;, or &#39; &#39;, mark the relevant cells in the larger grid as part of the region.</div>
                             
-                                <div style="margin-left: 20px;"> • Keep track of the number of valid instructions executed and return the result for each starting index.</div>
+                                <div style="margin-left: 20px;"> • 3. Use depth-first search (DFS) to explore the grid, marking all cells that belong to the same region.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Count the number of distinct regions by counting the number of DFS explorations that start from unvisited cells.</div>
                             
                         </div>
                     </div>
@@ -482,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If n is 1, no movement is possible, so the result for all indices in s will be 0.</div>
+                                <div style="margin-left: 20px;"> • The grid will never be empty as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for n and m up to 500.</div>
+                                <div style="margin-left: 20px;"> • For larger grids, the solution must efficiently handle grids with dimensions up to 30x30.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all instructions would cause the robot to move off the grid, the result will be 0 for every index.</div>
+                                <div style="margin-left: 20px;"> • Consider grids with no &#39;/&#39; or &#39;\&#39; characters, where all cells are empty space.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle the largest grid size and instruction string length efficiently.</div>
+                                <div style="margin-left: 20px;"> • The grid will always be a square of size n x n with 1 &lt;= n &lt;= 30.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,25 +514,43 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Position Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Horizontal Movement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Slash Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Vertical Movement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Mark Grid for Slash</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Result Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Backslash Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Result Calculation (cont.)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Mark Grid for Backslash</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Region Counter</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Outer Loop for DFS</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Inner Loop for DFS</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Region Identification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 DFS Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Base Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Base Condition Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Mark Cell as Visited</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Recursive DFS Calls</button>
                     
                 </div>
 
@@ -541,17 +559,33 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> executeInstructions(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> st, string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> s.size(), h <span style="color:#666">=</span> m <span style="color:#666">+</span> n, v <span style="color:#666">=</span> m <span style="color:#666">+</span> n;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> hor((h <span style="color:#666">+</span> m) <span style="color:#666">*</span> <span style="color:#666">2</span>, m), ver((h <span style="color:#666">+</span>m) <span style="color:#666">*</span> <span style="color:#666">2</span>, m), res(m);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        hor[h] <span style="color:#666">=</span> ver[v] <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>        h <span style="color:#666">+=</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;L&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;R&#39;</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        v <span style="color:#666">+=</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;U&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;D&#39;</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        res[i] <span style="color:#666">=</span> min({  m, hor[h <span style="color:#666">-</span> st[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>], hor[h <span style="color:#666">-</span> st[<span style="color:#666">1</span>] <span style="color:#666">+</span> n],
-</span></span><span style="display:flex;"><span>                           ver[v <span style="color:#666">-</span> st[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>], ver[v <span style="color:#666">-</span> st[<span style="color:#666">0</span>] <span style="color:#666">+</span> n]  }) <span style="color:#666">-</span> i;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">regionsBySlashes</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> g(n <span style="color:#666">*</span> <span style="color:#666">3</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">*</span> <span style="color:#666">3</span>, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
+</span></span><span style="display:flex;"><span>                g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;\\&#39;</span>) {
+</span></span><span style="display:flex;"><span>                g[i <span style="color:#666">*</span> <span style="color:#666">3</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> reg <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">*</span> <span style="color:#666">3</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">*</span> <span style="color:#666">3</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            reg <span style="color:#666">+=</span> dfs(g, i, j) <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> reg;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>g, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (min(i, j) <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> max(i, j) <span style="color:#666">&gt;=</span> g.size() <span style="color:#666">||</span> g[i][j] <span style="color:#666">!=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    g[i][j] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dfs(g, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j) <span style="color:#666">+</span> dfs(g, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j) <span style="color:#666">+</span> dfs(g, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> dfs(g, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -559,103 +593,193 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> executeInstructions(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> st, string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">regionsBySlashes</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Function definition for &#39;executeInstructions&#39; which takes an integer n, a vector of integers st, and a string s as input. It returns a vector of integers as the result. </div>
+                            <div class=""> Declares the function that computes the number of regions formed by slashes in a given grid. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> s.size(), h <span style="color:#666">=</span> m <span style="color:#666">+</span> n, v <span style="color:#666">=</span> m <span style="color:#666">+</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes variables m (size of the string), h (horizontal position), and v (vertical position), both starting from m &#43; n. </div>
+                            <div class=""> Initializes the variable `n` with the size of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Initialization</b></div>
+                            <div class=""> <b>3 : Matrix Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> hor((h <span style="color:#666">+</span> m) <span style="color:#666">*</span> <span style="color:#666">2</span>, m), ver((h <span style="color:#666">+</span>m) <span style="color:#666">*</span> <span style="color:#666">2</span>, m), res(m);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> g(n <span style="color:#666">*</span> <span style="color:#666">3</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">*</span> <span style="color:#666">3</span>, <span style="color:#666">0</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Three vectors are initialized: hor (for horizontal positions), ver (for vertical positions), and res (for storing the result). </div>
+                            <div class=""> Expands the grid by a factor of 3 to better represent slashes and backslashes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop</b></div>
+                            <div class=""> <b>4 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for loop that iterates through the string s in reverse order, starting from the last character. </div>
+                            <div class=""> Outer loop to iterate over rows of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Position Update</b></div>
+                            <div class=""> <b>5 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        hor[h] <span style="color:#666">=</span> ver[v] <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the hor and ver arrays at the current positions of h and v to the current index i. </div>
+                            <div class=""> Inner loop to iterate over columns of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Horizontal Movement</b></div>
+                            <div class=""> <b>6 : Slash Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        h <span style="color:#666">+=</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;L&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;R&#39;</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adjusts the horizontal position (h) based on whether the current character in the string is &#39;L&#39; (left), &#39;R&#39; (right), or neither. </div>
+                            <div class=""> Checks if the current cell contains a forward slash and marks corresponding positions in the expanded grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Vertical Movement</b></div>
+                            <div class=""> <b>7 : Mark Grid for Slash</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        v <span style="color:#666">+=</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;U&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;D&#39;</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adjusts the vertical position (v) based on whether the current character in the string is &#39;U&#39; (up), &#39;D&#39; (down), or neither. </div>
+                            <div class=""> Marks the positions of the forward slash in the expanded grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Result Calculation</b></div>
+                            <div class=""> <b>8 : Backslash Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i] <span style="color:#666">=</span> min({  m, hor[h <span style="color:#666">-</span> st[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>], hor[h <span style="color:#666">-</span> st[<span style="color:#666">1</span>] <span style="color:#666">+</span> n],
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;\\&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the result for the current position by finding the minimum of various possible values based on horizontal movements. </div>
+                            <div class=""> Checks if the current cell contains a backslash and marks corresponding positions in the expanded grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Result Calculation (cont.)</b></div>
+                            <div class=""> <b>9 : Mark Grid for Backslash</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                           ver[v <span style="color:#666">-</span> st[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>], ver[v <span style="color:#666">-</span> st[<span style="color:#666">0</span>] <span style="color:#666">+</span> n]  }) <span style="color:#666">-</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                g[i <span style="color:#666">*</span> <span style="color:#666">3</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> g[i <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>][j <span style="color:#666">*</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">2</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Continues the result calculation for vertical movements and subtracts the current index i. </div>
+                            <div class=""> Marks the positions of the backslash in the expanded grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Region Counter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> reg <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the result vector containing the calculated values. </div>
+                            <div class=""> Initializes a counter for the number of distinct regions. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Outer Loop for DFS</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">*</span> <span style="color:#666">3</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Outer loop to iterate over rows of the expanded grid for DFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Inner Loop for DFS</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">*</span> <span style="color:#666">3</span>; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Inner loop to iterate over columns of the expanded grid for DFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Region Identification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            reg <span style="color:#666">+=</span> dfs(g, i, j) <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Performs DFS to identify and count a new region if it exists. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> reg;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the total number of regions identified in the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : DFS Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>g, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declares the depth-first search (DFS) helper function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Base Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (min(i, j) <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> max(i, j) <span style="color:#666">&gt;=</span> g.size() <span style="color:#666">||</span> g[i][j] <span style="color:#666">!=</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current cell is out of bounds or already visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Base Condition Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>; }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns 0 if the base condition is met. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Mark Cell as Visited</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    g[i][j] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the current cell as visited in the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Recursive DFS Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dfs(g, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j) <span style="color:#666">+</span> dfs(g, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j) <span style="color:#666">+</span> dfs(g, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> dfs(g, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively explores all neighboring cells to calculate the region size. </div>
                         </div>
                     
                 </div>
@@ -675,16 +799,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * m)</div>
-                        <div class=""> <b>Average Case:</b> O(n * m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n * m), where n is the grid size and m is the length of the instruction string.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> In all cases, the time complexity is O(n^2) because we need to explore every cell in the grid at least once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m)</div>
-                        <div class=""> <b>Worst Case:</b> O(m)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m), as we store the result array of length m.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the storage of the larger grid for processing and the space used by the depth-first search stack.</div>    
                     </div>
 
                 </div>

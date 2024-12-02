@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given a string s, return the number of palindromic substrings in it. A palindrome is a string that reads the same forward and backward. A substring is a contiguous sequence of characters within the string. </div>
+<div class=""> You are managing a product development process where each version of the product is based on its previous version. However, you have a version that failed the quality check. Since all subsequent versions are based on the previous ones, they also fail the quality check. Your task is to find the first bad version that caused all subsequent versions to be bad. You are given an API <code>bool isBadVersion(version)</code> that returns <code>true</code> if the version is bad, and <code>false</code> otherwise. Your goal is to find the first bad version while minimizing the number of calls to the API. </div>
 
 
 
@@ -370,47 +370,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string s, which contains lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> s = &#34;abc&#34;</div>
+                        <div class=""> <b>Input:</b> You are given an integer `n`, representing the total number of versions, and a function `isBadVersion(version)` that tells whether a version is bad or not.</div>
+                        <div class=""> <b>Example:</b> Input: n = 6, bad = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= bad &lt;= n &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of palindromic substrings in the given string s.</div>
-                        <div class=""> <b>Example:</b> 3</div>
+                        <div class=""> <b>Output:</b> Return the first bad version number that causes all subsequent versions to be bad.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result will be a single integer representing the count of palindromic substrings.</div>
+                                <div style="margin-left: 20px;"> • The output should be the version number of the first bad version.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Count the number of palindromic substrings in the string.</div>
+                        <div class=""> <b>Goal:</b> Find the first bad version by minimizing the number of calls to `isBadVersion`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a dynamic programming (DP) table to store whether a substring is a palindrome.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Use binary search to find the first bad version.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate over all possible substrings and use the DP table to check if they are palindromes.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Initialize two pointers: start at 1 and end at n.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count the palindromes by summing up the number of valid palindromic substrings.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Compute the midpoint of the current range.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If the midpoint is a bad version, narrow the search range to the left half (end = mid). Otherwise, narrow the search range to the right half (start = mid &#43; 1).</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: Repeat this process until the start pointer equals the end pointer, which will indicate the first bad version.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string s will always consist of lowercase English letters.</div>
+                        <div class=""> <b>Goal:</b> The problem involves finding a specific version that causes all subsequent versions to be bad, with a focus on optimizing the number of API calls.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The string length is between 1 and 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The string contains only lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -418,17 +420,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string is not empty.</div>
+                                <div style="margin-left: 20px;"> • The `isBadVersion` function is available and can be called.</div>
                             
-                                <div style="margin-left: 20px;"> • The solution must handle strings up to length 1000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • You need to minimize the number of calls to the `isBadVersion` API.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;abc&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The palindromic substrings are: &#39;a&#39;, &#39;b&#39;, &#39;c&#39;. Hence, the total count is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 6, bad = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The versions are [1, 2, 3, 4, 5, 6]. The first bad version is 4. The binary search process calls `isBadVersion(3)` (false), then `isBadVersion(5)` (true), and finally `isBadVersion(4)` (true), thus returning 4.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 1, bad = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since there is only one version and it is bad, the function immediately returns 1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,16 +458,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses dynamic programming (DP) to efficiently count all palindromic substrings by building up from smaller substrings.</div>
+                        <div class=""> <b>Approach:</b> The approach to solving the problem involves using binary search to minimize the number of calls to `isBadVersion` while locating the first bad version.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A palindrome substring must have the same first and last characters, and the substring excluding the first and last characters must also be a palindrome.</div>
+                                <div style="margin-left: 20px;"> • Binary search is an optimal approach for this problem as it allows us to narrow down the search space quickly, halving it with each check.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By using dynamic programming, we can efficiently keep track of which substrings are palindromes and count them.</div>
+                                <div style="margin-left: 20px;"> • We aim to minimize the number of API calls while ensuring correctness by consistently narrowing the search range.</div>
                             
                         </div>
                     </div>
@@ -469,11 +475,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a DP table where dp[i][j] represents whether the substring s[i..j] is a palindrome.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize two pointers: `start = 1` and `end = n`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each possible substring, check if it can form a palindrome (i.e., the first and last characters are the same, and the substring excluding those characters is a palindrome).</div>
+                                <div style="margin-left: 20px;"> • Step 2: While `start &lt; end`, calculate the midpoint: `mid = start &#43; (end - start) / 2`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count each valid palindromic substring.</div>
+                                <div style="margin-left: 20px;"> • Step 3: If `isBadVersion(mid)` returns true, update `end = mid` to search the left half. Otherwise, update `start = mid &#43; 1` to search the right half.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Once `start == end`, return the value of `start` as the first bad version.</div>
                             
                         </div>
                     </div>
@@ -482,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string will always have at least one character.</div>
+                                <div style="margin-left: 20px;"> • No empty input cases are possible since the length of n is at least 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution can handle strings of length up to 1000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large values of n, ensure that the binary search approach is used to handle the input efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider strings where all characters are the same or strings with no palindromic substrings.</div>
+                                <div style="margin-left: 20px;"> • If the first version is bad, the function should return 1 immediately.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Efficiently handle large inputs with a time complexity of O(n^2).</div>
+                                <div style="margin-left: 20px;"> • The number of versions, n, can be large, but the binary search will handle this efficiently in O(log n) time.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,35 +522,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Search Range</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Recursive Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Binary Search Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculate Midpoint</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Check Bad Version</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Narrow Search Range Left</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Narrow Search Range Right</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Input Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Memoization Setup</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Result Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Outer Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Inner Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Counting Palindromes</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Final Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return First Bad Version</button>
                     
                 </div>
 
@@ -551,23 +545,15 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mem;
-</span></span><span style="display:flex;"><span>string s;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> j) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][j];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[i][j] <span style="color:#666">=</span> (s[i] <span style="color:#666">==</span> s[j])<span style="color:#666">?</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">-</span> <span style="color:#666">1</span>)<span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countSubstrings</span>(string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s <span style="color:#666">=</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> i; j <span style="color:#666">&lt;</span> s.size(); j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> dp(i, j);        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">firstBadVersion</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">1</span>, e <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s <span style="color:#666">&lt;</span> e) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> s <span style="color:#666">+</span> (e <span style="color:#666">-</span> s) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isBadVersion(mid))
+</span></span><span style="display:flex;"><span>            e <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> e;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -575,153 +561,83 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mem;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">firstBadVersion</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a 2D vector &#39;mem&#39; to store the results of subproblems for memoization. This will be used to avoid redundant calculations of the palindrome checks. </div>
+                            <div class=""> Defines the function `firstBadVersion`, which takes an integer `n` representing the total number of versions and returns the number of the first bad version. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Initialize Search Range</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">1</span>, e <span style="color:#666">=</span> n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a string &#39;s&#39; to store the input string for which the number of palindromic substrings will be counted. </div>
+                            <div class=""> Initializes the search range with `s` as 1 (the first version) and `e` as `n` (the last version). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Recursive Function Definition</b></div>
+                            <div class=""> <b>3 : Binary Search Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s <span style="color:#666">&lt;</span> e) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the recursive function &#39;dp&#39; that checks whether the substring from index &#39;i&#39; to &#39;j&#39; is a palindrome. It returns 1 if the substring is a palindrome, otherwise 0. </div>
+                            <div class=""> Enters a loop that continues until the search range is narrowed down to a single version. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case</b></div>
+                            <div class=""> <b>4 : Calculate Midpoint</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> j) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> s <span style="color:#666">+</span> (e <span style="color:#666">-</span> s) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the substring length is 1 or 0 (i.e., i &gt;= j), in which case it is a palindrome by definition, so it returns 1. </div>
+                            <div class=""> Calculates the midpoint `mid` of the current search range to check whether the bad version lies before or after it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Memoization Check</b></div>
+                            <div class=""> <b>5 : Check Bad Version</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isBadVersion(mid))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the result for the substring from &#39;i&#39; to &#39;j&#39; has already been computed (stored in &#39;mem&#39;). If it has, it returns the stored result. </div>
+                            <div class=""> Checks whether the version at the midpoint is bad by calling the `isBadVersion` function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursion</b></div>
+                            <div class=""> <b>6 : Narrow Search Range Left</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[i][j] <span style="color:#666">=</span> (s[i] <span style="color:#666">==</span> s[j])<span style="color:#666">?</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">-</span> <span style="color:#666">1</span>)<span style="color:#666">:</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            e <span style="color:#666">=</span> mid;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively checks if the substring is a palindrome. If the characters at positions &#39;i&#39; and &#39;j&#39; are equal, it calls &#39;dp&#39; on the next inner substring. If not, it returns 0. </div>
+                            <div class=""> If the midpoint version is bad, the search range is narrowed by setting the end of the range `e` to `mid`, excluding all versions after it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Function Definition</b></div>
+                            <div class=""> <b>7 : Narrow Search Range Right</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countSubstrings</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the main function &#39;countSubstrings&#39; which takes the string &#39;s&#39; and returns the total number of palindromic substrings. </div>
+                            <div class=""> If the midpoint version is not bad, the search range is narrowed by setting the start of the range `s` to `mid &#43; 1`, excluding the current `mid` version. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Input Assignment</b></div>
+                            <div class=""> <b>8 : Return First Bad Version</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s <span style="color:#666">=</span> s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> e;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the input string &#39;s&#39; to the class member variable &#39;s&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Stores the size of the string &#39;s&#39; in the variable &#39;n&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Memoization Setup</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Resizes the &#39;mem&#39; vector to a 2D array of size n x n, initializing all values to -1. This will be used to store results of the &#39;dp&#39; function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Result Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes the variable &#39;ans&#39; to 0, which will store the total count of palindromic substrings. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Outer Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Starts an outer loop to iterate through each character of the string &#39;s&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Inner Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> i; j <span style="color:#666">&lt;</span> s.size(); j<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Starts an inner loop to consider all substrings starting at index &#39;i&#39; and ending at index &#39;j&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Counting Palindromes</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> dp(i, j);        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calls the &#39;dp&#39; function to check if the substring from &#39;i&#39; to &#39;j&#39; is a palindrome. Adds the result (1 or 0) to &#39;ans&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Final Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the final count of palindromic substrings stored in &#39;ans&#39;. </div>
+                            <div class=""> Returns the first bad version found by the binary search. </div>
                         </div>
                     
                 </div>
@@ -741,16 +657,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n^2) due to the nested loops used to check each substring.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(log n) due to the binary search, where we halve the search space with each API call.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the DP table storing results for all substrings.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only use a constant amount of extra space.</div>    
                     </div>
 
                 </div>

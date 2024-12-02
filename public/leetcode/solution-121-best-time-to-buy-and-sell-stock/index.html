@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are tasked with designing a strategy to rob houses along a circular street, where no two adjacent houses can be robbed on the same night. The goal is to maximize the total money stolen without triggering security alarms. </div>
+<div class=""> You are given an array of prices where prices[i] represents the price of a stock on the i-th day. You want to maximize your profit by buying the stock on one day and selling it on a future day. Return the maximum profit you can achieve from this transaction. If no profit can be made, return 0. </div>
 
 
 
@@ -370,43 +370,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers representing the amount of money at each house along the street. The houses are arranged in a circle.</div>
-                        <div class=""> <b>Example:</b> [3, 5, 1, 6]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array prices where prices[i] is the price of the stock on the i-th day.</div>
+                        <div class=""> <b>Example:</b> Input: prices = [10, 3, 15, 8, 12, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= prices.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= prices[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the maximum amount of money that can be robbed without robbing two adjacent houses.</div>
-                        <div class=""> <b>Example:</b> For input [3, 5, 1, 6], the output is 9.</div>
+                        <div class=""> <b>Output:</b> Return a single integer representing the maximum profit you can achieve from buying and selling the stock.</div>
+                        <div class=""> <b>Example:</b> Output: 9</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The profit should be the difference between the selling price and the buying price, where the selling day is after the buying day.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Design an efficient algorithm that calculates the maximum amount of money that can be stolen, taking into account the circular arrangement of houses.</div>
+                        <div class=""> <b>Goal:</b> The goal is to maximize the profit by choosing the best day to buy and the best day to sell in the future.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use dynamic programming to solve the problem. Consider two cases: one where the first house is included and one where it is not.</div>
+                                <div style="margin-left: 20px;"> • Start by initializing the lowest price (l) as the price of the first day.</div>
                             
-                                <div style="margin-left: 20px;"> • For each case, use dynamic programming to calculate the maximum money that can be robbed while ensuring adjacent houses are not robbed.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the prices and update the lowest price (l) as the minimum price encountered so far.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each price, calculate the potential profit by subtracting the lowest price (l) from the current price.</div>
+                            
+                                <div style="margin-left: 20px;"> • Keep track of the maximum profit (g) encountered during the iteration.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the maximum profit after processing all prices.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should efficiently handle up to 100 houses, each with a potential value between 0 and 1000.</div>
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the input array will contain at least one price and that all prices will be valid within the specified range.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input size will be manageable (1 &lt;= nums.length &lt;= 100).</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= prices.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • The maximum value of each house&#39;s money is 1000.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= prices[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>        
@@ -414,21 +422,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The houses are in a circular arrangement.</div>
-                            
-                                <div style="margin-left: 20px;"> • Adjacent houses cannot be robbed together.</div>
+                                <div style="margin-left: 20px;"> • The input array prices contains valid values with at least one price.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, you can rob houses 1 and 3 to maximize the stolen amount, totaling 9.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: prices = [10, 3, 15, 8, 12, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum profit can be achieved by buying the stock on day 2 (price = 3) and selling it on day 3 (price = 15). The profit is 15 - 3 = 12.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this input, robbing houses 1, 3, and 5 gives a total of 12, which is the maximum amount.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: prices = [7, 6, 4, 3, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, no profit can be made as prices keep decreasing, so the maximum profit is 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,16 +458,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We use dynamic programming to solve this problem, considering two possible cases: one where the first house is robbed and one where it is not. We then apply a standard dynamic programming approach to each case.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved by iterating through the prices while tracking the minimum price seen so far and calculating the potential profit for each day. The maximum profit is then updated accordingly.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Dynamic programming is a natural fit because we need to decide at each step whether to rob a house or skip it, based on the previous decisions.</div>
+                                <div style="margin-left: 20px;"> • The approach involves iterating over the array once to keep track of the minimum price and maximum profit.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We will break the problem into two smaller subproblems: one where we exclude the first house and one where we include the first house.</div>
+                                <div style="margin-left: 20px;"> • The key observation is that the best profit comes from buying at the lowest price before a higher price in the future.</div>
                             
                         </div>
                     </div>
@@ -469,9 +475,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a helper function for dynamic programming to calculate the maximum money robbed, considering the first house as part of the sequence.</div>
+                                <div style="margin-left: 20px;"> • Initialize the variable &#39;l&#39; to the first price (lowest price).</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat the calculation excluding the first house and take the maximum of both results.</div>
+                                <div style="margin-left: 20px;"> • Initialize the variable &#39;g&#39; to 0 (no profit initially).</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate over the prices, and for each price update the lowest price (l) and calculate the profit (current price - l).</div>
+                            
+                                <div style="margin-left: 20px;"> • Update the maximum profit (g) whenever a higher profit is found.</div>
+                            
+                                <div style="margin-left: 20px;"> • After iterating through all prices, return the maximum profit (g).</div>
                             
                         </div>
                     </div>
@@ -480,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input is an empty array, the result should be 0.</div>
+                                <div style="margin-left: 20px;"> • There are no empty inputs allowed, as prices array has at least one element.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle cases where the number of houses is large (up to 100).</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle inputs up to 100,000 prices.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all houses contain 0 money, the maximum amount that can be robbed is 0.</div>
+                                <div style="margin-left: 20px;"> • If all prices are the same or decreasing, the maximum profit will be 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle edge cases such as arrays with only one house, or with houses containing no money.</div>
+                                <div style="margin-left: 20px;"> • The array length will always be between 1 and 100,000, inclusive.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,35 +524,17 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Conditional Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Minimum Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Profit Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Array Manipulation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Array Resize</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Array Manipulation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
                 </div>
 
@@ -549,26 +543,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rob</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> max(dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>], dp[i <span style="color:#666">-</span> <span style="color:#666">2</span>] <span style="color:#666">+</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> dp[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    dp.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">2</span>] <span style="color:#666">=</span> nums[<span style="color:#666">1</span>];        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> max(dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>], dp[i <span style="color:#666">-</span> <span style="color:#666">2</span>] <span style="color:#666">+</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);        
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(dp[n], r1);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProfit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> prices[<span style="color:#666">0</span>], g <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: prices) {
+</span></span><span style="display:flex;"><span>        l <span style="color:#666">=</span> min(l, x);
+</span></span><span style="display:flex;"><span>        g <span style="color:#666">=</span> max(g, x <span style="color:#666">-</span> l);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> g;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -576,153 +557,63 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rob</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProfit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The method definition for the &#39;rob&#39; function, which takes a vector of integers as input. </div>
+                            <div class=""> Declare a function to compute the maximum profit from stock prices given as input. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> prices[<span style="color:#666">0</span>], g <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a variable &#39;n&#39; to store the size of the input vector &#39;nums&#39;. </div>
+                            <div class=""> Initialize `l` to the first price (representing the lowest price seen so far) and `g` to 0 (representing the maximum profit). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Conditional Statement</b></div>
+                            <div class=""> <b>3 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: prices) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if there&#39;s only one house. If so, return its value as it is the only option. </div>
+                            <div class=""> Iterate over all stock prices to compute the lowest price and maximum profit dynamically. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Array Initialization</b></div>
+                            <div class=""> <b>4 : Minimum Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        l <span style="color:#666">=</span> min(l, x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a dynamic programming array &#39;dp&#39; of size &#39;n&#39; with all elements set to 0. </div>
+                            <div class=""> Update `l` to the minimum of the current price and the previously seen lowest price. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Assignment</b></div>
+                            <div class=""> <b>5 : Profit Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        g <span style="color:#666">=</span> max(g, x <span style="color:#666">-</span> l);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the first element of &#39;dp&#39; to 0, as no money can be robbed from the first house. </div>
+                            <div class=""> Update `g` to the maximum profit seen so far by subtracting the lowest price from the current price. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Assignment</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> g;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the second element of &#39;dp&#39; to the value of the first house, since it’s the first valid option. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Loop Iteration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Begins a loop from index 2 to &#39;n&#39;, iterating over the houses to calculate the maximum money that can be robbed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Array Manipulation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> max(dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>], dp[i <span style="color:#666">-</span> <span style="color:#666">2</span>] <span style="color:#666">+</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> For each house, we decide whether to rob it (i.e., add its value to the result of robbing up to house &#39;i-2&#39;) or skip it (i.e., keep the value from &#39;i-1&#39;). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Variable Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> dp[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Stores the final result of the first dynamic programming sequence (up to house &#39;n-1&#39;). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Array Resize</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Resizes the &#39;dp&#39; array to accommodate one more element and initializes the new values to 0. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sets the second element of the resized &#39;dp&#39; array to 0, representing no money robbed from the first house. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">2</span>] <span style="color:#666">=</span> nums[<span style="color:#666">1</span>];        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sets the third element of &#39;dp&#39; to the value of the second house. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Loop Iteration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Begins another loop, this time starting from house 3 (after resizing the array) to calculate maximum money that can be robbed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Array Manipulation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> max(dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>], dp[i <span style="color:#666">-</span> <span style="color:#666">2</span>] <span style="color:#666">+</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> As before, we update &#39;dp&#39; based on whether we rob the current house or not. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(dp[n], r1);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the maximum value between the results of the two dynamic programming sequences. </div>
+                            <div class=""> Return the maximum profit calculated. </div>
                         </div>
                     
                 </div>
@@ -742,16 +633,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the nums array.</div>
-                        <div class=""> <b>Average Case:</b> O(n), since we iterate over the array twice for the two cases.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the nums array.</div> 
-                        <div class=""> <b>Description:</b> The algorithm processes each element of the array once for each of the two cases, making the time complexity linear in terms of the number of houses.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we process each element of the prices array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), as space is used to store the results of subproblems.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), due to the space used for the dynamic programming table.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear because we store results for subproblems in an array of size n.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because we only need a constant amount of space to store the variables for the minimum price and maximum profit.</div>    
                     </div>
 
                 </div>

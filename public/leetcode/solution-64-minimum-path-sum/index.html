@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 31, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given the root of a binary tree, return the values of its nodes as they appear in an inorder traversal. Inorder traversal visits nodes in the left subtree, the root, and then the right subtree. </div>
+<div class=""> Given an m x n grid filled with non-negative integers, find a path from the top-left to the bottom-right corner that minimizes the sum of all numbers along the way. The robot can only move either right or down at each step. </div>
 
 
 
@@ -371,47 +371,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is the root of a binary tree where each node has a value and pointers to left and right child nodes.</div>
-                        <div class=""> <b>Example:</b> Input: root = [5,3,8,1,4,null,10]</div>
+                        <div class=""> <b>Input:</b> An integer 2D grid where grid[i][j] represents the cost at cell (i, j).</div>
+                        <div class=""> <b>Example:</b> Input: grid = [[2,3,4],[5,1,2],[3,2,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 100].</div>
+                                <div style="margin-left: 20px;"> • m == grid.length</div>
                             
-                                <div style="margin-left: 20px;"> • -100 &lt;= Node.val &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • n == grid[i].length</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 200</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= grid[i][j] &lt;= 200</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list of integers representing the inorder traversal of the binary tree.</div>
-                        <div class=""> <b>Example:</b> Output: [1,3,4,5,8,10]</div>
+                        <div class=""> <b>Output:</b> Return the minimum sum of numbers along the path from the top-left to the bottom-right corner.</div>
+                        <div class=""> <b>Example:</b> Output: 10</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output list must contain the values of all nodes visited in correct inorder sequence.</div>
+                                <div style="margin-left: 20px;"> • The result will always be less than or equal to 2 * 10^9.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Perform an inorder traversal of the binary tree and return the node values in the correct order.</div>
+                        <div class=""> <b>Goal:</b> Calculate the path from the top-left to the bottom-right corner of the grid that minimizes the total sum.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Traverse the left subtree recursively.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each cell of the grid.</div>
                             
-                                <div style="margin-left: 20px;"> • Visit the root node and append its value to the result list.</div>
+                                <div style="margin-left: 20px;"> • At each cell (i, j), calculate the minimum cost to reach the cell from either the top or the left neighbor.</div>
                             
-                                <div style="margin-left: 20px;"> • Traverse the right subtree recursively.</div>
+                                <div style="margin-left: 20px;"> • For the top row or the leftmost column, only consider cells that exist within the bounds.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the value at the bottom-right corner as the final result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the traversal correctly handles binary trees with various structures.</div>
+                        <div class=""> <b>Goal:</b> The grid size and cell values must adhere to the constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Handle null nodes gracefully.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 200</div>
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works for trees with all node values at the boundaries of the valid range.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= grid[i][j] &lt;= 200</div>
                             
                         </div>
                     </div>        
@@ -419,29 +425,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input tree is binary (each node has at most two children).</div>
+                                <div style="margin-left: 20px;"> • The grid is non-empty and contains at least one cell.</div>
                             
-                                <div style="margin-left: 20px;"> • The input tree structure is well-formed, with nodes correctly linked.</div>
+                                <div style="margin-left: 20px;"> • The top-left corner is always the starting point.</div>
+                            
+                                <div style="margin-left: 20px;"> • The bottom-right corner is the destination.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [2,1,3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The inorder traversal visits nodes in the order: left (1), root (2), right (3). Output: [1,2,3].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[2,3,4],[5,1,2],[3,2,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The path 2 → 3 → 1 → 2 → 1 minimizes the sum, giving an output of 10.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [10,null,15,null,20]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The inorder traversal visits nodes in the order: root (10), right child (15), right subtree (20). Output: [10,15,20].</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = []</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> An empty tree has no nodes to traverse. Output: [].</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> A single-node tree has only the root to traverse. Output: [7].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1,4,7],[2,5,6]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The path 1 → 4 → 7 → 6 minimizes the sum, giving an output of 13.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -465,20 +465,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Perform an inorder traversal of the binary tree using both recursive and iterative methods.</div>
+                        <div class=""> <b>Approach:</b> Use a dynamic programming approach to iteratively calculate the minimum path sum for each cell, based on values from its top or left neighbors.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Inorder traversal visits nodes in the order: left subtree, root, right subtree.</div>
+                                <div style="margin-left: 20px;"> • The problem involves minimizing the sum, so dynamic programming is suitable.</div>
                             
-                                <div style="margin-left: 20px;"> • A recursive implementation is straightforward but can be replaced with an iterative stack-based approach for better control over recursion depth.</div>
+                                <div style="margin-left: 20px;"> • Each cell&#39;s minimum cost depends on the values of its top and left neighbors.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Iterative traversal avoids the function call stack and provides explicit stack management.</div>
-                            
-                                <div style="margin-left: 20px;"> • Both methods result in the same output but vary in implementation style and use of memory.</div>
+                                <div style="margin-left: 20px;"> • Start with the base cases for the top row and leftmost column and build up the solution iteratively.</div>
                             
                         </div>
                     </div>
@@ -486,13 +484,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty list to store the result and a stack to manage traversal states.</div>
+                                <div style="margin-left: 20px;"> • Start from the top-left cell and iterate through each cell in the grid.</div>
                             
-                                <div style="margin-left: 20px;"> • Push nodes onto the stack while traversing to the leftmost node.</div>
+                                <div style="margin-left: 20px;"> • For each cell, calculate the minimum path sum by adding the cell&#39;s value to the minimum of its top or left neighbors&#39; values.</div>
                             
-                                <div style="margin-left: 20px;"> • Pop nodes from the stack, append their value to the result, and traverse their right child.</div>
+                                <div style="margin-left: 20px;"> • For cells in the top row, only consider the left neighbor (if it exists).</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat until all nodes are visited.</div>
+                                <div style="margin-left: 20px;"> • For cells in the leftmost column, only consider the top neighbor (if it exists).</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the value at the bottom-right corner as the result.</div>
                             
                         </div>
                     </div>
@@ -501,24 +501,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty tree (root = null) should return an empty list.</div>
+                                <div style="margin-left: 20px;"> • Not applicable as the input grid is guaranteed to have at least one cell.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A tree with maximum nodes (100) with a balanced or unbalanced structure.</div>
+                                <div style="margin-left: 20px;"> • A grid with maximum size (200 x 200) containing large values close to the upper bound (200).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All node values are the same, e.g., root = [5,5,5].</div>
+                                <div style="margin-left: 20px;"> • A grid where all values are zero, resulting in a minimum path sum of 0.</div>
                             
-                                <div style="margin-left: 20px;"> • All nodes are arranged in a single line (left-skewed or right-skewed tree).</div>
+                                <div style="margin-left: 20px;"> • A grid where the only path is straight down or straight right.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure no extra nodes are added or skipped during traversal.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles edge cases for single-row or single-column grids efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -537,27 +537,15 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Get Grid Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Handle First Row</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Handle First Column</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Nested Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Fill the Rest of the Grid</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Stack Push</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Pointer Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Stack Pop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Stack Pop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pointer Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Minimum Path Sum</button>
                     
                 </div>
 
@@ -566,20 +554,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> inorderTraversal(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nodes;
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> todo;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (root <span style="color:#666">||</span> <span style="color:#666">!</span>todo.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (root) {
-</span></span><span style="display:flex;"><span>            todo.push(root);
-</span></span><span style="display:flex;"><span>            root <span style="color:#666">=</span> root <span style="color:#666">-&gt;</span> left;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        root <span style="color:#666">=</span> todo.top();
-</span></span><span style="display:flex;"><span>        todo.pop();
-</span></span><span style="display:flex;"><span>        nodes.push_back(root <span style="color:#666">-&gt;</span> val);
-</span></span><span style="display:flex;"><span>        root <span style="color:#666">=</span> root <span style="color:#666">-&gt;</span> right;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minPathSum</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Handle the first row
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        grid[<span style="color:#666">0</span>][j] <span style="color:#666">+=</span> grid[<span style="color:#666">0</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nodes;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Handle the first column
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        grid[i][<span style="color:#666">0</span>] <span style="color:#666">+=</span> grid[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Fill the rest of the grid
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">+=</span> min(grid[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j], grid[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> grid[m <span style="color:#666">-</span> <span style="color:#666">1</span>][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -590,120 +585,68 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> inorderTraversal(TreeNode<span style="color:#666">*</span> root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minPathSum</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a function `inorderTraversal` that takes the root node of a binary tree as input and returns a vector containing the inorder traversal of the tree. </div>
+                            <div class=""> This line declares a function named `minPathSum` that takes a 2D vector `grid` representing the grid as input and returns the minimum path sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Result Initialization</b></div>
+                            <div class=""> <b>2 : Get Grid Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nodes;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an empty vector `nodes` to store the inorder traversal result. </div>
+                            <div class=""> This line gets the dimensions of the grid, `m` for rows and `n` for columns. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Stack Initialization</b></div>
+                            <div class=""> <b>3 : Handle First Row</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> todo;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        grid[<span style="color:#666">0</span>][j] <span style="color:#666">+=</span> grid[<span style="color:#666">0</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an empty stack `todo` to keep track of nodes to be visited. </div>
+                            <div class=""> This loop iterates over the first row of the grid, starting from the second element. For each cell, it adds the value of the cell to its left to the current cell&#39;s value. This represents the minimum path sum to reach that cell from the top-left corner. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Iteration</b></div>
+                            <div class=""> <b>4 : Handle First Column</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (root <span style="color:#666">||</span> <span style="color:#666">!</span>todo.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        grid[i][<span style="color:#666">0</span>] <span style="color:#666">+=</span> grid[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates until both the `root` node and the `todo` stack are empty. </div>
+                            <div class=""> This loop iterates over the first column of the grid, starting from the second row. For each cell, it adds the value of the cell above it to the current cell&#39;s value. This represents the minimum path sum to reach that cell from the top-left corner. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Nested Loop Iteration</b></div>
+                            <div class=""> <b>5 : Fill the Rest of the Grid</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">+=</span> min(grid[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j], grid[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> While the current `root` node is not null, we keep pushing it onto the stack and moving to its left child. </div>
+                            <div class=""> This nested loop iterates over the remaining cells of the grid. For each cell `(i, j)`, it calculates the minimum path sum to reach that cell by adding the minimum of the values from the cell above and the cell to the left to the current cell&#39;s value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Stack Push</b></div>
+                            <div class=""> <b>6 : Return Minimum Path Sum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            todo.push(root);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> grid[m <span style="color:#666">-</span> <span style="color:#666">1</span>][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the current `root` node onto the stack. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Pointer Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            root <span style="color:#666">=</span> root <span style="color:#666">-&gt;</span> left;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves the `root` pointer to its left child. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Stack Pop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        root <span style="color:#666">=</span> todo.top();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pops the top node from the stack and assigns it to the `root`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Stack Pop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        todo.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes the top node from the stack. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Result Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nodes.push_back(root <span style="color:#666">-&gt;</span> val);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the value of the current `root` node to the `nodes` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Pointer Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        root <span style="color:#666">=</span> root <span style="color:#666">-&gt;</span> right;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves the `root` pointer to its right child. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nodes;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the `nodes` vector containing the inorder traversal of the tree. </div>
+                            <div class=""> After filling the grid with minimum path sums, the function returns the value at the bottom-right corner, which represents the minimum path sum from the top-left to the bottom-right corner. </div>
                         </div>
                     
                 </div>
@@ -723,16 +666,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> Each node is visited exactly once during the traversal.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> Each cell in the grid is visited exactly once.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, the stack stores all nodes (e.g., in a completely skewed tree).</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The solution modifies the input grid in place, requiring no extra space.</div>    
                     </div>
 
                 </div>

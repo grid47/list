@@ -299,7 +299,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1099s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1102s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/378.webp" 
            alt="A matrix where the kth smallest element glows softly, showing its position within the sorted matrix." 
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> You are given a group of <code>n</code> people, each with a unique amount of money and quietness. An array <code>richer</code> specifies the relationships between people where <code>richer[i] = [ai, bi]</code> indicates that person <code>ai</code> has more money than person <code>bi</code>. You are also given an array <code>quiet</code> where <code>quiet[i]</code> represents the quietness of person <code>i</code>. Your task is to return an array <code>answer</code> where <code>answer[x]</code> is the person <code>y</code> who has the least quietness among all people who have equal or more money than person <code>x</code>. </div>
+<div class=""> Given an n x n matrix where each row and column is sorted in ascending order, find the kth smallest element in the matrix. The matrix is sorted in both rows and columns, but the kth smallest element is the one in the sorted order, not necessarily distinct. </div>
 
 
 
@@ -373,57 +373,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `richer`, where each element `richer[i] = [ai, bi]` represents a richer relationship between two people, and an array `quiet` where `quiet[i]` gives the quietness level of person `i`.</div>
-                        <div class=""> <b>Example:</b> Input: richer = [[2, 1], [3, 0], [4, 2]], quiet = [2, 3, 1, 0]</div>
+                        <div class=""> <b>Input:</b> The input consists of a matrix with n rows and n columns, where each element in the matrix is sorted in non-decreasing order. You are also given a value k.</div>
+                        <div class=""> <b>Example:</b> matrix = [[1, 5, 9], [10, 11, 13], [12, 13, 15]], k = 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • n == matrix.length == matrix[i].length</div>
                             
-                                <div style="margin-left: 20px;"> • quiet.length == n</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • All values of quiet are unique.</div>
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= matrix[i][j] &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= richer.length &lt;= n * (n - 1) / 2</div>
+                                <div style="margin-left: 20px;"> • All the rows and columns of matrix are sorted in non-decreasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt; n</div>
-                            
-                                <div style="margin-left: 20px;"> • ai != bi</div>
-                            
-                                <div style="margin-left: 20px;"> • All pairs in richer are unique and logically consistent.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= n^2</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an array `answer` where each `answer[x]` represents the person with the least quietness among all people who have equal or more money than person `x`.</div>
-                        <div class=""> <b>Example:</b> Output: [3, 3, 2, 3]</div>
+                        <div class=""> <b>Output:</b> The output is the kth smallest element from the matrix.</div>
+                        <div class=""> <b>Example:</b> Output: 13</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The array `answer` must be of the same length as the input `quiet` array.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine, for each person, the least quiet person who is either richer or equally rich.</div>
+                        <div class=""> <b>Goal:</b> Use a min-heap (priority queue) to efficiently find the kth smallest element from the matrix.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Build a graph of richer relationships, where each person points to those they are richer than.</div>
+                                <div style="margin-left: 20px;"> • Initialize a priority queue and push the first element from each row along with its position in the row.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use Depth First Search (DFS) to find the least quiet person among all people who have more money or are equally rich as the current person.</div>
+                                <div style="margin-left: 20px;"> • Pop the top element from the priority queue, and push the next element from the same row (if it exists) into the priority queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Fill the result array with the index of the quietest person for each person in the group.</div>
+                                <div style="margin-left: 20px;"> • Repeat the process until you pop the kth element, which is the kth smallest element in the matrix.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution works within the given constraints of `n` and `richer` size.</div>
+                        <div class=""> <b>Goal:</b> The problem is constrained by the size of the matrix (n x n) and the value of k.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input arrays `richer` and `quiet` will always be valid as per the problem&#39;s constraints.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • The function must handle up to 500 people efficiently.</div>
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= matrix[i][j] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements in the matrix are sorted in non-decreasing order.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= n^2</div>
                             
                         </div>
                     </div>        
@@ -431,21 +429,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All relationships in `richer` are logically consistent.</div>
+                                <div style="margin-left: 20px;"> • The matrix is sorted both row-wise and column-wise.</div>
                             
-                                <div style="margin-left: 20px;"> • The input arrays `quiet` contain unique quietness values.</div>
+                                <div style="margin-left: 20px;"> • The value of k is valid and within the range of the total number of elements in the matrix.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: richer = [[2, 1], [3, 0], [4, 2]], quiet = [2, 3, 1, 0]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, person 0 is richer than 1, person 1 is richer than 2, and person 2 is richer than 3. By following the richer relationships and quietness values, we determine that for each person, the person with the least quietness among those richer or equally rich is as follows: [3, 3, 2, 3].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> matrix = [[1, 5, 9], [10, 11, 13], [12, 13, 15]], k = 8</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sorted matrix elements are [1, 5, 9, 10, 11, 12, 13, 13, 15]. The 8th smallest element is 13.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: richer = [], quiet = [0]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, there is only one person. Since there are no richer relationships, the only answer is person 0 themselves. The output is [0].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> matrix = [[-5]], k = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The only element in the matrix is -5, so the 1st smallest element is -5.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -469,16 +467,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution leverages a depth-first search (DFS) approach to explore the richer relationships and determine the quietest person who is richer or equally rich.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem by using a priority queue (min-heap) to efficiently track the smallest elements in the matrix.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to efficiently search for the quietest person who is richer or equally rich.</div>
+                                <div style="margin-left: 20px;"> • Since the matrix is sorted, we can use a priority queue to extract the smallest elements efficiently.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using DFS will allow us to traverse the graph of relationships and propagate the quietest person for each person based on their richer relationships.</div>
+                                <div style="margin-left: 20px;"> • The priority queue will allow us to track the smallest element and ensure that we find the kth smallest element without having to sort the entire matrix.</div>
                             
                         </div>
                     </div>
@@ -486,11 +484,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Create a graph to store the richer relationships.</div>
+                                <div style="margin-left: 20px;"> • Create a priority queue and insert the first element of each row into the queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Perform a DFS for each person to determine the quietest person among those who are richer or equally rich.</div>
+                                <div style="margin-left: 20px;"> • Pop the smallest element and push the next element from the same row into the queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Return the array of answers.</div>
+                                <div style="margin-left: 20px;"> • Repeat this process k times to extract the kth smallest element.</div>
                             
                         </div>
                     </div>
@@ -499,22 +497,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When there are no richer relationships, each person is only compared to themselves.</div>
+                                <div style="margin-left: 20px;"> • The input matrix will always be non-empty as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the case where `n` is large (up to 500) and all possible richer relationships are included.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle up to the maximum constraints efficiently, with matrix size up to 300 x 300.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If a person is the richest (or tied for the richest), their answer will be themselves.</div>
+                                <div style="margin-left: 20px;"> • The matrix may contain negative values, and the kth smallest element can be negative as well.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The function must handle cases where no richer relationships exist.</div>
+                                <div style="margin-left: 20px;"> • The value of k will always be valid, and the matrix is guaranteed to be sorted.</div>
                             
                         </div>                                                                        
                     </div>
@@ -531,31 +529,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Matrix Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Priority Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Populate Richer Relationships</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Result Vector</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Heap Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Iterate Over Quiet Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Vector Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Main Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Helper Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Heap Top Extraction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Base Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Heap Pop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Initialize Current Person</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Next Element Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Depth-First Search</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Heap Push</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 End of Main Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Final Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -564,21 +564,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> richer2;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> loudAndRich(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> richer, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> quiet) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: richer) richer2[v[<span style="color:#666">1</span>]].push_back(v[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> (quiet.size(), <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> quiet.size(); i<span style="color:#666">++</span>) dfs(i, quiet);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> i, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>quiet) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(res[i] <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res[i];
-</span></span><span style="display:flex;"><span>    res[i] <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span> : richer2[i])
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(quiet[res[i]] <span style="color:#666">&gt;</span> quiet[dfs(j, quiet)]) res[i] <span style="color:#666">=</span> res[j];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res[i];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kthSmallest</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mtx.size(), n <span style="color:#666">=</span> mtx[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> <span style="color:#666">0</span>; r <span style="color:#666">&lt;</span> min(m, k); r<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        pq.push({mtx[r][<span style="color:#666">0</span>], r, <span style="color:#666">0</span>});
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cur;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n)
+</span></span><span style="display:flex;"><span>        pq.push({ mtx[cur[<span style="color:#666">1</span>]][cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>], cur[<span style="color:#666">1</span>], cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span> });
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    cur <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cur[<span style="color:#666">0</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -586,133 +592,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> richer2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kthSmallest</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a hash map `richer2` to store relationships of richer individuals for each person. </div>
+                            <div class=""> Declares the function `kthSmallest` which takes a matrix `mtx` and an integer `k` as inputs, and returns the kth smallest element from the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Matrix Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mtx.size(), n <span style="color:#666">=</span> mtx[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a vector `res` to store the final results for each person. </div>
+                            <div class=""> Extracts the number of rows (`m`) and columns (`n`) from the matrix `mtx`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Declaration</b></div>
+                            <div class=""> <b>3 : Priority Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> loudAndRich(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> richer, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> quiet) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare the function `loudAndRich`, which accepts the `richer` matrix and `quiet` vector to determine the least quiet richest person for each individual. </div>
+                            <div class=""> Initializes a min-heap priority queue `pq` to store elements in ascending order. Each element in the queue is a vector containing a matrix element, its row index, and its column index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Populate Richer Relationships</b></div>
+                            <div class=""> <b>4 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: richer) richer2[v[<span style="color:#666">1</span>]].push_back(v[<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> <span style="color:#666">0</span>; r <span style="color:#666">&lt;</span> min(m, k); r<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Populate the `richer2` map where for each person, the list of people they are richer than is stored. </div>
+                            <div class=""> Loops through the first `k` rows (or less if the matrix has fewer rows) and pushes the first element of each row into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Initialize Result Vector</b></div>
+                            <div class=""> <b>5 : Heap Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> (quiet.size(), <span style="color:#666">-</span><span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({mtx[r][<span style="color:#666">0</span>], r, <span style="color:#666">0</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the `res` vector with the same size as the `quiet` vector, filled with -1. </div>
+                            <div class=""> Pushes a triplet (value, row index, column index) for the first element of each row into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Iterate Over Quiet Array</b></div>
+                            <div class=""> <b>6 : Vector Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> quiet.size(); i<span style="color:#666">++</span>) dfs(i, quiet);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cur;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each person in the `quiet` array and call the `dfs` function to calculate the least quiet richest person for each. </div>
+                            <div class=""> Declares a vector `cur` to temporarily store the current smallest element and its indices from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class=""> <b>7 : Main Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>pq.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the populated `res` vector containing the answers for each individual. </div>
+                            <div class=""> Runs a loop to extract the smallest element from the heap `k-1` times, ensuring that the heap contains the next smallest elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Helper Function Declaration</b></div>
+                            <div class=""> <b>8 : Heap Top Extraction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> i, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>quiet) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">=</span> pq.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare the helper function `dfs`, which performs a depth-first search to find the quietest and richest individual for person `i`. </div>
+                            <div class=""> Extracts the top (smallest) element from the priority queue into the `cur` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Base Case Check</b></div>
+                            <div class=""> <b>9 : Heap Pop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(res[i] <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the result for person `i` has already been calculated. If so, return the result. </div>
+                            <div class=""> Removes the extracted top element from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Initialize Current Person</b></div>
+                            <div class=""> <b>10 : Next Element Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res[i] <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initially, assume that the least quiet richest person for `i` is themselves. </div>
+                            <div class=""> Checks if the next element in the current row exists (i.e., the current column index is within bounds). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Depth-First Search</b></div>
+                            <div class=""> <b>11 : Heap Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span> : richer2[i])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({ mtx[cur[<span style="color:#666">1</span>]][cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>], cur[<span style="color:#666">1</span>], cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span> });
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each person `j` who is richer than `i`, perform a depth-first search to find their least quiet richest person. </div>
+                            <div class=""> Pushes the next element from the current row into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Update Result</b></div>
+                            <div class=""> <b>12 : End of Main Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(quiet[res[i]] <span style="color:#666">&gt;</span> quiet[dfs(j, quiet)]) res[i] <span style="color:#666">=</span> res[j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the quietness of the current person is greater than the quietness of the person found through DFS, update the result to the quieter person. </div>
+                            <div class=""> Marks the end of the main while loop that processes the next smallest elements from the heap. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Return Result</b></div>
+                            <div class=""> <b>13 : Final Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cur <span style="color:#666">=</span> pq.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the result for person `i`. </div>
+                            <div class=""> Extracts the top element from the priority queue, which is now the kth smallest element after `k-1` extractions. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cur[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the value of the kth smallest element from the top of the priority queue. </div>
                         </div>
                     
                 </div>
@@ -732,16 +748,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; r)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; r)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n &#43; r), where `n` is the number of people and `r` is the number of richer relationships. Each person is processed once, and we perform a DFS to explore all relationships.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(k log n)</div>
+                        <div class=""> <b>Average Case:</b> O(k log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(k log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(k log n) because we are performing k operations with a priority queue of size n.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; r)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n &#43; r), which accounts for the graph of richer relationships and the storage for the result array.</div>    
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required to store the elements in the priority queue.</div>    
                     </div>
 
                 </div>

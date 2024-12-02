@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 20, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> A string is considered nice if every letter that appears in the string appears both in uppercase and lowercase. For example, &lsquo;aA&rsquo; and &lsquo;bB&rsquo; are nice strings, but &lsquo;a&rsquo; and &lsquo;B&rsquo; are not. Given a string s, find the longest nice substring of s. If there are multiple longest nice substrings, return the one that appears first. If no nice substring exists, return an empty string. </div>
+<div class=""> You are given an undirected graph where each node is labeled between 0 and n - 1. The graph is represented as a 2D array, where graph[u] contains the nodes that are adjacent to node u. A graph is bipartite if its nodes can be divided into two sets such that every edge connects a node from one set to a node in the other set. Your task is to return true if the graph is bipartite, otherwise return false. </div>
 
 
 
@@ -372,43 +372,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a string s consisting of uppercase and lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#39;aAAbB&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a 2D array graph, where each graph[u] contains the nodes adjacent to node u.</div>
+                        <div class=""> <b>Example:</b> Input: graph = [[1, 2], [0, 2], [0, 1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of uppercase and lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= graph[u].length &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • graph[u] contains unique nodes</div>
+                            
+                                <div style="margin-left: 20px;"> • If graph[u] contains v, graph[v] contains u</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the longest nice substring. If no such substring exists, return an empty string.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;aA&#39;</div>
+                        <div class=""> <b>Output:</b> The output should be a boolean value: true if the graph is bipartite, false otherwise.</div>
+                        <div class=""> <b>Example:</b> Output: false</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The function must return true if the graph is bipartite, false otherwise.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the longest substring where every letter appears in both its lowercase and uppercase form.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine if the graph can be divided into two independent sets such that every edge connects a node from one set to a node in the other set.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through all possible substrings of the given string s.</div>
+                                <div style="margin-left: 20px;"> • Initialize a structure to represent the two sets.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each substring, check if it contains every letter in both uppercase and lowercase.</div>
+                                <div style="margin-left: 20px;"> • Traverse the graph using DFS or BFS, and assign nodes alternately to the two sets.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Keep track of the longest valid substring found during the iteration.</div>
+                                <div style="margin-left: 20px;"> • If you find any edge connecting two nodes in the same set, return false. Otherwise, return true.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should efficiently handle strings of length up to 100.</div>
+                        <div class=""> <b>Goal:</b> The graph is undirected with no self-edges or parallel edges. The graph may not be connected.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should perform efficiently even for the maximum length of the string (100 characters).</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • Each node is adjacent to a unique set of nodes</div>
+                            
+                                <div style="margin-left: 20px;"> • The graph may not be connected</div>
                             
                         </div>
                     </div>        
@@ -416,25 +426,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string contains only alphabetic characters (both uppercase and lowercase).</div>
+                                <div style="margin-left: 20px;"> • There are no self-edges in the graph.</div>
                             
-                                <div style="margin-left: 20px;"> • There are no special characters or spaces in the string.</div>
+                                <div style="margin-left: 20px;"> • There are no parallel edges between nodes.</div>
+                            
+                                <div style="margin-left: 20px;"> • The graph may have disconnected components.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;YazaAay&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substring &#39;aAa&#39; is a nice string because both &#39;A&#39; and &#39;a&#39; appear. &#39;aAa&#39; is the longest nice substring.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: graph = [[1, 2], [0, 2], [0, 1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the graph has 3 nodes, and no way exists to divide them into two independent sets where each edge connects a node from one set to a node from the other set.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;Bb&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The entire string &#39;Bb&#39; is a nice string because both &#39;B&#39; and &#39;b&#39; appear.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;c&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are no nice substrings because &#39;c&#39; does not have a corresponding uppercase letter.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: graph = [[1, 3], [0, 2], [1, 3], [0, 2]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the graph can be divided into two independent sets: {0, 2} and {1, 3}, such that every edge connects nodes between the sets.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,18 +466,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve the problem by using recursion to check for all substrings, and for each substring, verify if it is nice.</div>
+                        <div class=""> <b>Approach:</b> We can use BFS or DFS to try to assign nodes to two sets. Starting from any node, we attempt to assign its neighbors to the opposite set. If at any point, a node is found to have a neighbor in the same set, we return false. If we can traverse the entire graph successfully, the graph is bipartite.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A string is nice if it contains all letters in both their uppercase and lowercase forms.</div>
-                            
-                                <div style="margin-left: 20px;"> • We need to explore all possible substrings to find the longest nice substring.</div>
+                                <div style="margin-left: 20px;"> • The graph may not be connected, so we need to perform a traversal for each disconnected component.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can approach this by checking each possible substring, but optimize by eliminating invalid substrings early.</div>
+                                <div style="margin-left: 20px;"> • We can check the bipartite property by coloring the graph using BFS/DFS, where two adjacent nodes should have different colors.</div>
                             
                         </div>
                     </div>
@@ -477,11 +483,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Use a recursive approach to find all possible substrings.</div>
+                                <div style="margin-left: 20px;"> • Initialize a color array to store the color of each node (either 0 or 1).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each substring, check if it satisfies the nice condition, i.e., each character appears both in uppercase and lowercase.</div>
+                                <div style="margin-left: 20px;"> • For each unvisited node, start a BFS/DFS and attempt to color its neighbors with the opposite color.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the longest nice substring and return it as the result.</div>
+                                <div style="margin-left: 20px;"> • If a neighbor already has the same color, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the traversal completes successfully, return true.</div>
                             
                         </div>
                     </div>
@@ -490,22 +498,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input string is empty, return an empty string.</div>
+                                <div style="margin-left: 20px;"> • The graph will always contain at least one node.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For larger inputs, the solution should efficiently process the string to find the longest nice substring.</div>
+                                <div style="margin-left: 20px;"> • The function should handle up to 100 nodes efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string contains only one type of letter (like &#39;a&#39; or &#39;A&#39;), no nice substring will exist.</div>
+                                <div style="margin-left: 20px;"> • If the graph has only one node, it is trivially bipartite.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle strings with a maximum length of 100.</div>
+                                <div style="margin-left: 20px;"> • The input graph will be within the problem&#39;s constraints (1 &lt;= n &lt;= 100).</div>
                             
                         </div>                                                                        
                     </div>
@@ -522,39 +530,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Union-Find Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Over Nodes</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Over Adjacent Nodes</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Tracking</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Union-Find Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Union Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 For Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Edge Case</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Comparison</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Update Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Pointer Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return True</button>
                     
                 </div>
 
@@ -563,25 +553,17 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">longestNiceSubstring</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> start <span style="color:#666">=</span> <span style="color:#666">0</span>, <span style="color:#0b0;font-weight:bold">int</span> end <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (end <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>        end <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">26</span>][<span style="color:#666">2</span>] <span style="color:#666">=</span> {}, j <span style="color:#666">=</span> start <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;</span> end; <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>        cnt[tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>][(<span style="color:#0b0;font-weight:bold">bool</span>)islower(s[i])] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    string res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;=</span> end; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ch <span style="color:#666">=</span> i <span style="color:#666">==</span> end <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (ch <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">||</span> cnt[ch][<span style="color:#666">0</span>] <span style="color:#666">+</span> cnt[ch][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> ch <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> s;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> res1 <span style="color:#666">=</span> longestNiceSubstring(s.substr(j <span style="color:#666">+</span> <span style="color:#666">1</span>, i <span style="color:#666">-</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (res1.size() <span style="color:#666">&gt;</span> res.size())
-</span></span><span style="display:flex;"><span>                res <span style="color:#666">=</span> res1;
-</span></span><span style="display:flex;"><span>            j <span style="color:#666">=</span> i;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isBipartite</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> gph) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> gph.size();
+</span></span><span style="display:flex;"><span>      UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(n);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: gph[i]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(x) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(i)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            uf<span style="color:#666">-&gt;</span>uni(gph[i][<span style="color:#666">0</span>], x);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;      
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -589,173 +571,83 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">longestNiceSubstring</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> start <span style="color:#666">=</span> <span style="color:#666">0</span>, <span style="color:#0b0;font-weight:bold">int</span> end <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isBipartite</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> gph) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the function that finds the longest nice substring of a given string. </div>
+                            <div class=""> This is the function signature for checking if a graph is bipartite. It takes a 2D vector &#39;gph&#39; as input, representing the adjacency list of the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Condition Check</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (end <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> gph.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the end index is unset and initializes it to the string size. </div>
+                            <div class=""> This line initializes &#39;n&#39; as the number of nodes in the graph, based on the size of the adjacency list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialization</b></div>
+                            <div class=""> <b>3 : Union-Find Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        end <span style="color:#666">=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>      UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the end of the substring to the size of the input string if not provided. </div>
+                            <div class=""> A new union-find data structure is initialized with &#39;n&#39; nodes. It is used to track connected components in the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Array Initialization</b></div>
+                            <div class=""> <b>4 : Loop Over Nodes</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">26</span>][<span style="color:#666">2</span>] <span style="color:#666">=</span> {}, j <span style="color:#666">=</span> start <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a 2D array to track lowercase and uppercase occurrences of characters and a pointer `j` for substring processing. </div>
+                            <div class=""> This starts a loop that iterates over each node in the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : For Loop</b></div>
+                            <div class=""> <b>5 : Loop Over Adjacent Nodes</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;</span> end; <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: gph[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over the string to populate the character tracking array. </div>
+                            <div class=""> This inner loop iterates over the adjacent nodes (neighbors) of node &#39;i&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Tracking</b></div>
+                            <div class=""> <b>6 : Union-Find Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt[tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>][(<span style="color:#0b0;font-weight:bold">bool</span>)islower(s[i])] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(x) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(i)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the presence of lowercase or uppercase forms of the current character in the tracking array. </div>
+                            <div class=""> If the current node &#39;i&#39; and its neighbor &#39;x&#39; are in the same set (found by the union-find structure), the graph is not bipartite, so it returns &#39;false&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class=""> <b>7 : Union Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            uf<span style="color:#666">-&gt;</span>uni(gph[i][<span style="color:#666">0</span>], x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an empty string `res` to store the result substring. </div>
+                            <div class=""> If the nodes are not in the same set, a union operation is performed to connect them. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : For Loop</b></div>
+                            <div class=""> <b>8 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;=</span> end; <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;      
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the string to identify and process substrings. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ch <span style="color:#666">=</span> i <span style="color:#666">==</span> end <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Gets the character index or sets a sentinel value when the end of the string is reached. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (ch <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">||</span> cnt[ch][<span style="color:#666">0</span>] <span style="color:#666">+</span> cnt[ch][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Identifies substrings that are not nice due to missing uppercase or lowercase forms. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Edge Case</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> ch <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Handles the edge case where the entire string is a nice substring. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> s;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the string if it is a nice substring. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> res1 <span style="color:#666">=</span> longestNiceSubstring(s.substr(j <span style="color:#666">+</span> <span style="color:#666">1</span>, i <span style="color:#666">-</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively processes substrings to find the longest nice substring. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Comparison</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (res1.size() <span style="color:#666">&gt;</span> res.size())
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the current result is longer than the previous best result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Update Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">=</span> res1;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Updates the result with the longer substring. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Pointer Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j <span style="color:#666">=</span> i;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves the pointer `j` to the current index for the next substring. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the longest nice substring found. </div>
+                            <div class=""> If no conflicts are found, the graph is bipartite, and &#39;true&#39; is returned. </div>
                         </div>
                     
                 </div>
@@ -775,16 +667,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^3)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is driven by the recursive checking of substrings and the verification process for each substring, resulting in O(n^3) in the worst case.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n &#43; e), where n is the number of nodes and e is the number of edges.</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; e), as each node and edge is visited once.</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; e), as we must traverse all nodes and edges in the worst case.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of nodes and edges in the graph.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) in the worst case due to the recursion stack and storing the substrings.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), as space is needed for the color array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of nodes, for storing the color array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear in the number of nodes due to the color array used for BFS/DFS.</div>    
                     </div>
 
                 </div>

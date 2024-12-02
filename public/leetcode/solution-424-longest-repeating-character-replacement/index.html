@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an n x n binary matrix where 1 represents land and 0 represents water. There are exactly two islands in the grid, and you need to connect them by flipping the smallest number of 0&rsquo;s to 1&rsquo;s. An island is a group of 1&rsquo;s that are connected horizontally or vertically. Your task is to find the minimum number of flips required to connect the two islands. </div>
+<div class=""> You are given a string s consisting of uppercase English letters and an integer k. You can change any character in the string to any other uppercase English character, but you are allowed to perform this operation at most k times. The goal is to find the length of the longest substring that contains the same letter after performing at most k character changes. </div>
 
 
 
@@ -371,51 +371,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an n x n binary matrix, where each cell is either 0 or 1.</div>
-                        <div class=""> <b>Example:</b> Input: grid = [[1,0],[0,1]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s containing only uppercase English letters and an integer k, which represents the maximum number of changes you can make to the string.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;AABACDAB&#34;, k = 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= s.length</div>
                             
-                                <div style="margin-left: 20px;"> • There are exactly two islands in the grid</div>
+                                <div style="margin-left: 20px;"> • s consists only of uppercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the smallest number of 0&#39;s that must be flipped to connect the two islands.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> The output is an integer representing the length of the longest substring that can be formed by making at most k changes to the input string.</div>
+                        <div class=""> <b>Example:</b> Output: 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid will always contain exactly two islands.</div>
+                                <div style="margin-left: 20px;"> • The output is a single integer value representing the length of the longest substring with repeating characters after at most k changes.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To connect the two islands with the minimum number of flips, we first identify one island using depth-first search (DFS), then perform a breadth-first search (BFS) to find the shortest path to the other island by flipping the minimum number of 0&#39;s to 1&#39;s.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the longest substring containing the same letter, using at most k changes to transform the string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use DFS to find the first island and store its coordinates.</div>
+                                <div style="margin-left: 20px;"> • Initialize a map to track the frequency of characters in the current window of the string.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use BFS from the first island to find the shortest path to the second island, counting the number of 0&#39;s encountered along the way.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string, expanding the window from the right side by incrementing the pointer.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Return the number of flips required to connect the two islands.</div>
+                                <div style="margin-left: 20px;"> • If the length of the current window minus the count of the most frequent character exceeds k, shrink the window from the left side.</div>
+                            
+                                <div style="margin-left: 20px;"> • Keep track of the maximum length of the window where the condition is satisfied.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The grid is square and contains exactly two islands.</div>
+                        <div class=""> <b>Goal:</b> The problem is constrained by the size of the input string and the value of k, which determines how many changes can be made.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The input string s can have a length of up to 100,000 characters.</div>
                             
-                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
-                            
-                                <div style="margin-left: 20px;"> • There are exactly two islands in the grid</div>
+                                <div style="margin-left: 20px;"> • The value of k is at most the length of the string.</div>
                             
                         </div>
                     </div>        
@@ -423,21 +423,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid will always contain exactly two islands, so no edge cases with more or fewer islands are possible.</div>
-                            
-                                <div style="margin-left: 20px;"> • The grid will not be empty and will always have a size of at least 2x2.</div>
+                                <div style="margin-left: 20px;"> • The input string contains only uppercase English letters, and it is guaranteed that k is non-negative and less than or equal to the length of the string.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1,0],[0,1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, there are two islands represented by 1&#39;s at positions (0,1) and (1,0). The minimum number of flips required to connect them is 1, flipping the 0 at position (0,0).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: s = &#34;AABACDAB&#34;, k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can change the two &#39;C&#39;s to &#39;A&#39;s, forming the substring &#39;AAAAA&#39; which has a length of 5. This is the longest substring with repeating characters, so the output is 5.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1,0,1],[0,0,0],[1,0,1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the two islands are at positions (0,0), (0,2), (2,0), and (2,2). The minimum number of flips required to connect them is 2, flipping the two 0&#39;s at positions (1,0) and (1,2).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: s = &#34;ABAB&#34;, k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, we can change two &#39;A&#39;s to &#39;B&#39;s or two &#39;B&#39;s to &#39;A&#39;s. This will result in the substring &#39;BBBB&#39; or &#39;AAAA&#39;, both of which have a length of 4. Hence, the output is 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -461,16 +459,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We solve this problem using depth-first search (DFS) and breadth-first search (BFS). First, we perform DFS to find and mark all the cells of one island, then use BFS to find the shortest path to the second island, flipping the minimum number of 0&#39;s along the way.</div>
+                        <div class=""> <b>Approach:</b> The approach is to use the sliding window technique to find the longest substring where we can change at most k characters to make all characters the same. We expand the window while keeping track of the most frequent character in the current window.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can use DFS to mark all the cells of one island, then use BFS to find the shortest path to the second island, ensuring we flip the fewest number of 0&#39;s.</div>
+                                <div style="margin-left: 20px;"> • A sliding window can efficiently track the frequency of characters and adjust the window size based on the number of changes allowed.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This approach effectively reduces the problem to a shortest path search, ensuring an optimal solution.</div>
+                                <div style="margin-left: 20px;"> • By using the most frequent character in the window, we minimize the number of changes needed to make the rest of the characters the same.</div>
                             
                         </div>
                     </div>
@@ -478,11 +476,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Use DFS to find and mark all the cells of one island.</div>
+                                <div style="margin-left: 20px;"> • Start with two pointers: one for the left side of the window and one for the right side.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use BFS to find the shortest path to the second island, flipping the fewest number of 0&#39;s along the way.</div>
+                                <div style="margin-left: 20px;"> • Use a map to count the frequency of characters in the current window.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Return the number of flips required to connect the two islands.</div>
+                                <div style="margin-left: 20px;"> • If the length of the window minus the frequency of the most frequent character exceeds k, move the left pointer to shrink the window.</div>
+                            
+                                <div style="margin-left: 20px;"> • Update the result with the length of the longest valid window found.</div>
                             
                         </div>
                     </div>
@@ -491,22 +491,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be exactly two islands, so no empty inputs are possible.</div>
+                                <div style="margin-left: 20px;"> • The input string will always have a length of at least 1, so there is no need to handle an empty string.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle the largest grid sizes (up to 100x100).</div>
+                                <div style="margin-left: 20px;"> • For large input strings, ensure that the solution runs in linear time relative to the length of the string.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid may contain only land (1&#39;s) or only water (0&#39;s), but there will always be two islands to connect.</div>
+                                <div style="margin-left: 20px;"> • If k is 0, the longest substring will be the length of the longest contiguous substring with repeating characters in the original string.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input grid will always contain exactly two islands, and no more.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle large inputs with up to 100,000 characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -523,59 +523,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Frequency Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Flag Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Grid Dimensions</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sliding Window Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Frequency Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Max Frequency Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Island Detection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Window Size Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 DFS Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Character Removal from Window</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Set Flag</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Start Pointer Increment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Break Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Break Outer Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Step Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Direction Array</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 BFS Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Size</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 BFS Inner Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Pop Element</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Queue Pop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Direction Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Direction Calculations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Bounds Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Skip Invalid Cells</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Island Found</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Queue Push</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Mark Visited</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Step Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
                 </div>
 
@@ -584,51 +552,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shortestBridge</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (grid[i][j]) {
-</span></span><span style="display:flex;"><span>                dfs(i, j, q, grid);
-</span></span><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>            }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">characterReplacement</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ma;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span>  <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        ma[s[i]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, ma[s[i]]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;</span> mx <span style="color:#666">+</span> k) {
+</span></span><span style="display:flex;"><span>            ma[s[j]]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (flag) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[<span style="color:#666">5</span>] <span style="color:#666">=</span> {<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">-</span><span style="color:#666">1</span>,<span style="color:#666">0</span>};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> p.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> p.second <span style="color:#666">+</span> dir[i<span style="color:#666">+</span><span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(grid[x][y] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> step;
-</span></span><span style="display:flex;"><span>                q.push({x, y});
-</span></span><span style="display:flex;"><span>                grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>q, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    q.push(make_pair(x, y));
-</span></span><span style="display:flex;"><span>    grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    dfs(x <span style="color:#666">+</span> <span style="color:#666">1</span>, y, q, grid);
-</span></span><span style="display:flex;"><span>    dfs(x <span style="color:#666">-</span> <span style="color:#666">1</span>, y, q, grid);
-</span></span><span style="display:flex;"><span>    dfs(x, y <span style="color:#666">+</span> <span style="color:#666">1</span>, q, grid);
-</span></span><span style="display:flex;"><span>    dfs(x, y <span style="color:#666">-</span> <span style="color:#666">1</span>, q, grid);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -636,273 +572,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initialization</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shortestBridge</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">characterReplacement</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the function that accepts a 2D grid where 1 represents land and 0 represents water. </div>
+                            <div class=""> This line declares the function `characterReplacement`, which takes the input string `s` and an integer `k` representing the maximum number of allowed character replacements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Queue Setup</b></div>
+                            <div class=""> <b>2 : Frequency Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ma;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a queue to store the coordinates of the first island&#39;s land cells that will be explored. </div>
+                            <div class=""> This line initializes a frequency map `ma` that will store the count of each character in the current window of the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Flag Setup</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Use a flag to indicate whether the first island has been found and DFS has been executed. </div>
+                            <div class=""> Here, three variables are initialized: `res` to track the maximum length of valid substring found, `j` as the start of the window, and `mx` to store the frequency of the most common character in the current window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Grid Dimensions</b></div>
+                            <div class=""> <b>4 : Sliding Window Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span>  <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Get the dimensions of the grid (number of rows and columns). </div>
+                            <div class=""> This loop iterates over the string `s` using the variable `i` to represent the end of the current window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Outer Loop</b></div>
+                            <div class=""> <b>5 : Frequency Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ma[s[i]]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each row of the grid. </div>
+                            <div class=""> This line increments the frequency of the character at position `i` in the map `ma`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inner Loop</b></div>
+                            <div class=""> <b>6 : Max Frequency Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, ma[s[i]]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each column of the grid. </div>
+                            <div class=""> This line updates `mx`, the frequency of the most common character in the current window, by comparing it with the frequency of the character at position `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Island Detection</b></div>
+                            <div class=""> <b>7 : Window Size Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (grid[i][j]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;</span> mx <span style="color:#666">+</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if a land cell is found, indicating the start of the first island. </div>
+                            <div class=""> This condition checks if the size of the current window exceeds the allowed limit, which is the frequency of the most common character plus `k` (the number of character replacements). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : DFS Call</b></div>
+                            <div class=""> <b>8 : Character Removal from Window</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dfs(i, j, q, grid);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ma[s[j]]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Call the DFS function to explore the first island and fill the queue with its land cells. </div>
+                            <div class=""> If the window size exceeds the limit, the character at the start of the window (`s[j]`) is removed by decrementing its frequency in the map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Set Flag</b></div>
+                            <div class=""> <b>9 : Start Pointer Increment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the flag to true to mark that the first island has been processed. </div>
+                            <div class=""> This increments `j`, effectively shrinking the window from the left to restore the valid window size. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Break Outer Loop</b></div>
+                            <div class=""> <b>10 : Result Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Break the inner loop once the first island is found. </div>
+                            <div class=""> This updates `res` with the maximum length of the valid window found so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Break Outer Loop</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (flag) <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Break the outer loop once the first island is fully processed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Step Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize a variable to count the number of steps to connect the two islands. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Direction Array</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[<span style="color:#666">5</span>] <span style="color:#666">=</span> {<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">-</span><span style="color:#666">1</span>,<span style="color:#666">0</span>};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Set up an array to represent the four possible movement directions (up, right, down, left). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : BFS Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Start the BFS loop to expand from the first island&#39;s land cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Queue Size</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Get the current size of the queue to process all land cells of the island. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : BFS Inner Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Loop through all elements in the queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Pop Element</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pop the front element from the queue (a land cell). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Queue Pop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Remove the element from the queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Direction Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Loop through the four possible directions to expand from the current cell. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Direction Calculations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> p.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> p.second <span style="color:#666">+</span> dir[i<span style="color:#666">+</span><span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculate the new coordinates based on the current direction. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Bounds Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the new coordinates are within bounds and if the cell has already been visited. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Skip Invalid Cells</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Skip the current iteration if the cell is out of bounds or already visited. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Island Found</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(grid[x][y] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> step;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If a land cell of the second island is found, return the current step count as the result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Queue Push</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push({x, y});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the new valid cell into the queue for future processing. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Mark Visited</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Mark the current cell as visited by setting its value to -1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Step Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increment the step counter after processing all cells in the current layer. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>27 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return -1 if no valid bridge is found (shouldn&#39;t happen for valid inputs). </div>
+                            <div class=""> This returns the maximum length of the substring found that can be turned into a string of one character by replacing at most `k` characters. </div>
                         </div>
                     
                 </div>
@@ -922,16 +698,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> Both DFS and BFS operate in O(n^2) time, where n is the number of rows (or columns) in the grid.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the input string.</div>
+                        <div class=""> <b>Average Case:</b> O(n), since the sliding window ensures a linear scan through the string.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as the window size adjustment requires only constant time operations for each character.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we process each character in the string at most twice: once for expansion and once for contraction.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the need to store the grid and the visited cells during the DFS and BFS.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), as no additional space is needed except for the sliding window.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), since the space used by the frequency map is bounded by the number of distinct characters (constant size).</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we only use a small amount of extra space to track the frequency of characters in the window.</div>    
                     </div>
 
                 </div>

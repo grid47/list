@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given an array &rsquo;time&rsquo; where each element &rsquo;time[i]&rsquo; represents the time taken by the ith bus to complete a trip. Your task is to calculate the minimum amount of time required for all buses to complete at least &rsquo;totalTrips&rsquo; trips in total. Each bus can complete multiple trips consecutively. </div>
+<div class=""> In a town with n people, one person may be the judge. The judge trusts no one and is trusted by everyone else. Given a list of trust relationships, identify the town judge or return -1 if no judge exists. </div>
 
 
 
@@ -359,47 +359,59 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers &#39;time&#39; and an integer &#39;totalTrips&#39;.</div>
-                        <div class=""> <b>Example:</b> Input: time = [4, 5], totalTrips = 6</div>
+                        <div class=""> <b>Input:</b> The input consists of a number n (the total number of people) and an array trust where trust[i] = [a, b] means that person a trusts person b.</div>
+                        <div class=""> <b>Example:</b> n = 2, trust = [[1, 2]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= time.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= time[i], totalTrips &lt;= 10^7</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= trust.length &lt;= 104</div>
+                            
+                                <div style="margin-left: 20px;"> • trust[i].length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • ai != bi</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= ai, bi &lt;= n</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum time required for all buses to complete at least &#39;totalTrips&#39; trips.</div>
-                        <div class=""> <b>Example:</b> Output: 10</div>
+                        <div class=""> <b>Output:</b> Return the label of the town judge if one exists, or return -1 if no judge can be identified.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle large inputs efficiently.</div>
+                                <div style="margin-left: 20px;"> • The label of the town judge should be between 1 and n, inclusive.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the minimum time required for all buses to complete at least &#39;totalTrips&#39; trips.</div>
+                        <div class=""> <b>Goal:</b> Identify the person who satisfies the judge&#39;s conditions of being trusted by everyone and trusting no one.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For a given time, calculate the total number of trips completed by all buses.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Create an array to track the trust levels of each person.</div>
                             
-                                <div style="margin-left: 20px;"> • Use binary search to find the smallest time for which the total number of trips is at least &#39;totalTrips&#39;.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Update the trust levels based on the trust relationships.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: Identify the person who has trust level n-1 (trusted by everyone else and trusts no one).</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Return the person if found, or -1 if no such person exists.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Conditions that the solution must satisfy.</div>
+                        <div class=""> <b>Goal:</b> The input must conform to the given constraints for the problem to be solvable.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the time array is between 1 and 10^5.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • Each time element is between 1 and 10^7.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= trust.length &lt;= 104</div>
                             
-                                <div style="margin-left: 20px;"> • The totalTrips value is between 1 and 10^7.</div>
+                                <div style="margin-left: 20px;"> • Each pair in the trust array is unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= ai, bi &lt;= n</div>
                             
                         </div>
                     </div>        
@@ -407,21 +419,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each bus operates independently and can make multiple trips in succession.</div>
-                            
-                                <div style="margin-left: 20px;"> • All buses are in operation at the same time.</div>
+                                <div style="margin-left: 20px;"> • The grid of trust relationships is sparse and doesn&#39;t contain redundant pairs.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: time = [4, 5], totalTrips = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> At time t = 4, the number of trips completed by the buses are [1,0]. At t = 8, the buses have completed [2,1]. At t = 10, the total number of trips is 6. So, the minimum time required is 10.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 2, trust = [[1, 2]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Person 2 is the town judge because they are trusted by person 1 and trust no one else.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: time = [3, 6], totalTrips = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> At time t = 3, the number of trips completed by the buses are [1,0]. At t = 6, the buses have completed [2,1]. At t = 9, the total number of trips is 5. So, the minimum time required is 9.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 3, trust = [[1, 3], [2, 3]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Person 3 is trusted by both person 1 and person 2, and trusts no one else, making them the town judge.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 3, trust = [[1, 3], [2, 3], [3, 1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Person 3 cannot be the judge because they trust person 1, violating the condition that the judge trusts no one.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +459,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will calculate the number of trips completed by each bus for a given time and use binary search to find the minimum time to complete the required total trips.</div>
+                        <div class=""> <b>Approach:</b> We can solve the problem by using a degree array to track the net trust level of each person.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The binary search will allow us to find the optimal time efficiently.</div>
+                                <div style="margin-left: 20px;"> • We need to identify the person who is trusted by everyone but trusts no one.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • To solve this problem, we need to determine the number of trips made by all buses for different time intervals and use binary search to narrow down the minimum time.</div>
+                                <div style="margin-left: 20px;"> • A simple solution would be to use an array to track the trust level of each person, and then check if any person has a trust level of n-1.</div>
                             
                         </div>
                     </div>
@@ -462,9 +476,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For each bus, calculate the number of trips completed by the bus in the given time.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a degree array where each entry represents the net trust level of a person.</div>
                             
-                                <div style="margin-left: 20px;"> • Use binary search to find the smallest time where the total number of trips completed is at least &#39;totalTrips&#39;.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Process each trust relationship and update the trust levels.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: Check if any person has a trust level of n-1 (trusted by everyone else and trusts no one).</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Return the town judge&#39;s label or -1 if no such person exists.</div>
                             
                         </div>
                     </div>
@@ -473,22 +491,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Empty input is not possible based on constraints.</div>
+                                <div style="margin-left: 20px;"> • If trust array is empty, return -1 as no one trusts anyone.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles cases where time has up to 10^5 elements and the totalTrips can be as large as 10^7.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, the solution should efficiently handle trust relationships up to the limit of 10^4.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all buses have the same trip time, the solution should still work efficiently.</div>
+                                <div style="margin-left: 20px;"> • If all people trust each other, no town judge exists.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must avoid a brute force approach to ensure it works efficiently for large inputs.</div>
+                                <div style="margin-left: 20px;"> • The solution should work for input sizes up to the maximum constraint of 10^4 trust relationships.</div>
                             
                         </div>                                                                        
                     </div>
@@ -507,33 +525,19 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Trips</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Trust Relationships Processing</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Temporary Variable</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Trust Score Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Accumulate Total Trips</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Trust Score Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Total Trips</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Judge Identification</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Empty Location</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Judge Identification</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Binary Search Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Binary Search Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Midpoint Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check Trips for Midpoint</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Adjust High</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Adjust Low</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Minimum Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Return</button>
                     
                 </div>
 
@@ -542,24 +546,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">numberOfTripsForAGivenTime</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> givenTime) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> totalTrips <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">x</span> : a) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> x;
-</span></span><span style="display:flex;"><span>        totalTrips <span style="color:#666">+=</span> givenTime <span style="color:#666">/</span> y;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findJudge</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> trust) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> deg(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: trust) {
+</span></span><span style="display:flex;"><span>        deg[x[<span style="color:#666">1</span>]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        deg[x[<span style="color:#666">0</span>]]<span style="color:#666">--</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> totalTrips;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minimumTime</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> time, <span style="color:#0b0;font-weight:bold">int</span> totalTrips) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> low <span style="color:#666">=</span> <span style="color:#666">1</span>, high <span style="color:#666">=</span> <span style="color:#666">1e14</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(low <span style="color:#666">&lt;</span> high) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> low <span style="color:#666">+</span> (high <span style="color:#666">-</span> low) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(numberOfTripsForAGivenTime(time, mid) <span style="color:#666">&gt;=</span> totalTrips) {
-</span></span><span style="display:flex;"><span>            high <span style="color:#666">=</span> mid;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> low <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> low;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(deg[i] <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -570,149 +566,80 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">numberOfTripsForAGivenTime</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> givenTime) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findJudge</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> trust) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function `numberOfTripsForAGivenTime`, which takes a vector of trip durations and a given time, and calculates the total number of trips that can be completed in the given time. </div>
+                            <div class=""> Defines the function `findJudge` which takes the total number of people (`n`) and a 2D vector `trust` representing trust relationships between people in the town. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> totalTrips <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> deg(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A variable `totalTrips` is initialized to 0 to accumulate the total number of trips that can be made within the given time. </div>
+                            <div class=""> Initializes a vector `deg` to track the net trust score for each person. Each index represents a person, where the value indicates how many people trust them and how many they trust. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through Trips</b></div>
+                            <div class=""> <b>3 : Trust Relationships Processing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">x</span> : a) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: trust) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each element `x` in the vector `a`, which represents the duration of each trip. </div>
+                            <div class=""> Loops through each trust relationship in the `trust` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Temporary Variable</b></div>
+                            <div class=""> <b>4 : Trust Score Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> x;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        deg[x[<span style="color:#666">1</span>]]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A temporary variable `y` is created to store the current trip duration `x`. This is done to avoid directly modifying `x` in subsequent calculations. </div>
+                            <div class=""> Increments the trust score of the person being trusted (`x[1]`) as they gain one more trust. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Accumulate Total Trips</b></div>
+                            <div class=""> <b>5 : Trust Score Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        totalTrips <span style="color:#666">+=</span> givenTime <span style="color:#666">/</span> y;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        deg[x[<span style="color:#666">0</span>]]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The number of trips that can be completed in the given time for the current trip duration `y` is calculated by integer division of `givenTime / y`. This value is added to `totalTrips`. </div>
+                            <div class=""> Decrements the trust score of the person who is trusting (`x[0]`) as they lose one trust. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Total Trips</b></div>
+                            <div class=""> <b>6 : Judge Identification</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> totalTrips;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the total number of trips that can be completed within the given time. </div>
+                            <div class=""> Loops through each person in the town (from 1 to n). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Empty Location</b></div>
+                            <div class=""> <b>7 : Judge Identification</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(deg[i] <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This location is left empty as there are no intermediate steps between the functions. </div>
+                            <div class=""> Checks if the current person `i` has a trust score of `n - 1`, indicating that they are trusted by everyone else and trust no one. If true, returns this person as the town judge. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Function Definition</b></div>
+                            <div class=""> <b>8 : Function Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minimumTime</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> time, <span style="color:#0b0;font-weight:bold">int</span> totalTrips) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function `minimumTime`, which takes a vector of trip durations and the total number of trips to be completed, and calculates the minimum time required to complete those trips. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Binary Search Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> low <span style="color:#666">=</span> <span style="color:#666">1</span>, high <span style="color:#666">=</span> <span style="color:#666">1e14</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Two variables `low` and `high` are initialized for the binary search. `low` starts at 1 and `high` is set to a very large value (1e14) to cover a wide range of possible times. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Binary Search Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(low <span style="color:#666">&lt;</span> high) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop performs binary search, narrowing down the range of possible times (`low` and `high`) until the correct minimum time is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Midpoint Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> low <span style="color:#666">+</span> (high <span style="color:#666">-</span> low) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The midpoint `mid` is calculated as the average of `low` and `high`, which will be checked to see if it allows enough trips to meet or exceed the required `totalTrips`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Check Trips for Midpoint</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(numberOfTripsForAGivenTime(time, mid) <span style="color:#666">&gt;=</span> totalTrips) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function `numberOfTripsForAGivenTime` is called with `mid` as the given time. If the total trips calculated for this time are greater than or equal to the required `totalTrips`, the upper bound (`high`) is adjusted. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Adjust High</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            high <span style="color:#666">=</span> mid;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current `mid` allows enough trips, `high` is updated to `mid` to search for a smaller possible time. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Adjust Low</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> low <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current `mid` does not allow enough trips, `low` is updated to `mid &#43; 1` to search for a larger possible time. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Return Minimum Time</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> low;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the minimum time found by the binary search. </div>
+                            <div class=""> Returns `-1` if no judge is found, meaning no person satisfies the conditions to be the town judge. </div>
                         </div>
                     
                 </div>
@@ -732,16 +659,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log T)</div>
-                        <div class=""> <b>Average Case:</b> O(n log T)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log T)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log T), where n is the number of buses and T is the time interval range.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n) - If no trust relationships exist, the solution only needs to check each person once.</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; t) - The time complexity is proportional to the number of people and the trust relationships.</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; t) - In the worst case, we process all trust relationships and check each person&#39;s trust level.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of people and trust relationships.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only need a constant amount of extra space for calculations.</div>    
+                        <div class=""> <b>Best Case:</b> O(n) - Even if there are no trust relationships, the space complexity remains linear.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) - We use an array to track the trust levels of n people.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear in terms of the number of people.</div>    
                     </div>
 
                 </div>

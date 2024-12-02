@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You are given a list of distinct positive integers, <code>nums</code>, and a list of operations. Each operation consists of two elements: <code>operations[i][0]</code> and <code>operations[i][1]</code>. In each operation, you need to replace the element <code>operations[i][0]</code> in <code>nums</code> with the new value <code>operations[i][1]</code>. The number <code>operations[i][1]</code> is guaranteed to not already be in <code>nums</code>. After performing all the operations, return the final array. </div>
+<div class=""> You are given an array of barcodes where each element represents a barcode. Your task is to rearrange the barcodes such that no two adjacent barcodes are the same. It is guaranteed that a solution exists, and you may return any valid rearrangement. </div>
 
 
 
@@ -362,43 +362,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a list `nums` consisting of distinct integers and a list `operations` with each operation consisting of two integers `operations[i][0]` and `operations[i][1]`.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [10, 20, 30, 40], operations = [[10, 50], [30, 60], [40, 70]]</div>
+                        <div class=""> <b>Input:</b> You are given an array of integers, where each element represents a barcode. The goal is to rearrange these integers such that no two adjacent integers are the same.</div>
+                        <div class=""> <b>Example:</b> Input: barcodes = [4, 4, 7, 7, 8, 8]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= barcodes.length &lt;= 10,000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i], operations[i][0], operations[i][1] &lt;= 10^6</div>
-                            
-                                <div style="margin-left: 20px;"> • All elements in nums are distinct.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= barcodes[i] &lt;= 10,000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the modified `nums` after applying all the operations in order.</div>
-                        <div class=""> <b>Example:</b> Output: [50, 20, 60, 70]</div>
+                        <div class=""> <b>Output:</b> The output should be an array of integers, where no two adjacent integers are the same. The arrangement should be a valid permutation of the input array.</div>
+                        <div class=""> <b>Example:</b> Output: [7, 4, 7, 4, 8, 8]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output must be a valid permutation of the input array.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to replace elements in the list `nums` based on the given operations, while ensuring no duplication occurs during the replacement process.</div>
+                        <div class=""> <b>Goal:</b> The goal is to rearrange the given barcodes such that no two adjacent barcodes are identical.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Create a mapping of each number in `nums` to its index.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each barcode in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each operation, find the index of the element to replace and update it with the new value.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a greedy approach to place the most frequent barcode in the array first, alternating the placement to ensure no two adjacent barcodes are the same.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: After all operations are performed, return the final array.</div>
+                                <div style="margin-left: 20px;"> • 3. Fill in the remaining barcodes, ensuring the same rule is followed.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The length of the array `nums` is at most 10^5, and each operation is performed at most 10^5 times.</div>
+                        <div class=""> <b>Goal:</b> The input array contains integers representing barcodes. The length of the array is constrained as described below.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= barcodes.length &lt;= 10,000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= barcodes[i] &lt;= 10,000</div>
                             
                         </div>
                     </div>        
@@ -406,21 +410,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input list `nums` contains distinct integers.</div>
+                                <div style="margin-left: 20px;"> • The input array contains at least one barcode.</div>
                             
-                                <div style="margin-left: 20px;"> • Each operation replaces an element that exists in `nums` with a new number that does not exist in the list.</div>
+                                <div style="margin-left: 20px;"> • The solution always exists, as guaranteed by the problem statement.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 3], operations = [[1, 4], [2, 5], [3, 6]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After the first operation, the list becomes [4, 2, 3]. After the second operation, it becomes [4, 5, 3], and finally, after the third operation, the list becomes [4, 5, 6].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: barcodes = [4, 4, 7, 7, 8, 8]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The most frequent barcode is 4, so it is placed in alternating positions. After filling the array with 4s, the remaining 7s and 8s are placed in the remaining positions. The output is [7, 4, 7, 4, 8, 8].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [100, 200, 300], operations = [[100, 500], [200, 600], [300, 700]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The operations replace 100 with 500, 200 with 600, and 300 with 700, resulting in the final array [500, 600, 700].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: barcodes = [1, 1, 1, 2, 2, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The most frequent barcode is 1, so we start by placing 1 in alternating positions. Then, we place the remaining 2s and 3 in the remaining spots. The output is [1, 2, 1, 2, 1, 3].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,16 +448,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will approach this problem by maintaining a map that tracks the index of each number in `nums` to efficiently replace values during the operations.</div>
+                        <div class=""> <b>Approach:</b> The approach involves counting the frequency of each barcode, sorting them in descending order, and placing them in the output array by alternating between positions to ensure no adjacent barcodes are the same.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The replacement operation involves direct lookup and update, so using a map can provide O(1) access time for each replacement.</div>
+                                <div style="margin-left: 20px;"> • We need to consider the frequency of barcodes to ensure that the most frequent ones are placed first.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The algorithm will perform each operation in constant time, making the overall complexity O(m), where m is the number of operations.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved by sorting the barcodes by frequency and then greedily placing the most frequent barcode in available positions.</div>
                             
                         </div>
                     </div>
@@ -461,11 +465,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Create a map to store the indices of the elements in `nums`.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each barcode using a frequency map.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each operation, find the index of the element to replace using the map, then replace the element in `nums` with the new value.</div>
+                                <div style="margin-left: 20px;"> • 2. Sort the barcodes by frequency in descending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: After processing all operations, return the updated array.</div>
+                                <div style="margin-left: 20px;"> • 3. Place the barcodes in the output array starting from the first position and alternating between even and odd indices to ensure no adjacent barcodes are the same.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Continue placing the remaining barcodes in the remaining available positions.</div>
                             
                         </div>
                     </div>
@@ -474,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will never be empty as the number of elements in `nums` and the number of operations are both guaranteed to be at least 1.</div>
+                                <div style="margin-left: 20px;"> • There are no empty inputs because the array will always contain at least one barcode.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For very large inputs (up to 10^5 elements and operations), the solution should ensure that operations are performed efficiently, ideally in O(1) for each operation.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle arrays with up to 10,000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The constraints guarantee that no element will be replaced by an already existing element in `nums`.</div>
+                                <div style="margin-left: 20px;"> • If there are only one or two unique barcodes, we need to ensure the arrangement is still valid with no adjacent duplicates.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The size of `nums` and the number of operations will not exceed 10^5, ensuring the approach remains efficient.</div>
+                                <div style="margin-left: 20px;"> • The solution is guaranteed to exist as stated in the problem description.</div>
                             
                         </div>                                                                        
                     </div>
@@ -506,27 +512,25 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Get Array Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Through Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Frequency Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Map Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sorting by Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Through Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Descending Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Find Index of Old Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Placement Logic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Erase Old Value from Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Edge Case Handling</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Element in Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Barcode Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Map with New Value</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Modified Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
                 </div>
 
@@ -535,21 +539,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arrayChange(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> ops) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        mp[nums[i]] <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ops) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> mp[it[<span style="color:#666">0</span>]];
-</span></span><span style="display:flex;"><span>        mp.erase(it[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>        nums[idx] <span style="color:#666">=</span> it[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>        mp[it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> idx;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rearrangeBarcodes(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> b, <span style="color:#0b0;font-weight:bold">int</span> pos <span style="color:#666">=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> st;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: b) mp[num]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) st.insert({ it.second, it.first });
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> st.rbegin(); it <span style="color:#666">!=</span> st.rend(); it<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>; cnt <span style="color:#666">&lt;</span> it<span style="color:#666">-&gt;</span>first; cnt<span style="color:#666">++</span>, pos <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pos <span style="color:#666">&gt;=</span> b.size()) pos  <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            b[pos] <span style="color:#666">=</span> it<span style="color:#666">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> b;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -557,113 +558,103 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arrayChange(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> ops) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rearrangeBarcodes(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> b, <span style="color:#0b0;font-weight:bold">int</span> pos <span style="color:#666">=</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `arrayChange` is declared, which takes a reference to a vector of integers `nums` and a reference to a 2D vector `ops` that contains operations to be applied to `nums`. It returns a modified vector of integers. </div>
+                            <div class=""> This line defines the function `rearrangeBarcodes` which takes a reference to a vector of integers `b` and an optional integer parameter `pos` (default value 0). The function aims to rearrange the elements of the vector `b` based on the barcode rearranging logic. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Map Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A map `mp` is declared to store the value of elements from `nums` as keys and their corresponding indices as values. This helps in quick look-up and modification of elements during operations. </div>
+                            <div class=""> An unordered map `mp` is initialized to store the frequency of each number in the barcode array `b`. The key is the barcode number, and the value is its frequency. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Get Array Size</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> st;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The size of the input vector `nums` is calculated and stored in the variable `n`. </div>
+                            <div class=""> A set `st` is initialized to store pairs of integers, where the first element of the pair is the frequency of a barcode, and the second is the barcode number itself. The set ensures the elements are ordered by frequency in descending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Through Array</b></div>
+                            <div class=""> <b>4 : Frequency Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: b) mp[num]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for-loop is initiated to iterate through each element in the `nums` array. </div>
+                            <div class=""> This loop iterates through the vector `b`, counting the frequency of each barcode and storing it in the unordered map `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Map Population</b></div>
+                            <div class=""> <b>5 : Sorting by Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[nums[i]] <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) st.insert({ it.second, it.first });
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The map `mp` is populated with each element of `nums` as the key and its index as the value. </div>
+                            <div class=""> This loop iterates over the map `mp` and inserts each barcode along with its frequency as a pair into the set `st`. The set will automatically order the pairs by the frequency in descending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop Through Operations</b></div>
+                            <div class=""> <b>6 : Descending Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ops) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> st.rbegin(); it <span style="color:#666">!=</span> st.rend(); it<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for-loop is initiated to iterate through each operation in the `ops` array, where each operation consists of two values: the old value and the new value. </div>
+                            <div class=""> This loop iterates through the set `st` in reverse order (from the most frequent to the least frequent barcode), using a reverse iterator `rbegin()` and `rend()`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Find Index of Old Value</b></div>
+                            <div class=""> <b>7 : Placement Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> mp[it[<span style="color:#666">0</span>]];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>; cnt <span style="color:#666">&lt;</span> it<span style="color:#666">-&gt;</span>first; cnt<span style="color:#666">++</span>, pos <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The index of the element to be replaced (old value) is retrieved from the map `mp` using `it[0]`, the old value in the operation. </div>
+                            <div class=""> This inner loop places the barcodes into the vector `b`. It runs for the frequency of the current barcode (`it-&gt;first`). It also increments `pos` by 2 to ensure that the barcodes are placed in alternate positions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Erase Old Value from Map</b></div>
+                            <div class=""> <b>8 : Edge Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp.erase(it[<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pos <span style="color:#666">&gt;=</span> b.size()) pos  <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The old value is erased from the map `mp` as it is no longer needed. </div>
+                            <div class=""> This condition checks if `pos` exceeds the size of the vector `b`. If it does, `pos` is reset to 1, ensuring that the placement continues from the second position (odd indices). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Update Element in Array</b></div>
+                            <div class=""> <b>9 : Barcode Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nums[idx] <span style="color:#666">=</span> it[<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            b[pos] <span style="color:#666">=</span> it<span style="color:#666">-&gt;</span>second;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The element at the found index `idx` in the array `nums` is replaced with the new value `it[1]` from the operation. </div>
+                            <div class=""> The barcode `it-&gt;second` (which is the barcode number) is assigned to the position `pos` in the vector `b`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Map with New Value</b></div>
+                            <div class=""> <b>10 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> idx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> b;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The map `mp` is updated to associate the new value `it[1]` with the index `idx`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Modified Array</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After applying all operations, the modified array `nums` is returned. </div>
+                            <div class=""> The function returns the modified vector `b` with the rearranged barcodes. </div>
                         </div>
                     
                 </div>
@@ -683,16 +674,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m)</div>
-                        <div class=""> <b>Average Case:</b> O(m)</div>
-                        <div class=""> <b>Worst Case:</b> O(m)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m) where m is the number of operations, since each operation involves a constant-time map lookup and update.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the sorting step, followed by a linear scan to fill the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the number of elements in `nums`, due to the map storing the indices of all elements.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we use additional space for counting the frequency of each barcode.</div>    
                     </div>
 
                 </div>

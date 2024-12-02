@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> Given a positive integer n, you are tasked with finding an integer x such that the sum of all integers from 1 to x is equal to the sum of all integers from x to n, inclusive. If no such integer exists, return -1. It is guaranteed that there will be at most one solution for the given input. </div>
+<div class=""> Given a square grid of size n x n containing only 0s (water) and 1s (land), find the water cell that is farthest from any land cell based on Manhattan distance, and return that distance. If the grid has no water or no land, return -1. </div>
 
 
 
@@ -360,43 +360,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A positive integer n representing the upper bound of the sequence.</div>
-                        <div class=""> <b>Example:</b> n = 8</div>
+                        <div class=""> <b>Input:</b> A 2D grid of size n x n where each cell contains either 0 (water) or 1 (land).</div>
+                        <div class=""> <b>Example:</b> grid = [[1,0,1],[0,0,0],[1,0,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • n == grid.length</div>
+                            
+                                <div style="margin-left: 20px;"> • n == grid[i].length</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The pivot integer x such that the sum of numbers from 1 to x equals the sum of numbers from x to n, or -1 if no such x exists.</div>
-                        <div class=""> <b>Example:</b> Output: 6</div>
+                        <div class=""> <b>Output:</b> An integer representing the maximum Manhattan distance from a water cell to the nearest land cell. Return -1 if no valid configuration exists.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The returned value will be an integer between 1 and n or -1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the pivot integer x that satisfies the sum condition or return -1 if no such integer exists.</div>
+                        <div class=""> <b>Goal:</b> Calculate the maximum Manhattan distance of a water cell to the nearest land cell.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the total sum of all integers from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue to store land cells&#39; coordinates.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Check if there exists an integer x where the sum of integers from 1 to x equals the sum of integers from x to n.</div>
+                                <div style="margin-left: 20px;"> • Mark water cells with -1 to differentiate unvisited cells.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If such x exists, return it; otherwise, return -1.</div>
+                                <div style="margin-left: 20px;"> • Perform a breadth-first search (BFS) starting from all land cells simultaneously.</div>
+                            
+                                <div style="margin-left: 20px;"> • Update water cells with their distance to the nearest land cell.</div>
+                            
+                                <div style="margin-left: 20px;"> • Keep track of the maximum distance during the BFS.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input integer n is guaranteed to be between 1 and 1000.</div>
+                        <div class=""> <b>Goal:</b> Ensure efficient computation for grids up to size 100x100.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • Handle edge cases such as grids with no water or no land.</div>
+                            
+                                <div style="margin-left: 20px;"> • Avoid out-of-bounds access during BFS.</div>
                             
                         </div>
                     </div>        
@@ -404,23 +414,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution assumes the sum formula for the first n integers is correct.</div>
+                                <div style="margin-left: 20px;"> • Grid dimensions are always square.</div>
+                            
+                                <div style="margin-left: 20px;"> • Input grid contains at least one water or one land cell.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 8</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For n = 8, the total sum of numbers from 1 to 8 is 36. The sum from 1 to 6 is 21, and the sum from 6 to 8 is also 21. Hence, 6 is the pivot integer.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[1,0,0],[0,0,0],[0,0,0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The cell (2, 2) is the farthest from all land cells with a distance of 4.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For n = 1, the sum of numbers from 1 to 1 is 1. The sum from 1 to 1 is also 1, so 1 is the pivot integer.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For n = 4, the total sum of numbers from 1 to 4 is 10. There is no integer x where the sum of numbers from 1 to x equals the sum from x to 4, so the output is -1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[1,1,1],[1,1,1],[1,1,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No water exists, so the output is -1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,16 +452,20 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we can first compute the total sum of the integers from 1 to n. We then check for a pivot integer x such that the sum of integers from 1 to x equals the sum from x to n. We use the fact that the sum of the first n integers is given by the formula n * (n &#43; 1) / 2.</div>
+                        <div class=""> <b>Approach:</b> Use BFS starting from all land cells to calculate the nearest distance for water cells.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to find an integer x where the sum of numbers from 1 to x is equal to the sum of numbers from x to n.</div>
+                                <div style="margin-left: 20px;"> • Each water cell&#39;s distance depends on its proximity to land cells.</div>
+                            
+                                <div style="margin-left: 20px;"> • Simultaneous BFS from all land cells ensures optimal computation.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This can be simplified using the formula for the sum of the first n integers. By calculating the total sum and checking if the square root of that sum is an integer, we can determine the pivot integer.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the grid to initialize BFS queue with all land cells.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use BFS to propagate distances to water cells.</div>
                             
                         </div>
                     </div>
@@ -461,11 +473,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the sum of integers from 1 to n using the formula n * (n &#43; 1) / 2.</div>
+                                <div style="margin-left: 20px;"> • Traverse the grid to collect all land cells&#39; coordinates.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Find the square root of the total sum and check if it is an integer.</div>
+                                <div style="margin-left: 20px;"> • Use BFS to process the grid from these coordinates.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the square root is an integer, return it as the pivot integer; otherwise, return -1.</div>
+                                <div style="margin-left: 20px;"> • Update distances for water cells and track the maximum distance.</div>
                             
                         </div>
                     </div>
@@ -474,22 +486,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty inputs are allowed as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • grid = [] -&gt; Return -1</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large values of n (up to 1000), the solution must efficiently compute the sum and check for a valid pivot integer.</div>
+                                <div style="margin-left: 20px;"> • grid = [[0]*100 for _ in range(100)] -&gt; Ensure no timeouts.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If n is a small value like 1, the solution must correctly handle this edge case.</div>
+                                <div style="margin-left: 20px;"> • grid with all 1s -&gt; Return -1</div>
+                            
+                                <div style="margin-left: 20px;"> • grid with all 0s -&gt; Return -1</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works for all n between 1 and 1000.</div>
+                                <div style="margin-left: 20px;"> • Ensure BFS handles edge cells correctly.</div>
                             
                         </div>                                                                        
                     </div>
@@ -506,11 +520,53 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sum Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Queue Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Grid Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Grid Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Land Cell Identification</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Enqueue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Grid Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Water Cell Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Empty Queue Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Direction Array Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Distance Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 BFS Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Queue Dequeue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Pop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Direction Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Neighbor Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Boundary Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Skip Invalid Cell</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Distance Output</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Grid Update (Distance Increment)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Queue Enqueue (Neighbor)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Max Distance Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Result</button>
                     
                 </div>
 
@@ -519,9 +575,34 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pivotInteger</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> n <span style="color:#666">*</span> (n <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>, x <span style="color:#666">=</span> sqrt(sum);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">*</span> x <span style="color:#666">==</span> sum <span style="color:#666">?</span> <span style="color:#a0a000">x</span> : <span style="color:#666">-</span><span style="color:#666">1</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            q.push(make_pair(i, j));
+</span></span><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> grid[i][j] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(q.empty() <span style="color:#666">||</span> q.size() <span style="color:#666">==</span> n <span style="color:#666">*</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> tmp.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> tmp.second <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> n <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> grid[tmp.first][tmp.second] <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>            grid[x][y] <span style="color:#666">=</span> grid[tmp.first][tmp.second] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            q.push(make_pair(x, y));
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, grid[x][y]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -529,33 +610,243 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pivotInteger</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `pivotInteger`, which takes an integer `n` and returns the pivot integer `x` or -1 if no such pivot exists. </div>
+                            <div class=""> Define the function maxDistance that takes a 2D grid as input, where 1 represents land and 0 represents water. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sum Calculation</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> n <span style="color:#666">*</span> (n <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>, x <span style="color:#666">=</span> sqrt(sum);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, `sum` calculates the total sum of integers from 1 to `n`. `x` is the square root of this sum, representing the potential pivot integer. </div>
+                            <div class=""> Initialize the variable n to store the size of the grid, i.e., the number of rows (and columns, since the grid is square). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Conditional Check</b></div>
+                            <div class=""> <b>3 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">*</span> x <span style="color:#666">==</span> sum <span style="color:#666">?</span> <span style="color:#a0a000">x</span> : <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line checks if the square of `x` equals `sum`. If true, it returns `x` as the pivot integer; otherwise, it returns -1 to indicate no such pivot exists. </div>
+                            <div class=""> Initialize a queue of pairs to perform BFS. Each pair will represent a cell in the grid (row and column indices). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Grid Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through each row of the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Grid Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through each column of the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Land Cell Identification</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current cell is land (represented by 1). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Queue Enqueue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(make_pair(i, j));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the coordinates of the land cell onto the queue for BFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Grid Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set the land cell to 0, marking it as visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Water Cell Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> grid[i][j] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set all water cells (represented by 0) to -1, indicating they are unvisited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Empty Queue Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(q.empty() <span style="color:#666">||</span> q.size() <span style="color:#666">==</span> n <span style="color:#666">*</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the queue is empty or if the grid is already fully land (no water cells), return -1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Direction Array Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize an array representing the four possible directions (right, down, left, up) for BFS traversal. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Max Distance Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a variable mx to store the maximum distance encountered during BFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : BFS Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begin a while loop that continues until the queue is empty, representing the BFS process. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Queue Dequeue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> q.front();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Dequeue the front element of the queue to start the BFS from the current land cell. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Queue Pop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the processed cell from the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Direction Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop over the four possible directions (up, down, left, right) to explore neighboring cells. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Neighbor Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> tmp.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> tmp.second <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculate the new coordinates (x, y) by adding the respective direction offsets. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Boundary Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> n <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the new coordinates are out of bounds or if the neighboring cell is already visited or not water. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Skip Invalid Cell</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skip the current neighbor if it&#39;s out of bounds or already processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Distance Output</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> grid[tmp.first][tmp.second] <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34; &#34;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Output the distance of the current cell (for debugging or visualization purposes). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Grid Update (Distance Increment)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[x][y] <span style="color:#666">=</span> grid[tmp.first][tmp.second] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the neighboring cell&#39;s distance to be the current cell&#39;s distance &#43; 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Queue Enqueue (Neighbor)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(make_pair(x, y));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the updated neighboring cell to the queue for further processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Max Distance Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, grid[x][y]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the maximum distance encountered so far. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the maximum distance found from any land cell to the nearest water cell. </div>
                         </div>
                     
                 </div>
@@ -575,16 +866,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The solution computes the sum in constant time and checks if the square root of the sum is an integer, which takes constant time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2) when grid contains mixed cells.</div>
+                        <div class=""> <b>Average Case:</b> O(n^2) due to full traversal during BFS.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2) for fully mixed grids.</div> 
+                        <div class=""> <b>Description:</b> Each cell is visited once during BFS.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we only store a few variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) for grids with uniform values.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2) for BFS queue.</div> 
+                        <div class=""> <b>Description:</b> Queue size depends on the number of cells in the grid.</div>    
                     </div>
 
                 </div>

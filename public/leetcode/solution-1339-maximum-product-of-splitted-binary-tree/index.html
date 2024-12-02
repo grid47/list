@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -300,7 +300,7 @@
 
 
 
-<div class=""> You are given two strings s1 and s2, both of length n, consisting of lowercase English letters. You can perform the following operation on any of the two strings: choose any two indices i and j such that i &lt; j and the difference j - i is even, then swap the two characters at those indices in the string. Return true if you can make s1 and s2 equal, and false otherwise. </div>
+<div class=""> Given the root of a binary tree, you need to split the tree into two subtrees by removing one edge. The goal is to maximize the product of the sums of these two subtrees. Return the maximum product of the sums of the two subtrees, modulo 10^9 + 7. </div>
 
 
 
@@ -351,51 +351,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two strings, s1 and s2, each containing n lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> s1 = &#39;aceb&#39;, s2 = &#39;caeb&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a binary tree with root node given as an array representation of the tree.</div>
+                        <div class=""> <b>Example:</b> root = [3,1,5,6,2,4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • s1 and s2 have the same length n.</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= Number of nodes &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5.</div>
-                            
-                                <div style="margin-left: 20px;"> • s1 and s2 consist only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= Node.val &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if it&#39;s possible to make the two strings equal using the described operations, otherwise return false.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> The output should be the maximum product of the sums of the two subtrees after removing one edge, modulo 10^9 &#43; 7.</div>
+                        <div class=""> <b>Example:</b> For root = [3,1,5,6,2,4], the output will be 162.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean value indicating whether the strings can be made equal or not.</div>
+                                <div style="margin-left: 20px;"> • The product must be calculated before taking modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine if s1 can be transformed into s2 using the allowed swap operations.</div>
+                        <div class=""> <b>Goal:</b> Maximize the product of the sums of two subtrees formed by removing one edge in the binary tree.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each character in s1 and s2, group them by their positions modulo 2 (even or odd indexed positions).</div>
+                                <div style="margin-left: 20px;"> • 1. Compute the total sum of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the counts of characters in corresponding groups for s1 and s2.</div>
+                                <div style="margin-left: 20px;"> • 2. For each subtree formed by cutting an edge, compute its sum and multiply it with the remaining sum of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • If the counts match for both even and odd indexed positions, return true; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • 3. Track the maximum product of the sums.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the maximum product modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints on the input are as follows:</div>
+                        <div class=""> <b>Goal:</b> The tree contains a large number of nodes, and the algorithm should work efficiently for the upper constraint.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Both s1 and s2 must have the same length n.</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= Number of nodes &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • s1 and s2 consist only of lowercase English letters.</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5.</div>
+                                <div style="margin-left: 20px;"> • Node values are between 1 and 10^4.</div>
                             
                         </div>
                     </div>        
@@ -403,21 +401,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The problem assumes that swapping characters is the only allowed operation.</div>
+                                <div style="margin-left: 20px;"> • The tree is a binary tree with integer node values.</div>
                             
-                                <div style="margin-left: 20px;"> • The strings can have repeated characters.</div>
+                                <div style="margin-left: 20px;"> • The tree will always contain at least 2 nodes.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;aceb&#39;, s2 = &#39;caeb&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can swap characters at indices 0 and 2 and then swap characters at indices 1 and 3 to make s1 equal to s2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: root = [3,1,5,6,2,4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By removing the edge between node 5 and node 6, we split the tree into two subtrees with sums 21 and 3. The product of their sums is 63, and taking modulo (10^9 &#43; 7) gives 162.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;abe&#39;, s2 = &#39;bea&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It&#39;s not possible to transform s1 into s2 since there is no valid swap that can achieve this.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: root = [10,5,15,3,7,6,20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By removing the edge between node 15 and node 20, we split the tree into two subtrees with sums 40 and 5. Their product is 1350.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,16 +439,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves checking if we can group characters of s1 and s2 based on their even and odd indexed positions, and verify that the counts of each character match.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem, we first compute the total sum of the tree and then for each edge, compute the product of the two subtrees formed by cutting that edge.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem involves swapping characters at specific indices, so checking the counts of characters in different indexed groups is key.</div>
+                                <div style="margin-left: 20px;"> • We can perform a depth-first traversal to compute the sum of the entire tree and the sums of individual subtrees formed by cutting each edge.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By comparing character frequencies in the even and odd indexed groups of both strings, we can determine if it&#39;s possible to make the strings equal.</div>
+                                <div style="margin-left: 20px;"> • The most efficient way to compute the sums and maximize the product is by performing a post-order traversal where we calculate the sum of each subtree and simultaneously track the maximum product.</div>
                             
                         </div>
                     </div>
@@ -458,9 +456,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create two frequency arrays for each string: one for characters at even indices and one for characters at odd indices.</div>
+                                <div style="margin-left: 20px;"> • 1. Perform a DFS to calculate the total sum of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the frequency arrays for both strings. If the arrays match, return true; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • 2. In a second DFS, calculate the sum of each subtree, compute the product of the current subtree&#39;s sum and the remaining sum, and track the maximum product.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Return the maximum product modulo (10^9 &#43; 7).</div>
                             
                         </div>
                     </div>
@@ -469,22 +469,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Empty strings are not allowed since the minimum length is 1.</div>
+                                <div style="margin-left: 20px;"> • The tree cannot be empty as the problem guarantees a minimum of two nodes.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle large strings with up to 10^5 characters.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle large trees efficiently, with up to 50,000 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The strings may consist of identical characters or all distinct characters.</div>
+                                <div style="margin-left: 20px;"> • All nodes having the same value may simplify the problem but must be handled correctly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently within the given constraint of 1 &lt;= n &lt;= 10^5.</div>
+                                <div style="margin-left: 20px;"> • The solution must consider both the computation of the sums and the efficient traversal of the tree.</div>
                             
                         </div>                                                                        
                     </div>
@@ -501,21 +501,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Strings</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Increment First String Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Method Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Decrement Second String Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Final Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 End Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Helper Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Subtree Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Maximum Product Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -524,103 +536,165 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkStrings</span>(string s1, string s2) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> map[<span style="color:#666">2</span>][<span style="color:#666">26</span>] <span style="color:#666">=</span> {<span style="color:#666">0</span>}; <span style="color:#080;font-style:italic">// Initialize a 2D array with all elements set to 0
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s1.length(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>map[i <span style="color:#666">%</span> <span style="color:#666">2</span>][s1[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>map[i <span style="color:#666">%</span> <span style="color:#666">2</span>][s2[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">--</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, ans <span style="color:#666">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> maxProduct(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#666">=</span> ino(root);
+</span></span><span style="display:flex;"><span>    ino(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (<span style="color:#0b0;font-weight:bold">int</span>) (ans <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>) (<span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>));
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (map[<span style="color:#666">0</span>][i] <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">||</span> map[<span style="color:#666">1</span>][i] <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">ino</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">bool</span> s <span style="color:#666">=</span> <span style="color:#a2f">true</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sub <span style="color:#666">=</span> ino(root<span style="color:#666">-&gt;</span>left) 
+</span></span><span style="display:flex;"><span>                  <span style="color:#666">+</span> ino(root<span style="color:#666">-&gt;</span>right)
+</span></span><span style="display:flex;"><span>                  <span style="color:#666">+</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> max(ans, sub <span style="color:#666">*</span> (sum <span style="color:#666">-</span> sub));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sub;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;}
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initialization</b></div>
+                            <div class=""> <b>1 : Class Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkStrings</span>(string s1, string s2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start of the function to check if two strings are identical by swapping characters. </div>
+                            <div class=""> Declares the Solution class which contains the logic for solving the problem. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Setup</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> map[<span style="color:#666">2</span>][<span style="color:#666">26</span>] <span style="color:#666">=</span> {<span style="color:#666">0</span>}; <span style="color:#080;font-style:italic">// Initialize a 2D array with all elements set to 0
-</span></span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, ans <span style="color:#666">=</span> INT_MIN;
+</span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a 2D array to track character frequencies for both strings (two rows, 26 columns for each alphabet letter). </div>
+                            <div class=""> Declares and initializes variables sum (for total sum of tree values) and ans (for tracking the maximum product). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through Strings</b></div>
+                            <div class=""> <b>3 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s1.length(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the characters of both strings simultaneously. </div>
+                            <div class=""> Indicates that the following members are accessible from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Increment First String Frequency</b></div>
+                            <div class=""> <b>4 : Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map[i <span style="color:#666">%</span> <span style="color:#666">2</span>][s1[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProduct</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the frequency of the character in the first string (mapped to one of the rows in the array). </div>
+                            <div class=""> Defines the public method `maxProduct` that computes the maximum product of splitting the binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Decrement Second String Frequency</b></div>
+                            <div class=""> <b>5 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map[i <span style="color:#666">%</span> <span style="color:#666">2</span>][s2[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sum <span style="color:#666">=</span> ino(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrements the frequency of the character in the second string (mapped to the other row in the array). </div>
+                            <div class=""> Calls the helper function `ino` to calculate the total sum of all nodes in the tree and stores it in `sum`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Final Check</b></div>
+                            <div class=""> <b>6 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ino(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through all the alphabet letters to check if the frequencies match. </div>
+                            <div class=""> Calls the helper function `ino` again to traverse the tree and update the `ans` variable with the maximum product. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Check Frequency</b></div>
+                            <div class=""> <b>7 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (map[<span style="color:#666">0</span>][i] <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">||</span> map[<span style="color:#666">1</span>][i] <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (<span style="color:#0b0;font-weight:bold">int</span>) (ans <span style="color:#666">%</span> (<span style="color:#0b0;font-weight:bold">int</span>) (<span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If any character&#39;s frequency is non-zero in either row, return false, meaning the strings cannot be made equal. </div>
+                            <div class=""> Returns the maximum product modulo (10^9 &#43; 7), as the result might be too large. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : End Function</b></div>
+                            <div class=""> <b>8 : Helper Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;}
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">ino</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">bool</span> s <span style="color:#666">=</span> <span style="color:#a2f">true</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns true if all character frequencies match, meaning the strings can be made equal by swapping characters. </div>
+                            <div class=""> Defines the recursive helper function `ino` for calculating subtree sums and updating the maximum product. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handles the base case where the current node is null, returning 0 as the sum for an empty subtree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sub <span style="color:#666">=</span> ino(root<span style="color:#666">-&gt;</span>left) 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively calculates the sum of the left subtree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                  <span style="color:#666">+</span> ino(root<span style="color:#666">-&gt;</span>right)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively calculates the sum of the right subtree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Subtree Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                  <span style="color:#666">+</span> root<span style="color:#666">-&gt;</span>val;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the value of the current node to the sum of the left and right subtrees. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Maximum Product Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">=</span> max(ans, sub <span style="color:#666">*</span> (sum <span style="color:#666">-</span> sub));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the product of the current subtree sum and the remaining tree sum, updating `ans` if a larger product is found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sub;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the sum of the current subtree to be used by its parent node. </div>
                         </div>
                     
                 </div>
@@ -640,16 +714,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of nodes in the tree.</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear, as we are processing the string once to count the character frequencies.</div>                                               
+                        <div class=""> <b>Description:</b> We perform two DFS traversals, each taking O(n) time, where n is the number of nodes in the tree.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear, as we need to store the character frequencies for even and odd indexed positions.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the tree and the recursive call stack during the DFS.</div>    
                     </div>
 
                 </div>

@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given an array of integers nums and an integer target. Your task is to count how many non-empty subsequences of nums exist such that the sum of the minimum and maximum element in each subsequence is less than or equal to target. Return the result modulo 10^9 + 7. </div>
+<div class=""> Given two integers n and k, construct a list of n different positive integers from 1 to n such that the absolute differences between consecutive elements contain exactly k distinct integers. Return any valid solution. </div>
 
 
 
@@ -370,51 +370,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array nums and an integer target.</div>
-                        <div class=""> <b>Example:</b> nums = [2, 5, 7, 8], target = 10</div>
+                        <div class=""> <b>Input:</b> The input consists of two integers n and k, where n is the size of the list and k is the number of distinct differences to be present.</div>
+                        <div class=""> <b>Example:</b> n = 4, k = 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^6</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt; n &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of valid subsequences modulo 10^9 &#43; 7.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> The output should be a list of n distinct integers between 1 and n that satisfies the condition of having exactly k distinct differences.</div>
+                        <div class=""> <b>Example:</b> [1, 2, 3, 4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be returned modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • The answer list must contain distinct integers.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to count subsequences where the sum of the minimum and maximum elements in the subsequence is less than or equal to the given target.</div>
+                        <div class=""> <b>Goal:</b> The goal is to construct the list such that the differences between consecutive elements have exactly k distinct values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the array to efficiently find pairs of subsequences where the sum of the minimum and maximum values is &lt;= target.</div>
+                                <div style="margin-left: 20px;"> • 1. Start by choosing numbers from 1 to n.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window technique to count valid subsequences.</div>
+                                <div style="margin-left: 20px;"> • 2. Arrange these numbers in a way that the absolute differences between consecutive numbers contain exactly k distinct values.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element, calculate the number of subsequences that can be formed with that element as the minimum, using binary search to find the maximum valid subsequence.</div>
+                                <div style="margin-left: 20px;"> • 3. Adjust the placement of numbers to ensure exactly k distinct differences.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array has a length between 1 and 10^5, and each element of the array is between 1 and 10^6.</div>
+                        <div class=""> <b>Goal:</b> The problem has constraints on the size of the input list and the number of distinct differences.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the input array nums is between 1 and 10^5.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each element in nums is between 1 and 10^6.</div>
-                            
-                                <div style="margin-left: 20px;"> • The target value is between 1 and 10^6.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt; n &lt;= 10^4</div>
                             
                         </div>
                     </div>        
@@ -422,19 +414,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array always has at least one element.</div>
+                                <div style="margin-left: 20px;"> • The integers in the output list must be distinct.</div>
+                            
+                                <div style="margin-left: 20px;"> • There can be multiple valid answers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [2, 5, 7, 8], target = 10</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid subsequences are: [2], [2, 5], [2, 5, 7], and [2, 7]. All of their minimum and maximum sums are less than or equal to 10.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 4, k = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The differences between consecutive elements in the list [1, 2, 3, 4] are all 1, so there is exactly 1 distinct difference.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 3, 5, 7], target = 8</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid subsequences are: [1], [3], [1, 3], and [1, 5], which satisfy the condition.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 5, k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The list [1, 5, 2, 4, 3] has differences of [4, 3, 2, 1], with exactly 2 distinct values: 1 and 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +452,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem using a sorted array and a sliding window technique to count valid subsequences. The number of subsequences can be computed using the binary search technique to find the range of valid subsequences.</div>
+                        <div class=""> <b>Approach:</b> The approach for constructing the list involves systematically selecting elements such that the absolute differences between consecutive numbers meet the requirements.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the array helps find subsequences with valid sums of minimum and maximum elements.</div>
+                                <div style="margin-left: 20px;"> • We need to control the number of distinct absolute differences between consecutive elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • The arrangement of the numbers must balance the number of unique differences.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The key observation is that once the array is sorted, finding the valid subsequences becomes a matter of using two pointers or binary search.</div>
+                                <div style="margin-left: 20px;"> • By alternating between the smallest and largest remaining numbers, we can ensure a controlled difference distribution.</div>
                             
                         </div>
                     </div>
@@ -475,11 +471,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the input array.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with the smallest and largest numbers.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element in the array, calculate how many subsequences can be formed with that element as the minimum, where the maximum element is within the target sum constraint.</div>
+                                <div style="margin-left: 20px;"> • 2. Alternately place these numbers in the list while tracking the distinct absolute differences.</div>
                             
-                                <div style="margin-left: 20px;"> • Use binary search to quickly find the valid subsequences for each element.</div>
+                                <div style="margin-left: 20px;"> • 3. Continue until the list is filled with n numbers.</div>
                             
                         </div>
                     </div>
@@ -488,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will never be empty, as it is guaranteed to have at least one element.</div>
+                                <div style="margin-left: 20px;"> • The input will always have valid n and k, so no empty cases need to be handled.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays of size up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • For large values of n and k, ensure that the algorithm is efficient enough to handle up to 10^4 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements in nums are the same, the valid subsequences are just the combinations of that element.</div>
+                                <div style="margin-left: 20px;"> • If k = 1, the list will have identical differences, which means the sequence must be in increasing or decreasing order.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must work within the given time limits for large inputs.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the list contains distinct integers between 1 and n.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,47 +516,19 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Modulo Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Power Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Main Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Odd Exponent Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Push Number with Alternating Direction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call for Odd Exponent</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push Incremented Number</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Odd Exponent Final Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Even Exponent Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Call for Even Exponent</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Even Exponent Final Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Final Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Main Function Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Sorting</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop Over Array</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Target Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Calculate Upper Bound</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Binary Search</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Calculate Index</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Add to Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return Final Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
                     
                 </div>
 
@@ -569,37 +537,12 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pow2</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">%</span> <span style="color:#666">2</span>) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> pow2(idx <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">*</span> res <span style="color:#666">*</span> <span style="color:#666">2</span>) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>    }<span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> pow2(idx <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">*</span> res) <span style="color:#666">%</span> mod;            
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSubseq</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">&gt;</span> target) <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> end <span style="color:#666">=</span> target <span style="color:#666">-</span> nums[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> upper_bound(nums.begin(), nums.end(), end);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> it <span style="color:#666">-</span> nums.begin();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">+</span> pow2(idx <span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>)) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>        
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> constructArray(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> n; i <span style="color:#666">&lt;=</span> j; ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            res.push_back(k<span style="color:#666">--%</span><span style="color:#666">2</span><span style="color:#666">?</span> i<span style="color:#666">++:</span> j<span style="color:#666">--</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> res.push_back(i<span style="color:#666">++</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
@@ -609,213 +552,73 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Modulo Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> constructArray(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the value of `mod` to (10^9 &#43; 7), a large prime used for modulo operations to prevent integer overflow in the result calculations. </div>
+                            <div class=""> This is the function definition for `constructArray`, which takes two parameters: `n` (the size of the array) and `k` (the number of elements with the largest absolute difference between consecutive numbers). It returns a vector of integers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Power Function Declaration</b></div>
+                            <div class=""> <b>2 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pow2</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the `pow2` function which calculates (2^{idx} % 	ext{mod}). It uses recursion and the properties of exponents for efficient computation. </div>
+                            <div class=""> Initialize an empty vector `res` that will hold the result of the constructed array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Base Case</b></div>
+                            <div class=""> <b>3 : Main Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> n; i <span style="color:#666">&lt;=</span> j; ) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the exponent is 0, return 1, as any number raised to the power of 0 is 1. </div>
+                            <div class=""> Start a `for` loop with two pointers: `i` initialized to 1 (the first number) and `j` initialized to `n` (the last number). The loop continues until `i` exceeds `j`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Declaration</b></div>
+                            <div class=""> <b>4 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a variable `res` to store the result of the power calculation. </div>
+                            <div class=""> Check if `k` is greater than 0, indicating that we should alternate between the smallest and largest numbers to maximize the difference. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Odd Exponent Check</b></div>
+                            <div class=""> <b>5 : Push Number with Alternating Direction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">%</span> <span style="color:#666">2</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(k<span style="color:#666">--%</span><span style="color:#666">2</span><span style="color:#666">?</span> i<span style="color:#666">++:</span> j<span style="color:#666">--</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the exponent is odd, proceed to calculate (2^{idx} % 	ext{mod}) by splitting it into smaller subproblems. </div>
+                            <div class=""> If `k &gt; 0`, decrement `k` and decide whether to push the next smallest (`i&#43;&#43;`) or largest (`j--`) number, alternating between them. This maximizes the difference between consecutive numbers for the first `k` elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursive Call for Odd Exponent</b></div>
+                            <div class=""> <b>6 : Push Incremented Number</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> pow2(idx <span style="color:#666">/</span> <span style="color:#666">2</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> res.push_back(i<span style="color:#666">++</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively calculate (2^{rac{idx}{2}} % 	ext{mod}). </div>
+                            <div class=""> If `k` is 0, just push the next smallest number (`i&#43;&#43;`) into the result vector. This ensures that the rest of the array is filled in increasing order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Odd Exponent Final Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">*</span> res <span style="color:#666">*</span> <span style="color:#666">2</span>) <span style="color:#666">%</span> mod;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> For an odd exponent, square the result of the recursive call and multiply by 2 to get (2^{idx} % 	ext{mod}). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Even Exponent Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }<span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the exponent is even, calculate the power using the even exponent property. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Recursive Call for Even Exponent</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> pow2(idx <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively calculate (2^{rac{idx}{2}} % 	ext{mod}). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Even Exponent Final Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">*</span> res) <span style="color:#666">%</span> mod;            
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> For an even exponent, square the result of the recursive call to get (2^{idx} % 	ext{mod}). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Final Result</b></div>
+                            <div class=""> <b>7 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the calculated result of (2^{idx} % 	ext{mod}). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Main Function Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSubseq</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Declare the `numSubseq` function, which calculates the number of subsequences in the array `nums` whose sum of the smallest and largest element is less than or equal to `target`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Sorting</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sort the array `nums` in non-decreasing order to facilitate the calculation of valid subsequences. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize a result variable `res` to 0 and a variable `n` to store the size of the array `nums`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Loop Over Array</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Loop through the elements of the sorted array `nums`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Target Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">&gt;</span> target) <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current element is greater than half of `target`, no valid subsequences can be formed, so exit the loop. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Calculate Upper Bound</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> end <span style="color:#666">=</span> target <span style="color:#666">-</span> nums[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculate the maximum possible value for the largest element of the subsequence, `end`, by subtracting `nums[i]` from `target`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Binary Search</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> upper_bound(nums.begin(), nums.end(), end);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Use binary search to find the first element in `nums` that is greater than `end`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Calculate Index</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> it <span style="color:#666">-</span> nums.begin();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculate the index of the element found by `upper_bound` to determine how many valid subsequences can be formed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Add to Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">+</span> pow2(idx <span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>)) <span style="color:#666">%</span> mod;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Add the number of valid subsequences formed between `i` and `idx - 1` to the result, using the `pow2` function to calculate powers of 2. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Return Final Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final result, the total number of valid subsequences. </div>
+                            <div class=""> Return the constructed result vector `res`, which contains the integers arranged with the maximum difference for the first `k` elements and the rest in increasing order. </div>
                         </div>
                     
                 </div>
@@ -835,16 +638,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log n) because the array is sorted and binary search is performed for each element.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) since we are constructing a list of size n and performing constant-time operations for each element.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space used for sorting the array and storing intermediate results.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the list of size n.</div>    
                     </div>
 
                 </div>

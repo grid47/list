@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> A number of robots are standing on an infinite number line with their initial positions given in the array <code>nums</code>. Each robot will move based on a command string <code>s</code> where &lsquo;L&rsquo; means left and &lsquo;R&rsquo; means right. If two robots collide, they instantly reverse their directions. Your task is to calculate the sum of the distances between all pairs of robots <code>d</code> seconds after the command. </div>
+<div class=""> Given an array of intervals, remove all intervals that are covered by another interval and return the number of remaining intervals. </div>
 
 
 
@@ -358,61 +358,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array `nums` representing the initial positions of robots, a string `s` representing the movement directions, and an integer `d` representing the number of seconds after the command.</div>
-                        <div class=""> <b>Example:</b> `nums = [2, 5, 8]`, `s = &#39;LLR&#39;`, `d = 2`</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of intervals where each interval is represented as [li, ri].</div>
+                        <div class=""> <b>Example:</b> Input: [[1,5], [2,6], [3,7], [4,8]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= intervals.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • -2 * 10^9 &lt;= nums[i] &lt;= 2 * 10^9</div>
+                                <div style="margin-left: 20px;"> • intervals[i].length == 2</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= d &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= li &lt; ri &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • nums.length == s.length</div>
-                            
-                                <div style="margin-left: 20px;"> • s consists of &#39;L&#39; and &#39;R&#39; only</div>
-                            
-                                <div style="margin-left: 20px;"> • nums[i] are unique</div>
+                                <div style="margin-left: 20px;"> • All the given intervals are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the sum of distances between all pairs of robots after `d` seconds. The result should be returned modulo 10^9 &#43; 7.</div>
-                        <div class=""> <b>Example:</b> For `nums = [2, 5, 8]`, `s = &#39;LLR&#39;`, and `d = 2`, the output is `24`.</div>
+                        <div class=""> <b>Output:</b> The function should return the number of remaining intervals after removing all covered intervals.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be returned modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • The input intervals are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Calculate the sum of distances between all pairs of robots after moving for `d` seconds.</div>
+                        <div class=""> <b>Goal:</b> The goal is to remove intervals that are covered by other intervals and return the count of the remaining intervals.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each robot, adjust its position based on its movement direction and the time `d`.</div>
+                                <div style="margin-left: 20px;"> • Sort the intervals based on their starting value.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the final positions of the robots.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the sorted intervals and keep track of the rightmost end of the previous interval.</div>
                             
-                                <div style="margin-left: 20px;"> • For each pair of robots, calculate the absolute distance between them.</div>
+                                <div style="margin-left: 20px;"> • For each new interval, if its end is less than or equal to the rightmost end, it is covered by the previous interval and can be discarded.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the distances and return the result modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • Otherwise, update the rightmost end and increment the count of remaining intervals.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints define the number of robots and the time `d` within manageable limits.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the intervals are unique and the array length is manageable.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of intervals is between 1 and 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • nums[i] are unique</div>
-                            
-                                <div style="margin-left: 20px;"> • -2 * 10^9 &lt;= nums[i] &lt;= 2 * 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= d &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • Each interval is represented by two integers, where 0 &lt;= li &lt; ri &lt;= 10^5.</div>
                             
                         </div>
                     </div>        
@@ -420,21 +412,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input is always valid with no duplicates in the positions.</div>
-                            
-                                <div style="margin-left: 20px;"> • The robots move in exactly one direction as specified by the string `s`.</div>
+                                <div style="margin-left: 20px;"> • Intervals are unique and no two intervals are identical.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `nums = [2, 5, 8]`, `s = &#39;LLR&#39;`, and `d = 2`, the positions of the robots will be updated each second and we compute the sum of the distances after `d` seconds.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `nums = [1, 0]`, `s = &#39;RL&#39;`, and `d = 1`, after one second, the robots are at positions `[2, -1]` and we calculate the distance between them.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [[1,5], [2,6], [3,7], [4,8]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Intervals `[2,6]`, `[3,7]`, and `[4,8]` are covered by `[1,5]`. The remaining intervals are `[1,5]` and `[4,8]`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,18 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can first update the positions of the robots based on the time `d` and their respective directions, then calculate the sum of distances between all pairs of robots.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we will sort the intervals based on their start value and then remove the intervals that are covered by others.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • After `d` seconds, the positions of all robots will be determined.</div>
-                            
-                                <div style="margin-left: 20px;"> • The sum of distances can be calculated using a sorted list of the final positions of robots.</div>
+                                <div style="margin-left: 20px;"> • Sorting the intervals first helps us easily compare each interval to the previous one to check for coverage.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A direct calculation of the pairwise distances might be inefficient, so sorting the positions will help simplify the distance calculations.</div>
+                                <div style="margin-left: 20px;"> • We need to iterate through the intervals and keep track of the rightmost end seen so far to determine if the current interval is covered.</div>
                             
                         </div>
                     </div>
@@ -477,13 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For each robot, adjust its position based on its movement direction.</div>
+                                <div style="margin-left: 20px;"> • Sort the intervals based on the starting value of each interval.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the positions of the robots after all of them have moved.</div>
+                                <div style="margin-left: 20px;"> • Initialize variables for the rightmost end and the count of remaining intervals.</div>
                             
-                                <div style="margin-left: 20px;"> • For each pair of robots, compute the distance and sum them up.</div>
+                                <div style="margin-left: 20px;"> • Loop through the sorted intervals and check if the current interval is covered by the previous one.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the result modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • If not, update the rightmost end and increment the count.</div>
                             
                         </div>
                     </div>
@@ -492,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs since the number of robots is always at least 2.</div>
+                                <div style="margin-left: 20px;"> • An empty array will never occur since the length of the intervals is guaranteed to be at least 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, we ensure the solution scales efficiently, especially with sorting and distance calculations.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle arrays with up to 1000 intervals efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where robots start at extreme positions or where `d = 0`.</div>
+                                <div style="margin-left: 20px;"> • If all intervals are distinct and no interval is covered, the output will be the total number of intervals.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the operations respect the constraints, especially the modulus for large numbers.</div>
+                                <div style="margin-left: 20px;"> • Since all intervals are unique, there will be no duplicate intervals to handle.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,25 +510,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Conditional Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Conditional Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Increment Counter</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Left Boundary</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Right Boundary</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Distance Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
                     
                 </div>
 
@@ -553,19 +533,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumDistance</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, string s, <span style="color:#0b0;font-weight:bold">int</span> d) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;L&#39;</span>) nums[i] <span style="color:#666">-=</span> d;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> nums[i] <span style="color:#666">+=</span> d;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">removeCoveredIntervals</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> ivl) {
+</span></span><span style="display:flex;"><span>    sort(ivl.begin(), ivl.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, left <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, right <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">p</span>: ivl) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left <span style="color:#666">&lt;</span> p[<span style="color:#666">0</span>] <span style="color:#666">&amp;&amp;</span> right <span style="color:#666">&lt;</span> p[<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            left <span style="color:#666">=</span> p[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        right <span style="color:#666">=</span> max(p[<span style="color:#666">1</span>], right);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, dist <span style="color:#666">=</span> <span style="color:#666">0</span>, mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        dist <span style="color:#666">+=</span> ((<span style="color:#0b0;font-weight:bold">long</span>)nums[i] <span style="color:#666">-</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">*</span> (i);
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dist) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -576,110 +556,90 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumDistance</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, string s, <span style="color:#0b0;font-weight:bold">int</span> d) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">removeCoveredIntervals</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> ivl) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `sumDistance` is defined, taking a vector of integers `nums`, a string `s`, and an integer `d` as parameters. </div>
+                            <div class=""> Defines the function to compute the count of intervals that are not covered by others. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Loop Start</b></div>
+                            <div class=""> <b>2 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(ivl.begin(), ivl.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for-loop is started to iterate over all elements in the `nums` vector. </div>
+                            <div class=""> Sorts the intervals by their starting point and, in case of ties, by their ending point. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Conditional Operation</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;L&#39;</span>) nums[i] <span style="color:#666">-=</span> d;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, left <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, right <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the character at index `i` in string `s` is &#39;L&#39;, the value at `nums[i]` is decreased by `d`. </div>
+                            <div class=""> Initializes variables to keep track of the count of non-covered intervals and boundaries. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Conditional Operation</b></div>
+                            <div class=""> <b>4 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> nums[i] <span style="color:#666">+=</span> d;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">p</span>: ivl) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Otherwise, if the character is not &#39;L&#39;, the value at `nums[i]` is increased by `d`. </div>
+                            <div class=""> Iterates through each interval in the sorted list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Sorting</b></div>
+                            <div class=""> <b>5 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left <span style="color:#666">&lt;</span> p[<span style="color:#666">0</span>] <span style="color:#666">&amp;&amp;</span> right <span style="color:#666">&lt;</span> p[<span style="color:#666">1</span>]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `nums` vector is sorted in ascending order. </div>
+                            <div class=""> Checks if the current interval is not covered by the previous interval. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Increment Counter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `n` is initialized to the size of the `nums` vector. </div>
+                            <div class=""> Increments the counter for non-covered intervals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class=""> <b>7 : Update Left Boundary</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, dist <span style="color:#666">=</span> <span style="color:#666">0</span>, mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            left <span style="color:#666">=</span> p[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variables `ans` (to store the final result), `dist` (to store intermediate distances), and `mod` (set to (10^9 &#43; 7) for modulo operations) are initialized. </div>
+                            <div class=""> Updates the left boundary to the starting point of the current interval. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Loop Start</b></div>
+                            <div class=""> <b>8 : Update Right Boundary</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        right <span style="color:#666">=</span> max(p[<span style="color:#666">1</span>], right);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for-loop starts, iterating through the sorted `nums` vector from index 1 to `n-1`. </div>
+                            <div class=""> Updates the right boundary to the maximum of the current interval&#39;s end or the previous boundary. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Distance Calculation</b></div>
+                            <div class=""> <b>9 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dist <span style="color:#666">+=</span> ((<span style="color:#0b0;font-weight:bold">long</span>)nums[i] <span style="color:#666">-</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">*</span> (i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The distance between the current and the previous element in the sorted vector is multiplied by the index `i`, and the result is added to `dist`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Result Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dist) <span style="color:#666">%</span> mod;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The accumulated distance is added to the result `ans`, and the result is taken modulo `mod` to prevent overflow. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The final result `ans` is returned, which is the sum of the distances modulo (10^9 &#43; 7). </div>
+                            <div class=""> Returns the count of non-covered intervals. </div>
                         </div>
                     
                 </div>
@@ -699,16 +659,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The most time-consuming step is sorting the positions, which is O(n log n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n) - Sorting the intervals takes O(n log n), where n is the number of intervals.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n) - The sorting step dominates the time complexity.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n) - In the worst case, we need to sort the intervals and iterate through them once.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n) because of the sorting step.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage needed for positions and other variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(n) - In the best case, we still need space for the sorted intervals.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) - The space complexity is O(n) in the worst case if we store the sorted intervals.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) to store the sorted intervals.</div>    
                     </div>
 
                 </div>

@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode89s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode88s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/116.webp" 
            alt="A glowing grid of nodes, with gentle arrows connecting them, showing the next right pointer linkages." 
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> You are given a set of courses and a list of prerequisites. Each prerequisite is a pair of courses where the second course must be taken before the first one. Determine if it is possible to complete all courses based on these prerequisites. If there are cycles in the dependencies, it would be impossible to finish all courses. </div>
+<div class=""> You are given a perfect binary tree where every parent node has two children and all leaves are at the same level. Your task is to populate the &rsquo;next&rsquo; pointer of each node to point to its next right node. If no such node exists, set the &rsquo;next&rsquo; pointer to NULL. Initially, all &rsquo;next&rsquo; pointers are set to NULL. </div>
 
 
 
@@ -373,57 +373,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer numCourses representing the total number of courses and an array prerequisites where each element [a, b] indicates that course b must be completed before course a.</div>
-                        <div class=""> <b>Example:</b> numCourses = 3, prerequisites = [[1, 0], [2, 1]]</div>
+                        <div class=""> <b>Input:</b> The input consists of the root of a perfect binary tree. The binary tree is represented by a node structure, where each node has a &#39;val&#39;, &#39;left&#39;, &#39;right&#39;, and &#39;next&#39; pointer.</div>
+                        <div class=""> <b>Example:</b> Input: root = [10, 5, 15, 3, 7, 12, 20]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= numCourses &lt;= 2000</div>
+                                <div style="margin-left: 20px;"> • The binary tree has between 0 and 2^12 - 1 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= prerequisites.length &lt;= 5000</div>
-                            
-                                <div style="margin-left: 20px;"> • prerequisites[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt; numCourses</div>
-                            
-                                <div style="margin-left: 20px;"> • All prerequisites pairs are unique.</div>
+                                <div style="margin-left: 20px;"> • Node values are between -1000 and 1000.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if it is possible to finish all the courses. Otherwise, return false.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output should return the root of the tree, where each node&#39;s &#39;next&#39; pointer is set to its next right node, or NULL if no next node exists.</div>
+                        <div class=""> <b>Example:</b> Output: [10,#,5,15,#,3,7,12,20,#]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The returned value must indicate whether it is possible to complete all courses given the prerequisites.</div>
+                                <div style="margin-left: 20px;"> • The next pointer of each node should point to the next right node, or NULL if no such node exists.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine if there is a cycle in the prerequisite graph. If there is no cycle, return true. If a cycle exists, return false.</div>
+                        <div class=""> <b>Goal:</b> The goal is to populate the &#39;next&#39; pointers for each node, connecting nodes at the same level to each other.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create a graph where each course points to its dependent courses.</div>
+                                <div style="margin-left: 20px;"> • Use a level-order traversal (breadth-first search) of the tree to connect each node to the node on its right.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a counter to track the number of prerequisites for each course.</div>
+                                <div style="margin-left: 20px;"> • For each level, connect nodes to their adjacent nodes and reset the next pointers for the next level.</div>
                             
-                                <div style="margin-left: 20px;"> • Start with the courses that have no prerequisites and reduce the count of prerequisites for their dependent courses.</div>
-                            
-                                <div style="margin-left: 20px;"> • If all courses can be completed (i.e., the prerequisite counter reaches zero for all), return true. Otherwise, return false if any course cannot be completed.</div>
+                                <div style="margin-left: 20px;"> • Ensure that after the last node of each level, the next pointer is set to NULL.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution handles both small and large inputs efficiently.</div>
+                        <div class=""> <b>Goal:</b> The tree will be a perfect binary tree with nodes between 0 and 2^12 - 1 in total. Node values will be between -1000 and 1000.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The maximum number of courses is 2000.</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is between 0 and 2^12 - 1.</div>
                             
-                                <div style="margin-left: 20px;"> • The maximum number of prerequisites is 5000.</div>
-                            
-                                <div style="margin-left: 20px;"> • Courses are labeled with unique indices from 0 to numCourses - 1.</div>
+                                <div style="margin-left: 20px;"> • Node values are in the range [-1000, 1000].</div>
                             
                         </div>
                     </div>        
@@ -431,19 +421,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input graph is well-formed with valid course numbers and prerequisites.</div>
+                                <div style="margin-left: 20px;"> • The tree is guaranteed to be a perfect binary tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: numCourses = 2, prerequisites = [[1, 0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are 2 courses. To take course 1, you must first take course 0. This is possible, so the output is true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [10, 5, 15, 3, 7, 12, 20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In the tree, each node&#39;s next pointer should connect it to the node to its immediate right, such as node 5&#39;s next pointer pointing to node 15, node 3&#39;s next pointer pointing to node 7, and so on. After processing, the tree should look like: [10, #, 5, 15, #, 3, 7, 12, 20, #].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: numCourses = 2, prerequisites = [[1, 0], [0, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are 2 courses. Course 1 requires course 0, and course 0 requires course 1. This forms a cycle, so it is impossible to complete all courses. The output is false.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = []</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> If the input tree is empty (root is NULL), the output should also be an empty tree.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -467,16 +457,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves topological sorting of the graph formed by courses and their prerequisites. If there is a cycle in the graph, it is impossible to complete all courses.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we can use a level-order traversal (BFS) approach. We traverse the tree level by level, connecting each node to its adjacent right node, and ensure that each level&#39;s last node points to NULL.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be viewed as a cycle detection problem in a directed graph.</div>
+                                <div style="margin-left: 20px;"> • We need to connect nodes at the same level, which makes level-order traversal an appropriate choice.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Topological sorting using Kahn&#39;s algorithm can be used to detect cycles efficiently.</div>
+                                <div style="margin-left: 20px;"> • This problem can be solved using BFS without requiring additional space, as long as we adjust the pointers in-place.</div>
                             
                         </div>
                     </div>
@@ -484,13 +474,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Construct a graph where each course points to its dependent courses.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue and add the root node.</div>
                             
-                                <div style="margin-left: 20px;"> • Count the prerequisites for each course and track courses with zero prerequisites.</div>
+                                <div style="margin-left: 20px;"> • For each level, process all nodes and connect each node to the next one in the same level using the &#39;next&#39; pointer.</div>
                             
-                                <div style="margin-left: 20px;"> • Process courses with zero prerequisites, reducing the count for dependent courses.</div>
+                                <div style="margin-left: 20px;"> • Ensure the last node&#39;s &#39;next&#39; pointer is set to NULL.</div>
                             
-                                <div style="margin-left: 20px;"> • If all courses can be processed, return true. If not, return false.</div>
+                                <div style="margin-left: 20px;"> • After processing each level, move to the next level in the tree.</div>
                             
                         </div>
                     </div>
@@ -499,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no prerequisites, you can finish all courses.</div>
+                                <div style="margin-left: 20px;"> • If the input is an empty tree (root is NULL), the output should also be an empty tree.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle up to 2000 courses and 5000 prerequisites efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large perfect binary trees, the solution should efficiently handle up to 2^12 - 1 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there is only one course, it can always be completed.</div>
+                                <div style="margin-left: 20px;"> • Handle trees where the root has no children (i.e., a single node).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution handles cycles efficiently, especially with a large number of courses.</div>
+                                <div style="margin-left: 20px;"> • The tree can have up to 2^12 - 1 nodes.</div>
                             
                         </div>                                                                        
                     </div>
@@ -531,51 +521,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Graph Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Dependency Counter Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Graph and Dependency Counter Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Graph Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Pointer Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Dependency Counter Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Level Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Queue Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Reset Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Queue Population Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 For Each Level</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Enqueue Course</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue Front</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 While Queue Not Empty</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Pointer Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Inner While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Dequeue Course</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Child Nodes Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Pop Course from Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Child Nodes Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Process Dependencies</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Dependency Counter Decrement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Check If Course Is Ready</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Enqueue Ready Course</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Final Check Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Cycle Detection</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return False</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Final Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
                     
                 </div>
 
@@ -584,45 +560,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canFinish</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pre) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> graph(n);
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Created graph and dependecy counter
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pre.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        graph[pre[i][<span style="color:#666">1</span>]].push_back(pre[i][<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>        cnt[pre[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>     queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Triaged course which does not have any dependency.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">==</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>            q.push(i);
-</span></span><span style="display:flex;"><span>   
-</span></span><span style="display:flex;"><span>
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">connect</span>(Node<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> root;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(root);
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> nextptr <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> size <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(size<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> course <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        nextptr <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            Node<span style="color:#666">*</span> tmp <span style="color:#666">=</span> q.front();
 </span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">dep</span>: graph[course]) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                cnt[dep]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(cnt[dep] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                    q.push(dep);
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            }                
+</span></span><span style="display:flex;"><span>            tmp<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> nextptr;
+</span></span><span style="display:flex;"><span>            nextptr <span style="color:#666">=</span> tmp;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right)  q.push(tmp<span style="color:#666">-&gt;</span>right),
+</span></span><span style="display:flex;"><span>                            q.push(tmp<span style="color:#666">-&gt;</span>left);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">!=</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;   
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -630,233 +585,163 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canFinish</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pre) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">connect</span>(Node<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `canFinish` which takes the number of courses `n` and a vector of prerequisites `pre` representing course dependencies. </div>
+                            <div class=""> Declare the function to connect all nodes at the same level in the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Graph Initialization</b></div>
+                            <div class=""> <b>2 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> graph(n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a graph where each course is represented by an index, and the corresponding vector stores its dependent courses. </div>
+                            <div class=""> Handle the base case where the tree is empty. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Dependency Counter Initialization</b></div>
+                            <div class=""> <b>3 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a counter array `cnt` to track the number of prerequisites (dependencies) each course has. </div>
+                            <div class=""> Initialize a queue to facilitate level-order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Graph and Dependency Counter Update</b></div>
+                            <div class=""> <b>4 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pre.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each prerequisite pair in the `pre` list. </div>
+                            <div class=""> Push the root node onto the queue to start the traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Graph Update</b></div>
+                            <div class=""> <b>5 : Pointer Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        graph[pre[i][<span style="color:#666">1</span>]].push_back(pre[i][<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    Node<span style="color:#666">*</span> nextptr <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each prerequisite, add the dependent course to the corresponding graph entry. </div>
+                            <div class=""> Initialize a pointer to track the next node at the same level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Dependency Counter Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt[pre[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increment the counter for the dependent course, indicating it has one more prerequisite. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Queue Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>     queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Declare a queue `q` to hold the courses that are ready to be taken (i.e., those with zero dependencies). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Queue Population</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Loop through all courses to find those with no prerequisites. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Queue Population Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">==</span> <span style="color:#666">0</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if a course has no dependencies by examining its counter value. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Enqueue Course</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Add the course with no dependencies to the queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : While Queue Not Empty</b></div>
+                            <div class=""> <b>6 : While Loop</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a `while` loop to process courses in the queue until it&#39;s empty. </div>
+                            <div class=""> Iterate as long as there are nodes in the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Queue Size Calculation</b></div>
+                            <div class=""> <b>7 : Level Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> size <span style="color:#666">=</span> q.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Get the current number of courses in the queue, which need to be processed. </div>
+                            <div class=""> Get the number of nodes at the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Inner While Loop</b></div>
+                            <div class=""> <b>8 : Reset Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(size<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nextptr <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through all the courses in the queue. </div>
+                            <div class=""> Reset the `next` pointer for the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Dequeue Course</b></div>
+                            <div class=""> <b>9 : For Each Level</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> course <span style="color:#666">=</span> q.front();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Get the course at the front of the queue to process. </div>
+                            <div class=""> Iterate over all nodes at the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Pop Course from Queue</b></div>
+                            <div class=""> <b>10 : Queue Front</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            Node<span style="color:#666">*</span> tmp <span style="color:#666">=</span> q.front();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Retrieve the front node from the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Queue Operation</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the course from the queue after processing it. </div>
+                            <div class=""> Remove the front node from the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Process Dependencies</b></div>
+                            <div class=""> <b>12 : Pointer Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">dep</span>: graph[course]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> nextptr;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each dependent course of the current course, reduce its dependency count. </div>
+                            <div class=""> Assign the `next` pointer of the current node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Dependency Counter Decrement</b></div>
+                            <div class=""> <b>13 : Update Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                cnt[dep]<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            nextptr <span style="color:#666">=</span> tmp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrement the counter for each dependent course, indicating one less prerequisite. </div>
+                            <div class=""> Update the `next` pointer to the current node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Check If Course Is Ready</b></div>
+                            <div class=""> <b>14 : Child Nodes Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(cnt[dep] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right)  q.push(tmp<span style="color:#666">-&gt;</span>right),
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a course now has no dependencies, it can be added to the queue. </div>
+                            <div class=""> If the right child exists, push it onto the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Enqueue Ready Course</b></div>
+                            <div class=""> <b>15 : Child Nodes Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(dep);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                            q.push(tmp<span style="color:#666">-&gt;</span>left);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Enqueue the course that has no remaining prerequisites. </div>
+                            <div class=""> If the left child exists, push it onto the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>20 : Final Check Loop</b></div>
+                            <div class=""> <b>16 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through all courses to check for any remaining prerequisites. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Cycle Detection</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">!=</span> <span style="color:#666">0</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If any course has remaining prerequisites, return `false` as there&#39;s a cycle. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Return False</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;   
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return `false` indicating it&#39;s not possible to finish all courses due to a cycle. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Final Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return `true` if all courses can be finished without any cycles. </div>
+                            <div class=""> Return the modified root node. </div>
                         </div>
                     
                 </div>
@@ -876,16 +761,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; e)</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; e)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; e)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n &#43; e), where n is the number of courses and e is the number of prerequisites.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In all cases, the time complexity is O(n), where n is the number of nodes in the tree, as each node is processed once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; e)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; e)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n &#43; e) due to the graph representation and the prerequisite count array.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the queue used for level-order traversal. In the worst case, the queue can store all nodes at the current level.</div>    
                     </div>
 
                 </div>

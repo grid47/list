@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 7, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -301,7 +301,7 @@
 
 
 
-<div class=""> Alice and Bob are playing a game with stones. The sequence of <code>n</code> stones has values given in an array <code>stones</code>. Players take turns to remove a stone. The player who removes a stone, making the sum of all removed stones divisible by 3, loses. If all stones are removed, Bob wins automatically. Determine if Alice wins or Bob wins, assuming both play optimally. </div>
+<div class=""> You are given a complete binary tree. A complete binary tree is one where every level, except possibly the last, is completely filled, and all nodes are as far left as possible. Your task is to design a data structure that supports inserting new nodes while maintaining the completeness of the binary tree. Implement the CBTInserter class that supports two operations: inserting a new node and returning the root of the tree. </div>
 
 
 
@@ -352,45 +352,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `stones` representing the values of the stones. Alice and Bob alternate turns, starting with Alice. On each turn, one stone is removed.</div>
-                        <div class=""> <b>Example:</b> stones = [3, 2]</div>
+                        <div class=""> <b>Input:</b> You are given the root of a complete binary tree and a value to insert.</div>
+                        <div class=""> <b>Example:</b> Input: root = [1, 2], val = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= stones.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= stones[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= val &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 10^4 calls to insert and get_root will be made.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return `true` if Alice wins and `false` if Bob wins.</div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Output:</b> The `insert` method should return the value of the parent node of the newly inserted node. The `get_root` method should return the root node of the tree.</div>
+                        <div class=""> <b>Example:</b> Output: [null, 1, 2, [1, 2, 3, 4]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The tree will always remain complete after each insertion.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine the winner of the game based on the values of the stones and the optimal moves by both players.</div>
+                        <div class=""> <b>Goal:</b> The goal is to maintain the completeness of the binary tree after each insertion while ensuring efficient updates.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Count the number of stones with values that leave remainders of 0, 1, and 2 when divided by 3.</div>
+                                <div style="margin-left: 20px;"> • Use a list (array) to store the nodes in level-order. This allows easy access to parent and child nodes for insertion.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use the counts of stones with each remainder to decide the optimal moves for Alice and Bob.</div>
+                                <div style="margin-left: 20px;"> • When inserting a new node, add it to the list and determine whether it should be the left or right child of its parent, based on the index of the new node.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Check if the sum of the removed stones after each turn is divisible by 3 to determine the winner.</div>
+                                <div style="margin-left: 20px;"> • Update the tree structure in the list and return the parent node&#39;s value.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints for the number of stones and their values.</div>
+                        <div class=""> <b>Goal:</b> The tree will contain at least one node, and the values will be within the specified ranges.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= stones.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The tree will contain between 1 and 1000 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= stones[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • Each node&#39;s value and the value to be inserted will be between 0 and 5000.</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 10^4 operations will be performed.</div>
                             
                         </div>
                     </div>        
@@ -398,23 +406,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Players will always play optimally and aim to avoid the sum of removed stones being divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • The input binary tree is a complete binary tree before the first insertion.</div>
+                            
+                                <div style="margin-left: 20px;"> • The new node will always be inserted in the next available spot in the tree to maintain completeness.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> stones = [3, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice removes the stone with value 2, and Bob removes the stone with value 3. The sum of the removed stones is 5, which is not divisible by 3, so Alice wins.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1, 2], val = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The tree before insertion is [1, 2]. After inserting 3, the new tree becomes [1, 2, 3], where 1 is the parent of 2 and 3. The return value is the parent node&#39;s value, which is 1.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> stones = [1, 1, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice removes one stone (value 1), Bob removes another (value 1), and Alice removes the last one (value 1). The sum is 3, divisible by 3, so Alice loses and Bob wins.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> stones = [4, 6, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice removes the stone with value 2, Bob removes the stone with value 4, and Alice removes the last stone with value 6. The sum is 12, divisible by 3, so Alice wins.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1, 2, 3, 4], val = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Before the insertion, the tree is [1, 2, 3, 4]. After inserting 5, the tree becomes [1, 2, 3, 4, 5]. The parent node of 5 is 2, so the return value is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,18 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to simulate the game and determine who will win given the sequence of stones and the optimal play strategy.</div>
+                        <div class=""> <b>Approach:</b> To insert a new node into the complete binary tree while maintaining its completeness, we use an array-based approach to store the tree in level order. This allows efficient access to parent nodes and insertion points.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The game is primarily determined by the number of stones that leave remainders of 0, 1, and 2 when divided by 3.</div>
-                            
-                                <div style="margin-left: 20px;"> • The game ends when one player causes the sum of the removed stones to be divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • The tree is complete, so every insertion can be handled by simply adding the new node to the next available position in the tree.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By analyzing the remainders of the stone values modulo 3, we can determine the optimal strategy for both Alice and Bob.</div>
+                                <div style="margin-left: 20px;"> • Using a list to represent the tree in level order allows us to efficiently manage the insertions and get the parent of the inserted node in constant time.</div>
                             
                         </div>
                     </div>
@@ -457,11 +461,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Count the number of stones that leave a remainder of 0, 1, and 2 when divided by 3.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Store the root of the tree in an array `tree` to keep track of the nodes in level order.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If there are no stones with a remainder of 1 or 2, Alice will lose because there is no optimal way to avoid the sum being divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each insertion, append the new node to the array and determine its parent by checking whether its index is odd or even.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Otherwise, calculate who will win based on the remainder counts and the optimal moves.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Update the parent-child relationship based on the calculated index and return the parent&#39;s value.</div>
                             
                         </div>
                     </div>
@@ -470,22 +474,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable since there will always be at least one stone.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that the tree will have at least one node, so there will be no empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution is optimized for large inputs (up to 10^5 stones).</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle up to 10^4 insertions efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all stones are divisible by 3, Bob will always win.</div>
+                                <div style="margin-left: 20px;"> • If the tree has only one node, the next insertion should simply add the second node as the left child.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm is efficient enough to handle the maximum input size within the time limits.</div>
+                                <div style="margin-left: 20px;"> • The tree will remain complete at all times, so there is no need to rebalance it.</div>
                             
                         </div>                                                                        
                     </div>
@@ -502,19 +506,39 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Specifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Counter</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Tree Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Condition 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Condition 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Child Insertion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Child Insertion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Method</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Node Creation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Tree Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Child Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Child Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Method</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Statement</button>
                     
                 </div>
 
@@ -523,87 +547,218 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGameIX</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> stones) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> m(<span style="color:#666">3</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span>: stones)
-</span></span><span style="display:flex;"><span>    m[a <span style="color:#666">%</span> <span style="color:#666">3</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(min(m[<span style="color:#666">2</span>], m[<span style="color:#666">1</span>]) <span style="color:#666">==</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(m[<span style="color:#666">1</span>], m[<span style="color:#666">2</span>]) <span style="color:#666">&gt;</span> <span style="color:#666">2</span> <span style="color:#666">&amp;&amp;</span> m[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">&gt;</span><span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> abs(m[<span style="color:#666">1</span>] <span style="color:#666">-</span> m[<span style="color:#666">2</span>]) <span style="color:#666">&gt;</span> <span style="color:#666">2</span> <span style="color:#666">||</span> m[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> <span style="color:#666">*</span> <span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#00a000">TreeNode</span>() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#00a000">TreeNode</span>(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span> <span style="color:#666">*</span>     <span style="color:#00a000">TreeNode</span>(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span> <span style="color:#666">*</span> };
+</span></span><span style="display:flex;"><span> <span style="">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">CBTInserter</span> {
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> tree;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>CBTInserter(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    tree.push_back(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> tree.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tree[i]<span style="color:#666">-&gt;</span>left) tree.push_back(tree[i]<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tree[i]<span style="color:#666">-&gt;</span>right) tree.push_back(tree[i]<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">insert</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> N <span style="color:#666">=</span> tree.size();
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(val);
+</span></span><span style="display:flex;"><span>    tree.push_back(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(N<span style="color:#666">%</span><span style="color:#666">2</span>) tree[(N<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span><span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>    tree[(N<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span><span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>right<span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tree[(N<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span><span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">get_root</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tree[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your CBTInserter object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * CBTInserter* obj = new CBTInserter(root);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;insert(val);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * TreeNode* param_2 = obj-&gt;get_root();
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGameIX</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> stones) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">CBTInserter</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the &#39;stoneGameIX&#39; function, which accepts a vector of stones and returns a boolean indicating whether the current player wins the game. </div>
+                            <div class=""> Define the &#39;CBTInserter&#39; class that manages a complete binary tree and provides methods for insertion and retrieval. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> m(<span style="color:#666">3</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> tree;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a vector &#39;m&#39; of size 3, used to store the counts of stones divided into 3 groups based on their remainder when divided by 3. </div>
+                            <div class=""> A vector of pointers to &#39;TreeNode&#39; objects, which holds the nodes of the complete binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Start</b></div>
+                            <div class=""> <b>3 : Access Specifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span>: stones)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each stone in the &#39;stones&#39; vector, performing the modulo operation to categorize the stones into one of three groups. </div>
+                            <div class=""> Specifies that the following methods and members are publicly accessible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Update Counter</b></div>
+                            <div class=""> <b>4 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    m[a <span style="color:#666">%</span> <span style="color:#666">3</span>]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>CBTInserter(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each stone &#39;a&#39;, this increments the corresponding counter in the &#39;m&#39; vector based on the result of &#39;a % 3&#39;. </div>
+                            <div class=""> Constructor for the &#39;CBTInserter&#39; class that initializes the tree with the root node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Tree Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(min(m[<span style="color:#666">2</span>], m[<span style="color:#666">1</span>]) <span style="color:#666">==</span> <span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    tree.push_back(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks whether one of the groups (1 or 2 modulo 3) has zero stones, which will influence the game&#39;s outcome. </div>
+                            <div class=""> Add the root node to the &#39;tree&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Condition 1</b></div>
+                            <div class=""> <b>6 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(m[<span style="color:#666">1</span>], m[<span style="color:#666">2</span>]) <span style="color:#666">&gt;</span> <span style="color:#666">2</span> <span style="color:#666">&amp;&amp;</span> m[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">&gt;</span><span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> tree.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the maximum count between groups 1 and 2 is greater than 2 and if the count of group 0 is odd, deciding the winner. </div>
+                            <div class=""> Start a loop to traverse all nodes in the tree and add their children to the &#39;tree&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Condition 2</b></div>
+                            <div class=""> <b>7 : Child Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">abs</span>(m[<span style="color:#666">1</span>] <span style="color:#666">-</span> m[<span style="color:#666">2</span>]) <span style="color:#666">&gt;</span> <span style="color:#666">2</span> <span style="color:#666">||</span> m[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tree[i]<span style="color:#666">-&gt;</span>left) tree.push_back(tree[i]<span style="color:#666">-&gt;</span>left);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the first condition is not met, this checks if the absolute difference between groups 1 and 2 is greater than 2 or if the count of group 0 is even, deciding the winner. </div>
+                            <div class=""> If the current node has a left child, add it to the &#39;tree&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Child Insertion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tree[i]<span style="color:#666">-&gt;</span>right) tree.push_back(tree[i]<span style="color:#666">-&gt;</span>right);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node has a right child, add it to the &#39;tree&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Method</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">insert</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the &#39;insert&#39; method that inserts a new node with value &#39;val&#39; into the tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Variable Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> N <span style="color:#666">=</span> tree.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the current size of the &#39;tree&#39; vector, which is used to find the parent node of the new node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Node Creation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(val);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create a new &#39;TreeNode&#39; with the given value &#39;val&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Tree Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    tree.push_back(node);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the newly created node to the &#39;tree&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Child Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(N<span style="color:#666">%</span><span style="color:#666">2</span>) tree[(N<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span><span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> node;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If &#39;N&#39; is odd, assign the new node as the left child of its parent. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Child Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>    tree[(N<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span><span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>right<span style="color:#666">=</span> node;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If &#39;N&#39; is even, assign the new node as the right child of its parent. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tree[(N<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span><span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>val;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the value of the parent node to confirm where the new node was inserted. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Method</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">get_root</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the &#39;get_root&#39; method that returns the root of the tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tree[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the root of the tree (the first element in the &#39;tree&#39; vector). </div>
                         </div>
                     
                 </div>
@@ -623,16 +778,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The algorithm runs in linear time relative to the number of stones.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> Both the `insert` and `get_root` operations run in constant time O(1), as we are only adding a new node to the list and returning the root.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we only need to track the counts of stones with different remainders modulo 3.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the number of nodes in the tree, as we store all nodes in the list.</div>    
                     </div>
 
                 </div>

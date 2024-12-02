@@ -307,7 +307,7 @@
 
 
 
-<div class=""> Given the dimensions and mass of a box, categorize it based on the following conditions: If any dimension is &gt;= 10,000 or the volume is &gt;= 1,000,000,000, the box is &lsquo;Bulky&rsquo;. If the mass is &gt;= 100, the box is &lsquo;Heavy&rsquo;. The box can be categorized as &lsquo;Both&rsquo;, &lsquo;Heavy&rsquo;, &lsquo;Bulky&rsquo;, &lsquo;Neither&rsquo;, or a combination of the categories. </div>
+<div class=""> Given an array of integers, determine the maximum sum of a non-empty contiguous subarray where you are allowed to optionally delete at most one element. The subarray must remain non-empty after any deletion. </div>
 
 
 
@@ -358,49 +358,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of four integers: `length`, `width`, `height`, and `mass`, representing the dimensions and mass of the box.</div>
-                        <div class=""> <b>Example:</b> length = 1200, width = 150, height = 800, mass = 150</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array representing the values of elements.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [2, -4, 3, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= length, width, height &lt;= 100,000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= mass &lt;= 1,000</div>
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= arr[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a string representing the category of the box: &#39;Bulky&#39;, &#39;Heavy&#39;, &#39;Both&#39;, &#39;Neither&#39;, or a combination of these.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;Heavy&#39;</div>
+                        <div class=""> <b>Output:</b> The output is a single integer representing the maximum sum of the subarray with at most one optional deletion.</div>
+                        <div class=""> <b>Example:</b> Output: 9</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a string representing the box&#39;s category.</div>
+                                <div style="margin-left: 20px;"> • The subarray must remain non-empty.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine the category of the box based on the provided dimensions and mass.</div>
+                        <div class=""> <b>Goal:</b> To calculate the maximum sum of a contiguous subarray with the option to delete one element.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Calculate the volume of the box by multiplying `length * width * height`.</div>
+                                <div style="margin-left: 20px;"> • Use dynamic programming to calculate forward maximum sums.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the box satisfies the &#39;Bulky&#39; condition (any dimension &gt;= 10,000 or volume &gt;= 1,000,000,000).</div>
+                                <div style="margin-left: 20px;"> • Compute backward maximum sums for the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the box satisfies the &#39;Heavy&#39; condition (mass &gt;= 100).</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the appropriate category based on the conditions.</div>
+                                <div style="margin-left: 20px;"> • Combine results to evaluate maximum sums with one deletion allowed.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The dimensions and mass are constrained as specified.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle large arrays efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= length, width, height &lt;= 100,000</div>
+                                <div style="margin-left: 20px;"> • Time complexity should be O(n).</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= mass &lt;= 1,000</div>
+                                <div style="margin-left: 20px;"> • Space complexity should be O(n) or optimized further.</div>
                             
                         </div>
                     </div>        
@@ -408,23 +406,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input values are within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The input array always contains at least one element.</div>
+                            
+                                <div style="margin-left: 20px;"> • Subarray sums may be negative.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> length = 1200, width = 150, height = 800, mass = 150</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The box has mass &gt;= 100, so it is categorized as &#39;Heavy&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [3, -1, 5, -2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You can choose [3, -1, 5] and optionally remove -1 to maximize the sum to 8.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> length = 900, width = 900, height = 300, mass = 20</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The box does not satisfy either &#39;Bulky&#39; or &#39;Heavy&#39;, so it is categorized as &#39;Neither&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> length = 10000, width = 10000, height = 10000, mass = 50</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The box is &#39;Bulky&#39; due to the large dimensions, but not &#39;Heavy&#39; due to its mass.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [-3, -1, -4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since all elements are negative, the best subarray is [-1] for a maximum sum of -1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,16 +444,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To categorize the box, calculate its volume and check the conditions for &#39;Bulky&#39; and &#39;Heavy&#39;. Return the appropriate category based on the conditions.</div>
+                        <div class=""> <b>Approach:</b> Use a dynamic programming approach to efficiently compute the maximum subarray sums with and without one deletion.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check both the box&#39;s volume and mass to determine its category.</div>
+                                <div style="margin-left: 20px;"> • If no deletion is allowed, it reduces to the classic maximum subarray problem.</div>
+                            
+                                <div style="margin-left: 20px;"> • To handle one deletion, we need a way to evaluate the subarray sum excluding one element.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The solution requires simple conditional checks to determine the category.</div>
+                                <div style="margin-left: 20px;"> • Using forward and backward maximum sums allows us to efficiently compute the result for each potential deletion point.</div>
                             
                         </div>
                     </div>
@@ -465,13 +463,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Calculate the volume of the box using the formula `length * width * height`.</div>
+                                <div style="margin-left: 20px;"> • Calculate the forward maximum subarray sum at each index using a standard Kadane&#39;s algorithm.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if any dimension is &gt;= 10,000 or if the volume is &gt;= 1,000,000,000 to classify as &#39;Bulky&#39;.</div>
+                                <div style="margin-left: 20px;"> • Compute the backward maximum subarray sum at each index similarly.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the mass is &gt;= 100 to classify as &#39;Heavy&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the correct category based on the checks.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the array to evaluate the maximum sum with at most one deletion by combining forward and backward results.</div>
                             
                         </div>
                     </div>
@@ -480,22 +476,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no cases with empty inputs since all values are provided.</div>
+                                <div style="margin-left: 20px;"> • N/A - The input is guaranteed to have at least one element.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the input dimensions and mass are within the allowed constraints.</div>
+                                <div style="margin-left: 20px;"> • An array of length 10^5 with alternating large positive and negative values.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the mass is exactly 100 or the volume is exactly 1,000,000,000, handle those cases properly.</div>
+                                <div style="margin-left: 20px;"> • An array of all negative values.</div>
+                            
+                                <div style="margin-left: 20px;"> • An array of all positive values.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be efficient enough to handle the largest possible inputs.</div>
+                                <div style="margin-left: 20px;"> • Handling edge cases where the deletion might lead to the highest result.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,37 +514,37 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Volume Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Dimension Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Dimension Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Array Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Set Bulky Flag</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Mass Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Max Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Set Heavy Flag</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Max Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Category Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Array Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Both Conditions Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Assign Category &#39;Both&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Neither Conditions Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Assign Category &#39;Neither&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Max Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Bulky Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Array Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Assign Category &#39;Bulky&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Heavy Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Assign Category &#39;Heavy&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Max Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Category</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Statement</button>
                     
                 </div>
 
@@ -555,24 +553,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">categorizeBox</span>(<span style="color:#0b0;font-weight:bold">int</span> length, <span style="color:#0b0;font-weight:bold">int</span> width, <span style="color:#0b0;font-weight:bold">int</span> height, <span style="color:#0b0;font-weight:bold">int</span> mass) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> bulky <span style="color:#666">=</span> <span style="color:#a2f">false</span>, heavy <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> v <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) length <span style="color:#666">*</span> width <span style="color:#666">*</span> height;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(length <span style="color:#666">&gt;=</span> <span style="color:#666">10000</span> <span style="color:#666">||</span> width <span style="color:#666">&gt;=</span> <span style="color:#666">10000</span> <span style="color:#666">||</span> 
-</span></span><span style="display:flex;"><span>       height <span style="color:#666">&gt;=</span> <span style="color:#666">10000</span> <span style="color:#666">||</span> v <span style="color:#666">&gt;=</span> <span style="color:#666">1000000000</span>)
-</span></span><span style="display:flex;"><span>        bulky <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mass <span style="color:#666">&gt;=</span> <span style="color:#666">100</span>)
-</span></span><span style="display:flex;"><span>        heavy <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    string category;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(bulky <span style="color:#666">&amp;&amp;</span> heavy)
-</span></span><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Both&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>bulky <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>heavy)
-</span></span><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Neither&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (bulky)
-</span></span><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Bulky&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (heavy)
-</span></span><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Heavy&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> category;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> arr.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> curr_mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>], overall_mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> f(n), b(n);
+</span></span><span style="display:flex;"><span>    f[<span style="color:#666">0</span>] <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        curr_mx <span style="color:#666">=</span> max(arr[i], curr_mx <span style="color:#666">+</span> arr[i]);
+</span></span><span style="display:flex;"><span>        overall_mx <span style="color:#666">=</span> max(curr_mx, overall_mx);
+</span></span><span style="display:flex;"><span>        f[i] <span style="color:#666">=</span> curr_mx;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    curr_mx <span style="color:#666">=</span> overall_mx <span style="color:#666">=</span> b[n<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> arr[n<span style="color:#666">-</span><span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>){
+</span></span><span style="display:flex;"><span>        curr_mx <span style="color:#666">=</span> max(arr[i], curr_mx <span style="color:#666">+</span> arr[i]);
+</span></span><span style="display:flex;"><span>        overall_mx <span style="color:#666">=</span> max(overall_mx, curr_mx);
+</span></span><span style="display:flex;"><span>        b[i] <span style="color:#666">=</span> curr_mx;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> overall_mx;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">-</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, f[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">+</span>b[i<span style="color:#666">+</span><span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -583,180 +586,180 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">categorizeBox</span>(<span style="color:#0b0;font-weight:bold">int</span> length, <span style="color:#0b0;font-weight:bold">int</span> width, <span style="color:#0b0;font-weight:bold">int</span> height, <span style="color:#0b0;font-weight:bold">int</span> mass) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function &#39;categorizeBox&#39; that takes four parameters: &#39;length&#39;, &#39;width&#39;, &#39;height&#39;, and &#39;mass&#39;, and returns a string representing the category of the box. </div>
+                            <div class=""> Define the function `maximumSum` which takes an integer array `arr` as input and returns the maximum sum after removing one element, or keeping the array unchanged. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> bulky <span style="color:#666">=</span> <span style="color:#a2f">false</span>, heavy <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> arr.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes two boolean variables, &#39;bulky&#39; and &#39;heavy&#39;, which will be used to check whether the box meets certain size and mass criteria. </div>
+                            <div class=""> Initialize `res` to store the result and `n` to store the size of the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Volume Calculation</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> v <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) length <span style="color:#666">*</span> width <span style="color:#666">*</span> height;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> curr_mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>], overall_mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the volume &#39;v&#39; of the box by multiplying its &#39;length&#39;, &#39;width&#39;, and &#39;height&#39;. The result is cast to a &#39;double&#39; for precision. </div>
+                            <div class=""> Initialize `curr_mx` and `overall_mx` to the first element of the array. These will track the current and overall maximum sums, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Dimension Check</b></div>
+                            <div class=""> <b>4 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(length <span style="color:#666">&gt;=</span> <span style="color:#666">10000</span> <span style="color:#666">||</span> width <span style="color:#666">&gt;=</span> <span style="color:#666">10000</span> <span style="color:#666">||</span> 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> f(n), b(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if any of the box&#39;s dimensions (length, width, or height) exceed the threshold of 10,000 units, which would categorize it as bulky. </div>
+                            <div class=""> Initialize two vectors `f` and `b` to store the maximum sums for each index from the left and right sides, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Dimension Check</b></div>
+                            <div class=""> <b>5 : Array Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       height <span style="color:#666">&gt;=</span> <span style="color:#666">10000</span> <span style="color:#666">||</span> v <span style="color:#666">&gt;=</span> <span style="color:#666">1000000000</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    f[<span style="color:#666">0</span>] <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the box&#39;s volume exceeds 1,000,000,000 cubic units, or if any dimension exceeds 10,000, marking it as bulky. </div>
+                            <div class=""> Set the first element of `f` to be the same as the first element of the array `arr`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Set Bulky Flag</b></div>
+                            <div class=""> <b>6 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        bulky <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the box meets the bulky conditions (large dimension or large volume), the &#39;bulky&#39; flag is set to true. </div>
+                            <div class=""> Loop through the array starting from the second element to calculate the maximum subarray sum from the left. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Mass Check</b></div>
+                            <div class=""> <b>7 : Max Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mass <span style="color:#666">&gt;=</span> <span style="color:#666">100</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        curr_mx <span style="color:#666">=</span> max(arr[i], curr_mx <span style="color:#666">+</span> arr[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the mass of the box is greater than or equal to 100 units. If true, the &#39;heavy&#39; flag is set to true. </div>
+                            <div class=""> Update `curr_mx` to be the maximum of the current element `arr[i]` and the sum of the current element with the previous subarray sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Set Heavy Flag</b></div>
+                            <div class=""> <b>8 : Max Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        heavy <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        overall_mx <span style="color:#666">=</span> max(curr_mx, overall_mx);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the mass of the box exceeds 100 units, the &#39;heavy&#39; flag is set to true. </div>
+                            <div class=""> Update `overall_mx` to be the maximum of the current subarray sum (`curr_mx`) and the overall maximum sum so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Category Declaration</b></div>
+                            <div class=""> <b>9 : Array Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string category;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        f[i] <span style="color:#666">=</span> curr_mx;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This declares a string variable &#39;category&#39; that will hold the final result based on the box&#39;s classification. </div>
+                            <div class=""> Assign the current maximum sum `curr_mx` to the `f` vector at index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Both Conditions Check</b></div>
+                            <div class=""> <b>10 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(bulky <span style="color:#666">&amp;&amp;</span> heavy)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    curr_mx <span style="color:#666">=</span> overall_mx <span style="color:#666">=</span> b[n<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> arr[n<span style="color:#666">-</span><span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the box is both bulky and heavy. If true, the category is set to &#39;Both&#39;. </div>
+                            <div class=""> Initialize `curr_mx`, `overall_mx`, and `b[n-1]` to the last element of the array `arr`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Assign Category &#39;Both&#39;</b></div>
+                            <div class=""> <b>11 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Both&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>){
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the box is both bulky and heavy, the category is set to &#39;Both&#39;. </div>
+                            <div class=""> Loop through the array starting from the second last element to calculate the maximum subarray sum from the right. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Neither Conditions Check</b></div>
+                            <div class=""> <b>12 : Max Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>bulky <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>heavy)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        curr_mx <span style="color:#666">=</span> max(arr[i], curr_mx <span style="color:#666">+</span> arr[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the box is neither bulky nor heavy. If true, the category is set to &#39;Neither&#39;. </div>
+                            <div class=""> Update `curr_mx` to be the maximum of the current element `arr[i]` and the sum of the current element with the previous subarray sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Assign Category &#39;Neither&#39;</b></div>
+                            <div class=""> <b>13 : Max Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Neither&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        overall_mx <span style="color:#666">=</span> max(overall_mx, curr_mx);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the box is neither bulky nor heavy, the category is set to &#39;Neither&#39;. </div>
+                            <div class=""> Update `overall_mx` to be the maximum of the current subarray sum (`curr_mx`) and the overall maximum sum so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Bulky Condition Check</b></div>
+                            <div class=""> <b>14 : Array Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (bulky)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        b[i] <span style="color:#666">=</span> curr_mx;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the box is only bulky (but not heavy). If true, the category is set to &#39;Bulky&#39;. </div>
+                            <div class=""> Assign the current maximum sum `curr_mx` to the `b` vector at index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Assign Category &#39;Bulky&#39;</b></div>
+                            <div class=""> <b>15 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Bulky&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> overall_mx;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the box is bulky, the category is set to &#39;Bulky&#39;. </div>
+                            <div class=""> Assign the overall maximum sum to `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Heavy Condition Check</b></div>
+                            <div class=""> <b>16 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (heavy)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">-</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the box is only heavy (but not bulky). If true, the category is set to &#39;Heavy&#39;. </div>
+                            <div class=""> Loop through the array, skipping the first and last element, to calculate the maximum possible sum by removing one element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Assign Category &#39;Heavy&#39;</b></div>
+                            <div class=""> <b>17 : Max Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            category <span style="color:#666">=</span> <span style="color:#b44">&#34;Heavy&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, f[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">+</span>b[i<span style="color:#666">+</span><span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the box is heavy, the category is set to &#39;Heavy&#39;. </div>
+                            <div class=""> Update `res` to the maximum of the current result and the sum of the left and right maximum sums from vectors `f` and `b`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Return Category</b></div>
+                            <div class=""> <b>18 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> category;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the final category string, which indicates the classification of the box. </div>
+                            <div class=""> Return the maximum sum `res`. </div>
                         </div>
                     
                 </div>
@@ -776,16 +779,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant because the operations performed are simple calculations and comparisons.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Iterating over the array multiple times for forward and backward passes.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we are only storing a few integer variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) if the backward pass is combined with a single array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Space can be reduced by combining computations in a single loop.</div>    
                     </div>
 
                 </div>

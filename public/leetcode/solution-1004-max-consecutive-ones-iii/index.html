@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 29, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,13 +309,7 @@
 
 
 
-<div class=""> <p>You are given an integer array <code>nums</code> representing a pile, where <code>nums[0]</code> is the topmost element. You can perform the following operations in exactly <code>k</code> moves:</p>
-<ol>
-<li>Remove the topmost element of the pile (if it&rsquo;s not empty).</li>
-<li>If any elements have been removed, you can add any one of them back onto the pile as the new topmost element.</li>
-</ol>
-<p>Your goal is to determine the maximum value that can be at the top of the pile after exactly <code>k</code> moves. If it is not possible to have any elements left in the pile after <code>k</code> moves, return <code>-1</code>.</p>
- </div>
+<div class=""> Given a binary array nums and an integer k, return the maximum number of consecutive 1&rsquo;s in the array if you can flip at most k 0&rsquo;s to 1&rsquo;s. </div>
 
 
 
@@ -366,49 +360,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two inputs: `nums`, a list of integers representing the pile, and `k`, the number of moves you are allowed to make.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [3, 1, 4, 6, 2], k = 4</div>
+                        <div class=""> <b>Input:</b> The input consists of a binary array nums of length n (1 &lt;= n &lt;= 10^5) and an integer k (0 &lt;= k &lt;= n), where nums[i] is either 0 or 1.</div>
+                        <div class=""> <b>Example:</b> nums = [1,0,1,0,1,1,0,1,1], k = 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                                 <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i], k &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • nums[i] is either 0 or 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= nums.length</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> You must return the maximum value that can be at the top of the pile after exactly `k` moves. If it is not possible to have any elements left in the pile after `k` moves, return -1.</div>
+                        <div class=""> <b>Output:</b> Return the maximum length of the subarray of 1&#39;s that can be obtained by flipping at most k 0&#39;s.</div>
                         <div class=""> <b>Example:</b> Output: 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `k` is less than the number of elements in the pile, it&#39;s possible to remove and add elements back.</div>
-                            
-                                <div style="margin-left: 20px;"> • If `k` is greater than or equal to the size of the pile and the pile becomes empty, return -1.</div>
+                                <div style="margin-left: 20px;"> • The output will be an integer representing the maximum consecutive 1&#39;s after flipping at most k 0&#39;s.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine the maximum value that can be on top of the pile after exactly `k` moves.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the maximum number of consecutive 1&#39;s after flipping at most k 0&#39;s.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. If `k` is 0, return the first element of `nums` if it&#39;s not empty.</div>
+                                <div style="margin-left: 20px;"> • Use a sliding window approach to track the range of indices that contains at most k 0&#39;s.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If `k` is 1 and the pile has only one element, return -1 since it will be removed.</div>
+                                <div style="margin-left: 20px;"> • Expand the window by including elements, and whenever the count of 0&#39;s exceeds k, shrink the window from the left side.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For other cases, check the elements that can be accessed by performing the `k` moves and return the maximum among them.</div>
+                                <div style="margin-left: 20px;"> • Keep track of the maximum window size as you iterate through the array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input constraints are: nums length up to 10^5, elements and k are within the range 0 to 10^9.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle large input sizes up to 100,000 elements.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i], k &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient to handle arrays with a length of up to 10^5.</div>
                             
                         </div>
                     </div>        
@@ -416,21 +408,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • It is guaranteed that `nums` is a valid list of integers with at least one element.</div>
+                                <div style="margin-left: 20px;"> • The input array nums only contains 0&#39;s and 1&#39;s.</div>
                             
-                                <div style="margin-left: 20px;"> • You are required to make exactly `k` moves, no more or less.</div>
+                                <div style="margin-left: 20px;"> • The integer k is within the valid range (0 &lt;= k &lt;= nums.length).</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after performing the four moves (removing the first three elements and then adding 6 back onto the pile), the largest element on top of the pile is 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1,1,0,0,1,1,1,0,1,1], k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By flipping two 0&#39;s to 1&#39;s, the longest subarray of consecutive 1&#39;s becomes [1,1,1,1,1,1], which has a length of 6.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the only element in the pile is removed, and thus, no elements are left to add back, resulting in -1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1,0,0,1,1,0,1,0], k = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By flipping one 0 to 1, the longest subarray of consecutive 1&#39;s is [1,1,1], which has a length of 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,18 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The strategy involves simulating the sequence of operations based on the value of `k`. Depending on the number of moves allowed, we calculate which element can be placed at the top after performing the moves.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we can use the sliding window technique to find the maximum length subarray with at most k flipped 0&#39;s.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When `k` is less than the number of elements in the pile, it&#39;s possible to remove elements and potentially add them back.</div>
+                                <div style="margin-left: 20px;"> • This problem can be solved efficiently using the sliding window technique.</div>
                             
-                                <div style="margin-left: 20px;"> • If `k` exceeds the number of elements in the pile, the pile will become empty after `k` moves, and the answer will be -1.</div>
+                                <div style="margin-left: 20px;"> • We need to handle the case where k is 0 or the array consists entirely of 1&#39;s.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We should identify the maximum value that can remain at the top based on the number of moves left.</div>
+                                <div style="margin-left: 20px;"> • The sliding window should expand to include 0&#39;s and shrink when the number of 0&#39;s exceeds k.</div>
                             
                         </div>
                     </div>
@@ -473,11 +465,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check if `k` is 0, return the first element.</div>
+                                <div style="margin-left: 20px;"> • Initialize two pointers for the sliding window: left and right.</div>
                             
-                                <div style="margin-left: 20px;"> • If `k` is 1 and there is only one element, return -1.</div>
+                                <div style="margin-left: 20px;"> • Track the number of 0&#39;s in the current window.</div>
                             
-                                <div style="margin-left: 20px;"> • Otherwise, check the maximum value from the accessible elements after performing `k` moves and return that.</div>
+                                <div style="margin-left: 20px;"> • Expand the right pointer to increase the window size and add 0&#39;s when encountered.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the number of 0&#39;s exceeds k, increment the left pointer to reduce the window size until the number of 0&#39;s is at most k.</div>
+                            
+                                <div style="margin-left: 20px;"> • Track and update the maximum length of the window during the iteration.</div>
                             
                         </div>
                     </div>
@@ -486,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` is empty, return -1.</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty, return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input size is large (up to 10^5 elements), ensure the solution is efficient.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles inputs where the array size is at the maximum limit (10^5).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `k` is 0, we return the topmost element without performing any operations.</div>
+                                <div style="margin-left: 20px;"> • If k is 0, no 0&#39;s can be flipped, so the solution should find the longest subarray of 1&#39;s in the input array.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution respects the constraints on `nums.length` and `k`.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle arrays with a length of up to 100,000 efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,21 +516,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Edge Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sliding Window Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Edge Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Count Ones and Zeros</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Edge Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Adjust Window</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Main Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Decrease Zero Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Main Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Move Left Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Calculate Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Result</button>
                     
                 </div>
 
@@ -543,20 +541,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumTop</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> (n <span style="color:#666">&gt;=</span> <span style="color:#666">1</span>) <span style="color:#666">?</span> nums[<span style="color:#666">0</span>] <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (k <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> nums[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> (k <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> nums[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(begin(nums), begin(nums) <span style="color:#666">+</span> min(n, k <span style="color:#666">-</span> <span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&lt;</span> n) mx <span style="color:#666">=</span> max(mx, nums[k]);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestOnes</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">2</span>] <span style="color:#666">=</span> {};
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        cnt[nums[i]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(cnt[<span style="color:#666">0</span>] <span style="color:#666">&gt;</span> k <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;=</span> i) {
+</span></span><span style="display:flex;"><span>            cnt[nums[j]]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, (i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -567,90 +563,100 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumTop</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestOnes</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function &#39;maximumTop&#39; which takes a vector &#39;nums&#39; and an integer &#39;k&#39; as input parameters. The function aims to return the maximum possible number after performing at most &#39;k&#39; operations on the input array. </div>
+                            <div class=""> Defines the function `longestOnes`, which takes a vector of integers `nums` and an integer `k` to determine the length of the longest subarray with at most `k` zeroes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">2</span>] <span style="color:#666">=</span> {};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes the variable &#39;ans&#39; which will hold the result of the maximum number after &#39;k&#39; operations. </div>
+                            <div class=""> Initializes an array `cnt` to store the count of zeros and ones within the current sliding window. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line stores the size of the vector &#39;nums&#39; in the variable &#39;n&#39;, which is used to determine the bounds of the input array. </div>
+                            <div class=""> Initializes the result variable `res` to store the maximum length of valid subarrays, and `j` as the left pointer of the sliding window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Edge Case Check</b></div>
+                            <div class=""> <b>4 : Sliding Window Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> (n <span style="color:#666">&gt;=</span> <span style="color:#666">1</span>) <span style="color:#666">?</span> nums[<span style="color:#666">0</span>] <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if &#39;k&#39; is 0, meaning no operations are allowed. It then returns the first element of the array if there is at least one element; otherwise, it returns -1. </div>
+                            <div class=""> Starts a loop to iterate through the elements of the `nums` array using `i` as the right pointer of the sliding window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Edge Case Check</b></div>
+                            <div class=""> <b>5 : Count Ones and Zeros</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (k <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> nums[<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt[nums[i]]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if &#39;k&#39; is 1, meaning only one operation is allowed. It returns -1 if there&#39;s only one element in the array; otherwise, it returns the second element. </div>
+                            <div class=""> Increments the count of zeros or ones in the `cnt` array based on the current element `nums[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Edge Case Check</b></div>
+                            <div class=""> <b>6 : Adjust Window</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> (k <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> nums[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(cnt[<span style="color:#666">0</span>] <span style="color:#666">&gt;</span> k <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;=</span> i) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if there&#39;s only one element in the array. If &#39;k&#39; is odd, it returns -1, otherwise it returns the first element. </div>
+                            <div class=""> Checks if the count of zeros exceeds `k`. If so, adjusts the sliding window by incrementing the left pointer `j`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Main Logic</b></div>
+                            <div class=""> <b>7 : Decrease Zero Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(begin(nums), begin(nums) <span style="color:#666">+</span> min(n, k <span style="color:#666">-</span> <span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt[nums[j]]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the maximum value in the first &#39;k-1&#39; elements of the vector &#39;nums&#39;, ensuring that the index does not exceed the size of the array. </div>
+                            <div class=""> Decrements the count of the element at `nums[j]` in the `cnt` array as the left pointer `j` moves to the right. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Main Logic</b></div>
+                            <div class=""> <b>8 : Move Left Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">&lt;</span> n) mx <span style="color:#666">=</span> max(mx, nums[k]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if &#39;k&#39; is less than the size of the array. If true, it compares the current maximum with the element at index &#39;k&#39; and updates the maximum value. </div>
+                            <div class=""> Increments the left pointer `j` to shrink the sliding window from the left side until the number of zeros is less than or equal to `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Calculate Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, (i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the maximum value found during the algorithm. </div>
+                            <div class=""> Updates the result `res` with the maximum length of valid subarray found so far. The length is calculated as `i - j &#43; 1`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the maximum length of subarray with at most `k` zeroes. </div>
                         </div>
                     
                 </div>
@@ -670,16 +676,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of elements in `nums` because we check a subset of the array.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) since we iterate through the array once with the sliding window technique.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we do not require extra space apart from variables used to store the result.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since we use only a constant amount of space, aside from the input array.</div>    
                     </div>
 
                 </div>

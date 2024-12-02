@@ -323,7 +323,7 @@
 
 
 
-<div class=""> You are the manager of a basketball team, and you are tasked with selecting a team that maximizes the overall score. The score of the team is calculated by summing the individual scores of all the selected players. However, there is a rule: a conflict arises if a younger player has a strictly higher score than an older player. There is no conflict if players have the same age. </div>
+<div class=""> Given two integer arrays <code>nums1</code> and <code>nums2</code>, your task is to find the maximum length of a contiguous subarray that appears in both arrays. </div>
 
 
 
@@ -374,55 +374,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> Two lists are given, `scores` and `ages`, where each element in `scores` corresponds to the score of a player and each element in `ages` corresponds to the age of that player.</div>
-                        <div class=""> <b>Example:</b> scores = [2, 4, 8, 10, 12], ages = [1, 2, 3, 4, 5]</div>
+                        <div class=""> <b>Input:</b> The input consists of two arrays `nums1` and `nums2` of integers.</div>
+                        <div class=""> <b>Example:</b> nums1 = [4, 5, 6, 7, 8], nums2 = [1, 2, 3, 4, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= scores.length, ages.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length, nums2.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • scores.length == ages.length</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= scores[i] &lt;= 106</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= ages[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums1[i], nums2[i] &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum possible score of a valid team, where the team has no conflicts.</div>
-                        <div class=""> <b>Example:</b> Output: 36</div>
+                        <div class=""> <b>Output:</b> Return the maximum length of a contiguous subarray that appears in both `nums1` and `nums2`.</div>
+                        <div class=""> <b>Example:</b> 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result is an integer representing the maximum score.</div>
+                                <div style="margin-left: 20px;"> • The result should be a non-negative integer representing the length of the longest common subarray.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Maximize the total score of a valid team.</div>
+                        <div class=""> <b>Goal:</b> To compute the maximum length of a contiguous subarray that appears in both arrays using dynamic programming.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Pair each player&#39;s age with their score.</div>
+                                <div style="margin-left: 20px;"> • Create a 2D array `dp` where `dp[i][j]` represents the length of the longest common subarray ending at `nums1[i-1]` and `nums2[j-1]`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Sort the list of players based on their age in descending order.</div>
+                                <div style="margin-left: 20px;"> • If `nums1[i-1] == nums2[j-1]`, then `dp[i][j] = dp[i-1][j-1] &#43; 1`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Use dynamic programming to find the best possible score by avoiding conflicts.</div>
+                                <div style="margin-left: 20px;"> • Track the maximum value in the `dp` array during the iteration.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The number of players (scores and ages) is up to 1000, and each player&#39;s score and age are bounded within certain limits.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle large inputs up to 1000 elements in both arrays.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= scores.length, ages.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The input arrays `nums1` and `nums2` have lengths up to 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • scores.length == ages.length</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= scores[i] &lt;= 106</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= ages[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • Each element in `nums1` and `nums2` is between 0 and 100.</div>
                             
                         </div>
                     </div>        
@@ -430,15 +422,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All players have a unique age or the same age, but the score is distinct for each player.</div>
+                                <div style="margin-left: 20px;"> • The input arrays will contain non-negative integers.</div>
+                            
+                                <div style="margin-left: 20px;"> • The length of the arrays is guaranteed to be at least 1.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: scores = [2, 4, 8, 10, 12], ages = [1, 2, 3, 4, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You can select all the players without any conflicts, resulting in a total score of 36.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums1 = [4, 5, 6, 7, 8], nums2 = [1, 2, 3, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest common subarray is [4, 5], which has a length of 2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums1 = [1, 2, 3, 4], nums2 = [2, 3, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest common subarray is [2, 3, 4], which has a length of 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,16 +460,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to use dynamic programming to maximize the score while avoiding conflicts between players.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved using dynamic programming to efficiently calculate the longest common subarray.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting players by age ensures that the condition of having no conflicts between players can be easily handled.</div>
+                                <div style="margin-left: 20px;"> • We need to keep track of the common subarrays between `nums1` and `nums2`.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The idea is to use a dynamic programming approach to compute the maximum score for each player while ensuring no conflicts.</div>
+                                <div style="margin-left: 20px;"> • Dynamic programming will help us store the results of overlapping subproblems and avoid redundant calculations.</div>
                             
                         </div>
                     </div>
@@ -479,11 +477,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Pair each player’s age with their score.</div>
+                                <div style="margin-left: 20px;"> • Initialize a 2D array `dp` with dimensions `(n1&#43;1) x (n2&#43;1)` where `n1` and `n2` are the lengths of `nums1` and `nums2` respectively.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Sort the players based on age in descending order.</div>
+                                <div style="margin-left: 20px;"> • Iterate through both arrays. For each pair of elements `nums1[i-1]` and `nums2[j-1]`, if they match, update `dp[i][j]` as `dp[i-1][j-1] &#43; 1`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Use dynamic programming to maximize the team’s total score while avoiding conflicts.</div>
+                                <div style="margin-left: 20px;"> • Track the maximum value in the `dp` array, which will give the length of the longest common subarray.</div>
                             
                         </div>
                     </div>
@@ -492,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If either the scores or ages list is empty, the output will be 0.</div>
+                                <div style="margin-left: 20px;"> • If one of the arrays is empty, the result should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs with the maximum number of players (1000), the algorithm should still perform efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for large arrays with lengths up to 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All players having the same score or age might result in different team configurations.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where all elements in the arrays are the same.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the upper bounds of input size and constraints.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where no common subarray exists, in which case the result will be 0.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,39 +522,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Constructs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Vector Manipulations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Filling DP Table - Row Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Filling DP Table - Column Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Comment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Dynamic Programming Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Constructs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Outer Loop - Iterating Over nums1</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Inner Loop - Iterating Over nums2</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Vector Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition Check - Matching Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop Constructs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 DP Update - Matching Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Max Length Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Conditional Statements</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Mathematical Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mathematical Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Maximum Length</button>
                     
                 </div>
 
@@ -565,26 +557,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bestTeamScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> scores, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ages) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> ages.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> palyer;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    palyer.push_back({ages[i], scores[i]});
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> nums1.size(), n2 <span style="color:#666">=</span> nums2.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n1 <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n2 <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    sort(palyer.begin(), palyer.end(), greater<span style="color:#666">&lt;&gt;</span>());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> young <span style="color:#666">=</span> palyer[i];
-</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> young.second;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> elder <span style="color:#666">=</span> palyer[j];
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(young.second <span style="color:#666">&lt;=</span> elder.second)
-</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#666">=</span> max(dp[i], dp[j] <span style="color:#666">+</span> young.second);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// dp[0][0] = 0;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// subseq - !subarr
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums1[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> nums2[j <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>             dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, dp[i][j]);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, dp[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -592,173 +582,142 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bestTeamScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> scores, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ages) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the main method &#39;bestTeamScore&#39; which takes in two vectors: scores and ages. </div>
+                            <div class=""> Define the function &#39;findLength&#39; that takes two vectors of integers &#39;nums1&#39; and &#39;nums2&#39; and returns an integer representing the maximum length of a common subarray. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> ages.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> nums1.size(), n2 <span style="color:#666">=</span> nums2.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;n&#39; to be the size of the &#39;ages&#39; vector, which is the total number of players. </div>
+                            <div class=""> Initialize two variables, &#39;n1&#39; and &#39;n2&#39;, to store the sizes of &#39;nums1&#39; and &#39;nums2&#39;, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> palyer;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n1 <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n2 <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector of pairs &#39;palyer&#39; where each pair stores the age and score of a player. </div>
+                            <div class=""> Initialize a 2D vector &#39;dp&#39; with dimensions (n1&#43;1) by (n2&#43;1), where each entry will store the length of the common subarray ending at that position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Constructs</b></div>
+                            <div class=""> <b>4 : Base Case Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each player to add their age and score to the &#39;palyer&#39; vector. </div>
+                            <div class=""> Base cases for dynamic programming are initialized in the following steps. The first row and first column of the DP table will be set to zero. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Vector Manipulations</b></div>
+                            <div class=""> <b>5 : Filling DP Table - Row Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    palyer.push_back({ages[i], scores[i]});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push a new pair containing the current player&#39;s age and score into the &#39;palyer&#39; vector. </div>
+                            <div class=""> Set the first column of the DP table to zero since there is no common subarray with an empty second array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Sorting</b></div>
+                            <div class=""> <b>6 : Filling DP Table - Column Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(palyer.begin(), palyer.end(), greater<span style="color:#666">&lt;&gt;</span>());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sort the &#39;palyer&#39; vector in descending order based on age first, and score second (if ages are equal). </div>
+                            <div class=""> Set the first row of the DP table to zero since there is no common subarray with an empty first array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class=""> <b>7 : Comment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// dp[0][0] = 0;
+</span></span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;ans&#39; to store the maximum score found during the process. </div>
+                            <div class=""> This line is a redundant initialization since dp[0][0] is already set to 0 in the previous loops. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Vector Initialization</b></div>
+                            <div class=""> <b>8 : Dynamic Programming Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a dynamic programming vector &#39;dp&#39; to store the best scores at each player position. </div>
+                            <div class=""> Initialize &#39;mx&#39; to store the maximum length of the common subarray found during the iterations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Loop Constructs</b></div>
+                            <div class=""> <b>9 : Outer Loop - Iterating Over nums1</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an outer loop to go through each player in the sorted &#39;palyer&#39; vector. </div>
+                            <div class=""> Start the outer loop to iterate over each element of &#39;nums1&#39;, from index 1 to n1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Inner Loop - Iterating Over nums2</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> young <span style="color:#666">=</span> palyer[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assign the current player (sorted by age and score) to the variable &#39;young&#39;. </div>
+                            <div class=""> Start the inner loop to iterate over each element of &#39;nums2&#39;, from index 1 to n2. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Vector Operations</b></div>
+                            <div class=""> <b>11 : Condition Check - Matching Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> young.second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums1[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> nums2[j <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;dp[i]&#39; with the score of the current player (&#39;young&#39;). </div>
+                            <div class=""> Check if the elements at the current indices of &#39;nums1&#39; and &#39;nums2&#39; match. If they do, the common subarray is extended. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Loop Constructs</b></div>
+                            <div class=""> <b>12 : DP Update - Matching Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an inner loop to check previous players for a valid team formation. </div>
+                            <div class=""> If the elements match, update the DP table by adding 1 to the value from the previous diagonal entry, representing the length of the common subarray ending at that point. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Variable Initialization</b></div>
+                            <div class=""> <b>13 : Max Length Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> elder <span style="color:#666">=</span> palyer[j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, dp[i][j]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assign the previous player to &#39;elder&#39; to compare their score with &#39;young&#39;. </div>
+                            <div class=""> Update &#39;mx&#39; to store the maximum length of the common subarray found so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Conditional Statements</b></div>
+                            <div class=""> <b>14 : Return Maximum Length</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(young.second <span style="color:#666">&lt;=</span> elder.second)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the score of the current player (&#39;young&#39;) is less than or equal to the score of the previous player (&#39;elder&#39;). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Mathematical Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dp[i] <span style="color:#666">=</span> max(dp[i], dp[j] <span style="color:#666">+</span> young.second);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If valid, update &#39;dp[i]&#39; by considering the best score combination of the current and previous player. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Mathematical Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, dp[i]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the maximum score &#39;ans&#39; by considering the current best score at &#39;dp[i]&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the maximum score &#39;ans&#39; which is the best team score. </div>
+                            <div class=""> Return the maximum length of the common subarray found, stored in &#39;mx&#39;. </div>
                         </div>
                     
                 </div>
@@ -778,16 +737,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n) due to sorting.</div>
-                        <div class=""> <b>Average Case:</b> O(n^2) due to dynamic programming.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2) due to dynamic programming and sorting.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step followed by the dynamic programming evaluation.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n1 * n2)</div>
+                        <div class=""> <b>Average Case:</b> O(n1 * n2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n1 * n2)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is quadratic due to the two nested loops iterating over both arrays.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) for storing the dynamic programming table.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for storing the dynamic programming table.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear as we store the dynamic programming table.</div>    
+                        <div class=""> <b>Best Case:</b> O(n1 * n2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n1 * n2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is quadratic because we are using a 2D array to store the results.</div>    
                     </div>
 
                 </div>

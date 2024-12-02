@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 14, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given three strings: &lsquo;firstWord&rsquo;, &lsquo;secondWord&rsquo;, and &rsquo;targetWord&rsquo;. Each string contains only lowercase English letters from &lsquo;a&rsquo; to &lsquo;j&rsquo;. The value of each letter corresponds to its position in the alphabet starting from &lsquo;a&rsquo; as 0 (&lsquo;a&rsquo; -&gt; 0, &lsquo;b&rsquo; -&gt; 1, &hellip;, &lsquo;j&rsquo; -&gt; 9). The value of a string is the concatenation of the values of its letters, which is then interpreted as an integer. Your task is to check if the sum of the values of &lsquo;firstWord&rsquo; and &lsquo;secondWord&rsquo; equals the value of &rsquo;targetWord&rsquo;. Return true if it does, and false otherwise. </div>
+<div class=""> Given an integer array <code>arr</code>, you need to find the length of the longest subarray that forms a mountain. A mountain subarray has the following properties: it must have at least three elements, the elements strictly increase to a peak, and then strictly decrease after the peak. If no such subarray exists, return 0. </div>
 
 
 
@@ -360,43 +360,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given three strings &#39;firstWord&#39;, &#39;secondWord&#39;, and &#39;targetWord&#39;. Each string consists of lowercase letters from &#39;a&#39; to &#39;j&#39;.</div>
-                        <div class=""> <b>Example:</b> firstWord = &#39;acb&#39;, secondWord = &#39;cba&#39;, targetWord = &#39;cdb&#39;</div>
+                        <div class=""> <b>Input:</b> You are given an integer array `arr` containing non-negative integers.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [1, 3, 2, 4, 7, 5, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= firstWord.length, secondWord.length, targetWord.length &lt;= 8</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • firstWord, secondWord, and targetWord consist of lowercase English letters from &#39;a&#39; to &#39;j&#39; inclusive.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= arr[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if the sum of the numerical values of &#39;firstWord&#39; and &#39;secondWord&#39; equals the numerical value of &#39;targetWord&#39;. Otherwise, return false.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest mountain subarray. If no valid mountain exists, return 0.</div>
+                        <div class=""> <b>Example:</b> Output: 5</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The array must have at least 3 elements to form a valid mountain.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Convert each word to its numerical value and check if the sum of the values of &#39;firstWord&#39; and &#39;secondWord&#39; equals &#39;targetWord&#39;.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the longest subarray in the form of a mountain. A peak must be surrounded by strictly increasing and strictly decreasing elements.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each word, convert each character to its corresponding value and concatenate them to form an integer.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Traverse through the array and calculate the length of the subarray before and after each peak.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the sum of the first and second word values equals the target word value.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each peak, calculate how far the elements on the left strictly increase and how far the elements on the right strictly decrease.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: Keep track of the longest mountain found and return its length.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The given strings consist of lowercase letters from &#39;a&#39; to &#39;j&#39;. The lengths of the strings are between 1 and 8.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle arrays with lengths up to 10^4 efficiently, ensuring that the peak and its surroundings strictly increase and decrease.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of each string is between 1 and 8.</div>
+                                <div style="margin-left: 20px;"> • The array must contain at least 3 elements to form a mountain.</div>
                             
-                                <div style="margin-left: 20px;"> • Each character in the strings is between &#39;a&#39; and &#39;j&#39;.</div>
+                                <div style="margin-left: 20px;"> • There should be a peak element where arr[i-1] &lt; arr[i] &gt; arr[i&#43;1].</div>
                             
                         </div>
                     </div>        
@@ -404,25 +408,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input strings contain only lowercase English letters from &#39;a&#39; to &#39;j&#39;.</div>
+                                <div style="margin-left: 20px;"> • The array is not empty and contains valid integers.</div>
                             
-                                <div style="margin-left: 20px;"> • The values of the words are formed by concatenating the positions of the characters in the alphabet.</div>
+                                <div style="margin-left: 20px;"> • The array elements are non-negative.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: firstWord = &#39;acb&#39;, secondWord = &#39;cba&#39;, targetWord = &#39;cdb&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The numerical value of &#39;acb&#39; is 21, the value of &#39;cba&#39; is 210, and the value of &#39;cdb&#39; is 231. The sum of 21 and 210 equals 231, so the result is true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [1, 3, 2, 4, 7, 5, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest mountain is [3, 2, 4, 7, 5], which has length 5.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: firstWord = &#39;aaa&#39;, secondWord = &#39;a&#39;, targetWord = &#39;aab&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The numerical value of &#39;aaa&#39; is 0, the value of &#39;a&#39; is 0, and the value of &#39;aab&#39; is 1. The sum of 0 and 0 does not equal 1, so the result is false.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [1, 2, 3, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is no mountain because the array only increases.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3: firstWord = &#39;aaa&#39;, secondWord = &#39;a&#39;, targetWord = &#39;aaaa&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The numerical value of &#39;aaa&#39; is 0, the value of &#39;a&#39; is 0, and the value of &#39;aaaa&#39; is 0. The sum of 0 and 0 equals 0, so the result is true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [8, 7, 6, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is no mountain because the array only decreases.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,18 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Convert each word to its numerical value by iterating over each character and using its position in the alphabet to form the corresponding number. Then, compare the sum of the first two words&#39; values with the value of the target word.</div>
+                        <div class=""> <b>Approach:</b> We will calculate the length of the longest mountain using two passes through the array. In the first pass, we compute the lengths of increasing and decreasing subsequences from each peak, and in the second pass, we identify the longest mountain.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each word can be transformed into an integer by processing each letter and using its alphabetical value.</div>
+                                <div style="margin-left: 20px;"> • The mountain is defined by a peak with elements strictly increasing before and strictly decreasing after it.</div>
                             
-                                <div style="margin-left: 20px;"> • The solution requires simple arithmetic comparison after converting the words to their numerical values.</div>
+                                <div style="margin-left: 20px;"> • We can calculate the lengths of increasing and decreasing subsequences for each potential peak.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This approach works efficiently given the constraints, as the maximum length of the strings is 8.</div>
+                                <div style="margin-left: 20px;"> • We can compute the lengths of increasing and decreasing sequences for each element and then use this information to calculate the mountain size.</div>
                             
                         </div>
                     </div>
@@ -465,11 +469,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Loop through each word and for each character, subtract &#39;a&#39; from it to get its position in the alphabet.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Traverse the array and calculate the lengths of increasing subsequences before each element.</div>
                             
-                                <div style="margin-left: 20px;"> • Concatenate the results to form the full number for each word.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Traverse the array in reverse and calculate the lengths of decreasing subsequences after each element.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the first two words&#39; values and compare with the third word&#39;s value.</div>
+                                <div style="margin-left: 20px;"> • Step 3: For each element, if both the increasing and decreasing subsequences have a non-zero length, compute the mountain length as the sum of these two lengths plus one.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Return the maximum length of the mountain.</div>
                             
                         </div>
                     </div>
@@ -478,22 +484,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will never be empty, as the length is guaranteed to be at least 1.</div>
+                                <div style="margin-left: 20px;"> • The input cannot be empty since the array must have at least 3 elements to form a valid mountain.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input strings will be of length at most 8, which ensures the operations are fast.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles large inputs efficiently (up to 10^4 elements).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all words are &#39;a&#39;, the sum will be 0.</div>
+                                <div style="margin-left: 20px;"> • Arrays with all equal elements cannot form a mountain.</div>
+                            
+                                <div style="margin-left: 20px;"> • An array that only increases or only decreases does not form a valid mountain.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where the sum of two words equals or does not equal the third word.</div>
+                                <div style="margin-left: 20px;"> • The solution must operate in linear time to handle the maximum array length efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,23 +518,49 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop and Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop and Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop and Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Validation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Increment Variable</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Reset Variable</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Array Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Reset</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Loop Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Increment Variable</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Reset Variable</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Array Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Loop Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Update Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Statement</button>
                     
                 </div>
 
@@ -535,19 +569,36 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isSumEqual</span>(string firstWord, string secondWord, string targetWord) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> first<span style="color:#666">=</span><span style="color:#666">0</span>,second<span style="color:#666">=</span><span style="color:#666">0</span>,target<span style="color:#666">=</span><span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>firstWord.size();i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        first<span style="color:#666">=</span>first<span style="color:#666">*</span><span style="color:#666">10</span> <span style="color:#666">+</span> (firstWord[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestMountain</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>secondWord.size();i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        second<span style="color:#666">=</span>second<span style="color:#666">*</span><span style="color:#666">10</span> <span style="color:#666">+</span>(secondWord[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>targetWord.size();i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        target<span style="color:#666">=</span>target<span style="color:#666">*</span><span style="color:#666">10</span> <span style="color:#666">+</span>(targetWord[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&lt;</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pre(n, <span style="color:#666">0</span>), suf(n, <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(arr[i] <span style="color:#666">&gt;</span> arr[i <span style="color:#666">-</span> <span style="color:#666">1</span>])
+</span></span><span style="display:flex;"><span>            cur<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        pre[i] <span style="color:#666">=</span> cur;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(arr[i] <span style="color:#666">&gt;</span> arr[i <span style="color:#666">+</span> <span style="color:#666">1</span>])
+</span></span><span style="display:flex;"><span>            cur<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        suf[i] <span style="color:#666">=</span> cur;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> first<span style="color:#666">+</span>second <span style="color:#666">==</span> target;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pre[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> suf[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> max(pre[i] <span style="color:#666">+</span> suf[i] <span style="color:#666">+</span> <span style="color:#666">1</span>, res);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -555,93 +606,223 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isSumEqual</span>(string firstWord, string secondWord, string targetWord) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestMountain</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines a function to check if the sum of two word-based integers equals the third. </div>
+                            <div class=""> This is the function declaration where the longestMountain function is defined. It takes a reference to a vector of integers as input and returns an integer. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> first<span style="color:#666">=</span><span style="color:#666">0</span>,second<span style="color:#666">=</span><span style="color:#666">0</span>,target<span style="color:#666">=</span><span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes integers to store numerical representations of the input strings. </div>
+                            <div class=""> The result variable &#39;res&#39; is initialized to 0. This will store the length of the longest mountain. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop and Conversion</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>firstWord.size();i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the firstWord to convert it into a numeric value. </div>
+                            <div class=""> Empty line for readability. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Conversion</b></div>
+                            <div class=""> <b>4 : Array Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        first<span style="color:#666">=</span>first<span style="color:#666">*</span><span style="color:#666">10</span> <span style="color:#666">+</span> (firstWord[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Converts each character of firstWord into a digit and appends it to the numeric value. </div>
+                            <div class=""> The size of the array &#39;arr&#39; is calculated and stored in variable &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop and Conversion</b></div>
+                            <div class=""> <b>5 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>secondWord.size();i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&lt;</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the secondWord to convert it into a numeric value. </div>
+                            <div class=""> If the array size is less than 3, return 0 as a valid mountain cannot exist. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Conversion</b></div>
+                            <div class=""> <b>6 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        second<span style="color:#666">=</span>second<span style="color:#666">*</span><span style="color:#666">10</span> <span style="color:#666">+</span>(secondWord[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pre(n, <span style="color:#666">0</span>), suf(n, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Converts each character of secondWord into a digit and appends it to the numeric value. </div>
+                            <div class=""> Two vectors &#39;pre&#39; and &#39;suf&#39; are initialized to store the lengths of increasing and decreasing sequences. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop and Conversion</b></div>
+                            <div class=""> <b>7 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>targetWord.size();i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the targetWord to convert it into a numeric value. </div>
+                            <div class=""> The variable &#39;cur&#39; is initialized to 0. It will be used to track the current length of increasing or decreasing sequences. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Conversion</b></div>
+                            <div class=""> <b>8 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        target<span style="color:#666">=</span>target<span style="color:#666">*</span><span style="color:#666">10</span> <span style="color:#666">+</span>(targetWord[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Converts each character of targetWord into a digit and appends it to the numeric value. </div>
+                            <div class=""> Loop starts to fill the &#39;pre&#39; vector with the lengths of increasing sequences from the left. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Validation</b></div>
+                            <div class=""> <b>9 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> first<span style="color:#666">+</span>second <span style="color:#666">==</span> target;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(arr[i] <span style="color:#666">&gt;</span> arr[i <span style="color:#666">-</span> <span style="color:#666">1</span>])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the sum of the first and second integers equals the target integer. </div>
+                            <div class=""> If the current element is greater than the previous element, it is part of an increasing sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Increment Variable</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the &#39;cur&#39; variable to track the length of the increasing sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Reset Variable</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current element is not greater than the previous, reset &#39;cur&#39; to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Array Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pre[i] <span style="color:#666">=</span> cur;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the current length of the increasing sequence in the &#39;pre&#39; array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Variable Reset</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Reset &#39;cur&#39; to 0 for the second loop. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Loop Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Second loop starts to fill the &#39;suf&#39; array with the lengths of decreasing sequences from the right. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(arr[i] <span style="color:#666">&gt;</span> arr[i <span style="color:#666">+</span> <span style="color:#666">1</span>])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current element is greater than the next element, it is part of a decreasing sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Increment Variable</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the &#39;cur&#39; variable to track the length of the decreasing sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Reset Variable</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current element is not greater than the next, reset &#39;cur&#39; to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Array Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        suf[i] <span style="color:#666">=</span> cur;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the current length of the decreasing sequence in the &#39;suf&#39; array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Loop Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through the array to check if both &#39;pre[i]&#39; and &#39;suf[i]&#39; are greater than 0, indicating a valid mountain. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pre[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> suf[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if both increasing and decreasing sequences are present at the current index. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Update Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> max(pre[i] <span style="color:#666">+</span> suf[i] <span style="color:#666">+</span> <span style="color:#666">1</span>, res);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the result with the maximum length of the mountain found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the result. If the mountain length is 1, return 0, as it doesn&#39;t meet the criteria of a mountain. </div>
                         </div>
                     
                 </div>
@@ -661,16 +842,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the longest string.</div>
-                        <div class=""> <b>Average Case:</b> O(n), where n is the length of the longest string.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the longest string.</div> 
-                        <div class=""> <b>Description:</b> In the worst case, we iterate over each string once, processing each character.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear, as we traverse the array twice: once for increasing subsequences and once for decreasing subsequences.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as no extra space is needed apart from storing intermediate results.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as we use a constant amount of extra space.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since we only need to store a few integer variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the lengths of increasing and decreasing subsequences in separate arrays.</div>    
                     </div>
 
                 </div>

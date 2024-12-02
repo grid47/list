@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You are given a string of digits, and you need to split it into a sequence of integers that follow the Fibonacci-like property. In other words, the sum of the first two numbers should equal the third, the sum of the second and third should equal the fourth, and so on. Your goal is to find any valid Fibonacci-like sequence from the digits, or return an empty list if it&rsquo;s not possible. </div>
+<div class=""> Given two sorted integer arrays <code>nums1</code> and <code>nums2</code> and an integer <code>k</code>, return the k pairs with the smallest sums. Each pair consists of one element from <code>nums1</code> and one element from <code>nums2</code>. </div>
 
 
 
@@ -362,47 +362,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a string of digits &#39;num&#39;. You need to split this string into multiple non-negative integers such that the resulting sequence forms a Fibonacci-like sequence.</div>
-                        <div class=""> <b>Example:</b> Input: num = &#39;123456&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of two sorted arrays, `nums1` and `nums2`, and an integer `k`.</div>
+                        <div class=""> <b>Example:</b> Input: nums1 = [1, 7, 11], nums2 = [2, 4, 6], k = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= num.length &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length, nums2.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • num contains only digits.</div>
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums1[i], nums2[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • nums1 and nums2 are sorted in non-decreasing order.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • k &lt;= nums1.length * nums2.length</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return any Fibonacci-like sequence that can be split from the given string of digits, or return an empty list if it&#39;s not possible to form such a sequence.</div>
-                        <div class=""> <b>Example:</b> Output: [123, 456, 579]</div>
+                        <div class=""> <b>Output:</b> Return a list of the `k` pairs with the smallest sums.</div>
+                        <div class=""> <b>Example:</b> Output: [[1, 2], [1, 4], [1, 6]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The resulting sequence must satisfy the Fibonacci property: f[i] &#43; f[i &#43; 1] = f[i &#43; 2] for all 0 &lt;= i &lt; f.length - 2.</div>
+                                <div style="margin-left: 20px;"> • The pairs must be returned in non-decreasing order of their sums.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to split the string into possible Fibonacci-like subsequences and check if they satisfy the property where each number is the sum of the previous two.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the `k` smallest sum pairs efficiently, leveraging the sorted order of the input arrays.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Try splitting the string into different lengths and check if the sum of the first two numbers equals the third number.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a priority queue (min-heap) to track the smallest sums.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Ensure that the numbers formed do not have leading zeros unless the number is zero itself.</div>
+                                <div style="margin-left: 20px;"> • 2. Push the first pair from each element in `nums1` and the first element in `nums2` into the priority queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Recursively check if we can split the string further while maintaining the Fibonacci property.</div>
+                                <div style="margin-left: 20px;"> • 3. Continue popping the smallest pairs and pushing the next possible pairs until `k` pairs are found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the string length and number constraints are met while trying to form the Fibonacci-like sequence.</div>
+                        <div class=""> <b>Goal:</b> The constraints on the size of the arrays and the value of `k` dictate the need for efficient algorithms.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The string must be split such that each piece is a valid integer.</div>
+                                <div style="margin-left: 20px;"> • The arrays `nums1` and `nums2` are sorted in non-decreasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • The sequence formed must satisfy the Fibonacci property where each number is the sum of the previous two.</div>
+                                <div style="margin-left: 20px;"> • k must be less than or equal to the number of possible pairs between `nums1` and `nums2`.</div>
                             
                         </div>
                     </div>        
@@ -410,25 +416,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each piece of the split string should be a valid non-negative integer.</div>
-                            
-                                <div style="margin-left: 20px;"> • The sequence must follow the Fibonacci-like rule where each number is the sum of the previous two numbers.</div>
+                                <div style="margin-left: 20px;"> • The arrays `nums1` and `nums2` are both sorted in non-decreasing order.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: &#39;123456&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting with &#39;1&#39; and &#39;2&#39;, the next number is &#39;3&#39;, which satisfies the Fibonacci-like condition. Then &#39;5&#39; and &#39;8&#39; form a valid sequence. The final sequence is [123, 456, 579].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums1 = [1, 7, 11], nums2 = [2, 4, 6], k = 3
+Output: [[1, 2], [1, 4], [1, 6]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The smallest pairs are (1, 2), (1, 4), and (1, 6) because their sums are 3, 5, and 7, respectively.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: &#39;11111&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sequence can be split as [1, 1, 2, 3, 5], which follows the Fibonacci-like condition.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: &#39;0123&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The input contains leading zeroes, which is not valid unless the number is &#39;0&#39;. Therefore, it is not possible to form a Fibonacci-like sequence.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums1 = [1, 1, 2], nums2 = [1, 2, 3], k = 2
+Output: [[1, 1], [1, 1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first two pairs are (1, 1) and (1, 1) because their sums are both 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,18 +454,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can approach this problem by attempting to split the input string into all possible subsequences of two numbers and checking if the sum of the first two equals the third. This requires trying different split points and ensuring that each number in the sequence fits the Fibonacci-like property.</div>
+                        <div class=""> <b>Approach:</b> We use a priority queue to keep track of the smallest sum pairs and efficiently find the k smallest pairs.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem involves checking all possible splits of the string into numbers.</div>
-                            
-                                <div style="margin-left: 20px;"> • We need to check if each possible sequence forms a valid Fibonacci-like sequence.</div>
+                                <div style="margin-left: 20px;"> • We are given two sorted arrays, which suggests that we can efficiently use a priority queue to find the smallest pairs.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Since we need to check different subsequences, a recursive approach with backtracking seems appropriate.</div>
+                                <div style="margin-left: 20px;"> • Using a min-heap (priority queue) will allow us to efficiently extract the smallest sums and generate the next potential pairs.</div>
                             
                         </div>
                     </div>
@@ -471,11 +471,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Start by trying different lengths for the first two numbers and check if the sum of the two numbers equals the third.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a priority queue with the first element of each pair from `nums1` and the first element of `nums2`.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Ensure no leading zeros are present in numbers that are more than one digit long.</div>
+                                <div style="margin-left: 20px;"> • 2. Repeatedly extract the smallest sum from the queue and push the next element from `nums2` (with the same element from `nums1`) into the queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Use recursion to check further splits, maintaining the Fibonacci-like property. If we find a valid split, return the sequence.</div>
+                                <div style="margin-left: 20px;"> • 3. Continue until we have found `k` pairs.</div>
                             
                         </div>
                     </div>
@@ -484,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty string cannot form a valid sequence.</div>
+                                <div style="margin-left: 20px;"> • If either of the arrays `nums1` or `nums2` is empty, the result should be an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, ensure that the splitting and checking process is efficient.</div>
+                                <div style="margin-left: 20px;"> • For large arrays, the solution should efficiently compute the k smallest pairs without exceeding time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Leading zeroes in numbers that are not &#39;0&#39; should be handled as invalid.</div>
+                                <div style="margin-left: 20px;"> • If `k = 1`, the output should be the pair with the smallest sum.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The constraints are based on the string length and valid integer splitting.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the priority queue is efficiently managed to avoid excessive computational overhead.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,39 +516,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Priority Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Helper Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Base Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Priority Queue Push</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Edge Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Priority Queue Pop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 SubString Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Priority Queue Pop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 String to Number</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Answer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Overflow Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Fibonacci Sequence Validation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Element Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Add to Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Element Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Successful Split</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Priority Queue Push</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Backtrack</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return False</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
                     
                 </div>
 
@@ -557,29 +555,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> splitIntoFibonacci(string num) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    split(<span style="color:#666">0</span>, res, num);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">split</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>res, string num) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> num.size() <span style="color:#666">&amp;&amp;</span> res.size() <span style="color:#666">&gt;=</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> num.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(num[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&gt;</span> idx) <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> i <span style="color:#666">-</span> idx<span style="color:#666">+</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> n <span style="color:#666">=</span> stol(<span style="color:#b44">&#34;0&#34;</span> <span style="color:#666">+</span> num.substr(idx, sz));
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> INT_MAX) <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>                 
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res.size() <span style="color:#666">&lt;=</span> <span style="color:#666">1</span> <span style="color:#666">||</span> (n <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">long</span>)res.back() <span style="color:#666">+</span> res[res.size() <span style="color:#666">-</span><span style="color:#666">2</span>])) {
-</span></span><span style="display:flex;"><span>            res.push_back(n);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(split(i <span style="color:#666">+</span> <span style="color:#666">1</span>, res, num))
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>            res.pop_back();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> kSmallestPairs(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> nums1.size(), n2 <span style="color:#666">=</span> nums2.size();
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        pq.push({nums1[i] <span style="color:#666">+</span> nums2[<span style="color:#666">0</span>], nums1[i], nums2[<span style="color:#666">0</span>], <span style="color:#666">0</span>});
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> ans.size() <span style="color:#666">&lt;</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>        ans.push_back({it[<span style="color:#666">1</span>], it[<span style="color:#666">2</span>]});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">3</span>] <span style="color:#666">==</span> n2 <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">continue</span>;            
+</span></span><span style="display:flex;"><span>        it[<span style="color:#666">0</span>] <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> nums2[it[<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        it[<span style="color:#666">2</span>] <span style="color:#666">=</span> nums2[it[<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        it[<span style="color:#666">3</span>] <span style="color:#666">=</span> it[<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        pq.push(it);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -587,173 +580,163 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> splitIntoFibonacci(string num) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> kSmallestPairs(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the main function that initiates the splitting process by calling the helper function &#39;split&#39; starting from index 0. </div>
+                            <div class=""> This line declares the function `kSmallestPairs`, which takes two vectors `nums1` and `nums2` and an integer `k` to find the k smallest sum pairs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A vector to store the resulting Fibonacci-like sequence. </div>
+                            <div class=""> A vector `ans` is declared to store the k smallest sum pairs that will be returned by the function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Call</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    split(<span style="color:#666">0</span>, res, num);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> nums1.size(), n2 <span style="color:#666">=</span> nums2.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calls the helper function &#39;split&#39; to attempt splitting the string into a Fibonacci sequence starting at index 0. </div>
+                            <div class=""> The sizes of `nums1` and `nums2` are stored in `n1` and `n2` respectively to avoid repeatedly calculating their sizes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Return</b></div>
+                            <div class=""> <b>4 : Priority Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the resulting Fibonacci sequence found by the &#39;split&#39; function. </div>
+                            <div class=""> A min-heap (priority queue) `pq` is initialized, which will store vectors containing the sum of pairs and the corresponding elements from `nums1` and `nums2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Helper Function</b></div>
+                            <div class=""> <b>5 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">split</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>res, string num) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A helper function that tries to split the string &#39;num&#39; into a Fibonacci-like sequence recursively, starting at the given index. </div>
+                            <div class=""> This loop iterates over `nums1` and adds the first element of each pair from `nums1[i]` and `nums2[0]` into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Base Case Check</b></div>
+                            <div class=""> <b>6 : Priority Queue Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> num.size() <span style="color:#666">&amp;&amp;</span> res.size() <span style="color:#666">&gt;=</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({nums1[i] <span style="color:#666">+</span> nums2[<span style="color:#666">0</span>], nums1[i], nums2[<span style="color:#666">0</span>], <span style="color:#666">0</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the entire string has been processed and at least 3 numbers have been added to the sequence, in which case it returns true. </div>
+                            <div class=""> The sum of `nums1[i]` and `nums2[0]` is pushed into the priority queue along with the corresponding elements and the index `0` (representing the first element of `nums2`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop</b></div>
+                            <div class=""> <b>7 : Loop Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> num.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> ans.size() <span style="color:#666">&lt;</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the string starting from the current index to try splitting the string into Fibonacci numbers. </div>
+                            <div class=""> The while loop continues as long as there are elements in the priority queue and the number of pairs found is less than `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Edge Case Check</b></div>
+                            <div class=""> <b>8 : Priority Queue Pop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(num[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&gt;</span> idx) <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Breaks the loop if the current number starts with a &#39;0&#39; and is not a single-digit number, as it would not be a valid Fibonacci number. </div>
+                            <div class=""> The smallest sum pair is popped from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : SubString Calculation</b></div>
+                            <div class=""> <b>9 : Priority Queue Pop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> i <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the length of the current substring being considered as a potential Fibonacci number. </div>
+                            <div class=""> The smallest element is removed from the priority queue after it has been retrieved. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : String to Number</b></div>
+                            <div class=""> <b>10 : Answer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> n <span style="color:#666">=</span> stol(<span style="color:#b44">&#34;0&#34;</span> <span style="color:#666">+</span> num.substr(idx, sz));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back({it[<span style="color:#666">1</span>], it[<span style="color:#666">2</span>]});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Converts the current substring to a long integer to avoid overflow. </div>
+                            <div class=""> The pair `it[1]` and `it[2]` (the elements from `nums1` and `nums2`) is added to the result `ans`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Overflow Check</b></div>
+                            <div class=""> <b>11 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> INT_MAX) <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">3</span>] <span style="color:#666">==</span> n2 <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">continue</span>;            
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the number exceeds the maximum value for an integer, in which case it breaks out of the loop. </div>
+                            <div class=""> If the index `it[3]` has reached the last element of `nums2`, the loop continues to the next iteration without making any changes, as no further pairs are available from `nums2` for this particular element of `nums1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Fibonacci Sequence Validation</b></div>
+                            <div class=""> <b>12 : Element Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res.size() <span style="color:#666">&lt;=</span> <span style="color:#666">1</span> <span style="color:#666">||</span> (n <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">long</span>)res.back() <span style="color:#666">+</span> res[res.size() <span style="color:#666">-</span> <span style="color:#666">2</span>])) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it[<span style="color:#666">0</span>] <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> nums2[it[<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current number is the sum of the last two numbers in the sequence. If it is, the number is valid and can be added to the sequence. </div>
+                            <div class=""> The sum of `it[1]` (current element of `nums1`) and the next element of `nums2` is updated in the vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Add to Result</b></div>
+                            <div class=""> <b>13 : Element Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it[<span style="color:#666">2</span>] <span style="color:#666">=</span> nums2[it[<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the valid number to the Fibonacci sequence. </div>
+                            <div class=""> The next element of `nums2` is updated in the vector `it`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Recursive Call</b></div>
+                            <div class=""> <b>14 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(split(i <span style="color:#666">+</span> <span style="color:#666">1</span>, res, num))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it[<span style="color:#666">3</span>] <span style="color:#666">=</span> it[<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively attempts to continue splitting the string from the next index. </div>
+                            <div class=""> The index `it[3]` is incremented to reflect the movement to the next element of `nums2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Successful Split</b></div>
+                            <div class=""> <b>15 : Priority Queue Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(it);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the recursive call succeeds in splitting the rest of the string, it returns true. </div>
+                            <div class=""> The updated vector is pushed back into the priority queue to continue processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Backtrack</b></div>
+                            <div class=""> <b>16 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.pop_back();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Backtracks by removing the last number added to the sequence if the split was unsuccessful. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return False</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If no valid split is found, returns false to indicate failure. </div>
+                            <div class=""> The result `ans`, containing the k smallest pairs, is returned. </div>
                         </div>
                     
                 </div>
@@ -773,16 +756,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^3)</div> 
-                        <div class=""> <b>Description:</b> The time complexity depends on the number of valid splits and the checks needed for each split, which could involve iterating through each character of the string.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(k log k)</div>
+                        <div class=""> <b>Average Case:</b> O(k log k)</div>
+                        <div class=""> <b>Worst Case:</b> O(k log n2)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we push and pop from the priority queue for `k` pairs, each involving logarithmic operations in relation to the size of the second array `nums2`.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity depends on the space required to store the subsequences and recursion stack.</div>    
+                        <div class=""> <b>Best Case:</b> O(k)</div>
+                        <div class=""> <b>Worst Case:</b> O(k)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is determined by the storage used for the priority queue and the resulting pairs.</div>    
                     </div>
 
                 </div>

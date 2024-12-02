@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -301,7 +301,7 @@
 
 
 
-<div class=""> You are given a 2D matrix <code>grid</code> of size m x n, where each cell can either be a land cell (represented by 0) or a water cell (represented by a positive integer indicating the number of fish present in that cell). A fisher can start at any water cell and perform two operations any number of times: catch all the fish in the current cell or move to an adjacent water cell. Your task is to determine the maximum number of fish the fisher can catch if they start at the optimal water cell. </div>
+<div class=""> Given an array of integers, find the maximum sum of any subsequence where the sum is divisible by 3. </div>
 
 
 
@@ -352,45 +352,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 2D grid of integers, where 0 represents a land cell and a positive integer represents a water cell containing that many fish.</div>
-                        <div class=""> <b>Example:</b> Input: grid = [[0, 3, 2], [4, 0, 0], [1, 0, 3]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a single integer array &#39;nums&#39;.</div>
+                        <div class=""> <b>Example:</b> [2, 5, 8, 7, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 4 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= grid[i][j] &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum number of fish the fisher can catch by starting at the optimal water cell.</div>
-                        <div class=""> <b>Example:</b> Output: 9</div>
+                        <div class=""> <b>Output:</b> The output is a single integer representing the maximum sum of any subsequence that is divisible by 3.</div>
+                        <div class=""> <b>Example:</b> 21</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a single integer representing the maximum number of fish the fisher can catch.</div>
+                                <div style="margin-left: 20px;"> • The sum must be divisible by 3.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the maximum number of fish that can be caught starting from any water cell, including moving through adjacent water cells.</div>
+                        <div class=""> <b>Goal:</b> Find the maximum possible sum of a subsequence divisible by 3.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Iterate over each water cell in the grid.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a dynamic programming array &#39;dp&#39; to store the maximum sum for each remainder modulo 3.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each water cell, perform a Depth-First Search (DFS) to count the total number of fish that can be caught starting from that cell and moving through adjacent water cells.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through the numbers in &#39;nums&#39; and update &#39;dp&#39; based on the current number.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Track the maximum fish count found during the search.</div>
+                                <div style="margin-left: 20px;"> • 3. Return the value in &#39;dp[0]&#39;, which represents the maximum sum divisible by 3.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution needs to respect the grid size constraints and ensure all operations are performed efficiently within these bounds.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the array length and values are within a manageable range.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Grid dimensions are at most 10x10, which allows for a depth-first search (DFS) to be performed within time limits.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 4 * 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>        
@@ -398,19 +400,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid will contain at least one water cell.</div>
+                                <div style="margin-left: 20px;"> • The input is a valid integer array with values within the given constraints.</div>
+                            
+                                <div style="margin-left: 20px;"> • A subsequence is any set of elements in the array, not necessarily contiguous.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[0, 3, 2], [4, 0, 0], [1, 0, 3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting at cell (0, 1), the fisher can catch 3 fish. Then, they can move to (1, 0) and catch 4 more fish. A total of 9 fish can be caught.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The fisher can start at either (0, 0) or (2, 2) and catch 1 fish.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [2, 5, 8, 7, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum of the numbers 2, 5, 8, and 7 equals 21, which is divisible by 3. Thus, 21 is the maximum sum.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -434,16 +434,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves performing a Depth-First Search (DFS) from each water cell to find the maximum number of fish the fisher can catch. We explore all adjacent water cells recursively to accumulate the number of fish and track the maximum fish count.</div>
+                        <div class=""> <b>Approach:</b> Use dynamic programming to track the maximum possible sum for each remainder when divided by 3.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to explore the grid cell by cell, performing a DFS to count fish from each starting point.</div>
+                                <div style="margin-left: 20px;"> • The problem can be reduced to finding the maximum sum for each modulo 3 remainder.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The DFS will help us explore all possible reachable water cells from any starting cell to accumulate the maximum fish count.</div>
+                                <div style="margin-left: 20px;"> • We can use dynamic programming to keep track of the best possible sums for remainders 0, 1, and 2.</div>
                             
                         </div>
                     </div>
@@ -451,13 +451,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Iterate over all cells in the grid. If the current cell is a water cell (grid[i][j] &gt; 0), perform a DFS from that cell.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a dynamic programming array &#39;dp&#39; of size 3 to keep track of the best sums for each remainder.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: In the DFS, mark cells as visited by setting grid[i][j] to 0, and accumulate the number of fish collected.</div>
+                                <div style="margin-left: 20px;"> • 2. For each number in the array, update the &#39;dp&#39; array to reflect the best possible sums.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Check all adjacent cells (up, down, left, right) during the DFS, recursively adding their fish counts if they are also water cells.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Return the maximum accumulated fish count.</div>
+                                <div style="margin-left: 20px;"> • 3. The maximum sum divisible by 3 will be stored in &#39;dp[0]&#39;.</div>
                             
                         </div>
                     </div>
@@ -466,22 +464,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty grid should not be passed as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • The array is not empty based on the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid size is small (maximum 10x10), so large input grids are not a concern.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles arrays with a size up to 40,000 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A grid with no fish should return 0.</div>
+                                <div style="margin-left: 20px;"> • All numbers in the array could be divisible by 3, or none could be.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure to handle cases where there are no water cells (i.e., the grid only contains land cells).</div>
+                                <div style="margin-left: 20px;"> • The input array is guaranteed to have at least one element.</div>
                             
                         </div>                                                                        
                     </div>
@@ -498,45 +496,19 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Grid Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Grid Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop (Array Iteration)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Grid Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop (Dynamic Programming Update)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Dynamic Programming Transition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Outer Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Inner Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Fish Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 DFS Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Maximum Fish</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 DFS Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 DFS Boundary Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Fish Collection</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Grid Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Recursive DFS Calls</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Recursive DFS Calls</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Recursive DFS Calls</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Recursive DFS Calls</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Fish Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
                     
                 </div>
 
@@ -545,32 +517,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m, n;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMaxFish</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>grid <span style="color:#666">=</span> grid;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, dfs(i, j));
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
-</span></span><span style="display:flex;"><span>}
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumDivThree</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> grid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> grid[i][j];
-</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
-</span></span><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
-</span></span><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(<span style="color:#666">3</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : nums)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(dp))
+</span></span><span style="display:flex;"><span>    dp[(i <span style="color:#666">+</span> a) <span style="color:#666">%</span> <span style="color:#666">3</span>] <span style="color:#666">=</span> max(dp[(i <span style="color:#666">+</span> a) <span style="color:#666">%</span> <span style="color:#666">3</span>], i <span style="color:#666">+</span> a);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[<span style="color:#666">0</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -578,203 +534,73 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m, n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumDivThree</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares two integer variables &#39;m&#39; and &#39;n&#39; to store the dimensions of the grid. </div>
+                            <div class=""> This defines the function `maxSumDivThree`, which takes a vector of integers `nums` and returns the maximum sum divisible by 3 that can be obtained by selecting elements from the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Grid Declaration</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A 2D vector &#39;grid&#39; is declared to store the fish grid values. </div>
+                            <div class=""> This declares an integer `n` to store the size of the input array `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Definition</b></div>
+                            <div class=""> <b>3 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMaxFish</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(<span style="color:#666">3</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function &#39;findMaxFish&#39;, which takes the 2D grid as input and returns the maximum amount of fish that can be collected. </div>
+                            <div class=""> This initializes a vector `dp` of size 3, with all values set to 0. The vector will store the maximum sum possible for each remainder when divided by 3. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Grid Initialization</b></div>
+                            <div class=""> <b>4 : Loop (Array Iteration)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The dimensions of the grid are calculated and stored in &#39;m&#39; and &#39;n&#39;. </div>
+                            <div class=""> This loop iterates over each element `a` in the input array `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Grid Assignment</b></div>
+                            <div class=""> <b>5 : Loop (Dynamic Programming Update)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>grid <span style="color:#666">=</span> grid;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(dp))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The input grid is assigned to the member variable &#39;grid&#39; for later use in the DFS function. </div>
+                            <div class=""> This loop iterates over the current values in the `dp` vector to update the possible sums with the current element `a`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Dynamic Programming Transition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[(i <span style="color:#666">+</span> a) <span style="color:#666">%</span> <span style="color:#666">3</span>] <span style="color:#666">=</span> max(dp[(i <span style="color:#666">+</span> a) <span style="color:#666">%</span> <span style="color:#666">3</span>], i <span style="color:#666">+</span> a);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A variable &#39;mx&#39; is initialized to 0, which will store the maximum number of fish collected during the DFS search. </div>
+                            <div class=""> This updates the `dp` vector by calculating the maximum sum for each possible remainder modulo 3 after adding the current element `a`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Outer Loop</b></div>
+                            <div class=""> <b>7 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An outer loop starts to iterate through each row of the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Inner Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> An inner loop iterates through each column in the current row of the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Fish Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This checks if the current grid cell contains fish (value is not 0). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : DFS Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, dfs(i, j));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current cell contains fish, the DFS function is called from this cell, and the maximum number of fish collected is updated. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Maximum Fish</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the maximum number of fish collected. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : DFS Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This defines the DFS function that explores the grid and collects fish from the adjacent cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : DFS Boundary Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> grid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This line checks for out-of-bounds indices or cells that don&#39;t contain fish (value 0), and returns 0 if any condition is met. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Fish Collection</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> grid[i][j];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The variable &#39;ans&#39; is initialized to the current cell&#39;s value (the amount of fish at that cell). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Grid Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The current grid cell is marked as visited by setting its value to 0. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Recursive DFS Calls</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The DFS function is called recursively for the adjacent cell below the current one. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Recursive DFS Calls</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The DFS function is called recursively for the adjacent cell above the current one. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Recursive DFS Calls</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The DFS function is called recursively for the adjacent cell to the right of the current one. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Recursive DFS Calls</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dfs(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The DFS function is called recursively for the adjacent cell to the left of the current one. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Return Fish Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The total number of fish collected from the current cell and its adjacent cells is returned. </div>
+                            <div class=""> This returns the value stored in `dp[0]`, which represents the maximum sum divisible by 3 after processing all elements. </div>
                         </div>
                     
                 </div>
@@ -794,16 +620,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The worst-case time complexity is O(m * n) due to the DFS traversal of all grid cells in the grid of size m x n.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(N), where N is the number of elements in the array.</div>
+                        <div class=""> <b>Average Case:</b> O(N) for each iteration over the array.</div>
+                        <div class=""> <b>Worst Case:</b> O(N), where N is the number of elements in the array.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we iterate over the array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the stack used by the DFS to explore all cells.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since the space usage does not depend on the input size.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), since we only store a fixed-size array (dp) of size 3.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we only need a fixed amount of extra space.</div>    
                     </div>
 
                 </div>

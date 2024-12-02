@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode130s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode128s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/128.webp" 
            alt="A smooth, radiant path showing consecutive numbers, glowing brighter as the sequence length increases." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given the root of a binary search tree and an integer k, your task is to return the kth smallest value in the tree (1-indexed). </div>
+<div class=""> Given an unsorted array of integers, return the length of the longest consecutive elements sequence. </div>
 
 
 
@@ -371,41 +371,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of the root node of a binary search tree (BST), represented as a tree structure. The second input is an integer k (1 &lt;= k &lt;= n), where n is the number of nodes in the tree.</div>
-                        <div class=""> <b>Example:</b> Input: root = [7, 3, 10, 2, 5, null, 15], k = 2</div>
+                        <div class=""> <b>Input:</b> The input is an unsorted array of integers.</div>
+                        <div class=""> <b>Example:</b> [1, 2, 4, 5, 6, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= n &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer representing the kth smallest value in the binary search tree.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> The output should be the length of the longest consecutive sequence in the array.</div>
+                        <div class=""> <b>Example:</b> 6</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be an integer representing the length of the longest consecutive sequence.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the kth smallest element in the binary search tree by leveraging the properties of the binary search tree and performing an in-order traversal.</div>
+                        <div class=""> <b>Goal:</b> To find the longest consecutive sequence, we need to track elements and determine the sequence length efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Perform an in-order traversal of the binary search tree.</div>
+                                <div style="margin-left: 20px;"> • 1. Insert all elements into a set for constant time lookup.</div>
                             
-                                <div style="margin-left: 20px;"> • Keep track of the number of nodes visited during the traversal.</div>
+                                <div style="margin-left: 20px;"> • 2. For each element, check if it is the start of a new sequence by checking if the previous element (element - 1) is not in the set.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the value of the kth node when the counter reaches k.</div>
+                                <div style="margin-left: 20px;"> • 3. If it is the start of a sequence, continue checking for consecutive elements by incrementing the current element and counting the sequence length.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Track the maximum sequence length found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should efficiently handle up to 10^4 nodes.</div>
+                        <div class=""> <b>Goal:</b> The input array will always be valid as per the given constraints.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>        
@@ -413,21 +421,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree is a valid binary search tree.</div>
-                            
-                                <div style="margin-left: 20px;"> • There are no duplicate values in the tree.</div>
+                                <div style="margin-left: 20px;"> • The input array may contain duplicate values which should not affect the length of the longest sequence.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [7, 3, 10, 2, 5, null, 15], k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this tree, the inorder traversal would give the sequence: [2, 3, 5, 7, 10, 15]. The second smallest value is 3, so the output is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [1, 2, 4, 5, 6, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sequence [1, 2, 3, 4, 5, 6] is the longest consecutive sequence in this array, having length 6.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [4, 2, 6, 1, 3, 5, 7], k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The inorder traversal of the tree gives: [1, 2, 3, 4, 5, 6, 7]. The third smallest value is 3, so the output is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [10, 100, 5, 11, 6, 7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest consecutive sequence is [5, 6, 7, 10, 11] with length 5.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -451,16 +457,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To find the kth smallest value in a binary search tree, an in-order traversal can be used since it visits nodes in ascending order for a BST.</div>
+                        <div class=""> <b>Approach:</b> Use a set to store the elements for quick lookup and determine the longest consecutive sequence in linear time.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • In-order traversal of a BST gives the values in sorted order.</div>
+                                <div style="margin-left: 20px;"> • The problem asks for the longest consecutive sequence in an unsorted array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Using a set allows us to look up elements in constant time, making the solution more efficient.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By counting the nodes during the traversal, we can identify when we reach the kth smallest element.</div>
+                                <div style="margin-left: 20px;"> • The solution involves inserting all elements into a set, then iterating through them and checking for consecutive sequences.</div>
                             
                         </div>
                     </div>
@@ -468,13 +476,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start with the root node of the binary search tree.</div>
+                                <div style="margin-left: 20px;"> • 1. Insert all elements from the input array into a set for O(1) lookup.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a stack to implement an iterative in-order traversal or use recursion.</div>
+                                <div style="margin-left: 20px;"> • 2. For each element, check if it is the beginning of a new consecutive sequence.</div>
                             
-                                <div style="margin-left: 20px;"> • Track the number of nodes visited.</div>
+                                <div style="margin-left: 20px;"> • 3. If it is, count the length of the consecutive sequence.</div>
                             
-                                <div style="margin-left: 20px;"> • When the counter reaches k, return the value of the current node.</div>
+                                <div style="margin-left: 20px;"> • 4. Keep track of the maximum sequence length found during the iteration.</div>
                             
                         </div>
                     </div>
@@ -483,22 +491,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the root is null, there are no elements to traverse, and the problem should return an error or invalid result.</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty, the longest consecutive sequence length is 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large trees, ensure the solution can handle up to 10^4 nodes without performance degradation.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle inputs with up to 10^5 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the tree has a single node, that node will be the kth smallest for any k = 1.</div>
+                                <div style="margin-left: 20px;"> • If the input contains duplicates, they should be ignored since they do not affect the sequence length.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must work within time limits for up to 10^4 nodes.</div>
+                                <div style="margin-left: 20px;"> • The input array will contain between 0 and 10^5 elements, and the range of values will be between -10^9 and 10^9.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,33 +523,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Control</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Set Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Empty Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Traverse Left</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Element Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Sequence Length Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Existence Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Decrement k</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop for Consecutive Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Kth Element Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Counter Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Traverse Right</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pointer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Null</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Maximum Length Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
                     
                 </div>
 
@@ -550,23 +560,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kthSmallest</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> stk;
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// stk.push(root);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    TreeNode<span style="color:#666">*</span> node<span style="color:#666">=</span> root;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">||</span> node) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node) {
-</span></span><span style="display:flex;"><span>            stk.push(node);
-</span></span><span style="display:flex;"><span>            node <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>left;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            node <span style="color:#666">=</span> stk.top();
-</span></span><span style="display:flex;"><span>            stk.pop();
-</span></span><span style="display:flex;"><span>            k<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> node<span style="color:#666">-&gt;</span>val;
-</span></span><span style="display:flex;"><span>            node <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>right;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestConsecutive</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
+</span></span><span style="display:flex;"><span>        s.insert(x);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> nums[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>s.count(y <span style="color:#666">+</span> <span style="color:#666">1</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(s.count(y <span style="color:#666">-</span> <span style="color:#666">1</span>)) {
+</span></span><span style="display:flex;"><span>            c<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            y <span style="color:#666">=</span> y <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, c);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -574,143 +584,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">kthSmallest</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestConsecutive</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `kthSmallest` that takes the root of a binary tree and the value `k`, and returns the k-th smallest element in the BST. </div>
+                            <div class=""> Define the function `longestConsecutive` that takes a vector of integers `nums` as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Set Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> stk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a stack `stk` to assist with the in-order traversal of the tree. </div>
+                            <div class=""> Initialize an empty set `s` to store unique numbers from the input vector `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> node<span style="color:#666">=</span> root;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the root of the tree to the `node` pointer for traversal. </div>
+                            <div class=""> Iterate through each element `x` in the input vector `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Control</b></div>
+                            <div class=""> <b>4 : Set Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">||</span> node) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.insert(x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a `while` loop that runs until both the stack is empty and there are no more nodes to visit. </div>
+                            <div class=""> Insert the current element `x` into the set `s`. This ensures all elements are unique. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Empty Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current `node` is not null, meaning there is still a node to visit. </div>
+                            <div class=""> Check if the set is empty. If it is, return 0 as there are no elements to form a consecutive sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Push Node</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(node);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the current node onto the stack to process it later. </div>
+                            <div class=""> Initialize the variable `mx` to 1 to keep track of the longest consecutive sequence found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Traverse Left</b></div>
+                            <div class=""> <b>7 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            node <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>left;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves to the left child of the current node for further traversal. </div>
+                            <div class=""> Iterate through each element of the `nums` vector again to find consecutive sequences. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Else Condition</b></div>
+                            <div class=""> <b>8 : Element Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current node is null, it means we&#39;ve reached the leftmost node and can start processing nodes from the stack. </div>
+                            <div class=""> Assign the current element `nums[i]` to the variable `y` for checking its consecutive sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Pop Node</b></div>
+                            <div class=""> <b>9 : Sequence Length Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            node <span style="color:#666">=</span> stk.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops the top node from the stack, which is the next node in the in-order traversal. </div>
+                            <div class=""> Initialize the counter `c` to 1 to count the current length of the consecutive sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pop Node</b></div>
+                            <div class=""> <b>10 : Existence Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>s.count(y <span style="color:#666">+</span> <span style="color:#666">1</span>))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the node from the stack after it has been processed. </div>
+                            <div class=""> Check if the next consecutive number `y &#43; 1` does not exist in the set. If not, attempt to find the previous consecutive numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Decrement k</b></div>
+                            <div class=""> <b>11 : Loop for Consecutive Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            k<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(s.count(y <span style="color:#666">-</span> <span style="color:#666">1</span>)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrements the value of `k` as we move closer to finding the k-th smallest element. </div>
+                            <div class=""> Enter a while loop to check if the previous consecutive number `y - 1` exists in the set. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Kth Element Check</b></div>
+                            <div class=""> <b>12 : Counter Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> node<span style="color:#666">-&gt;</span>val;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            c<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current node is the k-th smallest element. If so, returns its value. </div>
+                            <div class=""> Increment the counter `c` for each consecutive element found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Traverse Right</b></div>
+                            <div class=""> <b>13 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            node <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>right;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            y <span style="color:#666">=</span> y <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves to the right child of the current node to continue the in-order traversal. </div>
+                            <div class=""> Update `y` to the previous consecutive element `y - 1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Return Null</b></div>
+                            <div class=""> <b>14 : Maximum Length Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, c);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns `NULL` if no k-th smallest element is found, which should never happen for a valid input. </div>
+                            <div class=""> Update `mx` to the maximum length of consecutive sequence found so far. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the maximum length of the longest consecutive sequence found. </div>
                         </div>
                     
                 </div>
@@ -730,16 +750,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because the traversal must visit every node in the tree at least once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n), since we iterate through the array and each element is inserted and looked up in the set in constant time.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as we always process each element once.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only process each element once and look up elements in constant time using the set.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(h)</div>
-                        <div class=""> <b>Worst Case:</b> O(h)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(h), where h is the height of the tree, due to the stack used in the traversal (for the recursive solution, it depends on the tree&#39;s height).</div>    
+                        <div class=""> <b>Best Case:</b> O(n), as we need a set to store the elements.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), since we store all elements in a set.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), as we use a set to store the elements of the array.</div>    
                     </div>
 
                 </div>

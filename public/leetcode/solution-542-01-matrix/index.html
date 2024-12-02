@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1189s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1190s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/542.webp" 
            alt="A matrix where cells of 1s and 0s are arranged, with the shortest distance for 1s to 0s glowing softly." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given two strings s and t of the same length, and an integer maxCost. You want to change string s to string t. The cost of changing the ith character of s to the ith character of t is the absolute difference between their ASCII values. Your task is to find the maximum length of a substring of s that can be changed to match the corresponding substring of t, with the total cost not exceeding maxCost. </div>
+<div class=""> Given an m x n binary matrix, return the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1. </div>
 
 
 
@@ -372,51 +372,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two strings s and t of the same length, and an integer maxCost.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;hello&#34;, t = &#34;hxllo&#34;, maxCost = 2</div>
+                        <div class=""> <b>Input:</b> You are given a binary matrix of size m x n where each cell is either 0 or 1.</div>
+                        <div class=""> <b>Example:</b> Input: mat = [[1,1,1],[1,0,1],[1,1,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • t.length == s.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m * n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= maxCost &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • mat[i][j] is either 0 or 1.</div>
                             
-                                <div style="margin-left: 20px;"> • s and t consist of only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • There is at least one 0 in mat.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum length of a substring of s that can be changed to the corresponding substring of t with a total cost no greater than maxCost.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return a matrix where each element represents the distance to the nearest 0.</div>
+                        <div class=""> <b>Example:</b> Output: [[1,1,1],[1,0,1],[1,1,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output matrix will have the same dimensions as the input matrix.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the longest possible substring that can be converted from s to t such that the total cost of the transformation is within the allowed maxCost.</div>
+                        <div class=""> <b>Goal:</b> Find the nearest 0 for each cell and compute the distance.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Calculate the cost of changing each character of s to the corresponding character of t.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue and add all positions of the zeros in the matrix.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window approach to find the longest substring where the total change cost does not exceed maxCost.</div>
+                                <div style="margin-left: 20px;"> • Start from the zeros and use a breadth-first search (BFS) to propagate the distance to all other cells.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each cell, update its distance as the shortest distance from a 0.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem ensures the input strings are of the same length and constrained by the specified limits.</div>
+                        <div class=""> <b>Goal:</b> The matrix contains only 0s and 1s, and there is at least one 0 in the matrix.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • t.length == s.length</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= maxCost &lt;= 10^6</div>
-                            
-                                <div style="margin-left: 20px;"> • s and t consist of only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The matrix has at most 10^4 elements.</div>
                             
                         </div>
                     </div>        
@@ -424,23 +422,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input strings s and t are non-empty and consist of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The matrix is valid and contains at least one 0.</div>
+                            
+                                <div style="margin-left: 20px;"> • The matrix can be large, so the solution should be efficient.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;hello&#34;, t = &#34;hxllo&#34;, maxCost = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You can change the substring &#39;hel&#39; of s to &#39;hxl&#39; of t. The total cost is 2, which is within the maxCost.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;abcde&#34;, t = &#34;bbcde&#34;, maxCost = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You can change the substring &#39;ab&#39; of s to &#39;bb&#39; of t. The cost is 1, which is within the maxCost.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;abc&#34;, t = &#34;xyz&#34;, maxCost = 0</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since maxCost is 0, no changes can be made. The longest valid substring is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: mat = [[1,1,1],[1,0,1],[1,1,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The nearest 0 to any 1 in the matrix is found by calculating the shortest path in terms of adjacency. The matrix will be updated with the distances to the nearest 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,18 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can use a sliding window technique to solve this problem. The idea is to keep track of the running cost of converting substrings of s to substrings of t and adjust the window size accordingly.</div>
+                        <div class=""> <b>Approach:</b> The approach uses a breadth-first search (BFS) to propagate the distances from all zeros simultaneously. Starting from each 0, we explore its neighbors and update the distances accordingly.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to track the cost of character changes between s and t for substrings.</div>
-                            
-                                <div style="margin-left: 20px;"> • The sliding window will help in dynamically adjusting the substring length while ensuring the total cost stays within maxCost.</div>
+                                <div style="margin-left: 20px;"> • BFS is a suitable choice for this problem since it guarantees finding the shortest path in an unweighted grid.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The total cost of transforming any substring can be efficiently managed with a sliding window technique.</div>
+                                <div style="margin-left: 20px;"> • We can initialize a queue with all the zero positions and then explore the matrix layer by layer, updating the distances.</div>
                             
                         </div>
                     </div>
@@ -483,11 +473,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Calculate the absolute difference in ASCII values for each corresponding character in s and t.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty queue and add the positions of all zeros in the matrix.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window to find the longest substring where the sum of character differences does not exceed maxCost.</div>
+                                <div style="margin-left: 20px;"> • Mark the distance of zeros as 0 in the result matrix.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the length of this longest valid substring.</div>
+                                <div style="margin-left: 20px;"> • For each zero, explore its neighboring cells using BFS, updating the distance for each unvisited cell.</div>
                             
                         </div>
                     </div>
@@ -496,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input strings s and t should always have at least one character, as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • The matrix will not be empty as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution can handle inputs with lengths up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle large matrices with up to 10^4 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where maxCost is 0, which means no changes can be made.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the zero is at the edges or corners of the matrix.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The lengths of s and t are guaranteed to be the same, so there is no need to check for different lengths.</div>
+                                <div style="margin-left: 20px;"> • The matrix must have at least one zero.</div>
                             
                         </div>                                                                        
                     </div>
@@ -530,25 +520,57 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop to Calculate Differences</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculate Absolute Difference</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Matrix Traversal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Matrix Traversal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sliding Window Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Check for Zeros</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Maximum Difference</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Adjust Window for Validity</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Distance Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Expand Window by Moving Left Pointer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Visited Matrix</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Maximum Substring Length</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Visited Matrix Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Direction Array</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 BFS Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Queue Size</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 BFS Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Check Visited</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Update Distance</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Mark Visited</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Explore Neighbors</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Calculate New Coordinates</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Boundary Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Skip Visited Cells</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Increment Distance</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Return Result</button>
                     
                 </div>
 
@@ -557,20 +579,38 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">equalSubstring</span>(string s, string t, <span style="color:#0b0;font-weight:bold">int</span> mxc) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums(s.size(), <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        nums[i] <span style="color:#666">=</span> abs(s[i] <span style="color:#666">-</span> t[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mxc <span style="color:#666">-=</span> nums[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(mxc <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            mxc <span style="color:#666">+=</span> nums[j<span style="color:#666">++</span>];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> updateMatrix(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        q.push({i, j});
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dis <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> vis;
+</span></span><span style="display:flex;"><span>    vis.resize(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();                
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            mat[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> dis;
+</span></span><span style="display:flex;"><span>            vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>] <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> m <span style="color:#666">||</span> y <span style="color:#666">==</span> n)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x][y])
+</span></span><span style="display:flex;"><span>                    q.push({x, y});
+</span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        dis<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mat;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -581,110 +621,270 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">equalSubstring</span>(string s, string t, <span style="color:#0b0;font-weight:bold">int</span> mxc) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> updateMatrix(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `equalSubstring` that takes two strings `s`, `t`, and an integer `mxc`, which represents the maximum allowed difference. </div>
+                            <div class=""> Defines the function `updateMatrix` that takes a matrix of integers `mat` and returns the updated matrix where each cell contains the distance to its nearest zero. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Vector Initialization</b></div>
+                            <div class=""> <b>2 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums(s.size(), <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector `nums` of the same size as `s`, filled with zeros. This vector will store the absolute differences between corresponding characters in `s` and `t`. </div>
+                            <div class=""> Initializes a queue `q` to store the coordinates of cells that are being processed during BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop to Calculate Differences</b></div>
+                            <div class=""> <b>3 : Matrix Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a for loop to iterate over the characters in the strings `s` and `t`. </div>
+                            <div class=""> Gets the number of rows (`m`) and columns (`n`) in the matrix `mat`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Calculate Absolute Difference</b></div>
+                            <div class=""> <b>4 : Matrix Traversal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nums[i] <span style="color:#666">=</span> abs(s[i] <span style="color:#666">-</span> t[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character pair in `s` and `t`, compute the absolute difference between their ASCII values and store it in the `nums` vector. </div>
+                            <div class=""> Begins a loop to traverse through each row of the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Matrix Traversal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `res` to 0 to store the maximum length of the valid substring, and `j` to 0 as the starting index for the sliding window. </div>
+                            <div class=""> Begins an inner loop to traverse through each column of the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Sliding Window Loop</b></div>
+                            <div class=""> <b>6 : Check for Zeros</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a for loop that will iterate over the `nums` vector to find the maximum substring with the allowed differences. </div>
+                            <div class=""> Checks if the current cell contains a zero. If it does, its coordinates are added to the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update Maximum Difference</b></div>
+                            <div class=""> <b>7 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mxc <span style="color:#666">-=</span> nums[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.push({i, j});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Subtract the current difference from `mxc` to track how much the allowed difference decreases as the window expands. </div>
+                            <div class=""> Pushes the coordinates of the zero cell to the queue for BFS processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Adjust Window for Validity</b></div>
+                            <div class=""> <b>8 : Distance Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(mxc <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dis <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop to shrink the window from the left when the total difference exceeds the allowed `mxc`. </div>
+                            <div class=""> Initializes the distance variable `dis`, which will be used to update the distance of each cell from the nearest zero. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Expand Window by Moving Left Pointer</b></div>
+                            <div class=""> <b>9 : Visited Matrix</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mxc <span style="color:#666">+=</span> nums[j<span style="color:#666">++</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> vis;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment `j` (move the left pointer) and add back the difference for the element that is being excluded from the window. </div>
+                            <div class=""> Declares a 2D vector `vis` to track which cells have been visited during the BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Maximum Substring Length</b></div>
+                            <div class=""> <b>10 : Visited Matrix Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis.resize(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update `res` to store the maximum length of a valid substring found so far by comparing the current window length `i - j &#43; 1`. </div>
+                            <div class=""> Resizes the `vis` matrix to the size of the input matrix, initializing all values to 0 (unvisited). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Result</b></div>
+                            <div class=""> <b>11 : Direction Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final result `res`, which is the maximum length of a valid substring that can be transformed by no more than `mxc` changes. </div>
+                            <div class=""> Declares a direction array `dir` to represent the four possible directions (right, down, left, up) for BFS traversal. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : BFS Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins the BFS loop that continues until all cells have been processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Queue Size</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Gets the current size of the queue, representing the number of cells to process in the current level of BFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : BFS Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins an inner loop to process each cell at the current level of BFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Gets the front element from the queue (coordinates of the cell to process). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Removes the front element from the queue after processing it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Check Visited</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current cell has already been visited. If it has, it skips the current iteration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Update Distance</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mat[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> dis;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Updates the distance for the current cell to the value of `dis`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Mark Visited</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the current cell as visited in the `vis` matrix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Explore Neighbors</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins a loop to explore the four possible directions from the current cell. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Calculate New Coordinates</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>] <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the new coordinates (x, y) based on the current direction. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Boundary Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> m <span style="color:#666">||</span> y <span style="color:#666">==</span> n)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the new coordinates are out of bounds of the matrix. If they are, it skips to the next iteration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Skip Visited Cells</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skips processing the neighbor if it has already been visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x][y])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the neighbor has not been visited yet. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push({x, y});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the coordinates of the unvisited neighbor to the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Increment Distance</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dis<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the distance variable to move to the next level in BFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mat;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the updated matrix containing the shortest distances to the nearest zero for each cell. </div>
                         </div>
                     
                 </div>
@@ -704,16 +904,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the strings. This is because each character in the strings is processed at most twice.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because each cell is processed once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the differences between corresponding characters in s and t.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the storage of the result matrix and the queue.</div>    
                     </div>
 
                 </div>

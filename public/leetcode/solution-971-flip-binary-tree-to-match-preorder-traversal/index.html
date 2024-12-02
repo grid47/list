@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You start with the integer 1, and you need to reach the target integer using the minimum number of moves. In one move, you can either increment the current integer by 1 or double it. The doubling operation can be used at most <code>maxDoubles</code> times. </div>
+<div class=""> You are given the root of a binary tree with n nodes, where each node has a unique value from 1 to n. You are also given a sequence of n integers, voyage, representing the desired pre-order traversal of the tree. A node in the tree can be flipped by swapping its left and right children. Your task is to find the smallest set of nodes to flip such that the pre-order traversal matches voyage. If it is impossible to achieve this traversal, return [-1]. </div>
 
 
 
@@ -359,49 +359,61 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two integers: `target` (the target integer to reach) and `maxDoubles` (the maximum number of times the doubling operation can be used).</div>
-                        <div class=""> <b>Example:</b> Input: target = 19, maxDoubles = 2</div>
+                        <div class=""> <b>Input:</b> The root of a binary tree and an array voyage of n integers.</div>
+                        <div class=""> <b>Example:</b> Input: root = [1,2,3], voyage = [1,3,2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The binary tree has n nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= maxDoubles &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • n == voyage.length</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= Node.val, voyage[i] &lt;= n</div>
+                            
+                                <div style="margin-left: 20px;"> • All node values and voyage elements are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a single integer representing the minimum number of moves required to reach the target starting from 1.</div>
-                        <div class=""> <b>Example:</b> Output: 7</div>
+                        <div class=""> <b>Output:</b> A list of nodes that need to be flipped to achieve the pre-order traversal defined by voyage.</div>
+                        <div class=""> <b>Example:</b> Output: [1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a non-negative integer representing the minimum moves.</div>
+                                <div style="margin-left: 20px;"> • If flipping nodes is impossible, return [-1].</div>
+                            
+                                <div style="margin-left: 20px;"> • The output list may be in any order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the minimum number of moves to reach the target using increment and doubling operations.</div>
+                        <div class=""> <b>Goal:</b> Determine the minimum set of nodes to flip so that the binary tree&#39;s pre-order traversal matches voyage.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Start at 1 and try to reach the target.</div>
+                                <div style="margin-left: 20px;"> • Perform a recursive depth-first traversal of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • At each step, if the current integer is even and the doubling operation is available, try doubling it.</div>
+                                <div style="margin-left: 20px;"> • Match the current node&#39;s value with the current index in voyage.</div>
                             
-                                <div style="margin-left: 20px;"> • Otherwise, increment the integer by 1.</div>
+                                <div style="margin-left: 20px;"> • If the left child&#39;s value does not match the next value in voyage, flip the current node.</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat the process until the target is reached.</div>
+                                <div style="margin-left: 20px;"> • Continue traversing the left and right subtrees, updating the traversal index.</div>
+                            
+                                <div style="margin-left: 20px;"> • If any mismatch occurs that cannot be resolved by flipping, return [-1].</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input constraints are relatively small, making the problem solvable using greedy or dynamic programming techniques.</div>
+                        <div class=""> <b>Goal:</b> Ensure the inputs meet the problem&#39;s requirements and the output is consistent with the traversal rules.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The tree and voyage must have the same number of nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= maxDoubles &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • Each node&#39;s value and voyage element are unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • The solution must operate within the problem&#39;s constraints for input size.</div>
                             
                         </div>
                     </div>        
@@ -409,17 +421,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input values for `target` and `maxDoubles` are valid.</div>
+                                <div style="margin-left: 20px;"> • The binary tree is correctly structured.</div>
                             
-                                <div style="margin-left: 20px;"> • The input `target` will always be greater than or equal to 1.</div>
+                                <div style="margin-left: 20px;"> • All node values are unique and match the elements in voyage.</div>
+                            
+                                <div style="margin-left: 20px;"> • The voyage array defines a valid pre-order traversal for some arrangement of the tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> target = 19, maxDoubles = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we can increment to 4, double to 8, increment to 9, double to 18, and finally increment to 19. This process takes 7 steps.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1,2,4,null,null,3], voyage = [1,3,2,4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Flipping node 1 swaps the left and right children, resulting in a traversal of [1,3,2,4]. Output: [1].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1,2,3,4], voyage = [1,2,4,3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The pre-order traversal already matches voyage. Output: [].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -443,18 +461,24 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to simulate the process of reaching the target by using the operations optimally. If the target is divisible by 2 and we still have available doubles, we should perform the doubling operation to speed up reaching the target.</div>
+                        <div class=""> <b>Approach:</b> Use a recursive depth-first search to traverse the binary tree and match its pre-order traversal to voyage.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `maxDoubles` is 0, we can only increment to reach the target.</div>
+                                <div style="margin-left: 20px;"> • Pre-order traversal visits nodes in root-left-right order.</div>
                             
-                                <div style="margin-left: 20px;"> • If `maxDoubles` is large, using the doubling operation strategically can minimize the number of steps.</div>
+                                <div style="margin-left: 20px;"> • A mismatch between the current node&#39;s left child and voyage implies a flip may be needed.</div>
+                            
+                                <div style="margin-left: 20px;"> • Flipping is only necessary when voyage cannot otherwise be matched.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Use a greedy approach to either double the number or increment it based on the current situation.</div>
+                                <div style="margin-left: 20px;"> • Start from the root and traverse the tree recursively.</div>
+                            
+                                <div style="margin-left: 20px;"> • Keep track of the current position in voyage.</div>
+                            
+                                <div style="margin-left: 20px;"> • If a mismatch occurs, check if flipping can resolve it.</div>
                             
                         </div>
                     </div>
@@ -462,15 +486,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start at 1 and initialize a move counter.</div>
+                                <div style="margin-left: 20px;"> • Initialize a global index to track the position in voyage.</div>
                             
-                                <div style="margin-left: 20px;"> • While the target is greater than 1:</div>
+                                <div style="margin-left: 20px;"> • Create a helper function to perform recursive depth-first traversal.</div>
                             
-                                <div style="margin-left: 20px;"> •   - If the target is divisible by 2 and we still have doubles left, double the number.</div>
+                                <div style="margin-left: 20px;"> • If the current node&#39;s value does not match voyage[index], return false.</div>
                             
-                                <div style="margin-left: 20px;"> •   - If the target is odd or no doubles are left, increment the number.</div>
+                                <div style="margin-left: 20px;"> • Check if the left child needs to be swapped with the right child to match voyage.</div>
                             
-                                <div style="margin-left: 20px;"> • Continue until the target is reached.</div>
+                                <div style="margin-left: 20px;"> • If flipping resolves the mismatch, record the current node&#39;s value.</div>
+                            
+                                <div style="margin-left: 20px;"> • Continue traversing both subtrees, checking for matches and potential flips.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the traversal completes successfully, return the recorded flips. Otherwise, return [-1].</div>
                             
                         </div>
                     </div>
@@ -479,24 +507,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since the input is always valid (1 &lt;= target &lt;= 10^9), there will never be empty inputs.</div>
+                                <div style="margin-left: 20px;"> • An empty tree or empty voyage should return [].</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large values of `target`, ensure that the approach handles numbers up to 10^9 efficiently.</div>
+                                <div style="margin-left: 20px;"> • For a tree with 100 nodes, ensure the traversal does not exceed the recursion limit.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When `target` is 1, no moves are needed, so the answer should be 0.</div>
+                                <div style="margin-left: 20px;"> • If voyage is not a valid pre-order traversal of the tree, return [-1].</div>
                             
-                                <div style="margin-left: 20px;"> • When `maxDoubles` is 0, the only option is to increment the number.</div>
+                                <div style="margin-left: 20px;"> • If flipping the root resolves all mismatches, include the root&#39;s value in the output.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The approach must handle both large `target` values and small `maxDoubles` values efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the input tree is valid and matches the size of voyage.</div>
                             
                         </div>                                                                        
                     </div>
@@ -513,45 +541,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Retrieval</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Case 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Division</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 DFS Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Case 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Memoization Save</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Voyage Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Flip Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recording the Flip</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 DFS Recursion with Flip</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Odd Number Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Even Number Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Division Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Decrement dops</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 No Division Available</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Final Adjustment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Break</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 DFS Recursion without Flip</button>
                     
                 </div>
 
@@ -560,39 +574,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> end) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(cur) <span style="color:#666">&amp;&amp;</span> mp[cur].count(dops)) <span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">+</span> <span style="color:#666">1</span>, end, dops);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> min(ans, <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">*</span> <span style="color:#666">2</span>, end, dops <span style="color:#666">-</span> <span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops] <span style="color:#666">=</span> ans;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> flipMatchVoyage(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> voyage) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> fail <span style="color:#666">=</span> {<span style="color:#666">-</span><span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(root, voyage)<span style="color:#666">?</span> <span style="color:#a0a000">res</span>: fail;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMoves</span>(<span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(end <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(end <span style="color:#666">%</span> <span style="color:#666">2</span>) end <span style="color:#666">-=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            end <span style="color:#666">/=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>            dops<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> (end <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;                
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> node, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>voyage) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i<span style="color:#666">++</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> node<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i]) {
+</span></span><span style="display:flex;"><span>        res.push_back(node<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>  dfs(node<span style="color:#666">-&gt;</span>right, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>left, voyage);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// return dp(1, end, dops);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span>  dfs(node<span style="color:#666">-&gt;</span>left, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>right, voyage);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -600,203 +598,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes a 2D map `mp` which will be used for memoization. It stores previously computed results for the dynamic programming function to avoid redundant calculations. </div>
+                            <div class=""> A vector to store the nodes where a flip is required in the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the definition of the `dp` function, which recursively calculates the minimum number of steps required to transform the number `cur` to `end`, using `dops` remaining operations that allow division by 2. </div>
+                            <div class=""> A variable `i` used to keep track of the current index in the `voyage` vector during the DFS traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Base Case 1</b></div>
+                            <div class=""> <b>3 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `cur` is equal to `end`, no more operations are needed, so the function returns 0. </div>
+                            <div class=""> Access modifier that indicates the following methods and members are public and can be accessed from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case 2</b></div>
+                            <div class=""> <b>4 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> end) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> flipMatchVoyage(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> voyage) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `cur` exceeds `end`, it&#39;s not possible to reach `end`, so a large value (essentially infinity) is returned to signify an invalid path. </div>
+                            <div class=""> Function that accepts a root of a tree and a `voyage` vector, and returns a vector of nodes that need to be flipped to match the voyage. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Memoization Retrieval</b></div>
+                            <div class=""> <b>5 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(cur) <span style="color:#666">&amp;&amp;</span> mp[cur].count(dops)) <span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> fail <span style="color:#666">=</span> {<span style="color:#666">-</span><span style="color:#666">1</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks whether the result for `dp(cur, dops)` is already computed and stored in the memoization table `mp`. If so, it returns the cached result. </div>
+                            <div class=""> Initializes a fail vector that is returned when the voyage cannot be matched. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursive Case 1</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">+</span> <span style="color:#666">1</span>, end, dops);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(root, voyage)<span style="color:#666">?</span> <span style="color:#a0a000">res</span>: fail;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line computes the result of performing a decrement operation (`cur &#43; 1`) and recursively calls `dp` to calculate the remaining steps. </div>
+                            <div class=""> Checks if the tree can be matched with the voyage using DFS, returning the result vector or the fail vector if matching is impossible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Division</b></div>
+                            <div class=""> <b>7 : DFS Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> node, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>voyage) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if there are remaining division operations (`dops &gt; 0`) available to divide by 2. </div>
+                            <div class=""> The DFS helper function that performs a depth-first search on the tree to check if the nodes match the voyage sequence and handles flips where necessary. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Recursive Case 2</b></div>
+                            <div class=""> <b>8 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">=</span> min(ans, <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">*</span> <span style="color:#666">2</span>, end, dops <span style="color:#666">-</span> <span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If division by 2 is allowed (i.e., `dops &gt; 0`), the function recursively tries the division operation and compares the result to the previously calculated value to find the minimum number of operations. </div>
+                            <div class=""> Base case: if the node is null, return true as there&#39;s nothing to process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Memoization Save</b></div>
+                            <div class=""> <b>9 : Voyage Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops] <span style="color:#666">=</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i<span style="color:#666">++</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line stores the computed minimum number of operations for the current state `(cur, dops)` into the memoization table `mp` to avoid redundant calculations in future recursive calls. </div>
+                            <div class=""> Checks if the current node&#39;s value matches the current value in the voyage sequence. If not, the function returns false. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Function Definition</b></div>
+                            <div class=""> <b>10 : Flip Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMoves</span>(<span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> node<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the `minMoves` function, which calculates the minimum number of moves needed to transform `end` to 1, possibly using up to `dops` division operations. </div>
+                            <div class=""> Checks if the left child exists and its value does not match the current value in the voyage sequence, indicating that a flip might be needed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Variable Initialization</b></div>
+                            <div class=""> <b>11 : Recording the Flip</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(node<span style="color:#666">-&gt;</span>val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a counter `cnt` to track the number of operations performed. </div>
+                            <div class=""> Records the current node&#39;s value in the `res` vector as a node where a flip occurred. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : While Loop</b></div>
+                            <div class=""> <b>12 : DFS Recursion with Flip</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(end <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>  <span style="color:#00a000">dfs</span>(node<span style="color:#666">-&gt;</span>right, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>left, voyage);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This while loop continues as long as `end` is greater than 1, repeatedly applying operations to reduce `end`. </div>
+                            <div class=""> Recursively checks the right and left subtrees after flipping them to match the voyage. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Odd Number Check</b></div>
+                            <div class=""> <b>13 : DFS Recursion without Flip</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(end <span style="color:#666">%</span> <span style="color:#666">2</span>) end <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span>  <span style="color:#00a000">dfs</span>(node<span style="color:#666">-&gt;</span>left, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>right, voyage);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `end` is odd, it is decremented by 1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Even Number Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If `end` is even and division by 2 is allowed (`dops &gt; 0`), the function proceeds with division. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Division Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            end <span style="color:#666">/=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If division by 2 is allowed, `end` is halved. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Decrement dops</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dops<span style="color:#666">--</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After performing a division by 2, the available division operations (`dops`) are decremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : No Division Available</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If no division operation is available (i.e., `dops` is 0), the function enters the else block. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Final Adjustment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> (end <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If no division operations are left, the remaining difference between `end` and 1 is added to `cnt` to perform simple decrements until `end` becomes 1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Break</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;                
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The loop breaks after performing the necessary decrements when no division operations are left. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This returns the total count of operations performed to reduce `end` to 1. </div>
+                            <div class=""> Recursively checks the left and right subtrees without flipping them. </div>
                         </div>
                     
                 </div>
@@ -816,16 +744,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log target)</div>
-                        <div class=""> <b>Average Case:</b> O(log target)</div>
-                        <div class=""> <b>Worst Case:</b> O(target)</div> 
-                        <div class=""> <b>Description:</b> In the best and average cases, the time complexity is O(log target), as doubling reduces the target rapidly. In the worst case (when only incrementing is needed), the time complexity is O(target).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Each node is visited once during the traversal, making the time complexity linear in the number of nodes.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant (O(1)), as the algorithm only requires a few variables to track the current state.</div>    
+                        <div class=""> <b>Best Case:</b> O(h)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity depends on the depth of the recursion stack, which is equal to the height h of the tree.</div>    
                     </div>
 
                 </div>

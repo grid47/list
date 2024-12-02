@@ -301,7 +301,7 @@
 
 
 
-<div class=""> You are given an integer array &rsquo;nums&rsquo; and a positive integer &lsquo;x&rsquo;. Starting at index 0, you can move to any position j (where i &lt; j). For each position i that you visit, you get a score of nums[i]. If the parities of nums[i] and nums[j] differ, you lose a score of &lsquo;x&rsquo;. Your goal is to find the maximum score you can accumulate by visiting positions in the array. </div>
+<div class=""> Given the root of a binary tree, return the sum of the values of the nodes that have an even-valued grandparent. If there are no nodes with an even-valued grandparent, return 0. A grandparent is defined as the parent of a node’s parent, if it exists. </div>
 
 
 
@@ -352,47 +352,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array nums and a positive integer x.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [5, 10, 3, 7], x = 4</div>
+                        <div class=""> <b>Input:</b> The input consists of a binary tree represented by its root node. The binary tree nodes have integer values, and the structure of the tree is given in a nested manner (e.g., left and right children of nodes).</div>
+                        <div class=""> <b>Example:</b> For the tree [6,7,8,2,7,1,3,9,null,1,4,null,null,null,5], the root node is 6.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is between 1 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i], x &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • Each node’s value is an integer between 1 and 100.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum score you can achieve by visiting positions in the array according to the given rules.</div>
-                        <div class=""> <b>Example:</b> Output: 19</div>
+                        <div class=""> <b>Output:</b> The output is an integer representing the sum of values of nodes that have an even-valued grandparent.</div>
+                        <div class=""> <b>Example:</b> For the tree [6,7,8,2,7,1,3,9,null,1,4,null,null,null,5], the output is 18.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Maximize the total score by choosing the optimal positions to visit based on the parity conditions.</div>
+                        <div class=""> <b>Goal:</b> The goal is to traverse the tree and for each node, check if its grandparent has an even value. If so, add its value to the result.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize the scores for the even and odd cases based on nums[0].</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the binary tree using a depth-first search (DFS) approach.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, updating the scores based on the parity of nums[i] and the maximum possible score from previous positions.</div>
+                                <div style="margin-left: 20px;"> • 2. For each node, check if its grandparent exists and if its value is even.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the maximum score from the even or odd score variable.</div>
+                                <div style="margin-left: 20px;"> • 3. If the grandparent has an even value, add the current node’s value to the result.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the final sum after traversing the entire tree.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array length and the value of x.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the binary tree is not too large and that the node values are manageable for computation.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • nums.length is between 2 and 10^5.</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is between 1 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • Each value in nums is between 1 and 10^6.</div>
-                            
-                                <div style="margin-left: 20px;"> • x is between 1 and 10^6.</div>
+                                <div style="margin-left: 20px;"> • Each node’s value is an integer between 1 and 100.</div>
                             
                         </div>
                     </div>        
@@ -400,19 +400,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array nums contains integers and is not empty.</div>
+                                <div style="margin-left: 20px;"> • The input binary tree is valid and has at least one node.</div>
+                            
+                                <div style="margin-left: 20px;"> • Node values are positive integers within the specified range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [5, 10, 3, 7], x = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting at index 0, we first gain 5 points. Then moving to index 1, we gain 10 but lose 4 points because the parities of 5 (odd) and 10 (even) differ. Then, moving to index 3, we gain 7 but lose another 4 points because the parities of 10 (even) and 7 (odd) differ. The final score is 5 &#43; 10 &#43; 7 - 4 - 4 = 19.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [2, 4, 6, 8], x = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> All values are even, so no penalties are incurred. The total score is 2 &#43; 4 &#43; 6 &#43; 8 = 20.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For the tree [6,7,8,2,7,1,3,9,null,1,4,null,null,null,5], the sum of the values of the nodes with even-valued grandparents is 18. These nodes are 2, 1, and 5, where the grandparent node values are 6 (even).</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The even-valued grandparents are 6, and the nodes with even-valued grandparents are 2, 1, and 5. The sum of their values is 2 &#43; 1 &#43; 5 = 18.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -436,16 +434,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use dynamic programming to track the maximum possible score at each position based on the parity of the current and previous positions.</div>
+                        <div class=""> <b>Approach:</b> We use a depth-first traversal approach to explore the binary tree. For each node, we pass the values of its parent and grandparent to help determine if it should be included in the sum.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be solved by maintaining separate scores for even and odd parities as we iterate through the array.</div>
+                                <div style="margin-left: 20px;"> • We need to check the grandparent node for each node during traversal.</div>
+                            
+                                <div style="margin-left: 20px;"> • A recursive or DFS approach would work well for traversing the tree.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • I will track the maximum score for both even and odd parities as I move through the array.</div>
+                                <div style="margin-left: 20px;"> • We will recursively traverse the tree and track the parent and grandparent of each node. If the grandparent’s value is even, we add the node’s value to the result.</div>
                             
                         </div>
                     </div>
@@ -453,11 +453,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize the scores for even and odd parities using nums[0].</div>
+                                <div style="margin-left: 20px;"> • 1. Define a helper function that takes the current node, its parent’s value, and its grandparent’s value.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and update the scores based on the parity comparison of nums[i] with the previous score.</div>
+                                <div style="margin-left: 20px;"> • 2. Perform a DFS traversal of the tree, updating the parent and grandparent values as we move down the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the maximum of the even or odd score after processing the entire array.</div>
+                                <div style="margin-left: 20px;"> • 3. If a node has an even-valued grandparent, add its value to the result.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the sum after the DFS traversal is complete.</div>
                             
                         </div>
                     </div>
@@ -466,22 +468,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: []. Output: 0 (empty array should not be a valid input, but could return 0 if handled).</div>
+                                <div style="margin-left: 20px;"> • An empty tree (null root) should return a sum of 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: A large array with 10^5 elements. The solution should work within time limits.</div>
+                                <div style="margin-left: 20px;"> • The tree could have a large number of nodes, up to 10^4, and the solution should efficiently handle these cases.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: All numbers are the same. The result will be the sum of all numbers.</div>
+                                <div style="margin-left: 20px;"> • All nodes in the tree could have the same value, and the solution should still work correctly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should run efficiently for up to 10^5 elements.</div>
+                                <div style="margin-left: 20px;"> • The binary tree must be a valid structure with at least one node.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,17 +502,13 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Helper Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Odd Case Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Even Case Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Returning Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Recursive Calculation</button>
                     
                 </div>
 
@@ -519,13 +517,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">maxScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> n, <span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> eve <span style="color:#666">=</span> n[<span style="color:#666">0</span>] <span style="color:#666">-</span> (n[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">?</span> <span style="color:#a0a000">x</span> : <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> odd <span style="color:#666">=</span> n[<span style="color:#666">0</span>] <span style="color:#666">-</span> (n[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> x);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n.size(); <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (n[i] <span style="color:#666">%</span> <span style="color:#666">2</span>)   odd <span style="color:#666">=</span> n[i] <span style="color:#666">+</span> max(odd, eve <span style="color:#666">-</span> x);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>            eve <span style="color:#666">=</span> n[i] <span style="color:#666">+</span> max(eve, odd <span style="color:#666">-</span> x);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(eve, odd);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumEvenGrandparent</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(root, <span style="color:#666">1</span>, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">helper</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> p, <span style="color:#0b0;font-weight:bold">int</span> gp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(node<span style="color:#666">-&gt;</span>left, node<span style="color:#666">-&gt;</span>val, p) <span style="color:#666">+</span> helper(node<span style="color:#666">-&gt;</span>right, node<span style="color:#666">-&gt;</span>val, p) <span style="color:#666">+</span> (gp <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> node<span style="color:#666">-&gt;</span><span style="color:#a0a000">val</span>: <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -536,70 +534,50 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">maxScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> n, <span style="color:#0b0;font-weight:bold">int</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumEvenGrandparent</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `maxScore` is declared, taking a vector `n` of integers and an integer `x` as inputs. It returns a long long value, representing the maximum score that can be achieved. </div>
+                            <div class=""> The function &#39;sumEvenGrandparent&#39; is declared. It takes a pointer to the root of a binary tree as input and calls a helper function to calculate the sum based on the condition. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> eve <span style="color:#666">=</span> n[<span style="color:#666">0</span>] <span style="color:#666">-</span> (n[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">?</span> <span style="color:#a0a000">x</span> : <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">helper</span>(root, <span style="color:#666">1</span>, <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `eve` is initialized to the first element of the array `n`. If the element is odd, it subtracts `x`; if the element is even, no subtraction occurs. </div>
+                            <div class=""> The function calls the helper function with the root node, a parent value of 1, and a grandparent value of 1 (since the root has no parent or grandparent). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Helper Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> odd <span style="color:#666">=</span> n[<span style="color:#666">0</span>] <span style="color:#666">-</span> (n[<span style="color:#666">0</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> x);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">helper</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> p, <span style="color:#0b0;font-weight:bold">int</span> gp) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Similarly, the variable `odd` is initialized to the first element of `n`. If the element is even, it subtracts `x`; if the element is odd, no subtraction occurs. </div>
+                            <div class=""> The helper function is declared. It takes a node, the parent node&#39;s value (p), and the grandparent node&#39;s value (gp) as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Initialization</b></div>
+                            <div class=""> <b>4 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n.size(); <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for loop is initialized starting from index 1 to iterate through the elements of the vector `n` from the second element onward. </div>
+                            <div class=""> This is the base case for the recursion. If the node is null, the function returns 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Odd Case Calculation</b></div>
+                            <div class=""> <b>5 : Recursive Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (n[i] <span style="color:#666">%</span> <span style="color:#666">2</span>)   odd <span style="color:#666">=</span> n[i] <span style="color:#666">+</span> max(odd, eve <span style="color:#666">-</span> x);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">helper</span>(node<span style="color:#666">-&gt;</span>left, node<span style="color:#666">-&gt;</span>val, p) <span style="color:#666">+</span> helper(node<span style="color:#666">-&gt;</span>right, node<span style="color:#666">-&gt;</span>val, p) <span style="color:#666">+</span> (gp <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> node<span style="color:#666">-&gt;</span><span style="color:#a0a000">val</span>: <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element `n[i]` is odd (i.e., `n[i] % 2` evaluates to true), the `odd` variable is updated. It takes the maximum of the current `odd` value and the `eve` value minus `x`, then adds the current element `n[i]`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Even Case Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>            eve <span style="color:#666">=</span> n[i] <span style="color:#666">+</span> max(eve, odd <span style="color:#666">-</span> x);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current element `n[i]` is even, the `eve` variable is updated by adding the maximum of the current `eve` value and the `odd` value minus `x`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Returning Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(eve, odd);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After the loop finishes, the function returns the maximum of the `eve` and `odd` scores, which represents the highest achievable score after considering all elements. </div>
+                            <div class=""> The function recursively calls itself for the left and right children of the current node, passing the current node&#39;s value as the new parent value. If the grandparent&#39;s value (gp) is even, the current node&#39;s value is added to the sum. </div>
                         </div>
                     
                 </div>
@@ -622,13 +600,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear since we only iterate through the array once.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we visit each node exactly once during the DFS traversal.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since we only need to store two variables for tracking scores.</div>    
+                        <div class=""> <b>Best Case:</b> O(h)</div>
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h), where h is the height of the tree, due to the recursion stack in the DFS traversal.</div>    
                     </div>
 
                 </div>

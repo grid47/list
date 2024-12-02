@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     May 10, 2024
                                     <i class="far fa-clock clock"></i>
-                                    1 min read
+                                    9 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class="">  </div>
+<div class=""> You are managing an order system for a marketplace where both buy and sell orders are placed in batches. Each order contains a price, a quantity, and a type (either buy or sell). You need to calculate how many orders remain unfulfilled in the system after processing all the orders. </div>
 
 
 
@@ -318,72 +318,92 @@
     <div class="problem-guide-tags">
 
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
         </div> 
     </div>
 
     
     <div class="problem-guide-content">
 
-        <div id="" 
+        <div id="Problem" 
             class="problem-guide-topic-content" 
             style="display: block;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Input:</b> The input is a 2D array where each subarray represents an order with three values: price, amount, and order type (0 for buy, 1 for sell).</div>
+                        <div class=""> <b>Example:</b> orders = [[10, 5, 0], [15, 2, 1], [20, 1, 1], [30, 4, 0]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= orders.length &lt;= 100,000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= price_i, amount_i &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • orderType_i is either 0 (buy) or 1 (sell)</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Output:</b> Return the total number of unfulfilled orders in the backlog after processing all the orders, modulo 10^9 &#43; 7.</div>
+                        <div class=""> <b>Example:</b> Output: 6</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result is modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> Process the orders to match buy and sell orders, keeping track of unmatched orders in the backlog.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Initialize two priority queues, one for buy orders and one for sell orders.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each order in the input, check if it&#39;s a buy or sell order.</div>
+                            
+                                <div style="margin-left: 20px;"> • If it&#39;s a buy order, try to match it with the cheapest sell order. If no match is found, add it to the buy queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • If it&#39;s a sell order, try to match it with the most expensive buy order. If no match is found, add it to the sell queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • At the end, count the remaining orders in both queues.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> Input size can be large, but operations should be efficient.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Time complexity should be approximately O(n log n), where n is the number of orders.</div>
                             
                         </div>
                     </div>        
@@ -391,10 +411,16 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
+                                <div style="margin-left: 20px;"> • Orders are processed sequentially.</div>
+                            
                         </div>
                     </div>     
                     
                     <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> orders = [[10, 5, 0], [15, 2, 1], [20, 1, 1], [30, 4, 0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, 5 buy orders at price 10 are placed and go into the backlog since no sell orders exist. Then, 2 sell orders at price 15 are added to the backlog, followed by 1 sell order at price 20. Finally, 4 buy orders at price 30 are added, and matching occurs with the 2 lowest-priced sell orders (15 and 20). The remaining orders in the backlog are 5 buy orders with price 10 and 1 buy order with price 30.</div>                                
+                                <br/>
                             
                     </div>                         
                     
@@ -402,33 +428,47 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Approach" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> </div>
+                        <div class=""> <b>Approach:</b> We will use two priority queues to efficiently match buy and sell orders. A buy order will be matched with the cheapest sell order, and a sell order will be matched with the most expensive buy order. After processing all orders, we will count the remaining unmatched orders in the backlog.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
+                                <div style="margin-left: 20px;"> • We can use priority queues (heaps) to store buy and sell orders in sorted order, making matching efficient.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We need to account for all possible scenarios where orders do not match, and orders that remain unmatched must be added to the backlog.</div>
                             
                         </div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize two priority queues (one for buy orders and one for sell orders).</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate over the orders array and process each order based on its type.</div>
+                            
+                                <div style="margin-left: 20px;"> • If it&#39;s a buy order, attempt to match it with the lowest-priced sell orders from the backlog. If no match, add to the backlog.</div>
+                            
+                                <div style="margin-left: 20px;"> • If it&#39;s a sell order, attempt to match it with the highest-priced buy orders from the backlog. If no match, add to the backlog.</div>
+                            
+                                <div style="margin-left: 20px;"> • At the end of the process, sum the quantities of remaining orders in both the buy and sell queues.</div>
                             
                         </div>
                     </div>
@@ -437,14 +477,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • An empty input should return 0, as no orders are placed.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If the input contains the maximum allowed number of orders, the solution should handle it within the time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
+                                <div style="margin-left: 20px;"> • Consider cases where orders are exactly matched (both buy and sell orders can be fulfilled), as well as cases where no orders can be matched.</div>
+                            
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that operations on the priority queues are efficient, as the input size can be large.</div>
                             
                         </div>                                                                        
                     </div>
@@ -453,54 +501,577 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Steps" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop and Recursion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop and Recursion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Flow Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Flow Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Conditional Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Loop and Recursion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Flow Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Flow Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="32"> 32 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="33"> 33 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="34"> 34 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="35"> 35 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="36"> 36 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="37"> 37 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="38"> 38 Data Structure Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="39"> 39 Return</button>
                     
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Steps">
 
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getNumberOfBacklogOrders</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> orders) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) (<span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>);
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> sell;
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> buy;        
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: orders) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">2</span>] <span style="color:#666">==</span> <span style="color:#666">0</span>) { <span style="color:#080;font-style:italic">// For a buy order
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            
+</span></span><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> top;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>sell.empty() <span style="color:#666">&amp;&amp;</span> sell.top().first <span style="color:#666">&lt;=</span> it[<span style="color:#666">0</span>] <span style="color:#666">&amp;&amp;</span> it[<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                top <span style="color:#666">=</span> sell.top();
+</span></span><span style="display:flex;"><span>                sell.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(top.second <span style="color:#666">&gt;</span> it[<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                    top.second <span style="color:#666">-=</span> it[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>                    sell.push(top);
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">-=</span> top.second;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) buy.push({it[<span style="color:#666">0</span>], it[<span style="color:#666">1</span>]});
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">2</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> top;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>buy.empty() <span style="color:#666">&amp;&amp;</span> buy.top().first <span style="color:#666">&gt;=</span> it[<span style="color:#666">0</span>] <span style="color:#666">&amp;&amp;</span> it[<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                top <span style="color:#666">=</span> buy.top();
+</span></span><span style="display:flex;"><span>                buy.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(top.second <span style="color:#666">&gt;</span> it[<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                    top.second <span style="color:#666">-=</span> it[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>                    buy.push(top);
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">-=</span> top.second;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) sell.push({it[<span style="color:#666">0</span>], it[<span style="color:#666">1</span>]});              
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>sell.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> top <span style="color:#666">=</span> sell.top();
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> (cnt <span style="color:#666">+</span> top.second) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        sell.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>buy.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> top <span style="color:#666">=</span> buy.top();
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> (cnt <span style="color:#666">+</span> top.second) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        buy.pop();
+</span></span><span style="display:flex;"><span>    }        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getNumberOfBacklogOrders</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> orders) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start of the function definition that takes in a 2D vector of orders. The function returns an integer representing the number of remaining orders in the backlog. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) (<span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declaring a variable &#39;mod&#39; to store the modulus value, used later to prevent overflow and maintain results within the bounds of a 32-bit integer. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> sell;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a priority queue for sell orders with the &#39;greater&#39; comparator to maintain the smallest price at the top. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> buy;        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a priority queue for buy orders with the &#39;less&#39; comparator to maintain the largest price at the top. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Loop and Recursion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: orders) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to iterate over each order in the &#39;orders&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Conditional Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">2</span>] <span style="color:#666">==</span> <span style="color:#666">0</span>) { <span style="color:#080;font-style:italic">// For a buy order
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the order type is &#39;buy&#39; (indicated by the third element of the order). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> top;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare a pair &#39;top&#39; to hold the current top element in the priority queue while processing orders. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop and Recursion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>sell.empty() <span style="color:#666">&amp;&amp;</span> sell.top().first <span style="color:#666">&lt;=</span> it[<span style="color:#666">0</span>] <span style="color:#666">&amp;&amp;</span> it[<span style="color:#666">1</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop that processes the sell orders that can be matched with the current buy order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                top <span style="color:#666">=</span> sell.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element from the sell priority queue (which contains the lowest price orders). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                sell.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the top element from the sell priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Flow Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(top.second <span style="color:#666">&gt;</span> it[<span style="color:#666">1</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the quantity of the top sell order is greater than the quantity of the buy order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    top.second <span style="color:#666">-=</span> it[<span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the sell order quantity by subtracting the matched quantity of the buy order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set the remaining quantity of the buy order to 0, as it has been fully matched. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    sell.push(top);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the updated sell order back into the sell priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Flow Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Otherwise, update the buy order quantity by subtracting the matched quantity. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">-=</span> top.second;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Subtract the matched quantity from the buy order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) buy.push({it[<span style="color:#666">0</span>], it[<span style="color:#666">1</span>]});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the buy order is not fully matched, push it into the buy priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Conditional Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(it[<span style="color:#666">2</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Else, if the order type is &#39;sell&#39;, process the sell order in a similar manner. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> top;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare a pair &#39;top&#39; for processing the top sell orders. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Loop and Recursion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>buy.empty() <span style="color:#666">&amp;&amp;</span> buy.top().first <span style="color:#666">&gt;=</span> it[<span style="color:#666">0</span>] <span style="color:#666">&amp;&amp;</span> it[<span style="color:#666">1</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop that processes the buy orders that can be matched with the current sell order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                top <span style="color:#666">=</span> buy.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element from the buy priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                buy.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the top element from the buy priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Flow Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(top.second <span style="color:#666">&gt;</span> it[<span style="color:#666">1</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the quantity of the top buy order is greater than the quantity of the sell order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    top.second <span style="color:#666">-=</span> it[<span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the buy order quantity. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set the remaining quantity of the sell order to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    buy.push(top);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the updated buy order back into the buy priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Flow Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Otherwise, update the sell order quantity. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    it[<span style="color:#666">1</span>] <span style="color:#666">-=</span> top.second;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Subtract the matched quantity from the sell order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>29 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) sell.push({it[<span style="color:#666">0</span>], it[<span style="color:#666">1</span>]});              
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the sell order is not fully matched, push it into the sell priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>30 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize the variable &#39;cnt&#39; to hold the total count of remaining orders in the backlog. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>31 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>sell.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Process the remaining sell orders. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>32 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> top <span style="color:#666">=</span> sell.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Get the top sell order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>33 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> (cnt <span style="color:#666">+</span> top.second) <span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the quantity of the remaining sell order to &#39;cnt&#39; and apply modulus operation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>34 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sell.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element from the sell priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>35 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>buy.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Process the remaining buy orders. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>36 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> top <span style="color:#666">=</span> buy.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Get the top buy order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>37 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> (cnt <span style="color:#666">+</span> top.second) <span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the quantity of the remaining buy order to &#39;cnt&#39; and apply modulus operation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>38 : Data Structure Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        buy.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element from the buy priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>39 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final count of remaining orders modulo 1e9 &#43; 7. </div>
+                        </div>
+                    
                 </div>
             </div>
         </div> 
         
-        <div id="" 
+        <div id="Complexity" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Average Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is determined by the need to process each order and maintain the priority queues, which takes O(log n) for each operation.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> We are using two priority queues to store the orders, which requires space proportional to the number of orders.</div>    
                     </div>
 
                 </div>
@@ -575,8 +1146,8 @@
         }        
 
         function buttons() {
-            const slides = document.getElementById('stepsSlides-');
-            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
             let currentIndex = 0;
             let startX = 0;
             let isDragging = false;
@@ -618,7 +1189,7 @@
 
             updateSlides(currentIndex);
 
-            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
             if (initialTag) {
                 initialTag.classList.add('problem-guide-tag-active');
             }

@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a string <code>s</code>. You can perform two types of operations: (1) Choose an index <code>i</code> and remove the closest occurrence of the character at <code>i</code> to the left of <code>i</code>. (2) Choose an index <code>i</code> and remove the closest occurrence of the character at <code>i</code> to the right of <code>i</code>. Minimize the length of the string <code>s</code> by performing these operations and return the final minimized length. </div>
+<div class=""> Given an array of integers and a threshold, find the smallest divisor such that the sum of the division results (rounded up) is less than or equal to the threshold. </div>
 
 
 
@@ -358,47 +358,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A string `s` consisting of lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> s = &#34;abbccaa&#34;</div>
+                        <div class=""> <b>Input:</b> You are given an array `nums` of integers and an integer `threshold`.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [2,4,8,16], threshold = 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • s consists only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^6</div>
+                            
+                                <div style="margin-left: 20px;"> • nums.length &lt;= threshold &lt;= 10^6</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the length of the minimized string after performing the operations.</div>
-                        <div class=""> <b>Example:</b> 3</div>
+                        <div class=""> <b>Output:</b> Return the smallest integer divisor such that the sum of the division results (rounded up) is less than or equal to the threshold.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The divisor must be a positive integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the length of the string by repeatedly applying the operations where possible.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the smallest divisor such that the sum of the rounded-up division results is less than or equal to the threshold.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Identify the closest duplicate characters in the string.</div>
+                                <div style="margin-left: 20px;"> • Initialize a binary search range from 1 to max(nums).</div>
                             
-                                <div style="margin-left: 20px;"> • Remove one of the duplicates by performing one of the operations.</div>
+                                <div style="margin-left: 20px;"> • For each divisor in the range, calculate the sum of rounded-up division results of each element in `nums`.</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat this process until no duplicates are left.</div>
+                                <div style="margin-left: 20px;"> • Check if the sum is less than or equal to the threshold. If it is, narrow the search range to smaller divisors. If it is greater, narrow the range to larger divisors.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input string will have a length between 1 and 100 characters.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the divisor satisfies the condition where the sum of division results is less than or equal to the threshold.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 50,000</div>
                             
-                                <div style="margin-left: 20px;"> • The string contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 1,000,000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= threshold &lt;= 1,000,000</div>
                             
                         </div>
                     </div>        
@@ -406,23 +410,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string is non-empty and contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • There will always be a valid solution for the given input.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input &#39;abbccaa&#39;, applying the operations step-by-step reduces the string to &#39;bca&#39; with length 3.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input &#39;abc&#39;, no operations are performed, and the length of the string remains 3.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input &#39;aabbbcc&#39;, applying the operations reduces the string to &#39;abc&#39;, with a final length of 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2,4,8,16], threshold = 8</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we need to select a divisor such that the sum of the results of dividing each number in `nums` by the divisor is less than or equal to 8. The smallest divisor that satisfies this condition is 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,18 +442,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by iterating through the string and finding duplicate characters. For each duplicate, we perform an operation to remove one of them and continue until no duplicates remain.</div>
+                        <div class=""> <b>Approach:</b> We can use binary search to find the smallest divisor. The binary search will help efficiently narrow down the possible divisors.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string is reduced by removing duplicate characters.</div>
-                            
-                                <div style="margin-left: 20px;"> • The operations only affect characters that have duplicates.</div>
+                                <div style="margin-left: 20px;"> • We need to minimize the divisor while ensuring the sum of the division results remains below the threshold.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The key observation is that the minimum string length is determined by the number of unique characters in the string.</div>
+                                <div style="margin-left: 20px;"> • Binary search is a suitable approach to minimize the divisor because the sum decreases as the divisor increases.</div>
                             
                         </div>
                     </div>
@@ -465,9 +459,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string and store all characters in a set to identify unique characters.</div>
+                                <div style="margin-left: 20px;"> • Set the left boundary of binary search to 1 and the right boundary to the maximum value in `nums`.</div>
                             
-                                <div style="margin-left: 20px;"> • The length of the set will give the number of unique characters, which is the minimized string length.</div>
+                                <div style="margin-left: 20px;"> • For each mid-value in the binary search, calculate the sum of division results and check if it is less than or equal to the threshold.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the sum exceeds the threshold, increase the divisor. If the sum is within the threshold, reduce the divisor.</div>
                             
                         </div>
                     </div>
@@ -476,22 +472,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty string is not a valid input.</div>
+                                <div style="margin-left: 20px;"> • If `nums` is empty, return 1 as the divisor, but this case is not expected to occur based on the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string length is at most 100 characters, which can be handled efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the binary search approach works efficiently even for the largest inputs (i.e., `nums.length` up to 50,000).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string has no repeated characters, no operations are needed.</div>
+                                <div style="margin-left: 20px;"> • If all elements in `nums` are equal, the divisor will likely be close to the value of each element for an optimal sum.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be efficient for strings with lengths up to 100.</div>
+                                <div style="margin-left: 20px;"> • The approach should work within the problem&#39;s time and space limits.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,11 +506,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through String</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Binary Search Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Midpoint Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Reset Sum</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sum Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Left Bound</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Right Bound</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
                 </div>
 
@@ -523,10 +531,17 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizedStringLength</span>(string s) {
-</span></span><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> st;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span>: s) st.insert(c);
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> st.size();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">smallestDivisor</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> threshold) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> <span style="color:#666">1</span>, right <span style="color:#666">=</span> <span style="color:#666">1e6</span>, m , sum;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(left <span style="color:#666">&lt;</span> right) {
+</span></span><span style="display:flex;"><span>        m <span style="color:#666">=</span> (left <span style="color:#666">+</span> right) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span>: nums) sum <span style="color:#666">+=</span> (i <span style="color:#666">+</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>)<span style="color:#666">/</span>m;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> threshold) 
+</span></span><span style="display:flex;"><span>        left <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> right <span style="color:#666">=</span> m;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> left;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -537,40 +552,100 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizedStringLength</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">smallestDivisor</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> threshold) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `minimizedStringLength`, which takes a string `s` as an argument and returns an integer value representing the count of unique characters in the string. </div>
+                            <div class=""> Defines the function to find the smallest divisor meeting the threshold constraint. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Set Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> st;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> <span style="color:#666">1</span>, right <span style="color:#666">=</span> <span style="color:#666">1e6</span>, m , sum;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An unordered set `st` is created to store unique characters from the input string `s`. The unordered set ensures that each character is stored only once. </div>
+                            <div class=""> Initializes the binary search bounds and other variables. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through String</b></div>
+                            <div class=""> <b>3 : Binary Search Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span>: s) st.insert(c);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(left <span style="color:#666">&lt;</span> right) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop iterates through each character `c` in the string `s`, and each character is inserted into the unordered set `st`. If a character is already present in the set, it is not added again. </div>
+                            <div class=""> Starts the binary search loop to find the smallest valid divisor. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Return Size</b></div>
+                            <div class=""> <b>4 : Midpoint Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> st.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        m <span style="color:#666">=</span> (left <span style="color:#666">+</span> right) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After processing all characters in the string, the size of the unordered set `st` is returned. This size represents the number of unique characters in the string. </div>
+                            <div class=""> Calculates the middle value between the binary search bounds. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Reset Sum</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Resets the sum for the current divisor. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Sum Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span>: nums) sum <span style="color:#666">+=</span> (i <span style="color:#666">+</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>)<span style="color:#666">/</span>m;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the sum of quotients for the current divisor. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> threshold) 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the sum exceeds the threshold. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Update Left Bound</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        left <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increases the lower bound of the binary search if the condition is met. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Update Right Bound</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> right <span style="color:#666">=</span> m;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the upper bound of the binary search otherwise. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> left;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the smallest divisor that satisfies the threshold condition. </div>
                         </div>
                     
                 </div>
@@ -590,16 +665,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution runs in linear time since we only need to traverse the string once and find unique characters.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log(max(nums)))</div>
+                        <div class=""> <b>Average Case:</b> O(n log(max(nums)))</div>
+                        <div class=""> <b>Worst Case:</b> O(n log(max(nums)))</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log(max(nums))) because we perform binary search (log(max(nums))) and for each iteration, we sum the results of dividing each element in `nums` (O(n)).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing unique characters in a set.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage needed for the division results.</div>    
                     </div>
 
                 </div>

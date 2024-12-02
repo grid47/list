@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a string s. The task is to permute s such that all consonants remain in their original places, and the vowels are sorted in the nondecreasing order of their ASCII values. </div>
+<div class=""> Given a matrix of integers, where each element represents a value, you need to calculate the sum of all elements in a sub-matrix for each cell. For each cell, the sub-matrix includes all elements within a square grid of size (2k+1) x (2k+1) centered at that cell. If the sub-matrix extends beyond the boundaries of the matrix, only the valid elements within the matrix should be considered. </div>
 
 
 
@@ -359,45 +359,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string s containing only English letters (uppercase and lowercase).</div>
-                        <div class=""> <b>Example:</b> Input: s = &#39;ReAcTivE&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a 2D matrix of integers and an integer k. The matrix is represented as a list of lists, where each list represents a row. The integer k represents the size of the square grid to calculate the sum for each cell.</div>
+                        <div class=""> <b>Example:</b> mat = [[1,2,3],[4,5,6],[7,8,9]], k = 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n, k &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • s consists only of letters of the English alphabet in uppercase and lowercase.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= mat[i][j] &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the new string where the consonants remain in their original places and the vowels are sorted in non-decreasing ASCII order.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;ReACTivE&#39;</div>
+                        <div class=""> <b>Output:</b> The output is a matrix where each element represents the sum of the valid sub-matrix for that position in the original matrix.</div>
+                        <div class=""> <b>Example:</b> For mat = [[1,2,3],[4,5,6],[7,8,9]] and k = 1, the output is [[12, 21, 16], [27, 45, 33], [24, 39, 28]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Sort the vowels in the string while leaving consonants in place.</div>
+                        <div class=""> <b>Goal:</b> To calculate the sum of each sub-matrix centered at each cell in the matrix while considering the bounds of the matrix.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Extract the vowels from the string and store them in a list.</div>
+                                <div style="margin-left: 20px;"> • 1. Use dynamic programming to calculate prefix sums of the matrix.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the list of vowels based on their ASCII values.</div>
-                            
-                                <div style="margin-left: 20px;"> • Reconstruct the string by replacing the vowels in their original positions with the sorted vowels.</div>
+                                <div style="margin-left: 20px;"> • 2. For each cell in the matrix, calculate the sum of its sub-matrix using the prefix sum array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints on the input size and string content.</div>
+                        <div class=""> <b>Goal:</b> The matrix dimensions and k are bounded by constraints to ensure the solution is efficient.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n, k &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • s consists only of English alphabet letters (uppercase and lowercase).</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= mat[i][j] &lt;= 100</div>
                             
                         </div>
                     </div>        
@@ -405,19 +403,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string may contain both uppercase and lowercase vowels.</div>
+                                <div style="margin-left: 20px;"> • The input matrix is always valid, with at least one row and one column.</div>
+                            
+                                <div style="margin-left: 20px;"> • The integer k will be chosen such that the sub-matrix can be calculated within the matrix bounds.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: &#39;ReAcTivE&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The vowels in &#39;ReAcTivE&#39; are &#39;e&#39;, &#39;A&#39;, &#39;i&#39;. After sorting them based on their ASCII values, the new string becomes &#39;ReACTivE&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: &#39;hEllOWoRlD&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The vowels &#39;e&#39;, &#39;O&#39;, &#39;O&#39; are sorted, resulting in &#39;hElLOOWrLD&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For mat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] and k = 1, the sum of the 3x3 grid surrounding each element is calculated. For example, for the element at mat[1][1] (which is 5), the sum of the 3x3 grid is 45.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum is calculated by considering the elements within a 3x3 grid centered around each element, ensuring that any invalid positions outside the matrix bounds are ignored.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,18 +437,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Extract the vowels, sort them, and reinsert them into the original string in place of the vowels.</div>
+                        <div class=""> <b>Approach:</b> The approach utilizes a prefix sum technique to efficiently calculate the sum of each sub-matrix by avoiding recalculation of overlapping sub-matrices.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Only the vowels need to be rearranged. Consonants stay in their places.</div>
+                                <div style="margin-left: 20px;"> • The brute force solution could involve recalculating sums for each cell, but this would be inefficient.</div>
                             
-                                <div style="margin-left: 20px;"> • Sorting the vowels based on their ASCII values is straightforward.</div>
+                                <div style="margin-left: 20px;"> • By using a prefix sum array, we can quickly compute the sum of any sub-matrix in constant time.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • I will extract vowels, sort them, and replace them in the original positions.</div>
+                                <div style="margin-left: 20px;"> • We will first compute the prefix sum array for the entire matrix, and then for each element, calculate the sum of its surrounding grid using this array.</div>
                             
                         </div>
                     </div>
@@ -460,11 +456,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Identify the positions of vowels in the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a prefix sum array where each entry represents the sum of elements from the top-left corner of the matrix to that point.</div>
                             
-                                <div style="margin-left: 20px;"> • Extract the vowels and sort them.</div>
-                            
-                                <div style="margin-left: 20px;"> • Rebuild the string by replacing the original vowels with the sorted ones.</div>
+                                <div style="margin-left: 20px;"> • 2. For each cell in the matrix, use the prefix sum array to compute the sum of the sub-matrix centered at that cell, while ensuring boundaries are respected.</div>
                             
                         </div>
                     </div>
@@ -473,22 +467,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: &#39;&#39;. Output: &#39;&#39;</div>
+                                <div style="margin-left: 20px;"> • An empty matrix (0x0 matrix) should return an empty result.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: &#39;a&#39; repeated 10^5 times. Output: &#39;a&#39; repeated 10^5 times.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle large matrices up to size 100x100 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: &#39;bCdfgh&#39; (no vowels). Output: &#39;bCdfgh&#39;.</div>
+                                <div style="margin-left: 20px;"> • All elements in the matrix could be the same, or the matrix could contain very large or small values.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle up to 10^5 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • The size of the matrix and the value of k are constrained to ensure that the solution remains efficient.</div>
                             
                         </div>                                                                        
                     </div>
@@ -507,25 +501,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vowel Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Prefix Sum Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Prefix Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Copying Vowels</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Matrix Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Vowel Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Outer Loop for Rows</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Sorting Vowels</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Inner Loop for Columns</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Looping Through String</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Boundary Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Vowel Replacement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Block Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Replacing Character</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Returning Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
                 </div>
 
@@ -534,19 +526,30 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isVowel</span>(<span style="color:#0b0;font-weight:bold">char</span> ch) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;e&#39;</span> <span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;o&#39;</span><span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;u&#39;</span><span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;i&#39;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>string <span style="color:#00a000">sortVowels</span>(string s) {
-</span></span><span style="display:flex;"><span>    string v;
-</span></span><span style="display:flex;"><span>    copy_if(begin(s), end(s), back_inserter(v), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">char</span> ch){ 
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> isVowel(tolower(ch)); 
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    sort(begin(v), end(v));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (isVowel(tolower(s[i])))
-</span></span><span style="display:flex;"><span>            s[i] <span style="color:#666">=</span> v[j<span style="color:#666">++</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> matrixBlockSum(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> sum(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    sum[i][j] <span style="color:#666">=</span> mat[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> (sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> sum[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> min(i <span style="color:#666">+</span> k, m);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c1 <span style="color:#666">=</span> min(j <span style="color:#666">+</span> k, n);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r2 <span style="color:#666">=</span> max(i <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c2 <span style="color:#666">=</span> max(j <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        res[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> sum[r1][c1] <span style="color:#666">-</span> sum[r1][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c1] <span style="color:#666">+</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -557,110 +560,105 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isVowel</span>(<span style="color:#0b0;font-weight:bold">char</span> ch) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> matrixBlockSum(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function `isVowel` takes a character `ch` as input and checks if it is one of the vowels (&#39;a&#39;, &#39;e&#39;, &#39;o&#39;, &#39;u&#39;, &#39;i&#39;). It returns true if the character is a vowel, and false otherwise. </div>
+                            <div class=""> The function &#39;matrixBlockSum&#39; is declared, which takes a matrix &#39;mat&#39; and an integer &#39;k&#39; as input. The goal of the function is to calculate the sum of each element&#39;s block of size k x k. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Vowel Check</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;e&#39;</span> <span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;o&#39;</span><span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;u&#39;</span><span style="color:#666">||</span> ch <span style="color:#666">==</span> <span style="color:#b44">&#39;i&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line compares the input character `ch` against the five vowels (&#39;a&#39;, &#39;e&#39;, &#39;o&#39;, &#39;u&#39;, &#39;i&#39;) and returns true if the character matches any of them. </div>
+                            <div class=""> The variables &#39;m&#39; and &#39;n&#39; are initialized to represent the number of rows and columns in the matrix &#39;mat&#39;, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Declaration</b></div>
+                            <div class=""> <b>3 : Prefix Sum Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">sortVowels</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> sum(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function `sortVowels` takes a string `s` as input and returns a new string with the vowels sorted in ascending order, while keeping the consonants in their original positions. </div>
+                            <div class=""> A &#39;sum&#39; matrix is initialized to store the prefix sum of the input matrix &#39;mat&#39;. It has dimensions (m &#43; 1) x (n &#43; 1), with all values initialized to zero. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Prefix Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string v;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    sum[i][j] <span style="color:#666">=</span> mat[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> (sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> sum[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A string `v` is initialized to hold all the vowels extracted from the input string `s`. </div>
+                            <div class=""> This nested loop computes the prefix sum for each element of the &#39;sum&#39; matrix. The value at each position is the sum of elements from the top-left corner of the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Copying Vowels</b></div>
+                            <div class=""> <b>5 : Result Matrix Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    copy_if(begin(s), end(s), back_inserter(v), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">char</span> ch){ 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `copy_if` function iterates over the string `s` and copies each character that is a vowel (determined by the `isVowel` function) into the string `v`. </div>
+                            <div class=""> A &#39;res&#39; matrix is initialized to store the final result, which will hold the sum of each k x k block around every element in the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Vowel Check</b></div>
+                            <div class=""> <b>6 : Outer Loop for Rows</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">isVowel</span>(tolower(ch)); 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This lambda function checks if the character `ch` (converted to lowercase using `tolower`) is a vowel by calling the `isVowel` function. </div>
+                            <div class=""> The outer loop iterates over each row of the matrix to calculate the k x k sum block for each element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Sorting Vowels</b></div>
+                            <div class=""> <b>7 : Inner Loop for Columns</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(begin(v), end(v));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line sorts the string `v` in ascending order so that the vowels are arranged alphabetically. </div>
+                            <div class=""> The inner loop iterates over each column of the matrix, processing every element to calculate its k x k sum block. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Looping Through String</b></div>
+                            <div class=""> <b>8 : Boundary Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> min(i <span style="color:#666">+</span> k, m);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c1 <span style="color:#666">=</span> min(j <span style="color:#666">+</span> k, n);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r2 <span style="color:#666">=</span> max(i <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c2 <span style="color:#666">=</span> max(j <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This for loop iterates through each character of the string `s`. The variable `i` is the index for the original string, and `j` is used to track the position in the sorted `v` string. </div>
+                            <div class=""> These lines calculate the boundaries of the k x k block surrounding the current element. The boundaries are adjusted to ensure they stay within the matrix dimensions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Vowel Replacement</b></div>
+                            <div class=""> <b>9 : Block Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (isVowel(tolower(s[i])))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> sum[r1][c1] <span style="color:#666">-</span> sum[r1][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c1] <span style="color:#666">+</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition checks if the current character in the string `s` (converted to lowercase) is a vowel. </div>
+                            <div class=""> Using the prefix sum array, this line computes the sum of elements within the k x k block for the current matrix element, and stores the result in the &#39;res&#39; matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Replacing Character</b></div>
+                            <div class=""> <b>10 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s[i] <span style="color:#666">=</span> v[j<span style="color:#666">++</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the character is a vowel, it is replaced by the next vowel in the sorted string `v`, and the index `j` is incremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Returning Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After all vowels are replaced with the sorted vowels, the modified string `s` is returned. </div>
+                            <div class=""> The function returns the &#39;res&#39; matrix, which contains the sum of elements for each k x k block surrounding each element in the matrix. </div>
                         </div>
                     
                 </div>
@@ -680,16 +678,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The most time-consuming operation is sorting the vowels, which takes O(n log n) time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we compute the prefix sum array in O(m * n) time, and for each cell, we calculate the sub-matrix sum in constant time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We store the vowels and need extra space proportional to the size of the string.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the storage of the prefix sum array and the result matrix.</div>    
                     </div>
 
                 </div>

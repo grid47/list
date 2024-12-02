@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 22, 2024
                                     <i class="far fa-clock clock"></i>
-                                    3 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode260s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode261s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/153.webp" 
            alt="A rotating array with a glowing highlight marking the minimum element." 
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given an integer n, return true if it is a power of four. Otherwise, return false. An integer n is a power of four if there exists an integer x such that n == 4^x. </div>
+<div class=""> Given a sorted array of unique elements, rotated between 1 and n times, find the minimum element in this array. </div>
 
 
 
@@ -370,43 +370,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is an integer n.</div>
-                        <div class=""> <b>Example:</b> n = 64</div>
+                        <div class=""> <b>Input:</b> The input is a sorted array of unique integers which is rotated between 1 and n times.</div>
+                        <div class=""> <b>Example:</b> nums = [6,7,9,10,2,3,4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • -2^31 &lt;= n &lt;= 2^31 - 1</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • -5000 &lt;= nums[i] &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements in the array are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a boolean value indicating whether n is a power of four.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> The output should be the minimum element in the rotated sorted array.</div>
+                        <div class=""> <b>Example:</b> 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result is true if n is a power of four, otherwise false.</div>
+                                <div style="margin-left: 20px;"> • The array will always be rotated between 1 and n times.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine if n is a power of four using efficient conditions.</div>
+                        <div class=""> <b>Goal:</b> To find the minimum element, use a binary search approach that reduces the search space in each step.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Check if the number is greater than 0.</div>
+                                <div style="margin-left: 20px;"> • Initialize two pointers: start and end of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Ensure that the number is a power of 2 by using the bitwise AND operation.</div>
+                                <div style="margin-left: 20px;"> • Find the middle element and compare it with the rightmost element.</div>
                             
-                                <div style="margin-left: 20px;"> • Ensure that the number minus one is divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • If the middle element is greater than the rightmost element, the minimum must be in the right half, so move the start pointer to mid &#43; 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • Otherwise, move the end pointer to mid.</div>
+                            
+                                <div style="margin-left: 20px;"> • Repeat this process until the start pointer equals the end pointer, which will be the minimum element.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle the integer n within the range [-2^31, 2^31 - 1].</div>
+                        <div class=""> <b>Goal:</b> The input array is sorted but rotated between 1 and n times.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution must not exceed O(1) time complexity.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • -5000 &lt;= nums[i] &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements in the array are unique.</div>
                             
                         </div>
                     </div>        
@@ -414,23 +426,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input integer n is within the valid range of 32-bit signed integers.</div>
+                                <div style="margin-left: 20px;"> • The array is sorted and rotated.</div>
+                            
+                                <div style="margin-left: 20px;"> • The array has at least one element.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 64</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 64 is a power of four, as 64 = 4^3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [6,7,9,10,2,3,4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array was originally [2,3,4,6,7,9,10] and was rotated 4 times. The minimum element is 2.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 12</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 12 is not a power of four, so the result is false.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 1 is a power of four, as 4^0 = 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [10,11,13,15,18,20,1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array was originally [1,10,11,13,15,18,20] and was rotated 6 times. The minimum element is 1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,16 +464,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach to solving this problem involves using bitwise operations to check if the number is a power of four.</div>
+                        <div class=""> <b>Approach:</b> We can use binary search to find the minimum element efficiently in O(log n) time.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A number is a power of four if it is greater than 0 and if only one bit is set to 1 in its binary representation.</div>
+                                <div style="margin-left: 20px;"> • Since the array is sorted and rotated, the minimum element will always be the pivot point where the array shifts from higher to lower values.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use bitwise AND to check if a number is a power of two and verify divisibility by 3 for powers of four.</div>
+                                <div style="margin-left: 20px;"> • Binary search will be optimal to reduce the time complexity to O(log n).</div>
                             
                         </div>
                     </div>
@@ -471,11 +481,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the number is greater than 0.</div>
+                                <div style="margin-left: 20px;"> • Initialize two pointers, start and end, at the beginning and the end of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the number is a power of 2 using the bitwise condition: (num &amp; (num - 1)) == 0.</div>
+                                <div style="margin-left: 20px;"> • While the start pointer is less than the end pointer, calculate the middle index.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if (num - 1) is divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • If the middle element is greater than the end element, the minimum must be on the right side, so update start to mid &#43; 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • Otherwise, update the end pointer to mid.</div>
+                            
+                                <div style="margin-left: 20px;"> • When the start pointer equals the end pointer, that will be the minimum element.</div>
                             
                         </div>
                     </div>
@@ -484,22 +498,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If n is less than or equal to zero, it cannot be a power of four.</div>
+                                <div style="margin-left: 20px;"> • The array will always have at least one element.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Large inputs within the valid range should be handled without overflow or errors.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle arrays with up to 5000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The edge case where n = 1 should return true as 4^0 = 1.</div>
+                                <div style="margin-left: 20px;"> • Negative values and large values within the constraints should be handled correctly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must run in constant time, O(1).</div>
+                                <div style="margin-left: 20px;"> • The array will always contain unique elements.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,9 +530,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Edge Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Binary Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Midpoint Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Binary Search Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Binary Search Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Binary Search Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Binary Search Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Value</button>
                     
                 </div>
 
@@ -527,8 +563,26 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPowerOfFour</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> num <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (num <span style="color:#666">&amp;</span> (num <span style="color:#666">-</span> <span style="color:#666">1</span>)) <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (num <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMin</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>, e <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s <span style="color:#666">&lt;</span> e) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> s <span style="color:#666">+</span> (e <span style="color:#666">-</span> s) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// if(mid - 1 &gt;= 0 &amp;&amp; nums[mid] &lt; nums[mid - 1]) return nums[mid];
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[e] <span style="color:#666">&lt;</span> nums[mid]) {
+</span></span><span style="display:flex;"><span>            s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span>{
+</span></span><span style="display:flex;"><span>            e <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    cout <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34;Hi&#34;</span> <span style="color:#666">&lt;&lt;</span> e;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums[e];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -536,23 +590,132 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPowerOfFour</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMin</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function declaration. It takes an integer `num` and returns a boolean value indicating whether `num` is a power of four. </div>
+                            <div class=""> Defines the function `findMin`, which takes a vector of integers and returns the minimum element in a rotated sorted array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Return Statement</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> num <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (num <span style="color:#666">&amp;</span> (num <span style="color:#666">-</span> <span style="color:#666">1</span>)) <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (num <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The return statement checks three conditions: first, that `num` is positive, second, that `num` is a power of two (by using the bitwise AND operation), and third, that `num - 1` is divisible by 3, ensuring that it is a power of four. </div>
+                            <div class=""> Initializes `n` to the size of the `nums` vector to handle the array&#39;s length and ensure valid indexing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>, e <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes `s` (start) and `e` (end) to the first and last indices of the array, respectively, setting the bounds for the binary search. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes `ans` to store the result of the minimum element (though it isn&#39;t used in the final implementation here). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Edge Case Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handles the edge case where the array has only one element. If true, returns that single element as the minimum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Loop Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                            </div>
+                            <div class=""> This space is reserved for the beginning of the loop that will iterate until the search range is narrowed down to a single element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Binary Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s <span style="color:#666">&lt;</span> e) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins the while loop for binary search, which will continue until the search range (`s` to `e`) is reduced to a single element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Midpoint Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> s <span style="color:#666">+</span> (e <span style="color:#666">-</span> s) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the midpoint `mid` between `s` and `e` to split the array into two halves during each iteration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Binary Search Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[e] <span style="color:#666">&lt;</span> nums[mid]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Compares the element at the rightmost index (`e`) with the middle element. If the element at `e` is smaller, the minimum must be in the right half of the array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Binary Search Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adjusts the start index `s` to `mid &#43; 1` to narrow the search to the right half of the array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Binary Search Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span>{
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the element at `e` is not smaller than the middle element, the minimum must lie in the left half or could be the middle itself. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Binary Search Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            e <span style="color:#666">=</span> mid;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adjusts the end index `e` to `mid` to narrow the search to the left half of the array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Value</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums[e];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the element at index `e`, which is the minimum element in the rotated sorted array. </div>
                         </div>
                     
                 </div>
@@ -572,16 +735,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant because the solution involves only bitwise operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> Binary search will run in logarithmic time.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because only a few variables are used.</div>    
+                        <div class=""> <b>Description:</b> The solution only requires a constant amount of space.</div>    
                     </div>
 
                 </div>

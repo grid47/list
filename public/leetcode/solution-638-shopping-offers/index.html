@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 4, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    9 min read
                                 </span>					
                             </div>
                         </div>			
@@ -323,7 +323,7 @@
 
 
 
-<div class=""> Given an array of integers <code>nums</code> and a positive integer <code>limit</code>, determine the length of the longest subarray where the absolute difference between the minimum and maximum elements is less than or equal to <code>limit</code>. </div>
+<div class=""> In a store, there are n items available for sale, each with a given price. You are also given a list of special offers where you can buy multiple items at a discounted price. Your task is to determine the minimum total price to purchase the required quantities of each item, while utilizing the special offers optimally. You can use any offer as many times as you like, but cannot buy more items than you need. </div>
 
 
 
@@ -374,51 +374,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers `nums` and an integer `limit`.</div>
-                        <div class=""> <b>Example:</b> nums = [6,3,5,8], limit = 3</div>
+                        <div class=""> <b>Input:</b> You are given an array of prices, a list of special offers, and a list of the items you need to buy. Each offer consists of quantities of different items and the price for that offer.</div>
+                        <div class=""> <b>Example:</b> price = [3, 6], special = [[4, 0, 8], [2, 3, 10]], needs = [5, 6]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 6</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= price[i], needs[i] &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= limit &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= special.length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • special[i].length == n &#43; 1</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= special[i][j] &lt;= 50</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an integer representing the size of the longest subarray satisfying the given condition.</div>
-                        <div class=""> <b>Example:</b> 2</div>
+                        <div class=""> <b>Output:</b> Return the minimum cost to purchase exactly the required items, taking into account the special offers.</div>
+                        <div class=""> <b>Example:</b> 26</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The result must be the minimum total cost to satisfy the item needs.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To calculate the size of the longest subarray where the absolute difference between the minimum and maximum elements is less than or equal to the given `limit`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to compute the lowest total price while considering all available special offers.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Use a multiset to track the current subarray&#39;s elements.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each offer and decide whether to use it based on the remaining needs.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For every element in `nums`, add it to the multiset and check if the max difference exceeds the `limit`.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 3: If the condition is violated, remove elements from the start of the current subarray until it satisfies the condition again.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Keep track of the maximum subarray size.</div>
+                                <div style="margin-left: 20px;"> • Track the total cost as you use the optimal combination of offers.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the solution is efficient for large arrays and large values of `nums[i]` and `limit`.</div>
+                        <div class=""> <b>Goal:</b> The solution must efficiently calculate the minimum price, considering the constraints on the number of items and offers.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window technique to maintain efficiency.</div>
+                                <div style="margin-left: 20px;"> • The number of items (n) is small enough (&lt;= 6) to allow the solution to explore all offers without performance issues.</div>
                             
-                                <div style="margin-left: 20px;"> • Handle edge cases with a limit of 0.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the total cost is minimized without exceeding the item quantities in &#39;needs&#39;.</div>
                             
                         </div>
                     </div>        
@@ -426,21 +426,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array `nums` contains at least one element.</div>
+                                <div style="margin-left: 20px;"> • At least one of the special offers includes non-zero quantities of the items.</div>
                             
-                                <div style="margin-left: 20px;"> • The input values are within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The input will always be valid and satisfies the constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [6,3,5,8], limit = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest subarray is [6,3] or [5,8], each with a size of 2.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [9,2,4,6], limit = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarray [2,4,6] has a max difference of 4 and is the longest subarray with size 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> price = [3, 6], special = [[4, 0, 8], [2, 3, 10]], needs = [5, 6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You need 5 units of Item 0 and 6 units of Item 1. The best option is to buy the second offer twice and 1 more unit of Item 0 for a total cost of 26.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,18 +460,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a sliding window approach with a multiset to efficiently maintain the current subarray&#39;s minimum and maximum values.</div>
+                        <div class=""> <b>Approach:</b> The optimal strategy involves recursively trying each special offer and calculating the total cost. Use memoization to store previously computed results to avoid redundant calculations.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires maintaining a subarray that satisfies a condition on the maximum and minimum values.</div>
-                            
-                                <div style="margin-left: 20px;"> • A sliding window with dynamic size can help efficiently process the array.</div>
+                                <div style="margin-left: 20px;"> • We should take advantage of special offers that reduce the price for multiple items.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a multiset or two deques to maintain the max and min values of the current window.</div>
+                                <div style="margin-left: 20px;"> • We can recursively try each offer and compute the cost after applying the offer, then memoize the results to avoid recalculations.</div>
                             
                         </div>
                     </div>
@@ -483,13 +477,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize a multiset or two deques for tracking min and max values.</div>
+                                <div style="margin-left: 20px;"> • Start by calculating the total cost without using any special offers.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Iterate through the array and add elements to the current subarray.</div>
+                                <div style="margin-left: 20px;"> • Then, for each special offer, reduce the &#39;needs&#39; list accordingly and compute the resulting cost.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Remove elements from the front of the subarray if the condition is violated.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Track the size of the longest valid subarray.</div>
+                                <div style="margin-left: 20px;"> • Recursively try each offer and keep track of the minimum cost.</div>
                             
                         </div>
                     </div>
@@ -498,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty input is allowed as `nums` will always have at least one element.</div>
+                                <div style="margin-left: 20px;"> • The problem will always have valid inputs, so there will never be an empty list for &#39;price&#39;, &#39;needs&#39;, or &#39;special&#39;.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays with up to 10^5 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The input sizes are manageable (n &lt;= 6, special.length &lt;= 100), so a solution with time complexity up to O(n^2) is feasible.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases with `limit = 0` where only subarrays with identical elements are valid.</div>
+                                <div style="margin-left: 20px;"> • Special cases include when all offers result in the same cost or when no offer provides any savings.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution remains efficient even for extreme values of `limit` or `nums[i]`.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 100 offers and 6 items efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -530,23 +522,55 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Memoization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initial Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Insert Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Iterating over Offers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Subtraction of Items</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Erase Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check for Valid Needs</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call with Special Offer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Best Cost</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Restore Needs</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Memoization Store</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Helper Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Cost Calculation Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Accumulating Cost</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Helper Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Loop through Items</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Add Item Quantities</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Helper Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Loop through Items</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Subtract Item Quantities</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Helper Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Loop through Needs</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Check for Negative Values</button>
                     
                 </div>
 
@@ -555,17 +579,43 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> limit) {
-</span></span><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ms;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        ms.insert(nums[i]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ms.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">*</span>ms.rbegin() <span style="color:#666">-</span> <span style="color:#666">*</span>ms.begin() <span style="color:#666">&gt;</span> limit) {
-</span></span><span style="display:flex;"><span>            ms.erase(ms.find(nums[j<span style="color:#666">++</span>]));
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shoppingOffers</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> price, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> special, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[needs]) <span style="color:#a2f;font-weight:bold">return</span> mp[needs];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> best <span style="color:#666">=</span> calculate(price, needs);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">sp</span>: special) {
+</span></span><span style="display:flex;"><span>        sub(needs, sp);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(noneg(needs)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> woffer <span style="color:#666">=</span> sp.back() <span style="color:#666">+</span> shoppingOffers(price, special, needs);
+</span></span><span style="display:flex;"><span>            best <span style="color:#666">=</span> min(best, woffer);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        add(needs, sp);
+</span></span><span style="display:flex;"><span>    }        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp[needs] <span style="color:#666">=</span> best;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">calculate</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>prices, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (needs[i] <span style="color:#666">*</span> prices[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">add</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#666">+=</span> sp[i];
+</span></span><span style="display:flex;"><span>    }     
+</span></span><span style="display:flex;"><span>}    
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">sub</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#666">-=</span> sp[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">noneg</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(needs[i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -573,93 +623,253 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> limit) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `longestSubarray`, which takes a vector of integers `nums` and an integer `limit` as input. It returns the length of the longest subarray where the difference between the maximum and minimum elements is within the limit. </div>
+                            <div class=""> This line initializes a map, &#39;mp&#39;, which stores the minimum cost for each combination of item quantities (represented as a vector). The key is a vector of integers representing the current needs, and the value is the minimum cost for fulfilling that set of needs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ms;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shoppingOffers</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> price, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> special, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> needs) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a `multiset` named `ms` to store elements of the subarray in sorted order. This allows efficient access to the minimum and maximum elements. </div>
+                            <div class=""> This is the function signature of &#39;shoppingOffers&#39;. It takes in the prices of items, the special offers, and the current needs (quantities of items to buy) as input. It returns the minimum cost to fulfill the needs considering the special offers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Memoization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[needs]) <span style="color:#a2f;font-weight:bold">return</span> mp[needs];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes two variables: `res` to store the length of the longest valid subarray found and `j` to represent the starting index of the sliding window. </div>
+                            <div class=""> This line checks if the result for the current set of needs has already been computed. If so, it returns the cached result from the map &#39;mp&#39; to avoid redundant calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Initial Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> best <span style="color:#666">=</span> calculate(price, needs);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop where `i` iterates through each element of the `nums` vector. This loop represents the end of the sliding window. </div>
+                            <div class=""> This line initializes the best cost as the result of the &#39;calculate&#39; function, which computes the cost of fulfilling the needs without considering any special offers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Insert Operation</b></div>
+                            <div class=""> <b>5 : Iterating over Offers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ms.insert(nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">sp</span>: special) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inserts the current element `nums[i]` into the `multiset` to maintain the sorted order of the subarray. </div>
+                            <div class=""> This loop iterates through each special offer in the &#39;special&#39; vector. Each special offer contains a vector of item quantities and the price for that offer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Subtraction of Items</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ms.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">*</span>ms.rbegin() <span style="color:#666">-</span> <span style="color:#666">*</span>ms.begin() <span style="color:#666">&gt;</span> limit) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sub(needs, sp);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks whether the difference between the maximum (`*ms.rbegin()`) and minimum (`*ms.begin()`) elements of the `multiset` exceeds the `limit`. If so, the subarray is invalid, and the sliding window is adjusted. </div>
+                            <div class=""> The &#39;sub&#39; function subtracts the quantities of items in the special offer from the current &#39;needs&#39; vector, simulating the purchase of the offer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Erase Operation</b></div>
+                            <div class=""> <b>7 : Check for Valid Needs</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ms.erase(ms.find(nums[j<span style="color:#666">++</span>]));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(noneg(needs)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Erases the element at index `j` from the `multiset` and increments `j` to shrink the sliding window from the left side. </div>
+                            <div class=""> This checks whether the remaining needs are all non-negative. If any need is negative, it means the current offer is invalid (i.e., the special offer cannot be used to fulfill the needs). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Result</b></div>
+                            <div class=""> <b>8 : Recursive Call with Special Offer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> woffer <span style="color:#666">=</span> sp.back() <span style="color:#666">+</span> shoppingOffers(price, special, needs);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the result `res` with the length of the current valid subarray, which is `i - j &#43; 1`, and stores the maximum length found. </div>
+                            <div class=""> This line recursively calculates the cost if the current special offer is used, adding the cost of the offer (sp.back()) to the result of fulfilling the updated needs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Update Best Cost</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            best <span style="color:#666">=</span> min(best, woffer);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the value of `res`, which represents the length of the longest valid subarray found. </div>
+                            <div class=""> This updates the &#39;best&#39; variable to the minimum of the current &#39;best&#39; and the new cost (&#39;woffer&#39;) obtained from using the current special offer. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Restore Needs</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        add(needs, sp);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The &#39;add&#39; function restores the quantities of items in &#39;needs&#39; by adding back the quantities subtracted by the special offer. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Memoization Store</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp[needs] <span style="color:#666">=</span> best;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This stores the computed &#39;best&#39; result in the map &#39;mp&#39; for the current set of needs, ensuring it can be reused in future calculations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Helper Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">calculate</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>prices, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the helper function &#39;calculate&#39;, which calculates the total cost of fulfilling the needs without considering special offers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This initializes the result variable &#39;res&#39; to 0. It will accumulate the total cost of fulfilling the needs. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Cost Calculation Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates through each item in the &#39;needs&#39; vector, calculating the total cost based on the price and the quantity needed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Accumulating Cost</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (needs[i] <span style="color:#666">*</span> prices[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line adds the cost for the current item to the total cost &#39;res&#39;. It multiplies the price of the item by the quantity needed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns the total cost calculated by the &#39;calculate&#39; function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Helper Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">add</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the &#39;add&#39; function, which restores the quantities of items in &#39;needs&#39; by adding the quantities in the special offer &#39;sp&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Loop through Items</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates through the items in the &#39;needs&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Add Item Quantities</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        needs[i] <span style="color:#666">+=</span> sp[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This adds the quantity of the current item in the special offer &#39;sp&#39; to the &#39;needs&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Helper Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">sub</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the &#39;sub&#39; function, which subtracts the quantities of items in the special offer &#39;sp&#39; from the &#39;needs&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Loop through Items</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates through the items in the &#39;needs&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Subtract Item Quantities</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        needs[i] <span style="color:#666">-=</span> sp[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This subtracts the quantity of the current item in the special offer &#39;sp&#39; from the &#39;needs&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Helper Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">noneg</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the &#39;noneg&#39; function, which checks if all the values in the &#39;needs&#39; vector are non-negative. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Loop through Needs</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates through the &#39;needs&#39; vector to check if any value is negative. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Check for Negative Values</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(needs[i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if any value in the &#39;needs&#39; vector is negative. If it finds a negative value, it returns false. </div>
                         </div>
                     
                 </div>
@@ -679,16 +889,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) where n is the length of `nums`.</div>
-                        <div class=""> <b>Average Case:</b> O(n) for maintaining the sliding window and set operations.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for iterating through the array.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear as each element is added and removed from the sliding window at most once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * special.length)</div>
+                        <div class=""> <b>Average Case:</b> O(n * special.length)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2 * special.length)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is primarily determined by the number of special offers and the number of items.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) if subarrays are very small.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for the multiset or deque in extreme cases.</div> 
-                        <div class=""> <b>Description:</b> The space complexity depends on the size of the sliding window and is O(n) in the worst case.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * special.length)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is influenced by the memoization and the need to track the &#39;needs&#39; array for each recursive call.</div>    
                     </div>
 
                 </div>

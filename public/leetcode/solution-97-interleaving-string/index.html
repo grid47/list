@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1420s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1429s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/97.webp" 
            alt="Two glowing strings weaving together in an intricate, peaceful interleaving pattern." 
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Design and implement an LRU (Least Recently Used) cache. The cache should support two operations: <code>get(key)</code> and <code>put(key, value)</code>. Both operations must run in O(1) time on average. If the cache exceeds its capacity, the least recently used key should be evicted. </div>
+<div class=""> Given three strings s1, s2, and s3, determine whether s3 can be formed by interleaving s1 and s2. An interleaving is a way of combining s1 and s2 such that the characters of s1 and s2 maintain their relative order in the final string. </div>
 
 
 
@@ -370,47 +370,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a series of operations on the LRUCache. The operations include initializing the cache with a given capacity and executing `get` and `put` commands.</div>
-                        <div class=""> <b>Example:</b> Input: [&#39;LRUCache&#39;, &#39;put&#39;, &#39;put&#39;, &#39;get&#39;, &#39;put&#39;, &#39;get&#39;, &#39;put&#39;, &#39;get&#39;, &#39;get&#39;, &#39;get&#39;] [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]</div>
+                        <div class=""> <b>Input:</b> You are given three strings s1, s2, and s3.</div>
+                        <div class=""> <b>Example:</b> Input: s1 = &#39;abc&#39;, s2 = &#39;def&#39;, s3 = &#39;adbcef&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of operations will be at most 2 * 10^5.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= s1.length, s2.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • Capacity of the cache will be between 1 and 3000.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= s3.length &lt;= 200</div>
+                            
+                                <div style="margin-left: 20px;"> • s1, s2, and s3 consist of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a list of results corresponding to the `get` operation for each test case.</div>
-                        <div class=""> <b>Example:</b> Output: [null, null, null, 1, null, -1, null, -1, 3, 4]</div>
+                        <div class=""> <b>Output:</b> Return true if s3 is formed by interleaving s1 and s2. Otherwise, return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output for each operation is either the return value of `get(key)` or null for `put(key, value)`.</div>
+                                <div style="margin-left: 20px;"> • Return true if s3 is an interleaving of s1 and s2, otherwise false.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Design a data structure that efficiently handles `get` and `put` operations with O(1) average time complexity.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if s3 can be formed by interleaving s1 and s2 while maintaining the relative order of characters in both strings.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a hash map to store the key-value pairs for O(1) lookups.</div>
+                                <div style="margin-left: 20px;"> • Start from the beginning of s1, s2, and s3.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a doubly linked list to maintain the order of use of keys, where the most recently used key is at the front and the least recently used is at the back.</div>
+                                <div style="margin-left: 20px;"> • Check if the current character of s1 or s2 matches the current character of s3.</div>
                             
-                                <div style="margin-left: 20px;"> • On `put`, add the key-value pair to the cache and move it to the front. If the cache exceeds capacity, evict the least recently used key from the back.</div>
+                                <div style="margin-left: 20px;"> • Recursively verify the remaining characters in s1 and s2 to see if they can form the rest of s3.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The implementation must ensure that both `get` and `put` operations run in O(1) average time.</div>
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the input strings are within valid bounds.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Capacity is a positive integer and will not exceed 3000.</div>
+                                <div style="margin-left: 20px;"> • s1 and s2 can each have lengths up to 100 characters.</div>
                             
-                                <div style="margin-left: 20px;"> • The cache must efficiently handle up to 2 * 10^5 operations.</div>
+                                <div style="margin-left: 20px;"> • s3 can have a length up to 200 characters.</div>
+                            
+                                <div style="margin-left: 20px;"> • The strings consist of lowercase English letters only.</div>
                             
                         </div>
                     </div>        
@@ -418,17 +422,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The cache will only contain integer keys and values.</div>
+                                <div style="margin-left: 20px;"> • The input strings s1, s2, and s3 are valid and follow the given constraints.</div>
                             
-                                <div style="margin-left: 20px;"> • The input operations will be well-formed and within the constraints.</div>
+                                <div style="margin-left: 20px;"> • The function should efficiently handle the interleaving check for strings with lengths up to the maximum limits.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#39;LRUCache&#39;, &#39;put&#39;, &#39;put&#39;, &#39;get&#39;, &#39;put&#39;, &#39;get&#39;, &#39;put&#39;, &#39;get&#39;, &#39;get&#39;, &#39;get&#39;] [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the cache is initialized with a capacity of 2. The operations are performed as described, with key-value pairs being added to the cache and the least recently used keys being evicted when necessary.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s1 = &#39;abc&#39;, s2 = &#39;def&#39;, s3 = &#39;adbcef&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, s3 is an interleaving of s1 and s2 because we can alternate characters from s1 and s2 while maintaining their order to form s3.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s1 = &#39;abc&#39;, s2 = &#39;def&#39;, s3 = &#39;abcdef&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, it is not possible to form s3 by interleaving s1 and s2, as the characters from s2 need to maintain their order after s1&#39;s characters.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,18 +460,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem using a combination of a hash map and a doubly linked list to maintain the cache and manage eviction of the least recently used key.</div>
+                        <div class=""> <b>Approach:</b> The approach uses dynamic programming to check if s3 can be formed by interleaving s1 and s2 while preserving their order. A 2D table is used to store intermediate results, which helps in efficiently checking all combinations.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The most challenging part is ensuring that both `get` and `put` operations run in O(1) time.</div>
+                                <div style="margin-left: 20px;"> • Both s1 and s2 must be used entirely to form s3.</div>
                             
-                                <div style="margin-left: 20px;"> • A hash map will provide O(1) access to values, while a doubly linked list will help us manage the order of access.</div>
+                                <div style="margin-left: 20px;"> • We need to check the characters from both s1 and s2 one by one to form s3, while preserving their order.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The doubly linked list allows us to efficiently add and remove nodes, and the hash map allows for fast lookups.</div>
+                                <div style="margin-left: 20px;"> • We can use dynamic programming to break down the problem into smaller subproblems, checking whether each prefix of s1 and s2 can form a corresponding prefix of s3.</div>
                             
                         </div>
                     </div>
@@ -471,11 +479,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a doubly linked list to track the order of keys and a hash map for fast lookups.</div>
+                                <div style="margin-left: 20px;"> • Initialize a 2D array memo to store the intermediate results of checking whether s3[0...k] can be formed using s1[0...i] and s2[0...j].</div>
                             
-                                <div style="margin-left: 20px;"> • 2. When `get(key)` is called, move the key to the front of the list if it exists.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the lengths of s1 and s2, filling the memo table by checking whether each character in s1 or s2 matches the current character in s3.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. When `put(key, value)` is called, add the key-value pair to the front of the list, and evict the least recently used key from the back if the cache exceeds capacity.</div>
+                                <div style="margin-left: 20px;"> • Return the value at memo[s1.length][s2.length] to determine if s3 can be formed by interleaving s1 and s2.</div>
                             
                         </div>
                     </div>
@@ -484,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that operations on an empty cache handle edge cases, such as requesting a value that doesn&#39;t exist.</div>
+                                <div style="margin-left: 20px;"> • If all strings are empty (s1 = &#39;&#39;, s2 = &#39;&#39;, s3 = &#39;&#39;), the answer is true.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle large numbers of operations efficiently within the time and space constraints.</div>
+                                <div style="margin-left: 20px;"> • When the lengths of s1 and s2 are near the upper limit (100), the algorithm should handle it efficiently using dynamic programming.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that key-value pairs with edge values (e.g., 0, 10^5) are handled properly.</div>
+                                <div style="margin-left: 20px;"> • If s1 or s2 is empty, the solution depends solely on whether s3 matches the other string.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must meet time and space complexities within the provided constraints.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works within the provided constraints (maximum length of 100 for s1 and s2, 200 for s3).</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,49 +526,39 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 List Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Capacity</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check If Key Exists</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Retrieve Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Move Node to Front</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reinsert Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Memoization Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Check If Key Exists</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Update Existing Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Reinsert Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Update Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Handle New Key</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Insert New Node</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Update Map</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Evict Least Recently Used</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Remove Least Recently Used</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Pop Back</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Function Call</button>
                     
                 </div>
 
@@ -569,44 +567,32 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, list<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;::</span>iterator<span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>list<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cap;
-</span></span><span style="display:flex;"><span>LRUCache(<span style="color:#0b0;font-weight:bold">int</span> capacity) {
-</span></span><span style="display:flex;"><span>    cap <span style="color:#666">=</span> capacity;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s1, s2, s3;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> s1.size() <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> s2.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> i <span style="color:#666">+</span> j;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> s1.size() <span style="color:#666">&amp;&amp;</span> s1[i] <span style="color:#666">==</span> s3[k])
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">|=</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> s2.size() <span style="color:#666">&amp;&amp;</span> s2[j] <span style="color:#666">==</span> s3[k])
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">|=</span> dp(i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">get</span>(<span style="color:#0b0;font-weight:bold">int</span> key) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(key)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> <span style="color:#666">*</span>mp[key];
-</span></span><span style="display:flex;"><span>    q.erase(mp[key]);
-</span></span><span style="display:flex;"><span>    q.push_front(make_pair(key, it.second));
-</span></span><span style="display:flex;"><span>    mp[key] <span style="color:#666">=</span> q.begin();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> it.second;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isInterleave</span>(string s1, string s2, string s3) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s1 <span style="color:#666">=</span> s1;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s2 <span style="color:#666">=</span> s2;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s3 <span style="color:#666">=</span> s3;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1.size() <span style="color:#666">+</span> s2.size() <span style="color:#666">!=</span> s3.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    memo.resize(s1.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(s2.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">put</span>(<span style="color:#0b0;font-weight:bold">int</span> key, <span style="color:#0b0;font-weight:bold">int</span> value) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(key)) {
-</span></span><span style="display:flex;"><span>        q.erase(mp[key]);
-</span></span><span style="display:flex;"><span>        q.push_front(make_pair(key, value));
-</span></span><span style="display:flex;"><span>        mp[key] <span style="color:#666">=</span> q.begin();
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>        q.push_front(make_pair(key, value));
-</span></span><span style="display:flex;"><span>        mp[key] <span style="color:#666">=</span> q.begin();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(q.size() <span style="color:#666">&gt;</span> cap) {
-</span></span><span style="display:flex;"><span>            mp.erase(q.back().first);
-</span></span><span style="display:flex;"><span>            q.pop_back();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your LRUCache object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * LRUCache* obj = new LRUCache(capacity);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;get(key);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;put(key,value);
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
@@ -615,230 +601,180 @@
                             <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, list<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;::</span>iterator<span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s1, s2, s3;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a map `mp` that stores iterators to a doubly linked list. This map is used to quickly locate the nodes by their keys. </div>
+                            <div class=""> Declares three string variables to store the input strings. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : List Declaration</b></div>
+                            <div class=""> <b>2 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>list<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a doubly linked list `q` where each node stores a key-value pair. This list maintains the order of access from the most recently used (front) to the least recently used (back). </div>
+                            <div class=""> Initializes a 2D vector `memo` to store the results of subproblems, using memoization to avoid redundant calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Declaration</b></div>
+                            <div class=""> <b>3 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cap;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares an integer `cap` to hold the maximum capacity of the LRU Cache. </div>
+                            <div class=""> Declares a recursive function `dp` to check if the substring `s1[i:]` and `s2[j:]` can interleave to form `s3[i&#43;j:]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Constructor</b></div>
+                            <div class=""> <b>4 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>LRUCache(<span style="color:#0b0;font-weight:bold">int</span> capacity) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> s1.size() <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> s2.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Constructor for the LRUCache class, initializing the cache with a given capacity. </div>
+                            <div class=""> If we&#39;ve reached the end of both `s1` and `s2`, it means we&#39;ve successfully interleaved them, so return `true`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Initialize Capacity</b></div>
+                            <div class=""> <b>5 : Memoization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cap <span style="color:#666">=</span> capacity;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the `cap` variable to the provided capacity, which limits the number of items the cache can hold. </div>
+                            <div class=""> Checks if the result for the current `i` and `j` is already stored in the memoization table. If so, return the stored value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Function Definition</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">get</span>(<span style="color:#0b0;font-weight:bold">int</span> key) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `get` function, which retrieves the value associated with the given key if it exists in the cache. </div>
+                            <div class=""> Initializes a variable `ans` to store the result of the current subproblem. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Check If Key Exists</b></div>
+                            <div class=""> <b>7 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(key)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> i <span style="color:#666">+</span> j;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the key exists in the map. If not, returns -1 to indicate the key is not found. </div>
+                            <div class=""> Calculates the index `k` in `s3` corresponding to the current positions in `s1` and `s2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Retrieve Value</b></div>
+                            <div class=""> <b>8 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> <span style="color:#666">*</span>mp[key];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> s1.size() <span style="color:#666">&amp;&amp;</span> s1[i] <span style="color:#666">==</span> s3[k])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Retrieves the iterator to the node in the list corresponding to the given key. </div>
+                            <div class=""> Checks if the current character in `s1` matches the corresponding character in `s3`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Move Node to Front</b></div>
+                            <div class=""> <b>9 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.erase(mp[key]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">|=</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Erases the current node from its position in the list, as it needs to be moved to the front to mark it as recently used. </div>
+                            <div class=""> Recursively checks if the remaining substrings of `s1` and `s2` can interleave to form the remaining part of `s3`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Reinsert Node</b></div>
+                            <div class=""> <b>10 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push_front(make_pair(key, it.second));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> s2.size() <span style="color:#666">&amp;&amp;</span> s2[j] <span style="color:#666">==</span> s3[k])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inserts the key-value pair at the front of the list to mark it as the most recently used. </div>
+                            <div class=""> Checks if the current character in `s2` matches the corresponding character in `s3`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Update Map</b></div>
+                            <div class=""> <b>11 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[key] <span style="color:#666">=</span> q.begin();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">|=</span> dp(i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the map with the new iterator pointing to the front of the list for the given key. </div>
+                            <div class=""> Recursively checks if the remaining substrings of `s1` and `s2` can interleave to form the remaining part of `s3`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Value</b></div>
+                            <div class=""> <b>12 : Memoization Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> it.second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the value associated with the key. </div>
+                            <div class=""> Stores the result of the current subproblem in the memoization table and returns it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Function Definition</b></div>
+                            <div class=""> <b>13 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">put</span>(<span style="color:#0b0;font-weight:bold">int</span> key, <span style="color:#0b0;font-weight:bold">int</span> value) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s1 <span style="color:#666">=</span> s1;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `put` function, which inserts a key-value pair into the cache, or updates an existing key. </div>
+                            <div class=""> Assigns the input string `s1` to the class member variable `s1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Check If Key Exists</b></div>
+                            <div class=""> <b>14 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(key)) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s2 <span style="color:#666">=</span> s2;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the key already exists in the cache. </div>
+                            <div class=""> Assigns the input string `s2` to the class member variable `s2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Update Existing Node</b></div>
+                            <div class=""> <b>15 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.erase(mp[key]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s3 <span style="color:#666">=</span> s3;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Erases the old entry for the key from the list. </div>
+                            <div class=""> Assigns the input string `s3` to the class member variable `s3`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Reinsert Node</b></div>
+                            <div class=""> <b>16 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.push_front(make_pair(key, value));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1.size() <span style="color:#666">+</span> s2.size() <span style="color:#666">!=</span> s3.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inserts the key-value pair at the front of the list to mark it as the most recently used. </div>
+                            <div class=""> Checks if the sum of lengths of `s1` and `s2` is equal to the length of `s3`. If not, it&#39;s impossible to interleave, so return `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Update Map</b></div>
+                            <div class=""> <b>17 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[key] <span style="color:#666">=</span> q.begin();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memo.resize(s1.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(s2.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the map with the new iterator pointing to the front of the list for the given key. </div>
+                            <div class=""> Resizes the `memo` vector to store results for all possible substrings of `s1` and `s2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Handle New Key</b></div>
+                            <div class=""> <b>18 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the key does not already exist in the cache, handle it as a new key-value pair. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Insert New Node</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.push_front(make_pair(key, value));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Inserts the new key-value pair at the front of the list. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Update Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[key] <span style="color:#666">=</span> q.begin();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Updates the map with the new iterator pointing to the front of the list for the given key. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Evict Least Recently Used</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(q.size() <span style="color:#666">&gt;</span> cap) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the size of the list exceeds the cache&#39;s capacity. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Remove Least Recently Used</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp.erase(q.back().first);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Erases the least recently used item (at the back of the list) from both the list and the map. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Pop Back</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop_back();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes the last element from the list, which is the least recently used key-value pair. </div>
+                            <div class=""> Calls the `dp` function to check if the entire `s1` and `s2` can interleave to form `s3`, starting from the beginning of each string. </div>
                         </div>
                     
                 </div>
@@ -858,16 +794,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> Both `get` and `put` operations will run in constant time due to the use of a hash map for lookups and a doubly linked list for order management.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * m)</div>
+                        <div class=""> <b>Average Case:</b> O(n * m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
+                        <div class=""> <b>Description:</b> Where n is the length of s1 and m is the length of s2. The worst-case time complexity occurs when we need to fill the entire memo table.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(capacity)</div>
-                        <div class=""> <b>Worst Case:</b> O(capacity)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the cache&#39;s capacity, as each key-value pair takes up space in the cache.</div>    
+                        <div class=""> <b>Best Case:</b> O(n * m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n * m) due to the memo table storing the results for subproblems.</div>    
                     </div>
 
                 </div>

@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     May 11, 2024
                                     <i class="far fa-clock clock"></i>
-                                    1 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class="">  </div>
+<div class=""> You are tasked with creating an authentication system that handles tokens. Each token has an expiration time, and a user can generate new tokens or renew existing ones before they expire. The system should track and count the number of unexpired tokens at any given time. </div>
 
 
 
@@ -319,72 +319,97 @@
     <div class="problem-guide-tags">
 
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
         </div> 
     </div>
 
     
     <div class="problem-guide-content">
 
-        <div id="" 
+        <div id="Problem" 
             class="problem-guide-topic-content" 
             style="display: block;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Input:</b> The input consists of a series of operations: creating new tokens, renewing tokens, and counting unexpired tokens. Each token has an expiration time determined by the timeToLive parameter provided during the initialization of the AuthenticationManager.</div>
+                        <div class=""> <b>Example:</b> Input: [&#34;AuthenticationManager&#34;, &#34;generate&#34;, &#34;renew&#34;, &#34;countUnexpiredTokens&#34;]
+[[5], [&#34;aaa&#34;, 1], [&#34;aaa&#34;, 2], [6]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= timeToLive &lt;= 10^8</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= currentTime &lt;= 10^8</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= tokenId.length &lt;= 5</div>
+                            
+                                <div style="margin-left: 20px;"> • tokenId consists only of lowercase letters</div>
+                            
+                                <div style="margin-left: 20px;"> • All generate calls will have unique tokenIds</div>
+                            
+                                <div style="margin-left: 20px;"> • currentTime will strictly increase with each operation</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Output:</b> The output consists of the results of the operations, with generate and renew methods returning &#39;null&#39; and the countUnexpiredTokens method returning the count of unexpired tokens at the given time.</div>
+                        <div class=""> <b>Example:</b> Output: [null, null, null, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The function must be efficient enough to handle up to 2000 operations.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> Implement a system to manage token generation, renewal, and expiration, ensuring the correct number of unexpired tokens is returned when requested.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Initialize an authentication manager with a given timeToLive.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each token, store its expiration time when it is generated.</div>
+                            
+                                <div style="margin-left: 20px;"> • For renewals, check if the token exists and is unexpired before extending its expiration time.</div>
+                            
+                                <div style="margin-left: 20px;"> • Implement a method to count the number of unexpired tokens based on the current time.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> Ensure the solution can handle edge cases where no tokens exist or all tokens have expired.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The solution must be efficient and capable of handling the given constraints of up to 2000 operations.</div>
                             
                         </div>
                     </div>        
@@ -392,10 +417,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
+                                <div style="margin-left: 20px;"> • Tokens are uniquely identified by their tokenId.</div>
+                            
+                                <div style="margin-left: 20px;"> • All tokens have an expiration time that is based on the current time and the timeToLive value.</div>
+                            
                         </div>
                     </div>     
                     
                     <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#34;AuthenticationManager&#34;, &#34;generate&#34;, &#34;renew&#34;, &#34;countUnexpiredTokens&#34;]
+[[5], [&#34;aaa&#34;, 1], [&#34;aaa&#34;, 2], [6]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The system initializes with a timeToLive of 5 seconds. A new token &#39;aaa&#39; is generated at time 1. At time 6, there is one unexpired token, &#39;aaa&#39;, so the count is 1.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#34;AuthenticationManager&#34;, &#34;generate&#34;, &#34;renew&#34;, &#34;countUnexpiredTokens&#34;]
+[[5], [&#34;aaa&#34;, 1], [&#34;aaa&#34;, 2], [7]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> At time 7, the token &#39;aaa&#39; has expired, so there are no unexpired tokens, and the count is 0.</div>                                
+                                <br/>
                             
                     </div>                         
                     
@@ -403,33 +442,49 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Approach" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> </div>
+                        <div class=""> <b>Approach:</b> The approach to solving this problem involves using a priority queue to track token expiration times and a map to store the number of unexpired tokens.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
+                                <div style="margin-left: 20px;"> • We need to efficiently track and update the expiration times of each token.</div>
+                            
+                                <div style="margin-left: 20px;"> • A priority queue can be used to easily manage the earliest expiration times.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • We can process tokens efficiently by using a priority queue to manage expiration times, and a map to track how many tokens are unexpired at any given time.</div>
                             
                         </div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize a priority queue to store the expiration times of tokens.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use a map to store the count of unexpired tokens by tokenId.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each generate operation, add a new token with its expiration time to the priority queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each renew operation, check if the token exists and is unexpired before updating its expiration time.</div>
+                            
+                                <div style="margin-left: 20px;"> • For countUnexpiredTokens, process the priority queue to remove expired tokens and return the count of unexpired tokens.</div>
                             
                         </div>
                     </div>
@@ -438,14 +493,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • Ensure that the function handles cases where no tokens are generated.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution must be able to handle up to 2000 operations efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
+                                <div style="margin-left: 20px;"> • Handle cases where a token is requested for renewal after it has already expired.</div>
+                            
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The system should be able to handle up to 2000 operations and must perform efficiently within the time and space constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -454,54 +517,410 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Steps" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Constructor</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Token Management</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Token Management</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Token Cleanup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Token Management</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Token Insertion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Token Insertion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Token Renewal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Token Renewal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Token Cleanup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Token Management</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Token Renewal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Token Renewal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Token Renewal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Token Counting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Token Cleanup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Token Cleanup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Token Cleanup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Return Statement</button>
                     
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Steps">
 
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
-</span></span></code></pre></div>
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ttl;
+</span></span><span style="display:flex;"><span>AuthenticationManager(<span style="color:#0b0;font-weight:bold">int</span> timeToLive) {
+</span></span><span style="display:flex;"><span>    ttl <span style="color:#666">=</span> timeToLive;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">generate</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>        mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});
+</span></span><span style="display:flex;"><span>    mp[tokenId]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">renew</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>        mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tokenId)) {
+</span></span><span style="display:flex;"><span>        pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});            
+</span></span><span style="display:flex;"><span>        mp[tokenId]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countUnexpiredTokens</span>(<span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>        mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp.size();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your AuthenticationManager object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * AuthenticationManager* obj = new AuthenticationManager(timeToLive);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;generate(tokenId,currentTime);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;renew(tokenId,currentTime);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_3 = obj-&gt;countUnexpiredTokens(currentTime);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare a priority queue to store the expiration time of tokens along with the token ID. It uses the `greater` comparator to ensure the token with the earliest expiration time is at the top. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare a map to store the count of each token, which allows checking if a token exists and managing its renewals. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Constructor</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ttl;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare an integer variable `ttl` to store the time-to-live value for the tokens. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Constructor</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>AuthenticationManager(<span style="color:#0b0;font-weight:bold">int</span> timeToLive) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Constructor that initializes the `ttl` variable with the provided time-to-live value for tokens. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Constructor</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ttl <span style="color:#666">=</span> timeToLive;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set the time-to-live value for the AuthenticationManager. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">generate</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the `generate` function that creates a new token with a specific ID and time, adding it to the priority queue and map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Token Management</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to remove expired tokens from the priority queue and map based on the current time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Token Management</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrement the count of the token in the map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Token Cleanup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a token&#39;s count becomes zero, remove it from the map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Token Management</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the expired token from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Token Insertion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the new token with its expiration time into the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Token Insertion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[tokenId]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the count of the token in the map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">renew</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the `renew` function that renews an existing token if it is still valid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Token Renewal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Similar to `generate`, remove expired tokens from the priority queue and map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Token Renewal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrement the count of the token being renewed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Token Cleanup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove expired tokens from the map if their count reaches zero. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Token Management</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the expired token from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Token Renewal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tokenId)) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the token exists in the map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Token Renewal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the renewed token with a new expiration time into the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Token Renewal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[tokenId]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the token count in the map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countUnexpiredTokens</span>(<span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the `countUnexpiredTokens` function that counts the number of unexpired tokens. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Token Counting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove expired tokens from the priority queue and map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Token Cleanup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrement the count of the expired token. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Token Cleanup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove expired tokens from the map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Token Cleanup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the expired token from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the number of unexpired tokens. </div>
+                        </div>
                     
                 </div>
             </div>
         </div> 
         
-        <div id="" 
+        <div id="Complexity" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Average Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n) for each generate, renew, and countUnexpiredTokens operation, where n is the number of tokens.</div>
+                        <div class=""> <b>Average Case:</b> O(log n) for each operation due to the use of the priority queue.</div>
+                        <div class=""> <b>Worst Case:</b> O(log n) for each operation, where n is the number of tokens in the system.</div> 
+                        <div class=""> <b>Description:</b> Each operation requires O(log n) time due to the priority queue operations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(1), if no tokens are stored.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of tokens, due to the storage requirements of the priority queue and map.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the number of tokens, as both the priority queue and the map store each token.</div>    
                     </div>
 
                 </div>
@@ -576,8 +995,8 @@
         }        
 
         function buttons() {
-            const slides = document.getElementById('stepsSlides-');
-            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
             let currentIndex = 0;
             let startX = 0;
             let isDragging = false;
@@ -619,7 +1038,7 @@
 
             updateSlides(currentIndex);
 
-            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
             if (initialTag) {
                 initialTag.classList.add('problem-guide-tag-active');
             }

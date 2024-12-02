@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Mar 5, 2024
                                     <i class="far fa-clock clock"></i>
-                                    1 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class="">  </div>
+<div class=""> In a tree with n nodes labeled from 0 to n - 1, each node has a gate with a price to open. Alice starts at node 0 and Bob starts at node bob. Alice moves towards a leaf node, and Bob moves towards node 0. At every node, both Alice and Bob either pay the price to open the gate, or they receive a reward. If they reach a node simultaneously, they share the price/reward equally. Return the maximum net income Alice can achieve if she travels towards the optimal leaf node. </div>
 
 
 
@@ -320,72 +320,104 @@
     <div class="problem-guide-tags">
 
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
         </div> 
     </div>
 
     
     <div class="problem-guide-content">
 
-        <div id="" 
+        <div id="Problem" 
             class="problem-guide-topic-content" 
             style="display: block;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Input:</b> You are given the tree as a 2D integer array edges, a starting position bob for Bob, and an array amount where amount[i] gives the cost or reward at node i. The value is negative for a cost and positive for a reward. Alice starts at node 0, and both Alice and Bob move towards their respective destinations in each second.</div>
+                        <div class=""> <b>Example:</b> edges = [[0,1],[1,2],[1,3],[3,4]], bob = 3, amount = [-2,4,2,-4,6]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 105</div>
+                            
+                                <div style="margin-left: 20px;"> • edges.length == n - 1</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • ai != bi</div>
+                            
+                                <div style="margin-left: 20px;"> • edges represents a valid tree</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= bob &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • amount[i] is an even integer in the range [-104, 104]</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Output:</b> Return the maximum net income Alice can have by traveling towards the optimal leaf node.</div>
+                        <div class=""> <b>Example:</b> For edges = [[0,1],[1,2],[1,3],[3,4]], bob = 3, and amount = [-2,4,2,-4,6], the output is 6.</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The answer is an integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> The goal is to compute the maximum net income Alice can get while traveling towards the best leaf node.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Build an adjacency list to represent the tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use depth-first search (DFS) to determine the distances and parent nodes of all nodes in the tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • Simulate Bob&#39;s path towards node 0, updating the gates along his path.</div>
+                            
+                                <div style="margin-left: 20px;"> • Simulate Alice&#39;s path towards the optimal leaf node, while considering Bob&#39;s path and any shared gates.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the maximum net income Alice can achieve by following the optimal path.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> The given input should represent a valid tree with the provided constraints.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The tree has between 2 and 100,000 nodes.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input edges form a valid undirected tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • The gates&#39; costs and rewards are given as even integers in the specified range.</div>
                             
                         </div>
                     </div>        
@@ -393,10 +425,16 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
+                                <div style="margin-left: 20px;"> • The tree is rooted at node 0, and the game proceeds in discrete steps.</div>
+                            
                         </div>
                     </div>     
                     
                     <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For edges = [[0,1],[1,2],[1,3],[3,4]], bob = 3, and amount = [-2,4,2,-4,6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice and Bob start at nodes 0 and 3, respectively. As they move, Alice and Bob both pay or receive rewards as they pass through nodes. The goal is to compute the maximum net income Alice can achieve. In this example, Alice’s optimal path is through nodes 0 -&gt; 1 -&gt; 3 -&gt; 4, where her net income becomes 6.</div>                                
+                                <br/>
                             
                     </div>                         
                     
@@ -404,33 +442,47 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Approach" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> </div>
+                        <div class=""> <b>Approach:</b> We use a depth-first search (DFS) to explore the tree and simulate Alice&#39;s and Bob&#39;s movements. By updating the gates along Bob&#39;s path, we can compute the maximum possible net income for Alice.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
+                                <div style="margin-left: 20px;"> • This problem involves simulating the movements of Alice and Bob in a tree structure, with careful handling of shared gates and net income.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • Using DFS to determine paths for both Alice and Bob is a natural approach for solving this problem. The challenge lies in maximizing Alice&#39;s net income by considering the rewards and costs along the way.</div>
                             
                         </div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Step 1: Parse the input and build an adjacency list to represent the tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Perform DFS to determine the parent-child relationships and distances of all nodes from the root.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: Simulate Bob’s movement from node bob towards node 0, updating the gates along the path.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Simulate Alice’s movement towards the optimal leaf node while considering Bob’s path and adjusting for shared gates.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: Return the maximum net income Alice can achieve.</div>
                             
                         </div>
                     </div>
@@ -439,14 +491,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • The problem guarantees valid inputs, so no need to handle empty inputs.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm handles large inputs efficiently, especially when the number of nodes reaches the upper limit of 100,000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
+                                <div style="margin-left: 20px;"> • If the gates at all nodes are negative, Alice will always end up with a loss, and the solution should return the least negative value.</div>
+                            
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The tree must be connected, and the graph structure must not contain cycles.</div>
                             
                         </div>                                                                        
                     </div>
@@ -455,54 +515,428 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Steps" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Graph Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 DFS Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Distance Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Parent Tracking</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Edge Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive DFS</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Profit Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Profit Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Max Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Edge Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Leaf Node Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Final Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Main Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Adjacency List Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Edge Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 DFS Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 DFS Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Bob Path Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Amount Adjustment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Result Return</button>
                     
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Steps">
 
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> adj;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par, dis;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> u, <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> <span style="color:#666">0</span>, <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>    dis[u] <span style="color:#666">=</span> d;
+</span></span><span style="display:flex;"><span>    par[u] <span style="color:#666">=</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">v</span> : adj[u]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (v <span style="color:#666">==</span> p) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        dfs(v, u, d <span style="color:#666">+</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs2</span>(<span style="color:#0b0;font-weight:bold">int</span> u,vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span>amount,<span style="color:#0b0;font-weight:bold">int</span> p<span style="color:#666">=</span> <span style="color:#666">0</span>){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ret <span style="color:#666">=</span> amount[u];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mxc <span style="color:#666">=</span> <span style="color:#666">-</span>INT_MAX;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">v</span>:adj[u]){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(v<span style="color:#666">!=</span>p){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            mxc<span style="color:#666">=</span> max(mxc,dfs2(v,amount,u));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">//if the node is leaf we just return its amount
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mxc<span style="color:#666">==-</span>INT_MAX)<span style="color:#a2f;font-weight:bold">return</span> ret;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> ret<span style="color:#666">+</span>mxc;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mostProfitablePath</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges, <span style="color:#0b0;font-weight:bold">int</span> bob, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> amount) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> amount.size();
+</span></span><span style="display:flex;"><span>    adj.resize(n,vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span><span style="color:#a0a000">e</span>:edges){
+</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#666">0</span>]].push_back(e[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#666">1</span>]].push_back(e[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    par.resize(n);
+</span></span><span style="display:flex;"><span>    dis.resize(n);
+</span></span><span style="display:flex;"><span>    dfs(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> bob;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> bob_dis <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">//update the path of from Bob to 0
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">while</span>(cur<span style="color:#666">!=</span><span style="color:#666">0</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dis[cur]<span style="color:#666">&gt;</span>bob_dis){
+</span></span><span style="display:flex;"><span>            amount[cur] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(dis[cur]<span style="color:#666">==</span>bob_dis){
+</span></span><span style="display:flex;"><span>            amount[cur]<span style="color:#666">/=</span><span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> par[cur];
+</span></span><span style="display:flex;"><span>        bob_dis<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dfs2(<span style="color:#666">0</span>,amount);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Graph Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> adj;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Here, we declare a 2D vector `adj` to represent the adjacency list of the graph, where each node has a list of connected nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par, dis;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Two vectors `par` (for parent tracking) and `dis` (for distance tracking) are declared to assist in the traversal of the graph. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : DFS Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> u, <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> <span style="color:#666">0</span>, <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is the start of the DFS function, where `u` is the current node, `p` is its parent node, and `d` is the current depth or distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Distance Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dis[u] <span style="color:#666">=</span> d;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The distance for the current node `u` is updated to `d`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Parent Tracking</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    par[u] <span style="color:#666">=</span> p;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The parent of the current node `u` is stored in `par[u]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">v</span> : adj[u]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each adjacent node `v` of the current node `u`, the algorithm will check whether it is already visited or is its parent. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Edge Case Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (v <span style="color:#666">==</span> p) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This ensures that the algorithm does not revisit the parent node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Recursive DFS</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dfs(v, u, d <span style="color:#666">+</span><span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The DFS function is recursively called for each unvisited adjacent node, with the depth increased by 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Recursive Profit Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs2</span>(<span style="color:#0b0;font-weight:bold">int</span> u,vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span>amount,<span style="color:#0b0;font-weight:bold">int</span> p<span style="color:#666">=</span> <span style="color:#666">0</span>){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `dfs2` function computes the maximum possible profit starting from node `u`, considering the amount for each node and its children. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Profit Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ret <span style="color:#666">=</span> amount[u];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We initialize the return value `ret` with the amount at the current node `u`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Max Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mxc <span style="color:#666">=</span> <span style="color:#666">-</span>INT_MAX;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This initializes `mxc` to track the maximum profit that can be gained from the child nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">v</span>:adj[u]){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We iterate through the adjacent nodes of the current node `u`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Edge Case Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(v<span style="color:#666">!=</span>p){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We ensure that we do not revisit the parent node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mxc<span style="color:#666">=</span> max(mxc,dfs2(v,amount,u));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We recursively calculate the maximum profit for the child node `v` and update `mxc` with the maximum value. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Leaf Node Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">//if the node is leaf we just return its amount
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the node is a leaf (no further children), we return its amount. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mxc<span style="color:#666">==-</span>INT_MAX)<span style="color:#a2f;font-weight:bold">return</span> ret;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no valid child is found, the function returns the value of the current node `ret`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Final Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> ret<span style="color:#666">+</span>mxc;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a valid child exists, the maximum profit is returned by adding the `ret` value with `mxc`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Main Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mostProfitablePath</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges, <span style="color:#0b0;font-weight:bold">int</span> bob, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> amount) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This function initializes the graph, calls the DFS functions, and computes the most profitable path. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Adjacency List Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> amount.size();
+</span></span><span style="display:flex;"><span>    adj.resize(n,vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The adjacency list is set up based on the input edges, and the graph is resized to fit the number of nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Edge Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span><span style="color:#a0a000">e</span>:edges){
+</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#666">0</span>]].push_back(e[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#666">1</span>]].push_back(e[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The adjacency list is populated with the given edges, ensuring bidirectional connections. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : DFS Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    par.resize(n);
+</span></span><span style="display:flex;"><span>    dis.resize(n);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `par` and `dis` vectors are resized to fit the number of nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : DFS Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(<span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The DFS function is called starting from the root node (node 0). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Bob Path Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> bob;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> bob_dis <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We initialize Bob&#39;s current position and distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Amount Adjustment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(cur<span style="color:#666">!=</span><span style="color:#666">0</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dis[cur]<span style="color:#666">&gt;</span>bob_dis){
+</span></span><span style="display:flex;"><span>            amount[cur] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(dis[cur]<span style="color:#666">==</span>bob_dis){
+</span></span><span style="display:flex;"><span>            amount[cur]<span style="color:#666">/=</span><span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> par[cur];
+</span></span><span style="display:flex;"><span>        bob_dis<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Bob&#39;s path is updated, adjusting the amounts based on his distance from the root. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Result Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs2</span>(<span style="color:#666">0</span>,amount);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Finally, the function returns the result from `dfs2`, which calculates the most profitable path. </div>
+                        </div>
+                    
                 </div>
             </div>
         </div> 
         
-        <div id="" 
+        <div id="Complexity" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Average Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of nodes.</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of nodes in the tree, as we perform DFS and simulate the movements of Alice and Bob.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the adjacency list, parent and distance arrays, and recursion stack during DFS.</div>    
                     </div>
 
                 </div>
@@ -577,8 +1011,8 @@
         }        
 
         function buttons() {
-            const slides = document.getElementById('stepsSlides-');
-            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
             let currentIndex = 0;
             let startX = 0;
             let isDragging = false;
@@ -620,7 +1054,7 @@
 
             updateSlides(currentIndex);
 
-            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
             if (initialTag) {
                 initialTag.classList.add('problem-guide-tag-active');
             }

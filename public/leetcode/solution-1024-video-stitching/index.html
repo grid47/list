@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> Given an array of integers, find the number closest to 0. If there are multiple numbers equally close, return the largest number among them. </div>
+<div class=""> You are given a set of video clips from a sporting event that lasts a specified duration in seconds. The clips may overlap and have varying lengths. The goal is to determine the minimum number of clips required to cover the entire event. If it&rsquo;s impossible to cover the entire event, return -1. </div>
 
 
 
@@ -359,49 +359,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> An integer array nums of size n where each element can be negative, positive, or zero.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [-7, 2, 3, -3, 5]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of clips, where each clip is represented by a pair of integers [start, end] indicating the start and end times of the clip. Additionally, a single integer, time, specifies the duration of the event to be covered.</div>
+                        <div class=""> <b>Example:</b> clips = [[0, 3], [4, 7], [2, 5], [6, 8], [5, 9]], time = 9</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= clips.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • -105 &lt;= nums[i] &lt;= 105</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= starti &lt;= endi &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= time &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the integer from the array that is closest to 0. If multiple numbers are equally close, return the largest value.</div>
-                        <div class=""> <b>Example:</b> Output: -3</div>
+                        <div class=""> <b>Output:</b> The output should be a single integer representing the minimum number of clips needed to cover the entire event. If it&#39;s impossible to cover the event, return -1.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must be a single integer from the input array.</div>
+                                <div style="margin-left: 20px;"> • If the clips cannot cover the entire event, return -1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the number closest to 0 based on its absolute value. If two numbers have the same absolute value, select the larger one.</div>
+                        <div class=""> <b>Goal:</b> The task is to determine the smallest number of clips that can be used to cover the entire duration of the sporting event. This is a greedy problem where we need to select the clips that maximize the coverage of the event, ensuring we cover the entire time range from 0 to time.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through all elements in the array.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the clips based on their start times.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Compare the absolute values of each number to determine the closest to 0.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a greedy approach to select clips, always choosing the one that extends the coverage the most without skipping any part of the event.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If two numbers have the same absolute value, select the one with the larger value.</div>
+                                <div style="margin-left: 20px;"> • 3. If at any point the selected clips cannot extend the coverage, return -1.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the resulting number.</div>
+                                <div style="margin-left: 20px;"> • 4. Otherwise, return the number of clips selected.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array will always have at least one element, and each number is within the specified range.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution works for the given input size constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 100 clips, with start and end times between 0 and 100 seconds.</div>
                             
-                                <div style="margin-left: 20px;"> • -105 &lt;= nums[i] &lt;= 105</div>
+                                <div style="margin-left: 20px;"> • The event duration is between 1 and 100 seconds.</div>
                             
                         </div>
                     </div>        
@@ -409,21 +411,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array will never be empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • All values in the array are integers.</div>
+                                <div style="margin-left: 20px;"> • The clips array will be non-empty and the event duration will be positive.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [-7, 2, 3, -3, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The absolute values are [7, 2, 3, 3, 5]. Both 3 and -3 are equally close to 0, but 3 is larger. So, the output is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: clips = [[0, 3], [4, 7], [2, 5], [6, 8], [5, 9]], time = 9</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can take the clips [0, 3], [2, 5], and [5, 9], which cover the entire event from 0 to 9. So, the output is 3.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [4, -4, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The absolute values are [4, 4, 1]. Both 4 and -4 are equally close to 0, but 4 is larger. So, the output is 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: clips = [[0, 1], [1, 2]], time = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, it is impossible to cover the event duration from 0 to 5 using just the clips [0, 1] and [1, 2], so the output is -1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -447,18 +447,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a simple comparison of absolute values with a condition to handle ties for equally close numbers.</div>
+                        <div class=""> <b>Approach:</b> The approach uses a greedy strategy where we attempt to cover the event by iteratively selecting the clip that extends the current coverage the furthest.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The absolute value comparison is key to determining closeness to 0.</div>
-                            
-                                <div style="margin-left: 20px;"> • Handling ties by choosing the larger number ensures uniqueness in the output.</div>
+                                <div style="margin-left: 20px;"> • Sorting the clips by start time allows us to systematically check which clips to select for covering the event.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Iterating through the array while maintaining a variable for the current closest value is efficient for solving the problem.</div>
+                                <div style="margin-left: 20px;"> • By always picking the clip that extends the coverage the most, we can minimize the number of clips needed.</div>
                             
                         </div>
                     </div>
@@ -466,15 +464,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a variable to hold the closest number, starting with the first element in the array.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the clips by their start times.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Loop through the array to compare the absolute value of each number to the current closest value.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize variables to track the current end time of the covered event and the number of clips selected.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If a number has a smaller absolute value, update the closest number.</div>
+                                <div style="margin-left: 20px;"> • 3. For each clip, check if it extends the current coverage. If it does, update the coverage and increment the count of clips.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. If a number has the same absolute value but is larger, update the closest number.</div>
+                                <div style="margin-left: 20px;"> • 4. If at any point we cannot extend the coverage, return -1.</div>
                             
-                                <div style="margin-left: 20px;"> • 5. Return the final closest number.</div>
+                                <div style="margin-left: 20px;"> • 5. Return the number of clips selected once the entire event is covered.</div>
                             
                         </div>
                     </div>
@@ -483,24 +481,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable, as input size is guaranteed to be at least 1.</div>
+                                <div style="margin-left: 20px;"> • If there are no clips, return -1 unless the event duration is 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An array with 1000 elements containing a mix of large positive and negative numbers, e.g., nums = [-105, 105, -50, 50].</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle inputs with up to 100 clips.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Array contains zeros, e.g., nums = [0, -1, 1].</div>
-                            
-                                <div style="margin-left: 20px;"> • Array contains duplicate values, e.g., nums = [-5, 5, -5].</div>
+                                <div style="margin-left: 20px;"> • If a clip exactly matches the time, it should be counted as one clip.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All integers in the array should be within the range -105 to 105.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles cases where no set of clips can cover the entire event.</div>
                             
                         </div>                                                                        
                     </div>
@@ -519,9 +515,19 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Finding Minimum Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Comparison Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Max Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
                     
                 </div>
 
@@ -530,11 +536,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findClosestNumber</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">*</span>min_element(begin(nums), end(nums), [](<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> abs(a) <span style="color:#666">&lt;</span> abs(b) <span style="color:#666">||</span> (abs(a) <span style="color:#666">==</span> abs(b) <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&gt;</span> b);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>  }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">videoStitching</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> clips, <span style="color:#0b0;font-weight:bold">int</span> time) {
+</span></span><span style="display:flex;"><span>    sort(clips.begin(), clips.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, st <span style="color:#666">=</span> <span style="color:#666">0</span>, end <span style="color:#666">=</span> <span style="color:#666">0</span>; st <span style="color:#666">&lt;</span> time; st<span style="color:#666">=</span>end, <span style="color:#666">++</span>res){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(; i <span style="color:#666">&lt;</span> clips.size() <span style="color:#666">&amp;&amp;</span> clips[i][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> st; <span style="color:#666">++</span>i)
+</span></span><span style="display:flex;"><span>            end <span style="color:#666">=</span> max(end, clips[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
                     </div>
@@ -544,30 +555,80 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findClosestNumber</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">videoStitching</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> clips, <span style="color:#0b0;font-weight:bold">int</span> time) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the definition of the &#39;findClosestNumber&#39; function that takes a vector of integers and returns an integer, which is the closest to zero. </div>
+                            <div class=""> Define the function `videoStitching`, which takes a list of clips and a target time interval to cover. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Finding Minimum Element</b></div>
+                            <div class=""> <b>2 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">*</span><span style="color:#00a000">min_element</span>(begin(nums), end(nums), [](<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(clips.begin(), clips.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line uses the &#39;min_element&#39; algorithm to find the closest number to zero in the array, using a lambda function to compare absolute values. </div>
+                            <div class=""> Sort the clips by their start times to make it easier to find overlapping intervals and select the optimal clips. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Comparison Logic</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">abs</span>(a) <span style="color:#666">&lt;</span> abs(b) <span style="color:#666">||</span> (abs(a) <span style="color:#666">==</span> abs(b) <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&gt;</span> b);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The lambda function compares two integers by their absolute value. If the absolute values are equal, it returns the larger number. </div>
+                            <div class=""> Initialize the result variable `res` to 0, which will store the number of clips used to cover the time interval. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, st <span style="color:#666">=</span> <span style="color:#666">0</span>, end <span style="color:#666">=</span> <span style="color:#666">0</span>; st <span style="color:#666">&lt;</span> time; st<span style="color:#666">=</span>end, <span style="color:#666">++</span>res){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop where `i` is the index for iterating through the clips, `st` is the start of the current covered interval, and `end` is the end of the last selected clip. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(; i <span style="color:#666">&lt;</span> clips.size() <span style="color:#666">&amp;&amp;</span> clips[i][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> st; <span style="color:#666">++</span>i)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through the clips and find the clip whose start time is less than or equal to the current start time (`st`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Max Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            end <span style="color:#666">=</span> max(end, clips[i][<span style="color:#666">1</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the `end` time by taking the maximum of the current `end` and the end time of the current clip, which extends the covered interval. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current start time `st` is the same as the end time `end`, it means no clip can extend the coverage. Return -1 to indicate it&#39;s impossible to cover the entire time interval. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the number of clips used to cover the time interval. </div>
                         </div>
                     
                 </div>
@@ -587,16 +648,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear since the array is traversed once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n), where n is the number of clips.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> No additional space is used beyond a few variables for tracking the result.</div>    
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required for sorting the clips.</div>    
                     </div>
 
                 </div>

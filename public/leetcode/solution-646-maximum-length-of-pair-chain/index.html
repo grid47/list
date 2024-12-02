@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a string <code>s</code> consisting of lowercase English letters and an integer <code>k</code>. Your task is to find the maximum number of vowels in any substring of length <code>k</code>. Vowels in English are &lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, and &lsquo;u&rsquo;. </div>
+<div class=""> You are given an array of pairs where each pair represents an interval with two integers. A pair can follow another pair if the second integer of the first pair is less than the first integer of the second pair. Your task is to determine the length of the longest chain that can be formed by linking the pairs. </div>
 
 
 
@@ -372,53 +372,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s` and an integer `k`.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;programming&#34;, k = 4</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of pairs, where each pair is a list of two integers [lefti, righti] with lefti &lt; righti. The number of pairs is n.</div>
+                        <div class=""> <b>Example:</b> pairs = [[1, 2], [2, 3], [3, 4]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100,000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of only lowercase English letters.</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= s.length</div>
+                                <div style="margin-left: 20px;"> • -1000 &lt;= lefti &lt; righti &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum number of vowels in any substring of `s` with length `k`.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return an integer representing the length of the longest chain of pairs that can be formed.</div>
+                        <div class=""> <b>Example:</b> 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must be a single integer representing the maximum count of vowels.</div>
-                            
-                                <div style="margin-left: 20px;"> • If there are multiple substrings with the same maximum count, return the count as a single value.</div>
+                                <div style="margin-left: 20px;"> • The result will be a single integer representing the length of the longest chain.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine the maximum number of vowels present in any substring of length `k`.</div>
+                        <div class=""> <b>Goal:</b> Find the length of the longest chain that can be formed from the given pairs.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Define a helper function to identify vowels efficiently.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the pairs by the second value of each pair.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window approach to count vowels in substrings of length `k`.</div>
-                            
-                                <div style="margin-left: 20px;"> • Adjust the count dynamically as the window moves forward in the string.</div>
-                            
-                                <div style="margin-left: 20px;"> • Track and update the maximum count of vowels encountered.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate over the sorted pairs and greedily select the ones that can form a chain, starting with the first pair and selecting each subsequent pair where the first value is greater than the second value of the previous pair.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The conditions that input values must satisfy.</div>
+                        <div class=""> <b>Goal:</b> The input will contain valid pairs where lefti &lt; righti for each pair.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • `s` is a non-empty string with only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The number of pairs will not exceed 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • `k` is a positive integer and less than or equal to the length of `s`.</div>
+                                <div style="margin-left: 20px;"> • Each pair will consist of two integers where lefti &lt; righti.</div>
                             
                         </div>
                     </div>        
@@ -426,25 +418,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string and integer are valid and meet the constraints.</div>
-                            
-                                <div style="margin-left: 20px;"> • Substrings of length `k` are always possible as `k &lt;= s.length`.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain at least one pair.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;basketball&#34;, k = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: 2. The substring &#34;asket&#34; contains 2 vowels (&#39;a&#39; and &#39;e&#39;).</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;university&#34;, k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: 2. Substring &#34;uni&#34; contains 2 vowels (&#39;u&#39; and &#39;i&#39;).</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;robot&#34;, k = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: 1. The substring &#34;obot&#34; contains 1 vowel (&#39;o&#39;).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 2], [2, 3], [3, 4]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest chain is formed by selecting pairs [1, 2] and [3, 4], giving a chain length of 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -468,20 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Utilize a sliding window approach to efficiently count vowels in each substring of length `k`.</div>
+                        <div class=""> <b>Approach:</b> The solution is based on sorting the pairs and using a greedy approach to select pairs that can form a valid chain.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Vowels are a small, fixed subset of characters, so membership checks can be done using a set.</div>
-                            
-                                <div style="margin-left: 20px;"> • Sliding window helps avoid recomputing the vowel count for overlapping substrings.</div>
-                            
-                                <div style="margin-left: 20px;"> • Efficient implementation requires linear time complexity.</div>
+                                <div style="margin-left: 20px;"> • Sorting the pairs based on their second element allows us to efficiently find the longest chain by selecting pairs that follow each other.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window to maintain a running count of vowels as we traverse the string.</div>
+                                <div style="margin-left: 20px;"> • A greedy approach works well here because it ensures that we always pick the next pair that can extend the chain without skipping any possible valid pairs.</div>
                             
                         </div>
                     </div>
@@ -489,15 +467,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a set for vowels {&#39;a&#39;, &#39;e&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;}.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the pairs based on the second element of each pair.</div>
                             
-                                <div style="margin-left: 20px;"> • Start with the first `k` characters of the string and count the vowels.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize a variable to keep track of the last element of the selected chain.</div>
                             
-                                <div style="margin-left: 20px;"> • Move the window by one character at a time, adding the next character&#39;s contribution and removing the previous one.</div>
+                                <div style="margin-left: 20px;"> • 3. Iterate through the sorted pairs, and for each pair, check if it can be added to the chain (i.e., the first value of the current pair is greater than the last element of the previous pair).</div>
                             
-                                <div style="margin-left: 20px;"> • Update the maximum count whenever a higher count is observed.</div>
+                                <div style="margin-left: 20px;"> • 4. If the pair can be added, update the chain and increase the count.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the maximum count after processing all substrings.</div>
+                                <div style="margin-left: 20px;"> • 5. Return the total count of the longest chain.</div>
                             
                         </div>
                     </div>
@@ -506,24 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable as `s` is guaranteed to have at least one character.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain at least one pair.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: s with length 100,000 and k close to s.length. Verify performance.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle inputs up to the maximum size of 1000 pairs.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: s = &#34;aaaaa&#34;, k = 3 -&gt; Output: 3. Handles case with all vowels.</div>
-                            
-                                <div style="margin-left: 20px;"> • Input: s = &#34;bcdfg&#34;, k = 2 -&gt; Output: 0. Handles case with no vowels.</div>
+                                <div style="margin-left: 20px;"> • Pairs that are already sorted or pairs with no possible chain need to be handled properly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the function handles edge cases like `k = 1` or `k = s.length` gracefully.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm sorts the pairs efficiently and selects the valid chain in linear time after sorting.</div>
                             
                         </div>                                                                        
                     </div>
@@ -540,25 +516,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Helper Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Comparison Logic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Comparison Logic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Vowel Count Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Dynamic Programming Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Sliding Window Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Max Vowel Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Chain Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Dynamic Programming Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Maximum Chain Length Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Final Return</button>
                     
                 </div>
 
@@ -567,16 +551,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> vowels[<span style="color:#666">26</span>] <span style="color:#666">=</span> {  <span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>, <span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>, 
-</span></span><span style="display:flex;"><span>                    <span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>, <span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>, 
-</span></span><span style="display:flex;"><span>                    <span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>, <span style="color:#666">0</span> };
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxVowels</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> vowels[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> k) cur <span style="color:#666">-=</span> vowels[s[i<span style="color:#666">-</span>k] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(cur, mx);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findLongestChain</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pairs) {
+</span></span><span style="display:flex;"><span>    sort(pairs.begin(), pairs.end(), cmp);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> pairs.size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pairs[i][<span style="color:#666">0</span>] <span style="color:#666">&gt;</span> pairs[j][<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> max(dp[i], dp[j] <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>                mx <span style="color:#666">=</span> max(mx, dp[i]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
@@ -585,103 +581,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Array Initialization</b></div>
+                            <div class=""> <b>1 : Helper Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> vowels[<span style="color:#666">26</span>] <span style="color:#666">=</span> {  <span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>, <span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>, 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This array &#39;vowels&#39; is used to mark the presence of vowels in the alphabet. Each element corresponds to a letter, where vowels are marked with a &#39;1&#39; and consonants with a &#39;0&#39;. </div>
+                            <div class=""> Defines a helper function &#39;cmp&#39; that compares two pairs (a and b). It first compares the first elements of the pairs, and if they are equal, it compares the second elements. This function is used for sorting the pairs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Initialization</b></div>
+                            <div class=""> <b>2 : Comparison Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>, <span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>, 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Continues the initialization of the &#39;vowels&#39; array. This ensures that the vowels (a, e, i, o, u) are marked with &#39;1&#39; while other letters are marked with &#39;0&#39;. </div>
+                            <div class=""> Compares the second element of the pair if the first elements are equal. This ensures that the pairs are ordered first by the first element and then by the second element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Initialization</b></div>
+                            <div class=""> <b>3 : Comparison Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>, <span style="color:#666">0</span> };
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Finalizes the &#39;vowels&#39; array initialization, ensuring that all vowels are marked as &#39;1&#39;. </div>
+                            <div class=""> If the first elements of the pairs are not equal, this part of the function ensures that pairs are sorted in increasing order of the first element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Declaration</b></div>
+                            <div class=""> <b>4 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxVowels</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findLongestChain</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pairs) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;maxVowels&#39; is declared. It takes a string &#39;s&#39; and an integer &#39;k&#39;, and returns an integer representing the maximum number of vowels in any substring of length &#39;k&#39;. </div>
+                            <div class=""> Defines the main function &#39;findLongestChain&#39; which takes a reference to a vector of pairs and returns an integer representing the length of the longest chain of pairs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(pairs.begin(), pairs.end(), cmp);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;mx&#39; is initialized to zero, which will later hold the maximum number of vowels encountered in any substring of length &#39;k&#39;. </div>
+                            <div class=""> Sorts the pairs using the &#39;cmp&#39; function defined earlier. This ensures that the pairs are sorted in a way that makes it easier to find the longest chain. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> pairs.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop starts, iterating through each character in the string &#39;s&#39;. The variable &#39;cur&#39; keeps track of the current count of vowels in the current sliding window of length &#39;k&#39;. </div>
+                            <div class=""> Initializes an integer &#39;n&#39; with the size of the &#39;pairs&#39; vector, representing the total number of pairs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Vowel Count Update</b></div>
+                            <div class=""> <b>7 : Dynamic Programming Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> vowels[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n, <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The &#39;cur&#39; variable is updated by adding 1 if the current character &#39;s[i]&#39; is a vowel (as determined by the &#39;vowels&#39; array). </div>
+                            <div class=""> Declares and initializes a dynamic programming vector &#39;dp&#39; with size &#39;n&#39;, where each element is initialized to 1. The vector will be used to store the longest chain ending at each pair. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Sliding Window Adjustment</b></div>
+                            <div class=""> <b>8 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> k) cur <span style="color:#666">-=</span> vowels[s[i<span style="color:#666">-</span>k] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the index &#39;i&#39; is greater than or equal to &#39;k&#39;, the character that is sliding out of the window (at position &#39;i-k&#39;) is subtracted from &#39;cur&#39;. </div>
+                            <div class=""> Initializes the variable &#39;mx&#39; to 1, which will keep track of the length of the longest chain found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Max Vowel Update</b></div>
+                            <div class=""> <b>9 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(cur, mx);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;mx&#39; is updated to store the maximum value between &#39;cur&#39; (the current count of vowels in the window) and the previous maximum count. </div>
+                            <div class=""> Starts an outer loop to iterate through each pair in the sorted &#39;pairs&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts an inner loop to check each pair before the current pair &#39;i&#39; to find a valid chain. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Chain Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pairs[i][<span style="color:#666">0</span>] <span style="color:#666">&gt;</span> pairs[j][<span style="color:#666">1</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current pair &#39;i&#39; can form a valid chain with pair &#39;j&#39;. The first element of pair &#39;i&#39; must be greater than the second element of pair &#39;j&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Dynamic Programming Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> max(dp[i], dp[j] <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the chain condition is met, updates the dynamic programming value for pair &#39;i&#39;, ensuring it holds the maximum length of the chain ending at that pair. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Maximum Chain Length Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                mx <span style="color:#666">=</span> max(mx, dp[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Updates the variable &#39;mx&#39; to store the maximum length of any chain found so far. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Final Return</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the value of &#39;mx&#39;, which is the maximum number of vowels found in any substring of length &#39;k&#39;. </div>
+                            <div class=""> Returns the length of the longest chain found. </div>
                         </div>
                     
                 </div>
@@ -701,16 +737,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The sliding window traverses the string once, making it linear in terms of `n`, the length of the string.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> Only a fixed amount of space is used for tracking the count and vowel set.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the pairs and the result.</div>    
                     </div>
 
                 </div>

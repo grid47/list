@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given an integer array, determine if it is possible to partition the array into two subsets with equal sum. Return true if such a partition exists, otherwise return false. </div>
+<div class=""> Given a positive integer n, return the number of set bits (1s) in its binary representation, also known as the Hamming weight. </div>
 
 
 
@@ -370,47 +370,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers &#39;nums&#39;.</div>
-                        <div class=""> <b>Example:</b> For nums = [2, 6, 7, 4], the output is true.</div>
+                        <div class=""> <b>Input:</b> The input consists of a positive integer n.</div>
+                        <div class=""> <b>Example:</b> n = 9</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 200</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The integer n is between 1 and 2^31 - 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if the array can be partitioned into two subsets with equal sum, otherwise return false.</div>
-                        <div class=""> <b>Example:</b> For nums = [1, 2, 3, 9], the output is false.</div>
+                        <div class=""> <b>Output:</b> The output is the number of set bits (1s) in the binary representation of the integer n.</div>
+                        <div class=""> <b>Example:</b> Output = 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output is a single integer representing the number of set bits.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To check if an array can be partitioned into two subsets with equal sum.</div>
+                        <div class=""> <b>Goal:</b> The goal is to count the number of set bits in the binary representation of the integer n.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the total sum of the array.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Use bitwise operations to efficiently count the number of set bits.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If the sum is odd, return false (since two equal subsets cannot be formed).</div>
+                                <div style="margin-left: 20px;"> • Step 2: Continuously remove the lowest set bit from n and increment the count until n becomes zero.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the sum is even, check if there exists a subset whose sum is half of the total sum using dynamic programming.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Use a dynamic programming approach to check if it&#39;s possible to form a subset with the target sum.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return the count of set bits.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array contains integers between 1 and 100, and its length is at most 200.</div>
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the input n is a valid positive integer.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 200</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • n is between 1 and 2^31 - 1.</div>
                             
                         </div>
                     </div>        
@@ -418,21 +414,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array contains only positive integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The array length is within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The input integer is always a positive number within the specified range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [2, 6, 7, 4], the output is true.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array can be partitioned as [2, 6] and [7, 4], both with a sum of 8, making the partition possible.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [1, 2, 3, 9], the output is false.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum of the elements is 15, which is odd, so it&#39;s impossible to partition the array into two subsets with equal sum.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 9</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary representation of 9 is 1001, which has two set bits, so the output is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +446,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, we need to first check if the sum of the array is even. If it&#39;s even, we will use dynamic programming to determine if a subset with half the sum exists.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using bitwise operations to count the number of set bits in the integer&#39;s binary representation.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The total sum must be even for the array to be partitioned into two subsets with equal sum.</div>
+                                <div style="margin-left: 20px;"> • We can use a bitwise trick to remove the lowest set bit of the number and count how many times this operation can be performed.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A dynamic programming approach can be used to check if a subset sum of half the total sum is achievable.</div>
+                                <div style="margin-left: 20px;"> • By using n = n &amp; (n - 1), we can eliminate the rightmost set bit in each iteration until all bits are processed.</div>
                             
                         </div>
                     </div>
@@ -473,15 +463,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the total sum of the array.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a count variable to store the number of set bits.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If the total sum is odd, return false.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Iterate over the integer and repeatedly remove the lowest set bit using the operation n = n &amp; (n - 1).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Set the target sum as half of the total sum.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Increment the count in each iteration.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Use dynamic programming to check if a subset with this target sum can be formed. Use a boolean dp array where dp[i] is true if a subset with sum i is possible.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. If dp[target] is true, return true. Otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • Step 4: Return the final count after the loop ends.</div>
                             
                         </div>
                     </div>
@@ -490,20 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • The input is always a valid positive integer, so there are no empty inputs.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, ensure the dynamic programming approach runs efficiently by considering the time and space complexity.</div>
+                                <div style="margin-left: 20px;"> • Since n is constrained between 1 and 2^31 - 1, large inputs are not an issue.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array has only one element, it cannot be partitioned into two subsets.</div>
+                                <div style="margin-left: 20px;"> • If n is a power of 2 (e.g., 1, 2, 4, 8, 16, ...), the binary representation will have only one set bit.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where the sum is odd, or the array has a small number of elements.</div>
+                                <div style="margin-left: 20px;"> • The input is always a positive integer.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,41 +510,17 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case, Recursion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Bitwise Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Count Increment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call with Element Inclusion</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Memoized Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Main Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Assign Input Vector</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Odd Sum Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Divide Sum by Two</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Memoization Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return DP Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
                 </div>
 
@@ -563,37 +529,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">10001</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][sum] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> nums[idx])
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">|=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">-</span> nums[idx]);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum] <span style="color:#666">=</span> res;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartition</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> x;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    sum <span style="color:#666">=</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, sum);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">hammingWeight</span>(<span style="color:#0b0;font-weight:bold">uint32_t</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> key <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> n <span style="color:#666">&amp;</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        key<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> key;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -601,183 +543,63 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">hammingWeight</span>(<span style="color:#0b0;font-weight:bold">uint32_t</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a vector `nums` to hold the input array of integers that needs to be partitioned. </div>
+                            <div class=""> Define the function &#39;hammingWeight&#39; that takes a 32-bit unsigned integer &#39;n&#39; and returns the count of 1 bits in its binary representation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">10001</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> key <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a 2D array `memo` with dimensions to store computed results for each index and sum to avoid redundant calculations in the dynamic programming solution. </div>
+                            <div class=""> Initialize a variable &#39;key&#39; to zero, which will be used to count the number of 1 bits in the binary representation of &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Base Case, Recursion</b></div>
+                            <div class=""> <b>3 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `dp` that takes two parameters: `idx`, the current index of the element being considered, and `sum`, the remaining sum we need to achieve. </div>
+                            <div class=""> Start a while loop that continues until &#39;n&#39; becomes zero. The loop iterates through each 1 bit in &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case Check</b></div>
+                            <div class=""> <b>4 : Bitwise Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">=</span> n <span style="color:#666">&amp;</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we&#39;ve reached the end of the array (`idx == nums.size()`), return `true` if the remaining `sum` is 0, meaning we&#39;ve successfully partitioned the array. </div>
+                            <div class=""> Apply the bitwise AND operation between &#39;n&#39; and &#39;n-1&#39;. This operation clears the least significant 1 bit in &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Memoization Check</b></div>
+                            <div class=""> <b>5 : Count Increment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][sum] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        key<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current state (`idx`, `sum`) has already been computed by looking up the value in the `memo` table. If it has, return the stored result. </div>
+                            <div class=""> Increment the &#39;key&#39; variable to count the number of 1 bits encountered so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursive Call</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> key;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Make a recursive call to `dp` by moving to the next index (`idx &#43; 1`) without including the current element in the sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> nums[idx])
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the current element (`nums[idx]`) can be included in the subset, i.e., if the remaining `sum` is greater than or equal to the current element. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Recursive Call with Element Inclusion</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">|=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">-</span> nums[idx]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Make a recursive call to `dp` including the current element (`nums[idx]`) by subtracting it from the remaining `sum`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Return Memoized Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum] <span style="color:#666">=</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Store the result of the current state (`idx`, `sum`) in the `memo` table and return it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Main Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartition</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the main function `canPartition` that takes a vector `nums` and determines whether it is possible to partition the array into two subsets with equal sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Assign Input Vector</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the input `nums` to the class member variable `nums` for use in the `dp` function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize a variable `sum` to store the total sum of the elements in `nums`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Loop Iteration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterate through each element `x` in the `nums` array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> x;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Accumulate the value of each element `x` to compute the total sum of the elements in the array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Odd Sum Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the sum is odd (`sum &amp; 1`). If it is, return `false` since an odd sum cannot be partitioned into two equal subsets. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Divide Sum by Two</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sum <span style="color:#666">=</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Since the array needs to be split into two equal subsets, divide the total `sum` by 2 to determine the target sum for one subset. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Memoization Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize the `memo` table by setting all values to `-1`, indicating that no state has been computed yet. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Return DP Function Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, sum);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Call the `dp` function starting from index 0 with the target sum (`sum`). Return the result of this call. </div>
+                            <div class=""> Return the final count of 1 bits stored in &#39;key&#39;. </div>
                         </div>
                     
                 </div>
@@ -797,16 +619,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * sum)</div>
-                        <div class=""> <b>Average Case:</b> O(n * sum)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * sum)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n * sum), where n is the number of elements in the array and sum is the total sum of the array.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(k), where k is the number of set bits in n.</div>
+                        <div class=""> <b>Worst Case:</b> O(32), in the worst case when all bits are set to 1.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(k), where k is the number of set bits, because we process each set bit individually. In the worst case, k is at most 32.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(sum)</div>
-                        <div class=""> <b>Worst Case:</b> O(sum)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(sum), where sum is the total sum of the array, due to the dynamic programming array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1), as we only need a constant amount of space for the count variable.</div>    
                     </div>
 
                 </div>

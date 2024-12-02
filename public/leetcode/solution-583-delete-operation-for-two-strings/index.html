@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 9, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given three positive integers, a, b, and c. Your task is to find the minimum number of bit flips required in a and b to make the result of (a OR b) equal to c. A bit flip consists of changing any bit from 0 to 1 or from 1 to 0. </div>
+<div class=""> Given two strings word1 and word2, return the minimum number of steps required to make word1 and word2 the same. In one step, you can delete exactly one character in either string. </div>
 
 
 
@@ -370,43 +370,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of three integers a, b, and c, where each integer represents the bitwise values of a, b, and c.</div>
-                        <div class=""> <b>Example:</b> For a = 3, b = 5, and c = 7, we will calculate the number of bit flips needed to satisfy (a OR b == c).</div>
+                        <div class=""> <b>Input:</b> Two strings, word1 and word2, which consist of only lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> Input: word1 = &#34;fish&#34;, word2 = &#34;dish&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= a, b, c &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= word1.length, word2.length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • word1 and word2 consist of only lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be an integer representing the minimum number of bit flips required to make (a OR b) equal to c.</div>
-                        <div class=""> <b>Example:</b> For a = 3, b = 5, and c = 7, the output is 2.</div>
+                        <div class=""> <b>Output:</b> The minimum number of steps (deletions) needed to make word1 and word2 the same.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to count the minimum number of bit flips required to ensure that the bitwise OR of a and b equals c.</div>
+                        <div class=""> <b>Goal:</b> Minimize the number of deletions required to make both strings identical.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Loop through each bit position (from 0 to 30).</div>
+                                <div style="margin-left: 20px;"> • Use dynamic programming to calculate the length of the longest common subsequence (LCS) of the two strings.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Check the values of a, b, and c at each bit position using bitwise operations.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. Determine if a flip is required based on the combination of a, b, and c at that bit position.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Count the number of flips needed and return the result.</div>
+                                <div style="margin-left: 20px;"> • The minimum deletions required is the total length of both strings minus twice the length of the LCS.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints define the range of values for a, b, and c.</div>
+                        <div class=""> <b>Goal:</b> The input strings are non-empty, and the length of both strings is bounded.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= a, b, c &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= word1.length, word2.length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • word1 and word2 consist of only lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -414,17 +416,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input integers are valid positive integers within the specified range.</div>
+                                <div style="margin-left: 20px;"> • Both strings are non-empty.</div>
                             
-                                <div style="margin-left: 20px;"> • The bitwise operations are performed on integers with a maximum of 30 bits.</div>
+                                <div style="margin-left: 20px;"> • The strings only contain lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For a = 3, b = 5, and c = 7, (a OR b) = 7, and no flip is needed. Hence, the output is 2.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In binary, a = 0011, b = 0101, and c = 0111. (a OR b) results in 0111, which is equal to c, requiring 2 flips in total.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word1 = &#34;fish&#34;, word2 = &#34;dish&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You need to delete one &#39;f&#39; from word1 and one &#39;d&#39; from word2 to make them the same.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word1 = &#34;chat&#34;, word2 = &#34;mat&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You need to delete one &#39;c&#39; from word1 and one &#39;m&#39; from word2 to make them the same.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,18 +454,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We use bitwise operations to check each bit of a, b, and c. By comparing the values at each bit position, we determine whether a flip is required and count the total number of flips needed.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved using dynamic programming to find the longest common subsequence (LCS) between the two strings.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The bitwise OR operation compares corresponding bits from two integers.</div>
+                                <div style="margin-left: 20px;"> • The LCS will give us the longest sequence that both strings share.</div>
                             
-                                <div style="margin-left: 20px;"> • For each bit position, there are a few possible combinations of bits between a, b, and c.</div>
+                                <div style="margin-left: 20px;"> • By deleting the characters not in the LCS, we can make both strings identical.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The solution involves looping through all bit positions and checking if a flip is required for each one.</div>
+                                <div style="margin-left: 20px;"> • We need to calculate the LCS and then determine how many characters need to be deleted from both strings.</div>
                             
                         </div>
                     </div>
@@ -467,11 +473,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a helper function to extract individual bits of a, b, and c.</div>
+                                <div style="margin-left: 20px;"> • Create a 2D DP array where dp[i][j] represents the LCS of word1[0...i-1] and word2[0...j-1].</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each bit position from 0 to 30, check if the OR operation on a and b results in the correct bit for c.</div>
+                                <div style="margin-left: 20px;"> • Iterate through both strings to populate the DP table.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count the number of flips required for each bit and accumulate the result.</div>
+                                <div style="margin-left: 20px;"> • Return the result as (length of word1 &#43; length of word2 - 2 * dp[m][n]), where m and n are the lengths of word1 and word2.</div>
                             
                         </div>
                     </div>
@@ -480,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There should always be valid input values (non-zero positive integers).</div>
+                                <div style="margin-left: 20px;"> • Both strings are guaranteed to be non-empty, so no need to handle empty strings.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input values could be as large as 10^9, requiring efficient bitwise operations to handle these cases.</div>
+                                <div style="margin-left: 20px;"> • The input size can go up to 500 characters, so the solution must be efficient.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If a, b, or c are equal to 0, we need to handle these cases carefully as they may require different flip combinations.</div>
+                                <div style="margin-left: 20px;"> • If both strings are already identical, return 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that all values will be positive integers.</div>
+                                <div style="margin-left: 20px;"> • The solution must have a time complexity of O(m*n), where m and n are the lengths of the two strings.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,29 +518,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Helper Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Bitwise Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 LCS Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 LCS Update on Mismatch</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Count Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Else Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Count Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Final Calculation</button>
                     
                 </div>
 
@@ -543,32 +541,17 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bit</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> i) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (n <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minFlips</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// (a|b) has zero and c has 1 required change is one
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// (a|b) has one and c has zero required change is one(if one of them have 1) or two (if both have one)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        0   0   1       1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        0   1   0       1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        1   0   0       1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        1   1   0       2
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">31</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((<span style="color:#666">!</span>bit(a, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(b, i) <span style="color:#666">&amp;&amp;</span> bit(c, i)) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>           (<span style="color:#666">!</span>bit(a, i) <span style="color:#666">&amp;&amp;</span> bit(b, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(c, i)) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>           (bit(a, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(b, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(c, i)) ) {
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>((bit(a, i) <span style="color:#666">&amp;&amp;</span> bit(b, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(c, i))) {
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDistance</span>(string word1, string word2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// lcs
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> word1.size(), n <span style="color:#666">=</span> word2.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(word1[i] <span style="color:#666">==</span> word2[j]) dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i][j] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> max(dp[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>], dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> word1.size() <span style="color:#666">+</span> word2.size() <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> dp[m][n];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -576,123 +559,83 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Helper Function</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bit</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDistance</span>(string word1, string word2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;bit&#39; extracts the bit at position &#39;i&#39; from the integer &#39;n&#39; using bitwise right shift and AND operations. </div>
+                            <div class=""> Declares the function `minDistance`, which takes two strings as input and returns the minimum number of operations required to convert one string into the other. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Bitwise Operation</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (n <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> word1.size(), n <span style="color:#666">=</span> word2.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The expression shifts the bits of &#39;n&#39; to the right by &#39;i&#39; positions and returns the bitwise AND with 1 to isolate the desired bit. </div>
+                            <div class=""> Initializes the variables `m` and `n`, which store the lengths of `word1` and `word2`, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Declaration</b></div>
+                            <div class=""> <b>3 : Matrix Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minFlips</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The &#39;minFlips&#39; function is declared. It takes three integers &#39;a&#39;, &#39;b&#39;, and &#39;c&#39; and calculates the number of bit flips required to convert &#39;a&#39; and &#39;b&#39; into &#39;c&#39;. </div>
+                            <div class=""> Initializes a 2D dynamic programming table `dp` with dimensions `(m&#43;1) x (n&#43;1)`, where each cell `dp[i][j]` will hold the length of the longest common subsequence (LCS) for substrings `word1[0..i-1]` and `word2[0..j-1]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Initialization</b></div>
+                            <div class=""> <b>4 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;cnt&#39; is initialized to 0 to keep track of the number of flips needed. </div>
+                            <div class=""> Starts an outer loop that iterates over each character of `word1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Start</b></div>
+                            <div class=""> <b>5 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">31</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is set up to iterate over all 31 bit positions of the integers &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;. </div>
+                            <div class=""> Starts an inner loop that iterates over each character of `word2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : LCS Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((<span style="color:#666">!</span>bit(a, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(b, i) <span style="color:#666">&amp;&amp;</span> bit(c, i)) <span style="color:#666">||</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(word1[i] <span style="color:#666">==</span> word2[j]) dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i][j] <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition checks if both &#39;a&#39; and &#39;b&#39; have 0 in a bit position, but &#39;c&#39; has 1, which requires a flip. </div>
+                            <div class=""> If the characters at `word1[i]` and `word2[j]` match, it increments the LCS length by 1 and stores the result in `dp[i&#43;1][j&#43;1]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Condition Check</b></div>
+                            <div class=""> <b>7 : LCS Update on Mismatch</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>           (<span style="color:#666">!</span>bit(a, i) <span style="color:#666">&amp;&amp;</span> bit(b, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(c, i)) <span style="color:#666">||</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> max(dp[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>], dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if &#39;a&#39; has 0, &#39;b&#39; has 1, and &#39;c&#39; has 0, which also requires a flip. </div>
+                            <div class=""> If the characters at `word1[i]` and `word2[j]` do not match, it updates `dp[i&#43;1][j&#43;1]` by taking the maximum value between `dp[i][j&#43;1]` (LCS without the current character of `word1`) and `dp[i&#43;1][j]` (LCS without the current character of `word2`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Condition Check</b></div>
+                            <div class=""> <b>8 : Final Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>           (bit(a, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(b, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(c, i)) ) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> word1.size() <span style="color:#666">+</span> word2.size() <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> dp[m][n];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if &#39;a&#39; has 1, &#39;b&#39; has 0, and &#39;c&#39; has 0, which requires a flip. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Count Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the condition is true, one flip is required, so we increment &#39;cnt&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Else Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>((bit(a, i) <span style="color:#666">&amp;&amp;</span> bit(b, i) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>bit(c, i))) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This checks if both &#39;a&#39; and &#39;b&#39; have 1 in a bit position, but &#39;c&#39; has 0, which requires two flips. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Count Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the condition is true, two flips are required, so we increment &#39;cnt&#39; by 2. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the final count of required flips. </div>
+                            <div class=""> Returns the minimum number of operations needed to convert `word1` into `word2`. This is calculated by subtracting twice the length of the LCS (found in `dp[m][n]`) from the total lengths of `word1` and `word2`. </div>
                         </div>
                     
                 </div>
@@ -712,16 +655,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(30)</div>
-                        <div class=""> <b>Worst Case:</b> O(30)</div> 
-                        <div class=""> <b>Description:</b> The worst case occurs when we need to check all 30 bits for a, b, and c, so the time complexity is constant and O(30).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m*n)</div>
+                        <div class=""> <b>Average Case:</b> O(m*n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m*n)</div> 
+                        <div class=""> <b>Description:</b> We use dynamic programming to calculate the LCS, which requires O(m*n) time where m and n are the lengths of the two strings.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, O(1), as we only need a few variables to store intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(m*n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m*n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m*n) due to the DP table.</div>    
                     </div>
 
                 </div>

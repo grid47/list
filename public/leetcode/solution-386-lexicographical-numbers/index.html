@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 29, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1107s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1106s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/386.webp" 
            alt="A glowing series of numbers arranged in lexicographical order, highlighting their progression." 
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given a binary matrix where each row and column can be toggled independently. A toggle operation flips all values in a row or column (changing 0s to 1s and 1s to 0s). The matrix&rsquo;s score is calculated by interpreting each row as a binary number and summing up these values. Your task is to determine the maximum score possible after performing any number of toggle operations. </div>
+<div class=""> Given an integer n, return all the numbers in the range [1, n] sorted in lexicographical order. The solution must run in O(n) time and use O(1) extra space. </div>
 
 
 
@@ -370,51 +370,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a binary matrix represented as a 2D array of integers. Each element is either 0 or 1.</div>
-                        <div class=""> <b>Example:</b> Input: grid = [[1,0,0],[0,1,1],[1,1,0]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a single integer n.</div>
+                        <div class=""> <b>Example:</b> n = 15</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • m == grid.length</div>
-                            
-                                <div style="margin-left: 20px;"> • n == grid[i].length</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 20</div>
-                            
-                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 50,000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an integer representing the highest possible score of the matrix after performing any number of toggles.</div>
-                        <div class=""> <b>Example:</b> Output: 14</div>
+                        <div class=""> <b>Output:</b> Return a list of integers from 1 to n, sorted in lexicographical order.</div>
+                        <div class=""> <b>Example:</b> Output: [1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5, 6, 7, 8, 9]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should contain all the numbers from 1 to n, sorted lexicographically.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To maximize the matrix&#39;s score by toggling rows and columns strategically to maximize the binary number values of each row.</div>
+                        <div class=""> <b>Goal:</b> The goal is to generate the numbers in lexicographical order without storing the entire list upfront and while maintaining an efficient time complexity.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Ensure the first column contains all 1s by toggling any rows where the first element is 0.</div>
+                                <div style="margin-left: 20px;"> • Start from 1 and recursively append the next lexicographically smaller number.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each remaining column, determine whether toggling the column increases the number of 1s in that column.</div>
+                                <div style="margin-left: 20px;"> • For each number, attempt to add a zero to make it a &#39;child&#39; of the current number.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Use the column&#39;s majority value (1s or 0s) to calculate its contribution to the total score.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Compute the score by interpreting each row as a binary number and summing up the values.</div>
+                                <div style="margin-left: 20px;"> • If the current number exceeds n, backtrack to the next number in the sequence.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The binary matrix and toggle operations must follow the constraints:</div>
+                        <div class=""> <b>Goal:</b> The algorithm should be efficient both in terms of time and space.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix dimensions (m x n) are within the range 1 &lt;= m, n &lt;= 20.</div>
+                                <div style="margin-left: 20px;"> • Time complexity should be O(n).</div>
                             
-                                <div style="margin-left: 20px;"> • All elements in the matrix are either 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • Space complexity should be O(1) additional space, aside from the space required for the result.</div>
                             
                         </div>
                     </div>        
@@ -422,23 +416,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • You can perform any number of toggle operations on rows or columns.</div>
-                            
-                                <div style="margin-left: 20px;"> • No limit on the number of rows or columns toggled in a single operation.</div>
-                            
-                                <div style="margin-left: 20px;"> • The input matrix contains at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • The input value n is valid and lies within the specified range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1,0,0],[0,1,1],[1,1,0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Toggle the second row to convert it to [1, 0, 0]. Then toggle the third column to get [[1, 0, 1], [1, 0, 1], [1, 1, 1]]. The binary representation is 0b101 (5), 0b101 (5), 0b111 (7). Total score = 5 &#43; 5 &#43; 7 = 17.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[0,1],[1,0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Toggle the first row to make it [1, 0]. Then toggle the second column to make it [1, 1] and [1, 1]. The binary values are 0b11 (3) and 0b11 (3). Total score = 3 &#43; 3 = 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: 15</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The lexicographical order of the numbers from 1 to 15 is: 1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 5, 6, 7, 8, 9.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,18 +448,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> A greedy approach is used to maximize the score by toggling rows and columns strategically.</div>
+                        <div class=""> <b>Approach:</b> The approach is to generate the numbers in lexicographical order by recursively trying to append digits to the current number. The recursion will be stopped when a number exceeds n.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The leftmost column has the highest weight in the binary score. Ensuring all 1s in the first column maximizes its contribution.</div>
-                            
-                                <div style="margin-left: 20px;"> • For remaining columns, the contribution depends on the number of 1s. Maximizing 1s in each column maximizes the overall score.</div>
+                                <div style="margin-left: 20px;"> • We need to find a way to generate the numbers in lexicographical order without directly sorting the entire list.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can toggle rows to ensure the first column is all 1s, and then toggle columns to maximize the 1s in each column.</div>
+                                <div style="margin-left: 20px;"> • We can perform a depth-first search (DFS) from 1, appending digits to form lexicographically smaller numbers.</div>
                             
                         </div>
                     </div>
@@ -481,13 +465,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Traverse each row. If the first element is 0, toggle the entire row to make it 1.</div>
+                                <div style="margin-left: 20px;"> • Start at 1, and recursively try to multiply the current number by 10.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Traverse each column starting from the second. Count the number of 1s and 0s.</div>
+                                <div style="margin-left: 20px;"> • If the current number exceeds n, backtrack and move to the next number in the sequence.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: If the count of 0s is greater than 1s, toggle the column.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Compute the total score by interpreting each row as a binary number and summing the values.</div>
+                                <div style="margin-left: 20px;"> • Ensure the algorithm runs efficiently with O(n) time and O(1) extra space.</div>
                             
                         </div>
                     </div>
@@ -496,24 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • N/A: The constraints guarantee at least a 1x1 matrix.</div>
+                                <div style="margin-left: 20px;"> • Input will always be a valid positive integer as per constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix size can be up to 20x20. Ensure the solution efficiently processes matrices of this size.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm handles large values of n (up to 50,000) efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all values are 0 initially, toggling all rows first ensures the maximum score.</div>
-                            
-                                <div style="margin-left: 20px;"> • If all values are 1 initially, no toggles are needed.</div>
+                                <div style="margin-left: 20px;"> • For n = 1, the output is simply [1].</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input matrix values must strictly be binary (0 or 1).</div>
+                                <div style="margin-left: 20px;"> • The algorithm should generate the numbers in lexicographical order efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -530,23 +510,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initial Result Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop (Column Iteration)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable for Current Column Score</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop (Row Iteration)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check Column Values</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Push Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition Check</button>
                     
                 </div>
 
@@ -555,18 +539,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">matrixScore</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> m;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            cur <span style="color:#666">+=</span> grid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> grid[i][j];
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> max(cur, m <span style="color:#666">-</span> cur) <span style="color:#666">*</span> (<span style="color:#666">1</span><span style="color:#666">&lt;&lt;</span>n<span style="color:#666">-</span>j<span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> num;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> lexicalOrder(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    num <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>    d(<span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">d</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&gt;</span> num) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    ans.push_back(x);
+</span></span><span style="display:flex;"><span>    d(x <span style="color:#666">*</span> <span style="color:#666">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((x <span style="color:#666">%</span> <span style="color:#666">10</span>) <span style="color:#666">&lt;</span> <span style="color:#666">9</span>) d(x <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -574,93 +558,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">matrixScore</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> num;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function begins by accepting a 2D vector `grid` that represents a matrix of binary values. </div>
+                            <div class=""> Declare a global variable &#39;num&#39; that will store the value of &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two variables `m` and `n` are initialized to store the number of rows and columns in the grid, respectively. </div>
+                            <div class=""> Declare a vector &#39;ans&#39; to store the numbers in lexicographical order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initial Result Calculation</b></div>
+                            <div class=""> <b>3 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> m;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> lexicalOrder(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The initial score `res` is calculated based on the number of rows and the most significant bit of the matrix (represented by the left-most column). </div>
+                            <div class=""> Define the main function &#39;lexicalOrder&#39; which takes an integer &#39;n&#39; as input and returns a vector of integers in lexicographical order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop (Column Iteration)</b></div>
+                            <div class=""> <b>4 : Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    num <span style="color:#666">=</span> n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each column `j`, starting from column 1, we compute the contribution of the column to the score. </div>
+                            <div class=""> Assign the value of &#39;n&#39; to the global variable &#39;num&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable for Current Column Score</b></div>
+                            <div class=""> <b>5 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    d(<span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A variable `cur` is initialized to calculate the score for the current column, based on the grid values. </div>
+                            <div class=""> Call the recursive function &#39;d&#39; with the starting value 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inner Loop (Row Iteration)</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This inner loop iterates through each row `i` of the current column `j`. </div>
+                            <div class=""> Return the vector &#39;ans&#39; containing the lexicographically ordered numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Check Column Values</b></div>
+                            <div class=""> <b>7 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">+=</span> grid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> grid[i][j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">d</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `cur` score is incremented if the value in the first column matches the value in the current column (`grid[i][j]`). </div>
+                            <div class=""> Define a helper function &#39;d&#39; which takes an integer &#39;x&#39; and recursively generates numbers in lexicographical order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Result</b></div>
+                            <div class=""> <b>8 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> max(cur, m <span style="color:#666">-</span> cur) <span style="color:#666">*</span> (<span style="color:#666">1</span><span style="color:#666">&lt;&lt;</span>n<span style="color:#666">-</span>j<span style="color:#666">-</span><span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&gt;</span> num) <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The result `res` is updated by adding the maximum score obtainable for the current column (either flipping the column or not) multiplied by a power of 2 corresponding to the column&#39;s position. </div>
+                            <div class=""> If the current number &#39;x&#39; exceeds &#39;num&#39;, return and stop the recursion. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Push Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans.push_back(x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final calculated score after processing all columns. </div>
+                            <div class=""> Add the current number &#39;x&#39; to the vector &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    d(x <span style="color:#666">*</span> <span style="color:#666">10</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call &#39;d&#39; with &#39;x * 10&#39;, which generates the next level of lexicographical numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((x <span style="color:#666">%</span> <span style="color:#666">10</span>) <span style="color:#666">&lt;</span> <span style="color:#666">9</span>) d(x <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current number &#39;x&#39; is not ending in 9, call &#39;d&#39; with &#39;x &#43; 1&#39; to explore the next number. </div>
                         </div>
                     
                 </div>
@@ -680,16 +684,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n), where no toggling is needed and only the binary computation is performed.</div>
-                        <div class=""> <b>Average Case:</b> O(m * n), as we toggle rows and compute column values.</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n), as all rows and columns may need toggling.</div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we generate each number exactly once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), since space usage remains constant.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as no additional data structures are used apart from counters.</div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, aside from the space required to store the result.</div>    
                     </div>
 
                 </div>

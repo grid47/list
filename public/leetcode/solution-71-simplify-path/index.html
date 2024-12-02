@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1263s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1262s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/71.webp" 
            alt="A smooth, glowing path being simplified, with unnecessary elements fading away." 
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given the root of a binary tree, your task is to return the zigzag level order traversal of its nodes&rsquo; values. This means you need to traverse the tree level by level, alternating between left to right and right to left on each level. </div>
+<div class=""> Given an absolute path for a Unix-style file system, simplify the path by following Unix file system rules. Handle &lsquo;.&rsquo; and &lsquo;..&rsquo; as current and parent directories, and multiple slashes as a single slash. Return the simplified canonical path. </div>
 
 
 
@@ -370,45 +370,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given the root of a binary tree, where each node has a value and pointers to its left and right children.</div>
-                        <div class=""> <b>Example:</b> root = [4,2,6,1,3,5,7]</div>
+                        <div class=""> <b>Input:</b> A string representing the absolute path of a file or directory in a Unix-style file system.</div>
+                        <div class=""> <b>Example:</b> Input: path = &#34;/home//docs/&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 2000].</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= path.length &lt;= 3000</div>
                             
-                                <div style="margin-left: 20px;"> • -100 &lt;= Node.val &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • path consists of English letters, digits, period &#39;.&#39;, slash &#39;/&#39;, or &#39;_&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • The path is a valid absolute Unix path.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a 2D array where each element represents a level in the binary tree. For each level, alternate between traversing left to right and right to left.</div>
-                        <div class=""> <b>Example:</b> Output: [[4], [6, 2], [1, 3, 5, 7]]</div>
+                        <div class=""> <b>Output:</b> Return the simplified canonical path as a string.</div>
+                        <div class=""> <b>Example:</b> Output: &#34;/home/docs&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be an array of arrays where each inner array contains the values of the nodes at that level, following the zigzag order.</div>
+                                <div style="margin-left: 20px;"> • The output must be a valid simplified absolute path.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to perform a zigzag level order traversal using a breadth-first search (BFS) approach. At every odd level, the node values should be traversed from right to left.</div>
+                        <div class=""> <b>Goal:</b> Simplify the absolute Unix path by handling &#39;.&#39; and &#39;..&#39; according to file system rules.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Start by performing a regular level order traversal using a queue.</div>
+                                <div style="margin-left: 20px;"> • Split the path by the &#39;/&#39; character.</div>
                             
-                                <div style="margin-left: 20px;"> • After collecting the nodes at each level, reverse the values at odd levels to achieve the zigzag pattern.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each segment of the path.</div>
                             
-                                <div style="margin-left: 20px;"> • Push the left and right children of each node into the queue to process the next level.</div>
+                                <div style="margin-left: 20px;"> • Push valid directory names onto a stack, and pop the stack when encountering &#39;..&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • Ignore &#39;.&#39; and empty segments.</div>
+                            
+                                <div style="margin-left: 20px;"> • Finally, reconstruct the canonical path from the stack.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the solution can handle a tree with up to 2000 nodes efficiently.</div>
+                        <div class=""> <b>Goal:</b> The input path must be a valid absolute path, and the function must handle all possible edge cases efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree can have between 0 and 2000 nodes.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= path.length &lt;= 3000</div>
+                            
+                                <div style="margin-left: 20px;"> • The input path must be a valid Unix absolute path.</div>
                             
                         </div>
                     </div>        
@@ -416,31 +424,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input is always a valid binary tree.</div>
+                                <div style="margin-left: 20px;"> • The input path is well-formed and always starts with a slash (&#39;/&#39;).</div>
+                            
+                                <div style="margin-left: 20px;"> • The path is an absolute Unix-style file system path.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [3,9,20,null,null,15,7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree has the following structure:
-
-       3
-      / \
-     9  20
-        /  \
-       15   7
-
-The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: path = &#34;/home//docs/&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Multiple consecutive slashes are treated as a single slash, resulting in the simplified path &#39;/home/docs&#39;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree consists of just one node, which is the root node. The zigzag level order traversal is: [[1]]</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> root = []</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> An empty tree has no nodes, so the zigzag level order traversal is: []</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: path = &#34;/home/user/../data/files/&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The &#39;..&#39; refers to the parent directory, simplifying the path to &#39;/home/data/files&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,16 +462,18 @@ The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved using a breadth-first search (BFS) where nodes are processed level by level. We will alternate the direction of traversal based on the level number.</div>
+                        <div class=""> <b>Approach:</b> Use a stack-based approach to simplify the Unix path by processing each component in sequence.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Zigzag traversal requires alternating the order of nodes on each level.</div>
+                                <div style="margin-left: 20px;"> • The problem requires handling several path components, including valid directory names, &#39;.&#39; (current directory), and &#39;..&#39; (parent directory).</div>
+                            
+                                <div style="margin-left: 20px;"> • A stack data structure is useful for maintaining the current directory context.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By using BFS, we can traverse the tree level by level, and reversing the nodes at odd levels will give us the desired zigzag order.</div>
+                                <div style="margin-left: 20px;"> • The challenge is to correctly handle &#39;..&#39; and &#39;.&#39; while ignoring extraneous slashes and invalid period-based directory names.</div>
                             
                         </div>
                     </div>
@@ -481,11 +481,11 @@ The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Perform a regular level order traversal using a queue to process nodes at each level.</div>
+                                <div style="margin-left: 20px;"> • Split the input path into components using &#39;/&#39; as a delimiter.</div>
                             
-                                <div style="margin-left: 20px;"> • For each level, check if it&#39;s an odd or even level. If it’s an odd level, reverse the node values at that level.</div>
+                                <div style="margin-left: 20px;"> • Process each component and update the stack based on the rules for &#39;.&#39; and &#39;..&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • Push the left and right children of each node into the queue for the next level of traversal.</div>
+                                <div style="margin-left: 20px;"> • Reconstruct the canonical path by joining the stack elements, making sure to handle the leading slash and removing any trailing slashes unless the result is the root directory.</div>
                             
                         </div>
                     </div>
@@ -494,22 +494,22 @@ The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the tree is empty (i.e., the root is null), return an empty list.</div>
+                                <div style="margin-left: 20px;"> • An empty input is not possible due to the constraints (1 &lt;= path.length).</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large trees with up to 2000 nodes, ensure the solution handles the input efficiently.</div>
+                                <div style="margin-left: 20px;"> • Handle the largest possible input, where the length of the path is 3000 characters.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If a node has only one child (either left or right), make sure it is properly handled during the zigzag traversal.</div>
+                                <div style="margin-left: 20px;"> • Handle cases like &#39;/..&#39; where going up from the root directory results in the root directory itself.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The tree must be processed within the provided constraints (2000 nodes).</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle large inputs while simplifying the path.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,53 +526,29 @@ The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Temporary Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 String Stream Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Empty Tree Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Stack Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push Root to Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Main BFS Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Level Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Level Node Processing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue Front</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 String Concatenation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Pop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Stack Operations</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Add Node Value to Temp</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Left Child Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Right Child Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Push Level to Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Clear Temp Vector</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Call levelOrder</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Zigzag Traversal</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Reverse Current Level</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Reverse Vector</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Assign Reversed Level</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Return</button>
                     
                 </div>
 
@@ -581,39 +557,25 @@ The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>    q.push(root);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> it <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            tmp.push_back(it<span style="color:#666">-&gt;</span>val);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left  <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
-</span></span><span style="display:flex;"><span>        tmp.clear();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">simplifyPath</span>(string path) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> dot <span style="color:#666">=</span> {<span style="color:#b44">&#34;..&#34;</span>, <span style="color:#b44">&#34;.&#34;</span>, <span style="color:#b44">&#34;&#34;</span>};
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>, tmp;
+</span></span><span style="display:flex;"><span>    stringstream ss(path);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(getline(ss, tmp, <span style="color:#b44">&#39;/&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tmp <span style="color:#666">==</span> <span style="color:#b44">&#34;..&#34;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty()) stk.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>dot.count(tmp)) stk.push(tmp);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#666">*</span> root) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans <span style="color:#666">=</span> levelOrder(root);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ans.size(); i <span style="color:#666">+=</span> <span style="color:#666">2</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> ans[i];
-</span></span><span style="display:flex;"><span>        reverse(tmp.begin(), tmp.end());
-</span></span><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> tmp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> <span style="color:#b44">&#34;/&#34;</span> <span style="color:#666">+</span> stk.top() <span style="color:#666">+</span> res;
+</span></span><span style="display:flex;"><span>        stk.pop();
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span><span style="color:#666">?</span> <span style="color:#b44">&#34;/&#34;</span><span style="color:#666">:</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -621,243 +583,123 @@ The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">simplifyPath</span>(string path) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the &#39;levelOrder&#39; function that performs a level-order traversal of a binary tree and returns a 2D vector. </div>
+                            <div class=""> Declares a function `simplifyPath` that takes a string `path` as input and returns a simplified path as a string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Set Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> dot <span style="color:#666">=</span> {<span style="color:#b44">&#34;..&#34;</span>, <span style="color:#b44">&#34;.&#34;</span>, <span style="color:#b44">&#34;&#34;</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a 2D vector &#39;ans&#39; to store the values of each level during the level-order traversal. </div>
+                            <div class=""> Creates a set `dot` to store invalid path segments: &#39;..&#39;, &#39;.&#39;, and empty strings. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Temporary Vector Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>, tmp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a temporary vector &#39;tmp&#39; to store the values of nodes at each level. </div>
+                            <div class=""> Initializes `res` to store the simplified path and `tmp` to hold temporary path segments. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Queue Initialization</b></div>
+                            <div class=""> <b>4 : String Stream Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stringstream <span style="color:#00a000">ss</span>(path);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Create a queue &#39;q&#39; for performing breadth-first search (BFS), which will store the nodes at each level. </div>
+                            <div class=""> Creates a string stream `ss` to parse the input `path`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Empty Tree Check</b></div>
+                            <div class=""> <b>5 : Stack Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the root is null. If it is, return the empty result vector &#39;ans&#39;. </div>
+                            <div class=""> Creates a stack `stk` to store valid path segments. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Push Root to Queue</b></div>
+                            <div class=""> <b>6 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(getline(ss, tmp, <span style="color:#b44">&#39;/&#39;</span>)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the root node into the queue to start the traversal. </div>
+                            <div class=""> Iterates through each path segment in the string stream `ss`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Main BFS Loop</b></div>
+                            <div class=""> <b>7 : Conditions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tmp <span style="color:#666">==</span> <span style="color:#b44">&#34;..&#34;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty()) stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the BFS loop which continues as long as there are nodes in the queue. </div>
+                            <div class=""> If the current segment is &#39;..&#39; and the stack is not empty, pop the top element from the stack (go back one directory). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Level Size</b></div>
+                            <div class=""> <b>8 : Conditions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (<span style="color:#666">!</span>dot.count(tmp)) stk.push(tmp);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the number of nodes at the current level by checking the size of the queue. </div>
+                            <div class=""> If the current segment is not a &#39;.&#39; or &#39;..&#39; or empty, push it onto the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Level Node Processing</b></div>
+                            <div class=""> <b>9 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Process each node at the current level by looping through the queue until all nodes at this level are processed. </div>
+                            <div class=""> Iterates while the stack is not empty. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Queue Front</b></div>
+                            <div class=""> <b>10 : String Concatenation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> it <span style="color:#666">=</span> q.front();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> <span style="color:#b44">&#34;/&#34;</span> <span style="color:#666">+</span> stk.top() <span style="color:#666">+</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Get the front node from the queue to process it. </div>
+                            <div class=""> Concatenates the top element of the stack to the `res` string, prepending a &#39;/&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Queue Pop</b></div>
+                            <div class=""> <b>11 : Stack Operations</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the processed node from the queue. </div>
+                            <div class=""> Pops the top element from the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Add Node Value to Temp</b></div>
+                            <div class=""> <b>12 : Conditional Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp.push_back(it<span style="color:#666">-&gt;</span>val);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span><span style="color:#666">?</span> <span style="color:#b44">&#34;/&#34;</span><span style="color:#666">:</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current node&#39;s value to the &#39;tmp&#39; vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Left Child Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left  <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>left);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current node has a left child, push it to the queue for the next level. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Right Child Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>right);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current node has a right child, push it to the queue for the next level. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Push Level to Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(tmp);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After processing all nodes at the current level, push the &#39;tmp&#39; vector to &#39;ans&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Clear Temp Vector</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp.clear();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Clear the temporary vector &#39;tmp&#39; for the next level. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final 2D vector &#39;ans&#39;, which contains the level-order traversal of the tree. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#666">*</span> root) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the &#39;zigzagLevelOrder&#39; function which calls &#39;levelOrder&#39; and modifies the result to achieve zigzag ordering. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Call levelOrder</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans <span style="color:#666">=</span> levelOrder(root);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Call the &#39;levelOrder&#39; function to get the initial level-order traversal. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Zigzag Traversal</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ans.size(); i <span style="color:#666">+=</span> <span style="color:#666">2</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Loop through the result vector and reverse every alternate level to achieve a zigzag order. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Reverse Current Level</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> ans[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Copy the current level into &#39;tmp&#39; before reversing it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Reverse Vector</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        reverse(tmp.begin(), tmp.end());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Reverse the current level to achieve zigzag order. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Assign Reversed Level</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> tmp;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the reversed level back to the result vector &#39;ans&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final result vector with the zigzag level-order traversal. </div>
+                            <div class=""> Returns &#39;/&#39; if the `res` string is empty, otherwise returns the constructed simplified path. </div>
                         </div>
                     
                 </div>
@@ -880,13 +722,13 @@ The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> In all cases, we must visit each node in the tree once, so the time complexity is O(n), where n is the number of nodes in the tree.</div>                                               
+                        <div class=""> <b>Description:</b> We process each character of the input path once, making the time complexity linear in terms of the path length.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, the queue may hold all the nodes at the last level of the tree, resulting in a space complexity of O(n). In the best case, when the tree is perfectly balanced, the space complexity could be reduced to O(log n).</div>    
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of components in the path, which can be at most n.</div>    
                     </div>
 
                 </div>

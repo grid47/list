@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1288s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1286s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/756.webp" 
            alt="A pyramid structure where transitions occur, with the valid transitions glowing softly as they are made." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You have a 2-D grid representing a box, and a number of balls that will be dropped into the box. The box has diagonal boards in each cell, which can redirect the balls either left or right. Your task is to determine the path of each ball dropped from the top of the box. The ball can either fall out of the bottom, or get stuck if it hits a &lsquo;V&rsquo; shaped pattern between two boards or is redirected into a wall. </div>
+<div class=""> You are building a pyramid by stacking blocks, each represented by a color denoted by a letter. Each row above the bottom consists of one less block, centered on the row beneath. Only specific triangular patterns of blocks are allowed. A triangular pattern consists of three blocks: two at the bottom and one on top. Given the bottom row and allowed patterns, determine if it&rsquo;s possible to construct the pyramid. </div>
 
 
 
@@ -371,53 +371,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 2-D grid of size &#39;m&#39; x &#39;n&#39; where each element in the grid can either be 1 or -1. A value of 1 indicates a board that redirects a ball to the right, and -1 indicates a board that redirects a ball to the left. Additionally, you are given an integer &#39;n&#39; representing the number of balls.</div>
-                        <div class=""> <b>Example:</b> [[1,1,1,-1,-1],[1,1,1,-1,-1],[-1,-1,-1,1,1],[1,1,1,1,-1],[-1,-1,-1,-1,-1]]</div>
+                        <div class=""> <b>Input:</b> You are given a string representing the bottom row of blocks, and a list of strings representing the allowed triangular patterns.</div>
+                        <div class=""> <b>Example:</b> bottom = &#39;XYZ&#39;, allowed = [&#39;XZZ&#39;, &#39;XYZ&#39;, &#39;ZYY&#39;, &#39;YYY&#39;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= grid.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= bottom.length &lt;= 6</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= grid[i].length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= allowed.length &lt;= 216</div>
                             
-                                <div style="margin-left: 20px;"> • grid[i][j] is either 1 or -1</div>
+                                <div style="margin-left: 20px;"> • allowed[i].length == 3</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • All input letters are from the set {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;}</div>
+                            
+                                <div style="margin-left: 20px;"> • All patterns in &#39;allowed&#39; are unique</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an array of size &#39;n&#39; where the &#39;i&#39;th element represents the column that the &#39;i&#39;th ball falls out of at the bottom of the box, or -1 if the ball gets stuck.</div>
-                        <div class=""> <b>Example:</b> [1,-1,-1,-1,-1]</div>
+                        <div class=""> <b>Output:</b> Return true if it is possible to build the pyramid following the allowed patterns, or false otherwise.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output array should contain integers between 0 and n-1, or -1 if a ball gets stuck.</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient for large inputs</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Simulate the dropping of balls into the grid and track their paths based on the redirection rules.</div>
+                        <div class=""> <b>Goal:</b> The goal is to recursively check if we can build each level of the pyramid using the allowed triangular patterns.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. For each ball, start at the top of a given column and simulate its movement through the grid.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with the bottom row of blocks.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. At each row, check the direction of the board in the current cell and determine if the ball can be redirected.</div>
+                                <div style="margin-left: 20px;"> • 2. Try to form each level of the pyramid by checking the allowed patterns for every adjacent pair of blocks.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the ball hits a wall or gets stuck in a &#39;V&#39; shaped pattern, mark it as stuck and break out of the loop.</div>
+                                <div style="margin-left: 20px;"> • 3. If the level cannot be constructed using the allowed patterns, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. If the ball reaches the bottom without getting stuck, track the column where it exits.</div>
+                                <div style="margin-left: 20px;"> • 4. Repeat the process until the pyramid is complete or return false if any level cannot be built.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Handle the problem within the constraints provided, ensuring each ball&#39;s path is computed accurately based on the grid configuration.</div>
+                        <div class=""> <b>Goal:</b> This problem requires efficient checking of allowed patterns and handling small to large input sizes.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid is guaranteed to have at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • The input size for the bottom row is small (maximum length 6).</div>
                             
-                                <div style="margin-left: 20px;"> • Each ball can only fall down one path at a time and may get stuck or exit the grid.</div>
+                                <div style="margin-left: 20px;"> • The number of allowed patterns can be up to 216.</div>
                             
                         </div>
                     </div>        
@@ -425,23 +427,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each ball will be dropped from the top of a column and can either exit the grid or get stuck.</div>
+                                <div style="margin-left: 20px;"> • There are no empty patterns in the allowed list.</div>
+                            
+                                <div style="margin-left: 20px;"> • All patterns in the allowed list are valid and distinct.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 1, 1, -1, -1], [1, 1, 1, -1, -1], [-1, -1, -1, 1, 1], [1, 1, 1, 1, -1], [-1, -1, -1, -1, -1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Ball 0 is dropped at column 0 and falls out at column 1. Ball 1 is dropped at column 1 but gets stuck between columns 2 and 3. Balls 2-4 also get stuck due to the V-shaped pattern.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: bottom = &#39;XYZ&#39;, allowed = [&#39;XZZ&#39;, &#39;XYZ&#39;, &#39;ZYY&#39;, &#39;YYY&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Start with &#39;XYZ&#39;. Use &#39;XYZ&#39; to form &#39;ZY&#39; on the next level, then form &#39;Y&#39; on the top level. All patterns are valid, so the pyramid can be built.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [[-1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Ball 0 is dropped at column 0 but gets stuck against the left wall, resulting in -1.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-1],[1,1,1,1,1,1],[-1,-1,-1,-1,-1,-1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Each ball from columns 0-4 exits the box through the respective columns at the bottom. Ball 5 gets stuck.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: bottom = &#39;AAA&#39;, allowed = [&#39;AAB&#39;, &#39;ABB&#39;, &#39;AAB&#39;, &#39;BCC&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Start with &#39;AAA&#39;. There are no valid patterns to form a level from &#39;AA&#39;, so the pyramid cannot be built.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -465,16 +465,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Simulate the process of dropping each ball from the top and track its path using the grid&#39;s redirection rules.</div>
+                        <div class=""> <b>Approach:</b> The approach is to use a recursive function to check if the pyramid can be constructed level by level, verifying the allowed triangular patterns for each pair of adjacent blocks in the current row.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to follow the path of each ball through the grid row by row.</div>
+                                <div style="margin-left: 20px;"> • We need to recursively reduce the problem from bottom to top, checking the allowed patterns for each adjacent pair of blocks.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The grid&#39;s constraints (1, -1) provide clear redirection rules, making it possible to track each ball&#39;s path.</div>
+                                <div style="margin-left: 20px;"> • We can use a hash map to store the allowed patterns for efficient look-up during the recursive checks.</div>
                             
                         </div>
                     </div>
@@ -482,13 +482,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Loop through each ball and track its movement from top to bottom.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a hash map of allowed triangular patterns where the key is the pair of blocks at the bottom and the value is the top block.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each row, check if the ball can move left or right based on the grid&#39;s value at that position.</div>
+                                <div style="margin-left: 20px;"> • 2. Start from the bottom row and recursively check if the pyramid can be constructed by trying to form each subsequent row using the allowed patterns.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the ball gets stuck, add -1 to the result array for that ball.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If the ball exits the grid, add the column where it exits to the result array.</div>
+                                <div style="margin-left: 20px;"> • 3. Return true if the pyramid can be built or false if any row cannot be formed.</div>
                             
                         </div>
                     </div>
@@ -497,22 +495,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid will always have at least one row and column, so empty grids are not an issue.</div>
+                                <div style="margin-left: 20px;"> • The allowed list may be empty, in which case it&#39;s impossible to form the pyramid.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution scales for large grids with up to 100 rows and columns.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle the upper limit of allowed patterns efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check for cases where balls hit the wall or get stuck due to a V-shaped pattern.</div>
+                                <div style="margin-left: 20px;"> • No special cases for the input constraints.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must efficiently handle multiple balls and large grid sizes.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle the bottom row&#39;s length ranging from 2 to 6 and up to 216 allowed patterns.</div>
                             
                         </div>                                                                        
                     </div>
@@ -529,31 +527,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Data Structures</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Grid Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Clear Invalid Set</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mapping Transitions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialization for Ball Movement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Transition Mapping</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Calculate Next Column</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Helper Function Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Boundary and Direction Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case - Single Stone</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Ball Stuck Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Cycle Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Exit Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Step</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Ball Position</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Store Ball&#39;s Final Position</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Memoization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Character Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Recursive Call with New Stone</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return False</button>
                     
                 </div>
 
@@ -562,156 +566,192 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findBall(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i1 <span style="color:#666">=</span> i, i2;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            i2 <span style="color:#666">=</span> i1 <span style="color:#666">+</span> grid[j][i1];
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i2 <span style="color:#666">&lt;</span><span style="color:#666">0</span> <span style="color:#666">||</span> i2 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> grid[j][i1] <span style="color:#666">!=</span> grid[j][i2]) {
-</span></span><span style="display:flex;"><span>                i1 <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            i1 <span style="color:#666">=</span> i2;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        res.push_back(i1);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> invalid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">pyramidTransition</span>(string bottom, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> allowed) {
+</span></span><span style="display:flex;"><span>  invalid.clear();
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> m;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">s</span>:allowed) m[s.substr(<span style="color:#666">0</span>, <span style="color:#666">2</span>)].push_back(s.back());
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> helper(bottom, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">helper</span>(string bottom, unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> m, <span style="color:#0b0;font-weight:bold">int</span> start, string next){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(bottom.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(invalid.find(bottom) <span style="color:#666">!=</span> invalid.end()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(start <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">int</span>)bottom.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>       <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> helper(next, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>res) { invalid.insert(next); }
+</span></span><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : m[bottom.substr(start, <span style="color:#666">2</span>)])
+</span></span><span style="display:flex;"><span>  <span style="color:#a2f;font-weight:bold">if</span>(helper(bottom, m, start<span style="color:#666">+</span><span style="color:#666">1</span>, next<span style="color:#666">+</span>c)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>  }
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Data Structures</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findBall(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> invalid;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `findBall` that simulates the ball&#39;s path through the grid. </div>
+                            <div class=""> Creates an unordered set &#39;invalid&#39; to keep track of previously visited bottom rows to avoid cycles or redundant checks. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Function Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">pyramidTransition</span>(string bottom, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> allowed) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a vector `res` to store the result of the ball&#39;s final position for each column. </div>
+                            <div class=""> Begins the definition of the &#39;pyramidTransition&#39; function. The function checks if a pyramid can be built based on the given bottom row and allowed stone transitions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Grid Size Calculation</b></div>
+                            <div class=""> <b>3 : Clear Invalid Set</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  invalid.clear();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the dimensions of the grid, with `m` being the number of rows and `n` the number of columns. </div>
+                            <div class=""> Clears the &#39;invalid&#39; set to ensure no old invalid configurations are present before checking the new pyramid bottom. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Outer Loop</b></div>
+                            <div class=""> <b>4 : Mapping Transitions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> m;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each column at the top of the grid where the ball can start. </div>
+                            <div class=""> Defines an unordered map &#39;m&#39; where the key is a pair of stones and the value is a list of possible stones that can be placed above the pair. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Initialization for Ball Movement</b></div>
+                            <div class=""> <b>5 : Transition Mapping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i1 <span style="color:#666">=</span> i, i2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">s</span>:allowed) m[s.substr(<span style="color:#666">0</span>, <span style="color:#666">2</span>)].push_back(s.back());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the initial position of the ball (`i1` is the column index) and initializes `i2` to track the new column position. </div>
+                            <div class=""> Fills the map &#39;m&#39; by iterating through the allowed transitions. For each transition, it maps the first two characters of the transition to the corresponding stone that can be placed above it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inner Loop</b></div>
+                            <div class=""> <b>6 : Recursion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">helper</span>(bottom, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through each row of the grid, simulating the ball&#39;s movement. </div>
+                            <div class=""> Calls the helper function to start the process of attempting to build the pyramid, beginning from the bottom and using the transition map &#39;m&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Calculate Next Column</b></div>
+                            <div class=""> <b>7 : Helper Function Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i2 <span style="color:#666">=</span> i1 <span style="color:#666">+</span> grid[j][i1];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">helper</span>(string bottom, unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> m, <span style="color:#0b0;font-weight:bold">int</span> start, string next){
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the next column index `i2` based on the direction in the current grid cell (`grid[j][i1]` is either 1 for &#39;&gt;&#39; or -1 for &#39;v&#39;). </div>
+                            <div class=""> Starts the definition of the &#39;helper&#39; function. This function handles the recursive process of trying to build the pyramid from the bottom upwards. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Boundary and Direction Check</b></div>
+                            <div class=""> <b>8 : Base Case - Single Stone</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i2 <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i2 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> grid[j][i1] <span style="color:#666">!=</span> grid[j][i2]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(bottom.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the ball has gone out of bounds or if it is stuck in a &#39;V&#39; shape (where both directions are the same). </div>
+                            <div class=""> Base case of the recursion. If the bottom row has only one stone, the pyramid is successfully built. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Ball Stuck Condition</b></div>
+                            <div class=""> <b>9 : Cycle Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                i1 <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(invalid.find(bottom) <span style="color:#666">!=</span> invalid.end()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets `i1` to -1 to indicate the ball is stuck (cannot move further). </div>
+                            <div class=""> Checks if the current bottom row has been processed before. If it has, the function returns false to avoid infinite recursion or redundant calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Exit Inner Loop</b></div>
+                            <div class=""> <b>10 : Recursive Step</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(start <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">int</span>)bottom.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Exits the inner loop early if the ball is stuck. </div>
+                            <div class=""> If the current start index is the last stone in the bottom row, the function will attempt to build the next layer above it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Update Ball Position</b></div>
+                            <div class=""> <b>11 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i1 <span style="color:#666">=</span> i2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> helper(next, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the ball&#39;s position to the new column `i2`. </div>
+                            <div class=""> Recursively calls the helper function with the newly formed next layer (the stones placed above the current bottom). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Store Ball&#39;s Final Position</b></div>
+                            <div class=""> <b>12 : Memoization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(i1);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>res) { invalid.insert(next); }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the final position of the ball after it has moved through all the rows (or is stuck) in the vector `res`. </div>
+                            <div class=""> If the recursion fails, the next layer configuration is added to the &#39;invalid&#39; set to avoid future redundant checks. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>13 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the result vector `res`, which contains the final positions for the ball starting from each column. </div>
+                            <div class=""> Returns the result of the recursive call, indicating whether it was possible to build the pyramid from the current bottom layer. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Character Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : m[bottom.substr(start, <span style="color:#666">2</span>)])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over all possible stone transitions that can be placed above the current two stones at the &#39;start&#39; position of the bottom row. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Recursive Call with New Stone</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#a2f;font-weight:bold">if</span>(helper(bottom, m, start<span style="color:#666">+</span><span style="color:#666">1</span>, next<span style="color:#666">+</span>c)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively attempts to build the pyramid by adding each possible stone transition to the &#39;next&#39; layer, checking if a valid configuration can be formed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return False</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no valid configuration is found after iterating through all possible stone transitions, the function returns false. </div>
                         </div>
                     
                 </div>
@@ -731,16 +771,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n), where m is the number of rows and n is the number of columns in the grid.</div>
-                        <div class=""> <b>Average Case:</b> O(m * n), since each ball may need to traverse through each row.</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n), since in the worst case, every ball might traverse the entire grid.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m * n) due to the nested iteration over rows and columns.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The solution involves checking all possible pairs at each level, leading to a time complexity proportional to the size of the bottom row and the allowed patterns.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), if all balls exit immediately.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), since we store the result of each ball&#39;s path.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) because we only store the result for each ball.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of levels in the pyramid and the number of allowed patterns.</div>    
                     </div>
 
                 </div>

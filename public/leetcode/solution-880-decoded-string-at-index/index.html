@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 11, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
 
 
-<div class=""> You are tasked with designing a dynamic array where the number of elements that should be in the array at each time is provided in an integer array <code>nums</code>. Additionally, you are given an integer <code>k</code>, representing the maximum number of times you can resize the array. At each time step, the array’s size must be large enough to hold the elements in <code>nums[i]</code> and any extra space will be wasted. Your goal is to minimize the total wasted space by resizing the array at most <code>k</code> times. </div>
+<div class=""> You are given an encoded string consisting of letters and digits. The string is decoded such that for each digit, the preceding segment of the decoded string is repeated (digit - 1) additional times. Your task is to return the kth character (1-indexed) in the decoded string, where k is a positive integer. The decoded string could be extremely large, so you are not expected to fully decode the string. </div>
 
 
 
@@ -350,49 +350,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `nums` where each `nums[i]` represents the number of elements that need to be in the array at time `i`. You are also given an integer `k` which specifies the maximum number of resizes allowed.</div>
-                        <div class=""> <b>Example:</b> nums = [15, 25, 10], k = 1</div>
+                        <div class=""> <b>Input:</b> The input consists of an encoded string containing lowercase English letters and digits between 2 and 9. The string always starts with a letter.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#39;abc3de2&#39;, k = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= s.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase English letters and digits 2 through 9.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= nums.length - 1</div>
+                                <div style="margin-left: 20px;"> • s starts with a letter.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • It is guaranteed that k is less than or equal to the length of the decoded string.</div>
+                            
+                                <div style="margin-left: 20px;"> • The decoded string will have fewer than 2^63 letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the minimum total space wasted if you can resize the array at most `k` times.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> You should return a string representing the kth character in the decoded string.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;d&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array can be resized at most `k` times.</div>
+                                <div style="margin-left: 20px;"> • The output is a single lowercase letter.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The objective is to minimize the total wasted space by determining when and how to resize the array optimally.</div>
+                        <div class=""> <b>Goal:</b> To efficiently determine the kth character without fully decoding the string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Start by setting an initial size for the array.</div>
+                                <div style="margin-left: 20px;"> • First, calculate the total length of the decoded string by iterating over the encoded string.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Check the amount of space wasted at each time step based on the current size and the number of elements required.</div>
+                                <div style="margin-left: 20px;"> • Identify the range in which the kth character lies by adjusting the index in reverse.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Resize the array up to `k` times if it reduces the total wasted space.</div>
+                                <div style="margin-left: 20px;"> • When a digit is encountered, divide the total length by that digit to adjust the range, and continue until the correct position is found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the array is resized no more than `k` times and that the array size can hold all the required elements at each time step.</div>
+                        <div class=""> <b>Goal:</b> The problem has constraints that ensure that the decoded string is large enough that fully decoding it is impractical. The goal is to calculate the position of the kth character without decoding the entire string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The size of the array at each time `t` must be at least `nums[t]`.</div>
-                            
-                                <div style="margin-left: 20px;"> • Resizing the array can be done at most `k` times.</div>
+                                <div style="margin-left: 20px;"> • The number of characters to decode can grow very large, so a brute-force solution that fully decodes the string would be inefficient.</div>
                             
                         </div>
                     </div>        
@@ -400,17 +404,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array will always be valid with non-negative values.</div>
+                                <div style="margin-left: 20px;"> • It is guaranteed that k is less than or equal to the length of the decoded string.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of resizes will not exceed the length of the array minus one.</div>
+                                <div style="margin-left: 20px;"> • The input string contains only lowercase letters and digits between 2 and 9.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [15, 25, 10], k = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the initial array size could be set to 25 to accommodate the first two values, and a resize can be made at time 3 to accommodate the value 10. The total wasted space is 5.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;abc3de2&#39;, k = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;abc3de2&#39; decodes to &#39;abcdeabcde&#39;. The 5th character is &#39;d&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;xy2z3&#39;, k = 6</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;xy2z3&#39; decodes to &#39;xyzxyzxyzxyz&#39;. The 6th character is &#39;z&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -434,16 +442,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to start by choosing an initial size for the array and then check the space wasted at each step. The key to minimizing wasted space is to resize the array optimally and avoid unnecessary resizes.</div>
+                        <div class=""> <b>Approach:</b> The key observation is that you do not need to fully decode the string. Instead, track the length of the string dynamically as you process the encoded string. By identifying when the kth character falls within a segment, you can reverse the encoding process to find the character.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Resizing too frequently could increase wasted space, but resizing too infrequently may result in larger wasted space.</div>
+                                <div style="margin-left: 20px;"> • Instead of decoding the string fully, keep track of the lengths of the decoded segments as you parse the string.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem is about finding a balance between resizing the array and minimizing wasted space at each step.</div>
+                                <div style="margin-left: 20px;"> • Reverse the decoding process to determine the position of the kth character efficiently.</div>
                             
                         </div>
                     </div>
@@ -451,11 +459,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: For each potential resizing scenario, calculate the total space wasted if the array is resized.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the encoded string and calculate the total length of the decoded string as you go.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use dynamic programming to check different ways of resizing the array to minimize space waste.</div>
+                                <div style="margin-left: 20px;"> • When encountering a digit, multiply the length of the current segment by the digit to account for repetition.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Keep track of the best solution and return the minimum wasted space.</div>
+                                <div style="margin-left: 20px;"> • When encountering a letter, decrement the length and check if it corresponds to the kth character. If so, return it.</div>
                             
                         </div>
                     </div>
@@ -464,22 +472,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one element in the `nums` array.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least one letter, so empty input will not occur.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for the maximum input size.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle cases where the length of the decoded string exceeds the practical limit for direct storage.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider scenarios where no resizes are needed, i.e., `k = 0`.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the kth character is located within a repetitive segment.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of resizes will be constrained to `k` times.</div>
+                                <div style="margin-left: 20px;"> • Make sure the solution works within the problem&#39;s constraints, particularly the large value of k.</div>
                             
                         </div>                                                                        
                     </div>
@@ -496,49 +504,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Expression</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Expression</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Arithmetic Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Arithmetic Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Expression</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Wasted Space Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Result Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Vector Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Vector Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Memoization Setup</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
                 </div>
 
@@ -547,33 +535,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">200</span>];
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> idx) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[k][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[k][idx];
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>string decodeAtIndex(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX, sum <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> nums[idx];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> idx; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, nums[j]);
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[j];
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> wasted <span style="color:#666">=</span> mx <span style="color:#666">*</span> (j <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">-</span> sum;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> dp(k <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, wasted <span style="color:#666">+</span> (res <span style="color:#666">==</span> INT_MAX<span style="color:#666">?</span> INT_MAX <span style="color:#666">-</span> <span style="color:#a0a000">wasted</span>: res));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> N <span style="color:#666">=</span> <span style="color:#666">0</span>, i;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; N <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        N <span style="color:#666">=</span> isdigit(s[i])<span style="color:#666">?</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#a0a000">N</span>: N <span style="color:#666">+</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isdigit(s[i])) {
+</span></span><span style="display:flex;"><span>            N <span style="color:#666">/=</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>            k <span style="color:#666">%=</span> N;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (k <span style="color:#666">%</span> N<span style="color:#666">--</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> string(<span style="color:#666">1</span>, s[i]);
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[k][idx] <span style="color:#666">=</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSpaceWastedKResizing</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
-</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(k <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;hello yasir&#34;</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -581,221 +563,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initialization</b></div>
+                            <div class=""> <b>1 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializing variables for the dynamic programming function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare variable n to store the size of the input vector nums. </div>
+                            <div class=""> Access modifier `public` allows the method `decodeAtIndex` to be accessed from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Vector Declaration</b></div>
+                            <div class=""> <b>2 : Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">decodeAtIndex</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a vector nums to store the input integers. </div>
+                            <div class=""> This function `decodeAtIndex` takes a string `s` and an integer `k`, and decodes the string to find the k-th character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Array Declaration</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">200</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> N <span style="color:#666">=</span> <span style="color:#666">0</span>, i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a 2D array memo for memoization, to store the results of subproblems. </div>
+                            <div class=""> Declares two variables `N` (used to track the length of the decoded string) and `i` (used for iteration). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Function Definition</b></div>
+                            <div class=""> <b>4 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> idx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; N <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the recursive function dp, which calculates the minimum space wasted given k partitions and the current index. </div>
+                            <div class=""> A loop that iterates through the string `s`, updating `N` to track the decoded length until it reaches `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Base Case</b></div>
+                            <div class=""> <b>5 : Conditional Expression</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        N <span style="color:#666">=</span> isdigit(s[i])<span style="color:#666">?</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#a0a000">N</span>: N <span style="color:#666">+</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case: if the index has reached the end of the array, return 0 since there is no remaining space. </div>
+                            <div class=""> Updates `N` based on whether the character at `s[i]` is a digit or not. If it&#39;s a digit, `N` is multiplied; otherwise, it&#39;s incremented. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Base Case</b></div>
+                            <div class=""> <b>6 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case: if no partitions are allowed, return a large number to signify an invalid case. </div>
+                            <div class=""> A while loop that iterates backwards through the string to find the character corresponding to the k-th position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Memoization Check</b></div>
+                            <div class=""> <b>7 : Conditional Expression</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the result for the current state (k, idx) has already been computed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Memoization Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[k][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[k][idx];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isdigit(s[i])) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the precomputed result from the memoization array if it exists. </div>
+                            <div class=""> Checks if the current character is a digit. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>8 : Arithmetic Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX, sum <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> nums[idx];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            N <span style="color:#666">/=</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables: ans stores the minimum space wasted, sum tracks the current sum, and mx stores the maximum value in the current partition. </div>
+                            <div class=""> Divides `N` by the value of the digit at `s[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop</b></div>
+                            <div class=""> <b>9 : Arithmetic Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> idx; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            k <span style="color:#666">%=</span> N;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over all possible ending indices for the current partition. </div>
+                            <div class=""> Calculates the remainder of `k` after dividing it by `N` to find the new position of `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Max Calculation</b></div>
+                            <div class=""> <b>10 : Conditional Expression</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, nums[j]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (k <span style="color:#666">%</span> N<span style="color:#666">--</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the maximum value in the current partition. </div>
+                            <div class=""> Checks if `k` is divisible by `N` and decrements `N` after the check. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Sum Calculation</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">string</span>(<span style="color:#666">1</span>, s[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current element to the sum for the current partition. </div>
+                            <div class=""> Returns the character at `s[i]` as a string when the k-th position is found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Wasted Space Calculation</b></div>
+                            <div class=""> <b>12 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> wasted <span style="color:#666">=</span> mx <span style="color:#666">*</span> (j <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">-</span> sum;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;hello yasir&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the wasted space for the current partition by comparing the area that would be taken by the max value with the actual sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> dp(k <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively call dp to calculate the result for the remaining partitions after the current partition. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Result Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, wasted <span style="color:#666">+</span> (res <span style="color:#666">==</span> INT_MAX<span style="color:#666">?</span> INT_MAX <span style="color:#666">-</span> <span style="color:#a0a000">wasted</span>: res));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the minimum answer by considering the wasted space for the current partition and the result from the recursive call. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[k][idx] <span style="color:#666">=</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Store and return the result for the current state (k, idx) to avoid redundant calculations. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSpaceWastedKResizing</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the function to find the minimum space wasted after resizing the vector with k partitions. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Vector Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> nums.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize n with the size of the input vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Vector Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the input vector nums to the member variable nums. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Memoization Setup</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Set all entries in the memo array to -1 to signify that no subproblems have been solved yet. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(k <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Call the dp function with k &#43; 1 partitions and starting from index 0, and return the result. </div>
+                            <div class=""> Returns a default string &#34;hello yasir&#34; if the character is not found. </div>
                         </div>
                     
                 </div>
@@ -816,15 +700,15 @@
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The worst case involves checking every possible combination of resizes, which leads to a time complexity of O(n^2).</div>                                               
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the length of the input string, as we only need to process the string once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n*k)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of resizes and the length of the array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant since we are only keeping track of a few variables and do not need to store the decoded string.</div>    
                     </div>
 
                 </div>

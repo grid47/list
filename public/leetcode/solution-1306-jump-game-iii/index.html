@@ -308,7 +308,7 @@
 
 
 
-<div class=""> Given an m x n grid with some black cells specified by a coordinates list, determine how many 2x2 blocks contain exactly 0, 1, 2, 3, or 4 black cells. </div>
+<div class=""> You are given an array of non-negative integers arr and a starting index start. You can jump forward or backward from any index based on the values at the index. Your task is to determine whether you can reach an index with a value of 0. </div>
 
 
 
@@ -359,55 +359,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of integers m, n, and a 2D integer array coordinates.</div>
-                        <div class=""> <b>Example:</b> Input: m = 4, n = 4, coordinates = [[1, 1]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers and a starting index. The array contains non-negative integers and the starting index is within the bounds of the array.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [5, 3, 4, 0, 1, 6], start = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= m, n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= coordinates.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= arr[i] &lt; arr.length</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= coordinates[i][0] &lt; m</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= coordinates[i][1] &lt; n</div>
-                            
-                                <div style="margin-left: 20px;"> • Each coordinate pair is distinct.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt; arr.length</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list of size 5 where the i-th entry is the number of blocks containing exactly i black cells.</div>
-                        <div class=""> <b>Example:</b> Output: [9, 3, 0, 0, 0] for m = 4, n = 4, coordinates = [[1, 1]].</div>
+                        <div class=""> <b>Output:</b> The output is a boolean value indicating whether it is possible to reach an index with a value of 0.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Output should be a list of integers of size 5.</div>
+                                <div style="margin-left: 20px;"> • The result is either true or false depending on whether it&#39;s possible to reach an index with value 0.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To efficiently count the number of blocks containing exactly i black cells for i = 0 to 4.</div>
+                        <div class=""> <b>Goal:</b> To check if it is possible to reach an index with value 0 by jumping forward or backward.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a hash map to count how many black cells each block contains.</div>
+                                <div style="margin-left: 20px;"> • Use a queue or DFS to explore all reachable indices.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each black cell and update the counts for all blocks it contributes to.</div>
+                                <div style="margin-left: 20px;"> • Mark visited indices to avoid infinite loops.</div>
                             
-                                <div style="margin-left: 20px;"> • Aggregate the counts to produce the final output array.</div>
+                                <div style="margin-left: 20px;"> • Check if any visited index contains value 0.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the solution works for large inputs and handles sparse grids efficiently.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle large input sizes efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= m, n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The length of the array is between 1 and 50,000.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= coordinates.length &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • Each coordinate pair is distinct.</div>
+                                <div style="margin-left: 20px;"> • Each element is a non-negative integer less than the array length.</div>
                             
                         </div>
                     </div>        
@@ -415,21 +409,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Coordinates are pairwise distinct.</div>
+                                <div style="margin-left: 20px;"> • The array is non-empty and contains valid non-negative integers.</div>
                             
-                                <div style="margin-left: 20px;"> • Blocks outside the bounds of the grid do not exist.</div>
+                                <div style="margin-left: 20px;"> • The start index is within the valid range of the array.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: m = 4, n = 4, coordinates = [[1, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are 9 blocks with 0 black cells and 3 blocks with 1 black cell. Blocks with &gt;1 black cell do not exist.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [5, 3, 4, 0, 1, 6], start = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> From index 4, you can move to index 3 (which has value 0), so the answer is true.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: m = 3, n = 3, coordinates = [[0, 0], [1, 1], [0, 2]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 2 blocks have 1 black cell, 2 blocks have 2 black cells, and no blocks have 0, 3, or 4 black cells.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [2, 0, 1, 4, 2], start = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is no possible way to reach index 1 (value 0) from the start index 2, so the answer is false.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,18 +447,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through black cell coordinates and updating a hash map to track black cell counts for each block.</div>
+                        <div class=""> <b>Approach:</b> The solution involves traversing the array using a queue or depth-first search (DFS) to check if it&#39;s possible to reach an index with value 0.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each black cell contributes to at most 4 blocks.</div>
-                            
-                                <div style="margin-left: 20px;"> • The problem can be solved efficiently using a hash map.</div>
+                                <div style="margin-left: 20px;"> • We need to efficiently explore all possible jumps without revisiting indices.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Focus on sparse updates to minimize computational overhead.</div>
+                                <div style="margin-left: 20px;"> • A breadth-first search (BFS) can be used to explore all reachable indices from the start position.</div>
                             
                         </div>
                     </div>
@@ -472,13 +464,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a hash map to count black cells in each block.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue with the starting index.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the list of black cell coordinates.</div>
+                                <div style="margin-left: 20px;"> • Process each index in the queue by considering both possible jumps (forward and backward).</div>
                             
-                                <div style="margin-left: 20px;"> • For each black cell, update the count for all blocks it contributes to.</div>
+                                <div style="margin-left: 20px;"> • Mark visited indices to avoid revisiting.</div>
                             
-                                <div style="margin-left: 20px;"> • Aggregate the counts to create the final output array.</div>
+                                <div style="margin-left: 20px;"> • Check if you have reached an index with value 0.</div>
                             
                         </div>
                     </div>
@@ -487,22 +479,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No black cells (coordinates = []).</div>
+                                <div style="margin-left: 20px;"> • If the array is empty, it&#39;s impossible to reach an index with value 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Grids with maximum size (m, n = 10^5) and sparse black cells.</div>
+                                <div style="margin-left: 20px;"> • For large arrays, the solution should efficiently traverse the array while avoiding unnecessary recomputation.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Black cells at the edges or corners of the grid.</div>
+                                <div style="margin-left: 20px;"> • If the start index is already at a position with value 0, the answer should be true.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure memory usage is efficient for large grid dimensions.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle up to 50,000 elements in the array.</div>
                             
                         </div>                                                                        
                     </div>
@@ -519,27 +511,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize Result Vector</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Data Structure Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Iterate Over Coordinates</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Iterate Over Rows</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Control</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Iterate Over Columns</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check Boundary Conditions</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Result Vector</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Result Vector Again</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Marking Visited</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
                     
                 </div>
 
@@ -548,18 +548,26 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> countBlackBlocks(<span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> coordinates) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {(n <span style="color:#666">-</span> <span style="color:#666">1L</span>) <span style="color:#666">*</span> (m <span style="color:#666">-</span> <span style="color:#666">1</span>), <span style="color:#666">0</span>, <span style="color:#666">0</span>, <span style="color:#666">0</span>, <span style="color:#666">0</span>};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">c</span>: coordinates)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> c[<span style="color:#666">0</span>]; i <span style="color:#666">&lt;</span> c[<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">2</span>; <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> c[<span style="color:#666">1</span>]; j <span style="color:#666">&lt;</span> c[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">2</span>; <span style="color:#666">++</span>j)
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">0</span> <span style="color:#666">&lt;</span> i <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> <span style="color:#666">0</span> <span style="color:#666">&lt;</span> j <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;</span> n) {
-</span></span><span style="display:flex;"><span>                    res[cnt[i <span style="color:#666">*</span> <span style="color:#666">100000L</span> <span style="color:#666">+</span> j]]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>                    cnt[i <span style="color:#666">*</span> <span style="color:#666">100000L</span> <span style="color:#666">+</span> j]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                    res[cnt[i <span style="color:#666">*</span> <span style="color:#666">100000L</span> <span style="color:#666">+</span> j]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canReach</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> start) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(start);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (arr[i] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i <span style="color:#666">-</span> arr[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> i <span style="color:#666">+</span> arr[i];
+</span></span><span style="display:flex;"><span>        arr[i] <span style="color:#666">=</span> <span style="color:#666">-</span>arr[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (l <span style="color:#666">&gt;</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> arr[l] <span style="color:#666">&gt;</span> <span style="color:#666">-</span><span style="color:#666">1</span>) q.push(l);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (r <span style="color:#666">&lt;</span> n  <span style="color:#666">&amp;&amp;</span> arr[r] <span style="color:#666">&gt;</span> <span style="color:#666">-</span><span style="color:#666">1</span>) q.push(r);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -567,113 +575,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> countBlackBlocks(<span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> coordinates) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canReach</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> start) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `countBlackBlocks`, which takes the dimensions of the grid (`m` and `n`) and a list of coordinates representing the positions of black blocks. It returns a vector containing the counts of how many 2x2 blocks are formed. </div>
+                            <div class=""> The function &#39;canReach&#39; is defined to take a vector of integers &#39;arr&#39; and an integer &#39;start&#39; as input. The goal is to determine if it&#39;s possible to reach an index where the value is 0 by jumping through the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Initialize Map</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an unordered map `cnt` that will store the frequency of occurrences of each 2x2 block (using a unique key formed by the coordinates). </div>
+                            <div class=""> The size of the array &#39;arr&#39; is stored in the variable &#39;n&#39; to track the bounds of the array when checking indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialize Result Vector</b></div>
+                            <div class=""> <b>3 : Data Structure Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {(n <span style="color:#666">-</span> <span style="color:#666">1L</span>) <span style="color:#666">*</span> (m <span style="color:#666">-</span> <span style="color:#666">1</span>), <span style="color:#666">0</span>, <span style="color:#666">0</span>, <span style="color:#666">0</span>, <span style="color:#666">0</span>};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the result vector `res` with five elements, where the first element stores the total number of possible 2x2 blocks (calculated by `(n-1) * (m-1)`). The other four elements are set to 0 and will be used for the counts of blocks with 0, 1, 2, and 3 black cells. </div>
+                            <div class=""> A queue is initialized to facilitate breadth-first search (BFS). It will store indices that need to be processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Iterate Over Coordinates</b></div>
+                            <div class=""> <b>4 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">c</span>: coordinates)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(start);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate over each coordinate in the input `coordinates` array. </div>
+                            <div class=""> The starting index is pushed into the queue to begin the traversal from that position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Iterate Over Rows</b></div>
+                            <div class=""> <b>5 : Loop Control</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> c[<span style="color:#666">0</span>]; i <span style="color:#666">&lt;</span> c[<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">2</span>; <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts an inner loop to iterate over the two rows of the 2x2 block, starting from the current coordinate `c[0]`. </div>
+                            <div class=""> The while loop starts and runs as long as the queue is not empty. It processes each index from the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Iterate Over Columns</b></div>
+                            <div class=""> <b>6 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> c[<span style="color:#666">1</span>]; j <span style="color:#666">&lt;</span> c[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">2</span>; <span style="color:#666">++</span>j)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts another inner loop to iterate over the two columns of the 2x2 block, starting from the current coordinate `c[1]`. </div>
+                            <div class=""> The front element of the queue, which represents the current index, is retrieved and stored in variable &#39;i&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Check Boundary Conditions</b></div>
+                            <div class=""> <b>7 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">0</span> <span style="color:#666">&lt;</span> i <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> <span style="color:#666">0</span> <span style="color:#666">&lt;</span> j <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current cell (`i, j`) is within the bounds of the grid (i.e., 1 &lt;= i &lt; m and 1 &lt;= j &lt; n). </div>
+                            <div class=""> The current index is popped from the queue after it is processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Result Vector</b></div>
+                            <div class=""> <b>8 : Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res[cnt[i <span style="color:#666">*</span> <span style="color:#666">100000L</span> <span style="color:#666">+</span> j]]<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (arr[i] <span style="color:#666">==</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decreases the count of the current 2x2 block configuration stored in the result vector `res`. The key `i * 100000L &#43; j` represents the unique index for the current cell. </div>
+                            <div class=""> A check is made to see if the value at index &#39;i&#39; is 0. If it is, the goal has been reached, and the function will return true. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Update Map</b></div>
+                            <div class=""> <b>9 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    cnt[i <span style="color:#666">*</span> <span style="color:#666">100000L</span> <span style="color:#666">+</span> j]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the count of the current 2x2 block in the `cnt` map for the corresponding cell. </div>
+                            <div class=""> If the value at &#39;arr[i]&#39; is 0, the function immediately returns true, indicating that the goal has been reached. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Result Vector Again</b></div>
+                            <div class=""> <b>10 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res[cnt[i <span style="color:#666">*</span> <span style="color:#666">100000L</span> <span style="color:#666">+</span> j]]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i <span style="color:#666">-</span> arr[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the count of the updated 2x2 block configuration in the result vector `res`. </div>
+                            <div class=""> The left index &#39;l&#39; is calculated as the current index &#39;i&#39; minus the value at &#39;arr[i]&#39;. This represents a possible jump to the left. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Result</b></div>
+                            <div class=""> <b>11 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> i <span style="color:#666">+</span> arr[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the result vector `res`, which contains the counts of black blocks formed by the given coordinates. </div>
+                            <div class=""> The right index &#39;r&#39; is calculated as the current index &#39;i&#39; plus the value at &#39;arr[i]&#39;. This represents a possible jump to the right. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Marking Visited</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        arr[i] <span style="color:#666">=</span> <span style="color:#666">-</span>arr[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The value at index &#39;i&#39; is negated to mark it as visited, ensuring that the same index is not processed again. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (l <span style="color:#666">&gt;</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> arr[l] <span style="color:#666">&gt;</span> <span style="color:#666">-</span><span style="color:#666">1</span>) q.push(l);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the left index &#39;l&#39; is valid and not visited, it is pushed into the queue for further processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (r <span style="color:#666">&lt;</span> n  <span style="color:#666">&amp;&amp;</span> arr[r] <span style="color:#666">&gt;</span> <span style="color:#666">-</span><span style="color:#666">1</span>) q.push(r);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the right index &#39;r&#39; is valid and not visited, it is pushed into the queue for further processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the queue is emptied without finding a 0, the function returns false, indicating that it is not possible to reach an index with 0. </div>
                         </div>
                     
                 </div>
@@ -693,16 +741,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k)</div>
-                        <div class=""> <b>Average Case:</b> O(k)</div>
-                        <div class=""> <b>Worst Case:</b> O(k)</div> 
-                        <div class=""> <b>Description:</b> k = number of black cells in coordinates.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n) - The best case occurs when the first index with value 0 is reached immediately.</div>
+                        <div class=""> <b>Average Case:</b> O(n) - In the average case, all indices may need to be visited.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) - In the worst case, every index may need to be processed.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k)</div>
-                        <div class=""> <b>Worst Case:</b> O(k)</div> 
-                        <div class=""> <b>Description:</b> Hash map space depends on the number of unique blocks affected by black cells.</div>    
+                        <div class=""> <b>Best Case:</b> O(n) - Even in the best case, we may need to use space for the queue and visited array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) - The space complexity is O(n) due to the queue used for BFS and the space needed for marking visited indices.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the length of the array.</div>    
                     </div>
 
                 </div>

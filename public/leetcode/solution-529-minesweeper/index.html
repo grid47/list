@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a string <code>text</code>. You can swap two characters in the string. The task is to find the length of the longest substring with repeated characters after the swap. </div>
+<div class=""> You are playing the game Minesweeper. Given an m x n grid, you must reveal the square corresponding to the next click and update the grid according to Minesweeper&rsquo;s rules. The grid can contain mines (&lsquo;M&rsquo;), empty squares (&lsquo;E&rsquo;), or revealed squares with adjacent mine counts. </div>
 
 
 
@@ -372,47 +372,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `text` containing lowercase English characters.</div>
-                        <div class=""> <b>Example:</b> Input: text = &#34;abcba&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of a 2D list representing the board and an array of two integers representing the click position.</div>
+                        <div class=""> <b>Example:</b> Input: board = [[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;M&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;]], click = [2,2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= text.length &lt;= 20,000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 50</div>
                             
-                                <div style="margin-left: 20px;"> • text consists of lowercase English characters only</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= board[i][j] &lt;= 105</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= clickr &lt; m</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= clickc &lt; n</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be an integer representing the length of the longest substring with repeated characters after one swap.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> The output is the updated board after revealing the square at the click position and applying the Minesweeper rules.</div>
+                        <div class=""> <b>Example:</b> Output: [[&#39;B&#39;,&#39;1&#39;,&#39;E&#39;],[&#39;B&#39;,&#39;1&#39;,&#39;M&#39;],[&#39;B&#39;,&#39;B&#39;,&#39;B&#39;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be the maximum length of a substring with repeated characters after one swap.</div>
+                                <div style="margin-left: 20px;"> • The board must be updated after revealing the click square.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the longest substring of repeated characters after performing one swap of any two characters in the string.</div>
+                        <div class=""> <b>Goal:</b> Update the board based on Minesweeper rules after a click.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create an array to track the indices of each character in the string.</div>
+                                <div style="margin-left: 20px;"> • If the clicked square is a mine, change it to &#39;X&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each character and calculate the longest repeated substring that can be achieved by swapping characters.</div>
+                                <div style="margin-left: 20px;"> • If the clicked square is empty and has no adjacent mines, reveal it as &#39;B&#39; and recursively reveal adjacent squares.</div>
                             
-                                <div style="margin-left: 20px;"> • Consider the best result by swapping any two characters and return the maximum length of the substring.</div>
+                                <div style="margin-left: 20px;"> • If the clicked square is empty and has adjacent mines, change it to the number of adjacent mines.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must efficiently handle the constraints of text length up to 20,000 characters.</div>
+                        <div class=""> <b>Goal:</b> Constraints for this problem ensure the grid is within valid bounds and the click position is correct.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= text.length &lt;= 20,000</div>
+                                <div style="margin-left: 20px;"> • board[i][j] is either &#39;M&#39;, &#39;E&#39;, &#39;B&#39;, or a digit from &#39;1&#39; to &#39;8&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • text consists of lowercase English characters only</div>
+                                <div style="margin-left: 20px;"> • click.length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • board[clickr][clickc] is either &#39;M&#39; or &#39;E&#39;.</div>
                             
                         </div>
                     </div>        
@@ -420,17 +426,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • We are allowed to swap exactly two characters in the string.</div>
+                                <div style="margin-left: 20px;"> • The input board is valid and well-formed.</div>
                             
-                                <div style="margin-left: 20px;"> • Only lowercase English characters are involved.</div>
+                                <div style="margin-left: 20px;"> • The click position is a valid position within the board.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: text = &#34;abcba&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By swapping the first &#39;b&#39; with the last &#39;a&#39;, we get the string &#39;ababc&#39;. The longest substring of repeated characters is &#39;aaa&#39;, with a length of 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: board = [[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;M&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;]], click = [2,2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, clicking on an empty square with adjacent mines will reveal the number of adjacent mines or recursively reveal surrounding squares if there are no adjacent mines.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,16 +460,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use a greedy approach to check for possible swaps and calculate the longest repeated substring in each case.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to recursively reveal squares based on the Minesweeper rules.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check the effect of swapping characters and calculate the resulting longest repeated substring for each swap.</div>
+                                <div style="margin-left: 20px;"> • The game is based on revealing squares and updating the board recursively.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A greedy approach might work well here, iterating over possible swaps and computing the result in each case.</div>
+                                <div style="margin-left: 20px;"> • We will need to check adjacent squares and recursively reveal empty squares without adjacent mines.</div>
                             
                         </div>
                     </div>
@@ -471,11 +477,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate through each character in the string and track the indices of each character.</div>
+                                <div style="margin-left: 20px;"> • Check if the clicked square is a mine. If it is, set it to &#39;X&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • For each character, consider the effect of swapping it with other characters and check the length of the longest repeated substring.</div>
+                                <div style="margin-left: 20px;"> • If the clicked square is empty, count adjacent mines. If there are any, set the square to the count of adjacent mines.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the maximum length of the substring found.</div>
+                                <div style="margin-left: 20px;"> • If no adjacent mines are found, change the square to &#39;B&#39; and recursively reveal adjacent squares.</div>
                             
                         </div>
                     </div>
@@ -484,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string length is 1, the longest repeated substring is the entire string.</div>
+                                <div style="margin-left: 20px;"> • The clicked square is already revealed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution can handle the largest possible string size efficiently.</div>
+                                <div style="margin-left: 20px;"> • The board size is at the maximum allowed.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where the string is already a substring of repeated characters, so no swap is needed.</div>
+                                <div style="margin-left: 20px;"> • The click lands on a corner or edge of the board.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle strings with both small and large lengths efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure no out-of-bounds errors when revealing adjacent squares.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,33 +522,57 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Matrix Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Index Tracking</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Main Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Board Update for Mine</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Else Block</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Through Indices</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Counter Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Consecutive Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Non-Consecutive Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Gap Handling</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Skip Center Cell</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Reset Counter</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Neighbor Coordinates</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Length Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Boundary Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Result Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Mine Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Update Cell with Mine Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Open Else Block</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Update for Blank Cell</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Recursive Exploration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Recursive Exploration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Skip Center Cell Again</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Neighbor Coordinates Again</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Boundary Check Again</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Push Neighbor to Array</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Store Coordinates</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Store Coordinates</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Return Updated Board</button>
                     
                 </div>
 
@@ -551,24 +581,37 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxRepOpt1</span>(string text, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> idx(<span style="color:#666">26</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> text.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        idx[text[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].push_back(i);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">0</span>; n <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; n<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> cnt <span style="color:#666">=</span> <span style="color:#666">1</span>, cnt1 <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> idx[n].size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(idx[n][i] <span style="color:#666">==</span> idx[n][i <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">++</span>cnt;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                cnt1 <span style="color:#666">=</span> idx[n][i] <span style="color:#666">==</span> idx[n][i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">2</span><span style="color:#666">?</span> <span style="color:#a0a000">cnt</span>:<span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>                cnt <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, cnt <span style="color:#666">+</span> cnt1);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> updateBoard(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> click) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> row <span style="color:#666">=</span> click[<span style="color:#666">0</span>], col <span style="color:#666">=</span> click[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(board[row][col] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span>) {
+</span></span><span style="display:flex;"><span>        board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;X&#39;</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span> <span style="color:#666">||</span> board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;X&#39;</span>) cnt<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, mx <span style="color:#666">+</span> ( idx[n].size() <span style="color:#666">&gt;</span> mx <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>) );
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> cnt;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;B&#39;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr;
+</span></span><span style="display:flex;"><span>                arr.push_back(x);
+</span></span><span style="display:flex;"><span>                arr.push_back(y);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;E&#39;</span>) updateBoard(board, arr);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> board;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -576,143 +619,263 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method Definition</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxRepOpt1</span>(string text, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> updateBoard(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> click) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `maxRepOpt1` which calculates the maximum length of a repeated substring that can be obtained by changing at most one character in the string. </div>
+                            <div class=""> Defines the `updateBoard` function that takes a board and a click position to update the board based on Minesweeper rules. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Matrix Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> idx(<span style="color:#666">26</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a 2D vector `idx` with 26 inner vectors, each corresponding to one letter of the alphabet. This will store the indices of occurrences of each letter in the input string. </div>
+                            <div class=""> Initializes `m` and `n` to hold the dimensions of the board, representing the number of rows and columns, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> text.size(); i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> row <span style="color:#666">=</span> click[<span style="color:#666">0</span>], col <span style="color:#666">=</span> click[<span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each character of the string `text` to record the indices of each character&#39;s occurrence in the corresponding subvector of `idx`. </div>
+                            <div class=""> Extracts the row and column values from the `click` vector to identify the clicked cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Index Tracking</b></div>
+                            <div class=""> <b>4 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        idx[text[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].push_back(i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(board[row][col] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character in the string, subtract the ASCII value of &#39;a&#39; to get the index of the character (0 for &#39;a&#39;, 1 for &#39;b&#39;, etc.), and append the current index `i` to the corresponding subvector in `idx`. </div>
+                            <div class=""> Checks if the clicked cell is a mine. If it is, the cell is marked as &#39;X&#39; to signify that the player hit a mine. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Main Loop</b></div>
+                            <div class=""> <b>5 : Board Update for Mine</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">0</span>; n <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; n<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;X&#39;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through all 26 possible characters (from &#39;a&#39; to &#39;z&#39;) to analyze the occurrences of each character in the string. </div>
+                            <div class=""> Marks the clicked cell as &#39;X&#39; to represent a mine hit. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Else Block</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> cnt <span style="color:#666">=</span> <span style="color:#666">1</span>, cnt1 <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables: `cnt` to track the length of consecutive occurrences of a character, `cnt1` to track the length of possible gaps, and `mx` to store the maximum length found for the current character. </div>
+                            <div class=""> Handles the case when the clicked cell is not a mine. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop Through Indices</b></div>
+                            <div class=""> <b>7 : Counter Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> idx[n].size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the list of indices for the current character to identify consecutive occurrences and handle potential gaps between occurrences. </div>
+                            <div class=""> Initializes a counter `cnt` to keep track of the number of adjacent mines around the clicked cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Consecutive Check</b></div>
+                            <div class=""> <b>8 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(idx[n][i] <span style="color:#666">==</span> idx[n][i <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">++</span>cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current index is exactly one greater than the previous index, indicating a consecutive occurrence. If true, increment the `cnt` variable. </div>
+                            <div class=""> Iterates over the rows of the neighboring cells, including the current cell itself. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Non-Consecutive Check</b></div>
+                            <div class=""> <b>9 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current index is not consecutive with the previous one, enter this branch to handle non-consecutive occurrences. </div>
+                            <div class=""> Iterates over the columns of the neighboring cells, ensuring all 8 surrounding cells are checked. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Gap Handling</b></div>
+                            <div class=""> <b>10 : Skip Center Cell</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                cnt1 <span style="color:#666">=</span> idx[n][i] <span style="color:#666">==</span> idx[n][i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">2</span><span style="color:#666">?</span> <span style="color:#a0a000">cnt</span>:<span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the gap between the current index and the previous one is exactly 1 (indicating one character is missing). If true, set `cnt1` to the value of `cnt` to allow for a potential swap, otherwise reset `cnt1`. </div>
+                            <div class=""> Skips the center cell (the clicked cell itself) and only checks the surrounding cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Reset Counter</b></div>
+                            <div class=""> <b>11 : Neighbor Coordinates</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                cnt <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Reset the `cnt` variable to 1 as the consecutive sequence has been broken. </div>
+                            <div class=""> Calculates the coordinates of each neighboring cell based on the offsets `i` and `j`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Max Length Update</b></div>
+                            <div class=""> <b>12 : Boundary Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, cnt <span style="color:#666">+</span> cnt1);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the maximum length `mx` by considering the sum of the consecutive length `cnt` and the possible gap length `cnt1`. </div>
+                            <div class=""> Checks if the neighboring cell is within the bounds of the board. If out of bounds, the iteration continues with the next neighbor. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Result Update</b></div>
+                            <div class=""> <b>13 : Mine Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, mx <span style="color:#666">+</span> ( idx[n].size() <span style="color:#666">&gt;</span> mx <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>) );
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span> <span style="color:#666">||</span> board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;X&#39;</span>) cnt<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the result `res` by considering the maximum length found for the current character, and if there is one more occurrence of the character, add 1 to the result. </div>
+                            <div class=""> Checks if the neighboring cell contains a mine (&#39;M&#39;) or has already been revealed as a mine (&#39;X&#39;). If so, increments the counter `cnt`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Return Result</b></div>
+                            <div class=""> <b>14 : Update Cell with Mine Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the result `res`, which is the maximum length of the repeated substring that can be obtained with at most one character change. </div>
+                            <div class=""> If the counter `cnt` is greater than 0, updates the clicked cell with the count of adjacent mines. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Open Else Block</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handles the case when no adjacent mines are found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Update for Blank Cell</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;B&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the clicked cell as &#39;B&#39; to indicate it is a blank space with no adjacent mines. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Recursive Exploration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a recursive process to explore all adjacent cells if the clicked cell is blank. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Recursive Exploration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over the surrounding cells to explore them recursively. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Skip Center Cell Again</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skips the current cell when exploring adjacent cells. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Neighbor Coordinates Again</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the coordinates of the neighboring cells during recursion. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Boundary Check Again</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ensures the neighboring cells are within the board boundaries. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Push Neighbor to Array</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Creates a new vector `arr` to hold the coordinates of a neighboring cell. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Store Coordinates</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                arr.push_back(x);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the x-coordinate of the neighboring cell into the `arr` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Store Coordinates</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                arr.push_back(y);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the y-coordinate of the neighboring cell into the `arr` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;E&#39;</span>) updateBoard(board, arr);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the neighboring cell is an empty space (&#39;E&#39;), the function is called recursively to update it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Return Updated Board</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> board;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the updated board after processing the click. </div>
                         </div>
                     
                 </div>
@@ -732,16 +895,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, we may need to check all possible swaps, which could involve iterating over all pairs of characters.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, all squares need to be revealed.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is determined by the storage of indices for each character.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> Space complexity depends on the recursion depth and the board size.</div>    
                     </div>
 
                 </div>

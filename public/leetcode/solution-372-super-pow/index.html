@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You are in a building with multiple rooms, each containing a set of keys to unlock other rooms. Initially, only the first room (room 0) is unlocked. You are tasked with determining whether you can visit all the rooms, starting from room 0. To enter a locked room, you must have its corresponding key, which can only be obtained by visiting other rooms. </div>
+<div class=""> Given an integer <code>a</code> and an array <code>b</code>, where <code>b</code> represents a very large number, compute ( a^b % 1337 ). The array <code>b</code> stores the digits of <code>b</code> from most significant to least significant. You must handle extremely large values of <code>b</code> efficiently. </div>
 
 
 
@@ -362,57 +362,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 2D array &#39;rooms&#39; where each rooms[i] contains a list of keys that can be obtained by visiting room i. Each key in the list unlocks a specific room in the building. Your goal is to check if it&#39;s possible to visit all rooms starting from room 0.</div>
-                        <div class=""> <b>Example:</b> Input: rooms = [[1, 2], [3], [3], [0]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer `a` and an array `b`, where `b[i]` is a digit of the large number `b`.</div>
+                        <div class=""> <b>Example:</b> Input: a = 3, b = [2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= a &lt;= 231 - 1</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= rooms[i].length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= b.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= sum(rooms[i].length) &lt;= 3000</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= b[i] &lt;= 9</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= rooms[i][j] &lt; n</div>
-                            
-                                <div style="margin-left: 20px;"> • All the values in rooms[i] are unique.</div>
+                                <div style="margin-left: 20px;"> • b does not contain leading zeros.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if it&#39;s possible to visit all rooms starting from room 0; otherwise, return false.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> Return the value of ( a^b % 1337 ).</div>
+                        <div class=""> <b>Example:</b> Output: 9</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean value: true if all rooms can be visited, false otherwise.</div>
+                                <div style="margin-left: 20px;"> • The result should be computed modulo 1337.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to use a depth-first search (DFS) approach to simulate visiting each room and collecting keys. Keep track of which rooms have been visited, and ensure all rooms can be visited by collecting the necessary keys.</div>
+                        <div class=""> <b>Goal:</b> The goal is to compute ( a^b % 1337 ) efficiently, even for extremely large values of `b`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize a &#39;visited&#39; array to track rooms that have been visited.</div>
+                                <div style="margin-left: 20px;"> • 1. Reduce `a` modulo 1337 to prevent overflow.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use DFS starting from room 0, visiting all rooms that can be unlocked by the keys you collect.</div>
+                                <div style="margin-left: 20px;"> • 2. Use recursion to handle the large exponent, breaking the problem into smaller parts.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Once all rooms are visited, return true. If there are any rooms that remain unvisited, return false.</div>
+                                <div style="margin-left: 20px;"> • 3. Use the principle of modular arithmetic to compute the result using smaller powers.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the grid dimensions and input constraints are met as specified.</div>
+                        <div class=""> <b>Goal:</b> The constraints describe the valid range for `a` and the size of the array `b`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of rooms n is between 2 and 1000.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= a &lt;= 231 - 1</div>
                             
-                                <div style="margin-left: 20px;"> • Each room&#39;s list of keys contains between 0 and 1000 keys.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= b.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • The sum of all keys across rooms does not exceed 3000.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= b[i] &lt;= 9</div>
                             
-                                <div style="margin-left: 20px;"> • The values in rooms[i] are unique and are valid indices (0 &lt;= rooms[i][j] &lt; n).</div>
+                                <div style="margin-left: 20px;"> • b does not contain leading zeros.</div>
                             
                         </div>
                     </div>        
@@ -420,23 +418,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each room contains a list of keys, which might allow access to other rooms.</div>
+                                <div style="margin-left: 20px;"> • The integer `a` is a positive integer.</div>
                             
-                                <div style="margin-left: 20px;"> • Starting at room 0, it is possible to gather keys to unlock additional rooms.</div>
-                            
-                                <div style="margin-left: 20px;"> • The solution assumes that a DFS approach will help in determining whether all rooms can be visited.</div>
+                                <div style="margin-left: 20px;"> • The array `b` represents a valid large integer without leading zeros.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [[1, 2], [3], [3], [0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting from room 0, we can collect key 1 and visit room 1. From room 1, we collect key 3 and visit room 3. Finally, from room 3, we collect key 0 and can visit all rooms.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 3, b = [2]
+Output: 9</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The result is ( 3^2 % 1337 = 9 ), which is the expected output.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [[1,3],[3,0,1],[2],[0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, starting from room 0, we collect key 1 and visit room 1. However, we cannot access room 2 because the only key to room 2 is located in room 2 itself, which remains locked.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 5, b = [1, 2]
+Output: 25</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The result is ( 5^{12} % 1337 = 25 ), which is computed using the recursive approach.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,18 +458,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we can use a depth-first search (DFS) strategy. Starting at room 0, we explore all accessible rooms by collecting keys. The DFS approach will ensure we cover all possible rooms that can be reached by following the key-paths.</div>
+                        <div class=""> <b>Approach:</b> The approach uses recursion to break down the large exponent `b` and calculates the result using modular arithmetic.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to visit rooms iteratively, collecting keys along the way.</div>
+                                <div style="margin-left: 20px;"> • Direct computation of large exponents is inefficient.</div>
                             
-                                <div style="margin-left: 20px;"> • DFS is a good fit for this problem, as it allows us to explore all reachable rooms from room 0.</div>
+                                <div style="margin-left: 20px;"> • Recursive solutions and modular arithmetic can break down the problem.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • It is crucial to maintain a visited set to ensure we do not revisit rooms and fall into an infinite loop.</div>
+                                <div style="margin-left: 20px;"> • By recursively calculating smaller powers, we can avoid overflow and handle the large size of `b`.</div>
                             
                         </div>
                     </div>
@@ -479,13 +477,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize a visited array to track the rooms we have already visited.</div>
+                                <div style="margin-left: 20px;"> • 1. Reduce `a` modulo 1337 to prevent overflow.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Start DFS from room 0 and collect all keys found in the rooms you visit.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 3: For each room you visit, recursively visit rooms that can be unlocked with the keys you have.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: After visiting all rooms, check if all rooms are visited and return true. Otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • 2. Recursively calculate the modular exponentiation of `a` raised to `b` using the divide and conquer method.</div>
                             
                         </div>
                     </div>
@@ -494,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty input or a grid with fewer than 2 rooms would not be valid according to the constraints.</div>
+                                <div style="margin-left: 20px;"> • The array `b` will always have at least one digit.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the number of rooms is large, ensure the DFS traversal is efficient enough to handle up to 1000 rooms.</div>
+                                <div style="margin-left: 20px;"> • The array `b` can be up to 2000 digits long, so efficient handling of large numbers is necessary.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that rooms with no keys and rooms that cannot be unlocked are handled properly.</div>
+                                <div style="margin-left: 20px;"> • If `a = 1`, the result is always 1, regardless of `b`.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid dimensions and key relationships should be carefully handled to ensure correctness.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles the maximum and minimum values for `a` and handles large `b` values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,31 +520,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Method Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Set Start Room</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Modulo Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 DFS Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Through Visited Rooms</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return False if Any Room is Unvisited</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Multiplication</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return True if All Rooms are Visited</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Empty Line</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Method Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 DFS Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Mark Current Room as Visited</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Last Digit</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop Through Current Room&#39;s Neighbors</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Last Digit</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check if Neighbor is Visited</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Recursive DFS Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call</button>
                     
                 </div>
 
@@ -559,23 +551,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canVisitAllRooms</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rooms) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> vis(rooms.size(), <span style="color:#a2f">false</span>);
-</span></span><span style="display:flex;"><span>    vis[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    dfs(rooms, vis, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: vis)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>x) <span style="color:#a2f;font-weight:bold">return</span> x;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> base <span style="color:#666">=</span> <span style="color:#666">1337</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">powmod</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    a <span style="color:#666">%=</span> base;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> (res <span style="color:#666">*</span> a) <span style="color:#666">%</span> base;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rooms, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>vis, <span style="color:#0b0;font-weight:bold">int</span> cur) {
-</span></span><span style="display:flex;"><span>    vis[cur] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: rooms[cur]) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x])
-</span></span><span style="display:flex;"><span>            dfs(rooms, vis, x);
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> superPow(<span style="color:#0b0;font-weight:bold">int</span> a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> last_digit <span style="color:#666">=</span> b.back();
+</span></span><span style="display:flex;"><span>    b.pop_back();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">powmod</span>(superPow(a, b), <span style="color:#666">10</span>) <span style="color:#666">*</span> powmod(a, last_digit) <span style="color:#666">%</span> base;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -583,132 +573,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canVisitAllRooms</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rooms) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> base <span style="color:#666">=</span> <span style="color:#666">1337</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function declaration for `canVisitAllRooms`, which checks if all rooms can be visited starting from room 0. </div>
+                            <div class=""> The `base` variable is initialized to 1337. This is the modulus used in the calculation to keep the result within manageable limits. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> vis(rooms.size(), <span style="color:#a2f">false</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">powmod</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A vector `vis` is initialized to track whether each room has been visited. All rooms are initially marked as not visited. </div>
+                            <div class=""> This line declares the helper method `powmod`, which calculates `a^k % base`. It takes two arguments: `a`, the base, and `k`, the exponent. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Set Start Room</b></div>
+                            <div class=""> <b>3 : Modulo Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    a <span style="color:#666">%=</span> base;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The starting room (room 0) is marked as visited. </div>
+                            <div class=""> This line reduces `a` modulo `base`, ensuring that the base remains within the modulus before performing exponentiation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : DFS Call</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(rooms, vis, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The depth-first search (DFS) function is called to explore all rooms starting from room 0. </div>
+                            <div class=""> The variable `res` is initialized to 1, which will hold the result of the power calculation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Through Visited Rooms</b></div>
+                            <div class=""> <b>5 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: vis)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop iterates through the `vis` vector to check if all rooms have been visited. </div>
+                            <div class=""> This loop runs `k` times, each time multiplying `res` by `a` and reducing it modulo `base`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return False if Any Room is Unvisited</b></div>
+                            <div class=""> <b>6 : Multiplication</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>x) <span style="color:#a2f;font-weight:bold">return</span> x;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> (res <span style="color:#666">*</span> a) <span style="color:#666">%</span> base;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If any room has not been visited, the function immediately returns `false`. </div>
+                            <div class=""> In each iteration of the loop, `res` is updated to be the result of `res * a % base`, effectively calculating `a^k % base`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return True if All Rooms are Visited</b></div>
+                            <div class=""> <b>7 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If all rooms are visited, the function returns `true`. </div>
+                            <div class=""> The final result of the modular exponentiation is returned as the output of the `powmod` method. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Empty Line</b></div>
+                            <div class=""> <b>8 : Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">superPow</span>(<span style="color:#0b0;font-weight:bold">int</span> a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> b) {
+</span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An empty line for code separation. </div>
+                            <div class=""> The method `superPow` is declared. This method calculates `a` raised to the power represented by the list of digits `b`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : DFS Function Declaration</b></div>
+                            <div class=""> <b>9 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rooms, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>vis, <span style="color:#0b0;font-weight:bold">int</span> cur) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function declaration for `dfs`, which performs depth-first search to visit rooms recursively. </div>
+                            <div class=""> If the vector `b` is empty, the result is `1`, as any number raised to the power of zero is 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Mark Current Room as Visited</b></div>
+                            <div class=""> <b>10 : Pop Last Digit</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis[cur] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> last_digit <span style="color:#666">=</span> b.back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The current room is marked as visited. </div>
+                            <div class=""> The last digit of the vector `b` is retrieved and stored in `last_digit`, representing the current power to apply. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop Through Current Room&#39;s Neighbors</b></div>
+                            <div class=""> <b>11 : Pop Last Digit</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: rooms[cur]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    b.pop_back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function loops through the rooms connected to the current room (`cur`) and recursively visits them if they haven&#39;t been visited. </div>
+                            <div class=""> The last digit is removed from the vector `b` to reduce the problem size for the recursive call. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Check if Neighbor is Visited</b></div>
+                            <div class=""> <b>12 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">powmod</span>(superPow(a, b), <span style="color:#666">10</span>) <span style="color:#666">*</span> powmod(a, last_digit) <span style="color:#666">%</span> base;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function checks if a neighboring room has been visited. If not, it proceeds to visit it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Recursive DFS Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dfs(rooms, vis, x);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A recursive call to the DFS function is made to visit the neighboring room (`x`). </div>
+                            <div class=""> The method uses recursion to calculate the result. It calls `superPow` recursively to calculate the power of `a` raised to the value represented by `b`. It then combines the result with the power of `a` raised to `last_digit`, applying the modulus operation at each step. </div>
                         </div>
                     
                 </div>
@@ -728,16 +709,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; k)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; k)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is proportional to the number of rooms (n) and the number of keys (k) that need to be processed during the DFS traversal.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log(b.length)) where `b.length` is the number of digits in `b`.</div>
+                        <div class=""> <b>Average Case:</b> O(log(b.length)) due to the recursive approach.</div>
+                        <div class=""> <b>Worst Case:</b> O(log(b.length)) as the recursion depth is determined by the length of `b`.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is logarithmic in relation to the length of `b`, as the problem is divided in each recursive step.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; k)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is dependent on the space needed to track the visited rooms and the keys collected, which is O(n &#43; k).</div>    
+                        <div class=""> <b>Best Case:</b> O(1) if the recursion depth is minimal.</div>
+                        <div class=""> <b>Worst Case:</b> O(log(b.length)) due to the recursion stack.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the recursion depth, which is logarithmic in relation to the number of digits in `b`.</div>    
                     </div>
 
                 </div>

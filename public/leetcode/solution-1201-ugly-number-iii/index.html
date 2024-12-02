@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 9, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -301,7 +301,7 @@
 
 
 
-<div class=""> You are given a positive integer <code>n</code>, initially placed on a board. For each number <code>x</code> on the board, find all integers <code>i</code> such that <code>1 &lt;= i &lt;= n</code> and <code>x % i == 1</code>. Add these numbers to the board. Your goal is to determine how many distinct integers will be present on the board after a billion days. </div>
+<div class=""> An ugly number is a positive integer that is divisible by at least one of the integers a, b, or c. Your task is to return the nth ugly number in the sequence formed by the integers divisible by a, b, or c. </div>
 
 
 
@@ -352,43 +352,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a single integer `n` which represents the number initially placed on the board.</div>
-                        <div class=""> <b>Example:</b> n = 6</div>
+                        <div class=""> <b>Input:</b> You are given four integers n, a, b, and c. You need to return the nth ugly number, where an ugly number is divisible by a, b, or c.</div>
+                        <div class=""> <b>Example:</b> Input: n = 3, a = 2, b = 3, c = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n, a, b, c &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= a * b * c &lt;= 10^18</div>
+                            
+                                <div style="margin-left: 20px;"> • It is guaranteed that the result will be in range [1, 2 * 10^9].</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of distinct integers on the board after performing the described procedure for one billion days.</div>
-                        <div class=""> <b>Example:</b> 4</div>
+                        <div class=""> <b>Output:</b> Return the nth ugly number from the sequence.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the distinct numbers on the board after the given procedure is performed for one billion days.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the nth ugly number in the sequence formed by numbers divisible by a, b, or c.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Start with `n` as the initial number on the board.</div>
+                                <div style="margin-left: 20px;"> • Perform a binary search to find the nth ugly number.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each number `x` on the board, find all `i` such that `x % i == 1`.</div>
+                                <div style="margin-left: 20px;"> • At each step, calculate the number of ugly numbers less than or equal to the mid-point of the search range.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Add the values of `i` to the board if they are not already present.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Repeat the above steps for one billion days.</div>
+                                <div style="margin-left: 20px;"> • Adjust the range based on the count of ugly numbers found and repeat until the correct ugly number is found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should efficiently handle the constraints given the number of iterations.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure the result will be in the specified range. The values of a, b, c, and n are large but manageable for the solution approach used.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n, a, b, c &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= a * b * c &lt;= 10^18</div>
+                            
+                                <div style="margin-left: 20px;"> • It is guaranteed that the result will be in range [1, 2 * 10^9].</div>
                             
                         </div>
                     </div>        
@@ -396,21 +402,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The procedure will run for a large number of iterations (one billion days).</div>
+                                <div style="margin-left: 20px;"> • It is assumed that the integers a, b, and c are not equal to zero.</div>
                             
-                                <div style="margin-left: 20px;"> • The board will keep adding distinct numbers that satisfy the modulo condition.</div>
+                                <div style="margin-left: 20px;"> • The given values are large but within the range allowed by the solution approach.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Initially, the number 6 is placed on the board. Over time, the numbers 2, 4, and 3 will be added to the board, resulting in the distinct numbers: 2, 3, 4, and 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 3, a = 2, b = 3, c = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The ugly numbers are 2, 3, 4, 5, 6, 8, 9, 10, 12... The 3rd ugly number is 4.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 7</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `n = 7`, the numbers added to the board after the operations are 2, 3, 6, and 7, making the distinct numbers 2, 3, 6, and 7.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 4, a = 2, b = 3, c = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The ugly numbers are 2, 3, 4, 6, 8, 9, 10... The 4th ugly number is 6.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5, a = 2, b = 11, c = 13</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The ugly numbers are 2, 4, 6, 8, 10, 11, 12, 13... The 5th ugly number is 10.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -434,18 +444,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The key observation is that the process of adding numbers to the board can be efficiently modeled using the modulo operation to identify which numbers will appear on the board after many iterations.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, a binary search approach is used to find the nth ugly number. The idea is to calculate how many ugly numbers are there less than or equal to a given number using the formula for counting divisibility by a, b, and c.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The operation depends on finding numbers where `x % i == 1` for all current numbers `x` on the board.</div>
+                                <div style="margin-left: 20px;"> • The problem is constrained by large values, so a brute-force approach of checking all numbers is inefficient.</div>
                             
-                                <div style="margin-left: 20px;"> • The numbers that appear on the board will be a result of modulo operations from previous numbers.</div>
+                                <div style="margin-left: 20px;"> • A binary search allows for efficient narrowing of the range of possible ugly numbers.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • If we start with `n`, we need to find all integers `i` such that `x % i == 1`. After a few iterations, a pattern emerges that allows us to count distinct values efficiently.</div>
+                                <div style="margin-left: 20px;"> • Binary search is optimal for this kind of problem, where the answer lies within a specific range.</div>
                             
                         </div>
                     </div>
@@ -453,13 +463,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Start with the number `n` on the board.</div>
+                                <div style="margin-left: 20px;"> • Initialize the search range from 1 to 2 * 10^9.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each number `x` on the board, identify all numbers `i` such that `x % i == 1`.</div>
+                                <div style="margin-left: 20px;"> • For each mid-point in the search, count how many ugly numbers are less than or equal to it.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Add those numbers to the board if they are not already present.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Repeat the process for one billion days. Since the operation depends on modulo properties, we can predict the distinct numbers that will remain.</div>
+                                <div style="margin-left: 20px;"> • Adjust the range based on whether the count of ugly numbers is less than, equal to, or greater than n.</div>
                             
                         </div>
                     </div>
@@ -468,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no cases where the input is empty, as the problem guarantees that `n &gt;= 1`.</div>
+                                <div style="margin-left: 20px;"> • Ensure all inputs are positive integers.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For very large inputs of `n`, the solution must be optimized to avoid iterating over all days explicitly.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles large values of n, a, b, and c efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider special cases where `n` is very small (e.g., `n = 1`) or where all numbers on the board quickly stabilize.</div>
+                                <div style="margin-left: 20px;"> • Consider edge cases where a, b, or c might be large prime numbers or powers of each other.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the upper constraint of `n = 100` efficiently.</div>
+                                <div style="margin-left: 20px;"> • The constraints allow us to use a binary search approach because the range of possible ugly numbers is manageable.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,11 +508,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mathematical Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mathematical Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Mathematical Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Mathematical Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Binary Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Counting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Adjust Bound</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Adjust Bound</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return</button>
                     
                 </div>
 
@@ -513,9 +543,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">distinctIntegers</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> n <span style="color:#666">==</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">nthUglyNumber</span>(<span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> A, <span style="color:#0b0;font-weight:bold">int</span> B, <span style="color:#0b0;font-weight:bold">int</span> C) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lo <span style="color:#666">=</span> <span style="color:#666">1</span>, hi <span style="color:#666">=</span> <span style="color:#666">2</span><span style="color:#666">*</span> (<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">1e9</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> a <span style="color:#666">=</span> <span style="color:#0b0;font-weight:bold">long</span>(A), b <span style="color:#666">=</span> <span style="color:#0b0;font-weight:bold">long</span>(B), c <span style="color:#666">=</span> <span style="color:#0b0;font-weight:bold">long</span>(C);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> ab <span style="color:#666">=</span> a <span style="color:#666">*</span> b <span style="color:#666">/</span> __gcd(a, b);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> bc <span style="color:#666">=</span> b <span style="color:#666">*</span> c <span style="color:#666">/</span> __gcd(b, c);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> ac <span style="color:#666">=</span> a <span style="color:#666">*</span> c <span style="color:#666">/</span> __gcd(a, c);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> abc <span style="color:#666">=</span> a <span style="color:#666">*</span> bc <span style="color:#666">/</span> __gcd(a, bc);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (lo <span style="color:#666">&lt;</span> hi ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> lo <span style="color:#666">+</span> (hi <span style="color:#666">-</span> lo)<span style="color:#666">/</span><span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> mid <span style="color:#666">/</span> a <span style="color:#666">+</span> mid <span style="color:#666">/</span> b <span style="color:#666">+</span> mid <span style="color:#666">/</span> c <span style="color:#666">-</span> mid <span style="color:#666">/</span> ab <span style="color:#666">-</span> mid <span style="color:#666">/</span> bc <span style="color:#666">-</span> mid <span style="color:#666">/</span> ac <span style="color:#666">+</span> mid <span style="color:#666">/</span> abc;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cnt <span style="color:#666">&lt;</span> k) {
+</span></span><span style="display:flex;"><span>            lo <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> hi <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> lo;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -523,33 +566,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">distinctIntegers</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">nthUglyNumber</span>(<span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> A, <span style="color:#0b0;font-weight:bold">int</span> B, <span style="color:#0b0;font-weight:bold">int</span> C) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;distinctIntegers&#39; is defined with one parameter, &#39;n&#39;. It calculates the number of distinct integers in a given set based on the value of &#39;n&#39;. </div>
+                            <div class=""> Defines the function that calculates the k-th ugly number based on inputs A, B, and C. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Condition Check</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> n <span style="color:#666">==</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lo <span style="color:#666">=</span> <span style="color:#666">1</span>, hi <span style="color:#666">=</span> <span style="color:#666">2</span><span style="color:#666">*</span> (<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">1e9</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If n is equal to 1 or 2, the function immediately returns 1 as the number of distinct integers in this case is always 1. </div>
+                            <div class=""> Initializes the search range for the binary search algorithm. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Return Statement</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> a <span style="color:#666">=</span> <span style="color:#0b0;font-weight:bold">long</span>(A), b <span style="color:#666">=</span> <span style="color:#0b0;font-weight:bold">long</span>(B), c <span style="color:#666">=</span> <span style="color:#0b0;font-weight:bold">long</span>(C);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If n is greater than 2, the function returns n-1, which represents the number of distinct integers in the set from 1 to n. </div>
+                            <div class=""> Converts the inputs A, B, and C to long type for arithmetic operations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Mathematical Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> ab <span style="color:#666">=</span> a <span style="color:#666">*</span> b <span style="color:#666">/</span> __gcd(a, b);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Computes the least common multiple (LCM) of A and B using their GCD. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Mathematical Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> bc <span style="color:#666">=</span> b <span style="color:#666">*</span> c <span style="color:#666">/</span> __gcd(b, c);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Computes the LCM of B and C using their GCD. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Mathematical Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> ac <span style="color:#666">=</span> a <span style="color:#666">*</span> c <span style="color:#666">/</span> __gcd(a, c);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Computes the LCM of A and C using their GCD. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Mathematical Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> abc <span style="color:#666">=</span> a <span style="color:#666">*</span> bc <span style="color:#666">/</span> __gcd(a, bc);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Computes the LCM of A, B, and C using the LCM of B and C. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (lo <span style="color:#666">&lt;</span> hi ) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins the binary search loop to narrow down the k-th ugly number. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Binary Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> lo <span style="color:#666">+</span> (hi <span style="color:#666">-</span> lo)<span style="color:#666">/</span><span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the midpoint of the current range in binary search. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Counting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> mid <span style="color:#666">/</span> a <span style="color:#666">+</span> mid <span style="color:#666">/</span> b <span style="color:#666">+</span> mid <span style="color:#666">/</span> c <span style="color:#666">-</span> mid <span style="color:#666">/</span> ab <span style="color:#666">-</span> mid <span style="color:#666">/</span> bc <span style="color:#666">-</span> mid <span style="color:#666">/</span> ac <span style="color:#666">+</span> mid <span style="color:#666">/</span> abc;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Counts how many numbers up to mid are divisible by A, B, or C, adjusting for overlaps. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cnt <span style="color:#666">&lt;</span> k) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the count of valid numbers is less than k, adjust the lower bound. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Adjust Bound</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            lo <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Moves the lower bound up when the count is less than k. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Adjust Bound</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> hi <span style="color:#666">=</span> mid;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Moves the upper bound down when the count meets or exceeds k. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> lo;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the k-th ugly number after narrowing down the search range. </div>
                         </div>
                     
                 </div>
@@ -569,16 +722,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of distinct numbers on the board.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as the number of new numbers added can be at most proportional to `n`.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as the number of distinct values that can appear on the board is bounded by `n`.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the size of `n`, as we need to process each number once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log(2 * 10^9))</div>
+                        <div class=""> <b>Average Case:</b> O(log(2 * 10^9))</div>
+                        <div class=""> <b>Worst Case:</b> O(log(2 * 10^9))</div> 
+                        <div class=""> <b>Description:</b> The binary search narrows the range logarithmically, ensuring a fast solution even for large inputs.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), in cases where the number of distinct integers does not increase.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as we store the distinct numbers on the board.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n), as we only need to store the distinct numbers added to the board.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The solution only requires a few variables, making it space-efficient.</div>    
                     </div>
 
                 </div>

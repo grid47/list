@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 29, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a list of triplets representing the structure of a binary tree. Each triplet <code>[parent, child, isLeft]</code> indicates that <code>parent</code> is the parent of <code>child</code>, and if <code>isLeft</code> is 1, <code>child</code> is the left child of <code>parent</code>, otherwise, it&rsquo;s the right child. Your task is to reconstruct the binary tree and return the root node. </div>
+<div class=""> Given a list of words, return an array of characters that appear in all words. The output should include duplicates of characters as they appear in each word, and the answer can be returned in any order. </div>
 
 
 
@@ -359,53 +359,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a list of triplets where each triplet represents a parent-child relationship in a binary tree. The structure of the input is: `[parent, child, isLeft]`. The list contains information about all nodes of the tree.</div>
-                        <div class=""> <b>Example:</b> descriptions = [[10, 5, 1], [10, 20, 0], [5, 3, 1], [3, 2, 0]]</div>
+                        <div class=""> <b>Input:</b> The input is a list of words where each word is a string of lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> words = [&#39;apple&#39;, &#39;grape&#39;, &#39;maple&#39;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= descriptions.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • descriptions[i].length == 3</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= parent, child &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= isLeft &lt;= 1</div>
-                            
-                                <div style="margin-left: 20px;"> • The binary tree described by descriptions is valid.</div>
+                                <div style="margin-left: 20px;"> • words[i] consists of lowercase English letters</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the root node of the reconstructed binary tree, represented as a binary tree node. The output should be in the form of an array representation of the tree starting from the root.</div>
-                        <div class=""> <b>Example:</b> [10, 5, 20, 3, 2]</div>
+                        <div class=""> <b>Output:</b> The output is an array of characters that appear in all words of the list. The characters should appear as many times as they appear in each word, and can be in any order.</div>
+                        <div class=""> <b>Example:</b> [&#39;p&#39;, &#39;e&#39;, &#39;l&#39;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should represent the tree starting from the root node.</div>
+                                <div style="margin-left: 20px;"> • The output array will only contain lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to reconstruct the binary tree from the descriptions and return its root node.</div>
+                        <div class=""> <b>Goal:</b> The goal is to identify the characters that appear in all words, taking into account their frequency in each word.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Parse the descriptions to identify the root node (the node that does not have any parent).</div>
+                                <div style="margin-left: 20px;"> • Create a frequency array to track the minimum number of occurrences of each character across all words.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Create a map to store the nodes as we build the tree.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each word, updating the frequency array to reflect the minimum occurrences of each character.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each triplet, connect the parent and child nodes as left or right based on the value of `isLeft`.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the root node once the tree is fully constructed.</div>
+                                <div style="margin-left: 20px;"> • Generate the result by adding characters to the output list according to their minimum frequency.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the input list is well-formed and the tree is valid.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the solution works efficiently for the input size.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The binary tree described by descriptions is valid and does not contain any cycles.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle up to 100 words with lengths up to 100 characters.</div>
                             
                         </div>
                     </div>        
@@ -413,19 +407,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The binary tree is guaranteed to be valid and can always be constructed from the descriptions.</div>
+                                <div style="margin-left: 20px;"> • The input list contains valid words with lowercase English letters only.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> descriptions = [[10, 5, 1], [10, 20, 0], [5, 3, 1], [3, 2, 0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we construct the binary tree where 10 is the root, 5 is the left child of 10, 20 is the right child of 10, 3 is the left child of 5, and 2 is the right child of 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#39;hello&#39;, &#39;cello&#39;, &#39;mellow&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The common characters between all words are &#39;e&#39;, &#39;l&#39;, and &#39;l&#39;, which appear at least once in each word.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> descriptions = [[1, 2, 1], [2, 3, 0], [3, 4, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the tree is constructed such that 1 is the root, 2 is the left child of 1, 3 is the right child of 2, and 4 is the left child of 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#39;blue&#39;, &#39;clue&#39;, &#39;glue&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The common characters are &#39;l&#39;, &#39;u&#39;, and &#39;e&#39;, appearing at least once in each word.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,16 +443,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to build the tree by identifying the root node (which does not appear as a child in any triplet), then iterating over the descriptions to connect the parent and child nodes accordingly. After constructing the tree, we return the root node.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved by using frequency counts for each character in every word and comparing them to find the minimum occurrences for each character across all words.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The first step is to identify the root node by checking which node is not a child of any other node.</div>
+                                <div style="margin-left: 20px;"> • We need to track the occurrences of each character in every word and update the result accordingly.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a map to store each node allows us to easily connect parents and children while building the tree.</div>
+                                <div style="margin-left: 20px;"> • This problem can be tackled by using a frequency array and iterating over the words to find common characters.</div>
                             
                         </div>
                     </div>
@@ -466,13 +460,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through the descriptions and track all nodes that appear as children.</div>
+                                <div style="margin-left: 20px;"> • Initialize a frequency array to store the minimum occurrences of each character.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Find the root node (the node that does not appear as a child).</div>
+                                <div style="margin-left: 20px;"> • For each word, create a count array to track the frequency of characters in that word.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Use a map to create nodes and connect them based on the triplets provided.</div>
+                                <div style="margin-left: 20px;"> • Update the global frequency array by comparing each character&#39;s frequency in the current word.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Finally, return the root node.</div>
+                                <div style="margin-left: 20px;"> • After processing all words, generate the result by including each character the number of times it appears in the frequency array.</div>
                             
                         </div>
                     </div>
@@ -481,22 +475,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be valid input as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • If the input is an empty list, return an empty result array.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The approach should be efficient enough to handle the input size up to 10^4 descriptions.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the maximum input size with up to 100 words and 100 characters per word.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there is only one node (parent = child), it will be the root node.</div>
+                                <div style="margin-left: 20px;"> • If there are no common characters between the words, return an empty result.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the tree is always valid and does not contain cycles.</div>
+                                <div style="margin-left: 20px;"> • The solution should avoid unnecessary complexity and optimize for large inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,47 +509,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Frequency Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iterate over Desc</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Over Words</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Insert Parent</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Count Frequency in Word</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Insert Child</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Counting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Second Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Frequency Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Find Node in Set</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Min Frequency Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Erase Node from Set</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Determine Root</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Over Characters</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Add Common Characters</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Third Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Push Character to Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check and Create Node for Parent</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Add Parent to Map</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Check and Create Node for Child</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Add Child to Map</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Fourth Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Assign Left or Right Child</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Assign Left or Right Child</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Assign Left or Right Child</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Assign Left Child</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Assign Right Child</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Root</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Result Return</button>
                     
                 </div>
 
@@ -564,45 +538,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">createBinaryTree</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> desc) {
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">v</span>: desc) {
-</span></span><span style="display:flex;"><span>        s.insert(v[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>        s.insert(v[<span style="color:#666">1</span>]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> commonChars(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(<span style="color:#666">26</span>, INT_MAX);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string<span style="color:#666">&amp;</span> <span style="color:#a0a000">s</span>: words) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) cnt[x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        frq[i] <span style="color:#666">=</span> min(frq[i], cnt[i]);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: desc) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.find(v[<span style="color:#666">1</span>]) <span style="color:#666">!=</span> s.end()) {
-</span></span><span style="display:flex;"><span>            s.erase(v[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> frq[i]; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        res.push_back(string(<span style="color:#666">1</span>, <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> i));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> root <span style="color:#666">=</span> <span style="color:#666">*</span>s.begin();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// found root
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// next create map for nodes
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// connect them as given in desc
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, TreeNode<span style="color:#666">*&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: desc) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.find(v[<span style="color:#666">0</span>]) <span style="color:#666">==</span> mp.end()) {
-</span></span><span style="display:flex;"><span>            mp[v[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(v[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.find(v[<span style="color:#666">1</span>]) <span style="color:#666">==</span> mp.end()) {
-</span></span><span style="display:flex;"><span>            mp[v[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(v[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: desc) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> paret <span style="color:#666">=</span> v[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> child <span style="color:#666">=</span> v[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> left  <span style="color:#666">=</span> v[<span style="color:#666">2</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left) mp[paret]<span style="color:#666">-&gt;</span>left  <span style="color:#666">=</span> mp[child];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>     mp[paret]<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> mp[child];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp[root];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -613,220 +564,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">createBinaryTree</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> desc) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> commonChars(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function definition, where we pass a 2D vector `desc` that contains the tree&#39;s node relationships. </div>
+                            <div class=""> Defines the function `commonChars` which takes a vector of strings and returns a vector of strings containing the common characters among them. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Set Initialization</b></div>
+                            <div class=""> <b>2 : Frequency Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(<span style="color:#666">26</span>, INT_MAX);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, a set `s` is initialized to store unique node values from the description. </div>
+                            <div class=""> Initializes a frequency vector `frq` of size 26, where each element represents the maximum possible count of each character (&#39;a&#39; to &#39;z&#39;). The frequency is set to `INT_MAX` to ensure that the first comparison will set the correct minimum frequency. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Iterate over Desc</b></div>
+                            <div class=""> <b>3 : Loop Over Words</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">v</span>: desc) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string<span style="color:#666">&amp;</span> <span style="color:#a0a000">s</span>: words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We iterate over each entry in the `desc` vector to process the parent-child relationships. </div>
+                            <div class=""> Iterates over each word in the input list `words`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Insert Parent</b></div>
+                            <div class=""> <b>4 : Count Frequency in Word</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.insert(v[<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the parent node value `v[0]` into the set `s`. </div>
+                            <div class=""> For each word, a `cnt` vector is initialized to count the occurrences of each character in the word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Insert Child</b></div>
+                            <div class=""> <b>5 : Character Counting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.insert(v[<span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) cnt[x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the child node value `v[1]` into the set `s`. </div>
+                            <div class=""> Iterates over each character in the current word and updates the corresponding count in the `cnt` vector based on the character&#39;s position in the alphabet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Second Loop</b></div>
+                            <div class=""> <b>6 : Frequency Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: desc) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A second iteration over `desc` to refine the node relationships and determine the root. </div>
+                            <div class=""> Loops through all 26 characters of the alphabet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Find Node in Set</b></div>
+                            <div class=""> <b>7 : Min Frequency Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.find(v[<span style="color:#666">1</span>]) <span style="color:#666">!=</span> s.end()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        frq[i] <span style="color:#666">=</span> min(frq[i], cnt[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the child node `v[1]` exists in the set `s`. </div>
+                            <div class=""> For each character, updates the frequency vector `frq` by taking the minimum count of the character between the current word and the previous words. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Erase Node from Set</b></div>
+                            <div class=""> <b>8 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s.erase(v[<span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the child node is found in the set, remove it from the set, as it&#39;s no longer a potential root. </div>
+                            <div class=""> Initializes an empty vector `res` to store the result, which will be the common characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Determine Root</b></div>
+                            <div class=""> <b>9 : Loop Over Characters</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> root <span style="color:#666">=</span> <span style="color:#666">*</span>s.begin();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The root of the tree is the only element left in the set `s`. </div>
+                            <div class=""> Iterates over each character (from &#39;a&#39; to &#39;z&#39;). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Map Initialization</b></div>
+                            <div class=""> <b>10 : Add Common Characters</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, TreeNode<span style="color:#666">*&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> frq[i]; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A map `mp` is initialized to store the tree nodes, with their values as keys. </div>
+                            <div class=""> For each character, adds the character to the result vector `res` based on its minimum frequency (how many times it appears in all the words). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Third Loop</b></div>
+                            <div class=""> <b>11 : Push Character to Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: desc) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(string(<span style="color:#666">1</span>, <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> i));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over `desc` again to create the nodes if they don&#39;t already exist in the map. </div>
+                            <div class=""> Creates a string from the character (using its ASCII value) and adds it to the result vector `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Check and Create Node for Parent</b></div>
+                            <div class=""> <b>12 : Result Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.find(v[<span style="color:#666">0</span>]) <span style="color:#666">==</span> mp.end()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the parent node `v[0]` is not already in the map, create it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Add Parent to Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[v[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(v[<span style="color:#666">0</span>]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Create a new TreeNode for the parent and add it to the map. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Check and Create Node for Child</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.find(v[<span style="color:#666">1</span>]) <span style="color:#666">==</span> mp.end()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the child node `v[1]` is not already in the map, create it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Add Child to Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[v[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(v[<span style="color:#666">1</span>]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Create a new TreeNode for the child and add it to the map. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Fourth Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: desc) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A loop to establish parent-child connections between the nodes. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Assign Left or Right Child</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> paret <span style="color:#666">=</span> v[<span style="color:#666">0</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the parent node value to `paret`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Assign Left or Right Child</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> child <span style="color:#666">=</span> v[<span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the child node value to `child`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Assign Left or Right Child</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> left  <span style="color:#666">=</span> v[<span style="color:#666">2</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the left flag value to `left`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Assign Left Child</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left) mp[paret]<span style="color:#666">-&gt;</span>left  <span style="color:#666">=</span> mp[child];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If `left` is true, set the left child of the parent node. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Assign Right Child</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>     mp[paret]<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> mp[child];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If `left` is false, set the right child of the parent node. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Return Root</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mp[root];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the root node, which is the result of the function. </div>
+                            <div class=""> Returns the vector `res`, which contains all the common characters. </div>
                         </div>
                     
                 </div>
@@ -846,16 +697,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of descriptions.</div>
-                        <div class=""> <b>Average Case:</b> O(n), where n is the number of descriptions.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of descriptions.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of descriptions, as we only need to process each description once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * m)</div>
+                        <div class=""> <b>Average Case:</b> O(n * m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * m), where n is the number of words and m is the maximum length of a word, since we process each character in each word.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), when there is only one node.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of nodes in the tree.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear with respect to the number of nodes in the tree, as we store each node in a map.</div>    
+                        <div class=""> <b>Best Case:</b> O(26)</div>
+                        <div class=""> <b>Worst Case:</b> O(26)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(26) for the frequency arrays used to track the minimum counts of characters, as there are only 26 possible lowercase English letters.</div>    
                     </div>
 
                 </div>

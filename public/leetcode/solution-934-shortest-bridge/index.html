@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array nums, containing distinct numbers, an integer start, and an integer goal. There is an integer x, initially set to start, and you need to transform x into goal by repeatedly performing operations. You can use any number from the array nums in the following ways: x + nums[i], x - nums[i], or x ^ nums[i] (bitwise-XOR). You can perform each operation any number of times in any order. If the resulting number goes outside the range 0 &lt;= x &lt;= 1000, no further operations can be performed. The task is to determine the minimum number of operations required to convert x from start to goal, or return -1 if it is not possible. </div>
+<div class=""> You are given an n x n binary matrix where 1 represents land and 0 represents water. There are exactly two islands in the grid, and you need to connect them by flipping the smallest number of 0&rsquo;s to 1&rsquo;s. An island is a group of 1&rsquo;s that are connected horizontally or vertically. Your task is to find the minimum number of flips required to connect the two islands. </div>
 
 
 
@@ -360,57 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are provided with the following input parameters:</div>
-                        <div class=""> <b>Example:</b> Input: nums = [4, 5, 6], start = 3, goal = 9</div>
+                        <div class=""> <b>Input:</b> The input consists of an n x n binary matrix, where each cell is either 0 or 1.</div>
+                        <div class=""> <b>Example:</b> Input: grid = [[1,0],[0,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i], goal &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • start != goal</div>
-                            
-                                <div style="margin-left: 20px;"> • All elements in nums are distinct.</div>
+                                <div style="margin-left: 20px;"> • There are exactly two islands in the grid</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of operations required to transform start to goal using the operations described, or -1 if it is not possible.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return the smallest number of 0&#39;s that must be flipped to connect the two islands.</div>
+                        <div class=""> <b>Example:</b> Output: 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result must be a non-negative integer or -1.</div>
+                                <div style="margin-left: 20px;"> • The grid will always contain exactly two islands.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine the minimum number of operations to transform the number start into goal using the operations provided. The strategy involves exploring all possible transformations using a breadth-first search (BFS) approach.</div>
+                        <div class=""> <b>Goal:</b> To connect the two islands with the minimum number of flips, we first identify one island using depth-first search (DFS), then perform a breadth-first search (BFS) to find the shortest path to the other island by flipping the minimum number of 0&#39;s to 1&#39;s.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a queue and a set to track seen numbers.</div>
+                                <div style="margin-left: 20px;"> • 1. Use DFS to find the first island and store its coordinates.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Perform a breadth-first search, starting with the value &#39;start&#39;.</div>
+                                <div style="margin-left: 20px;"> • 2. Use BFS from the first island to find the shortest path to the second island, counting the number of 0&#39;s encountered along the way.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each number x, generate new numbers by performing the operations x &#43; nums[i], x - nums[i], and x ^ nums[i], ensuring they are within the allowed range (0 &lt;= x &lt;= 1000).</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Check if any of the new numbers equal goal, and return the current number of operations.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. If no solution is found, return -1.</div>
+                                <div style="margin-left: 20px;"> • 3. Return the number of flips required to connect the two islands.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The algorithm should handle edge cases efficiently, especially those involving large inputs or impossible transformations.</div>
+                        <div class=""> <b>Goal:</b> The grid is square and contains exactly two islands.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm performs efficiently for up to 1000 elements in nums.</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • Handle cases where it is impossible to transform start into goal.</div>
+                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
+                            
+                                <div style="margin-left: 20px;"> • There are exactly two islands in the grid</div>
                             
                         </div>
                     </div>        
@@ -418,27 +412,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The numbers in the nums array are distinct.</div>
+                                <div style="margin-left: 20px;"> • The grid will always contain exactly two islands, so no edge cases with more or fewer islands are possible.</div>
                             
-                                <div style="margin-left: 20px;"> • Both start and goal are integers within the range [0, 1000].</div>
-                            
-                                <div style="margin-left: 20px;"> • If no valid transformation sequence exists, return -1.</div>
+                                <div style="margin-left: 20px;"> • The grid will not be empty and will always have a size of at least 2x2.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2,4,12], start = 2, goal = 12</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can go from 2 → 14 → 12 with the following operations: 2 &#43; 12 = 14, then 14 - 2 = 12. This requires 2 operations.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1,0],[0,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, there are two islands represented by 1&#39;s at positions (0,1) and (1,0). The minimum number of flips required to connect them is 1, flipping the 0 at position (0,0).</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3,5,7], start = 0, goal = -4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can go from 0 → 3 → -4 with the following operations: 0 &#43; 3 = 3, then 3 - 7 = -4. This requires 2 operations.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2,8,16], start = 0, goal = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is impossible to reach 1 starting from 0 with the given nums, so the output is -1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1,0,1],[0,0,0],[1,0,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the two islands are at positions (0,0), (0,2), (2,0), and (2,2). The minimum number of flips required to connect them is 2, flipping the two 0&#39;s at positions (1,0) and (1,2).</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,18 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem is best solved using a breadth-first search (BFS) strategy. BFS is ideal here as it explores all possible transformations level by level, ensuring the minimum number of operations is found.</div>
+                        <div class=""> <b>Approach:</b> We solve this problem using depth-first search (DFS) and breadth-first search (BFS). First, we perform DFS to find and mark all the cells of one island, then use BFS to find the shortest path to the second island, flipping the minimum number of 0&#39;s along the way.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to explore all possible transformations of x from start to goal.</div>
-                            
-                                <div style="margin-left: 20px;"> • BFS will allow us to find the shortest path of transformations.</div>
+                                <div style="margin-left: 20px;"> • We can use DFS to mark all the cells of one island, then use BFS to find the shortest path to the second island, ensuring we flip the fewest number of 0&#39;s.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Since BFS explores level by level, it ensures we find the minimum number of operations to reach the goal.</div>
+                                <div style="margin-left: 20px;"> • This approach effectively reduces the problem to a shortest path search, ensuring an optimal solution.</div>
                             
                         </div>
                     </div>
@@ -481,15 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize a queue and a set to track visited numbers.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Use DFS to find and mark all the cells of one island.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Start BFS from the &#39;start&#39; value.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Use BFS to find the shortest path to the second island, flipping the fewest number of 0&#39;s along the way.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: For each number in the queue, generate new numbers by performing the allowed operations (&#43;, -, ^).</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: If a new number equals the goal, return the number of operations.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 5: If no solution is found, return -1.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return the number of flips required to connect the two islands.</div>
                             
                         </div>
                     </div>
@@ -498,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one number in nums, so no need to handle empty input.</div>
+                                <div style="margin-left: 20px;"> • There will always be exactly two islands, so no empty inputs are possible.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where nums contains a large number of elements efficiently (up to 1000).</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the largest grid sizes (up to 100x100).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm handles edge cases like unreachable goals or cases where transformations take the number out of the allowed range.</div>
+                                <div style="margin-left: 20px;"> • The grid may contain only land (1&#39;s) or only water (0&#39;s), but there will always be two islands to connect.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The BFS should be optimized to avoid unnecessary computations and to handle the constraints efficiently.</div>
+                                <div style="margin-left: 20px;"> • The input grid will always contain exactly two islands, and no more.</div>
                             
                         </div>                                                                        
                     </div>
@@ -530,55 +512,59 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Flag Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Grid Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Set Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Island Detection</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Queue Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Set Flag</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Break Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Break Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Step Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Direction Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Conditional Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 BFS Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Set Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 BFS Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Set Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Pop Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Queue Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Queue Pop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Set Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Direction Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Set Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Direction Calculations</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Queue Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Bounds Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Set Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Skip Invalid Cells</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Set Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Island Found</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Queue Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Queue Push</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Mark Visited</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Step Increment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Return Result</button>
                     
                 </div>
 
@@ -587,43 +573,51 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> goal) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> seen;
-</span></span><span style="display:flex;"><span>    q.push(start);
-</span></span><span style="display:flex;"><span>    seen.insert(start);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> op <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        op<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: nums) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>((x <span style="color:#666">+</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">-</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">^</span> it) <span style="color:#666">==</span> goal)
-</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> op;
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">+</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">+</span> it);                        
-</span></span><span style="display:flex;"><span>                    q.push(x <span style="color:#666">+</span> it);
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">-</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">-</span> it);
-</span></span><span style="display:flex;"><span>                    q.push(x <span style="color:#666">-</span> it);
-</span></span><span style="display:flex;"><span>                }             
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">^</span> it) <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">^</span> it);
-</span></span><span style="display:flex;"><span>                    q.push(x <span style="color:#666">^</span> it);
-</span></span><span style="display:flex;"><span>                }                    
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shortestBridge</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (grid[i][j]) {
+</span></span><span style="display:flex;"><span>                dfs(i, j, q, grid);
+</span></span><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (flag) <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[<span style="color:#666">5</span>] <span style="color:#666">=</span> {<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">-</span><span style="color:#666">1</span>,<span style="color:#666">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> p.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> p.second <span style="color:#666">+</span> dir[i<span style="color:#666">+</span><span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(grid[x][y] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> step;
+</span></span><span style="display:flex;"><span>                q.push({x, y});
+</span></span><span style="display:flex;"><span>                grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>q, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    q.push(make_pair(x, y));
+</span></span><span style="display:flex;"><span>    grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    dfs(x <span style="color:#666">+</span> <span style="color:#666">1</span>, y, q, grid);
+</span></span><span style="display:flex;"><span>    dfs(x <span style="color:#666">-</span> <span style="color:#666">1</span>, y, q, grid);
+</span></span><span style="display:flex;"><span>    dfs(x, y <span style="color:#666">+</span> <span style="color:#666">1</span>, q, grid);
+</span></span><span style="display:flex;"><span>    dfs(x, y <span style="color:#666">-</span> <span style="color:#666">1</span>, q, grid);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -631,253 +625,273 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> goal) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shortestBridge</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the function &#39;minimumOperations&#39; which takes in a vector &#39;nums&#39; and two integers &#39;start&#39; and &#39;goal&#39; to calculate the minimum operations required. </div>
+                            <div class=""> Start the function that accepts a 2D grid where 1 represents land and 0 represents water. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Queue Initialization</b></div>
+                            <div class=""> <b>2 : Queue Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a queue &#39;q&#39; for BFS traversal to explore the different possible values. </div>
+                            <div class=""> Initialize a queue to store the coordinates of the first island&#39;s land cells that will be explored. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Set Initialization</b></div>
+                            <div class=""> <b>3 : Flag Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> seen;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Create a set &#39;seen&#39; to store the values that have already been processed, ensuring no value is revisited. </div>
+                            <div class=""> Use a flag to indicate whether the first island has been found and DFS has been executed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Queue Operations</b></div>
+                            <div class=""> <b>4 : Grid Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(start);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the initial &#39;start&#39; value into the queue to begin the BFS search. </div>
+                            <div class=""> Get the dimensions of the grid (number of rows and columns). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Set Operations</b></div>
+                            <div class=""> <b>5 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    seen.insert(start);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the &#39;start&#39; value into the &#39;seen&#39; set to mark it as processed. </div>
+                            <div class=""> Loop through each row of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> op <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a variable &#39;op&#39; to track the number of operations (steps) taken to reach the goal. </div>
+                            <div class=""> Loop through each column of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Looping</b></div>
+                            <div class=""> <b>7 : Island Detection</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (grid[i][j]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if a land cell is found, indicating the start of the first island. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : DFS Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dfs(i, j, q, grid);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the DFS function to explore the first island and fill the queue with its land cells. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Set Flag</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set the flag to true to mark that the first island has been processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Break Outer Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Break the inner loop once the first island is found. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Break Outer Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (flag) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Break the outer loop once the first island is fully processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Step Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a variable to count the number of steps to connect the two islands. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Direction Array</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[<span style="color:#666">5</span>] <span style="color:#666">=</span> {<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">-</span><span style="color:#666">1</span>,<span style="color:#666">0</span>};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set up an array to represent the four possible movement directions (up, right, down, left). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : BFS Loop</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop that continues until all possible values are explored. </div>
+                            <div class=""> Start the BFS loop to expand from the first island&#39;s land cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Queue Size</b></div>
+                            <div class=""> <b>15 : Queue Size</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the current size of the queue, which represents the number of elements to be processed in this iteration. </div>
+                            <div class=""> Get the current size of the queue to process all land cells of the island. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Counting</b></div>
+                            <div class=""> <b>16 : BFS Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        op<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the operation count as a new level of BFS is processed. </div>
+                            <div class=""> Loop through all elements in the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Looping</b></div>
+                            <div class=""> <b>17 : Pop Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each element at the current level in the BFS. </div>
+                            <div class=""> Pop the front element from the queue (a land cell). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Queue Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> q.front();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Get the front element of the queue to process. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Queue Operations</b></div>
+                            <div class=""> <b>18 : Queue Pop</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the front element from the queue after processing. </div>
+                            <div class=""> Remove the element from the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Looping</b></div>
+                            <div class=""> <b>19 : Direction Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each element in the &#39;nums&#39; vector to apply the operations. </div>
+                            <div class=""> Loop through the four possible directions to expand from the current cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Conditional Logic</b></div>
+                            <div class=""> <b>20 : Direction Calculations</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>((x <span style="color:#666">+</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">-</span> it) <span style="color:#666">==</span> goal <span style="color:#666">||</span> (x <span style="color:#666">^</span> it) <span style="color:#666">==</span> goal)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> p.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> p.second <span style="color:#666">+</span> dir[i<span style="color:#666">+</span><span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if any operation (&#43;, -, or ^) applied to the current value &#39;x&#39; results in the &#39;goal&#39;. </div>
+                            <div class=""> Calculate the new coordinates based on the current direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class=""> <b>21 : Bounds Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> op;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the &#39;goal&#39; is reached, return the number of operations (steps) taken. </div>
+                            <div class=""> Check if the new coordinates are within bounds and if the cell has already been visited. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Set Operations</b></div>
+                            <div class=""> <b>22 : Skip Invalid Cells</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">+</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">+</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the result of adding &#39;it&#39; to &#39;x&#39; has not been processed yet and falls within the valid range. </div>
+                            <div class=""> Skip the current iteration if the cell is out of bounds or already visited. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Set Operations</b></div>
+                            <div class=""> <b>23 : Island Found</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">+</span> it);                        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(grid[x][y] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> step;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the new value into the &#39;seen&#39; set to mark it as processed. </div>
+                            <div class=""> If a land cell of the second island is found, return the current step count as the result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Queue Operations</b></div>
+                            <div class=""> <b>24 : Queue Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(x <span style="color:#666">+</span> it);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push({x, y});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the new value into the queue for further processing. </div>
+                            <div class=""> Push the new valid cell into the queue for future processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Set Operations</b></div>
+                            <div class=""> <b>25 : Mark Visited</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">-</span> it) <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> x <span style="color:#666">-</span> it <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the result of subtracting &#39;it&#39; from &#39;x&#39; has not been processed yet and falls within the valid range. </div>
+                            <div class=""> Mark the current cell as visited by setting its value to -1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>20 : Set Operations</b></div>
+                            <div class=""> <b>26 : Step Increment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">-</span> it);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the new value into the &#39;seen&#39; set to mark it as processed. </div>
+                            <div class=""> Increment the step counter after processing all cells in the current layer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>21 : Queue Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(x <span style="color:#666">-</span> it);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the new value into the queue for further processing. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Set Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(x <span style="color:#666">^</span> it) <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> (x <span style="color:#666">^</span> it) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the result of XOR&#39;ing &#39;it&#39; with &#39;x&#39; has not been processed yet and falls within the valid range. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Set Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    seen.insert(x <span style="color:#666">^</span> it);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Insert the new XOR&#39;d value into the &#39;seen&#39; set. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Queue Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(x <span style="color:#666">^</span> it);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the new XOR&#39;d value into the queue for further processing. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Return Statement</b></div>
+                            <div class=""> <b>27 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return -1 if the goal cannot be reached with the available operations. </div>
+                            <div class=""> Return -1 if no valid bridge is found (shouldn&#39;t happen for valid inputs). </div>
                         </div>
                     
                 </div>
@@ -897,16 +911,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the number of elements in nums, as we explore all possible transformations in BFS.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> Both DFS and BFS operate in O(n^2) time, where n is the number of rows (or columns) in the grid.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the queue and the set used to track visited numbers.</div>    
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the need to store the grid and the visited cells during the DFS and BFS.</div>    
                     </div>
 
                 </div>

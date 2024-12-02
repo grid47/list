@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given two strings, a and b, of the same length. You need to split both strings at the same index into two parts: one prefix and one suffix for each string. Then, check if concatenating one prefix from one string with the suffix of the other string forms a palindrome. Specifically, you need to check if either <code>aprefix + bsuffix</code> or <code>bprefix + asuffix</code> forms a palindrome. </div>
+<div class=""> Given an array of integers <code>nums</code> and an integer <code>k</code>, return the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than <code>k</code>. </div>
 
 
 
@@ -372,49 +372,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two strings, a and b, both of the same length.</div>
-                        <div class=""> <b>Example:</b> a = &#39;abc&#39;, b = &#39;cba&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of an array `nums` of integers and an integer `k`.</div>
+                        <div class=""> <b>Example:</b> nums = [3, 4, 1, 2], k = 20</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= a.length, b.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 3 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • a.length == b.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • a and b consist of lowercase English letters</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^6</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if it is possible to form a palindrome string by concatenating either `aprefix &#43; bsuffix` or `bprefix &#43; asuffix`. Otherwise, return false.</div>
-                        <div class=""> <b>Example:</b> For a = &#39;abc&#39; and b = &#39;cba&#39;, the output would be true.</div>
+                        <div class=""> <b>Output:</b> Return the count of contiguous subarrays whose product of elements is strictly less than `k`.</div>
+                        <div class=""> <b>Example:</b> 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean value, true or false.</div>
+                                <div style="margin-left: 20px;"> • The result should be a non-negative integer representing the count of subarrays.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Check if it is possible to form a palindrome by choosing a split index for both strings and combining the corresponding parts.</div>
+                        <div class=""> <b>Goal:</b> To efficiently calculate the number of contiguous subarrays with product less than `k`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each possible split point, split both strings into two parts: a prefix and a suffix.</div>
+                                <div style="margin-left: 20px;"> • Use a sliding window technique to iterate through the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if either concatenation of `aprefix &#43; bsuffix` or `bprefix &#43; asuffix` forms a palindrome.</div>
+                                <div style="margin-left: 20px;"> • Maintain a product variable to store the product of the current subarray.</div>
                             
-                                <div style="margin-left: 20px;"> • Return true if either concatenation forms a palindrome, otherwise return false.</div>
+                                <div style="margin-left: 20px;"> • If the product exceeds `k`, move the left boundary of the window to reduce the product.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each valid window, the number of subarrays ending at the current position is added to the result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input strings should have the same length and consist of lowercase letters.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle the array size up to 30,000 and handle values within the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Both strings a and b have the same length.</div>
+                                <div style="margin-left: 20px;"> • The input array can contain up to 30,000 elements.</div>
                             
-                                <div style="margin-left: 20px;"> • The lengths of a and b can range from 1 to 100,000.</div>
+                                <div style="margin-left: 20px;"> • Each element in the array is between 1 and 1000.</div>
+                            
+                                <div style="margin-left: 20px;"> • The value of `k` is between 0 and 1,000,000.</div>
                             
                         </div>
                     </div>        
@@ -422,25 +426,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The two input strings are guaranteed to have the same length.</div>
-                            
-                                <div style="margin-left: 20px;"> • You can split the strings at any valid index.</div>
+                                <div style="margin-left: 20px;"> • The array contains positive integers and `k` is a non-negative integer.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = &#39;abc&#39;, b = &#39;cba&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can split both strings at index 1: aprefix = &#39;a&#39;, asuffix = &#39;bc&#39;, bprefix = &#39;c&#39;, and bsuffix = &#39;ba&#39;. Concatenating `aprefix &#43; bsuffix = &#39;a&#39; &#43; &#39;ba&#39; = &#39;aba&#39;`, which is a palindrome.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [3, 4, 1, 2], k = 20</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays [3], [4], [1], [2], [3, 4], and [4, 1] have products less than 20, totaling 6 valid subarrays.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = &#39;ab&#39;, b = &#39;ba&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, splitting the strings at index 1: aprefix = &#39;a&#39;, asuffix = &#39;b&#39;, bprefix = &#39;b&#39;, and bsuffix = &#39;a&#39;. Concatenating `aprefix &#43; bsuffix = &#39;a&#39; &#43; &#39;a&#39; = &#39;aa&#39;`, which is a palindrome.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = &#39;abc&#39;, b = &#39;def&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, no matter how we split the strings, no combination of prefix and suffix will form a palindrome.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 1, 1], k = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> All possible subarrays in this case have products less than 5, so the output is 6.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,16 +462,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through all possible split points, checking the formed concatenations for palindrome properties.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved efficiently using a sliding window technique to track the product of elements in subarrays.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check both concatenations (`aprefix &#43; bsuffix` and `bprefix &#43; asuffix`) for each possible split.</div>
+                                <div style="margin-left: 20px;"> • Using a brute force approach by checking all possible subarrays would be too slow for large arrays.</div>
+                            
+                                <div style="margin-left: 20px;"> • A sliding window approach can help reduce the time complexity.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • If a combination forms a palindrome, we return true; otherwise, we return false.</div>
+                                <div style="margin-left: 20px;"> • We will use a window where the product of the elements is maintained dynamically, updating it as the window slides over the array.</div>
                             
                         </div>
                     </div>
@@ -481,11 +481,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a helper function `check` that checks if either concatenation forms a palindrome.</div>
+                                <div style="margin-left: 20px;"> • Initialize a variable to store the product of elements in the current window.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each possible split index of the strings a and b.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array and maintain a right pointer to track the window&#39;s right boundary.</div>
                             
-                                <div style="margin-left: 20px;"> • For each index, check if either `aprefix &#43; bsuffix` or `bprefix &#43; asuffix` is a palindrome.</div>
+                                <div style="margin-left: 20px;"> • When the product exceeds `k`, move the left pointer to reduce the product.</div>
+                            
+                                <div style="margin-left: 20px;"> • Count all subarrays that end at the current right pointer and have a product less than `k`.</div>
                             
                         </div>
                     </div>
@@ -494,22 +496,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If either string is empty, the result should be false as there are no valid splits.</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty, return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large strings, the approach needs to be efficient enough to handle up to 100,000 characters.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently for large arrays, up to the size constraint of 30,000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Strings that are already palindromes can be split trivially.</div>
+                                <div style="margin-left: 20px;"> • If `k` is 0, the result should be 0 as no subarray can have a product less than 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm needs to check possible splits efficiently.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where `k` is very large or very small relative to the elements in the array.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,25 +528,25 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Edge Case Handling</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Helper Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Pointer Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Product Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Sliding Window Adjustment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Palindrome Check Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Window Shrinking</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pointer Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Counting Valid Subarrays</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
@@ -555,21 +557,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkPalindromeFormation</span>(string a, string b) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> check(a, b) <span style="color:#666">||</span> check(b, a);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(string a, string b) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> a.size() <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> j <span style="color:#666">&amp;&amp;</span> a[i] <span style="color:#666">==</span> b[j])
-</span></span><span style="display:flex;"><span>    i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> isPalindrom(a, i, j) <span style="color:#666">||</span> isPalindrom(b, i, j);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPalindrom</span>(string a, <span style="color:#0b0;font-weight:bold">int</span> i , <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> j <span style="color:#666">&amp;&amp;</span> a[i] <span style="color:#666">==</span> a[j])
-</span></span><span style="display:flex;"><span>    i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">&gt;=</span> j;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSubarrayProductLessThanK</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> prod <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        prod <span style="color:#666">*=</span> nums[i];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(prod <span style="color:#666">&gt;=</span> k <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;=</span> i) {
+</span></span><span style="display:flex;"><span>            prod <span style="color:#666">/=</span> nums[j<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -577,113 +578,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkPalindromeFormation</span>(string a, string b) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSubarrayProductLessThanK</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `checkPalindromeFormation` that takes two strings `a` and `b` and returns true if a palindrome can be formed by rearranging them. </div>
+                            <div class=""> Define the function &#39;numSubarrayProductLessThanK&#39; which takes a vector of integers &#39;nums&#39; and an integer &#39;k&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Logic</b></div>
+                            <div class=""> <b>2 : Edge Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">check</span>(a, b) <span style="color:#666">||</span> check(b, a);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Call the `check` function for both possible combinations of the strings `a` and `b`. If either combination can form a palindrome, return true. </div>
+                            <div class=""> Handle the edge case where &#39;k&#39; is 0, in which case no subarray product can be less than 0, thus return 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Helper Function Definition</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(string a, string b) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> prod <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the helper function `check` that will determine if the strings `a` and `b` can form a palindrome by checking character matches from both ends. </div>
+                            <div class=""> Initialize the product variable &#39;prod&#39; to 1. This will hold the product of elements in the current subarray. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> a.size() <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two pointers `i` at the start of string `a` and `j` at the end to check for palindrome conditions. </div>
+                            <div class=""> Initialize &#39;res&#39; to store the result (number of valid subarrays) and &#39;j&#39; as the starting index of the sliding window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : While Loop</b></div>
+                            <div class=""> <b>5 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> j <span style="color:#666">&amp;&amp;</span> a[i] <span style="color:#666">==</span> b[j])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Use a while loop to compare characters of the two strings from both ends (`a[i]` with `b[j]`). Continue as long as they match. </div>
+                            <div class=""> Loop through each element in the &#39;nums&#39; array using the variable &#39;i&#39; as the end index of the sliding window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Pointer Adjustment</b></div>
+                            <div class=""> <b>6 : Product Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        prod <span style="color:#666">*=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If characters match, move the pointers towards the center (`i&#43;&#43;` and `j--`) to check the next pair of characters. </div>
+                            <div class=""> Multiply the current element &#39;nums[i]&#39; with the running product &#39;prod&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Sliding Window Adjustment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">isPalindrom</span>(a, i, j) <span style="color:#666">||</span> isPalindrom(b, i, j);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the result of checking if either string from the updated pointers forms a palindrome using the helper function `isPalindrom`. </div>
+                            <div class=""> Check and adjust the sliding window if the product exceeds &#39;k&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Palindrome Check Function Definition</b></div>
+                            <div class=""> <b>8 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPalindrom</span>(string a, <span style="color:#0b0;font-weight:bold">int</span> i , <span style="color:#0b0;font-weight:bold">int</span> j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(prod <span style="color:#666">&gt;=</span> k <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;=</span> i) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `isPalindrom` that checks whether the substring from index `i` to `j` in string `a` is a palindrome. </div>
+                            <div class=""> While the product exceeds or equals &#39;k&#39;, move the starting index &#39;j&#39; to the right to reduce the product. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : While Loop</b></div>
+                            <div class=""> <b>9 : Window Shrinking</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> j <span style="color:#666">&amp;&amp;</span> a[i] <span style="color:#666">==</span> a[j])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            prod <span style="color:#666">/=</span> nums[j<span style="color:#666">++</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Use a while loop to compare characters from both ends of the substring in string `a` (`a[i]` with `a[j]`). Continue as long as they match. </div>
+                            <div class=""> Divide the product by &#39;nums[j]&#39; (the element at the starting index), and increment &#39;j&#39; to shrink the window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pointer Adjustment</b></div>
+                            <div class=""> <b>10 : Counting Valid Subarrays</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If characters match, move the pointers towards the center (`i&#43;&#43;` and `j--`) to check the next pair of characters. </div>
+                            <div class=""> For each valid subarray (where the product is less than &#39;k&#39;), add the number of valid subarrays in the current window to &#39;res&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">&gt;=</span> j;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the pointers have crossed or met, it means the substring is a palindrome. Return true, else false. </div>
+                            <div class=""> Return the total count of valid subarrays whose product is less than &#39;k&#39;. </div>
                         </div>
                     
                 </div>
@@ -706,13 +707,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The worst case occurs when we check palindrome properties at each split for strings of length n.</div>                                               
+                        <div class=""> <b>Description:</b> In the worst case, we process each element once while adjusting the window, making the time complexity linear.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) in the worst case for storing prefixes and suffixes.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The solution uses constant space, only requiring a few variables to maintain the window and the count.</div>    
                     </div>
 
                 </div>

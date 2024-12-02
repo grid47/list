@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1278s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1289s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/739.webp" 
            alt="A series of temperatures with the next warmer day highlighted, glowing softly as it is identified." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given an integer array <code>nums</code> and a positive integer <code>k</code>, return the most competitive subsequence of <code>nums</code> of size <code>k</code>. A subsequence is more competitive than another if at the first position where they differ, the subsequence has a smaller number. </div>
+<div class=""> Given an array of integers temperatures representing the daily temperatures, return an array where each element is the number of days you need to wait after that day to get a warmer temperature. If there is no future day for which this is possible, keep the answer as 0. </div>
 
 
 
@@ -371,53 +371,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers `nums` and an integer `k` which is the size of the subsequence.</div>
-                        <div class=""> <b>Example:</b> nums = [6, 3, 4, 5], k = 2</div>
+                        <div class=""> <b>Input:</b> The input is an array of integers representing the daily temperatures.</div>
+                        <div class=""> <b>Example:</b> temperatures = [72, 74, 78, 68, 65, 70, 80, 73]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= temperatures.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length</div>
+                                <div style="margin-left: 20px;"> • 30 &lt;= temperatures[i] &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the most competitive subsequence of size `k`.</div>
-                        <div class=""> <b>Example:</b> Output: [3, 5]</div>
+                        <div class=""> <b>Output:</b> Return an array where each element represents the number of days to wait for a warmer temperature.</div>
+                        <div class=""> <b>Example:</b> For temperatures = [72, 74, 78, 68, 65, 70, 80, 73], the output should be [1, 1, 4, 2, 1, 1, 0, 0].</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the most competitive subsequence by maintaining a stack and ensuring that subsequences are in increasing order.</div>
+                        <div class=""> <b>Goal:</b> Find the number of days to wait for a warmer temperature for each day in the input array.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty stack.</div>
+                                <div style="margin-left: 20px;"> • Create an empty stack to store pairs of temperature and its index.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each element of the array `nums`.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the temperatures from left to right.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element, pop elements from the stack if they are greater than the current element and if there are enough remaining elements to form a subsequence of size `k`.</div>
+                                <div style="margin-left: 20px;"> • For each temperature, check if it is higher than the temperature at the index stored at the top of the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Push the current element to the stack if the size of the stack is less than `k`.</div>
+                                <div style="margin-left: 20px;"> • If so, pop the stack, calculate the difference in days, and store the result in the answer array.</div>
                             
-                                <div style="margin-left: 20px;"> • After iterating through all elements, return the stack as the result.</div>
+                                <div style="margin-left: 20px;"> • Push the current temperature and its index onto the stack.</div>
+                            
+                                <div style="margin-left: 20px;"> • After processing all temperatures, fill in remaining stack indices with 0 (no warmer day).</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input will always satisfy the following constraints:</div>
+                        <div class=""> <b>Goal:</b> The number of days should be between 1 and 10^5, and temperatures should range from 30 to 100.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the input list `nums` will be between 1 and 100,000.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= temperatures.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • Each element in the list will be between 0 and 1 billion.</div>
-                            
-                                <div style="margin-left: 20px;"> • The subsequence size `k` will always be less than or equal to the length of `nums`.</div>
+                                <div style="margin-left: 20px;"> • 30 &lt;= temperatures[i] &lt;= 100</div>
                             
                         </div>
                     </div>        
@@ -425,17 +423,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array `nums` will have at least one element.</div>
-                            
-                                <div style="margin-left: 20px;"> • The value of `k` will be a valid integer between 1 and the length of `nums`.</div>
+                                <div style="margin-left: 20px;"> • The input array temperatures will always contain at least one element.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [6, 3, 4, 5], k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Among all possible subsequences of size 2, [3, 5] is the most competitive because the first position where the subsequences differ is at the second position, and 3 is smaller than 4 and 5.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For temperatures = [72, 74, 78, 68, 65, 70, 80, 73], the output is [1, 1, 4, 2, 1, 1, 0, 0].</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Day 1 has a higher temperature on day 2 (1 day later), day 2 has a higher temperature on day 3 (1 day later), and so on.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -459,18 +455,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem using a greedy approach with a stack. As we iterate through the array, we ensure that the stack contains the most competitive subsequence by removing larger elements when necessary.</div>
+                        <div class=""> <b>Approach:</b> A stack-based approach to efficiently determine the number of days to wait for a warmer temperature.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to select `k` elements that form the most competitive subsequence.</div>
-                            
-                                <div style="margin-left: 20px;"> • Using a stack allows us to efficiently maintain the subsequence in increasing order.</div>
+                                <div style="margin-left: 20px;"> • We need to track the previous days&#39; temperatures to know when we can find a warmer day.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to ensure that at each point we are maintaining the smallest possible elements in the subsequence, using the stack to enforce this.</div>
+                                <div style="margin-left: 20px;"> • Using a stack to store temperatures and their indices will allow us to efficiently compute the answer for each day.</div>
                             
                         </div>
                     </div>
@@ -478,15 +472,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty stack.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty stack and a result array with all zeros.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the list `nums`.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the temperatures list.</div>
                             
-                                <div style="margin-left: 20px;"> • If the stack is not empty and the current element is smaller than the top element of the stack, and there are enough remaining elements to form a subsequence of size `k`, pop the stack.</div>
+                                <div style="margin-left: 20px;"> • For each day, check if the current temperature is higher than the one at the top of the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Push the current element to the stack if the size of the stack is less than `k`.</div>
+                                <div style="margin-left: 20px;"> • If so, pop the stack and update the result for the popped day with the number of days between them.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the stack as the final subsequence.</div>
+                                <div style="margin-left: 20px;"> • Push the current temperature and its index onto the stack.</div>
+                            
+                                <div style="margin-left: 20px;"> • Once the loop completes, any remaining days in the stack have no warmer day, so their result stays 0.</div>
                             
                         </div>
                     </div>
@@ -495,20 +491,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always contain at least one element.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain at least one temperature.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle inputs up to 100,000 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle inputs up to 100,000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array elements can be as large as 1 billion.</div>
+                                <div style="margin-left: 20px;"> • If the input contains strictly decreasing temperatures, all answers will be 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution should handle both small and large inputs within the time limit.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,21 +523,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Stack Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping Through Elements</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Stack Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Pop Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Push Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Result Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Stack Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 While Loop Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Stack Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Result Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -548,23 +558,32 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mostCompetitive(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dailyTemperatures(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> temp) {
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(temp.size(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> temp.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; temp[i] &lt;&lt; &#34; &#34; ;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> temp[i] <span style="color:#666">&gt;</span> stk.top().first) {
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; temp[i] &lt;&lt; &#34; &#34; ;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> x <span style="color:#666">=</span> stk.top();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>stk.empty()          <span style="color:#666">&amp;&amp;</span>
-</span></span><span style="display:flex;"><span>             stk.back() <span style="color:#666">&gt;</span> nums[i] <span style="color:#666">&amp;&amp;</span>
-</span></span><span style="display:flex;"><span>            (stk.size() <span style="color:#666">+</span> nums.size() <span style="color:#666">-</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>)) <span style="color:#666">&gt;=</span> k )
-</span></span><span style="display:flex;"><span>            stk.pop_back();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(stk.size() <span style="color:#666">&lt;</span> k)
-</span></span><span style="display:flex;"><span>            stk.push_back(nums[i]);
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; temp[i] &lt;&lt; &#34; &#34; ;                
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            stk.pop();
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; temp[i] &lt;&lt; &#34; &#34; &lt;&lt; x.first &lt;&lt; x.second; 
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            ans[x.second] <span style="color:#666">=</span> i<span style="color:#666">-</span>x.second;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; temp[i] &lt;&lt; &#34; &#34; ;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span><span style="display:flex;"><span>        stk.push(make_pair(temp[i], i));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> x <span style="color:#666">=</span> stk.top();
+</span></span><span style="display:flex;"><span>        stk.pop();
+</span></span><span style="display:flex;"><span>        ans[x.second] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -572,83 +591,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mostCompetitive(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dailyTemperatures(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> temp) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function mostCompetitive that takes a reference to a vector of integers &#39;nums&#39; and an integer &#39;k&#39; as input. The function will return a vector of integers representing the most competitive subsequence. </div>
+                            <div class=""> Defines the function that takes a vector of integers, `temp`, representing daily temperatures. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Stack Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty vector &#39;stk&#39; that will be used as a stack to store elements from &#39;nums&#39; in the most competitive order. </div>
+                            <div class=""> Declares a stack to store pairs of temperature and day index to track the previous higher temperatures. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Looping Through Elements</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(temp.size(), <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through each element in the &#39;nums&#39; array. </div>
+                            <div class=""> Initializes a result vector `ans` with zeros, each representing the number of days until a warmer temperature for each day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Stack Operations</b></div>
+                            <div class=""> <b>4 : Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.back() <span style="color:#666">&gt;</span> nums[i] <span style="color:#666">&amp;&amp;</span> (stk.size() <span style="color:#666">+</span> nums.size() <span style="color:#666">-</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>)) <span style="color:#666">&gt;=</span> k )
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> temp.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inside the loop, use a while loop to check if the stack is not empty, the top element of the stack is greater than the current element, and there are enough remaining elements to form a valid subsequence of length &#39;k&#39;. </div>
+                            <div class=""> Starts a loop to iterate through each day in the input temperature vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Pop Operation</b></div>
+                            <div class=""> <b>5 : Loop Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop_back();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> temp[i] <span style="color:#666">&gt;</span> stk.top().first) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the above conditions are true, pop the top element from the stack to make room for potentially smaller and more competitive elements. </div>
+                            <div class=""> Starts a while loop to check if the current temperature is greater than the previous stored temperature in the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Conditional Insertion</b></div>
+                            <div class=""> <b>6 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(stk.size() <span style="color:#666">&lt;</span> k)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> x <span style="color:#666">=</span> stk.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current size of the stack is less than &#39;k&#39;, meaning there is space to add more elements. </div>
+                            <div class=""> Pops the top element from the stack and assigns it to `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Push Operation</b></div>
+                            <div class=""> <b>7 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push_back(nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If there is space in the stack (i.e., the stack&#39;s size is less than &#39;k&#39;), push the current element onto the stack. </div>
+                            <div class=""> Pops the top element from the stack after processing it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class=""> <b>8 : Result Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[x.second] <span style="color:#666">=</span> i<span style="color:#666">-</span>x.second;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After the loop finishes, return the stack, which now contains the most competitive subsequence of length &#39;k&#39;. </div>
+                            <div class=""> Updates the result array to record the number of days until a warmer temperature. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Stack Push</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.push(make_pair(temp[i], i));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the current temperature and its index onto the stack for future comparisons. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : While Loop Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a while loop to handle any remaining elements in the stack after processing all temperatures. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Variable Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> x <span style="color:#666">=</span> stk.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pops the top element of the stack into variable `x` to process any remaining days that didn&#39;t get a warmer temperature. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Stack Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pops the top element from the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Result Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[x.second] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sets the number of days to 0 for any temperatures that didn&#39;t have a warmer temperature. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the result vector, which contains the number of days until a warmer temperature for each day. </div>
                         </div>
                     
                 </div>
@@ -668,16 +747,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We iterate through the list once, and each element is pushed and popped from the stack at most once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the temperatures array. This happens when the temperatures are strictly increasing.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as we process each element in the temperatures array once.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the temperatures array. In the worst case, each element is processed once and added to the stack.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only iterate through the array once, with each element being pushed and popped from the stack once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k)</div>
-                        <div class=""> <b>Worst Case:</b> O(k)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the size of the subsequence `k`.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), as the stack may store up to n elements in the worst case.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the temperatures array, due to the space required for the stack.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because the stack can hold up to n elements in the worst case.</div>    
                     </div>
 
                 </div>

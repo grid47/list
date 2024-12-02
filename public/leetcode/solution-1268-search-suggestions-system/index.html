@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You are given a perfect binary tree with <code>n</code> nodes, where each node has a cost associated with it. The tree is numbered from 1 to n, with node 1 as the root. For each node <code>i</code>, its left child is <code>2*i</code> and its right child is <code>2*i + 1</code>. You are allowed to increment the cost of any node by 1 any number of times. Your task is to return the minimum number of increments required to make the total cost of the path from the root to each leaf node equal. </div>
+<div class=""> You are given a list of unique product names and a search word. As each character of the search word is typed, you need to suggest up to three products that have a prefix matching the current search word. If there are more than three products with the same prefix, return the three lexicographically smallest products. </div>
 
 
 
@@ -362,49 +362,60 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer `n` representing the number of nodes in a perfect binary tree, followed by a list of integers `cost`, where `cost[i]` is the cost of node `i&#43;1`.</div>
-                        <div class=""> <b>Example:</b> Input: n = 5, cost = [2, 4, 3, 2, 5]</div>
+                        <div class=""> <b>Input:</b> A list of unique product names and a search word string.</div>
+                        <div class=""> <b>Example:</b> products = [&#34;tablet&#34;,&#34;telescope&#34;,&#34;test&#34;,&#34;terrace&#34;,&#34;time&#34;]
+searchWord = &#34;test&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= products.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • n &#43; 1 is a power of 2</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= products[i].length &lt;= 3000</div>
                             
-                                <div style="margin-left: 20px;"> • cost.length == n</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= sum(products[i].length) &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= cost[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • All the strings in products are unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= searchWord.length &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer, which represents the minimum number of increments required to make the cost of all root-to-leaf paths equal.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> Return a list of lists where each list contains at most three products that start with the prefix corresponding to the characters typed so far in searchWord.</div>
+                        <div class=""> <b>Example:</b> [[&#34;tablet&#34;, &#34;telescope&#34;, &#34;test&#34;], [&#34;tablet&#34;, &#34;telescope&#34;, &#34;test&#34;], [&#34;test&#34;, &#34;telescope&#34;], [&#34;test&#34;, &#34;telescope&#34;], [&#34;test&#34;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • Each list in the output should contain at most three products.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the number of increments required to equalize the path costs.</div>
+                        <div class=""> <b>Goal:</b> Find the products that match the current prefix and return the three lexicographically smallest products at each step.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Starting from the leaf nodes, propagate the required increments up to the root node, ensuring each path has the same total cost.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the product names lexicographically.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each non-leaf node, compare the costs of its left and right children. Increment the smaller one to match the larger one and count the number of increments.</div>
+                                <div style="margin-left: 20px;"> • 2. For each character in the search word, create the current prefix.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Repeat the process until you reach the root node.</div>
+                                <div style="margin-left: 20px;"> • 3. Find products that match the current prefix and return at most three of them.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must efficiently handle the constraints specified.</div>
+                        <div class=""> <b>Goal:</b> The input grid has size m x n, where m and n are both at least 1 and at most 1000. The product strings and searchWord are strings consisting of lowercase English letters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works within O(n) time complexity to handle the largest inputs.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= products.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= products[i].length &lt;= 3000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= sum(products[i].length) &lt;= 2 * 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • All the strings in products are unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= searchWord.length &lt;= 1000</div>
                             
                         </div>
                     </div>        
@@ -412,17 +423,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree is a perfect binary tree, meaning every non-leaf node has exactly two children.</div>
+                                <div style="margin-left: 20px;"> • The products list contains unique strings.</div>
                             
-                                <div style="margin-left: 20px;"> • All nodes have a non-negative cost value.</div>
+                                <div style="margin-left: 20px;"> • The search word is a non-empty string.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5, cost = [2, 4, 3, 2, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the two paths from root to leaves are [2, 4, 5] and [2, 3, 5]. To equalize the path costs, we increment the cost of node 2 to match node 3&#39;s cost. This requires 4 increments, so the total increments required are 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> products = [&#34;tablet&#34;,&#34;telescope&#34;,&#34;test&#34;,&#34;terrace&#34;,&#34;time&#34;]
+searchWord = &#34;test&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> As each character of &#39;test&#39; is typed, the system suggests products that start with the corresponding prefix. At each step, it returns up to three products, sorted lexicographically.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> products = [&#34;banana&#34;,&#34;berry&#34;,&#34;cherry&#34;,&#34;date&#34;]
+searchWord = &#34;berry&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the search word is &#39;berry&#39;. Since &#39;berry&#39; is the only product starting with &#39;b&#39;, after each character is typed, only &#39;berry&#39; will be suggested.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,18 +463,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we will work our way from the leaf nodes upwards to the root, balancing the path costs by making necessary increments.</div>
+                        <div class=""> <b>Approach:</b> We can implement the system by sorting the product list lexicographically and finding products that match the current prefix at each step.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to ensure that the cost of each root-to-leaf path is the same.</div>
-                            
-                                <div style="margin-left: 20px;"> • This requires comparing the costs of left and right children of every node and balancing them.</div>
+                                <div style="margin-left: 20px;"> • Sorting the products lexicographically allows us to easily get the smallest lexicographical products when a prefix matches.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Starting from the leaf nodes and adjusting the internal nodes&#39; costs seems to be an efficient way to solve this problem.</div>
+                                <div style="margin-left: 20px;"> • After each character of the search word, we can use binary search to quickly find products that start with the current prefix.</div>
                             
                         </div>
                     </div>
@@ -465,11 +480,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize an array `cost` of size `n`.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the products list lexicographically.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Start from the last non-leaf node and move upwards. For each node, compare the costs of its left and right children and increment the smaller cost to match the larger one.</div>
+                                <div style="margin-left: 20px;"> • 2. For each character of the search word, update the prefix and find products that start with this prefix.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Accumulate the number of increments required as you move upwards towards the root.</div>
+                                <div style="margin-left: 20px;"> • 3. Return the three lexicographically smallest products at each step.</div>
                             
                         </div>
                     </div>
@@ -478,22 +493,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always have at least 3 nodes, ensuring a valid binary tree structure.</div>
+                                <div style="margin-left: 20px;"> • If the product list is empty, return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle up to 10^5 nodes efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle large inputs with up to 1000 products and long search words.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the tree already has equal costs for all root-to-leaf paths, the result should be 0 increments.</div>
+                                <div style="margin-left: 20px;"> • If there are fewer than three products matching a prefix, return all matching products.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution runs in O(n) time complexity to handle the largest inputs.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution efficiently handles sorting and finding products for each prefix.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,15 +527,37 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Iterator Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iteration Over Details</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Check for Senior 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Check for Senior 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Prefix Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Prefix Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Building Prefix</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Suggestion Vector Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Lower Bound Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Suggestion Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 End Suggestion Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Checking Prefix Match</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Breaking on No Match</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Adding Valid Suggestions</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 End Suggestion Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Appending Suggestions to Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Returning Result</button>
                     
                 </div>
 
@@ -529,13 +566,26 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countSeniors</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> details) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">i</span> : details) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i[<span style="color:#666">11</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&gt;</span> <span style="color:#666">6</span>) count<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (i[<span style="color:#666">11</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">==</span> <span style="color:#666">6</span> <span style="color:#666">&amp;&amp;</span> i[<span style="color:#666">12</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) count<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> suggestedProducts(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> A, string w) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> A.begin();
+</span></span><span style="display:flex;"><span>    sort(it, A.end());
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> res;
+</span></span><span style="display:flex;"><span>    string cur <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : w) {
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> c;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> sdg;
+</span></span><span style="display:flex;"><span>        it <span style="color:#666">=</span> lower_bound(it, A.end(), cur);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">3</span> <span style="color:#666">&amp;&amp;</span> (it <span style="color:#666">+</span> i) <span style="color:#666">!=</span> A.end(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    string<span style="color:#666">&amp;</span> s <span style="color:#666">=</span> <span style="color:#666">*</span>(i <span style="color:#666">+</span> it);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.find(cur)) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>    sdg.push_back(s);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        res.push_back(sdg);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> count;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -546,60 +596,170 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countSeniors</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> details) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> suggestedProducts(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> A, string w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;countSeniors&#39; is defined with a parameter &#39;details&#39;, which is a vector of strings. Each string represents an individual&#39;s details, including their date of birth. </div>
+                            <div class=""> This defines the function `suggestedProducts`, which takes a vector of strings `A` and a string `w` representing the prefix. The function returns a vector of vectors of strings, where each vector contains up to 3 suggestions for the corresponding prefix of `w`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Iterator Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> A.begin();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A variable &#39;count&#39; is initialized to 0, which will be used to keep track of the number of seniors in the &#39;details&#39; vector. </div>
+                            <div class=""> This initializes an iterator `it` to the beginning of the list `A` (the product list). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Iteration Over Details</b></div>
+                            <div class=""> <b>3 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">i</span> : details) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(it, A.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We loop through each element &#39;i&#39; in the &#39;details&#39; vector, where each element is a string containing personal details of an individual. </div>
+                            <div class=""> This sorts the vector `A` in lexicographical order to make it easier to find matching products for each prefix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Check for Senior 1</b></div>
+                            <div class=""> <b>4 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i[<span style="color:#666">11</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&gt;</span> <span style="color:#666">6</span>) count<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The if condition checks if the month of birth (extracted from the string at index 11) is greater than 6 (i.e., born after June), which indicates the person is a senior (60&#43; years old). If true, &#39;count&#39; is incremented. </div>
+                            <div class=""> This initializes the result vector `res` to store the list of product suggestions for each prefix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Check for Senior 2</b></div>
+                            <div class=""> <b>5 : Prefix Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (i[<span style="color:#666">11</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">==</span> <span style="color:#666">6</span> <span style="color:#666">&amp;&amp;</span> i[<span style="color:#666">12</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) count<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string cur <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The else-if condition checks if the month is exactly June (index 11), and if the day of the month (index 12) is greater than 0, indicating the person is also a senior. In this case, &#39;count&#39; is incremented. </div>
+                            <div class=""> This initializes the string `cur` as an empty string, which will be used to store the current prefix being considered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Result</b></div>
+                            <div class=""> <b>6 : Prefix Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> count;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After the loop completes, the function returns the total count of seniors found in the &#39;details&#39; vector. </div>
+                            <div class=""> This begins a loop that iterates through each character `c` in the string `w`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Building Prefix</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> c;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This adds the current character `c` to the string `cur`, building the prefix incrementally. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Suggestion Vector Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> sdg;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This initializes an empty vector `sdg` that will hold the suggestions for the current prefix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Lower Bound Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it <span style="color:#666">=</span> lower_bound(it, A.end(), cur);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This uses `lower_bound` to find the first product in `A` that is greater than or equal to the current prefix `cur`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Suggestion Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">3</span> <span style="color:#666">&amp;&amp;</span> (it <span style="color:#666">+</span> i) <span style="color:#666">!=</span> A.end(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This begins a loop that tries to find up to 3 products matching the current prefix `cur`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : End Suggestion Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This section marks the continuation of the loop for adding suggestions, but there is no actual code inside. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Checking Prefix Match</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string<span style="color:#666">&amp;</span> s <span style="color:#666">=</span> <span style="color:#666">*</span>(i <span style="color:#666">+</span> it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This dereferences the iterator `it &#43; i` to get the product string `s` and checks if it matches the current prefix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Breaking on No Match</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.find(cur)) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the product string `s` does not start with the current prefix `cur`, the loop breaks as no further products will match. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Adding Valid Suggestions</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sdg.push_back(s);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This adds the valid product `s` to the suggestion vector `sdg`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : End Suggestion Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This section marks the continuation of the loop, but no additional code is inside this block. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Appending Suggestions to Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(sdg);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This appends the current suggestion vector `sdg` to the result vector `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Returning Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns the final result vector `res`, which contains the product suggestions for each prefix. </div>
                         </div>
                     
                 </div>
@@ -619,16 +779,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) as we only need to traverse the tree once, adjusting costs from the leaves to the root.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n &#43; m)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n &#43; m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step (O(n log n)) and the time to find matching products for each prefix (O(m)).</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space needed for the cost array.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the sorted list of products.</div>    
                     </div>
 
                 </div>

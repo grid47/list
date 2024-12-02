@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 17, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> Given an integer array nums of size n, find the length of the longest contiguous subarray that has the maximum possible bitwise AND. The bitwise AND of an array is calculated by performing a bitwise AND operation on all the numbers in it. </div>
+<div class=""> You are given two arrays: <code>arr1</code> and <code>arr2</code>. The elements of <code>arr2</code> are distinct, and all elements in <code>arr2</code> exist in <code>arr1</code>. The task is to sort the elements of <code>arr1</code> such that the relative ordering of elements in <code>arr1</code> matches the order of elements in <code>arr2</code>. Elements in <code>arr1</code> that are not present in <code>arr2</code> should be placed at the end of <code>arr1</code> in ascending order. </div>
 
 
 
@@ -360,45 +360,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an array of integers nums of size n.</div>
-                        <div class=""> <b>Example:</b> nums = [5, 3, 7, 7, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of two integer arrays, `arr1` and `arr2`. The length of `arr1` and `arr2` can range from 1 to 1000, and all elements in `arr2` are distinct and exist in `arr1`.</div>
+                        <div class=""> <b>Example:</b> Input: arr1 = [5, 6, 1, 3, 9, 1, 7], arr2 = [3, 1, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr1.length, arr2.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= arr1[i], arr2[i] &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements of arr2 are distinct.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element of arr2 is present in arr1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the length of the longest contiguous subarray that has the maximum possible bitwise AND value.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> The output should be an array where the elements in `arr1` are sorted such that the relative order of elements from `arr2` is preserved, and elements not in `arr2` appear at the end of the array in ascending order.</div>
+                        <div class=""> <b>Example:</b> Output: [3, 1, 7, 5, 6, 9]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The elements in arr1 should be sorted in the specified order as per arr2.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Identify the subarray with the highest possible bitwise AND and return the length of the longest one.</div>
+                        <div class=""> <b>Goal:</b> Sort the elements of `arr1` based on their position in `arr2`, and place the remaining elements at the end in ascending order.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Find the maximum number in the array.</div>
+                                <div style="margin-left: 20px;"> • Create a mapping for the elements in `arr2` to track their order.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Traverse the array and track the longest contiguous subarray where the bitwise AND of the subarray equals the maximum value found.</div>
+                                <div style="margin-left: 20px;"> • Sort the elements of `arr1` by using this mapping to prioritize the order of `arr2` elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Return the length of this subarray.</div>
+                                <div style="margin-left: 20px;"> • For elements not in `arr2`, sort them in ascending order and append them at the end of the array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should handle arrays with up to 100,000 elements and individual values as large as 1,000,000.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the elements of `arr1` are reordered such that those in `arr2` appear first in the order given, followed by the remaining elements sorted in ascending order.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of elements (n) can be as large as 100,000.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each element in the array is between 1 and 1,000,000.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must preserve the relative order of `arr1` as defined by `arr2`.</div>
                             
                         </div>
                     </div>        
@@ -406,15 +410,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array will always contain at least one element.</div>
+                                <div style="margin-left: 20px;"> • Each element of `arr2` exists at least once in `arr1`.</div>
+                            
+                                <div style="margin-left: 20px;"> • Elements of `arr1` that are not present in `arr2` should be sorted and placed at the end.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5, 3, 7, 7, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum bitwise AND is 7, and the longest subarray with this value is [7, 7], which has length 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr1 = [4, 3, 1, 2], arr2 = [3, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the output should be `[3, 1, 2, 4]` because the order of elements in `arr1` matching `arr2` (3 first, then 1) is preserved, and the remaining elements (2, 4) are placed at the end in ascending order.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr1 = [10, 5, 7, 6], arr2 = [5, 6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The output should be `[5, 6, 7, 10]` as `arr1` elements in `arr2` (5, 6) are placed first, and the remaining elements (7, 10) are sorted and placed at the end.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,18 +448,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves identifying the maximum number in the array, and then checking for the longest contiguous subarray where the bitwise AND equals this maximum value.</div>
+                        <div class=""> <b>Approach:</b> The approach is to first create a mapping of the order of elements in `arr2`, then sort `arr1` such that elements in `arr2` come first. Elements in `arr1` that are not in `arr2` will be sorted and appended at the end.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The highest possible AND value will be the maximum element in the array.</div>
-                            
-                                <div style="margin-left: 20px;"> • We need to focus on the contiguous subarrays that contain only this maximum value.</div>
+                                <div style="margin-left: 20px;"> • The order of elements in `arr1` should respect the order specified in `arr2`.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can solve this problem by iterating through the array to track the longest sequence of the maximum number.</div>
+                                <div style="margin-left: 20px;"> • By creating a mapping for `arr2`, we can sort `arr1` accordingly and handle the remaining elements by sorting them in ascending order.</div>
                             
                         </div>
                     </div>
@@ -457,13 +465,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Identify the maximum value in the array.</div>
+                                <div style="margin-left: 20px;"> • Create a dictionary to map the index of each element in `arr2`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through the array to find the longest contiguous subarray of this maximum value.</div>
+                                <div style="margin-left: 20px;"> • Sort `arr1` by using this dictionary to determine the relative order of the elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the length of the current subarray and update the maximum length if necessary.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the maximum length.</div>
+                                <div style="margin-left: 20px;"> • Sort the remaining elements (those not in `arr2`) in ascending order and append them at the end.</div>
                             
                         </div>
                     </div>
@@ -472,22 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees at least one element in the array, so this case will not occur.</div>
+                                <div style="margin-left: 20px;"> • If either `arr1` or `arr2` is empty, return an empty array.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle large arrays (up to 100,000 elements).</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays of size up to 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements in the array are the same, the entire array is the subarray with the maximum bitwise AND.</div>
+                                <div style="margin-left: 20px;"> • If all elements in `arr1` are already in `arr2`, the output should be exactly the same as `arr2`.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles arrays with up to 100,000 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution must ensure that sorting is done in linear time for the elements that are in `arr2`, and the remaining elements are sorted in ascending order.</div>
                             
                         </div>                                                                        
                     </div>
@@ -506,19 +512,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Find Maximum Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Streak</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Reset Streak</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Array Mapping</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Sorting Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Sorting Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Comparison Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Comparison Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 End Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Function End</button>
                     
                 </div>
 
@@ -527,15 +545,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>, ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">ele</span>: nums) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ele <span style="color:#666">==</span> x) {
-</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> max(ans, <span style="color:#666">++</span>len);
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> relativeSortArray(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1<span style="color:#666">=</span>arr1.size(), n2<span style="color:#666">=</span>arr2.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> a2i[<span style="color:#666">1001</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fill(a2i, end(a2i), n2);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>; i<span style="color:#666">&lt;</span>n2; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        a2i[arr2[i]]<span style="color:#666">=</span>i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sort(arr1.begin(), arr1.end(), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (a2i[x]<span style="color:#666">==</span>a2i[y]) <span style="color:#a2f;font-weight:bold">return</span> x<span style="color:#666">&lt;</span>y;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> a2i[x]<span style="color:#666">&lt;</span>a2i[y];
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> arr1;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -546,80 +568,138 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> relativeSortArray(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function &#39;longestSubarray&#39;, which takes a vector of integers (nums) as input and returns an integer representing the length of the longest subarray of consecutive maximum values. </div>
+                            <div class=""> Declares the function `relativeSortArray` that takes two input arrays, `arr1` and `arr2`, and returns a sorted `arr1` based on the order defined by `arr2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Find Maximum Element</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(nums.begin(), nums.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1<span style="color:#666">=</span>arr1.size(), n2<span style="color:#666">=</span>arr2.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line finds the maximum element &#39;x&#39; in the vector &#39;nums&#39; using the &#39;max_element&#39; function, which returns an iterator pointing to the largest element. </div>
+                            <div class=""> Initializes variables `n1` and `n2` to store the sizes of `arr1` and `arr2` respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Array Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>, ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> a2i[<span style="color:#666">1001</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two variables are initialized: &#39;len&#39; to track the current streak of consecutive maximum elements, and &#39;ans&#39; to store the maximum streak length found. </div>
+                            <div class=""> Declares an integer array `a2i` with 1001 elements, which will be used to map the values in `arr2` to their respective indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">ele</span>: nums) {
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is started to iterate over each element &#39;ele&#39; in the &#39;nums&#39; vector. </div>
+                            <div class=""> This section is left empty to highlight initialization steps done later in the code. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ele <span style="color:#666">==</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    fill(a2i, end(a2i), n2);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This conditional checks if the current element &#39;ele&#39; is equal to the maximum element &#39;x&#39;. </div>
+                            <div class=""> Fills the entire `a2i` array with the value `n2` (the size of `arr2`), which ensures that elements not present in `arr2` will be considered as the largest value during sorting. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Update Streak</b></div>
+                            <div class=""> <b>6 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> max(ans, <span style="color:#666">++</span>len);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>; i<span style="color:#666">&lt;</span>n2; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the element is equal to the maximum value, &#39;len&#39; is incremented, and &#39;ans&#39; is updated to the larger of the current value of &#39;ans&#39; or &#39;len&#39;. </div>
+                            <div class=""> Begins a loop over `arr2` to populate the `a2i` array with the correct indices for each element in `arr2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Reset Streak</b></div>
+                            <div class=""> <b>7 : Array Mapping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        a2i[arr2[i]]<span style="color:#666">=</span>i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the element is not equal to the maximum value, the streak (&#39;len&#39;) is reset to 0. </div>
+                            <div class=""> Maps each element `arr2[i]` to its index `i` in the `a2i` array. This will help to sort the elements of `arr1` based on their index in `arr2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return</b></div>
+                            <div class=""> <b>8 : Sorting Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                            </div>
+                            <div class=""> This section is left empty to emphasize the use of sorting functions to arrange the elements of `arr1`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Sorting Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(arr1.begin(), arr1.end(), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y){
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the value of &#39;ans&#39;, which holds the length of the longest contiguous subarray of maximum elements. </div>
+                            <div class=""> Begins the sorting of `arr1` using a custom comparator function that compares elements based on their positions in `arr2`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Comparison Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (a2i[x]<span style="color:#666">==</span>a2i[y]) <span style="color:#a2f;font-weight:bold">return</span> x<span style="color:#666">&lt;</span>y;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If two elements `x` and `y` from `arr1` have the same index in `arr2`, they are compared using their natural order (`x &lt; y`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Comparison Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> a2i[x]<span style="color:#666">&lt;</span>a2i[y];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If two elements `x` and `y` from `arr1` have different indices in `arr2`, they are compared based on the order defined by their indices in `arr2`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : End Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    });
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the custom sorting function, applying the comparator to the entire `arr1`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> arr1;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the sorted `arr1` array, which is now ordered according to the positions of its elements in `arr2` and any remaining elements sorted in ascending order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Function End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the end of the `relativeSortArray` function. </div>
                         </div>
                     
                 </div>
@@ -639,16 +719,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we are making two passes through the array: one to find the maximum and another to determine the longest subarray.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting operations. Sorting `arr1` based on the order from `arr2` takes O(n log n), where `n` is the size of `arr1`.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) because we only need a few variables to keep track of the maximum value and the lengths.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the extra space used for storing the mapping of `arr2` and sorting elements.</div>    
                     </div>
 
                 </div>

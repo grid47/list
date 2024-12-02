@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a stream of stock price records, where each record contains a timestamp and the corresponding price of the stock. The records may not be in order, and some records may contain errors that need to be corrected. Your task is to design an algorithm that updates the stock price at a given timestamp, finds the current price at the latest timestamp, and also finds the maximum and minimum prices the stock has been based on the current records. </div>
+<div class=""> You are given a string consisting of parentheses. In one move, you can insert a parenthesis (either &lsquo;(&rsquo; or &lsquo;)&rsquo;) at any position in the string. Your task is to return the minimum number of moves required to make the string valid, meaning all parentheses are properly balanced. </div>
 
 
 
@@ -359,51 +359,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a sequence of operations: &#39;update&#39; to update the stock price at a timestamp, and queries like &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; to retrieve information about the stock price.</div>
-                        <div class=""> <b>Example:</b> [[&#39;StockPrice&#39;, &#39;update&#39;, &#39;update&#39;, &#39;current&#39;, &#39;maximum&#39;, &#39;update&#39;, &#39;maximum&#39;, &#39;update&#39;, &#39;minimum&#39;], [[], [1, 10], [2, 5], [], [], [1, 3], [], [4, 2], []]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a string of parentheses, with each character being either &#39;(&#39; or &#39;)&#39;.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;(()))&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= timestamp, price &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • At most 10^5 operations in total</div>
-                            
-                                <div style="margin-left: 20px;"> • &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; will be called only after at least one &#39;update&#39; operation</div>
+                                <div style="margin-left: 20px;"> • Each character in s is either &#39;(&#39; or &#39;)&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output consists of a list of results corresponding to each operation. For &#39;update&#39; operations, the result is null. For &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; operations, the result is the respective stock price.</div>
-                        <div class=""> <b>Example:</b> [null, null, null, 5, 10, null, 5, null, 2]</div>
+                        <div class=""> <b>Output:</b> The output should be an integer representing the minimum number of moves required to make the parentheses string valid.</div>
+                        <div class=""> <b>Example:</b> Output: 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that each operation is performed in constant or logarithmic time for efficient handling of up to 10^5 operations.</div>
+                                <div style="margin-left: 20px;"> • The string will contain only &#39;(&#39; and &#39;)&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to implement a class that can handle stock price updates and queries efficiently, keeping track of the latest, maximum, and minimum stock prices.</div>
+                        <div class=""> <b>Goal:</b> The goal is to calculate how many parentheses need to be added in order to balance the string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Store the stock prices in a map, where the key is the timestamp and the value is the price.</div>
+                                <div style="margin-left: 20px;"> • Traverse through the string character by character.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For &#39;update&#39; operations, if the timestamp already exists, update the price; otherwise, add a new entry for the timestamp.</div>
+                                <div style="margin-left: 20px;"> • Use a stack to keep track of unmatched opening parentheses &#39;(&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Keep track of the maximum and minimum prices using additional variables or sorted data structures.</div>
+                                <div style="margin-left: 20px;"> • For each closing parenthesis &#39;)&#39;, pop from the stack if there is a matching opening parenthesis, otherwise count it as a required move.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. For &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; queries, simply return the corresponding price based on the latest records.</div>
+                                <div style="margin-left: 20px;"> • At the end, the stack will contain unmatched opening parentheses, and the number of required moves will be equal to the size of the stack.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure that the solution is efficient enough to handle large inputs and multiple operations.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the input string satisfies the constraints for length and valid parentheses.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= timestamp, price &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The input string will be between 1 and 1000 characters long.</div>
                             
-                                <div style="margin-left: 20px;"> • At most 10^5 operations will be made in total.</div>
+                                <div style="margin-left: 20px;"> • Each character in the input string will be either &#39;(&#39; or &#39;)&#39;.</div>
                             
                         </div>
                     </div>        
@@ -411,17 +409,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The timestamps are positive integers and can be updated multiple times.</div>
-                            
-                                <div style="margin-left: 20px;"> • The &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; queries will only occur after at least one &#39;update&#39; operation.</div>
+                                <div style="margin-left: 20px;"> • The input string contains only parentheses.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [&#39;StockPrice&#39;, &#39;update&#39;, &#39;update&#39;, &#39;current&#39;, &#39;maximum&#39;, &#39;update&#39;, &#39;maximum&#39;, &#39;update&#39;, &#39;minimum&#39;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the stock prices are updated at timestamps 1 and 2. The &#39;current&#39; operation returns the latest price at timestamp 2, which is 5. The &#39;maximum&#39; operation returns the highest price seen so far, which is 10. After updating the price at timestamp 1, the &#39;maximum&#39; becomes 5, and after adding a price at timestamp 4, the &#39;minimum&#39; becomes 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;())&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string has one unmatched closing parenthesis. To balance it, we need to insert one opening parenthesis at the beginning. So, the answer is 1.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;(((&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string has three unmatched opening parentheses. To balance it, we need to insert three closing parentheses at the end. So, the answer is 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,18 +445,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We need to efficiently track stock prices over time, taking care of updates at specific timestamps and providing queries for the latest, maximum, and minimum stock prices.</div>
+                        <div class=""> <b>Approach:</b> The approach involves using a stack to keep track of unmatched parentheses while traversing the string. We also count the required moves for unmatched closing parentheses and opening parentheses.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need a way to quickly access the latest price, the maximum price, and the minimum price.</div>
+                                <div style="margin-left: 20px;"> • We can use a stack to efficiently manage unmatched parentheses.</div>
                             
-                                <div style="margin-left: 20px;"> • Using a map to store the prices by timestamp allows for efficient updates and lookups.</div>
+                                <div style="margin-left: 20px;"> • By traversing the string once, we can determine the minimum moves needed.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • To efficiently track the maximum and minimum prices, we could use additional sorted data structures or simple comparisons.</div>
+                                <div style="margin-left: 20px;"> • A stack is a good choice for tracking unmatched opening parentheses. For unmatched closing parentheses, we can simply count the number of insertions needed.</div>
                             
                         </div>
                     </div>
@@ -464,13 +464,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a map to store stock prices by timestamp.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a stack to store unmatched opening parentheses.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use additional variables or sorted data structures (such as sets or heaps) to track the maximum and minimum prices.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Traverse the string character by character.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For &#39;update&#39;, adjust the map and update the tracking structures accordingly.</div>
+                                <div style="margin-left: 20px;"> • Step 3: If the character is an opening parenthesis &#39;(&#39;, push it onto the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. For &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39;, retrieve the corresponding values directly from the map or tracking structures.</div>
+                                <div style="margin-left: 20px;"> • Step 4: If the character is a closing parenthesis &#39;)&#39;, check if the stack is empty. If it&#39;s not, pop an element from the stack. Otherwise, increment the count for required moves.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: After traversing the string, the size of the stack will give the number of unmatched opening parentheses, which also corresponds to the required moves.</div>
                             
                         </div>
                     </div>
@@ -479,22 +481,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; operations do not occur before an &#39;update&#39;.</div>
+                                <div style="margin-left: 20px;"> • The input string will always have at least one character, so we don&#39;t need to handle empty strings.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where up to 10^5 operations are performed efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle up to 1000 characters efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle edge cases where timestamps and prices are at the extreme ends of their ranges.</div>
+                                <div style="margin-left: 20px;"> • If the string contains only one unmatched opening or closing parenthesis, it will need one move to balance.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution runs within time limits for large inputs.</div>
+                                <div style="margin-left: 20px;"> • The input string will only contain parentheses, and we will always need to insert parentheses to balance it.</div>
                             
                         </div>                                                                        
                     </div>
@@ -511,37 +513,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Checking</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Map Erasing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Erasing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Else Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Empty Stack Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Map Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Increment Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Stack Pop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Stack</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Stack Size Addition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
                     
                 </div>
 
@@ -550,208 +546,157 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>StockPrice() {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">update</span>(<span style="color:#0b0;font-weight:bold">int</span> ts, <span style="color:#0b0;font-weight:bold">int</span> pc) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(ts)) {
-</span></span><span style="display:flex;"><span>        strm.erase(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(ts, mp[ts]));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        ord.erase(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(mp[ts], ts));
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minAddToMakeValid</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">a</span> : s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
+</span></span><span style="display:flex;"><span>            stk.push(a);
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(stk.empty()) {
+</span></span><span style="display:flex;"><span>                res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                stk.pop();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    mp[ts] <span style="color:#666">=</span> pc;
-</span></span><span style="display:flex;"><span>    strm.insert(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(ts, pc));
-</span></span><span style="display:flex;"><span>    ord.insert(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(pc, ts));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> stk.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">current</span>() {
-</span></span><span style="display:flex;"><span>   cout<span style="color:#666">&lt;&lt;</span> strm.size() <span style="color:#666">&lt;&lt;</span>endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> rbegin(strm)<span style="color:#666">-&gt;</span>second;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximum</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> rbegin(ord)<span style="color:#666">-&gt;</span>first;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimum</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> begin(ord)<span style="color:#666">-&gt;</span>first;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your StockPrice object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * StockPrice* obj = new StockPrice();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;update(timestamp,price);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_2 = obj-&gt;current();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_3 = obj-&gt;maximum();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_4 = obj-&gt;minimum();
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minAddToMakeValid</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A map `mp` is initialized to store the stock prices with their corresponding timestamps. </div>
+                            <div class=""> Define the function &#39;minAddToMakeValid&#39;, which takes a string &#39;s&#39; and returns an integer representing the number of parentheses needed to balance the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The public section of the class is defined, which allows access to the methods and the object. </div>
+                            <div class=""> Declare an integer variable &#39;res&#39; to keep track of the number of parentheses to be added for balancing the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Constructor</b></div>
+                            <div class=""> <b>3 : Stack Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>StockPrice() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The constructor for the `StockPrice` class is defined, but it is currently empty. </div>
+                            <div class=""> Declare a stack &#39;stk&#39; to help track the open parentheses. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">update</span>(<span style="color:#0b0;font-weight:bold">int</span> ts, <span style="color:#0b0;font-weight:bold">int</span> pc) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">a</span> : s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function updates the stock price for a given timestamp `ts` and price `pc`. </div>
+                            <div class=""> Iterate through each character &#39;a&#39; in the input string &#39;s&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Checking</b></div>
+                            <div class=""> <b>5 : Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(ts)) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the timestamp `ts` already exists in the map, the previous entry is erased. </div>
+                            <div class=""> Check if the current character is an opening parenthesis &#39;(&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Map Erasing</b></div>
+                            <div class=""> <b>6 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        strm.erase(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(ts, mp[ts]));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(a);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Erase the previous entry from `strm` (a set or multiset that stores pairs of timestamp and price). </div>
+                            <div class=""> If the character is an opening parenthesis, push it onto the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Map Erasing</b></div>
+                            <div class=""> <b>7 : Else Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ord.erase(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(mp[ts], ts));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Erase the previous entry from `ord` (a set or multiset that stores pairs of price and timestamp). </div>
+                            <div class=""> If the current character is not an opening parenthesis, proceed with the else block. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Map Insertion</b></div>
+                            <div class=""> <b>8 : Empty Stack Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[ts] <span style="color:#666">=</span> pc;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(stk.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the stock price for the given timestamp `ts` with the new price `pc`. </div>
+                            <div class=""> Check if the stack is empty, indicating there is no matching opening parenthesis for the closing parenthesis. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Map Insertion</b></div>
+                            <div class=""> <b>9 : Increment Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    strm.insert(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(ts, pc));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the updated timestamp and price into `strm`. </div>
+                            <div class=""> If the stack is empty (no matching opening parenthesis), increment &#39;res&#39; as one more parenthesis is needed to balance. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Map Insertion</b></div>
+                            <div class=""> <b>10 : Stack Pop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ord.insert(pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(pc, ts));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the updated price and timestamp into `ord`. </div>
+                            <div class=""> If the stack is not empty, it means there is a matching opening parenthesis for the closing parenthesis. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Function Definition</b></div>
+                            <div class=""> <b>11 : Pop Stack</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">current</span>() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function returns the current stock price, which is the latest price in the `strm`. </div>
+                            <div class=""> Pop the matching opening parenthesis from the stack, as the pair is balanced. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Stack Size Addition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">rbegin</span>(strm)<span style="color:#666">-&gt;</span>second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">+=</span> stk.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the current stock price, which is the last element in `strm` (ordered by timestamp). </div>
+                            <div class=""> After processing all characters, add the number of unmatched opening parentheses left in the stack to &#39;res&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Function Definition</b></div>
+                            <div class=""> <b>13 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximum</span>() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function returns the maximum stock price from `ord`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">rbegin</span>(ord)<span style="color:#666">-&gt;</span>first;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the maximum stock price, which is the first element in `ord` (ordered by price). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimum</span>() {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This function returns the minimum stock price from `ord`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">begin</span>(ord)<span style="color:#666">-&gt;</span>first;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the minimum stock price, which is the first element in `ord` (ordered by price). </div>
+                            <div class=""> Return the final count of parentheses that need to be added to make the string valid. </div>
                         </div>
                     
                 </div>
@@ -771,16 +716,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) for &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; queries.</div>
-                        <div class=""> <b>Average Case:</b> O(log N) for &#39;update&#39; operations if sorted structures are used.</div>
-                        <div class=""> <b>Worst Case:</b> O(log N) for &#39;update&#39; and O(1) for queries.</div> 
-                        <div class=""> <b>Description:</b> The time complexity of the update operation is logarithmic due to sorting, and constant for &#39;current&#39;, &#39;maximum&#39;, and &#39;minimum&#39; queries.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only need to traverse the string once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(N)</div>
-                        <div class=""> <b>Worst Case:</b> O(N) for storing prices and tracking the maximum and minimum values.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(N) due to the need to store the prices and potentially track maximum and minimum values.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we may need to store up to n unmatched parentheses in the stack. Hence, the space complexity is O(n).</div>    
                     </div>
 
                 </div>

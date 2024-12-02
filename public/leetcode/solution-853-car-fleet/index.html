@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> In a given 2D grid, a peak element is an element that is greater than all of its adjacent elements (left, right, top, and bottom). You are given an m x n matrix <code>mat</code> where no two adjacent elements are equal. Your task is to find and return the coordinates of any peak element. The grid is surrounded by a perimeter filled with -1. </div>
+<div class=""> You are given several cars starting at different positions along a road. Each car has a specific speed and is trying to reach a target destination. A car cannot pass another car, but it can catch up and travel at the speed of the slower car. Cars that travel together form a fleet. Your task is to determine the number of car fleets that will reach the target. </div>
 
 
 
@@ -360,55 +360,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A matrix of integers, mat, representing the grid.</div>
-                        <div class=""> <b>Example:</b> mat = [[10, 20, 15], [21, 30, 14], [7, 16, 32]]</div>
+                        <div class=""> <b>Input:</b> You are given the target distance, an array of car positions, and an array of car speeds.</div>
+                        <div class=""> <b>Example:</b> Input: target = 15, position = [12, 5, 2, 9], speed = [3, 4, 2, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • m == mat.length</div>
+                                <div style="margin-left: 20px;"> • n == position.length == speed.length</div>
                             
-                                <div style="margin-left: 20px;"> • n == mat[i].length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • 0 &lt; target &lt;= 10^6</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= mat[i][j] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= position[i] &lt; target</div>
                             
-                                <div style="margin-left: 20px;"> • No two adjacent cells are equal.</div>
+                                <div style="margin-left: 20px;"> • All the values of position are unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt; speed[i] &lt;= 10^6</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the coordinates of any peak element in the grid.</div>
-                        <div class=""> <b>Example:</b> [1, 1]</div>
+                        <div class=""> <b>Output:</b> Return the number of car fleets that will arrive at the target.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • Coordinates of any peak element in the grid.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the coordinates of any peak element.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find how many fleets will form by considering each car&#39;s starting position and speed, and determining if it will catch up to others.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Perform binary search on columns.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Calculate the time it takes for each car to reach the target.</div>
                             
-                                <div style="margin-left: 20px;"> • For each column, find the row with the largest element.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Sort the cars by their starting position in descending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the element is greater than its left and right neighbors.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Iterate through the sorted list of cars, comparing the time for each car to reach the target with the previous car&#39;s time.</div>
                             
-                                <div style="margin-left: 20px;"> • Adjust the search space based on comparisons with neighbors.</div>
+                                <div style="margin-left: 20px;"> • Step 4: If a car reaches the target faster than the previous car, it forms a new fleet. Otherwise, it joins the previous fleet.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The matrix is bounded by -1 and contains no two adjacent equal elements.</div>
+                        <div class=""> <b>Goal:</b> The positions of the cars are guaranteed to be unique and within the range of the target.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 500</div>
-                            
-                                <div style="margin-left: 20px;"> • No two adjacent elements in the matrix are equal.</div>
+                                <div style="margin-left: 20px;"> • The array of positions will be sorted before applying the logic.</div>
                             
                         </div>
                     </div>        
@@ -416,17 +414,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix is non-empty and valid.</div>
-                            
-                                <div style="margin-left: 20px;"> • There will always be at least one peak element.</div>
+                                <div style="margin-left: 20px;"> • Cars with the same position cannot exist.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: mat = [[10, 20, 15], [21, 30, 14], [7, 16, 32]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The element at [1, 1] (30) is a peak because it is greater than its neighbors (20, 15, 21, 14).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: target = 10, position = [7, 3, 0, 5], speed = [1, 2, 3, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the car starting at position 0 (speed 3) reaches the target before the car starting at position 3 (speed 2), but after the car starting at position 7 (speed 1). The car starting at position 5 (speed 4) forms a fleet with the car starting at position 3 and moves at the same speed. Therefore, there are 2 fleets.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: target = 100, position = [0, 10, 20, 30], speed = [10, 5, 2, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the car starting at position 0 (speed 10) forms a fleet by itself. The cars starting at positions 10, 20, and 30 form a single fleet because each catches up to the previous one.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -450,16 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can use binary search to find a peak element in O(m log(n)) or O(n log(m)) time.</div>
+                        <div class=""> <b>Approach:</b> We solve this problem by first sorting the cars based on their starting positions and then determining how many distinct fleets will reach the target.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be approached using a divide-and-conquer technique, such as binary search.</div>
+                                <div style="margin-left: 20px;"> • Cars that are farther ahead will likely have a smaller time to the target, so they may form a new fleet if they travel at a faster speed.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By reducing the search space at each step, we can efficiently find a peak element.</div>
+                                <div style="margin-left: 20px;"> • By calculating the time for each car to reach the target, we can decide if the car forms a new fleet or joins an existing one.</div>
                             
                         </div>
                     </div>
@@ -467,13 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Perform binary search on columns.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Create a map of cars to their respective time to reach the target.</div>
                             
-                                <div style="margin-left: 20px;"> • For each mid column, identify the row with the largest value.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Sort the cars by their position in descending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare with adjacent cells to determine if the element is a peak.</div>
-                            
-                                <div style="margin-left: 20px;"> • Adjust the search space accordingly.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Compare the times of consecutive cars, incrementing the fleet count if the current car&#39;s time is greater than the previous one.</div>
                             
                         </div>
                     </div>
@@ -482,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty matrix is not allowed based on constraints.</div>
+                                <div style="margin-left: 20px;"> • N/A: The problem guarantees at least one car.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle matrices with dimensions close to 500 x 500.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle up to 10^5 cars efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure proper handling when elements are at the edges of the matrix.</div>
+                                <div style="margin-left: 20px;"> • If there is only one car, it will form one fleet.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix is guaranteed to have no two adjacent equal cells.</div>
+                                <div style="margin-left: 20px;"> • All positions are unique, and the number of cars will not exceed the specified limit.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,35 +512,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Binary Search Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mid Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Row Search</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Iterating Rows</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Row Selection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Fleet Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Right Comparison</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Left Comparison</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Peak Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Returning Peak</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Adjusting Search Range</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Adjusting Search Range</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Invalid Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return</button>
                     
                 </div>
 
@@ -551,29 +537,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findPeakGrid(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> row <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            row <span style="color:#666">=</span> mat[i][mid] <span style="color:#666">&gt;=</span> mat[row][mid]<span style="color:#666">?</span> <span style="color:#a0a000">i</span>: row;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> isRightLarger <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;=</span> r <span style="color:#666">?</span> mat[row][mid <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> mat[row][mid]<span style="color:#666">:</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> isLeftLarger <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> l  <span style="color:#666">?</span> mat[row][mid <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> mat[row][mid]<span style="color:#666">:</span> <span style="color:#a2f">false</span>;            
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>isRightLarger <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>isLeftLarger)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{row, mid};
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isRightLarger) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>             r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">carFleet</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pos, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> v) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> t;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        t[<span style="color:#666">-</span>pos[i]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) (target<span style="color:#666">-</span>pos[i]) <span style="color:#666">/</span> v[i];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fleet <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: t) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.second <span style="color:#666">&gt;</span> cur) fleet<span style="color:#666">++</span>, cur <span style="color:#666">=</span> it.second;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> fleet;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -581,153 +557,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findPeakGrid(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">carFleet</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pos, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> v) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;findPeakGrid&#39; is defined to take a 2D matrix as input and return a vector of integers representing the peak&#39;s coordinates. </div>
+                            <div class=""> Define the main function, taking target position, car positions, and car speeds as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Data Structure</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> t;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, we initialize &#39;m&#39; to the number of rows and &#39;n&#39; to the number of columns in the matrix. </div>
+                            <div class=""> Initialize a map to store the time taken for each car to reach the target, using the negative of the position as the key. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Binary Search Setup</b></div>
+                            <div class=""> <b>3 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We initialize two variables &#39;l&#39; and &#39;r&#39; to represent the left and right boundaries for the binary search on columns. </div>
+                            <div class=""> Start a loop to calculate the time for each car to reach the target. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : While Loop</b></div>
+                            <div class=""> <b>4 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        t[<span style="color:#666">-</span>pos[i]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) (target<span style="color:#666">-</span>pos[i]) <span style="color:#666">/</span> v[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This while loop will continue to iterate as long as there is a valid range between &#39;l&#39; and &#39;r&#39;. </div>
+                            <div class=""> For each car, calculate the time it will take to reach the target by using the formula: time = (target - position) / speed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Mid Calculation</b></div>
+                            <div class=""> <b>5 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fleet <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, we calculate the middle column index &#39;mid&#39; to split the matrix and search for the peak. </div>
+                            <div class=""> Initialize the fleet counter to 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Row Search</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> row <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We initialize a variable &#39;row&#39; to track the row that contains the maximum value at the current &#39;mid&#39; column. </div>
+                            <div class=""> Initialize the variable &#39;cur&#39; to track the current maximum time seen among the fleets. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Iterating Rows</b></div>
+                            <div class=""> <b>7 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: t) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This for loop iterates over each row of the matrix to find the row where the element in the &#39;mid&#39; column is the largest. </div>
+                            <div class=""> Start a loop to process each car&#39;s time to reach the target in descending order of positions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Row Selection</b></div>
+                            <div class=""> <b>8 : Fleet Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            row <span style="color:#666">=</span> mat[i][mid] <span style="color:#666">&gt;=</span> mat[row][mid]<span style="color:#666">?</span> <span style="color:#a0a000">i</span>: row;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.second <span style="color:#666">&gt;</span> cur) fleet<span style="color:#666">++</span>, cur <span style="color:#666">=</span> it.second;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element in the &#39;mid&#39; column is greater than the previous maximum, update the &#39;row&#39; variable. </div>
+                            <div class=""> If the current car takes more time than the previous one, it forms a new fleet. Update the current time. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Right Comparison</b></div>
+                            <div class=""> <b>9 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> isRightLarger <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;=</span> r <span style="color:#666">?</span> mat[row][mid <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> mat[row][mid]<span style="color:#666">:</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> fleet;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We check if the element to the right of &#39;mid&#39; in the same row is larger. If it is, we will move the binary search range to the right. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Left Comparison</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> isLeftLarger <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> l  <span style="color:#666">?</span> mat[row][mid <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> mat[row][mid]<span style="color:#666">:</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We check if the element to the left of &#39;mid&#39; in the same row is larger. If it is, we will move the binary search range to the left. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Peak Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>isRightLarger <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>isLeftLarger)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If neither the left nor the right elements are larger, we have found the peak element, so we return the coordinates. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Returning Peak</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{row, mid};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the coordinates of the peak element as a vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Adjusting Search Range</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isRightLarger) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the right neighbor is larger, update the left boundary &#39;l&#39; to search the right half of the matrix. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Adjusting Search Range</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>             r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the left neighbor is larger, update the right boundary &#39;r&#39; to search the left half of the matrix. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Return Invalid Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If no peak is found, return an invalid result indicating failure to find a peak. </div>
+                            <div class=""> Return the total number of fleets. </div>
                         </div>
                     
                 </div>
@@ -747,16 +663,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m log(n))</div>
-                        <div class=""> <b>Average Case:</b> O(m log(n))</div>
-                        <div class=""> <b>Worst Case:</b> O(m log(n))</div> 
-                        <div class=""> <b>Description:</b> Binary search is applied on columns, ensuring logarithmic time complexity in one dimension.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting of the positions of the cars, which takes O(n log n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since we do not use any additional space for storing intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the times of the cars.</div>    
                     </div>
 
                 </div>

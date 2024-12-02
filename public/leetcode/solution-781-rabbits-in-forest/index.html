@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1298s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1299s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/781.webp" 
            alt="A forest where rabbits are hiding, with each rabbit&#39;s position glowing softly as it’s found." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given two strings, <code>word1</code> and <code>word2</code>. You need to construct a string <code>merge</code> by choosing characters from both strings. At each step, you can either append the first character of <code>word1</code> to <code>merge</code> (if <code>word1</code> is non-empty) or append the first character of <code>word2</code> to <code>merge</code> (if <code>word2</code> is non-empty). The goal is to form the lexicographically largest string possible from these choices. </div>
+<div class=""> In a forest, there are an unknown number of rabbits. We ask n rabbits, &lsquo;How many rabbits of the same color as you are there?&rsquo; and collect their answers in an integer array answers, where answers[i] is the answer of the i-th rabbit. The task is to determine the minimum number of rabbits that could be in the forest. </div>
 
 
 
@@ -372,45 +372,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two strings, `word1` and `word2`, both consisting of lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> Input: word1 = &#39;abcde&#39;, word2 = &#39;acd&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of an array answers where each element answers[i] represents the number of rabbits that the i-th rabbit believes share the same color.</div>
+                        <div class=""> <b>Example:</b> Input: answers = [2, 2, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= word1.length, word2.length &lt;= 3000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= answers.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • word1 and word2 consist only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= answers[i] &lt; 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the lexicographically largest merge string you can construct.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;abcdeacd&#39;</div>
+                        <div class=""> <b>Output:</b> The output is a single integer representing the minimum number of rabbits that could be in the forest.</div>
+                        <div class=""> <b>Example:</b> Output: 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The resulting string is guaranteed to be lexicographically the largest possible merge.</div>
+                                <div style="margin-left: 20px;"> • The minimum number of rabbits must satisfy the answers given by the rabbits.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the lexicographically largest merge string, we need to make the optimal choice at each step of picking from `word1` or `word2`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to calculate the minimum number of rabbits in the forest that could explain the given answers.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Compare the first characters of `word1` and `word2`.</div>
+                                <div style="margin-left: 20px;"> • Count the frequency of each answer.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If the character in `word1` is larger, append it to `merge`. Otherwise, append the character from `word2`.</div>
+                                <div style="margin-left: 20px;"> • For each answer, calculate the minimum number of rabbits required to satisfy that answer. If there are X rabbits answering the same number Y, then the minimum number of rabbits for that answer group is ceil(X / (Y&#43;1)) * (Y&#43;1).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If one string becomes empty, append the remaining characters from the other string to `merge`.</div>
+                                <div style="margin-left: 20px;"> • Sum up the required rabbits for all answer groups to find the total minimum.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution works for large inputs and performs within time limits.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle arrays with a length up to 1000, and handle answers in the range of 0 to 999.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should be optimized to handle inputs with lengths up to 3000.</div>
+                                <div style="margin-left: 20px;"> • The input array will have at least one element.</div>
+                            
+                                <div style="margin-left: 20px;"> • The answers array will not have values greater than 999.</div>
                             
                         </div>
                     </div>        
@@ -418,19 +420,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both `word1` and `word2` are non-empty strings consisting of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The array of answers is valid, and each answer is a non-negative integer.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word1 = &#39;abcd&#39;, word2 = &#39;acef&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> At each step, we compare the first characters of `word1` and `word2`. The largest lexicographical choice is appended to `merge`. The result is &#39;abcdeaf&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: answers = [2, 2, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The two rabbits that answered &#39;2&#39; need to be in a group of at least 3 rabbits, and the one rabbit that answered &#39;1&#39; needs to be in a group of at least 2 rabbits. Therefore, the minimum number of rabbits in the forest is 6.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word1 = &#39;abc&#39;, word2 = &#39;aaa&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, we always take from `word1` as its characters are larger than those in `word2`, resulting in &#39;abcaaa&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: answers = [5, 5, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The three rabbits that answered &#39;5&#39; need to be in a group of at least 6 rabbits, so the minimum number of rabbits in the forest is 6.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,16 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves comparing the first characters of both strings and greedily choosing the lexicographically larger one, ensuring the largest possible merge string.</div>
+                        <div class=""> <b>Approach:</b> The approach is to count how many rabbits give the same answer, then compute the minimum number of rabbits required to form complete groups that match those answers.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can use a greedy approach to always select the larger character between the two strings at each step.</div>
+                                <div style="margin-left: 20px;"> • The answers represent groups of rabbits with the same color, and the answers must form groups that fit within those constraints.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The solution is based on the principle of comparing characters in a lexicographical manner.</div>
+                                <div style="margin-left: 20px;"> • To minimize the total number of rabbits, each group should be as small as possible while still matching the answers given by the rabbits.</div>
                             
                         </div>
                     </div>
@@ -471,13 +473,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize an empty string `merge`.</div>
+                                <div style="margin-left: 20px;"> • Count the frequency of each answer.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. While both `word1` and `word2` are non-empty, compare the first characters of both strings.</div>
+                                <div style="margin-left: 20px;"> • For each unique answer, calculate the minimum group size using the formula: ceil(X / (Y &#43; 1)) * (Y &#43; 1), where X is the frequency of the answer and Y is the answer value.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Append the larger character to `merge` and remove it from the respective string.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. When one string becomes empty, append the remaining characters of the other string to `merge`.</div>
+                                <div style="margin-left: 20px;"> • Sum the minimum group sizes to get the total number of rabbits.</div>
                             
                         </div>
                     </div>
@@ -486,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If either `word1` or `word2` is empty, simply return the other string.</div>
+                                <div style="margin-left: 20px;"> • The input array will always have at least one element.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle cases where `word1` and `word2` are close to 3000 characters in length.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles arrays with a length up to 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If both strings are identical, the result is the string concatenated to itself.</div>
+                                <div style="margin-left: 20px;"> • When all rabbits answer &#39;0&#39;, only one rabbit is needed in the forest.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should perform efficiently with the maximum input size.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle all possible values of answers correctly, considering edge cases like answers with high values near 999.</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,17 +518,19 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Answers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Count Answers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Calculate Total Rabbits</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
                     
                 </div>
 
@@ -537,12 +539,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">largestMerge</span>(string w1, string w2) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (w1 <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span> <span style="color:#666">||</span> w2 <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> w1 <span style="color:#666">+</span> w2;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (w1 <span style="color:#666">&lt;</span> w2)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> w2[<span style="color:#666">0</span>] <span style="color:#666">+</span> largestMerge(w1, w2.substr(<span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> w1[<span style="color:#666">0</span>] <span style="color:#666">+</span> largestMerge(w1.substr(<span style="color:#666">1</span>), w2);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numRabbits</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> answers) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span>: answers)
+</span></span><span style="display:flex;"><span>    c[i]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">i</span> : c) res <span style="color:#666">+=</span> (i.second <span style="color:#666">+</span> i.first) <span style="color:#666">/</span> (i.first <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (i.first <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -550,63 +553,73 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">largestMerge</span>(string w1, string w2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numRabbits</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> answers) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the recursive function to create the largest lexicographical merge of two strings. </div>
+                            <div class=""> Defines the function `numRabbits`, which takes a vector of integers `answers` representing the answers to the rabbit color question. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Base Case</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (w1 <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span> <span style="color:#666">||</span> w2 <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if either string is empty, which serves as the base case for recursion. </div>
+                            <div class=""> Initializes an unordered map `c` to count the frequency of each answer (representing the number of rabbits with the same color). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Return Statement</b></div>
+                            <div class=""> <b>3 : Loop Through Answers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> w1 <span style="color:#666">+</span> w2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span>: answers)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If one string is empty, appends the other string and ends the recursion. </div>
+                            <div class=""> Loops through each element in the `answers` vector to count how many times each answer appears. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Conditional Check</b></div>
+                            <div class=""> <b>4 : Count Answers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (w1 <span style="color:#666">&lt;</span> w2)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    c[i]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the first string is lexicographically smaller than the second string. </div>
+                            <div class=""> Increments the count for the current answer `i` in the map `c`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Recursive Call</b></div>
+                            <div class=""> <b>5 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> w2[<span style="color:#666">0</span>] <span style="color:#666">+</span> largestMerge(w1, w2.substr(<span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Appends the first character of `w2` and makes a recursive call with the remaining part of `w2`. </div>
+                            <div class=""> Initializes a variable `res` to store the final result, which is the total number of rabbits. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursive Call</b></div>
+                            <div class=""> <b>6 : Calculate Total Rabbits</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> w1[<span style="color:#666">0</span>] <span style="color:#666">+</span> largestMerge(w1.substr(<span style="color:#666">1</span>), w2);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">i</span> : c) res <span style="color:#666">+=</span> (i.second <span style="color:#666">+</span> i.first) <span style="color:#666">/</span> (i.first <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (i.first <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Appends the first character of `w1` and makes a recursive call with the remaining part of `w1`. </div>
+                            <div class=""> Iterates through the map `c` and calculates the total number of rabbits based on the frequency of each answer. The formula ensures that if there are `x` rabbits with the same answer, they will all be grouped together. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the calculated total number of rabbits. </div>
                         </div>
                     
                 </div>
@@ -626,16 +639,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m), where n is the length of `word1` and m is the length of `word2`.</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; m), as each character from both strings is processed once.</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m), where n and m are the lengths of the strings.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in the sum of the lengths of the two strings, as each character is processed once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of rabbits, because we only need to count the frequency of answers.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as the process of counting and grouping is linear with respect to the number of answers.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as the worst case also involves counting frequencies and calculating the group sizes.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in the size of the input array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m), as the space used is proportional to the length of the result string.</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m), where n and m are the lengths of `word1` and `word2`.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear, as the merge string needs to store all the characters from both input strings.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), when all rabbits have unique answers.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of unique answers, since we need to store the frequency of each answer.</div> 
+                        <div class=""> <b>Description:</b> Space complexity is linear with respect to the number of unique answers in the input.</div>    
                     </div>
 
                 </div>

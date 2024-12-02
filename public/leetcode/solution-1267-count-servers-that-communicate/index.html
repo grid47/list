@@ -276,7 +276,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -303,7 +303,7 @@
 
 
 
-<div class=""> You are given a perfect binary tree with <code>n</code> nodes, where each node has a cost associated with it. The tree is numbered from 1 to n, with node 1 as the root. For each node <code>i</code>, its left child is <code>2*i</code> and its right child is <code>2*i + 1</code>. You are allowed to increment the cost of any node by 1 any number of times. Your task is to return the minimum number of increments required to make the total cost of the path from the root to each leaf node equal. </div>
+<div class=""> You are given a 2D grid where each cell is either 1 (indicating a server) or 0 (no server). Two servers are said to communicate if they are in the same row or column. The task is to find the number of servers that can communicate with at least one other server. </div>
 
 
 
@@ -354,49 +354,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer `n` representing the number of nodes in a perfect binary tree, followed by a list of integers `cost`, where `cost[i]` is the cost of node `i&#43;1`.</div>
-                        <div class=""> <b>Example:</b> Input: n = 5, cost = [2, 4, 3, 2, 5]</div>
+                        <div class=""> <b>Input:</b> A 2D grid of size m x n where each cell is either 1 (server) or 0 (no server).</div>
+                        <div class=""> <b>Example:</b> grid = [[1,0],[0,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m &lt;= 250</div>
                             
-                                <div style="margin-left: 20px;"> • n &#43; 1 is a power of 2</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 250</div>
                             
-                                <div style="margin-left: 20px;"> • cost.length == n</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= cost[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • grid[i][j] == 0 or 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer, which represents the minimum number of increments required to make the cost of all root-to-leaf paths equal.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> Return the number of servers that can communicate with at least one other server.</div>
+                        <div class=""> <b>Example:</b> Output: 0</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The returned number should be an integer representing the number of servers that can communicate with another server.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the number of increments required to equalize the path costs.</div>
+                        <div class=""> <b>Goal:</b> Count how many servers can communicate with at least one other server by checking the row and column of each server.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Starting from the leaf nodes, propagate the required increments up to the root node, ensuring each path has the same total cost.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through each row and column of the grid, counting the number of servers in each row and column.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each non-leaf node, compare the costs of its left and right children. Increment the smaller one to match the larger one and count the number of increments.</div>
+                                <div style="margin-left: 20px;"> • 2. After counting, iterate again to check for servers that have more than one server in their row or column.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Repeat the process until you reach the root node.</div>
+                                <div style="margin-left: 20px;"> • 3. Return the count of servers that can communicate with another server.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must efficiently handle the constraints specified.</div>
+                        <div class=""> <b>Goal:</b> The input grid has size m x n, where m and n are both at least 1 and at most 250. The grid values are either 0 or 1.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works within O(n) time complexity to handle the largest inputs.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m &lt;= 250</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 250</div>
+                            
+                                <div style="margin-left: 20px;"> • grid[i][j] == 0 or 1</div>
                             
                         </div>
                     </div>        
@@ -404,17 +406,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree is a perfect binary tree, meaning every non-leaf node has exactly two children.</div>
-                            
-                                <div style="margin-left: 20px;"> • All nodes have a non-negative cost value.</div>
+                                <div style="margin-left: 20px;"> • The grid will contain only 0s and 1s.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5, cost = [2, 4, 3, 2, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the two paths from root to leaves are [2, 4, 5] and [2, 3, 5]. To equalize the path costs, we increment the cost of node 2 to match node 3&#39;s cost. This requires 4 increments, so the total increments required are 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[1,0],[0,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This is a simple case with two servers that cannot communicate with each other because they are not in the same row or column.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[1,0],[1,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, all three servers can communicate with at least one other server.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,18 +442,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we will work our way from the leaf nodes upwards to the root, balancing the path costs by making necessary increments.</div>
+                        <div class=""> <b>Approach:</b> We need to count how many servers can communicate with other servers. The most efficient way is to check each server’s row and column to see if there are other servers present.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to ensure that the cost of each root-to-leaf path is the same.</div>
-                            
-                                <div style="margin-left: 20px;"> • This requires comparing the costs of left and right children of every node and balancing them.</div>
+                                <div style="margin-left: 20px;"> • We need to check the row and column of each server to determine if it has another server it can communicate with.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Starting from the leaf nodes and adjusting the internal nodes&#39; costs seems to be an efficient way to solve this problem.</div>
+                                <div style="margin-left: 20px;"> • The approach involves counting the number of servers in each row and each column. Then we can check for each server if it belongs to a row or column that has more than one server.</div>
                             
                         </div>
                     </div>
@@ -457,11 +459,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize an array `cost` of size `n`.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through the grid to count the number of servers in each row and each column.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Start from the last non-leaf node and move upwards. For each node, compare the costs of its left and right children and increment the smaller cost to match the larger one.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 3: Accumulate the number of increments required as you move upwards towards the root.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse the grid again, and for each server, check if its row or column has more than one server. If it does, add it to the result.</div>
                             
                         </div>
                     </div>
@@ -470,22 +470,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always have at least 3 nodes, ensuring a valid binary tree structure.</div>
+                                <div style="margin-left: 20px;"> • If the grid has no servers (all 0s), the result will be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle up to 10^5 nodes efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should be optimized to handle grids of size up to 250x250.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the tree already has equal costs for all root-to-leaf paths, the result should be 0 increments.</div>
+                                <div style="margin-left: 20px;"> • If a server is isolated (its row and column have no other servers), it cannot communicate with any other server.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution runs in O(n) time complexity to handle the largest inputs.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle grids up to the maximum constraint of 250x250 efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,17 +504,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Grid Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Row and Column Tracking</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Child Nodes Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Nested Loops (Grid Iteration)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Difference Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Nested Loops (Inner Grid Iteration)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Adjust Parent Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Incrementing Row and Column Counts</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Row and Column Servers</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Row and Column Servers</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Result Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Nested Loops (Second Grid Iteration)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Nested Loops (Inner Grid Iteration)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check Communication Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Increment Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -523,13 +537,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minIncrements</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; <span style="color:#666">--</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> i <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> abs(A[l] <span style="color:#666">-</span> A[r]);
-</span></span><span style="display:flex;"><span>        A[i] <span style="color:#666">+=</span> max(A[l], A[r]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countServers</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>                row[i]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                col[j]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#666">&amp;&amp;</span> ((row[i] <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#666">||</span> (col[j] <span style="color:#666">&gt;</span> <span style="color:#666">1</span>))) {
+</span></span><span style="display:flex;"><span>                res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
@@ -541,70 +570,140 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minIncrements</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countServers</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function definition of &#39;minIncrements&#39;, which takes an integer &#39;n&#39; (size of the array) and a reference to a vector &#39;A&#39;. The goal is to compute the minimum number of increments needed to turn the array into a valid heap. </div>
+                            <div class=""> This defines the function `countServers` that takes a 2D grid `grid` of size `m x n`, where each element indicates whether there&#39;s a server (1) or not (0). The function returns the total number of servers that can communicate with at least one other server. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Result Initialization</b></div>
+                            <div class=""> <b>2 : Grid Dimensions</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line calculates the number of rows (`m`) and columns (`n`) in the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Row and Column Tracking</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This initializes two vectors, `row` and `col`, to track the number of servers in each row and each column, respectively. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Nested Loops (Grid Iteration)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This outer loop iterates over each row in the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Nested Loops (Inner Grid Iteration)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This inner loop iterates over each column in the current row of the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Incrementing Row and Column Counts</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if there&#39;s a server at position (i, j) in the grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Update Row and Column Servers</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                row[i]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there is a server in the current cell, it increments the count of servers in the `i`-th row. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Update Row and Column Servers</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                col[j]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> It also increments the count of servers in the `j`-th column. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Result Initialization</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We initialize &#39;res&#39; to 0. This variable will keep track of the total number of increments made while adjusting the array. </div>
+                            <div class=""> This initializes a variable `res` to 0, which will store the count of servers that can communicate with at least one other server. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Start</b></div>
+                            <div class=""> <b>10 : Nested Loops (Second Grid Iteration)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; <span style="color:#666">--</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We start a loop that iterates over the parent nodes of the binary heap, starting from the last parent node (at index &#39;n / 2 - 1&#39;) and moving upwards. </div>
+                            <div class=""> This loop iterates again over the rows of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Child Nodes Calculation</b></div>
+                            <div class=""> <b>11 : Nested Loops (Inner Grid Iteration)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> i <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each parent node, we calculate the indices of its left (&#39;l&#39;) and right (&#39;r&#39;) children using the standard binary heap indexing formula. </div>
+                            <div class=""> This inner loop iterates over each column in the current row again. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Difference Calculation</b></div>
+                            <div class=""> <b>12 : Check Communication Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> abs(A[l] <span style="color:#666">-</span> A[r]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#666">&amp;&amp;</span> ((row[i] <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#666">||</span> (col[j] <span style="color:#666">&gt;</span> <span style="color:#666">1</span>))) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We calculate the absolute difference between the values of the left and right children, adding this value to &#39;res&#39; to account for the required increments to make the children equal. </div>
+                            <div class=""> This checks if there&#39;s a server at position (i, j) and if the server can communicate with another server in the same row or column. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Adjust Parent Value</b></div>
+                            <div class=""> <b>13 : Increment Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        A[i] <span style="color:#666">+=</span> max(A[l], A[r]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> To maintain the heap property, we adjust the parent node&#39;s value by adding the maximum of its left or right child&#39;s value. </div>
+                            <div class=""> If the server can communicate with another, it increments the result `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class=""> <b>14 : Return Statement</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We return the total number of increments made to the array, stored in &#39;res&#39;. </div>
+                            <div class=""> This returns the total count of servers that can communicate with at least one other server. </div>
                         </div>
                     
                 </div>
@@ -624,16 +723,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) as we only need to traverse the tree once, adjusting costs from the leaves to the root.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we iterate through the entire grid twice.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space needed for the cost array.</div>    
+                        <div class=""> <b>Best Case:</b> O(m &#43; n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m &#43; n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m &#43; n) because we store counts for rows and columns.</div>    
                     </div>
 
                 </div>

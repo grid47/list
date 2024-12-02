@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 31, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array &rsquo;nums&rsquo;. Your task is to rearrange the elements of &rsquo;nums&rsquo; by sorting the values at odd indices in non-increasing order and the values at even indices in non-decreasing order. Return the rearranged array. </div>
+<div class=""> You are planning a series of train travels throughout the year. The days you plan to travel are given in a list of integers, where each integer represents a day of the year (from 1 to 365). You need to find the minimum cost needed to cover all the travel days using 1-day, 7-day, and 30-day passes. </div>
 
 
 
@@ -358,45 +358,59 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array &#39;nums&#39;.</div>
-                        <div class=""> <b>Example:</b> nums = [5, 2, 8, 1]</div>
+                        <div class=""> <b>Input:</b> You are given an array of integers &#39;days&#39;, where each integer represents a day you plan to travel. Additionally, you are given an array &#39;costs&#39; with three integers, where each represents the cost of the 1-day, 7-day, and 30-day passes respectively.</div>
+                        <div class=""> <b>Example:</b> days = [1, 4, 6, 7, 8, 20], costs = [3, 10, 20]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= days.length &lt;= 365</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= days[i] &lt;= 365</div>
+                            
+                                <div style="margin-left: 20px;"> • days is strictly increasing.</div>
+                            
+                                <div style="margin-left: 20px;"> • costs.length == 3</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= costs[i] &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the array &#39;nums&#39; after rearranging it according to the given sorting rules.</div>
-                        <div class=""> <b>Example:</b> [2, 8, 5, 1]</div>
+                        <div class=""> <b>Output:</b> Return the minimum cost needed to cover all the travel days using one or more of the available passes.</div>
+                        <div class=""> <b>Example:</b> Output: 16</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must preserve the rearrangement order for odd and even indices as described.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer representing the minimum cost.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Sort elements at odd indices in non-increasing order and elements at even indices in non-decreasing order.</div>
+                        <div class=""> <b>Goal:</b> We need to compute the minimum cost by selecting the best combination of passes for the given travel days.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and sort the elements at even indices in non-decreasing order.</div>
+                                <div style="margin-left: 20px;"> • Initialize a dynamic programming array &#39;dp&#39; to store the minimum cost to cover all days from 1 to the last day of travel.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and sort the elements at odd indices in non-increasing order.</div>
+                                <div style="margin-left: 20px;"> • For each day in the travel list, calculate the minimum cost considering each pass type (1-day, 7-day, 30-day).</div>
+                            
+                                <div style="margin-left: 20px;"> • Use previous computed costs to optimize the solution by avoiding redundant calculations.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array nums has between 1 and 100 elements, and each element is between 1 and 100.</div>
+                        <div class=""> <b>Goal:</b> The travel days are strictly increasing and we need to ensure the algorithm is efficient enough to handle up to 365 days and up to 1000 dollars per pass.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • nums.length between 1 and 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= days.length &lt;= 365</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= days[i] &lt;= 365</div>
+                            
+                                <div style="margin-left: 20px;"> • days is strictly increasing.</div>
+                            
+                                <div style="margin-left: 20px;"> • costs.length == 3</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= costs[i] &lt;= 1000</div>
                             
                         </div>
                     </div>        
@@ -404,21 +418,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array will always contain between 1 and 100 elements.</div>
+                                <div style="margin-left: 20px;"> • The days array is sorted in strictly increasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • Elements are integers in the range 1 to 100.</div>
+                                <div style="margin-left: 20px;"> • The costs for the 1-day, 7-day, and 30-day passes are provided and are not negative.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: nums = [5, 2, 8, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> First, the elements at odd indices [2, 1] are sorted in non-increasing order to become [8, 1]. Then, the elements at even indices [5, 8] are sorted in non-decreasing order to become [2, 5]. The final array is [2, 8, 5, 1].</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: nums = [9, 7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is only one element at an odd index and one at an even index, so the array remains [7, 9].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> days = [1, 4, 6, 7, 8, 20], costs = [3, 10, 20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we can use a combination of a 1-day pass and a 7-day pass to minimize the cost, resulting in a total of 16 dollars.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +452,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves sorting elements at odd and even indices separately while preserving their relative order.</div>
+                        <div class=""> <b>Approach:</b> The approach involves using dynamic programming to keep track of the minimum cost to cover all the travel days, iterating over the travel days and considering the cost of each type of pass at each step.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting odd and even indices separately ensures that the required order is maintained.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved efficiently using dynamic programming.</div>
+                            
+                                <div style="margin-left: 20px;"> • We should consider all possible pass options for each travel day.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The solution involves simple sorting and iterating through the array.</div>
+                                <div style="margin-left: 20px;"> • We need to minimize the total cost while ensuring that we cover all the travel days.</div>
                             
                         </div>
                     </div>
@@ -459,9 +471,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the elements at even indices in non-decreasing order.</div>
+                                <div style="margin-left: 20px;"> • Initialize a DP array to store the minimum cost for each day.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the elements at odd indices in non-increasing order.</div>
+                                <div style="margin-left: 20px;"> • For each travel day, calculate the minimum cost using the previous day&#39;s cost plus the cost of the current pass options (1-day, 7-day, 30-day).</div>
+                            
+                                <div style="margin-left: 20px;"> • Use binary search or iteration to efficiently calculate the DP values.</div>
                             
                         </div>
                     </div>
@@ -470,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array must have at least one element.</div>
+                                <div style="margin-left: 20px;"> • Handle edge cases where there are no travel days.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle arrays with up to 100 elements.</div>
+                                <div style="margin-left: 20px;"> • Consider the performance of the algorithm when the number of travel days is large, near 365.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Arrays with all elements equal should still return the same array.</div>
+                                <div style="margin-left: 20px;"> • If the travel days cover the entire year, consider optimizing the pass choices accordingly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays with lengths between 1 and 100 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle the maximum constraints efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,35 +518,29 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initial Day Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Dynamic Programming Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Ticket Availability Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Nested For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mark Travel Days</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Over Days</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Index Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check If Not Travel Day</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Swap</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Copy Previous Cost</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Skip Non-Travel Day</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Block Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Add One-Day Ticket Cost</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Add Seven-Day Ticket Cost</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Nested For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Add Thirty-Day Ticket Cost</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Comparison</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Index Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Swap</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
                     
                 </div>
 
@@ -541,32 +549,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sortEvenOdd(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minIndex;
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// Here in this nested loop , we are sorting the elements at even indices in non-decreasing order.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>nums.size();i<span style="color:#666">+=</span><span style="color:#666">2</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        minIndex<span style="color:#666">=</span>i;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j<span style="color:#666">=</span>i<span style="color:#666">+</span><span style="color:#666">2</span>;j<span style="color:#666">&lt;</span>nums.size();j<span style="color:#666">+=</span><span style="color:#666">2</span>)
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[j]<span style="color:#666">&lt;</span>nums[minIndex])
-</span></span><span style="display:flex;"><span>                minIndex<span style="color:#666">=</span>j;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mincostTickets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> days, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cost) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> days.back();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>  dp(d <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> td(d <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : days) td[x] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> d <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>td[i]) {
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        swap(nums[i],nums[minIndex]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> cost[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> min(dp[i], cost[<span style="color:#666">1</span>] <span style="color:#666">+</span> dp[max(i <span style="color:#666">-</span> <span style="color:#666">7</span>, <span style="color:#666">0</span>)]);
+</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> min(dp[i], cost[<span style="color:#666">2</span>] <span style="color:#666">+</span> dp[max(i <span style="color:#666">-</span> <span style="color:#666">30</span>, <span style="color:#666">0</span>)]);            
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// Here , we are trying to sort the elements at odd indices in non-increasing order. 
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">1</span>;i<span style="color:#666">&lt;</span>nums.size();i<span style="color:#666">+=</span><span style="color:#666">2</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        minIndex<span style="color:#666">=</span>i;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j<span style="color:#666">=</span>i<span style="color:#666">+</span><span style="color:#666">2</span>;j<span style="color:#666">&lt;</span>nums.size();j<span style="color:#666">+=</span><span style="color:#666">2</span>)
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[j]<span style="color:#666">&gt;</span>nums[minIndex])
-</span></span><span style="display:flex;"><span>                minIndex<span style="color:#666">=</span>j;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        swap(nums[i],nums[minIndex]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[d];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -577,160 +580,130 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sortEvenOdd(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mincostTickets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> days, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cost) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function that takes a vector of integers as input and returns a vector of integers. </div>
+                            <div class=""> Defines the `mincostTickets` function, which calculates the minimum cost to cover the given travel days using dynamic programming. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Initial Day Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minIndex;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> days.back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable &#39;minIndex&#39; to store the index of the minimum element during the sorting process. </div>
+                            <div class=""> Calculates the last day in the travel days array, `days`, and stores it in variable `d`. This is used as the total number of days to consider for ticket costs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop</b></div>
+                            <div class=""> <b>3 : Dynamic Programming Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>nums.size();i<span style="color:#666">+=</span><span style="color:#666">2</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>  dp(d <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop iterates through the elements at even indices in the vector &#39;nums&#39;. </div>
+                            <div class=""> Initializes a dynamic programming array `dp` of size `d &#43; 1` (one extra for 0-based indexing), where each element represents the minimum cost to cover the days up to that index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Assignment</b></div>
+                            <div class=""> <b>4 : Ticket Availability Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        minIndex<span style="color:#666">=</span>i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> td(d <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets &#39;minIndex&#39; to the current index to track the minimum element. </div>
+                            <div class=""> Initializes an array `td` of size `d &#43; 1` to keep track of which days are travel days, marking `true` for each travel day and `false` otherwise. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Nested For Loop</b></div>
+                            <div class=""> <b>5 : Mark Travel Days</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j<span style="color:#666">=</span>i<span style="color:#666">+</span><span style="color:#666">2</span>;j<span style="color:#666">&lt;</span>nums.size();j<span style="color:#666">+=</span><span style="color:#666">2</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : days) td[x] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Nested loop iterates over the remaining even indices starting from the next index. </div>
+                            <div class=""> Iterates through the `days` array and marks the corresponding indices in the `td` array as `true` for each travel day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Comparison</b></div>
+                            <div class=""> <b>6 : Loop Over Days</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[j]<span style="color:#666">&lt;</span>nums[minIndex])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> d <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Compares the current element with the element at &#39;minIndex&#39; to find the smallest element. </div>
+                            <div class=""> Starts a loop that iterates through each day from 1 to `d` (the last day of travel). This loop calculates the minimum cost to cover each day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Index Update</b></div>
+                            <div class=""> <b>7 : Check If Not Travel Day</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                minIndex<span style="color:#666">=</span>j;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>td[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates &#39;minIndex&#39; to the new index if a smaller element is found. </div>
+                            <div class=""> Checks if the current day `i` is not a travel day by checking the value of `td[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Swap</b></div>
+                            <div class=""> <b>8 : Copy Previous Cost</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        swap(nums[i],nums[minIndex]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Swaps the elements at index &#39;i&#39; and &#39;minIndex&#39; to place the smallest element at index &#39;i&#39;. </div>
+                            <div class=""> If it&#39;s not a travel day, the cost to cover day `i` is the same as the previous day (no additional ticket is needed). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : For Loop</b></div>
+                            <div class=""> <b>9 : Skip Non-Travel Day</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">1</span>;i<span style="color:#666">&lt;</span>nums.size();i<span style="color:#666">+=</span><span style="color:#666">2</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop iterates through the elements at odd indices in the vector &#39;nums&#39;. </div>
+                            <div class=""> Skips the current iteration if it&#39;s not a travel day and continues to the next day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Block Start</b></div>
+                            <div class=""> <b>10 : Add One-Day Ticket Cost</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> cost[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins the block for the loop processing odd indices. </div>
+                            <div class=""> For a travel day, adds the cost of a one-day ticket (represented by `cost[0]`) to the minimum cost of covering the previous day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Assignment</b></div>
+                            <div class=""> <b>11 : Add Seven-Day Ticket Cost</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        minIndex<span style="color:#666">=</span>i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> min(dp[i], cost[<span style="color:#666">1</span>] <span style="color:#666">+</span> dp[max(i <span style="color:#666">-</span> <span style="color:#666">7</span>, <span style="color:#666">0</span>)]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets &#39;minIndex&#39; to the current index to track the maximum element during the sorting process. </div>
+                            <div class=""> Checks if using a seven-day ticket (represented by `cost[1]`) results in a lower total cost by comparing it with the current value of `dp[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Nested For Loop</b></div>
+                            <div class=""> <b>12 : Add Thirty-Day Ticket Cost</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j<span style="color:#666">=</span>i<span style="color:#666">+</span><span style="color:#666">2</span>;j<span style="color:#666">&lt;</span>nums.size();j<span style="color:#666">+=</span><span style="color:#666">2</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> min(dp[i], cost[<span style="color:#666">2</span>] <span style="color:#666">+</span> dp[max(i <span style="color:#666">-</span> <span style="color:#666">30</span>, <span style="color:#666">0</span>)]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Nested loop iterates over the remaining odd indices starting from the next index. </div>
+                            <div class=""> Checks if using a thirty-day ticket (represented by `cost[2]`) results in a lower total cost by comparing it with the current value of `dp[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Comparison</b></div>
+                            <div class=""> <b>13 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[j]<span style="color:#666">&gt;</span>nums[minIndex])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[d];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Compares the current element with the element at &#39;minIndex&#39; to find the largest element. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Index Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                minIndex<span style="color:#666">=</span>j;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Updates &#39;minIndex&#39; to the new index if a larger element is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Swap</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        swap(nums[i],nums[minIndex]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Swaps the elements at index &#39;i&#39; and &#39;minIndex&#39; to place the largest element at index &#39;i&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the sorted vector &#39;nums&#39;. </div>
+                            <div class=""> Returns the minimum cost to cover all the travel days, which is stored in `dp[d]`, the last element of the dynamic programming array. </div>
                         </div>
                     
                 </div>
@@ -750,16 +723,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity for sorting each set of indices is O(n^2).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n) where n is the number of travel days.</div>
+                        <div class=""> <b>Average Case:</b> O(n) where n is the number of travel days.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) where n is the number of travel days.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in the number of travel days, as we only process each day once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> We use constant extra space apart from the input array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) if no travel days are planned.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) for storing the DP array for n travel days.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear in the number of travel days, as we need to store the minimum cost for each day.</div>    
                     </div>
 
                 </div>

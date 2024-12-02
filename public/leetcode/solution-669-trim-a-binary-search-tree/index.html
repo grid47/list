@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a wooden plank of length n, and some ants are walking on the plank. Some ants move to the left, others to the right. When two ants meet, they change directions without any additional time loss. When an ant reaches the edge of the plank, it falls off. The task is to determine when the last ant will fall off the plank. </div>
+<div class=""> You are given the root of a binary search tree (BST) and two integer values <code>low</code> and <code>high</code>. Trim the tree such that all its elements lie within the inclusive range <code>[low, high]</code>. The tree&rsquo;s relative structure should remain unchanged, and the root may change depending on the given bounds. </div>
 
 
 
@@ -372,53 +372,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two integer arrays: &#39;left&#39; and &#39;right&#39;. The array &#39;left&#39; represents the positions of ants moving to the left, and the array &#39;right&#39; represents the positions of ants moving to the right.</div>
-                        <div class=""> <b>Example:</b> n = 5, left = [3, 4], right = [1, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of the root of a binary search tree and two integer values `low` and `high`, representing the boundaries within which all elements of the tree should lie.</div>
+                        <div class=""> <b>Example:</b> root = [4,2,6,1,3,5,7], low = 3, high = 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= Number of nodes &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= left.length &lt;= n &#43; 1</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= right.length &lt;= n &#43; 1</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= left.length &#43; right.length &lt;= n &#43; 1</div>
-                            
-                                <div style="margin-left: 20px;"> • All values in &#39;left&#39; and &#39;right&#39; are unique, and no position is repeated in both arrays.</div>
+                                <div style="margin-left: 20px;"> • low &lt;= high &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be an integer representing the time when the last ant falls off the plank.</div>
-                        <div class=""> <b>Example:</b> 6</div>
+                        <div class=""> <b>Output:</b> Return the root of the trimmed binary search tree. The structure of the tree must remain intact, with nodes lying within the range `[low, high]`.</div>
+                        <div class=""> <b>Example:</b> [4,3,6,null,null,5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The time is a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The output tree must have the same structure as the input tree, but with only the nodes that fall within the specified range.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to compute the moment when the last ant falls off the plank.</div>
+                        <div class=""> <b>Goal:</b> Trim the binary search tree by removing nodes that fall outside the range [low, high]. The relative structure of the tree should be maintained.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each ant moving to the right, calculate how much time it takes to fall off the right end of the plank.</div>
+                                <div style="margin-left: 20px;"> • 1. Check if the current node’s value is less than low, in which case we only need to trim the right subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • For each ant moving to the left, calculate how much time it takes to fall off the left end of the plank.</div>
+                                <div style="margin-left: 20px;"> • 2. If the current node’s value is greater than high, trim the left subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • The time when the last ant falls off is the maximum of all these times.</div>
+                                <div style="margin-left: 20px;"> • 3. If the current node&#39;s value lies within the range [low, high], recursively trim both the left and right subtrees.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array &#39;left&#39; and &#39;right&#39; represent positions on the plank, and the total number of ants must be between 1 and n &#43; 1.</div>
+                        <div class=""> <b>Goal:</b> The problem has constraints related to the tree structure and values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The plank&#39;s length, n, is between 1 and 10^4.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= Number of nodes &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • Each position in &#39;left&#39; and &#39;right&#39; is distinct and falls within the range [0, n].</div>
+                                <div style="margin-left: 20px;"> • Node values are unique and within the range [0, 10^4].</div>
                             
                         </div>
                     </div>        
@@ -426,21 +422,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input arrays &#39;left&#39; and &#39;right&#39; contain unique values.</div>
+                                <div style="margin-left: 20px;"> • The binary search tree is valid and follows the properties of a BST.</div>
                             
-                                <div style="margin-left: 20px;"> • The time for ants to change directions when they meet is negligible.</div>
+                                <div style="margin-left: 20px;"> • The node values are unique, ensuring there is only one possible valid trimming of the tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 5, left = [3, 4], right = [1, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The last ant to fall off is the one at position 4, which will take 5 seconds to reach the left end.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [4,2,6,1,3,5,7], low = 3, high = 6</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After trimming, the tree only contains nodes with values between 3 and 6. The final tree is [4,3,6,null,null,5].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 6, left = [], right = [0, 1, 2, 3, 4, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The ant at position 0 will take 6 seconds to fall off the plank, and all other ants fall off before it.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [10,5,15,3,7,null,18], low = 5, high = 15</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After trimming, the tree contains nodes with values between 5 and 15. The final tree is [10,5,null,null,7].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,16 +460,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, calculate the time for each ant to fall off the plank. The solution is simply the maximum time of all ants.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, recursively trim the binary search tree by ensuring each node falls within the given range. Nodes outside the range should be removed, and the structure should be preserved.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The ants&#39; movements are independent, so we just need to compute how long it will take for each ant to fall off the plank.</div>
+                                <div style="margin-left: 20px;"> • The problem requires a modification of the tree structure while maintaining the order of the remaining nodes.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The time for ants moving to the left is just their position, while the time for ants moving to the right is the plank&#39;s length minus their position.</div>
+                                <div style="margin-left: 20px;"> • The key observation is that trimming a BST can be done using a simple recursive approach by comparing each node&#39;s value with the given range.</div>
                             
                         </div>
                     </div>
@@ -481,11 +477,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: For ants in the &#39;right&#39; array, compute the time as n - position.</div>
+                                <div style="margin-left: 20px;"> • 1. If the current node is NULL, return NULL.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For ants in the &#39;left&#39; array, compute the time as position.</div>
+                                <div style="margin-left: 20px;"> • 2. If the node&#39;s value is less than low, recursively trim the right subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Return the maximum of these times as the answer.</div>
+                                <div style="margin-left: 20px;"> • 3. If the node&#39;s value is greater than high, recursively trim the left subtree.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If the node&#39;s value lies within the range, recursively trim both left and right subtrees.</div>
                             
                         </div>
                     </div>
@@ -494,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If either &#39;left&#39; or &#39;right&#39; is empty, we only consider the times for the non-empty array.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least one node in the tree, so no need to handle empty tree cases.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution handles the maximum value of n, which is 10^4.</div>
+                                <div style="margin-left: 20px;"> • For large trees with up to 10^4 nodes, ensure the solution handles recursion efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all ants are moving in one direction, the time will be the time it takes the farthest ant to fall off.</div>
+                                <div style="margin-left: 20px;"> • Ensure that nodes with values at the boundaries of the range [low, high] are correctly included.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input arrays &#39;left&#39; and &#39;right&#39; should respect the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The tree is a valid BST with unique node values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -528,17 +526,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Left Subtree Trimming</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Trim Right Subtree</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Right Subtree Trimming Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Trim Left Subtree</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Trim Left Subtree Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Right Subtree Recursion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Root</button>
                     
                 </div>
 
@@ -547,16 +549,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getLastMoment</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> left, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> right) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> right.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, n <span style="color:#666">-</span> right[i]);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> left.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, left[i]);        
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">trimBST</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> low, <span style="color:#0b0;font-weight:bold">int</span> high) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>val <span style="color:#666">&lt;</span> low) {
+</span></span><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">return</span> trimBST(root<span style="color:#666">-&gt;</span>right, low, high);
+</span></span><span style="display:flex;"><span>   } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>val <span style="color:#666">&gt;</span> high) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> trimBST(root<span style="color:#666">-&gt;</span>left, low, high);
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> trimBST(root<span style="color:#666">-&gt;</span>left, low, high);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right<span style="color:#666">=</span> trimBST(root<span style="color:#666">-&gt;</span>right, low, high);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -567,70 +571,90 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getLastMoment</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> left, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> right) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">trimBST</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> low, <span style="color:#0b0;font-weight:bold">int</span> high) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function that calculates the last moment any object in the `left` or `right` array reaches the boundary of size `n`. </div>
+                            <div class=""> This is the function definition for `trimBST`, which trims a binary search tree (BST) such that only nodes with values within the specified range `[low, high]` are kept. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a variable `mx` to store the maximum moment of time as the loop progresses. </div>
+                            <div class=""> If the root is `NULL`, return `NULL` as there is no tree to trim. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Left Subtree Trimming</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> right.size(); i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>val <span style="color:#666">&lt;</span> low) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each element in the `right` array. </div>
+                            <div class=""> If the value of the current node is smaller than `low`, this node and everything in its left subtree should be discarded, so we recursively call `trimBST` on the right child. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Mathematical Operations</b></div>
+                            <div class=""> <b>4 : Trim Right Subtree</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, n <span style="color:#666">-</span> right[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">trimBST</span>(root<span style="color:#666">-&gt;</span>right, low, high);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each element in the `right` array, calculates the moment when it reaches the right boundary. The time is updated in the `mx` variable. </div>
+                            <div class=""> Return the result of recursively trimming the right subtree, as all values in the left subtree are too small. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop</b></div>
+                            <div class=""> <b>5 : Right Subtree Trimming Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> left.size(); i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>   } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(root<span style="color:#666">-&gt;</span>val <span style="color:#666">&gt;</span> high) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each element in the `left` array. </div>
+                            <div class=""> If the value of the current node is greater than `high`, this node and everything in its right subtree should be discarded, so we recursively call `trimBST` on the left child. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Mathematical Operations</b></div>
+                            <div class=""> <b>6 : Trim Left Subtree</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, left[i]);        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">trimBST</span>(root<span style="color:#666">-&gt;</span>left, low, high);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each element in the `left` array, it calculates the moment when it reaches the left boundary. The time is updated in the `mx` variable. </div>
+                            <div class=""> Return the result of recursively trimming the left subtree, as all values in the right subtree are too large. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return</b></div>
+                            <div class=""> <b>7 : Trim Left Subtree Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> trimBST(root<span style="color:#666">-&gt;</span>left, low, high);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the maximum time calculated from both the left and right arrays. </div>
+                            <div class=""> Recursively call `trimBST` to trim the left child of the current node, ensuring the left subtree only contains nodes within the range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Right Subtree Recursion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right<span style="color:#666">=</span> trimBST(root<span style="color:#666">-&gt;</span>right, low, high);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call `trimBST` to trim the right child of the current node, ensuring the right subtree only contains nodes within the range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Root</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the current node (root) after its left and right subtrees have been trimmed, ensuring all nodes in the subtree are within the given range. </div>
                         </div>
                     
                 </div>
@@ -653,13 +677,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), as we iterate through both the &#39;left&#39; and &#39;right&#39; arrays once.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) as we may need to visit every node in the tree once.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, as we only need a few variables to store the maximum time.</div>    
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h), where h is the height of the tree, due to recursive calls on the call stack.</div>    
                     </div>
 
                 </div>

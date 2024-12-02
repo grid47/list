@@ -279,7 +279,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 16, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -306,7 +306,7 @@
 
 
 
-<div class=""> You are given two integers, <code>n</code> and <code>k</code>. Initially, you have an array <code>a</code> of size <code>n</code>, where each element is initialized to 1. After each second, every element in the array is updated to be the sum of all preceding elements plus the element itself. The process repeats for <code>k</code> seconds. You need to return the value of the last element of the array, <code>a[n - 1]</code>, after <code>k</code> seconds. Since the result may be very large, return it modulo (10^9 + 7). </div>
+<div class=""> You are given a list of integers representing the number of candies each kid has. You are also given an integer representing the number of extra candies. Your task is to return a boolean array indicating whether, after adding all the extra candies to each kid&rsquo;s total, they will have the greatest number of candies among all the kids. </div>
 
 
 
@@ -357,53 +357,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two integers: `n` (the number of elements in the array) and `k` (the number of seconds the array undergoes updates).</div>
-                        <div class=""> <b>Example:</b> Example 1:
-Input: n = 4, k = 3
-Output: 20
-Explanation: After 3 seconds, the last element becomes 20.</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers `candies` where each element represents the number of candies a kid has, and an integer `extraCandies` representing the extra candies to be distributed.</div>
+                        <div class=""> <b>Example:</b> [3, 5, 8, 2], extraCandies = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, k &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= candies[i] &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= extraCandies &lt;= 50</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the value of the last element of the array after `k` seconds, modulo (10^9 &#43; 7).</div>
-                        <div class=""> <b>Example:</b> Example 2:
-Input: n = 5, k = 4
-Output: 35
-Explanation: After 4 seconds, the last element becomes 35.</div>
+                        <div class=""> <b>Output:</b> The output is a boolean array of length `n` where each element is true if, after receiving the extra candies, that kid will have the greatest number of candies, otherwise false.</div>
+                        <div class=""> <b>Example:</b> [true, true, true, false]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be an integer modulo (10^9 &#43; 7).</div>
+                                <div style="margin-left: 20px;"> • The output array has the same length as the input `candies` array.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Simulate the update of the array for `k` seconds and compute the value of the last element modulo (10^9 &#43; 7).</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine whether each kid, after receiving all the extra candies, will have as many or more candies than every other kid.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an array `a` of size `n` with all elements set to 1.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Find the kid with the maximum number of candies.</div>
                             
-                                <div style="margin-left: 20px;"> • For each second, update each element of the array such that each element becomes the sum of all preceding elements plus the element itself.</div>
-                            
-                                <div style="margin-left: 20px;"> • Repeat this for `k` seconds.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the value of the last element modulo (10^9 &#43; 7).</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each kid, check if adding `extraCandies` makes their total candies greater than or equal to the maximum number of candies.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input should satisfy the following constraints.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle the problem within the provided constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The solution should work within time and space limits of up to 100 kids and 100 candies per kid.</div>
                             
                         </div>
                     </div>        
@@ -411,21 +403,19 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All elements in the array are initially set to 1.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of seconds is limited to 1000, making an iterative approach feasible.</div>
+                                <div style="margin-left: 20px;"> • The input will always be valid, with the number of kids being at least 2.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1:</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `n = 4` and `k = 3`, the array starts as [1, 1, 1, 1]. After 1 second, the array becomes [1, 2, 3, 4]. After 2 seconds, it becomes [1, 3, 6, 10], and after 3 seconds, it becomes [1, 4, 10, 20]. Therefore, the last element after 3 seconds is 20.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [3, 5, 8, 2], extraCandies = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Kid 1 will have 7 candies, Kid 2 will have 9 candies (greatest), Kid 3 will have 12 candies (greatest), and Kid 4 will have 6 candies.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2:</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `n = 5` and `k = 4`, the array starts as [1, 1, 1, 1, 1]. After 1 second, the array becomes [1, 2, 3, 4, 5], after 2 seconds it becomes [1, 3, 6, 10, 15], after 3 seconds it becomes [1, 4, 10, 20, 35], and after 4 seconds, the array becomes [1, 5, 15, 35, 70]. Thus, the last element after 4 seconds is 35.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [6, 2, 7, 5], extraCandies = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Kid 1 will have 9 candies (greatest), Kid 2 will have 5 candies, Kid 3 will have 10 candies (greatest), and Kid 4 will have 8 candies.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,18 +439,18 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will simulate the array updates for `k` seconds. After each second, every element of the array is updated based on the sum of all previous elements. This can be efficiently implemented using dynamic programming.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we first find the maximum number of candies any kid has. Then, for each kid, we check if their total candies after adding the extra candies will be greater than or equal to this maximum.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be solved through dynamic programming by iterating over the seconds and updating the array in-place.</div>
+                                <div style="margin-left: 20px;"> • The solution can be approached by finding the maximum number of candies first.</div>
                             
-                                <div style="margin-left: 20px;"> • The last element after `k` seconds is influenced by all the previous elements.</div>
+                                <div style="margin-left: 20px;"> • Then, we can compare each kid&#39;s total after adding the extra candies to the maximum.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to be mindful of performance given that both `n` and `k` can go up to 1000. Using dynamic programming with a 2D array should work efficiently within these limits.</div>
+                                <div style="margin-left: 20px;"> • The overall time complexity of this solution should be linear with respect to the number of kids.</div>
                             
                         </div>
                     </div>
@@ -468,11 +458,11 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a 2D array `mtx` where each row represents the state of the array at a given second. The initial state is all elements set to 1.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Identify the maximum number of candies from the input list `candies`.</div>
                             
-                                <div style="margin-left: 20px;"> • For each second (from 1 to k), update the elements such that `mtx[i][j] = (mtx[i-1][j] &#43; mtx[i][j-1]) % MOD`, where `MOD = 10^9 &#43; 7`.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each kid, calculate the total candies after adding `extraCandies` and compare with the maximum candies.</div>
                             
-                                <div style="margin-left: 20px;"> • After `k` seconds, return the value of `mtx[k][n-1]`.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return the result as a boolean array indicating whether each kid will have the greatest number of candies.</div>
                             
                         </div>
                     </div>
@@ -481,22 +471,22 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs since the problem always provides values for `n` and `k`.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that there will be at least two kids, so there will never be empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The approach should handle the maximum values of `n = 1000` and `k = 1000` efficiently, using dynamic programming.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution can handle the upper limits of `n` and the values of candies efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For `n = 1` and `k = 1`, the result is trivially 1 because the array does not change.</div>
+                                <div style="margin-left: 20px;"> • Consider scenarios where many kids have the same number of candies or when all kids receive the extra candies.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be able to handle the constraints up to `n = 1000` and `k = 1000` efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works within time and space constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -513,17 +503,17 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Modulo Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Max Element Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Constructs</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Matrix Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
                     
@@ -534,15 +524,13 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">valueAfterKSeconds</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;</span> mtx(k <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> k; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            mtx[i][j] <span style="color:#666">=</span> (mtx[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> mtx[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">%</span> mod;   
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mtx[k][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> kidsWithCandies(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> candies, <span style="color:#0b0;font-weight:bold">int</span> ext) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> candies.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(candies.begin(), candies.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span><span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> (candies[i]<span style="color:#666">+</span> ext<span style="color:#666">&gt;=</span> mx);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -550,73 +538,73 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Modulo Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> kidsWithCandies(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> candies, <span style="color:#0b0;font-weight:bold">int</span> ext) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The modulo value `mod` is initialized to `1e9 &#43; 7`, a common modulus used to prevent overflow in large numbers. </div>
+                            <div class=""> Defines the function `kidsWithCandies` that takes a vector `candies` and an integer `ext` and returns a vector of booleans indicating whether each child can have the greatest number of candies after receiving the extra candies. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">valueAfterKSeconds</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> candies.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `valueAfterKSeconds` is defined, taking two parameters: `n` (the number of positions) and `k` (the number of seconds). </div>
+                            <div class=""> Initializes the variable `n` to hold the size of the `candies` vector, representing the number of children. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Matrix Initialization</b></div>
+                            <div class=""> <b>3 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;</span> mtx(k <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#a2f">false</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A 2D matrix `mtx` is initialized with dimensions `(k &#43; 1) x n`, and all elements are set to `1`. </div>
+                            <div class=""> Initializes a boolean vector `ans` of size `n` with all values set to `false`. This vector will store whether each child can have the greatest number of candies. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Outer Loop Start</b></div>
+                            <div class=""> <b>4 : Max Element Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> k; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(candies.begin(), candies.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The outer loop begins, iterating over `k` seconds (from `1` to `k`). </div>
+                            <div class=""> Finds the maximum value in the `candies` vector, representing the greatest number of candies any child has. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Inner Loop Start</b></div>
+                            <div class=""> <b>5 : Loop Constructs</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span><span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The inner loop starts, iterating over `n` positions (from `1` to `n-1`). </div>
+                            <div class=""> Starts a loop to iterate over each element in the `candies` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Matrix Update</b></div>
+                            <div class=""> <b>6 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mtx[i][j] <span style="color:#666">=</span> (mtx[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> mtx[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">%</span> mod;   
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> (candies[i] <span style="color:#666">+</span> ext <span style="color:#666">&gt;=</span> mx);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The current matrix element `mtx[i][j]` is updated by adding the values from the previous row and the previous column, and then applying the modulo operation to avoid overflow. </div>
+                            <div class=""> For each child, checks if the sum of their candies and the extra candies (`ext`) is greater than or equal to the maximum number of candies `mx`. If true, the corresponding entry in the `ans` vector is set to `true`. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>7 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mtx[k][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the final value located at the `k`-th row and the `n-1`-th column of the matrix. </div>
+                            <div class=""> Returns the `ans` vector, which contains `true` or `false` for each child, indicating whether they can have the greatest number of candies. </div>
                         </div>
                     
                 </div>
@@ -636,16 +624,16 @@ Explanation: After 4 seconds, the last element becomes 35.</div>
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k * n)</div>
-                        <div class=""> <b>Average Case:</b> O(k * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(k * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(k * n) because we update the array for each second, and each element takes constant time to update.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of kids.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as we have to iterate through all the kids.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), since we check each kid&#39;s total candies.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in the number of kids, i.e., O(n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(k * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(k * n) due to the storage of the 2D array `mtx` used for dynamic programming.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), as we store the result array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of kids.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear due to the result array.</div>    
                     </div>
 
                 </div>

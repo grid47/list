@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 29, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -323,7 +323,7 @@
 
 
 
-<div class=""> You are given a binary matrix of size m x n, where each element is either 0 or 1. A position (i, j) in the matrix is considered special if mat[i][j] = 1 and all other elements in the same row i and column j are 0. Your task is to find how many such special positions exist in the matrix. </div>
+<div class=""> Given an integer array nums and an integer k, your task is to determine if it is possible to divide this array into k non-empty subsets such that each subset has an equal sum. </div>
 
 
 
@@ -374,45 +374,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a matrix &#39;mat&#39; of size m x n, where each element is either 0 or 1.</div>
-                        <div class=""> <b>Example:</b> Input: mat = [[1, 0, 0], [0, 0, 1], [1, 0, 0]]</div>
+                        <div class=""> <b>Input:</b> You are provided with an integer array nums and an integer k.</div>
+                        <div class=""> <b>Example:</b> nums = [5, 2, 4, 6], k = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length &lt;= 16</div>
                             
-                                <div style="margin-left: 20px;"> • mat[i][j] is either 0 or 1</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 104</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element in nums occurs between 1 and 4 times.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an integer representing the number of special positions in the matrix.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> Return true if it is possible to partition the array into k subsets with equal sums, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> Output: false</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result should be a boolean value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find special positions, we need to check each 1 in the matrix and verify that all other elements in its row and column are 0.</div>
+                        <div class=""> <b>Goal:</b> To determine if it is possible to partition the array into k subsets with equal sums.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse the entire matrix to calculate how many 1&#39;s are present in each row and column.</div>
+                                <div style="margin-left: 20px;"> • Calculate the total sum of the elements in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each element in the matrix, check if it&#39;s 1, and if the row and column of that element contain no other 1&#39;s.</div>
+                                <div style="margin-left: 20px;"> • If the total sum is not divisible by k, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count the number of such positions that meet the condition.</div>
+                                <div style="margin-left: 20px;"> • Determine the subset sum, which is the total sum divided by k.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use backtracking to try to form k subsets, each having the sum equal to the subset sum.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The matrix can have up to 100 rows and columns, so the solution must be efficient.</div>
+                        <div class=""> <b>Goal:</b> Consider the constraints mentioned in the input representation.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Matrix dimensions are between 1 and 100 (inclusive).</div>
+                                <div style="margin-left: 20px;"> • k cannot exceed the number of elements in nums.</div>
                             
-                                <div style="margin-left: 20px;"> • Each element in the matrix is either 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • Each element of nums should be used exactly once in the partition.</div>
                             
                         </div>
                     </div>        
@@ -420,19 +426,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix will not be empty, and the elements are constrained to 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • You can use each element of the array exactly once.</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements are non-negative integers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: mat = [[1, 0, 0], [0, 0, 1], [1, 0, 0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, only the position (1, 2) is special because mat[1][2] == 1 and all other elements in row 1 and column 2 are 0. Therefore, the output is 1.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: mat = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the positions (0, 0), (1, 1), and (2, 2) are all special. Therefore, the output is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [5, 2, 4, 6], k = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It&#39;s not possible to partition the array into 3 subsets with equal sums. The total sum is 17, which is not divisible by 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +460,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to determine the special positions by first counting how many 1&#39;s are present in each row and column, then checking each 1 in the matrix to ensure there are no other 1&#39;s in its row and column.</div>
+                        <div class=""> <b>Approach:</b> We use backtracking to explore different ways of dividing the array into subsets and check if the sum of each subset equals the required subset sum.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A brute force approach would involve checking each element in the matrix for the special condition, which could lead to a time complexity of O(m * n^2).</div>
+                                <div style="margin-left: 20px;"> • If the total sum is not divisible by k, it&#39;s impossible to divide the array into subsets with equal sums.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A more efficient approach would involve counting the number of 1&#39;s in each row and column first, then performing a single check for each element, which would improve the solution&#39;s efficiency.</div>
+                                <div style="margin-left: 20px;"> • Backtracking will help us find a combination of subsets that satisfy the sum condition.</div>
                             
                         </div>
                     </div>
@@ -473,13 +477,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create arrays to store the number of 1&#39;s in each row and column.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Calculate the sum of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Traverse the matrix to populate these arrays.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Check if the total sum is divisible by k. If not, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each element mat[i][j], if mat[i][j] == 1, check if row[i] and col[j] both contain only 1&#39;s, if so increment the result count.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Set the target subset sum as total sum divided by k.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the final result count.</div>
+                                <div style="margin-left: 20px;"> • Step 4: Use backtracking to try forming subsets of the target sum. If we find a valid division, return true, else return false.</div>
                             
                         </div>
                     </div>
@@ -488,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Matrix dimensions are guaranteed to be at least 1x1.</div>
+                                <div style="margin-left: 20px;"> • Empty input arrays are not possible, as the constraints guarantee that nums.length &gt;= 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle large matrices efficiently, with dimensions up to 100x100.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, we may need to optimize backtracking or consider dynamic programming techniques to avoid excessive computation.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When the matrix consists entirely of 0&#39;s, the output will be 0.</div>
+                                <div style="margin-left: 20px;"> • If all elements in the array are the same and k is 1, it&#39;s always possible to partition.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution is efficient enough to handle the maximum input size.</div>
+                                <div style="margin-left: 20px;"> • The array size is small (up to 16), which allows for backtracking solutions.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,25 +528,65 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Boundary Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop - Row Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop - Column Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sum Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Row and Column Counts</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Divisibility Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Second Loop - Checking Special Positions</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Partition Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Second Inner Loop - Checking Columns</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check - Special Position</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Boolean Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Increment Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Subset Sum Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Taken Array Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 First Element Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Taken Array Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Function End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Recursive Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Subset Match Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Recursive Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 End Subset Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Loop Through Remaining Elements</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Element Skipped Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Subset Addition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Subset Sum Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Element Inclusion</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Subset Sum Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Backtracking</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Subset Sum Decrease</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Success Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="32"> 32 Final Return</button>
                     
                 </div>
 
@@ -551,24 +595,47 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSpecial</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartitionKSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> K) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> N <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (K <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (N <span style="color:#666">&lt;</span> K) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> N; i<span style="color:#666">++</span>) sum <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (sum <span style="color:#666">%</span> K <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) row[i]<span style="color:#666">++</span>, col[j]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> subset <span style="color:#666">=</span> sum <span style="color:#666">/</span> K;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> subsetSum[K];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> taken[N];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> K; i<span style="color:#666">++</span>) subsetSum[i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> N; i<span style="color:#666">++</span>) taken[i] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    subsetSum[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[N <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    taken[N <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> canPartitionKSubsets(nums, subsetSum, taken, subset, K, N, <span style="color:#666">0</span>, N <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartitionKSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> subsetSum[], <span style="color:#0b0;font-weight:bold">bool</span> taken[], <span style="color:#0b0;font-weight:bold">int</span> subset, <span style="color:#0b0;font-weight:bold">int</span> K, <span style="color:#0b0;font-weight:bold">int</span> N, <span style="color:#0b0;font-weight:bold">int</span> curIdx, <span style="color:#0b0;font-weight:bold">int</span> limitIdx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (subsetSum[curIdx] <span style="color:#666">==</span> subset) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (curIdx <span style="color:#666">==</span> K <span style="color:#666">-</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> canPartitionKSubsets(nums, subsetSum, taken, subset, K, N, curIdx <span style="color:#666">+</span> <span style="color:#666">1</span>, N <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(row[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> col[j] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> limitIdx; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (taken[i]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> subsetSum[curIdx] <span style="color:#666">+</span> nums[i];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (tmp <span style="color:#666">&lt;=</span> subset) {
+</span></span><span style="display:flex;"><span>            taken[i] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            subsetSum[curIdx] <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">bool</span> nxt <span style="color:#666">=</span> canPartitionKSubsets(nums, subsetSum, taken, subset, K, N, curIdx, i <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>            taken[i] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            subsetSum[curIdx] <span style="color:#666">-=</span> nums[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (nxt) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -579,120 +646,320 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSpecial</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartitionKSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> K) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `numSpecial` that takes a matrix `mat` as input, where each cell can either be 0 or 1. </div>
+                            <div class=""> Define the main function to check if the array can be partitioned into K subsets with equal sum. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> N <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables `m` and `n` to represent the number of rows and columns in the matrix, respectively. </div>
+                            <div class=""> Store the size of the input array &#39;nums&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (K <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Create two vectors `row` and `col`, initialized to zero. These vectors will track the count of 1s in each row and each column. </div>
+                            <div class=""> If K equals 1, return true as any array can be partitioned into 1 subset. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Boundary Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (N <span style="color:#666">&lt;</span> K) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `res` to 0, which will store the result (the number of special positions in the matrix). </div>
+                            <div class=""> If the number of elements is less than K, return false as it&#39;s not possible to partition. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Outer Loop - Row Iteration</b></div>
+                            <div class=""> <b>5 : Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the first loop to iterate over each row in the matrix. </div>
+                            <div class=""> Initialize a variable &#39;sum&#39; to store the total sum of elements in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inner Loop - Column Iteration</b></div>
+                            <div class=""> <b>6 : Sum Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> N; i<span style="color:#666">++</span>) sum <span style="color:#666">+=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the second loop to iterate over each column in the current row. </div>
+                            <div class=""> Loop through the array and calculate the total sum of elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update Row and Column Counts</b></div>
+                            <div class=""> <b>7 : Divisibility Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) row[i]<span style="color:#666">++</span>, col[j]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (sum <span style="color:#666">%</span> K <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current cell is 1, increment the count for the corresponding row (`row[i]`) and column (`col[j]`), indicating that a 1 has been found. </div>
+                            <div class=""> Check if the total sum is divisible by K. If not, return false as partitioning is not possible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Second Loop - Checking Special Positions</b></div>
+                            <div class=""> <b>8 : Partition Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> subset <span style="color:#666">=</span> sum <span style="color:#666">/</span> K;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the third loop to iterate over each row again, this time to check for special positions. </div>
+                            <div class=""> Calculate the target sum for each subset. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Second Inner Loop - Checking Columns</b></div>
+                            <div class=""> <b>9 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> subsetSum[K];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the fourth loop to iterate over each column in the current row and check if the position is special. </div>
+                            <div class=""> Initialize an array &#39;subsetSum&#39; to store the current sum of each subset. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Condition Check - Special Position</b></div>
+                            <div class=""> <b>10 : Boolean Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(row[i] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> col[j] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> mat[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> taken[N];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current cell is 1, and if both its row and column contain exactly one 1. </div>
+                            <div class=""> Initialize an array &#39;taken&#39; to track which elements are already included in subsets. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Increment Result</b></div>
+                            <div class=""> <b>11 : Subset Sum Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> K; i<span style="color:#666">++</span>) subsetSum[i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition is true, increment the result `res` by 1, as this cell is a special position. </div>
+                            <div class=""> Initialize all elements of &#39;subsetSum&#39; to 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class=""> <b>12 : Taken Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> N; i<span style="color:#666">++</span>) taken[i] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final result `res`, which represents the number of special positions in the matrix. </div>
+                            <div class=""> Initialize all elements of &#39;taken&#39; to false, indicating no element has been selected. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : First Element Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    subsetSum[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[N <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the last element of &#39;nums&#39; to the first subset sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Taken Array Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    taken[N <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mark the last element as taken. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">canPartitionKSubsets</span>(nums, subsetSum, taken, subset, K, N, <span style="color:#666">0</span>, N <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the recursive function to try partitioning the remaining elements into subsets. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Function End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the function definition. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Recursive Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartitionKSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> subsetSum[], <span style="color:#0b0;font-weight:bold">bool</span> taken[], <span style="color:#0b0;font-weight:bold">int</span> subset, <span style="color:#0b0;font-weight:bold">int</span> K, <span style="color:#0b0;font-weight:bold">int</span> N, <span style="color:#0b0;font-weight:bold">int</span> curIdx, <span style="color:#0b0;font-weight:bold">int</span> limitIdx) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the helper function that recursively attempts to partition the array into K subsets. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Subset Match Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (subsetSum[curIdx] <span style="color:#666">==</span> subset) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current subset has reached the target sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Recursive Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (curIdx <span style="color:#666">==</span> K <span style="color:#666">-</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the second last subset is valid, return true indicating success. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">canPartitionKSubsets</span>(nums, subsetSum, taken, subset, K, N, curIdx <span style="color:#666">+</span> <span style="color:#666">1</span>, N <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recurse to the next subset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : End Subset Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the subset match check. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Loop Through Remaining Elements</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> limitIdx; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through the array from the current index to try adding each element to the subset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Element Skipped Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (taken[i]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skip if the element has already been taken. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Subset Addition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> subsetSum[curIdx] <span style="color:#666">+</span> nums[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculate the temporary sum if the current element is added to the subset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Subset Sum Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (tmp <span style="color:#666">&lt;=</span> subset) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if adding the element does not exceed the subset sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Element Inclusion</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            taken[i] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mark the element as taken. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Subset Sum Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            subsetSum[curIdx] <span style="color:#666">+=</span> nums[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the sum of the current subset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">bool</span> nxt <span style="color:#666">=</span> canPartitionKSubsets(nums, subsetSum, taken, subset, K, N, curIdx, i <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Make the recursive call to attempt the next subset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>29 : Backtracking</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            taken[i] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Backtrack by marking the element as not taken. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>30 : Subset Sum Decrease</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            subsetSum[curIdx] <span style="color:#666">-=</span> nums[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Undo the change to the subset sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>31 : Success Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (nxt) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the recursive call succeeds, return true. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>32 : Final Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the function by returning false if no valid partitioning was found. </div>
                         </div>
                     
                 </div>
@@ -712,16 +979,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we process each element in the matrix once and use auxiliary arrays to store the row and column counts.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(k) if the array can be immediately partitioned into equal subsets.</div>
+                        <div class=""> <b>Average Case:</b> O(2^N), where N is the number of elements in the array, due to the backtracking search.</div>
+                        <div class=""> <b>Worst Case:</b> O(2^N) for exploring all possible subsets.</div> 
+                        <div class=""> <b>Description:</b> The worst-case time complexity occurs due to the exponential search for valid subsets.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m &#43; n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m &#43; n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m &#43; n) because we use two arrays to store the row and column counts.</div>    
+                        <div class=""> <b>Best Case:</b> O(N) for storing the state of the subsets and used elements.</div>
+                        <div class=""> <b>Worst Case:</b> O(N) due to the space required for backtracking.</div> 
+                        <div class=""> <b>Description:</b> Space complexity depends on the number of subsets and the size of the array.</div>    
                     </div>
 
                 </div>

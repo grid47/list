@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1231s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1234s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/648.webp" 
            alt="A string where words are replaced with their corresponding replacements, glowing softly as replacements are made." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a binary string s and an integer k. Your task is to determine if every possible binary code of length k appears as a substring within s. Return true if all such binary codes are present, otherwise return false. </div>
+<div class=""> In English, certain words can be formed by adding a suffix to a root word. Given a list of root words and a sentence, replace every word in the sentence that is a derivative of any root word with the shortest root. If a word can be formed by more than one root, replace it with the shortest root. </div>
 
 
 
@@ -372,51 +372,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a binary string s and an integer k, where s represents a binary number and k specifies the length of binary codes to check.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;1101011&#34;, k = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of root words (dictionary) and a sentence, both represented as strings.</div>
+                        <div class=""> <b>Example:</b> dictionary = [&#34;dog&#34;, &#34;cat&#34;, &#34;rat&#34;], sentence = &#34;the dogs were caught by the rats&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 5 * 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= dictionary.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • s[i] is either &#39;0&#39; or &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= dictionary[i].length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 20</div>
+                                <div style="margin-left: 20px;"> • dictionary[i] consists of only lowercase letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= sentence.length &lt;= 10^6</div>
+                            
+                                <div style="margin-left: 20px;"> • sentence consists of only lowercase letters and spaces.</div>
+                            
+                                <div style="margin-left: 20px;"> • The number of words in sentence is in the range [1, 1000].</div>
+                            
+                                <div style="margin-left: 20px;"> • Each word in sentence has a length in the range [1, 1000].</div>
+                            
+                                <div style="margin-left: 20px;"> • There are no leading or trailing spaces in the sentence.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if every possible binary code of length k exists as a substring of s. Otherwise, return false.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output should be a sentence with all derivative words replaced by the shortest corresponding root word.</div>
+                        <div class=""> <b>Example:</b> the dog were caught by the rat</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a boolean value indicating whether every binary code of length k exists in the string.</div>
+                                <div style="margin-left: 20px;"> • The output will be a string with words separated by spaces, and no leading or trailing spaces.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Check if all binary codes of length k are present as substrings of s.</div>
+                        <div class=""> <b>Goal:</b> Replace each word in the sentence with the shortest root word it can be derived from.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a set to store the binary codes of length k that appear as substrings.</div>
+                                <div style="margin-left: 20px;"> • 1. Build a Trie data structure to store all root words.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the string s, checking each substring of length k.</div>
+                                <div style="margin-left: 20px;"> • 2. For each word in the sentence, attempt to find the shortest prefix that exists in the Trie.</div>
                             
-                                <div style="margin-left: 20px;"> • For each substring, add it to the set.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the set size equals 2^k, then all possible binary codes of length k have been found.</div>
+                                <div style="margin-left: 20px;"> • 3. Replace the word with its root if a match is found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The conditions that input values must satisfy.</div>
+                        <div class=""> <b>Goal:</b> The input and output should be handled efficiently due to the large size constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of s is at most 500,000 characters, so the solution must be efficient.</div>
-                            
-                                <div style="margin-left: 20px;"> • k is at most 20, so there are at most 2^k possible binary codes to check.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle up to 1000 root words and a sentence of length up to 10^6 efficiently.</div>
                             
                         </div>
                     </div>        
@@ -424,25 +430,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string s is valid and contains only &#39;0&#39; and &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • The dictionary is non-empty.</div>
                             
-                                <div style="margin-left: 20px;"> • The integer k is at most 20, ensuring that checking all binary codes of length k is feasible.</div>
+                                <div style="margin-left: 20px;"> • The sentence contains words that are potentially derivatives of roots.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;00110110&#34;, k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: true. The binary codes of length 2 are &#34;00&#34;, &#34;01&#34;, &#34;10&#34;, and &#34;11&#34;, and all of them appear as substrings in s.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;0110&#34;, k = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: true. The binary codes of length 1 are &#34;0&#34; and &#34;1&#34;, and both appear as substrings in s.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;0110&#34;, k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: false. The binary code &#34;00&#34; is missing as a substring in s.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> dictionary = [&#34;dog&#34;, &#34;cat&#34;, &#34;rat&#34;], sentence = &#34;the dogs were caught by the rats&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The words &#39;dogs&#39; and &#39;rats&#39; are derivatives of &#39;dog&#39; and &#39;rat&#39; respectively, so they are replaced with these shorter roots.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -466,18 +464,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we will use a sliding window approach to efficiently check every substring of length k in the string s.</div>
+                        <div class=""> <b>Approach:</b> We use a Trie data structure to efficiently store and check the prefixes of words in the sentence to replace them with the shortest root.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of unique binary codes of length k is 2^k.</div>
-                            
-                                <div style="margin-left: 20px;"> • We need to efficiently check for all possible binary codes of length k in s.</div>
+                                <div style="margin-left: 20px;"> • Trie is a good choice because it allows efficient prefix matching.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A sliding window can help extract each substring of length k from s, and a set can be used to track unique substrings.</div>
+                                <div style="margin-left: 20px;"> • We need to handle the large input efficiently by ensuring that the lookup and insertion in the Trie are fast.</div>
                             
                         </div>
                     </div>
@@ -485,15 +481,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a set to store unique substrings of length k.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a TrieNode structure to store child nodes and mark the end of a word.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a loop to slide through the string s and extract each substring of length k.</div>
+                                <div style="margin-left: 20px;"> • 2. Insert all the root words into the Trie.</div>
                             
-                                <div style="margin-left: 20px;"> • Add each substring to the set.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the size of the set equals 2^k, return true as all binary codes of length k are present.</div>
-                            
-                                <div style="margin-left: 20px;"> • Otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • 3. For each word in the sentence, check if it has a prefix in the Trie and replace it with the shortest matching root.</div>
                             
                         </div>
                     </div>
@@ -502,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string s is empty, return false as no substrings can exist.</div>
+                                <div style="margin-left: 20px;"> • The sentence is guaranteed to have at least one word.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs where s has the maximum length (500,000 characters), ensure the solution remains efficient.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the sentence is large (up to 10^6 characters).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If k equals the length of the string, check if the string itself is a valid substring.</div>
+                                <div style="margin-left: 20px;"> • Consider cases where no words in the sentence are derivatives of the roots.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where the string is smaller than 2^k, which means not all possible binary codes can be present.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution efficiently handles the large input constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -534,33 +526,61 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 String Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Trie Node Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Set Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Trie Node Traversal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Character Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Binary Conversion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Trie Node Creation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Continue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Traverse to Next Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Insert into Set</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Mark Word End</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Shift and Mask</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Masking</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Trie Node Traversal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Binary Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Prefix Accumulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Final Insert</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Character Search</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Traverse Trie</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Exit Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Prefix Building</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 End of Word Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Word</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Initialize Trie</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Insert Words into Trie</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Split Sentence</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Process Each Word</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Word Replacement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Add Space</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Remove Trailing Space</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Return Final Sentence</button>
                     
                 </div>
 
@@ -569,24 +589,46 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">hasAllCodes</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> k) {
-</span></span><span style="display:flex;"><span>            tmp <span style="color:#666">=</span> tmp <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">+</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        cnt.insert(tmp);
-</span></span><span style="display:flex;"><span>        tmp <span style="color:#666">*=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        tmp <span style="color:#666">&amp;=</span> ((<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> k) <span style="color:#666">-</span> <span style="color:#666">1</span>);            
-</span></span><span style="display:flex;"><span>        tmp <span style="color:#666">+=</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> <span style="color:#666">1</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>TrieNode<span style="color:#666">*</span> root;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> insert(string w) {
+</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> st <span style="color:#666">=</span> root;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: w) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode();
+</span></span><span style="display:flex;"><span>        st <span style="color:#666">=</span> st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    cnt.insert(tmp);
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; cnt.size() &lt;&lt; &#34; &#34; &lt;&lt; (1 &lt;&lt; k);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> cnt.size() <span style="color:#666">==</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> k);
+</span></span><span style="display:flex;"><span>    st<span style="color:#666">-&gt;</span>isEnd <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>string <span style="color:#00a000">check</span>(string w) {
+</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> st <span style="color:#666">=</span> root;
+</span></span><span style="display:flex;"><span>    string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: w) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) st <span style="color:#666">=</span> st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        s <span style="color:#666">+=</span> c;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st<span style="color:#666">-&gt;</span>isEnd) <span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> w;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>string <span style="color:#00a000">replaceWords</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> dictionary, string sentence) {
+</span></span><span style="display:flex;"><span>    root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">w</span>: dictionary) insert(w);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    istringstream ss(sentence);
+</span></span><span style="display:flex;"><span>    string word <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>, ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(; ss<span style="color:#666">&gt;&gt;</span>word;) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> check(word);
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> <span style="color:#b44">&#39; &#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ans.pop_back();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -594,143 +636,283 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">hasAllCodes</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `hasAllCodes`, which takes a string `s` and an integer `k` as input and returns a boolean value indicating whether all binary strings of length `k` are present in `s`. </div>
+                            <div class=""> The class `Solution` is defined, which will contain methods for inserting words into a trie and checking and replacing words in a sentence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : String Size</b></div>
+                            <div class=""> <b>2 : Trie Node Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TrieNode<span style="color:#666">*</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the length of the input string `s` in variable `n`. </div>
+                            <div class=""> A pointer `root` is declared that will point to the root of the trie structure used to store words. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Set Declaration</b></div>
+                            <div class=""> <b>3 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a set `cnt` to store unique binary integers corresponding to substrings of length `k`. </div>
+                            <div class=""> The `public` access modifier allows the methods `insert`, `check`, and `replaceWords` to be accessible from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Initialization</b></div>
+                            <div class=""> <b>4 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">insert</span>(string w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable `tmp` to 0, which will store the current k-length binary number being processed. </div>
+                            <div class=""> The `insert` method is defined to insert a word into the trie. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Start</b></div>
+                            <div class=""> <b>5 : Trie Node Traversal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> st <span style="color:#666">=</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop that iterates through each character of the string `s`. </div>
+                            <div class=""> A temporary pointer `st` is initialized to the root of the trie. This pointer will be used to traverse the trie as we insert characters of the word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Character Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current index `i` is less than `k`. This ensures the first `k` characters are processed correctly. </div>
+                            <div class=""> This loop iterates over each character in the word `w` to insert it into the trie. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Binary Conversion</b></div>
+                            <div class=""> <b>7 : Trie Node Creation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp <span style="color:#666">=</span> tmp <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">+</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update `tmp` by shifting its bits left and adding the current character (0 or 1) of the string `s` to it. </div>
+                            <div class=""> If the current character’s corresponding child node does not exist, a new trie node is created for that character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Continue</b></div>
+                            <div class=""> <b>8 : Traverse to Next Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        st <span style="color:#666">=</span> st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skip the rest of the loop for the current iteration since the set is only populated after `k` characters. </div>
+                            <div class=""> After ensuring the child node exists, `st` is moved to the next node in the trie corresponding to the current character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Insert into Set</b></div>
+                            <div class=""> <b>9 : Mark Word End</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt.insert(tmp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    st<span style="color:#666">-&gt;</span>isEnd <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the current value of `tmp` into the set `cnt` to track the unique k-length binary numbers. </div>
+                            <div class=""> After all characters are inserted, the last node in the trie is marked as the end of a valid word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Shift and Mask</b></div>
+                            <div class=""> <b>10 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp <span style="color:#666">*=</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">check</span>(string w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Shift the bits of `tmp` left by 1 to make room for the next bit. </div>
+                            <div class=""> The `check` method is defined to search for the shortest prefix of the word `w` in the trie. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Masking</b></div>
+                            <div class=""> <b>11 : Trie Node Traversal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp <span style="color:#666">&amp;=</span> ((<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> k) <span style="color:#666">-</span> <span style="color:#666">1</span>);            
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> st <span style="color:#666">=</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Apply a mask to keep only the last `k` bits of `tmp`, ensuring that the value fits within `k` bits. </div>
+                            <div class=""> A temporary pointer `st` is initialized again to the root of the trie to start searching for the word’s prefix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Update Binary Value</b></div>
+                            <div class=""> <b>12 : Prefix Accumulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp <span style="color:#666">+=</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current character (either 0 or 1) from `s` to `tmp` to form the new k-length binary number. </div>
+                            <div class=""> A string `s` is initialized to store the prefix that matches a word in the trie. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Final Insert</b></div>
+                            <div class=""> <b>13 : Character Search</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cnt.insert(tmp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After the loop, insert the final value of `tmp` into the set `cnt` to ensure it is considered. </div>
+                            <div class=""> The loop iterates over each character in the word `w` to check for matching prefixes in the trie. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class=""> <b>14 : Traverse Trie</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt.size() <span style="color:#666">==</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> k);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) st <span style="color:#666">=</span> st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return `true` if the size of the set `cnt` equals the total number of possible k-length binary strings (2^k), otherwise return `false`. </div>
+                            <div class=""> If the current character exists in the trie, the pointer `st` moves to the corresponding child node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Exit Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a character is not found in the trie, the loop breaks as no valid prefix exists. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Prefix Building</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s <span style="color:#666">+=</span> c;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The current character is added to the string `s`, building the prefix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : End of Word Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st<span style="color:#666">-&gt;</span>isEnd) <span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node is the end of a valid word in the trie, the prefix `s` is returned. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return Word</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> w;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no valid prefix is found, the original word `w` is returned. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">replaceWords</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> dictionary, string sentence) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `replaceWords` method is defined to replace words in a sentence based on the dictionary, using the trie structure. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Initialize Trie</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A new root node is created for the trie to store the dictionary words. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Insert Words into Trie</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">w</span>: dictionary) insert(w);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Each word from the dictionary is inserted into the trie using the `insert` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Split Sentence</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    istringstream <span style="color:#00a000">ss</span>(sentence);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The sentence is split into words using a string stream. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string word <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>, ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Two strings `word` and `ans` are initialized. `word` stores the current word from the sentence, and `ans` accumulates the result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Process Each Word</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(; ss<span style="color:#666">&gt;&gt;</span>word;) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The loop processes each word in the sentence one by one. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Word Replacement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> check(word);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each word, the `check` method is called to find its replacement (prefix), which is appended to `ans`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Add Space</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> <span style="color:#b44">&#39; &#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A space is added after each word to separate them in the final sentence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Remove Trailing Space</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans.pop_back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The trailing space is removed from the final result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Return Final Sentence</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The final sentence, with all words replaced, is returned. </div>
                         </div>
                     
                 </div>
@@ -751,15 +933,15 @@
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the length of the string s, as we slide through the string once and check substrings of length k.</div>                                               
+                        <div class=""> <b>Average Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * m) where n is the number of words in the sentence, and m is the length of the longest word. The best case occurs when no words are derivatives.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(2^k)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(2^k) for storing the unique binary substrings of length k in the set.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n * m) where n is the number of words in the sentence and m is the length of the longest word, due to the storage of the Trie structure.</div>    
                     </div>
 
                 </div>

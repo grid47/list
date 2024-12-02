@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1232s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1230s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/649.webp" 
            alt="A series of characters where the senate is divided and illuminated by those voting for or against, softly glowing." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given a set of courses numbered from 0 to numCourses - 1 and a list of prerequisites. Each prerequisite is a pair [ai, bi], indicating that you must complete course ai before course bi. For a series of queries, where each query asks whether a specific course is a prerequisite for another, you are tasked with determining whether each query is true or false. </div>
+<div class=""> In a Senate made up of senators from two parties, Radiant and Dire, senators can either ban another senator from voting or announce victory if only one party remains with active senators. Predict which party will announce the victory and change the game. </div>
 
 
 
@@ -371,65 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are provided with two inputs: numCourses, the number of courses, and prerequisites, an array of pairs indicating course dependencies. Additionally, you are given queries, where each query asks whether one course is a prerequisite for another.</div>
-                        <div class=""> <b>Example:</b> Input: numCourses = 3, prerequisites = [[1,0],[2,1],[2,0]], queries = [[1,0], [0,2]]</div>
+                        <div class=""> <b>Input:</b> The input is a string representing the parties of each senator, where &#39;R&#39; represents Radiant and &#39;D&#39; represents Dire. The length of the string represents the number of senators.</div>
+                        <div class=""> <b>Example:</b> senate = &#34;DRD&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= numCourses &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= prerequisites.length &lt;= (numCourses * (numCourses - 1) / 2)</div>
-                            
-                                <div style="margin-left: 20px;"> • prerequisites[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt;= numCourses - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • ai != bi</div>
-                            
-                                <div style="margin-left: 20px;"> • All pairs [ai, bi] are unique</div>
-                            
-                                <div style="margin-left: 20px;"> • The graph of prerequisites contains no cycles</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= queries.length &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= ui, vi &lt;= numCourses - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • ui != vi</div>
+                                <div style="margin-left: 20px;"> • senate[i] is either &#39;R&#39; or &#39;D&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output consists of a boolean array, where each element represents the answer to the corresponding query. If the first course in a query is a prerequisite of the second course, the corresponding answer is true; otherwise, it is false.</div>
-                        <div class=""> <b>Example:</b> Output: [true, false]</div>
+                        <div class=""> <b>Output:</b> Return the party that will eventually announce victory: either &#39;Radiant&#39; or &#39;Dire&#39;.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;Dire&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is an array of booleans, each indicating whether the first course in a query is a prerequisite for the second course.</div>
+                                <div style="margin-left: 20px;"> • The output will be either &#39;Radiant&#39; or &#39;Dire&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Efficiently determine whether each course in the queries list is a prerequisite of another.</div>
+                        <div class=""> <b>Goal:</b> Determine which party will be the last to have active senators left after the rounds of banning.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Construct a graph where each node represents a course and an edge from course A to course B indicates that A is a prerequisite for B.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize two queues, one for each party, to represent the senators&#39; positions.</div>
                             
-                                <div style="margin-left: 20px;"> • For each course, perform a breadth-first search (BFS) to find all courses that are reachable from it.</div>
+                                <div style="margin-left: 20px;"> • 2. In each round, allow the senator with the smallest index in the queue to ban an opponent.</div>
                             
-                                <div style="margin-left: 20px;"> • Store the reachable courses in a 2D array (reach), where reach[i][j] is true if course i is a prerequisite of course j.</div>
-                            
-                                <div style="margin-left: 20px;"> • For each query, check the reach array to see if the first course is a prerequisite of the second.</div>
+                                <div style="margin-left: 20px;"> • 3. Repeat the rounds until all remaining senators are from the same party.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem has certain constraints to ensure that the solution can be computed within acceptable limits.</div>
+                        <div class=""> <b>Goal:</b> The input string will represent a set of senators from two parties and the output must predict the winner.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The maximum number of courses is 100, making it feasible to process using graph traversal algorithms like BFS.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of queries can be large, so the solution must be efficient in answering them.</div>
+                                <div style="margin-left: 20px;"> • The length of the input string will be at least 1 and at most 10^4 characters.</div>
                             
                         </div>
                     </div>        
@@ -437,21 +417,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The graph of prerequisites is a Directed Acyclic Graph (DAG), meaning there are no cycles.</div>
+                                <div style="margin-left: 20px;"> • Each senator can ban the other party&#39;s senator in each round.</div>
                             
-                                <div style="margin-left: 20px;"> • The input queries are valid and do not contain any invalid course numbers.</div>
+                                <div style="margin-left: 20px;"> • A senator can only announce the victory when all remaining senators belong to the same party.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: numCourses = 3, prerequisites = [[1,0],[2,1],[2,0]], queries = [[1,0], [0,2]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: [true, false]. Course 1 is a prerequisite of course 0, but course 0 is not a prerequisite of course 2.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: numCourses = 2, prerequisites = [], queries = [[0,1], [1,0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: [false, false]. Since there are no prerequisites, no course is a prerequisite of another.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> senate = &#34;DRD&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first senator from Dire bans the second senator from Radiant. In the next round, the second senator from Radiant bans the remaining senator from Dire, allowing Radiant to announce victory.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -475,18 +451,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we will model the courses and their prerequisites as a directed graph and use breadth-first search (BFS) to find all prerequisites for each course.</div>
+                        <div class=""> <b>Approach:</b> Use two queues to simulate the round-based banning of senators. Each senator from the two parties will take turns banning the opponent until one party remains.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem is essentially about finding transitive closures in a directed graph.</div>
-                            
-                                <div style="margin-left: 20px;"> • BFS can be used to explore all courses reachable from a given course, thus identifying all its prerequisites.</div>
+                                <div style="margin-left: 20px;"> • This is a simulation problem, so we can use queues to efficiently manage the senators in each round.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using BFS to traverse the graph ensures we efficiently find all courses that are prerequisites for a given course.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that in each round, the senator with the smallest index bans an opponent and moves to the end of the queue.</div>
                             
                         </div>
                     </div>
@@ -494,11 +468,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Build the graph using an adjacency list, where each node points to its dependent courses.</div>
+                                <div style="margin-left: 20px;"> • 1. Create two queues: one for the Radiant senators and one for the Dire senators.</div>
                             
-                                <div style="margin-left: 20px;"> • Perform BFS from each course to determine all courses that are reachable from it.</div>
+                                <div style="margin-left: 20px;"> • 2. For each round, pop the front of each queue to see who gets to ban whom.</div>
                             
-                                <div style="margin-left: 20px;"> • For each query, check if the first course is reachable from the second course using the BFS results.</div>
+                                <div style="margin-left: 20px;"> • 3. If a senator bans an opponent, they are placed at the back of their party&#39;s queue with an updated index.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Repeat this until one party runs out of active senators.</div>
                             
                         </div>
                     </div>
@@ -507,22 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no prerequisites, all queries will return false unless they are self-referential.</div>
+                                <div style="margin-left: 20px;"> • The input string will not be empty, as there will always be at least one senator.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are a large number of queries (up to 10^4), the solution must handle them efficiently without repeated computations.</div>
+                                <div style="margin-left: 20px;"> • Handle cases with the maximum number of senators (10^4) efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For queries where both courses are the same, the result should always be true, as a course is trivially a prerequisite of itself.</div>
+                                <div style="margin-left: 20px;"> • If all senators belong to the same party, that party wins immediately.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the graph has no cycles, as stated in the problem&#39;s constraints.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles cases with large inputs within the time limits.</div>
                             
                         </div>                                                                        
                     </div>
@@ -539,53 +515,25 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Graph Representation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Determine Number of Players</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Edge Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Edge Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 BFS Traversal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Main Simulation Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Operations</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Queue Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Queue Operations</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Visited Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Match Decision</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Visited Array Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 BFS Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Size Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 BFS Loop Inner</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Queue Dequeue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Dequeue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Neighbor Processing</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Reach Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Visitation Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Mark as Visited</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Queue Push</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Answer Preparation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Query Evaluation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Query Answering</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Final Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Determine Winner</button>
                     
                 </div>
 
@@ -594,43 +542,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> checkIfPrerequisite(<span style="color:#0b0;font-weight:bold">int</span> num, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pre, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">predictPartyVictory</span>(string sen) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> reach(num, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(num, <span style="color:#a2f">false</span>));
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid(num);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: pre) {
-</span></span><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]].push_back(it[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q1, q2;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> sen.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sen.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    (sen[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;R&#39;</span>)<span style="color:#666">?</span> q1.push(i) <span style="color:#666">:</span> q2.push(i);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> num; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>        q.push(i);
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(num, <span style="color:#666">0</span>);            
-</span></span><span style="display:flex;"><span>        vis[i] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                q.pop();
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">it</span>: grid[tmp]) {
-</span></span><span style="display:flex;"><span>                    reach[i][it] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(vis[it]) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>                    vis[it] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>                    q.push(it);
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q1.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>q2.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> q1.front(); q1.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> q2.front(); q2.pop();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        (r <span style="color:#666">&lt;</span> l) <span style="color:#666">?</span> q1.push(r <span style="color:#666">+</span> n) <span style="color:#666">:</span> q2.push(l <span style="color:#666">+</span> n);
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> ans(q.size());
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// is q[0] a pre of q[1];
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        ans[i] <span style="color:#666">=</span> reach[q[i][<span style="color:#666">0</span>]][q[i][<span style="color:#666">1</span>]];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> q1.size() <span style="color:#666">&gt;</span> q2.size()  <span style="color:#666">?</span>  <span style="color:#b44">&#34;Radiant&#34;</span> <span style="color:#666">:</span> <span style="color:#b44">&#34;Dire&#34;</span> ;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -638,243 +564,103 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> checkIfPrerequisite(<span style="color:#0b0;font-weight:bold">int</span> num, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pre, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">predictPartyVictory</span>(string sen) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function checks if one course is a prerequisite for another, given a list of prerequisites and a set of queries. It returns a boolean vector indicating the answer for each query. </div>
+                            <div class=""> The method `predictPartyVictory` is defined to determine the winning party in a game based on the string `sen`, where each character represents a player from either the &#39;Radiant&#39; or &#39;Dire&#39; team. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> reach(num, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(num, <span style="color:#a2f">false</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q1, q2;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a 2D boolean array &#39;reach&#39; to keep track of whether a course can reach another course (i.e., if one is a prerequisite of the other). </div>
+                            <div class=""> Two queues, `q1` and `q2`, are initialized to store the indices of the players for the &#39;Radiant&#39; and &#39;Dire&#39; teams, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Graph Representation</b></div>
+                            <div class=""> <b>3 : Determine Number of Players</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid(num);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> sen.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates an adjacency list &#39;grid&#39; where each index represents a course, and the list at each index holds courses that are directly dependent on that course. </div>
+                            <div class=""> The total number of players is determined by the length of the input string `sen`, which represents the players. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Edge Insertion</b></div>
+                            <div class=""> <b>4 : Queue Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: pre) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sen.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through each prerequisite pair, where &#39;it&#39; contains two elements: the first is the prerequisite course, and the second is the course that depends on it. </div>
+                            <div class=""> A loop iterates over the string `sen` to populate the two queues based on whether the character is &#39;R&#39; (Radiant) or &#39;D&#39; (Dire). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Edge Insertion</b></div>
+                            <div class=""> <b>5 : Character Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]].push_back(it[<span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    (sen[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;R&#39;</span>)<span style="color:#666">?</span> q1.push(i) <span style="color:#666">:</span> q2.push(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds an edge to the adjacency list, indicating that course &#39;it[0]&#39; is a prerequisite for course &#39;it[1]&#39;. </div>
+                            <div class=""> For each character in `sen`, if it is &#39;R&#39;, the index is pushed to the Radiant queue `q1`, otherwise it is pushed to the Dire queue `q2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : BFS Traversal</b></div>
+                            <div class=""> <b>6 : Main Simulation Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> num; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q1.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>q2.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each course to check which other courses it can reach using breadth-first search. </div>
+                            <div class=""> A while loop runs as long as both teams have players remaining in their respective queues. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Queue Initialization</b></div>
+                            <div class=""> <b>7 : Queue Operations</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> q1.front(); q1.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a queue for breadth-first search (BFS). </div>
+                            <div class=""> The first player from the Radiant team is retrieved and removed from `q1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Queue Operation</b></div>
+                            <div class=""> <b>8 : Queue Operations</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.push(i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> q2.front(); q2.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the current course (i) into the queue to begin BFS from that course. </div>
+                            <div class=""> The first player from the Dire team is retrieved and removed from `q2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Visited Array Initialization</b></div>
+                            <div class=""> <b>9 : Match Decision</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(num, <span style="color:#666">0</span>);            
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        (r <span style="color:#666">&lt;</span> l) <span style="color:#666">?</span> q1.push(r <span style="color:#666">+</span> n) <span style="color:#666">:</span> q2.push(l <span style="color:#666">+</span> n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a &#39;vis&#39; vector to track visited courses, ensuring each course is processed only once during BFS. </div>
+                            <div class=""> A match is simulated by comparing the indices of the players. The player with the smaller index loses, and the losing player is sent to the back of the opposing team&#39;s queue, with their index incremented by the total number of players (to simulate their return in the next round). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Visited Array Update</b></div>
+                            <div class=""> <b>10 : Determine Winner</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vis[i] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> q1.size() <span style="color:#666">&gt;</span> q2.size()  <span style="color:#666">?</span>  <span style="color:#b44">&#34;Radiant&#34;</span> <span style="color:#666">:</span> <span style="color:#b44">&#34;Dire&#34;</span> ;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the current course as visited. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : BFS Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Starts the BFS loop, which continues as long as there are courses in the queue to process. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Queue Size Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Stores the number of courses in the queue at the beginning of each BFS iteration. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : BFS Loop Inner</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Processes all courses at the current BFS level. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Queue Dequeue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> q.front();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Gets the next course from the front of the queue to process. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Queue Dequeue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes the processed course from the queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Neighbor Processing</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">it</span>: grid[tmp]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterates over all courses that are directly dependent on the current course &#39;tmp&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Reach Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    reach[i][it] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Marks that course &#39;it&#39; is reachable from course &#39;i&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Visitation Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(vis[it]) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the dependent course &#39;it&#39; has already been visited. If it has, it skips to the next course. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Mark as Visited</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    vis[it] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Marks course &#39;it&#39; as visited. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Queue Push</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    q.push(it);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds course &#39;it&#39; to the queue for further BFS processing. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Answer Preparation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> ans(q.size());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes a boolean vector &#39;ans&#39; to store the results of each query. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Query Evaluation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterates through each query to check if the first course is a prerequisite of the second. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Query Answering</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> reach[q[i][<span style="color:#666">0</span>]][q[i][<span style="color:#666">1</span>]];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> For each query, checks if the first course is a prerequisite of the second and stores the result in the &#39;ans&#39; vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Return Final Answer</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the vector &#39;ans&#39;, containing the results for each query. </div>
+                            <div class=""> After the while loop ends, the team with more players remaining in their queue is declared the winner. If `q1` (Radiant) has more players, &#39;Radiant&#39; is returned; otherwise, &#39;Dire&#39; is returned. </div>
                         </div>
                     
                 </div>
@@ -894,16 +680,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; e)</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; e)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; e)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n &#43; e), where n is the number of courses and e is the number of prerequisites. This is because we traverse all courses and their edges (dependencies) once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Each senator is processed exactly once, so the time complexity is linear with respect to the number of senators.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; e)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, space complexity is O(n^2) to store the reachability matrix, but in general, it will be O(n &#43; e) for storing the graph and visited nodes.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required to store the two queues representing the two parties.</div>    
                     </div>
 
                 </div>

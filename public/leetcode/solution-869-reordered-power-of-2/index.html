@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are given a string &rsquo;text&rsquo; consisting of words separated by a single space and a string &lsquo;brokenLetters&rsquo; containing the broken keys on a malfunctioning keyboard. Return the number of words in &rsquo;text&rsquo; that can be fully typed using the working keys. </div>
+<div class=""> Given an integer <code>n</code>, check if it is possible to reorder its digits (in any order, including the original order) to form a number that is a power of two. Leading digits cannot be zero in the reordered number. </div>
 
 
 
@@ -361,51 +361,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two strings: &#39;text&#39; containing words separated by spaces, and &#39;brokenLetters&#39; containing distinct lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> text = &#34;apple orange&#34;, brokenLetters = &#34;a&#34;</div>
+                        <div class=""> <b>Input:</b> A single positive integer `n`.</div>
+                        <div class=""> <b>Example:</b> Input: n = 32</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= text.length &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= brokenLetters.length &lt;= 26</div>
-                            
-                                <div style="margin-left: 20px;"> • text consists of words separated by a single space without leading or trailing spaces.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each word only consists of lowercase English letters.</div>
-                            
-                                <div style="margin-left: 20px;"> • brokenLetters consists of distinct lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of words in &#39;text&#39; that can be fully typed using the working keys.</div>
-                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Output:</b> Return `true` if it is possible to reorder the digits of `n` to form a power of two, otherwise return `false`.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output is a boolean value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To count the number of words in &#39;text&#39; that do not contain any broken letters.</div>
+                        <div class=""> <b>Goal:</b> Determine if a permutation of the digits of `n` can result in a power of two.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate over each word in &#39;text&#39;.</div>
+                                <div style="margin-left: 20px;"> • Count the frequency of each digit in `n`.</div>
                             
-                                <div style="margin-left: 20px;"> • For each word, check if it contains any letter from &#39;brokenLetters&#39;.</div>
+                                <div style="margin-left: 20px;"> • Iterate through all powers of two up to the maximum possible value within the constraints.</div>
                             
-                                <div style="margin-left: 20px;"> • If a word can be fully typed (contains no broken letters), increment the count.</div>
+                                <div style="margin-left: 20px;"> • Check if the frequency of digits in any power of two matches the frequency of digits in `n`.</div>
+                            
+                                <div style="margin-left: 20px;"> • If a match is found, return `true`; otherwise, return `false`.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> We need an efficient solution that works with text lengths up to 10^4.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle the given range of inputs efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The text string will have a length between 1 and 10,000.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • The brokenLetters string will contain distinct lowercase English letters (0 to 26 characters).</div>
+                                <div style="margin-left: 20px;"> • Reordering must not allow leading zeros.</div>
                             
                         </div>
                     </div>        
@@ -413,17 +409,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The text string is guaranteed to have words separated by single spaces.</div>
+                                <div style="margin-left: 20px;"> • The input `n` is always a valid positive integer within the specified range.</div>
                             
-                                <div style="margin-left: 20px;"> • The brokenLetters string can be empty, which means all letters are usable.</div>
+                                <div style="margin-left: 20px;"> • The number can be represented in base 10 without truncation.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> text = &#34;apple orange&#34;, brokenLetters = &#34;a&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The word &#39;apple&#39; cannot be typed because it contains the broken letter &#39;a&#39;, but &#39;orange&#39; can be typed. Hence, the output is 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 46</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 46 can be reordered to form 64, which is 2^6. Therefore, the output is `true`.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 123</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 123 cannot be reordered to form any power of two. Therefore, the output is `false`.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 8</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 8 is already a power of two (2^3). Therefore, the output is `true`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -447,16 +451,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will process each word and check if it contains any broken letter. If it doesn&#39;t, we increment the count.</div>
+                        <div class=""> <b>Approach:</b> Use a frequency-based approach to compare the digit counts of `n` with the digit counts of all powers of two within the constraints.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check each word in the text for broken letters.</div>
+                                <div style="margin-left: 20px;"> • A number can only be a power of two if its digits can be reordered to match the digits of an actual power of two.</div>
+                            
+                                <div style="margin-left: 20px;"> • There are only 31 powers of two to consider since 2^30 is slightly over 10^9.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a set to store the broken letters and efficiently check if any letter in a word is broken.</div>
+                                <div style="margin-left: 20px;"> • Compare the digit frequencies of `n` with precomputed digit frequencies of all powers of two.</div>
                             
                         </div>
                     </div>
@@ -464,13 +470,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Convert the brokenLetters string into a set for O(1) lookup time.</div>
+                                <div style="margin-left: 20px;"> • Create a helper function to count the frequency of each digit in a number.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each word in &#39;text&#39;.</div>
+                                <div style="margin-left: 20px;"> • Precompute the digit frequencies for all powers of two up to 2^30.</div>
                             
-                                <div style="margin-left: 20px;"> • For each word, check if any character is in the set of brokenLetters.</div>
+                                <div style="margin-left: 20px;"> • Compute the digit frequencies for the input `n`.</div>
                             
-                                <div style="margin-left: 20px;"> • If a word has no broken letters, increment the counter.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the precomputed powers of two and check if any frequency matches the frequency of `n`.</div>
+                            
+                                <div style="margin-left: 20px;"> • If a match is found, return `true`; otherwise, return `false`.</div>
                             
                         </div>
                     </div>
@@ -479,22 +487,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If &#39;brokenLetters&#39; is empty, all words are typeable.</div>
+                                <div style="margin-left: 20px;"> • Not applicable as `n` is always provided.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle the maximum length of the text efficiently.</div>
+                                <div style="margin-left: 20px;"> • Inputs near the upper limit of 10^9 should be handled efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If a word is empty (which shouldn&#39;t occur as per constraints), it should be considered typeable.</div>
+                                <div style="margin-left: 20px;"> • Inputs like `n = 1` should return `true` since 1 is 2^0.</div>
+                            
+                                <div style="margin-left: 20px;"> • Inputs like `n = 0` (if allowed) should return `false` since 0 cannot be a power of two.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must run in O(n) time where n is the length of the text string.</div>
+                                <div style="margin-left: 20px;"> • Ensure that leading zeros in permutations are not allowed.</div>
                             
                         </div>                                                                        
                     </div>
@@ -511,29 +521,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Header</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Counter Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Broken Letters</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mark Broken Letters</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return False</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Through Text</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Helper Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Space Character Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Valid Word Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop For Digit Counting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Reset Counter</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Non-Space Character Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Broken Letter Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Signature</button>
                     
                 </div>
 
@@ -542,19 +546,17 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">canBeTypedWords</span>(string text, string brokenLetters) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> broken[<span style="color:#666">26</span>] <span style="color:#666">=</span> {};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : brokenLetters)
-</span></span><span style="display:flex;"><span>        broken[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : text)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (ch <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> cnt <span style="color:#666">==</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> broken[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">+</span> (cnt <span style="color:#666">==</span> <span style="color:#666">0</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">reorderedPowerOf2</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> counter(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">32</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(counter(<span style="color:#666">1</span><span style="color:#666">&lt;&lt;</span>i) <span style="color:#666">==</span> c) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">counter</span>(<span style="color:#0b0;font-weight:bold">int</span> N) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(;N; N<span style="color:#666">/=</span><span style="color:#666">10</span>) res <span style="color:#666">+=</span> pow(<span style="color:#666">10</span>, N<span style="color:#666">%</span><span style="color:#666">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -562,123 +564,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Header</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">canBeTypedWords</span>(string text, string brokenLetters) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">reorderedPowerOf2</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `canBeTypedWords`, which takes two strings: `text` (the input text) and `brokenLetters` (the letters that cannot be used). It returns an integer representing how many words can be typed without using any broken letters. </div>
+                            <div class=""> Defines the `reorderedPowerOf2` function, which checks if the number `n` can be rearranged into a power of 2. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Initialization</b></div>
+                            <div class=""> <b>2 : Counter Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> broken[<span style="color:#666">26</span>] <span style="color:#666">=</span> {};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> counter(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a boolean array `broken[26]` to mark which letters are broken. The array is of size 26, corresponding to each letter of the alphabet. </div>
+                            <div class=""> Calls the helper function `counter` to calculate the digit count signature of `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through Broken Letters</b></div>
+                            <div class=""> <b>3 : Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : brokenLetters)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">32</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each character in the `brokenLetters` string to mark the broken letters in the `broken` array. </div>
+                            <div class=""> Starts a loop to check the 32 possible powers of 2 (from 2^0 to 2^31). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Mark Broken Letters</b></div>
+                            <div class=""> <b>4 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        broken[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(counter(<span style="color:#666">1</span><span style="color:#666">&lt;&lt;</span>i) <span style="color:#666">==</span> c) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the respective index of the `broken` array as `true` for each broken letter in the `brokenLetters` string. </div>
+                            <div class=""> Compares the digit count of `n` with the digit count of each power of 2 (calculated as `1 &lt;&lt; i`). If they match, returns `true`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes two variables: `res` (the result to count valid words) and `cnt` (the counter for broken letters in a word). </div>
+                            <div class=""> If no power of 2 matches the digit count of `n`, returns `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop Through Text</b></div>
+                            <div class=""> <b>6 : Helper Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : text)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">counter</span>(<span style="color:#0b0;font-weight:bold">int</span> N) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop that iterates through each character in the input string `text`. </div>
+                            <div class=""> Defines the helper function `counter`, which calculates the &#39;digit count signature&#39; of a number `N`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Space Character Check</b></div>
+                            <div class=""> <b>7 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (ch <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current character is a space, indicating the end of a word. </div>
+                            <div class=""> Initializes the result variable `res` to store the computed signature of the digits of `N`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Valid Word Check</b></div>
+                            <div class=""> <b>8 : Loop For Digit Counting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> cnt <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(;N; N<span style="color:#666">/=</span><span style="color:#666">10</span>) res <span style="color:#666">+=</span> pow(<span style="color:#666">10</span>, N<span style="color:#666">%</span><span style="color:#666">10</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the word contains no broken letters (`cnt == 0`), increments the result `res`. </div>
+                            <div class=""> Uses a loop to process each digit of `N`. For each digit, it adds `10^digit` to the result `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Reset Counter</b></div>
+                            <div class=""> <b>9 : Return Signature</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Resets the `cnt` variable to 0 to start counting broken letters for the next word. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Non-Space Character Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Handles the case when the current character is not a space (i.e., it&#39;s part of a word). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Broken Letter Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> broken[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments the `cnt` variable if the current character is a broken letter. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">+</span> (cnt <span style="color:#666">==</span> <span style="color:#666">0</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the final count of valid words, adding 1 if the last word is valid (i.e., `cnt == 0`). </div>
+                            <div class=""> Returns the computed digit signature `res`. </div>
                         </div>
                     
                 </div>
@@ -698,16 +670,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the number of characters in the text, because we need to check each character against the broken letters.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n * k), where k is the number of powers of two to check</div>
+                        <div class=""> <b>Worst Case:</b> O(log n * k)</div> 
+                        <div class=""> <b>Description:</b> The complexity is determined by the number of digits in `n` (log n) and the number of powers of two to compare (k).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k)</div>
+                        <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(k)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(k), where k is the number of distinct broken letters (at most 26).</div>    
+                        <div class=""> <b>Description:</b> Space is used for storing the precomputed digit frequencies of powers of two.</div>    
                     </div>
 
                 </div>

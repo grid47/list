@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> Given two strings text1 and text2, return the length of their longest common subsequence. A subsequence is a sequence that can be derived from the string by deleting some characters without changing the order of the remaining characters. </div>
+<div class=""> Given a string s and a string array dictionary, return the longest string from the dictionary that can be formed by deleting some characters of s. If there are multiple valid words, return the longest word with the smallest lexicographical order. If no valid word exists, return an empty string. </div>
 
 
 
@@ -372,49 +372,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two strings text1 and text2. The characters in each string are lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> Input: text1 = &#39;apple&#39;, text2 = &#39;applause&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s and an array of strings dictionary.</div>
+                        <div class=""> <b>Example:</b> s = &#39;xyzzabca&#39;, dictionary = [&#39;abc&#39;, &#39;xy&#39;, &#39;zz&#39;, &#39;xyz&#39;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= text1.length, text2.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • text1 and text2 consist of only lowercase English characters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= dictionary.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= dictionary[i].length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • s and dictionary[i] consist of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the length of the longest common subsequence between text1 and text2.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> Return the longest word in the dictionary that can be formed from the string s. If there are multiple such words, return the lexicographically smallest one. If no valid word can be formed, return an empty string.</div>
+                        <div class=""> <b>Example:</b> &#39;abc&#39;, &#39;c&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be a single integer representing the length of the longest common subsequence.</div>
+                                <div style="margin-left: 20px;"> • The output should be a string.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the length of the longest common subsequence by comparing characters of both strings and using dynamic programming to store the results of overlapping subproblems.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check each word in the dictionary to see if it can be formed by deleting characters from s and then return the longest, lexicographically smallest one.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Create a 2D DP table to store the lengths of longest common subsequences for different substrings.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through each word in the dictionary.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through both strings. If characters match, add 1 to the value of the previous common subsequence.</div>
+                                <div style="margin-left: 20px;"> • 2. For each word, check if it can be formed by deleting some characters from s by maintaining a pointer for both strings.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If characters do not match, take the maximum length from either of the previous two subsequences.</div>
+                                <div style="margin-left: 20px;"> • 3. Track the longest valid word found and update if a new word with a longer length or smaller lexicographical order is found.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. The final value in the DP table will be the length of the longest common subsequence.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the valid word or an empty string if no valid word is found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem must be solved efficiently with respect to both time and space complexity.</div>
+                        <div class=""> <b>Goal:</b> The constraints on the input string s and the dictionary ensure that the solution must be efficient enough to handle large inputs.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= text1.length, text2.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= text2.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= dictionary.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= dictionary[i].length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • s and dictionary[i] consist of lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -422,25 +430,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both text1 and text2 will consist only of lowercase English characters.</div>
+                                <div style="margin-left: 20px;"> • The input strings are valid and consist of lowercase English letters only.</div>
                             
-                                <div style="margin-left: 20px;"> • The length of both text1 and text2 will be between 1 and 1000.</div>
+                                <div style="margin-left: 20px;"> • We assume that all words in the dictionary are distinct.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: text1 = &#39;apple&#39;, text2 = &#39;applause&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the longest common subsequence between &#39;apple&#39; and &#39;applause&#39; is &#39;apple&#39;, which has a length of 5.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;xyzzabca&#39;, dictionary = [&#39;abc&#39;, &#39;xy&#39;, &#39;zz&#39;, &#39;xyz&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The word &#39;abc&#39; can be formed from s by deleting &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, and &#39;z&#39;. The other words cannot be formed.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: text1 = &#39;happy&#39;, text2 = &#39;sad&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the longest common subsequence between &#39;happy&#39; and &#39;sad&#39; is &#39;a&#39;, which has a length of 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;abc&#39;, dictionary = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> &#39;c&#39; is the longest valid word that can be formed from s.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: text1 = &#39;cat&#39;, text2 = &#39;dog&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, there is no common subsequence between &#39;cat&#39; and &#39;dog&#39;, so the result is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;abcxyz&#39;, dictionary = [&#39;ax&#39;, &#39;bc&#39;, &#39;xyz&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> &#39;ax&#39; can be formed from s and is the longest, lexicographically smallest word.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -464,16 +472,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved using dynamic programming to calculate the longest common subsequence by comparing characters and storing results for overlapping subproblems.</div>
+                        <div class=""> <b>Approach:</b> The approach involves iterating over each word in the dictionary and checking if it can be formed from s by deleting characters. The key operation is maintaining a pointer for both the string and the word being checked.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be efficiently solved using dynamic programming with a 2D table.</div>
+                                <div style="margin-left: 20px;"> • The task is a typical string matching problem where we are allowed to delete characters from s.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The key observation is that we need to store intermediate results to avoid redundant calculations, which makes dynamic programming a good choice.</div>
+                                <div style="margin-left: 20px;"> • The solution needs to efficiently check if a word can be formed from s and track the longest, lexicographically smallest result.</div>
                             
                         </div>
                     </div>
@@ -481,11 +489,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a 2D DP table with dimensions (text1.length &#43; 1) x (text2.length &#43; 1).</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the dictionary in lexicographical order to ensure we can always pick the smallest word first.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Loop through both strings. If characters match, increment the previous common subsequence length by 1. Otherwise, take the maximum length from either the top or left cell in the DP table.</div>
+                                <div style="margin-left: 20px;"> • 2. For each word, check if it can be formed by traversing s and matching the characters of the word in sequence.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Return the value in the bottom-right corner of the table, which contains the length of the longest common subsequence.</div>
+                                <div style="margin-left: 20px;"> • 3. Track the longest word found, and if two words are of the same length, return the lexicographically smallest one.</div>
                             
                         </div>
                     </div>
@@ -494,22 +502,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The case where one of the strings is empty should be handled by returning 0.</div>
+                                <div style="margin-left: 20px;"> • Handle empty string s or an empty dictionary.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must be optimized to handle large inputs efficiently (up to 1000 characters).</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the case where s and the dictionary contain the maximum number of elements (1000).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The case where both strings are the same should return the length of the string.</div>
+                                <div style="margin-left: 20px;"> • If no word can be formed, return an empty string.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the DP table is initialized correctly and that the algorithm runs within the problem&#39;s constraints.</div>
+                                <div style="margin-left: 20px;"> • The solution should run in O(n * m) time, where n is the length of s and m is the total length of all words in the dictionary.</div>
                             
                         </div>                                                                        
                     </div>
@@ -528,21 +536,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping through Dictionary</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Matching Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Character Matching</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Dynamic Programming Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Subsequence Validity and Lexicographical Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Assign Longest Word</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
                     
                 </div>
 
@@ -551,16 +559,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestCommonSubsequence</span>(string t1, string t2) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> t1.size(), n2 <span style="color:#666">=</span> t2.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n1 <span style="color:#666">+</span><span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n2<span style="color:#666">+</span><span style="color:#666">1</span>, <span style="color:#666">0</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n2; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(t1[i] <span style="color:#666">==</span> t2[j])
-</span></span><span style="display:flex;"><span>                dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i][j] <span style="color:#666">+</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> max(dp[i][j<span style="color:#666">+</span><span style="color:#666">1</span>], dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">findLongestWord</span>(string s, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> d) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n1][n2];
+</span></span><span style="display:flex;"><span>    string ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> d.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> pi <span style="color:#666">=</span> <span style="color:#666">0</span>, pj <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(; pi <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> pj <span style="color:#666">&lt;</span> d[i].size(); pi<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            pj <span style="color:#666">+=</span> s[pi] <span style="color:#666">==</span> d[i][pj];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pj <span style="color:#666">==</span> d[i].size() <span style="color:#666">&amp;&amp;</span> (ans.size() <span style="color:#666">&lt;</span> d[i].size() <span style="color:#666">||</span> (ans.size() <span style="color:#666">==</span> d[i].size() <span style="color:#666">&amp;&amp;</span> ans <span style="color:#666">&gt;</span> d[i])))
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> d[i];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -571,90 +585,90 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestCommonSubsequence</span>(string t1, string t2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">findLongestWord</span>(string s, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> d) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function `longestCommonSubsequence`, which takes two input strings `t1` and `t2` and returns the length of their longest common subsequence. </div>
+                            <div class=""> Defines the function `findLongestWord` that takes a string `s` and a vector of strings `d`, and returns the longest word from `d` that can be formed by deleting some characters from `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> t1.size(), n2 <span style="color:#666">=</span> t2.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This declares two integer variables `n1` and `n2`, which store the lengths of the input strings `t1` and `t2` respectively. </div>
+                            <div class=""> Initializes the variable `ans` to store the result, which will be the longest word found from the dictionary `d`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Matrix Initialization</b></div>
+                            <div class=""> <b>3 : Looping through Dictionary</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n1 <span style="color:#666">+</span><span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n2<span style="color:#666">+</span><span style="color:#666">1</span>, <span style="color:#666">0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> d.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a 2D vector `dp` of size `(n1&#43;1) x (n2&#43;1)`, where each element is initialized to 0. This matrix will be used to store the length of the longest common subsequence for substrings of `t1` and `t2`. </div>
+                            <div class=""> Starts a loop to iterate through each word in the dictionary `d`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Initialization</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> pi <span style="color:#666">=</span> <span style="color:#666">0</span>, pj <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This begins a loop that iterates over each character of the first string `t1`. </div>
+                            <div class=""> Initializes two variables `pi` and `pj`, which represent the current indices in the string `s` and the current word `d[i]` being checked, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Inner Loop</b></div>
+                            <div class=""> <b>5 : Matching Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n2; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(; pi <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> pj <span style="color:#666">&lt;</span> d[i].size(); pi<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This begins an inner loop that iterates over each character of the second string `t2`. </div>
+                            <div class=""> Starts a loop to iterate through the string `s` and the current word `d[i]` simultaneously. It continues as long as both indices are within the bounds of `s` and `d[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Character Matching</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(t1[i] <span style="color:#666">==</span> t2[j])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pj <span style="color:#666">+=</span> s[pi] <span style="color:#666">==</span> d[i][pj];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the characters `t1[i]` and `t2[j]` are equal. </div>
+                            <div class=""> Increments the index `pj` if the characters `s[pi]` and `d[i][pj]` match. This helps in checking if `d[i]` is a subsequence of `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>7 : Subsequence Validity and Lexicographical Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i][j] <span style="color:#666">+</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pj <span style="color:#666">==</span> d[i].size() <span style="color:#666">&amp;&amp;</span> (ans.size() <span style="color:#666">&lt;</span> d[i].size() <span style="color:#666">||</span> (ans.size() <span style="color:#666">==</span> d[i].size() <span style="color:#666">&amp;&amp;</span> ans <span style="color:#666">&gt;</span> d[i])))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the characters are equal, this updates the value of `dp[i&#43;1][j&#43;1]` to `dp[i][j] &#43; 1`, meaning that the LCS length for this pair of substrings is extended by 1. </div>
+                            <div class=""> Checks if `d[i]` is a subsequence of `s` (i.e., if `pj` equals the length of `d[i]`), and if it is, compares it with the current longest word `ans` to ensure that the longest and lexicographically largest word is selected. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Else Condition</b></div>
+                            <div class=""> <b>8 : Assign Longest Word</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">=</span> max(dp[i][j<span style="color:#666">+</span><span style="color:#666">1</span>], dp[i<span style="color:#666">+</span><span style="color:#666">1</span>][j]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> d[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the characters are not equal, this sets `dp[i&#43;1][j&#43;1]` to the maximum of `dp[i][j&#43;1]` and `dp[i&#43;1][j]`, representing the longest subsequence found by excluding either the current character of `t1` or `t2`. </div>
+                            <div class=""> If the current word `d[i]` is a valid subsequence and is either longer or lexicographically larger than `ans`, it updates `ans` with `d[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n1][n2];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the value stored in `dp[n1][n2]`, which holds the length of the longest common subsequence of the entire strings `t1` and `t2`. </div>
+                            <div class=""> Returns the longest word found from `d` that can be formed by deleting characters from `s`. </div>
                         </div>
                     
                 </div>
@@ -674,16 +688,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * m)</div>
+                        <div class=""> <b>Best Case:</b> O(n * m), where n is the length of s and m is the total length of all dictionary words.</div>
                         <div class=""> <b>Average Case:</b> O(n * m)</div>
                         <div class=""> <b>Worst Case:</b> O(n * m)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n * m) where n is the length of text1 and m is the length of text2.</div>                                               
+                        <div class=""> <b>Description:</b> In the worst case, we check every word in the dictionary against the entire string s.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n * m) due to the DP table storing intermediate results for all substrings.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if no valid word is found.</div>
+                        <div class=""> <b>Worst Case:</b> O(m), where m is the total length of all words in the dictionary.</div> 
+                        <div class=""> <b>Description:</b> Space complexity is determined by the dictionary size and the string s, with no extra space used apart from variables for tracking results.</div>    
                     </div>
 
                 </div>

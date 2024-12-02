@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 8, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a positive integer array nums. A subset of the array nums is square-free if the product of its elements is a square-free integer. A square-free integer is an integer that is not divisible by any perfect square other than 1. Return the number of square-free non-empty subsets of the array nums. Since the answer may be too large, return it modulo 10^9 + 7. </div>
+<div class=""> Given an integer array arr and an integer difference, find the length of the longest subsequence in arr such that the difference between each adjacent element in the subsequence equals the given difference. </div>
 
 
 
@@ -359,47 +359,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array nums where 1 &lt;= nums.length &lt;= 1000 and 1 &lt;= nums[i] &lt;= 30.</div>
-                        <div class=""> <b>Example:</b> For example, nums = [6, 7, 8].</div>
+                        <div class=""> <b>Input:</b> You are given an integer array arr and an integer difference.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [2, 4, 6, 8, 10], difference = 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 30</div>
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= arr[i], difference &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of square-free non-empty subsets of the array nums. The result must be returned modulo 10^9 &#43; 7.</div>
-                        <div class=""> <b>Example:</b> For nums = [6, 7, 8], the output is 4.</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest subsequence where the difference between adjacent elements equals the given difference.</div>
+                        <div class=""> <b>Example:</b> Output: 5</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The result should be an integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to count the number of non-empty subsets of nums where the product of the elements is square-free.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the longest subsequence of numbers that have a constant difference between adjacent elements.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. First, determine which numbers in nums have prime factorization with no square factors.</div>
+                                <div style="margin-left: 20px;"> • Use a map to store the length of the longest subsequence ending at each element.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use dynamic programming to explore all possible subsets, ensuring that the product of the elements is square-free at each step.</div>
+                                <div style="margin-left: 20px;"> • For each element in the array, check if there is a subsequence ending at the previous element that can be extended with the current element.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the valid square-free subsets and their counts.</div>
+                                <div style="margin-left: 20px;"> • Update the map and keep track of the longest subsequence found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array length is at most 1000, and each number is between 1 and 30. The problem is solvable within these constraints using dynamic programming.</div>
+                        <div class=""> <b>Goal:</b> The input array and difference must meet the specified constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 30</div>
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= arr[i], difference &lt;= 10^4</div>
                             
                         </div>
                     </div>        
@@ -407,17 +405,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array nums will always contain positive integers.</div>
+                                <div style="margin-left: 20px;"> • The input array may contain both positive and negative integers.</div>
                             
-                                <div style="margin-left: 20px;"> • Subsets should not be empty, and the result should be computed modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • The difference can be both positive and negative.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [6, 7, 8], the output is 4.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We identify the square-free subsets, [6], [7], [6, 7], and [8]. The total count of square-free subsets is 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [2, 4, 6, 8, 10], difference = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The entire array forms an arithmetic subsequence with a common difference of 2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [1, 2, 3, 4], difference = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest subsequence with a difference of 3 is [1, 4].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,18 +443,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> This approach uses dynamic programming to count the valid square-free subsets by iterating through all subsets and checking if their product is square-free.</div>
+                        <div class=""> <b>Approach:</b> We can use dynamic programming with a hashmap to efficiently track the longest subsequence for each element.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The key observation is that any number divisible by a square is not square-free, so we need to exclude such subsets.</div>
-                            
-                                <div style="margin-left: 20px;"> • We can represent each subset by its prime factorization mask and dynamically compute the result.</div>
+                                <div style="margin-left: 20px;"> • Each element in the array can potentially extend a subsequence if it forms a valid arithmetic progression with the previous element.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Dynamic programming allows us to efficiently keep track of subsets and their corresponding masks to check square-freeness.</div>
+                                <div style="margin-left: 20px;"> • We will use a map to store the longest subsequence that ends with each element and update it as we iterate through the array.</div>
                             
                         </div>
                     </div>
@@ -460,11 +460,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Identify which elements in nums are square-free by checking their prime factorization.</div>
+                                <div style="margin-left: 20px;"> • Initialize a map to store the length of the longest subsequence for each element.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Define a bitmask for each number based on its prime factorization.</div>
+                                <div style="margin-left: 20px;"> • For each element in the array, check if the previous element (current element - difference) is in the map.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Use dynamic programming to count valid square-free subsets, ensuring no product has a square factor.</div>
+                                <div style="margin-left: 20px;"> • If it is, update the current element&#39;s subsequence length by extending the subsequence ending at the previous element.</div>
+                            
+                                <div style="margin-left: 20px;"> • If it isn&#39;t, the longest subsequence ending at this element is just the element itself (length 1).</div>
+                            
+                                <div style="margin-left: 20px;"> • Keep track of the maximum subsequence length encountered.</div>
                             
                         </div>
                     </div>
@@ -473,22 +477,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • nums will always contain at least one element, as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • The input array will always have at least one element, as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution efficiently handles arrays with 1000 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle arrays of length up to 10^5.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When nums contains repeated elements, make sure subsets are counted correctly without duplication.</div>
+                                <div style="margin-left: 20px;"> • Consider cases where the entire array is a valid arithmetic subsequence or when no subsequence forms.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider the modulus operation to handle large outputs.</div>
+                                <div style="margin-left: 20px;"> • The solution should work within the given time and space limits.</div>
                             
                         </div>                                                                        
                     </div>
@@ -505,61 +509,19 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Dynamic Programming</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Answer Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Through Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Implementation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Update Map with Subsequence Length</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Maximum Length</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Counter</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Counter Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Number Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Bitmask Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Bitmask Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Base Case</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Memoization Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Mask Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Memoization Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Prime List Setup</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Memoization Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
                     
                 </div>
 
@@ -568,45 +530,14 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>, n;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums, prime;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">1001</span>][<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">11</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getMask</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> prime.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(num <span style="color:#666">%</span> prime[i] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            num <span style="color:#666">/=</span> prime[i];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>            mask <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>));                
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubsequence</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> diff) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: arr) {
+</span></span><span style="display:flex;"><span>        mp[x] <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> max(mp[x <span style="color:#666">-</span> diff], mp.count(x)<span style="color:#666">?</span> mp[x] <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span><span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, mp[x]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mask;
-</span></span><span style="display:flex;"><span>}    
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> mask) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][mask] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask];        
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, mask);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> nmask <span style="color:#666">=</span> getMask(nums[idx]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((nmask <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#666">&amp;&amp;</span> ((nmask <span style="color:#666">&amp;</span> mask) <span style="color:#666">==</span> <span style="color:#666">0</span>)) {
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, nmask <span style="color:#666">|</span> mask)) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask] <span style="color:#666">=</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">squareFreeSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
-</span></span><span style="display:flex;"><span>    prime <span style="color:#666">=</span> { <span style="color:#666">2</span>, <span style="color:#666">3</span>, <span style="color:#666">5</span>, <span style="color:#666">7</span>, <span style="color:#666">11</span>, <span style="color:#666">13</span>, <span style="color:#666">17</span>, <span style="color:#666">19</span>, <span style="color:#666">23</span>, <span style="color:#666">29</span> };
-</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span> memo);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>) <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> mod) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -614,283 +545,73 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>, n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestSubsequence</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> diff) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the modulo constant to 10^9 &#43; 7 and declare the integer variable &#39;n&#39; for the size of the input array. </div>
+                            <div class=""> Define the function `longestSubsequence` which takes a vector `arr` and an integer `diff` as input, where `diff` is the required difference between consecutive elements in the subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums, prime;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare vectors &#39;nums&#39; to store the input numbers and &#39;prime&#39; to store a list of prime numbers used in the algorithm. </div>
+                            <div class=""> Initialize a map `mp` where the key is an element from `arr`, and the value is the length of the longest subsequence ending with that element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Dynamic Programming</b></div>
+                            <div class=""> <b>3 : Answer Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">1001</span>][<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">11</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a memoization table &#39;memo&#39; to store intermediate results of subproblems. The table has dimensions based on the number of elements and bitmask size. </div>
+                            <div class=""> Initialize `ans` to 1, which will store the length of the longest subsequence found so far. The minimum subsequence length is 1 (the element itself). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Loop Through Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getMask</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;getMask&#39; that generates a bitmask representing the prime factorization of a number. </div>
+                            <div class=""> Start a loop to iterate through each element `x` in the input array `arr`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Function Implementation</b></div>
+                            <div class=""> <b>5 : Update Map with Subsequence Length</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[x] <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> max(mp[x <span style="color:#666">-</span> diff], mp.count(x)<span style="color:#666">?</span> mp[x] <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span><span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a variable &#39;mask&#39; to store the bitmask result. </div>
+                            <div class=""> For each element `x`, update the map `mp`. The new value is 1 plus the maximum of two cases: the length of the subsequence that ends with `x - diff` or the length of the subsequence ending with `x`, adjusted if it exists. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Update Maximum Length</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> prime.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, mp[x]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the list of prime numbers to calculate the bitmask. </div>
+                            <div class=""> Update `ans` to be the maximum of the current `ans` and the subsequence length ending at `x`. This ensures that the longest subsequence length is stored. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Counter</b></div>
+                            <div class=""> <b>7 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a counter &#39;cnt&#39; to track the number of times a prime divides the number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(num <span style="color:#666">%</span> prime[i] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> While the number is divisible by the current prime, increment the counter and divide the number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Counter Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increment the counter &#39;cnt&#39; for each division by the current prime. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Number Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            num <span style="color:#666">/=</span> prime[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Divide the number by the current prime to remove the prime factor. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the prime factor appears more than once, return -1 indicating it&#39;s not a square-free factor. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Bitmask Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the prime appears exactly once, update the bitmask. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Bitmask Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mask <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>));                
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Set the corresponding bit in the mask for the current prime. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mask;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the generated bitmask representing the prime factorization of the number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> mask) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the dynamic programming function &#39;dp&#39; to calculate the number of square-free subsets. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Base Case</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Base case: If the index is equal to the number of elements, return 1 as a valid subset. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Memoization Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][mask] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask];        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the result is already computed in the memoization table. If yes, return the stored value. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, mask);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively call the function for the next index without including the current element. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Mask Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> nmask <span style="color:#666">=</span> getMask(nums[idx]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculate the bitmask for the current number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((nmask <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#666">&amp;&amp;</span> ((nmask <span style="color:#666">&amp;</span> mask) <span style="color:#666">==</span> <span style="color:#666">0</span>)) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the number can be included in the subset (no overlap of prime factors). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, nmask <span style="color:#666">|</span> mask)) <span style="color:#666">%</span> mod;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Include the current number and recursively call the function for the next index, updating the mask. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Memoization Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask] <span style="color:#666">=</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Store the computed result in the memoization table. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">squareFreeSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the main function &#39;squareFreeSubsets&#39; to solve the problem using dynamic programming. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> nums.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Set &#39;n&#39; to the size of the input vector &#39;nums&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the input vector to the class variable &#39;nums&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Prime List Setup</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    prime <span style="color:#666">=</span> { <span style="color:#666">2</span>, <span style="color:#666">3</span>, <span style="color:#666">5</span>, <span style="color:#666">7</span>, <span style="color:#666">11</span>, <span style="color:#666">13</span>, <span style="color:#666">17</span>, <span style="color:#666">19</span>, <span style="color:#666">23</span>, <span style="color:#666">29</span> };
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize the list of primes used in the bitmask calculation. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>27 : Memoization Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span> memo);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize the memoization table with -1 values to indicate uncomputed states. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>28 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>) <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> mod) <span style="color:#666">%</span> mod;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the result of the dynamic programming function, subtracting 1 to exclude the empty subset. </div>
+                            <div class=""> Return the length of the longest subsequence found. </div>
                         </div>
                     
                 </div>
@@ -910,16 +631,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * 2^k), where n is the number of elements and k is the number of primes up to 30.</div>
-                        <div class=""> <b>Average Case:</b> O(n * 2^k), assuming prime factorization of each element.</div>
-                        <div class=""> <b>Worst Case:</b> O(n * 2^k), where n is the size of nums and k is the number of prime numbers up to 30.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dependent on the number of subsets and the prime factorization checks.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the array, as we process each element once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * 2^k), for the space required by dynamic programming.</div>
-                        <div class=""> <b>Worst Case:</b> O(n * 2^k), where n is the size of nums and k is the number of prime numbers.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of subsets and the size of the prime factorization representation.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of subsequence lengths in the map.</div>    
                     </div>
 
                 </div>

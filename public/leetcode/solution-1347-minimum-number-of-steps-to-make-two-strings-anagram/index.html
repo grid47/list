@@ -300,7 +300,7 @@
 
 
 
-<div class=""> You are given a list of distinct positive integers. Your task is to determine the minimum number of right shifts needed to sort the list in ascending order, or return -1 if it is not possible. </div>
+<div class=""> You are given two strings s and t of the same length. In one step, you can choose any character of t and replace it with another character. Return the minimum number of steps to make t an anagram of s. </div>
 
 
 
@@ -351,49 +351,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a list of distinct positive integers.</div>
-                        <div class=""> <b>Example:</b> nums = [4, 5, 6, 1, 2, 3]</div>
+                        <div class=""> <b>Input:</b> The input consists of two strings, s and t, each containing lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> For s = &#39;abc&#39; and t = &#39;cba&#39;, no steps are required as the strings are already anagrams.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • s.length == t.length</div>
                             
-                                <div style="margin-left: 20px;"> • nums contains distinct integers.</div>
+                                <div style="margin-left: 20px;"> • s and t consist of lowercase English letters only.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of right shifts required to sort the list in ascending order, or -1 if it is not possible.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return the minimum number of operations required to convert string t into an anagram of string s.</div>
+                        <div class=""> <b>Example:</b> For s = &#39;abcdef&#39; and t = &#39;abcfgh&#39;, the output is 2 as &#39;g&#39; and &#39;h&#39; must be replaced.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is an integer, either the number of shifts or -1 if it&#39;s impossible.</div>
+                                <div style="margin-left: 20px;"> • The result should be within 10^-5 of the correct value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine if it&#39;s possible to sort the list with right shifts and calculate the minimum number of shifts.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine the number of replacements required to make t an anagram of s.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Check if the list is already sorted. If it is, return 0.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each character in both strings s and t.</div>
                             
-                                <div style="margin-left: 20px;"> • If the list is not sorted, check if it can be sorted by performing right shifts. If so, return the number of shifts required.</div>
+                                <div style="margin-left: 20px;"> • 2. Calculate the difference in frequency for each character between s and t.</div>
                             
-                                <div style="margin-left: 20px;"> • If it is not possible to sort the list, return -1.</div>
+                                <div style="margin-left: 20px;"> • 3. Sum the positive differences to get the minimum number of changes required.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints for the input list.</div>
+                        <div class=""> <b>Goal:</b> Handle all valid inputs efficiently within the problem constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the list is between 1 and 100.</div>
+                                <div style="margin-left: 20px;"> • Both strings have the same length.</div>
                             
-                                <div style="margin-left: 20px;"> • The list contains distinct integers between 1 and 100.</div>
+                                <div style="margin-left: 20px;"> • Both strings consist of lowercase English letters only.</div>
                             
                         </div>
                     </div>        
@@ -401,25 +401,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The list contains distinct positive integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The list is cyclic, meaning shifts wrap around the end of the list.</div>
+                                <div style="margin-left: 20px;"> • The strings s and t are always non-empty and have the same length.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4, 5, 6, 1, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After 3 right shifts, the list becomes sorted as [1, 2, 3, 4, 5, 6].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: s = &#39;abc&#39;, t = &#39;cba&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Both strings are already anagrams of each other, so no operations are required.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The list is already sorted, so no right shifts are needed.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: s = &#39;abcdef&#39;, t = &#39;abcfgh&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Two characters (&#39;g&#39; and &#39;h&#39;) need to be replaced to make t an anagram of s.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [3, 1, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It&#39;s impossible to sort the list with right shifts because no number of right shifts will sort it.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3: s = &#39;hello&#39;, t = &#39;world&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Four characters (&#39;w&#39;, &#39;r&#39;, &#39;o&#39;, &#39;d&#39;) need to be replaced to make t an anagram of s.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -443,18 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves checking if the list is already sorted or if it can be sorted by performing right shifts. The key idea is to track how the elements shift cyclically.</div>
+                        <div class=""> <b>Approach:</b> The approach is to compare the frequency of characters in both strings and count how many characters in t need to be replaced to match s.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The list may already be sorted, in which case no shifts are needed.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the list is not sorted, check if the elements can be sorted by performing right shifts.</div>
+                                <div style="margin-left: 20px;"> • Both strings are of the same length, and we only need to adjust the frequency of characters.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The main challenge is to identify if the list can be sorted by right shifts, and if so, calculate the minimum number of shifts.</div>
+                                <div style="margin-left: 20px;"> • We can use a frequency counter to track how many characters are overrepresented or underrepresented in string t.</div>
                             
                         </div>
                     </div>
@@ -462,13 +458,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check if the list is already sorted.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a count array for both strings to track the frequency of each character.</div>
                             
-                                <div style="margin-left: 20px;"> • If not sorted, check for the possibility of sorting by performing right shifts.</div>
+                                <div style="margin-left: 20px;"> • 2. For each character in s and t, update the respective count arrays.</div>
                             
-                                <div style="margin-left: 20px;"> • Simulate the right shifts and find the minimum number of shifts required, if possible.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return -1 if it&#39;s impossible to sort the list.</div>
+                                <div style="margin-left: 20px;"> • 3. Calculate the total number of replacements needed by summing the positive differences between the count arrays.</div>
                             
                         </div>
                     </div>
@@ -477,22 +471,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the list has a single element, it is trivially sorted.</div>
+                                <div style="margin-left: 20px;"> • There are no empty inputs, as both strings have a length of at least 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For larger inputs, the list should still be checked for the possibility of sorting with right shifts.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle large strings with up to 50,000 characters.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the list is already sorted, no shifts are required.</div>
+                                <div style="margin-left: 20px;"> • If the strings are already anagrams, no steps are required.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input list contains distinct integers between 1 and 100.</div>
+                                <div style="margin-left: 20px;"> • Ensure to handle cases where there are multiple instances of the same character in both strings.</div>
                             
                         </div>                                                                        
                     </div>
@@ -509,27 +503,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop to Count Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Increment Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Decrement Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Set Index</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Increment Counter</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Iterate Frequency Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Else Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Count Mismatches</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
                     
                 </div>
 
@@ -538,19 +528,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumRightShifts</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span>  n <span style="color:#666">=</span> nums.size(),ind <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>,cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n<span style="color:#666">-</span><span style="color:#666">1</span>;i<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&gt;</span>nums[i<span style="color:#666">+</span><span style="color:#666">1</span>]){
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt<span style="color:#666">==</span><span style="color:#666">0</span>){
-</span></span><span style="display:flex;"><span>            ind <span style="color:#666">=</span> i<span style="color:#666">+</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSteps</span>(string s, string t) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> count(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        count[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        count[t[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">--</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ind<span style="color:#666">==-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[n<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">&gt;</span>nums[<span style="color:#666">0</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n<span style="color:#666">-</span>ind;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : count)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) step <span style="color:#666">+=</span> num;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> step;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -558,113 +545,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumRightShifts</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSteps</span>(string s, string t) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function definition begins here. It takes a vector of integers &#39;nums&#39; as input and returns an integer representing the minimum right shifts. </div>
+                            <div class=""> Declares a function to calculate the minimum steps to make string `s` an anagram of string `t`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span>  n <span style="color:#666">=</span> nums.size(),ind <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>,cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> count(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables: &#39;n&#39; is the size of the array, &#39;ind&#39; is used to store the index where the first decrease is found, and &#39;cnt&#39; counts the number of decreases. </div>
+                            <div class=""> Initializes a frequency array `count` to track the differences in character occurrences between `s` and `t`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Start</b></div>
+                            <div class=""> <b>3 : Loop to Count Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n<span style="color:#666">-</span><span style="color:#666">1</span>;i<span style="color:#666">++</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through the array from the first element to the second-to-last element. </div>
+                            <div class=""> Iterates through each character in `s` and `t` to calculate frequency differences. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Condition Check</b></div>
+                            <div class=""> <b>4 : Increment Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&gt;</span>nums[i<span style="color:#666">+</span><span style="color:#666">1</span>]){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        count[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current element is greater than the next element, indicating a decrease in the array. </div>
+                            <div class=""> Increments the frequency count for the character in `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Inner Condition Check</b></div>
+                            <div class=""> <b>5 : Decrement Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt<span style="color:#666">==</span><span style="color:#666">0</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        count[t[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if this is the first decrease found. If yes, the &#39;ind&#39; is set to the index of the decrease, and the decrease count &#39;cnt&#39; is incremented. </div>
+                            <div class=""> Decrements the frequency count for the character in `t`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Set Index</b></div>
+                            <div class=""> <b>6 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ind <span style="color:#666">=</span> i<span style="color:#666">+</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set &#39;ind&#39; to the index of the first decrease (i&#43;1) in the array. </div>
+                            <div class=""> Declares a variable `step` to store the total number of steps required. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Increment Counter</b></div>
+                            <div class=""> <b>7 : Iterate Frequency Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : count)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the &#39;cnt&#39; variable, indicating that a decrease has been found. </div>
+                            <div class=""> Iterates through the frequency array to calculate the positive mismatches. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Else Return</b></div>
+                            <div class=""> <b>8 : Count Mismatches</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) step <span style="color:#666">+=</span> num;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a second decrease is found, return -1, indicating that it&#39;s not possible to sort the array by a single right shift. </div>
+                            <div class=""> Adds the positive mismatches to `step`, representing characters that need to be adjusted. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Condition Check</b></div>
+                            <div class=""> <b>9 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ind<span style="color:#666">==-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> step;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if no decrease was found (&#39;ind&#39; is still -1), indicating that the array is already sorted. In this case, return 0. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[n<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">&gt;</span>nums[<span style="color:#666">0</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the last element is greater than the first element. If so, it means the array cannot be rotated to a sorted order, so return -1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n<span style="color:#666">-</span>ind;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the number of shifts needed to sort the array, which is the difference between the array size &#39;n&#39; and the index of the first decrease &#39;ind&#39;. </div>
+                            <div class=""> Returns the total number of steps required to make the strings anagrams. </div>
                         </div>
                     
                 </div>
@@ -687,13 +654,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the length of the list, as we only need to check the list once for sorting and shifts.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is linear, O(n), where n is the length of the strings.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) because we do not use any extra space except for a few variables.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is constant, O(1), since the space used for character counts is fixed.</div>    
                     </div>
 
                 </div>

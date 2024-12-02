@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 17, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -290,7 +290,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1325s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1324s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/820.webp" 
            alt="A series of words encoded, with the shortest encoding glowing softly as it is created." 
@@ -313,7 +313,7 @@
 
 
 
-<div class=""> Given a string <code>sentence</code> consisting of lowercase English letters, determine whether the sentence contains every letter of the English alphabet at least once. </div>
+<div class=""> Given an array of words, you are to return the length of the shortest reference string that can encode these words. The reference string consists of the words concatenated with a &lsquo;#&rsquo; character at the end, and indices are used to encode the words by identifying their position in the reference string. Each word is encoded by the substring in the reference string that starts at its position and ends at the next &lsquo;#&rsquo;. </div>
 
 
 
@@ -364,47 +364,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `sentence` containing only lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> sentence = &#34;abcdefghijklmnopqrstuvwxyz&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of words, where each word is a string of lowercase letters. Each word in the array has a length between 1 and 7 characters.</div>
+                        <div class=""> <b>Example:</b> Input: words = [&#34;apple&#34;, &#34;ple&#34;, &#34;le&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= sentence.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • sentence consists of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 7</div>
+                            
+                                <div style="margin-left: 20px;"> • words[i] consists of only lowercase letters</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return `true` if the sentence is a pangram, otherwise return `false`.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> Return the length of the shortest reference string that can encode the given words.</div>
+                        <div class=""> <b>Example:</b> Output: 9</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be a boolean value indicating whether the sentence is a pangram.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer representing the length of the shortest reference string.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Check if all the letters of the alphabet are present in the given sentence.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the shortest encoding of the words using a reference string. To do this, we can eliminate words that are suffixes of other words, and concatenate only the distinct prefixes of the words to form the reference string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a set or bitmask to track the unique letters in the sentence.</div>
+                                <div style="margin-left: 20px;"> • Create a set of words to store unique words.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each character in the sentence and update the set or bitmask.</div>
+                                <div style="margin-left: 20px;"> • For each word, check all possible suffixes and remove them from the set if they are also present.</div>
                             
-                                <div style="margin-left: 20px;"> • If all 26 letters are present, return `true`; otherwise, return `false`.</div>
+                                <div style="margin-left: 20px;"> • Finally, concatenate the remaining words, adding 1 for each &#39;#&#39; delimiter, and return the length of the concatenated string.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string `sentence` must be between 1 and 1000 characters long, and it will only contain lowercase English letters.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the solution handles the constraints efficiently, especially when the number of words and the total length of words increases.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= sentence.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The number of words can be up to 2000.</div>
                             
-                                <div style="margin-left: 20px;"> • sentence consists only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • Each word has a length of at most 7 characters.</div>
                             
                         </div>
                     </div>        
@@ -412,21 +414,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string `sentence` contains lowercase English letters and is not empty.</div>
+                                <div style="margin-left: 20px;"> • All words are lowercase and have lengths between 1 and 7 characters.</div>
                             
-                                <div style="margin-left: 20px;"> • The sentence length is within the given constraint.</div>
+                                <div style="margin-left: 20px;"> • Words in the array are unique.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> sentence = &#34;abcdefghijklmnopqrstuvwxyz&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sentence contains every letter from &#39;a&#39; to &#39;z&#39;, so the output is `true`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#34;apple&#34;, &#34;ple&#34;, &#34;le&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The word &#39;ple&#39; is a suffix of &#39;apple&#39;, and &#39;le&#39; is a suffix of &#39;ple&#39;. So, we can encode the words with &#39;apple#&#39;, which results in a total length of 9.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> sentence = &#34;hello&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sentence does not contain every letter of the alphabet, so the output is `false`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#34;orange&#34;, &#34;or&#34;, &#34;ange&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, &#39;or&#39; is a prefix of &#39;orange&#39;, and &#39;ange&#39; is a suffix of &#39;orange&#39;. The shortest encoding would be &#39;orange#&#39;, resulting in a total length of 7.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -450,16 +452,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we will check if the sentence contains every letter of the alphabet using a set or bitmask.</div>
+                        <div class=""> <b>Approach:</b> The key to solving this problem efficiently is to first remove suffixes that are redundant. If one word is a suffix of another, the shorter word does not need to be included in the final encoding.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be efficiently solved using a set or bitmask to track the presence of each letter.</div>
+                                <div style="margin-left: 20px;"> • Suffixes that are part of longer words don&#39;t need to be included separately.</div>
+                            
+                                <div style="margin-left: 20px;"> • The reference string must end with a &#39;#&#39; character, so we need to account for that when calculating the total length.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can utilize a bitmask of 26 bits to represent each letter of the alphabet. Each bit corresponds to a letter, and if the bit is set, it means that letter is present in the sentence.</div>
+                                <div style="margin-left: 20px;"> • We should identify all words that are not suffixes of other words, as these will contribute to the final reference string.</div>
                             
                         </div>
                     </div>
@@ -467,11 +471,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a bitset of size 26 to track the letters found in the sentence.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Convert the array of words into a set to eliminate duplicates.</div>
                             
-                                <div style="margin-left: 20px;"> • Loop through each character in the sentence and mark the corresponding bit in the bitset.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each word, check for suffixes and remove them from the set if they appear in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • After processing all characters, check if all 26 bits are set. If they are, return `true`; otherwise, return `false`.</div>
+                                <div style="margin-left: 20px;"> • Step 3: After removing suffixes, concatenate the remaining words with a &#39;#&#39; character after each word.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Return the total length of the concatenated reference string.</div>
                             
                         </div>
                     </div>
@@ -480,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sentence will always have at least one character, based on the constraints.</div>
+                                <div style="margin-left: 20px;"> • If the input is an empty array, return 0 since there are no words to encode.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, the solution should efficiently check for the presence of all alphabet letters.</div>
+                                <div style="margin-left: 20px;"> • For large arrays (up to 2000 words), the solution should handle them efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the sentence is too short to contain all 26 letters, the result will be `false`.</div>
+                                <div style="margin-left: 20px;"> • Ensure that cases where all words are prefixes or suffixes of one another are handled correctly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently within the provided input size constraints.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays of up to 2000 words efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,11 +520,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Bitset Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Characters</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Bitset Count Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Erase Suffix</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Result Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Summing Lengths</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Calculate Encoding Length</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
                     
                 </div>
 
@@ -527,10 +543,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfPangram</span>(string set) {
-</span></span><span style="display:flex;"><span>    bitset<span style="color:#666">&lt;</span><span style="color:#666">26</span><span style="color:#666">&gt;</span> bit;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: set) bit.set(x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> bit.count() <span style="color:#666">==</span> <span style="color:#666">26</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumLengthEncoding</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s(words.begin(), words.end());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">w</span>: words)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> w.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        s.erase(w.substr(i));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">sk</span>: s)
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> (sk.size() <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -541,40 +566,90 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfPangram</span>(string set) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumLengthEncoding</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `checkIfPangram`, which takes a string `set` as input and returns a boolean indicating whether the string contains all 26 letters of the alphabet. </div>
+                            <div class=""> The function `minimumLengthEncoding` is defined, which takes a vector of strings `words` as input and returns an integer representing the minimum length encoding. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Bitset Initialization</b></div>
+                            <div class=""> <b>2 : Set Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bitset<span style="color:#666">&lt;</span><span style="color:#666">26</span><span style="color:#666">&gt;</span> bit;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s(words.begin(), words.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a bitset of size 26, where each bit represents one of the 26 letters of the alphabet. A set bit indicates the presence of that letter. </div>
+                            <div class=""> An unordered set `s` is initialized with the elements from the `words` vector, ensuring all words are stored without duplicates. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through Characters</b></div>
+                            <div class=""> <b>3 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: set) bit.set(x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">w</span>: words)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each character `x` in the string `set` and sets the corresponding bit in the bitset. The expression `x - &#39;a&#39;` maps each letter to an index between 0 and 25. </div>
+                            <div class=""> The outer loop iterates over each word `w` in the `words` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Bitset Count Check</b></div>
+                            <div class=""> <b>4 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> bit.count() <span style="color:#666">==</span> <span style="color:#666">26</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> w.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if all 26 bits in the bitset are set. If all bits are set (i.e., all letters are present), the count will be 26, and the function returns `true`; otherwise, it returns `false`. </div>
+                            <div class=""> The inner loop iterates over the characters in each word starting from index 1, essentially looking at suffixes of the word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Erase Suffix</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.erase(w.substr(i));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The substring of `w` starting from index `i` is removed from the set `s`. This ensures that any word that is a suffix of another word is excluded from the encoding. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Result Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The variable `res` is initialized to 0, which will be used to store the total length of the encoded string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Summing Lengths</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">sk</span>: s)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The loop iterates over each string `sk` remaining in the set `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Calculate Encoding Length</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">+=</span> (sk.size() <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each string `sk`, its length is added to `res`, along with an additional 1 to account for the &#39;#&#39; character that separates each word in the encoding. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the total length of the encoded string, which is the sum of the lengths of all the strings in the set `s`. </div>
                         </div>
                     
                 </div>
@@ -594,16 +669,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the sentence. We only need one pass through the sentence to check for the presence of all letters.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of words.</div>
+                        <div class=""> <b>Average Case:</b> O(n * m), where n is the number of words and m is the average length of the words.</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m), where n is the number of words and m is the average length of the words.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of words and the length of each word due to the need to check suffixes.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) since we are only using a fixed-size bitset or set for tracking the letters, regardless of the sentence length.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of words, when no suffixes need to be stored.</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m), where n is the number of words and m is the average length of the words, for storing the word set.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is primarily determined by the size of the word set.</div>    
                     </div>
 
                 </div>

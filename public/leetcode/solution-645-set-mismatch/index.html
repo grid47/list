@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> Given an array of lists where <code>favoriteCompanies[i]</code> represents the favorite companies of the i-th person, find the indices of people whose favorite company lists are not subsets of any other person&rsquo;s list. Return these indices in increasing order. </div>
+<div class=""> You are given a list of integers that should originally represent all numbers from 1 to n. However, one number appears twice and another number is missing. Your task is to find the number that is duplicated and the one that is missing. </div>
 
 
 
@@ -372,61 +372,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a 2D array where each element is a list of strings representing the favorite companies of a person.</div>
-                        <div class=""> <b>Example:</b> Input: favoriteCompanies = [[&#34;apple&#34;,&#34;google&#34;,&#34;amazon&#34;],[&#34;apple&#34;,&#34;microsoft&#34;],[&#34;google&#34;,&#34;apple&#34;],[&#34;amazon&#34;]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of integers, nums, where each element is between 1 and n. The list has n elements, but one of the numbers appears twice and another is missing.</div>
+                        <div class=""> <b>Example:</b> nums = [1, 2, 2, 4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= favoriteCompanies.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= favoriteCompanies[i].length &lt;= 500</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= favoriteCompanies[i][j].length &lt;= 20</div>
-                            
-                                <div style="margin-left: 20px;"> • All strings in `favoriteCompanies[i]` are distinct.</div>
-                            
-                                <div style="margin-left: 20px;"> • All lists are distinct.</div>
-                            
-                                <div style="margin-left: 20px;"> • Strings consist of lowercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list of indices of people whose favorite companies are not subsets of any other list, in increasing order.</div>
-                        <div class=""> <b>Example:</b> Output: [0,1,3]</div>
+                        <div class=""> <b>Output:</b> Return an array containing two elements: the number that is repeated and the number that is missing.</div>
+                        <div class=""> <b>Example:</b> [2, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output indices must be in sorted order.</div>
-                            
-                                <div style="margin-left: 20px;"> • If a person&#39;s list is not a subset of any other, their index must be included.</div>
+                                <div style="margin-left: 20px;"> • The result array should contain exactly two integers.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Identify all people whose favorite company lists are unique and not subsets of other people&#39;s lists.</div>
+                        <div class=""> <b>Goal:</b> Find the duplicate and the missing number in the list.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort each person&#39;s favorite company list for efficient subset checking.</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the list and for each number, mark it as visited by negating the number at its index.</div>
                             
-                                <div style="margin-left: 20px;"> • For each person, compare their list with all other people&#39;s lists.</div>
+                                <div style="margin-left: 20px;"> • 2. If you encounter a negative number, it means that number has already appeared, so it&#39;s the duplicate.</div>
                             
-                                <div style="margin-left: 20px;"> • If their list is not a subset of any other list, mark their index for inclusion.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return all such indices in increasing order.</div>
+                                <div style="margin-left: 20px;"> • 3. The missing number is the index that was never visited.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Conditions that must be met for the input and output.</div>
+                        <div class=""> <b>Goal:</b> The input array will always have exactly one duplicate and one missing number.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Each list in the input contains only distinct company names.</div>
+                                <div style="margin-left: 20px;"> • The array length will be between 2 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • Two different lists are guaranteed to be distinct even if sorted.</div>
-                            
-                                <div style="margin-left: 20px;"> • Indices in the output must be sorted in ascending order.</div>
+                                <div style="margin-left: 20px;"> • The values in the array will be within the range from 1 to n.</div>
                             
                         </div>
                     </div>        
@@ -434,25 +420,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input lists are valid and adhere to the constraints.</div>
-                            
-                                <div style="margin-left: 20px;"> • Subset checking is performed using sorted lists for efficiency.</div>
+                                <div style="margin-left: 20px;"> • There will always be exactly one missing number and one duplicate number in the list.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: favoriteCompanies = [[&#34;apple&#34;,&#34;google&#34;],[&#34;apple&#34;,&#34;microsoft&#34;],[&#34;google&#34;],[&#34;amazon&#34;]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: [0,1,3]. Person at index 2 has a list [&#34;google&#34;] which is a subset of [&#34;apple&#34;,&#34;google&#34;]. Others are unique.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: favoriteCompanies = [[&#34;facebook&#34;,&#34;instagram&#34;],[&#34;instagram&#34;],[&#34;twitter&#34;],[&#34;facebook&#34;]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: [0,2,3]. The list at index 1 is a subset of the list at index 0.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: favoriteCompanies = [[&#34;youtube&#34;],[&#34;netflix&#34;],[&#34;amazon&#34;],[&#34;hulu&#34;]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: [0,1,2,3]. All lists are unique and not subsets of one another.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [1, 2, 2, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, 2 is repeated and the missing number is 3, so the output is [2, 3].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -476,20 +452,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a combination of sorting and subset checking to identify non-subset lists efficiently.</div>
+                        <div class=""> <b>Approach:</b> The solution leverages the fact that the numbers should be between 1 and n and the duplicate and missing numbers can be identified via index manipulation.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem revolves around subset checking between lists.</div>
-                            
-                                <div style="margin-left: 20px;"> • Sorting each list ensures that the subset check can be efficiently done.</div>
-                            
-                                <div style="margin-left: 20px;"> • Direct comparisons between every pair of lists may lead to a quadratic time complexity.</div>
+                                <div style="margin-left: 20px;"> • We can use index manipulation to mark visited numbers.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Sort lists and use an efficient comparison method to minimize redundant checks.</div>
+                                <div style="margin-left: 20px;"> • By negating the number at the corresponding index, we can identify duplicates by encountering already negated numbers. The missing number is the index whose value is not negated.</div>
                             
                         </div>
                     </div>
@@ -497,13 +469,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort each list in the input array alphabetically for efficient subset comparison.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize an array `ans` to store the result.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over all pairs of lists to determine if one is a subset of the other.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse the `nums` array and for each number, check the index it corresponds to and negate the value at that index.</div>
                             
-                                <div style="margin-left: 20px;"> • If a list is not a subset of any other list, add its index to the result.</div>
+                                <div style="margin-left: 20px;"> • 3. If the value at the index is already negative, it means the number has been encountered before, so it is the duplicate.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the result indices in ascending order before returning.</div>
+                                <div style="margin-left: 20px;"> • 4. After traversal, check which index is still positive to find the missing number.</div>
                             
                         </div>
                     </div>
@@ -512,24 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: favoriteCompanies = [] -&gt; Output: []. No input leads to an empty output.</div>
+                                <div style="margin-left: 20px;"> • Input array will never be empty.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: A list with 100 people each having 500 companies -&gt; Verify performance.</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle up to 10^4 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input: favoriteCompanies = [[&#34;a&#34;],[&#34;a&#34;,&#34;b&#34;],[&#34;b&#34;]] -&gt; Handle minimal string sizes and subsets correctly.</div>
-                            
-                                <div style="margin-left: 20px;"> • Input: favoriteCompanies = [[&#34;apple&#34;]] -&gt; Single list remains unchanged.</div>
+                                <div style="margin-left: 20px;"> • The input will always have one missing and one duplicate number.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where lists are identical after sorting but are not subsets.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm runs in O(n) time and uses O(1) space.</div>
                             
                         </div>                                                                        
                     </div>
@@ -546,31 +516,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Absolute Value Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 XOR Operation for Duplicate/Non-Duplicate</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Duplicate Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Mark Number as Visited</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Final XOR for Missing Number</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Subset Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Vector Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
                     
                 </div>
 
@@ -579,25 +541,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> peopleIndexes(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> comp) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> comp.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">c</span> : comp)
-</span></span><span style="display:flex;"><span>        sort(c.begin(), c.end());
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> notSubset <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> notSubset; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            notSubset <span style="color:#666">=</span> <span style="color:#666">!</span>includes(comp[j].begin(), comp[j].end(), comp[i].begin(), comp[i].end());
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(notSubset)
-</span></span><span style="display:flex;"><span>            res.push_back(i);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findErrorNums(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(<span style="color:#666">2</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> val <span style="color:#666">=</span> abs(nums[i]);
+</span></span><span style="display:flex;"><span>        ans[<span style="color:#666">1</span>] <span style="color:#666">^=</span> (i<span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">^</span> val;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums[val<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) ans[<span style="color:#666">0</span>] <span style="color:#666">=</span> val;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> nums[val<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">-</span>nums[val<span style="color:#666">-</span><span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    ans[<span style="color:#666">1</span>] <span style="color:#666">^=</span> ans[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;        
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -605,133 +558,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> peopleIndexes(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> comp) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findErrorNums(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;peopleIndexes&#39; is declared, which takes a reference to a vector of vector of strings (&#39;comp&#39;) and returns a vector of integers. </div>
+                            <div class=""> This is the function definition. The function takes a reference to a vector of integers and returns a vector of integers containing the duplicate and missing number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> comp.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(<span style="color:#666">2</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;n&#39; is initialized to the size of the input vector &#39;comp&#39;, which represents the number of elements in the input. </div>
+                            <div class=""> Declares a vector &#39;ans&#39; of size 2 initialized to zero. This will store the duplicate number at index 0 and the missing number at index 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">c</span> : comp)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is started to iterate over each vector &#39;c&#39; inside the vector of vectors &#39;comp&#39;. </div>
+                            <div class=""> Starts a loop that iterates over each element in the input vector &#39;nums&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Sorting</b></div>
+                            <div class=""> <b>4 : Absolute Value Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sort(c.begin(), c.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> val <span style="color:#666">=</span> abs(nums[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The current vector &#39;c&#39; is sorted in lexicographical order using the sort function. </div>
+                            <div class=""> Takes the absolute value of the current element in the array, &#39;nums[i]&#39;, to avoid issues with previously modified elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : XOR Operation for Duplicate/Non-Duplicate</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[<span style="color:#666">1</span>] <span style="color:#666">^=</span> (i<span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">^</span> val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An empty vector &#39;res&#39; is initialized to store the result indices of vectors that are not subsets of any other vectors. </div>
+                            <div class=""> Performs an XOR operation between the current index (i&#43;1) and the absolute value &#39;val&#39;. This helps identify the duplicate and missing numbers in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Duplicate Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums[val<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) ans[<span style="color:#666">0</span>] <span style="color:#666">=</span> val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is started to iterate through each vector in &#39;comp&#39; by index &#39;i&#39;. </div>
+                            <div class=""> Checks if the element at the index corresponding to &#39;val-1&#39; is negative. If it is, this means the number &#39;val&#39; is a duplicate, so it is stored in &#39;ans[0]&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class=""> <b>7 : Mark Number as Visited</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> notSubset <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> nums[val<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">-</span>nums[val<span style="color:#666">-</span><span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;notSubset&#39; is initialized to true, which will be used to track whether the current vector is a subset of any other vector. </div>
+                            <div class=""> If &#39;val&#39; is not a duplicate, it negates the element at the index &#39;val-1&#39; to mark that this number has been visited. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Loop</b></div>
+                            <div class=""> <b>8 : Final XOR for Missing Number</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> notSubset; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans[<span style="color:#666">1</span>] <span style="color:#666">^=</span> ans[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A nested loop starts to iterate through all other vectors in &#39;comp&#39; by index &#39;j&#39;. The &#39;notSubset&#39; flag ensures that the loop stops once a subset is found. </div>
+                            <div class=""> Performs a final XOR operation between the two numbers, ensuring that the missing number is correctly identified. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Conditional Check</b></div>
+                            <div class=""> <b>9 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the indices &#39;i&#39; and &#39;j&#39; are the same (i.e., comparing the same vector with itself), the loop skips to the next iteration. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Subset Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            notSubset <span style="color:#666">=</span> <span style="color:#666">!</span>includes(comp[j].begin(), comp[j].end(), comp[i].begin(), comp[i].end());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The &#39;notSubset&#39; flag is updated by checking if vector &#39;comp[i]&#39; is included in vector &#39;comp[j]&#39;. If it is, &#39;notSubset&#39; is set to false. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(notSubset)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the &#39;notSubset&#39; flag is still true after checking all other vectors, it means &#39;comp[i]&#39; is not a subset of any other vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Vector Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If &#39;comp[i]&#39; is not a subset of any other vector, the index &#39;i&#39; is added to the result vector &#39;res&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the vector &#39;res&#39;, which contains the indices of vectors that are not subsets of any other vectors. </div>
+                            <div class=""> Returns the vector &#39;ans&#39; containing the duplicate number at index 0 and the missing number at index 1. </div>
                         </div>
                     
                 </div>
@@ -751,16 +664,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2 * m)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2 * m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2 * m)</div> 
-                        <div class=""> <b>Description:</b> Where n is the number of people and m is the average length of their favorite companies list. Sorting and subset checks dominate the complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The algorithm always takes linear time to find the duplicate and the missing number.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
-                        <div class=""> <b>Description:</b> Space is used for storing the sorted lists and the result indices.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> We only use a constant amount of extra space.</div>    
                     </div>
 
                 </div>

@@ -275,7 +275,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -302,7 +302,7 @@
 
 
 
-<div class=""> You are given two strings s1 and s2, each consisting of 4 lowercase English letters. You can perform a specific operation multiple times, where you swap two characters at indices i and j such that j - i = 2. The task is to determine if it&rsquo;s possible to make s1 equal to s2 after performing any number of such operations. </div>
+<div class=""> You are given an integer array arr. You can choose a set of integers and remove all occurrences of these integers. Your task is to return the minimum size of the set such that at least half of the integers of the array are removed. </div>
 
 
 
@@ -353,49 +353,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two strings, s1 and s2, each containing 4 lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> s1 = &#39;abcd&#39;, s2 = &#39;cdab&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array arr.</div>
+                        <div class=""> <b>Example:</b> arr = [1, 1, 2, 2, 3, 3, 4, 5, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Both s1 and s2 have a length of 4.</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= arr.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • Both strings consist only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • arr.length is even.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if it&#39;s possible to make the two strings equal using the described operations, otherwise return false.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> The output should be the minimum size of the set that can be removed to make at least half of the array elements disappear.</div>
+                        <div class=""> <b>Example:</b> For arr = [1, 1, 2, 2, 3, 3, 4, 5, 5], the output will be 2.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean value indicating whether the strings can be made equal or not.</div>
+                                <div style="margin-left: 20px;"> • The returned set should be the smallest set that achieves the goal.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to check if it&#39;s possible to transform s1 into s2 using the allowed operations.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the minimum set of integers that should be removed to reduce the size of the array by at least half.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Check if s1 is already equal to s2.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each integer in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • If not, attempt to swap characters at indices (0, 2) and (1, 3).</div>
+                                <div style="margin-left: 20px;"> • 2. Sort the integers by their frequency in descending order.</div>
                             
-                                <div style="margin-left: 20px;"> • If the resulting string matches s2 after any number of swaps, return true.</div>
+                                <div style="margin-left: 20px;"> • 3. Keep removing integers starting from the most frequent until the total number of removed elements is at least half the size of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • If no such transformation is possible, return false.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the number of integers removed.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints on the input are as follows:</div>
+                        <div class=""> <b>Goal:</b> The array size is manageable, but the solution should handle larger inputs efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • s1 and s2 are of length 4.</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= arr.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • Both strings consist only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • arr.length is even.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -403,21 +407,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Only the swap operation between indices (i, j) where j - i = 2 is allowed.</div>
+                                <div style="margin-left: 20px;"> • The array may have duplicate integers.</div>
                             
-                                <div style="margin-left: 20px;"> • Both input strings are of the same length (4).</div>
+                                <div style="margin-left: 20px;"> • The array length is always even.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;abcd&#39;, s2 = &#39;cdab&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can swap characters at indices (0, 2) and (1, 3) to transform s1 into s2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: arr = [1, 1, 2, 2, 3, 3, 4, 5, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Choosing the set {1, 5} will remove at least half of the elements from the array.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;abcd&#39;, s2 = &#39;dacb&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No number of swaps can make s1 equal to s2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: arr = [4, 4, 4, 4, 5, 5, 5, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Choosing either {4} or {5} will remove all elements from the array, achieving the goal with the smallest set.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,16 +445,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved by checking if it&#39;s possible to transform s1 into s2 by performing the allowed swap operations.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, count the frequency of each integer, sort the integers by their frequency, and remove the most frequent integers until at least half of the elements are removed.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We are given that both strings are of length 4, so there are only a limited number of swap operations to check.</div>
+                                <div style="margin-left: 20px;"> • Removing the most frequent integers will reduce the array size the quickest.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By swapping characters at indices (0, 2) and (1, 3), we should be able to check if the strings can be made equal.</div>
+                                <div style="margin-left: 20px;"> • Sorting the integers by frequency will allow us to efficiently determine the smallest set of integers to remove.</div>
                             
                         </div>
                     </div>
@@ -458,13 +462,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the strings are already equal, return true.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each element in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • If not, swap characters at indices (0, 2) and check if the strings match.</div>
+                                <div style="margin-left: 20px;"> • 2. Sort the frequencies in descending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Next, swap characters at indices (1, 3) and check again.</div>
+                                <div style="margin-left: 20px;"> • 3. Keep removing elements from the most frequent until half of the array is removed.</div>
                             
-                                <div style="margin-left: 20px;"> • If any swap leads to the strings matching, return true; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the number of distinct elements removed.</div>
                             
                         </div>
                     </div>
@@ -473,22 +477,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since the strings always have a length of 4, empty inputs are not possible.</div>
+                                <div style="margin-left: 20px;"> • Empty inputs are not valid given the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem has a fixed size input (length of 4), so large inputs are not a concern.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the approach works efficiently for large arrays up to the size 10^5.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The strings may consist of identical characters or all different characters.</div>
+                                <div style="margin-left: 20px;"> • If one integer appears enough times, removing just that integer might be sufficient.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the logic works within the fixed input size.</div>
+                                <div style="margin-left: 20px;"> • Handle arrays where many integers may have the same frequency.</div>
                             
                         </div>                                                                        
                     </div>
@@ -505,19 +509,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Frequency Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Swap Step 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Count Element Frequencies</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Store Frequencies</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Swap Step 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Transfer Frequencies to Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sort Frequencies</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Set Initial Values</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Remove Most Frequent Element</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Increment Answer</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
                     
                 </div>
 
@@ -526,16 +538,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canBeEqual</span>(string s1, string s2) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1 <span style="color:#666">==</span> s2) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1[<span style="color:#666">0</span>] <span style="color:#666">!=</span> s2[<span style="color:#666">0</span>]) swap(s1[<span style="color:#666">0</span>],s1[<span style="color:#666">2</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1 <span style="color:#666">==</span> s2) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1[<span style="color:#666">1</span>] <span style="color:#666">!=</span> s2[<span style="color:#666">1</span>]) swap(s1[<span style="color:#666">1</span>],s1[<span style="color:#666">3</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1 <span style="color:#666">==</span> s2) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSetSize</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">c</span>: arr) <span style="color:#666">++</span>mp[c];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [_, fq] <span style="color:#666">:</span> mp) frq.push_back(fq);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sort(frq.begin(), frq.end());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, i <span style="color:#666">=</span> frq.size() <span style="color:#666">-</span> <span style="color:#666">1</span>, half <span style="color:#666">=</span> arr.size()<span style="color:#666">/</span><span style="color:#666">2</span>, rm <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(rm <span style="color:#666">&lt;</span> half) {
+</span></span><span style="display:flex;"><span>        rm <span style="color:#666">+=</span> frq[i<span style="color:#666">--</span>];
+</span></span><span style="display:flex;"><span>        ans<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -543,73 +560,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canBeEqual</span>(string s1, string s2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSetSize</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Function definition to check if two strings can be made equal by swapping characters. </div>
+                            <div class=""> This line defines the function &#39;minSetSize&#39;, which takes a vector of integers &#39;arr&#39; and returns the minimum number of elements needed to reduce the array by half. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Base Case</b></div>
+                            <div class=""> <b>2 : Initialize Frequency Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1 <span style="color:#666">==</span> s2) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case check if both strings are already equal. </div>
+                            <div class=""> We initialize an unordered map &#39;mp&#39; to store the frequency of each element in the input array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Swap Step 1</b></div>
+                            <div class=""> <b>3 : Count Element Frequencies</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1[<span style="color:#666">0</span>] <span style="color:#666">!=</span> s2[<span style="color:#666">0</span>]) swap(s1[<span style="color:#666">0</span>],s1[<span style="color:#666">2</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">c</span>: arr) <span style="color:#666">++</span>mp[c];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the first characters are unequal, swaps the first and third characters of s1. </div>
+                            <div class=""> This loop iterates through each element &#39;c&#39; in the array and increments its corresponding frequency in the map &#39;mp&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case</b></div>
+                            <div class=""> <b>4 : Store Frequencies</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1 <span style="color:#666">==</span> s2) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks again if the strings are now equal after the first swap. </div>
+                            <div class=""> We initialize a vector &#39;frq&#39; to store the frequencies of the elements found in the map &#39;mp&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Swap Step 2</b></div>
+                            <div class=""> <b>5 : Transfer Frequencies to Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1[<span style="color:#666">1</span>] <span style="color:#666">!=</span> s2[<span style="color:#666">1</span>]) swap(s1[<span style="color:#666">1</span>],s1[<span style="color:#666">3</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [_, fq] <span style="color:#666">:</span> mp) frq.push_back(fq);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the second characters are unequal, swaps the second and fourth characters of s1. </div>
+                            <div class=""> We iterate through the frequency map and push the frequency values (not the keys) into the &#39;frq&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Base Case</b></div>
+                            <div class=""> <b>6 : Sort Frequencies</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1 <span style="color:#666">==</span> s2) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(frq.begin(), frq.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks again if the strings are now equal after the second swap. </div>
+                            <div class=""> We sort the frequencies in ascending order so that we can remove the most frequent elements first. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return</b></div>
+                            <div class=""> <b>7 : Set Initial Values</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, i <span style="color:#666">=</span> frq.size() <span style="color:#666">-</span> <span style="color:#666">1</span>, half <span style="color:#666">=</span> arr.size()<span style="color:#666">/</span><span style="color:#666">2</span>, rm <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns false if the strings are still not equal after the swaps. </div>
+                            <div class=""> Here, we initialize &#39;ans&#39; to 0 (the count of elements to remove), &#39;i&#39; to the last index of the frequency vector, &#39;half&#39; to half the size of the array, and &#39;rm&#39; to 0 (the count of removed elements). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : While Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(rm <span style="color:#666">&lt;</span> half) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This while loop runs until we have removed enough elements to reduce the array by half. In each iteration, we remove one of the most frequent elements. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Remove Most Frequent Element</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        rm <span style="color:#666">+=</span> frq[i<span style="color:#666">--</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We add the frequency of the current most frequent element (at index &#39;i&#39;) to the removed element count &#39;rm&#39;, and decrement the index &#39;i&#39; to consider the next most frequent element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Increment Answer</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Each time we remove an element, we increment the answer variable &#39;ans&#39; to track the number of elements removed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Once the while loop finishes, we return the number of elements we need to remove to achieve the goal, stored in &#39;ans&#39;. </div>
                         </div>
                     
                 </div>
@@ -629,16 +686,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant as the input size is fixed at 4.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n), where n is the size of the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> Sorting the frequencies takes O(n log n), where n is the number of elements in the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we only need a few variables to store the strings.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the frequency counts of the integers.</div>    
                     </div>
 
                 </div>

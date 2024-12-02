@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 31, 2024
                                     <i class="far fa-clock clock"></i>
-                                    3 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> Given an integer <code>num</code>, your task is to determine if it can be expressed as the sum of three consecutive integers. If it can, return these integers as a sorted array. If not, return an empty array. </div>
+<div class=""> You are given a list of equations where each equation represents a relationship between two variables in the form &lsquo;xi==yi&rsquo; or &lsquo;xi!=yi&rsquo;. Determine if it&rsquo;s possible to assign integer values to variables such that all equations are satisfied. </div>
 
 
 
@@ -360,43 +360,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a single integer `num`.</div>
-                        <div class=""> <b>Example:</b> 27</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of strings, where each string is an equation of the form &#39;xi==yi&#39; or &#39;xi!=yi&#39;.</div>
+                        <div class=""> <b>Example:</b> equations = [&#34;a==b&#34;, &#34;b!=a&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= num &lt;= 10^15</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= equations.length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • equations[i].length == 4</div>
+                            
+                                <div style="margin-left: 20px;"> • equations[i][0] is a lowercase letter.</div>
+                            
+                                <div style="margin-left: 20px;"> • equations[i][1] is either &#39;=&#39; or &#39;!&#39;</div>
+                            
+                                <div style="margin-left: 20px;"> • equations[i][2] is &#39;=&#39;</div>
+                            
+                                <div style="margin-left: 20px;"> • equations[i][3] is a lowercase letter.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is either an array containing the three consecutive integers that sum to `num` or an empty array if no such triplet exists.</div>
-                        <div class=""> <b>Example:</b> [8, 9, 10]</div>
+                        <div class=""> <b>Output:</b> The output should be a boolean value: &#39;true&#39; if the equations can be satisfied by assigning values to the variables, &#39;false&#39; otherwise.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must be a sorted array of three consecutive integers or an empty array.</div>
+                                <div style="margin-left: 20px;"> • The output is true if all equations can be satisfied with consistent assignments of values to variables.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find if `num` can be written as the sum of three consecutive integers.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if it&#39;s possible to assign integer values to variables such that all the equations are satisfied. This can be done by using a union-find data structure to group variables that are equal and check if any &#39;!=&#39; equations violate these groups.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Check if `num` is divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • Initialize a union-find data structure to represent groups of variables that are equal.</div>
                             
-                                <div style="margin-left: 20px;"> • If `num` is divisible by 3, calculate the three consecutive integers using `num / 3 - 1`, `num / 3`, and `num / 3 &#43; 1`.</div>
-                            
-                                <div style="margin-left: 20px;"> • If not, return an empty array.</div>
+                                <div style="margin-left: 20px;"> • Process each equation: if it&#39;s an equality (&#39;==&#39;), union the two variables; if it&#39;s an inequality (&#39;!=&#39;), check if the two variables are in the same group, which would indicate a contradiction.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input `num` should be within the given bounds.</div>
+                        <div class=""> <b>Goal:</b> The solution needs to be efficient given the constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= num &lt;= 10^15</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= equations.length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • Each equation is of length 4.</div>
                             
                         </div>
                     </div>        
@@ -404,15 +414,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The integer `num` is non-negative.</div>
+                                <div style="margin-left: 20px;"> • The input list will contain only valid equations in the form of &#39;xi==yi&#39; or &#39;xi!=yi&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • The variables are represented by lowercase letters (&#39;a&#39; to &#39;z&#39;).</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> 27</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 27 can be expressed as 8 &#43; 9 &#43; 10. These are three consecutive integers that sum to 27.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> equations = [&#34;a==b&#34;, &#34;b!=a&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we are given the equations &#39;a==b&#39; and &#39;b!=a&#39;. If we assume a = 1 and b = 1, the first equation is satisfied, but the second equation is violated because a cannot be equal to b and not equal to b at the same time.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -436,16 +448,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves checking if the given number is divisible by 3, then finding the three consecutive integers that sum to the number.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we can use a union-find (disjoint-set) data structure to manage the groups of variables that must be equal. We process all equality equations first and then check each inequality equation to ensure no contradictions.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sum of three consecutive integers is always divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • The problem requires us to check both equality and inequality relationships, which can be efficiently handled using the union-find data structure.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Check if `num` is divisible by 3, then simply return the three integers. If not, return an empty array.</div>
+                                <div style="margin-left: 20px;"> • The union-find approach will allow us to group variables and detect contradictions efficiently. If two variables that must be different are in the same group, it&#39;s impossible to satisfy the equations.</div>
                             
                         </div>
                     </div>
@@ -453,11 +465,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check if `num` is divisible by 3.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a union-find data structure for the 26 lowercase variables.</div>
                             
-                                <div style="margin-left: 20px;"> • If it is, return `num / 3 - 1`, `num / 3`, `num / 3 &#43; 1`.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Process all &#39;==&#39; equations by uniting the respective variables.</div>
                             
-                                <div style="margin-left: 20px;"> • If it is not, return an empty array.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Process all &#39;!=&#39; equations and check if any variables that should be different belong to the same group.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If a contradiction is found, return false; otherwise, return true.</div>
                             
                         </div>
                     </div>
@@ -466,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input `num` is always non-negative and within the specified range.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the input array is empty.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle very large numbers, as `num` can be as large as 10^15.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution efficiently handles the maximum number of equations (500).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider the case when `num` is 0, as the sum of three consecutive integers can&#39;t result in 0.</div>
+                                <div style="margin-left: 20px;"> • Check for edge cases with only one equation, such as &#39;a==a&#39; or &#39;a!=a&#39;.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works within the input constraints.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle up to 500 equations efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,11 +514,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Union-Find Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Equality Processing Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Character Indexing</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Indexing</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Equality Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Union Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Inequality Processing Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Character Indexing</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Character Indexing</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Inequality Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Find Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return False</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return True</button>
                     
                 </div>
 
@@ -513,10 +547,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> sumOfThree(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> num) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span><span style="color:#666">3</span> <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {num <span style="color:#666">/</span> <span style="color:#666">3</span> <span style="color:#666">-</span> <span style="color:#666">1</span>, num<span style="color:#666">/</span> <span style="color:#666">3</span>, num<span style="color:#666">/</span><span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>};
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">equationsPossible</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> eqn) {
+</span></span><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;=&#39;</span>)
+</span></span><span style="display:flex;"><span>            uf<span style="color:#666">-&gt;</span>uni(a, b);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;!&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(a) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(b))
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -527,40 +573,140 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> sumOfThree(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> num) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">equationsPossible</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> eqn) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `sumOfThree` that takes a single long long integer `num` and returns a vector of long long integers. </div>
+                            <div class=""> Defines the `equationsPossible` function that takes a vector of strings, `eqn`, where each string represents an equation (either equality or inequality) between two characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Union-Find Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty vector `ans` to store the result if `num` is divisible by 3. </div>
+                            <div class=""> Initializes a union-find (disjoint-set) data structure `uf` with 26 elements, one for each letter of the alphabet. The union-find structure will help manage connected components for equality relations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Condition Check</b></div>
+                            <div class=""> <b>3 : Equality Processing Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span><span style="color:#666">3</span> <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if `num` is divisible by 3. If not, return the empty vector `ans`. </div>
+                            <div class=""> Starts a loop to process each equation in the input `eqn` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Return Result</b></div>
+                            <div class=""> <b>4 : Character Indexing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {num <span style="color:#666">/</span> <span style="color:#666">3</span> <span style="color:#666">-</span> <span style="color:#666">1</span>, num<span style="color:#666">/</span> <span style="color:#666">3</span>, num<span style="color:#666">/</span><span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `num` is divisible by 3, return a vector containing three integers: `num/3 - 1`, `num/3`, and `num/3 &#43; 1`. </div>
+                            <div class=""> Converts the first character of the equation (left side) into an integer index between 0 and 25, representing the letter in the alphabet. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Character Indexing</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Converts the second character of the equation (right side) into an integer index between 0 and 25. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Equality Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;=&#39;</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current equation is an equality (`=`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Union Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            uf<span style="color:#666">-&gt;</span>uni(a, b);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the equation is an equality, it performs a union operation on the two characters (`a` and `b`), indicating that they belong to the same group. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Inequality Processing Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts another loop to process the inequality equations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Character Indexing</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Converts the first character of the inequality equation into an integer index between 0 and 25. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Character Indexing</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Converts the second character of the inequality equation into an integer index between 0 and 25. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Inequality Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;!&#39;</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current equation is an inequality (`!=`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Find Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(a) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(b))
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the equation is an inequality, it checks if the two characters are connected in the union-find structure. If they are connected (i.e., they belong to the same group), the inequality is violated. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return False</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the inequality is violated (the characters are in the same group), the function returns `false` indicating that the equations are not possible. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return True</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If all equations have been processed and no contradictions were found, the function returns `true`, indicating that the set of equations is possible. </div>
                         </div>
                     
                 </div>
@@ -580,16 +726,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant because the solution only requires a simple modulo check and arithmetic operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of equations, if all equations are satisfied with no contradictions.</div>
+                        <div class=""> <b>Average Case:</b> O(n), since each equation requires a constant time union/find operation.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as each union/find operation is nearly constant time with path compression and union by rank.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) due to the use of union-find, where n is the number of equations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we are only storing a fixed number of integers.</div>    
+                        <div class=""> <b>Best Case:</b> O(26), regardless of input size, as the space required is constant.</div>
+                        <div class=""> <b>Worst Case:</b> O(26), as we need to store the union-find structure for 26 variables.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(26), which is constant, since we only need to store the union-find structure for the 26 variables.</div>    
                     </div>
 
                 </div>

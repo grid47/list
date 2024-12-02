@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given a sorted array of integers, find two numbers whose sum equals a target value. Return the indices of these two numbers, ensuring they are 1-indexed. </div>
+<div class=""> Given the root of a binary tree, your task is to return the zigzag level order traversal of its nodes&rsquo; values. This means you need to traverse the tree level by level, alternating between left to right and right to left on each level. </div>
 
 
 
@@ -371,51 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a sorted array `numbers` of integers and a `target` integer.</div>
-                        <div class=""> <b>Example:</b> numbers = [1, 5, 8, 12], target = 13</div>
+                        <div class=""> <b>Input:</b> You are given the root of a binary tree, where each node has a value and pointers to its left and right children.</div>
+                        <div class=""> <b>Example:</b> root = [4,2,6,1,3,5,7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= numbers.length &lt;= 30,000</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 2000].</div>
                             
-                                <div style="margin-left: 20px;"> • -1,000 &lt;= numbers[i] &lt;= 1,000</div>
-                            
-                                <div style="margin-left: 20px;"> • The array is sorted in non-decreasing order.</div>
-                            
-                                <div style="margin-left: 20px;"> • -1,000 &lt;= target &lt;= 1,000</div>
+                                <div style="margin-left: 20px;"> • -100 &lt;= Node.val &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an array of two integers representing the 1-indexed positions of the two numbers that add up to the target.</div>
-                        <div class=""> <b>Example:</b> Output: [2, 3]</div>
+                        <div class=""> <b>Output:</b> The output should be a 2D array where each element represents a level in the binary tree. For each level, alternate between traversing left to right and right to left.</div>
+                        <div class=""> <b>Example:</b> Output: [[4], [6, 2], [1, 3, 5, 7]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output array contains exactly two integers.</div>
+                                <div style="margin-left: 20px;"> • The output should be an array of arrays where each inner array contains the values of the nodes at that level, following the zigzag order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find two indices such that the sum of the numbers at those indices equals the target.</div>
+                        <div class=""> <b>Goal:</b> The goal is to perform a zigzag level order traversal using a breadth-first search (BFS) approach. At every odd level, the node values should be traversed from right to left.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a two-pointer approach to iterate through the array.</div>
+                                <div style="margin-left: 20px;"> • Start by performing a regular level order traversal using a queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Start with pointers at the beginning and end of the array.</div>
+                                <div style="margin-left: 20px;"> • After collecting the nodes at each level, reverse the values at odd levels to achieve the zigzag pattern.</div>
                             
-                                <div style="margin-left: 20px;"> • Move the pointers towards each other based on whether the sum is less than or greater than the target.</div>
+                                <div style="margin-left: 20px;"> • Push the left and right children of each node into the queue to process the next level.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure the problem has a manageable input size, and there is exactly one solution.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution can handle a tree with up to 2000 nodes efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the array is between 2 and 30,000.</div>
-                            
-                                <div style="margin-left: 20px;"> • There will always be exactly one solution.</div>
+                                <div style="margin-left: 20px;"> • The tree can have between 0 and 2000 nodes.</div>
                             
                         </div>
                     </div>        
@@ -423,17 +417,31 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array is already sorted in non-decreasing order.</div>
-                            
-                                <div style="margin-left: 20px;"> • There is exactly one valid solution.</div>
+                                <div style="margin-left: 20px;"> • The input is always a valid binary tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> numbers = [1, 5, 8, 12], target = 13</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum of 5 and 8 equals 13, so the solution is at indices 2 and 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [3,9,20,null,null,15,7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree has the following structure:
+
+       3
+      / \
+     9  20
+        /  \
+       15   7
+
+The zigzag level order traversal is: [[3], [20, 9], [15, 7]]</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree consists of just one node, which is the root node. The zigzag level order traversal is: [[1]]</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = []</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> An empty tree has no nodes, so the zigzag level order traversal is: []</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,16 +465,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use a two-pointer approach to efficiently find the solution in O(n) time.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved using a breadth-first search (BFS) where nodes are processed level by level. We will alternate the direction of traversal based on the level number.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array is sorted, so we can use the two-pointer technique to find the pair.</div>
+                                <div style="margin-left: 20px;"> • Zigzag traversal requires alternating the order of nodes on each level.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We will initialize two pointers: one at the beginning and one at the end of the array, and move them based on the current sum.</div>
+                                <div style="margin-left: 20px;"> • By using BFS, we can traverse the tree level by level, and reversing the nodes at odd levels will give us the desired zigzag order.</div>
                             
                         </div>
                     </div>
@@ -474,15 +482,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize two pointers: left at the beginning (index 1) and right at the end (last index).</div>
+                                <div style="margin-left: 20px;"> • Perform a regular level order traversal using a queue to process nodes at each level.</div>
                             
-                                <div style="margin-left: 20px;"> • Check the sum of the values at these pointers.</div>
+                                <div style="margin-left: 20px;"> • For each level, check if it&#39;s an odd or even level. If it’s an odd level, reverse the node values at that level.</div>
                             
-                                <div style="margin-left: 20px;"> • If the sum is equal to the target, return the indices.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the sum is less than the target, move the left pointer to the right.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the sum is greater than the target, move the right pointer to the left.</div>
+                                <div style="margin-left: 20px;"> • Push the left and right children of each node into the queue for the next level of traversal.</div>
                             
                         </div>
                     </div>
@@ -491,22 +495,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the array will always have at least two elements.</div>
+                                <div style="margin-left: 20px;"> • If the tree is empty (i.e., the root is null), return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large arrays, the solution is efficient with O(n) time complexity.</div>
+                                <div style="margin-left: 20px;"> • For large trees with up to 2000 nodes, ensure the solution handles the input efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the target is negative, the same approach works.</div>
+                                <div style="margin-left: 20px;"> • If a node has only one child (either left or right), make sure it is properly handled during the zigzag traversal.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since the array is sorted and there&#39;s exactly one solution, the two-pointer approach is optimal.</div>
+                                <div style="margin-left: 20px;"> • The tree must be processed within the provided constraints (2000 nodes).</div>
                             
                         </div>                                                                        
                     </div>
@@ -527,23 +531,49 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Map Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Temporary Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Empty Tree Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Index Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push Root to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Index Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Main BFS Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Level Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Level Node Processing</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue Front</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Pop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Add Node Value to Temp</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Left Child Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Right Child Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Push Level to Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Clear Temp Vector</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Call levelOrder</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Zigzag Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Reverse Current Level</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Reverse Vector</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Assign Reversed Level</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Result</button>
                     
                 </div>
 
@@ -552,19 +582,39 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> twoSum(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(<span style="color:#666">2</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(nums[i])) {
-</span></span><span style="display:flex;"><span>            ans[<span style="color:#666">0</span>] <span style="color:#666">=</span> mp[nums[i]] <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            ans[<span style="color:#666">1</span>] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            mp[target <span style="color:#666">-</span> nums[i]] <span style="color:#666">=</span> i;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    q.push(root);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            tmp.push_back(it<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left  <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>right);
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>        tmp.clear();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans <span style="color:#666">=</span> levelOrder(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ans.size(); i <span style="color:#666">+=</span> <span style="color:#666">2</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> ans[i];
+</span></span><span style="display:flex;"><span>        reverse(tmp.begin(), tmp.end());
+</span></span><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> tmp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -575,110 +625,240 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> twoSum(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;twoSum&#39; which takes a vector of integers &#39;nums&#39; and an integer &#39;target&#39;, and returns a vector of two indices whose sum equals the target. </div>
+                            <div class=""> Define the &#39;levelOrder&#39; function that performs a level-order traversal of a binary tree and returns a 2D vector. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(<span style="color:#666">2</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector &#39;ans&#39; with two elements, both set to 0, which will store the indices of the two numbers that sum to the target. </div>
+                            <div class=""> Initialize a 2D vector &#39;ans&#39; to store the values of each level during the level-order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Map Declaration</b></div>
+                            <div class=""> <b>3 : Temporary Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a map &#39;mp&#39; to store the complement (target - nums[i]) as the key, and the index of the number as the value. </div>
+                            <div class=""> Initialize a temporary vector &#39;tmp&#39; to store the values of nodes at each level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop</b></div>
+                            <div class=""> <b>4 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through each element of the input vector &#39;nums&#39;. </div>
+                            <div class=""> Create a queue &#39;q&#39; for performing breadth-first search (BFS), which will store the nodes at each level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Empty Tree Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(nums[i])) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current number &#39;nums[i]&#39; exists in the map &#39;mp&#39;. If it does, the two sum condition is met. </div>
+                            <div class=""> Check if the root is null. If it is, return the empty result vector &#39;ans&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Index Assignment</b></div>
+                            <div class=""> <b>6 : Push Root to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[<span style="color:#666">0</span>] <span style="color:#666">=</span> mp[nums[i]] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition is true, assign the index of the first number (found in the map) to &#39;ans[0]&#39;. Add 1 to make the index 1-based. </div>
+                            <div class=""> Push the root node into the queue to start the traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Index Assignment</b></div>
+                            <div class=""> <b>7 : Main BFS Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[<span style="color:#666">1</span>] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assign the current index &#39;i&#39; to &#39;ans[1]&#39; (adding 1 to make it 1-based) as the second index of the two numbers whose sum equals the target. </div>
+                            <div class=""> Start the BFS loop which continues as long as there are nodes in the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class=""> <b>8 : Level Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the result vector &#39;ans&#39; containing the indices of the two numbers that sum to the target. </div>
+                            <div class=""> Store the number of nodes at the current level by checking the size of the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Else Condition</b></div>
+                            <div class=""> <b>9 : Level Node Processing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current number is not in the map, proceed to store its complement (target - nums[i]) in the map. </div>
+                            <div class=""> Process each node at the current level by looping through the queue until all nodes at this level are processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Map Insertion</b></div>
+                            <div class=""> <b>10 : Queue Front</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[target <span style="color:#666">-</span> nums[i]] <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> it <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the complement of the current number (target - nums[i]) as the key and its index &#39;i&#39; as the value in the map &#39;mp&#39;. </div>
+                            <div class=""> Get the front node from the queue to process it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Queue Pop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the processed node from the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Add Node Value to Temp</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp.push_back(it<span style="color:#666">-&gt;</span>val);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the current node&#39;s value to the &#39;tmp&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Left Child Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left  <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>left);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node has a left child, push it to the queue for the next level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Right Child Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>right);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node has a right child, push it to the queue for the next level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Push Level to Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(tmp);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> After processing all nodes at the current level, push the &#39;tmp&#39; vector to &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Clear Temp Vector</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp.clear();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Clear the temporary vector &#39;tmp&#39; for the next level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the &#39;ans&#39; vector, which will contain the indices of the two numbers whose sum equals the target, if they are found. </div>
+                            <div class=""> Return the final 2D vector &#39;ans&#39;, which contains the level-order traversal of the tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#666">*</span> root) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the &#39;zigzagLevelOrder&#39; function which calls &#39;levelOrder&#39; and modifies the result to achieve zigzag ordering. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Call levelOrder</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans <span style="color:#666">=</span> levelOrder(root);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the &#39;levelOrder&#39; function to get the initial level-order traversal. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Zigzag Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ans.size(); i <span style="color:#666">+=</span> <span style="color:#666">2</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through the result vector and reverse every alternate level to achieve a zigzag order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Reverse Current Level</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> ans[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Copy the current level into &#39;tmp&#39; before reversing it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Reverse Vector</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        reverse(tmp.begin(), tmp.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Reverse the current level to achieve zigzag order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Assign Reversed Level</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> tmp;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the reversed level back to the result vector &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final result vector with the zigzag level-order traversal. </div>
                         </div>
                     
                 </div>
@@ -701,13 +881,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only need to iterate through the array once.</div>                                               
+                        <div class=""> <b>Description:</b> In all cases, we must visit each node in the tree once, so the time complexity is O(n), where n is the number of nodes in the tree.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as we are using only constant extra space.</div>    
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, the queue may hold all the nodes at the last level of the tree, resulting in a space complexity of O(n). In the best case, when the tree is perfectly balanced, the space complexity could be reduced to O(log n).</div>    
                     </div>
 
                 </div>

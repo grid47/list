@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given two strings: <code>sequence</code> and <code>word</code>. A string <code>word</code> is considered &lsquo;k-repeating&rsquo; in <code>sequence</code> if <code>word</code> concatenated <code>k</code> times forms a substring of <code>sequence</code>. The task is to return the maximum value of <code>k</code> such that <code>word</code> repeated <code>k</code> times appears as a substring in <code>sequence</code>. If no such substring exists, return 0. </div>
+<div class=""> You are given an array of integers representing asteroids in a row. Each asteroid has a size and a direction, with positive integers representing asteroids moving right and negative integers representing asteroids moving left. You need to determine the state of the asteroids after all collisions. </div>
 
 
 
@@ -371,49 +371,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two strings, `sequence` and `word`.</div>
-                        <div class=""> <b>Example:</b> sequence = &#39;xyzxyzxyz&#39;, word = &#39;xyz&#39;</div>
+                        <div class=""> <b>Input:</b> The input is an array of integers, where each integer represents an asteroid. A positive value means the asteroid is moving to the right, and a negative value means it is moving to the left.</div>
+                        <div class=""> <b>Example:</b> asteroids = [10, 15, -10]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= sequence.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= asteroids.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= word.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • -1000 &lt;= asteroids[i] &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • Both `sequence` and `word` contain only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • asteroids[i] != 0</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum value of `k` such that `word` repeated `k` times forms a substring of `sequence`.</div>
-                        <div class=""> <b>Example:</b> 3</div>
+                        <div class=""> <b>Output:</b> Return the final state of the asteroids after all collisions, as an array of integers.</div>
+                        <div class=""> <b>Example:</b> For the input [10, 15, -10], the output should be [10, 15].</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • If `word` is not a substring of `sequence`, return 0.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the highest value of `k` where `word` repeated `k` times is a substring of `sequence`.</div>
+                        <div class=""> <b>Goal:</b> Determine the final state of the asteroids after resolving all collisions.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Start with the word and initialize the count of repetitions as 0.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array of asteroids.</div>
                             
-                                <div style="margin-left: 20px;"> • Keep concatenating `word` and check if the concatenated string exists in `sequence`.</div>
+                                <div style="margin-left: 20px;"> • Use a stack to track the current state of the asteroids.</div>
                             
-                                <div style="margin-left: 20px;"> • Stop when the concatenated string is no longer a substring, and return the count of repetitions.</div>
+                                <div style="margin-left: 20px;"> • For each new asteroid, check if it will collide with the top of the stack (which represents the asteroid moving to the right).</div>
+                            
+                                <div style="margin-left: 20px;"> • If a collision occurs, resolve it by removing the smaller asteroid or both if they are of equal size.</div>
+                            
+                                <div style="margin-left: 20px;"> • If no collision occurs, push the asteroid onto the stack.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure that the input sizes are manageable for direct string search operations.</div>
+                        <div class=""> <b>Goal:</b> The grid size and asteroid values are constrained to avoid overflow and ensure efficiency.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= sequence.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The number of asteroids will be between 2 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= word.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • Each asteroid&#39;s value will be between -1000 and 1000.</div>
+                            
+                                <div style="margin-left: 20px;"> • The asteroid values are non-zero integers.</div>
                             
                         </div>
                     </div>        
@@ -421,19 +425,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both `sequence` and `word` are non-empty strings.</div>
+                                <div style="margin-left: 20px;"> • All asteroids move at the same speed.</div>
+                            
+                                <div style="margin-left: 20px;"> • Two asteroids moving in the same direction will not collide.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> sequence = &#39;xyzxyzxyz&#39;, word = &#39;xyz&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The word &#39;xyz&#39; can be repeated 3 times to form the substring &#39;xyzxyzxyz&#39; in &#39;xyzxyzxyz&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> sequence = &#39;abcdefg&#39;, word = &#39;xyz&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since &#39;xyz&#39; does not exist in &#39;abcdefg&#39;, the maximum k-repeating value is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Starting with asteroids [10, 15, -10], the asteroid 15 collides with -10, leaving 15 intact. The final state is [10, 15].</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The 15 asteroid moves to the right, while -10 moves to the left. Since 15 is larger than -10, it survives, and -10 explodes. The 10 and 15 do not collide, so they remain.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,16 +459,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we will simulate the process of concatenating `word` multiple times and check if the resulting string is a substring of `sequence`.</div>
+                        <div class=""> <b>Approach:</b> Use a stack to simulate the movement and collision of the asteroids.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check for increasing repetitions of `word` in the `sequence`.</div>
+                                <div style="margin-left: 20px;"> • Each time an asteroid moves right, we need to check if it will collide with the one moving left.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Start by checking if the word itself exists in the sequence. Then, iteratively check for more repetitions of the word.</div>
+                                <div style="margin-left: 20px;"> • We can track the state of the asteroids with a stack, where we only need to check the top of the stack for potential collisions.</div>
                             
                         </div>
                     </div>
@@ -474,11 +476,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a counter `k` to 0.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Concatenate `word` to a temporary string and check if it is a substring of `sequence`.</div>
+                                <div style="margin-left: 20px;"> • For each asteroid in the input array, check if it collides with the asteroid at the top of the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Increment `k` each time a valid repetition is found, and stop when the concatenated string is no longer a substring of `sequence`.</div>
+                                <div style="margin-left: 20px;"> • If a collision occurs, remove the top of the stack or both asteroids if they have equal size.</div>
+                            
+                                <div style="margin-left: 20px;"> • Otherwise, push the asteroid onto the stack.</div>
                             
                         </div>
                     </div>
@@ -487,22 +491,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Both `sequence` and `word` will have at least one character, so empty inputs are not a concern.</div>
+                                <div style="margin-left: 20px;"> • No empty input arrays will be provided, as the minimum length of the array is 2.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for the maximum input sizes, up to 100 characters.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle large inputs up to the maximum size (10^4 elements).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `word` does not appear in `sequence`, the result should be 0.</div>
+                                <div style="margin-left: 20px;"> • If all asteroids are moving in the same direction, the result will be the same array as input.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle cases where `word` appears multiple times or not at all.</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient to handle up to 10^4 elements.</div>
                             
                         </div>                                                                        
                     </div>
@@ -519,19 +523,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Counter Increment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Flag Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 String Concatenation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Collision Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Collision Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Collision Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Asteroid from Stack</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Same Size Collision</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Matching Asteroid</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Continue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Asteroid Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Stack Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Result</button>
                     
                 </div>
 
@@ -540,15 +560,39 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxRepeating</span>(string sequence, string word) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> count<span style="color:#666">=</span><span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    string temp<span style="color:#666">=</span>word;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(sequence.find(temp)<span style="color:#666">!=</span>string<span style="color:#666">::</span>npos)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        count<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        temp<span style="color:#666">+=</span>word;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> asteroidCollision(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ast) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> ast.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : ast) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> eq <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>                  (((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a) <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>                  (abs(stk.back()) <span style="color:#666">&lt;</span> abs(a))) {
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>       
+</span></span><span style="display:flex;"><span>                stk.pop_back();
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> (stk.back() <span style="color:#666">==</span> <span style="color:#666">-</span>a <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)) { 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       <span style="color:#080;font-style:italic">// cout &lt;&lt; stk.back();                
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            
+</span></span><span style="display:flex;"><span>            stk.pop_back();                
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>; 
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (stk.empty() <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>))
+</span></span><span style="display:flex;"><span>            stk.push_back(a);
+</span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> count;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -556,73 +600,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxRepeating</span>(string sequence, string word) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> asteroidCollision(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ast) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `maxRepeating` which takes a string `sequence` and a string `word`, and returns the maximum number of times `word` can repeat in `sequence`. </div>
+                            <div class=""> Define the function that accepts an array of asteroids as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> count<span style="color:#666">=</span><span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> ast.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `count` to keep track of the number of times `word` repeats in `sequence`. </div>
+                            <div class=""> Initialize direction (`dir`) and get the size of the asteroid array (`n`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Stack Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string temp<span style="color:#666">=</span>word;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `temp` with the value of `word`. This string will be used to check for repeated concatenations of `word` in `sequence`. </div>
+                            <div class=""> Declare an empty stack (`stk`) to manage the asteroids during the collision simulation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : While Loop</b></div>
+                            <div class=""> <b>4 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(sequence.find(temp)<span style="color:#666">!=</span>string<span style="color:#666">::</span>npos)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : ast) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop that continues as long as `temp` is found as a substring in `sequence`. </div>
+                            <div class=""> Iterate through each asteroid in the input array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Counter Increment</b></div>
+                            <div class=""> <b>5 : Flag Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        count<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> eq <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the `count` variable each time `temp` is found in `sequence`. </div>
+                            <div class=""> Initialize a flag `eq` to track whether a collision has occurred for the current asteroid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : String Concatenation</b></div>
+                            <div class=""> <b>6 : Collision Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        temp<span style="color:#666">+=</span>word;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Concatenates `word` to `temp` to check for the next repeated occurrence in `sequence`. </div>
+                            <div class=""> Check if the stack is non-empty and if there is a potential for collision between the current asteroid and the last asteroid in the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class=""> <b>7 : Collision Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> count;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                  (((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a) <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the total count of repeated occurrences of `word` in `sequence`. </div>
+                            <div class=""> Check if the last asteroid in the stack is moving to the right and the current one is moving to the left. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Collision Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                  (abs(stk.back()) <span style="color:#666">&lt;</span> abs(a))) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ensure the current asteroid is larger than the one in the stack (by comparing absolute values). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Pop Asteroid from Stack</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                stk.pop_back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the last asteroid from the stack, as it is destroyed by the current one. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Same Size Collision</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> (stk.back() <span style="color:#666">==</span> <span style="color:#666">-</span>a <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current asteroid collides with an asteroid of the same size but moving in the opposite direction. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Pop Matching Asteroid</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop_back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the matching asteroid from the stack, as both asteroids are destroyed in the collision. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Continue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>; 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skip the current asteroid as it has been destroyed in the collision. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Asteroid Push</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (stk.empty() <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>))
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no collision occurs, or if the current asteroid moves in the opposite direction of the last asteroid in the stack, push it onto the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Stack Push</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push_back(a);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the current asteroid onto the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the stack, which contains the remaining asteroids after all collisions. </div>
                         </div>
                     
                 </div>
@@ -642,16 +766,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n * m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
-                        <div class=""> <b>Description:</b> The time complexity depends on how many times the word can be concatenated and checked as a substring, where `n` is the length of the sequence and `m` is the length of the word.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of asteroids, when no collisions occur.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as each asteroid is processed once.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as in the worst case, all asteroids could potentially collide.</div> 
+                        <div class=""> <b>Description:</b> The algorithm runs in linear time because each asteroid is either pushed to or popped from the stack once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is mainly determined by the storage required to hold the concatenated word and the sequence.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if there are no collisions and the stack remains empty.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of asteroids, as the stack may store all asteroids in the worst case.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of asteroids due to the stack storing the results.</div>    
                     </div>
 
                 </div>

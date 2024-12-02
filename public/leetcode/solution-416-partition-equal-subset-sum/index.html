@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given two arrays of strings <code>words1</code> and <code>words2</code>, find all the strings in <code>words1</code> that are universal. A string from <code>words1</code> is considered universal if it contains all the letters of every string in <code>words2</code>, including multiplicity. Each string in <code>words2</code> is a subset of the string from <code>words1</code>. </div>
+<div class=""> Given an integer array, determine if it is possible to partition the array into two subsets with equal sum. Return true if such a partition exists, otherwise return false. </div>
 
 
 
@@ -370,53 +370,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two arrays of strings `words1` and `words2`.</div>
-                        <div class=""> <b>Example:</b> Input: words1 = [&#34;hello&#34;, &#34;world&#34;, &#34;goodbye&#34;, &#34;example&#34;], words2 = [&#34;h&#34;, &#34;e&#34;, &#34;l&#34;]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers &#39;nums&#39;.</div>
+                        <div class=""> <b>Example:</b> For nums = [2, 6, 7, 4], the output is true.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= words1.length, words2.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 200</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= words1[i].length, words2[i].length &lt;= 10</div>
-                            
-                                <div style="margin-left: 20px;"> • words1[i] and words2[i] consist only of lowercase English letters.</div>
-                            
-                                <div style="margin-left: 20px;"> • All the strings in words1 are unique.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an array containing all the strings from `words1` that are universal, which means they contain all the letters from every string in `words2`.</div>
-                        <div class=""> <b>Example:</b> Output: [&#34;hello&#34;, &#34;goodbye&#34;]</div>
+                        <div class=""> <b>Output:</b> Return true if the array can be partitioned into two subsets with equal sum, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> For nums = [1, 2, 3, 9], the output is false.</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The output should be an array of strings from `words1`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to identify strings from `words1` that are universal, meaning they contain all the characters (with correct multiplicity) of each string in `words2`.</div>
+                        <div class=""> <b>Goal:</b> To check if an array can be partitioned into two subsets with equal sum.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count the frequency of each character in all strings of `words2`.</div>
+                                <div style="margin-left: 20px;"> • 1. Calculate the total sum of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each string in `words1`, count its characters and check if it contains the required characters with at least the same multiplicity as in `words2`.</div>
+                                <div style="margin-left: 20px;"> • 2. If the sum is odd, return false (since two equal subsets cannot be formed).</div>
                             
-                                <div style="margin-left: 20px;"> • If a string meets the criteria, include it in the result.</div>
+                                <div style="margin-left: 20px;"> • 3. If the sum is even, check if there exists a subset whose sum is half of the total sum using dynamic programming.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Use a dynamic programming approach to check if it&#39;s possible to form a subset with the target sum.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input arrays and strings should adhere to the given constraints.</div>
+                        <div class=""> <b>Goal:</b> The array contains integers between 1 and 100, and its length is at most 200.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The arrays `words1` and `words2` have lengths between 1 and 10^4.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 200</div>
                             
-                                <div style="margin-left: 20px;"> • Each string in `words1` and `words2` has a length between 1 and 10, and they consist only of lowercase English letters.</div>
-                            
-                                <div style="margin-left: 20px;"> • All strings in `words1` are unique.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
                             
                         </div>
                     </div>        
@@ -424,15 +418,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • We assume that the input arrays contain valid strings and that all the strings in `words1` are unique.</div>
+                                <div style="margin-left: 20px;"> • The input array contains only positive integers.</div>
+                            
+                                <div style="margin-left: 20px;"> • The array length is within the given constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words1 = [&#34;hello&#34;, &#34;world&#34;, &#34;goodbye&#34;, &#34;example&#34;], words2 = [&#34;h&#34;, &#34;e&#34;, &#34;l&#34;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this example, the string &#34;hello&#34; contains all the characters in `words2` (&#39;h&#39;, &#39;e&#39;, and &#39;l&#39;) with the correct multiplicity, so it&#39;s a valid answer. The string &#34;world&#34; does not contain all characters required by `words2`, so it&#39;s not a valid answer. The string &#34;goodbye&#34; is also valid as it contains all the characters required by `words2`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [2, 6, 7, 4], the output is true.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array can be partitioned as [2, 6] and [7, 4], both with a sum of 8, making the partition possible.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [1, 2, 3, 9], the output is false.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum of the elements is 15, which is odd, so it&#39;s impossible to partition the array into two subsets with equal sum.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,18 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we first calculate the required frequencies for all characters in `words2`. Then, we check each string in `words1` to see if it meets these frequency requirements. If a string contains the necessary characters in the correct amounts, we add it to the result.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem, we need to first check if the sum of the array is even. If it&#39;s even, we will use dynamic programming to determine if a subset with half the sum exists.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check the frequency of each character in both `words1` and `words2`.</div>
-                            
-                                <div style="margin-left: 20px;"> • The size of the arrays is large, so the solution must be efficient.</div>
+                                <div style="margin-left: 20px;"> • The total sum must be even for the array to be partitioned into two subsets with equal sum.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using frequency counting for each string and comparing these counts for every word in `words1` should be an efficient approach.</div>
+                                <div style="margin-left: 20px;"> • A dynamic programming approach can be used to check if a subset sum of half the total sum is achievable.</div>
                             
                         </div>
                     </div>
@@ -475,11 +473,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a frequency array to store the maximum required frequency of each character in `words2`.</div>
+                                <div style="margin-left: 20px;"> • 1. Calculate the total sum of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each string in `words2`, update the frequency array for each character.</div>
+                                <div style="margin-left: 20px;"> • 2. If the total sum is odd, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • For each string in `words1`, check if it contains at least the required number of each character from `words2`. If so, add it to the result.</div>
+                                <div style="margin-left: 20px;"> • 3. Set the target sum as half of the total sum.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Use dynamic programming to check if a subset with this target sum can be formed. Use a boolean dp array where dp[i] is true if a subset with sum i is possible.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. If dp[target] is true, return true. Otherwise, return false.</div>
                             
                         </div>
                     </div>
@@ -488,22 +490,20 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that both arrays will have at least one string, so no need to handle empty inputs.</div>
-                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle cases where both `words1` and `words2` have up to 10^4 strings.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, ensure the dynamic programming approach runs efficiently by considering the time and space complexity.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `words2` contains strings with characters that do not appear in any string in `words1`, no strings from `words1` will be valid.</div>
+                                <div style="margin-left: 20px;"> • If the array has only one element, it cannot be partitioned into two subsets.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The constraints ensure that the input will always contain valid strings and the solution must work within the given bounds.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the sum is odd, or the array has a small number of elements.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,41 +520,41 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case, Recursion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Frequency Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Frequency Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Frequency Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call with Element Inclusion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Memoized Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Main Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Character Frequency Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Assign Input Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Flag Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Frequency Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Checking</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Flag Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Odd Sum Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Loop Exit</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Divide Sum by Two</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Adding Valid Words</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Memoization Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return DP Function Call</button>
                     
                 </div>
 
@@ -563,29 +563,37 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> wordSubsets(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words1, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words2) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words2) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) {
-</span></span><span style="display:flex;"><span>            tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> max(frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>], tmp[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words1) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp[i] <span style="color:#666">&lt;</span> frq[i]) {
-</span></span><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(flag) res.push_back(s);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">10001</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][sum] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> nums[idx])
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">|=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">-</span> nums[idx]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum] <span style="color:#666">=</span> res;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartition</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> x;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    sum <span style="color:#666">=</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, sum);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -593,183 +601,183 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> wordSubsets(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words1, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;wordSubsets&#39; which takes two vectors of strings, &#39;words1&#39; and &#39;words2&#39;, and returns a vector of strings representing words from &#39;words1&#39; that are supersets of the words in &#39;words2&#39;. </div>
+                            <div class=""> Declare a vector `nums` to hold the input array of integers that needs to be partitioned. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">10001</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector &#39;frq&#39; to keep track of the maximum frequency required for each letter (&#39;a&#39; to &#39;z&#39;) across all words in &#39;words2&#39;. </div>
+                            <div class=""> Initialize a 2D array `memo` with dimensions to store computed results for each index and sum to avoid redundant calculations in the dynamic programming solution. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Looping</b></div>
+                            <div class=""> <b>3 : Base Case, Recursion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each word in &#39;words2&#39; to compute the required frequency of each character. </div>
+                            <div class=""> Define the function `dp` that takes two parameters: `idx`, the current index of the element being considered, and `sum`, the remaining sum we need to achieve. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each word in &#39;words2&#39;, initialize a temporary frequency vector &#39;tmp&#39; to count the occurrences of each letter. </div>
+                            <div class=""> If we&#39;ve reached the end of the array (`idx == nums.size()`), return `true` if the remaining `sum` is 0, meaning we&#39;ve successfully partitioned the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Character Frequency Counting</b></div>
+                            <div class=""> <b>5 : Memoization Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][sum] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each character of the current word in &#39;words2&#39;. </div>
+                            <div class=""> Check if the current state (`idx`, `sum`) has already been computed by looking up the value in the `memo` table. If it has, return the stored result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Frequency Counting</b></div>
+                            <div class=""> <b>6 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the frequency count for the current character in the temporary frequency vector &#39;tmp&#39;. </div>
+                            <div class=""> Make a recursive call to `dp` by moving to the next index (`idx &#43; 1`) without including the current element in the sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Frequency Comparison</b></div>
+                            <div class=""> <b>7 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> max(frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>], tmp[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> nums[idx])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the global frequency vector &#39;frq&#39; to store the maximum frequency encountered for each character across all words in &#39;words2&#39;. </div>
+                            <div class=""> Check if the current element (`nums[idx]`) can be included in the subset, i.e., if the remaining `sum` is greater than or equal to the current element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Variable Initialization</b></div>
+                            <div class=""> <b>8 : Recursive Call with Element Inclusion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">|=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">-</span> nums[idx]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty vector &#39;res&#39; to store the valid words from &#39;words1&#39; that meet the criteria. </div>
+                            <div class=""> Make a recursive call to `dp` including the current element (`nums[idx]`) by subtracting it from the remaining `sum`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Looping</b></div>
+                            <div class=""> <b>9 : Return Memoized Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words1) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum] <span style="color:#666">=</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each word in &#39;words1&#39; to check if it is a valid superset of the words in &#39;words2&#39;. </div>
+                            <div class=""> Store the result of the current state (`idx`, `sum`) in the `memo` table and return it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Main Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartition</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a temporary frequency vector &#39;tmp&#39; to count the characters in the current word from &#39;words1&#39;. </div>
+                            <div class=""> Define the main function `canPartition` that takes a vector `nums` and determines whether it is possible to partition the array into two subsets with equal sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Character Frequency Counting</b></div>
+                            <div class=""> <b>11 : Assign Input Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Count the occurrences of each character in the current word from &#39;words1&#39;. </div>
+                            <div class=""> Assign the input `nums` to the class member variable `nums` for use in the `dp` function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Flag Initialization</b></div>
+                            <div class=""> <b>12 : Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a flag to &#39;true&#39;, which will be used to check if the current word is a valid superset. </div>
+                            <div class=""> Initialize a variable `sum` to store the total sum of the elements in `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Frequency Comparison</b></div>
+                            <div class=""> <b>13 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over each character in the alphabet to compare the frequencies of characters in the current word from &#39;words1&#39; with the required frequencies stored in &#39;frq&#39;. </div>
+                            <div class=""> Iterate through each element `x` in the `nums` array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Condition Checking</b></div>
+                            <div class=""> <b>14 : Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp[i] <span style="color:#666">&lt;</span> frq[i]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> x;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current word does not meet the required frequency for any character, set the flag to &#39;false&#39;. </div>
+                            <div class=""> Accumulate the value of each element `x` to compute the total sum of the elements in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Flag Update</b></div>
+                            <div class=""> <b>15 : Odd Sum Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the flag to &#39;false&#39; if the current word does not contain enough of the character &#39;i&#39; compared to &#39;words2&#39;. </div>
+                            <div class=""> Check if the sum is odd (`sum &amp; 1`). If it is, return `false` since an odd sum cannot be partitioned into two equal subsets. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Loop Exit</b></div>
+                            <div class=""> <b>16 : Divide Sum by Two</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sum <span style="color:#666">=</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Exit the loop early if any character in the word does not satisfy the frequency condition. </div>
+                            <div class=""> Since the array needs to be split into two equal subsets, divide the total `sum` by 2 to determine the target sum for one subset. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Adding Valid Words</b></div>
+                            <div class=""> <b>17 : Memoization Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(flag) res.push_back(s);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the word is a valid superset (flag is true), add it to the result vector &#39;res&#39;. </div>
+                            <div class=""> Initialize the `memo` table by setting all values to `-1`, indicating that no state has been computed yet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Return Statement</b></div>
+                            <div class=""> <b>18 : Return DP Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, sum);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the vector &#39;res&#39; containing all valid words from &#39;words1&#39; that are supersets of the words in &#39;words2&#39;. </div>
+                            <div class=""> Call the `dp` function starting from index 0 with the target sum (`sum`). Return the result of this call. </div>
                         </div>
                     
                 </div>
@@ -789,16 +797,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m), where n is the length of `words1` and m is the length of `words2`</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * k &#43; m * k), where k is the average length of strings in `words1` and `words2`</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the size of the input arrays, with an additional factor for processing each character in the strings.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * sum)</div>
+                        <div class=""> <b>Average Case:</b> O(n * sum)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * sum)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * sum), where n is the number of elements in the array and sum is the total sum of the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1) for the frequency array of size 26</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant due to the frequency array for each character and the result array which holds the universal strings.</div>    
+                        <div class=""> <b>Best Case:</b> O(sum)</div>
+                        <div class=""> <b>Worst Case:</b> O(sum)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(sum), where sum is the total sum of the array, due to the dynamic programming array.</div>    
                     </div>
 
                 </div>

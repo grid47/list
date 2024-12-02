@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
 
 
-<div class=""> You are required to build a system for a bank that automates various account transactions, including deposits, withdrawals, and transfers. The bank has multiple accounts, and each transaction must adhere to specific rules to be considered valid. Implement a class that handles these operations efficiently while ensuring transactional integrity. </div>
+<div class=""> Your friend is typing their name on a keyboard. Sometimes, while typing, a key might be long pressed, causing the character to be typed multiple times. Given the name and the typed string, determine if it is possible that the typed string could have been the result of long pressing some characters while typing the name. </div>
 
 
 
@@ -350,58 +350,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The system receives an initial array of balances and multiple commands for transactions. Each command specifies the type of transaction, the involved account(s), and the amount.</div>
-                        <div class=""> <b>Example:</b> Input:
-[&#39;Bank&#39;, &#39;withdraw&#39;, &#39;transfer&#39;, &#39;deposit&#39;, &#39;transfer&#39;, &#39;withdraw&#39;]
-[[[50, 200, 75]], [2, 20], [3, 1, 50], [2, 30], [3, 1, 100], [4, 40]]</div>
+                        <div class=""> <b>Input:</b> You are given two strings: &#39;name&#39; representing your friend&#39;s name and &#39;typed&#39; representing the characters typed on the keyboard.</div>
+                        <div class=""> <b>Example:</b> Input: name = &#34;emma&#34;, typed = &#34;eemmaa&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of accounts, n, is between 1 and 10^5.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= name.length, typed.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • Account indices are between 1 and n.</div>
-                            
-                                <div style="margin-left: 20px;"> • Transaction amounts and balances are non-negative and can go up to 10^12.</div>
-                            
-                                <div style="margin-left: 20px;"> • A maximum of 10^4 operations are supported.</div>
+                                <div style="margin-left: 20px;"> • Both &#39;name&#39; and &#39;typed&#39; consist of only lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The system outputs the success or failure of each transaction as a boolean result.</div>
-                        <div class=""> <b>Example:</b> Output:
-[null, true, true, true, false, false]</div>
+                        <div class=""> <b>Output:</b> Return True if the &#39;typed&#39; string could have been the result of long pressing characters from the &#39;name&#39;. Otherwise, return False.</div>
+                        <div class=""> <b>Example:</b> Output: True</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output matches the order of operations, indicating success or failure for each transaction type.</div>
+                                <div style="margin-left: 20px;"> • The strings &#39;name&#39; and &#39;typed&#39; will always contain only lowercase letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Process transactions while maintaining the validity of account balances and ensuring the integrity of operations.</div>
+                        <div class=""> <b>Goal:</b> To determine if the typed string could be derived from the name with some characters possibly being long pressed.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize the bank with an array representing account balances.</div>
+                                <div style="margin-left: 20px;"> • Traverse both the &#39;name&#39; and &#39;typed&#39; strings simultaneously.</div>
                             
-                                <div style="margin-left: 20px;"> • For &#39;withdraw&#39;, check if the account exists and has sufficient balance. Deduct the amount if valid.</div>
+                                <div style="margin-left: 20px;"> • If characters in &#39;typed&#39; match the current character in &#39;name&#39;, continue.</div>
                             
-                                <div style="margin-left: 20px;"> • For &#39;deposit&#39;, validate the account number and add the specified amount to the account balance.</div>
+                                <div style="margin-left: 20px;"> • If a character in &#39;typed&#39; matches the previous character, it can be considered a result of long pressing.</div>
                             
-                                <div style="margin-left: 20px;"> • For &#39;transfer&#39;, validate both account numbers and check if the source account has sufficient balance. Transfer the funds if valid.</div>
+                                <div style="margin-left: 20px;"> • If there is a mismatch and the previous character in &#39;typed&#39; isn&#39;t the same as the current character, return False.</div>
                             
-                                <div style="margin-left: 20px;"> • Return true for successful operations and false for invalid transactions.</div>
+                                <div style="margin-left: 20px;"> • At the end, check if all characters from &#39;name&#39; have been matched correctly.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the system processes transactions efficiently without exceeding computational limits.</div>
+                        <div class=""> <b>Goal:</b> Ensure that both &#39;name&#39; and &#39;typed&#39; are valid strings consisting of lowercase English letters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Transaction processing must run in O(1) time per operation.</div>
-                            
-                                <div style="margin-left: 20px;"> • Account lookup and updates are constant-time operations.</div>
+                                <div style="margin-left: 20px;"> • The length of &#39;name&#39; and &#39;typed&#39; will not exceed 1000 characters.</div>
                             
                         </div>
                     </div>        
@@ -409,22 +400,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The initial balances are non-negative.</div>
+                                <div style="margin-left: 20px;"> • The input strings contain only lowercase English letters.</div>
                             
-                                <div style="margin-left: 20px;"> • All accounts are valid at initialization.</div>
+                                <div style="margin-left: 20px;"> • The typed string is potentially longer than the name due to long presses.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input:
-[&#39;Bank&#39;, &#39;deposit&#39;, &#39;withdraw&#39;, &#39;transfer&#39;]
-[[[100, 50]], [1, 50], [2, 60], [1, 2, 30]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The initial balances are [100, 50].
-- &#39;deposit&#39;: Account 1 receives $50, new balance is $150. Return true.
-- &#39;withdraw&#39;: Account 2 tries to withdraw $60 but has insufficient funds. Return false.
-- &#39;transfer&#39;: Account 1 transfers $30 to Account 2. Updated balances are [120, 80]. Return true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: name = &#34;alison&#34;, typed = &#34;aalliiison&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The typed string has multiple instances of the &#39;l&#39;, &#39;i&#39;, and &#39;s&#39; characters, which could have been long pressed. Hence, the output is True.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: name = &#34;joan&#34;, typed = &#34;jooaann&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The second &#39;o&#39; in the typed string doesn&#39;t match any subsequent character in the name, so the output is False.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,20 +438,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution uses a direct mapping of account numbers to indices in the balance array for efficient lookups and updates. All operations are performed in constant time by validating inputs and applying changes directly to the array.</div>
+                        <div class=""> <b>Approach:</b> The approach involves scanning both strings character by character to ensure the typed string could match the name with possible long presses.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The key challenge is validating account numbers and ensuring sufficient balance for transactions.</div>
+                                <div style="margin-left: 20px;"> • The &#39;typed&#39; string may contain repeated characters which could indicate long presses.</div>
                             
-                                <div style="margin-left: 20px;"> • Since accounts are indexed and contiguous, they can be efficiently mapped to array indices.</div>
+                                <div style="margin-left: 20px;"> • We need to verify that characters in &#39;typed&#39; are either exactly matching &#39;name&#39; or are a result of long pressing.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Use a straightforward array representation for account balances.</div>
-                            
-                                <div style="margin-left: 20px;"> • Perform validation checks before applying any transaction to ensure data consistency.</div>
+                                <div style="margin-left: 20px;"> • Using two pointers to traverse &#39;name&#39; and &#39;typed&#39; should efficiently solve this problem in linear time.</div>
                             
                         </div>
                     </div>
@@ -469,11 +457,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Implement a constructor to initialize the balance array.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize two pointers, one for &#39;name&#39; and one for &#39;typed&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • Define methods for withdraw, deposit, and transfer, each performing validation and updating balances.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Iterate through &#39;typed&#39;, and for each character, compare it with the current character in &#39;name&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • Use zero-based indexing internally for efficient access to balances.</div>
+                                <div style="margin-left: 20px;"> • Step 3: If a match is found, move both pointers forward.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If a character in &#39;typed&#39; is the same as the previous one, move only the &#39;typed&#39; pointer.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: If there is no match and the current &#39;typed&#39; character doesn&#39;t match the previous one, return False.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 6: If the &#39;name&#39; pointer reaches the end of &#39;name&#39; and all characters have been matched, return True.</div>
                             
                         </div>
                     </div>
@@ -482,24 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input with no accounts should return false for all operations.</div>
+                                <div style="margin-left: 20px;"> • There will be no empty inputs for this problem since the input strings are guaranteed to have at least one character.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Processes a maximum-sized balance array with 10^5 accounts and 10^4 transactions without exceeding limits.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for input sizes up to 1000 characters.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where transaction amounts are zero or equal to account balances.</div>
-                            
-                                <div style="margin-left: 20px;"> • Ensure invalid account numbers return false.</div>
+                                <div style="margin-left: 20px;"> • If &#39;name&#39; is a prefix of &#39;typed&#39;, ensure that long presses of the last character in &#39;name&#39; are correctly handled.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check operations with edge case values like maximum balance and transaction amounts.</div>
+                                <div style="margin-left: 20px;"> • The &#39;typed&#39; string can only contain repeated characters from the &#39;name&#39;.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,45 +508,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Assign Balance to Bank</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Character Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Account Size Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Increment Index</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Long Press Validation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Account Index Adjustments</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return False</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Transfer Validation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return False on Invalid Transfer</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Transfer Logic</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Transfer Logic</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return True on Successful Transfer</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Function Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Deposit Validation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Deposit Logic</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return True on Successful Deposit</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Function Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Withdraw Validation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Withdraw Logic</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return True on Successful Withdrawal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Final Validation</button>
                     
                 </div>
 
@@ -563,247 +531,98 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> bal;
-</span></span><span style="display:flex;"><span>Bank(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&amp;</span> balance) {
-</span></span><span style="display:flex;"><span>    bal <span style="color:#666">=</span> balance;
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> bal.size();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isLongPressedName</span>(string name, string typed) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, m <span style="color:#666">=</span> name.length(), n <span style="color:#666">=</span> typed.length();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>j)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> name[i] <span style="color:#666">==</span> typed[j])
+</span></span><span style="display:flex;"><span>            <span style="color:#666">++</span>i;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>j <span style="color:#666">||</span> typed[j] <span style="color:#666">!=</span> typed[j <span style="color:#666">-</span> <span style="color:#666">1</span>])
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> m;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">transfer</span>(<span style="color:#0b0;font-weight:bold">int</span> acc1, <span style="color:#0b0;font-weight:bold">int</span> acc2, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> money) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ac1 <span style="color:#666">=</span> acc1 <span style="color:#666">-</span> <span style="color:#666">1</span> , ac2 <span style="color:#666">=</span> acc2 <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ac1 <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> ac1 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> ac2 <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> ac2 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> bal[ac1] <span style="color:#666">&lt;</span> money)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    bal[ac1] <span style="color:#666">-=</span> money;
-</span></span><span style="display:flex;"><span>    bal[ac2] <span style="color:#666">+=</span> money;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">deposit</span>(<span style="color:#0b0;font-weight:bold">int</span> acc, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> money) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(acc <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">||</span> acc <span style="color:#666">&gt;</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    bal[acc <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> money;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">withdraw</span>(<span style="color:#0b0;font-weight:bold">int</span> acc, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> money) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(acc <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">||</span> acc <span style="color:#666">&gt;</span> n <span style="color:#666">||</span> bal[acc <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;</span> money) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;        
-</span></span><span style="display:flex;"><span>    bal[acc <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-=</span> money;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Bank object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Bank* obj = new Bank(balance);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_1 = obj-&gt;transfer(account1,account2,money);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_2 = obj-&gt;deposit(account,money);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_3 = obj-&gt;withdraw(account,money);
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isLongPressedName</span>(string name, string typed) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the integer variable `n`, which will store the number of accounts. </div>
+                            <div class=""> Define the function &#39;isLongPressedName&#39; that takes two strings, &#39;name&#39; and &#39;typed&#39;, and returns a boolean indicating whether &#39;typed&#39; is a valid long-pressed version of &#39;name&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Vector Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> bal;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, m <span style="color:#666">=</span> name.length(), n <span style="color:#666">=</span> typed.length();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a vector `bal` of type `long long` to hold the balances of the accounts. </div>
+                            <div class=""> Initialize two integer variables, &#39;i&#39; to track the index of &#39;name&#39;, and &#39;m&#39; and &#39;n&#39; to store the lengths of &#39;name&#39; and &#39;typed&#39;, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Constructor Definition</b></div>
+                            <div class=""> <b>3 : For Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Bank(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&amp;</span> balance) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>j)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Constructor to initialize the bank with an account balance vector. </div>
+                            <div class=""> Start a loop to iterate through the characters of the &#39;typed&#39; string using the index variable &#39;j&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Assign Balance to Bank</b></div>
+                            <div class=""> <b>4 : Character Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bal <span style="color:#666">=</span> balance;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> name[i] <span style="color:#666">==</span> typed[j])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the passed `balance` vector to the `bal` member variable. </div>
+                            <div class=""> Check if the current character in &#39;typed&#39; matches the current character in &#39;name&#39;. If it does, move to the next character in &#39;name&#39; by incrementing &#39;i&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Account Size Assignment</b></div>
+                            <div class=""> <b>5 : Increment Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> bal.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#666">++</span>i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the number of accounts `n` by determining the size of the balance vector. </div>
+                            <div class=""> If the characters match, increment &#39;i&#39; to move to the next character in &#39;name&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Function Declaration</b></div>
+                            <div class=""> <b>6 : Long Press Validation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">transfer</span>(<span style="color:#0b0;font-weight:bold">int</span> acc1, <span style="color:#0b0;font-weight:bold">int</span> acc2, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> money) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>j <span style="color:#666">||</span> typed[j] <span style="color:#666">!=</span> typed[j <span style="color:#666">-</span> <span style="color:#666">1</span>])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the `transfer` function that allows transferring money between two accounts. </div>
+                            <div class=""> If the characters do not match, check if the current character in &#39;typed&#39; is not the same as the previous one, or if it is the first character. If this condition is met, it means &#39;typed&#39; contains an invalid sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Account Index Adjustments</b></div>
+                            <div class=""> <b>7 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ac1 <span style="color:#666">=</span> acc1 <span style="color:#666">-</span> <span style="color:#666">1</span> , ac2 <span style="color:#666">=</span> acc2 <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adjusts the account numbers (1-based to 0-based index) for `ac1` and `ac2`. </div>
+                            <div class=""> If an invalid sequence is detected, return false immediately, as &#39;typed&#39; cannot be a valid long-pressed version of &#39;name&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Transfer Validation</b></div>
+                            <div class=""> <b>8 : Final Validation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ac1 <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> ac1 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> ac2 <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> ac2 <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> bal[ac1] <span style="color:#666">&lt;</span> money)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> m;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the account numbers are valid and if the balance in `ac1` is sufficient to cover the transfer. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Return False on Invalid Transfer</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns `false` if the transfer is invalid due to insufficient funds or invalid account numbers. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Transfer Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bal[ac1] <span style="color:#666">-=</span> money;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Deducts the specified amount from account `ac1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Transfer Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bal[ac2] <span style="color:#666">+=</span> money;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the specified amount to account `ac2`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return True on Successful Transfer</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns `true` if the transfer is successful. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Function Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">deposit</span>(<span style="color:#0b0;font-weight:bold">int</span> acc, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> money) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Declares the `deposit` function that allows depositing money into an account. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Deposit Validation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(acc <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">||</span> acc <span style="color:#666">&gt;</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the account number `acc` is valid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Deposit Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bal[acc <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> money;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the specified amount to the balance of the given account. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return True on Successful Deposit</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns `true` if the deposit is successful. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Function Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">withdraw</span>(<span style="color:#0b0;font-weight:bold">int</span> acc, <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> money) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Declares the `withdraw` function that allows withdrawing money from an account. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Withdraw Validation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(acc <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">||</span> acc <span style="color:#666">&gt;</span> n <span style="color:#666">||</span> bal[acc <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;</span> money) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the account number is valid and if the account has enough balance for the withdrawal. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Withdraw Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bal[acc <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-=</span> money;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Deducts the specified amount from the account balance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Return True on Successful Withdrawal</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns `true` if the withdrawal is successful. </div>
+                            <div class=""> After iterating through &#39;typed&#39;, return true if all characters in &#39;name&#39; have been matched. If &#39;i&#39; equals &#39;m&#39;, it means the entire &#39;name&#39; string was successfully matched. </div>
                         </div>
                     
                 </div>
@@ -823,16 +642,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) per transaction.</div>
-                        <div class=""> <b>Average Case:</b> O(1) per transaction.</div>
-                        <div class=""> <b>Worst Case:</b> O(1) per transaction.</div> 
-                        <div class=""> <b>Description:</b> Each operation involves constant-time array access and validation.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the &#39;typed&#39; string, as we traverse &#39;typed&#39; and &#39;name&#39; only once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) for storing balances.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for storing balances.</div> 
-                        <div class=""> <b>Description:</b> The balance array is the only significant space usage.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1), as we are only using a constant amount of extra space.</div>    
                     </div>
 
                 </div>

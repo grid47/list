@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a binary string <code>s</code> of length <code>n</code>. You can perform two types of operations: (1) Flip all characters from index <code>0</code> to <code>i</code> (inclusive), with a cost of <code>i + 1</code>. (2) Flip all characters from index <code>i</code> to <code>n - 1</code> (inclusive), with a cost of <code>n - i</code>. The goal is to return the minimum cost required to make all the characters in the string equal (either all <code>0</code>s or all <code>1</code>s). </div>
+<div class=""> Given an array where each element represents the required size of the group for each person, group the people accordingly and return the groups. Each person must be in exactly one group. </div>
 
 
 
@@ -359,45 +359,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A binary string `s` of length `n`.</div>
-                        <div class=""> <b>Example:</b> s = &#34;1101&#34;</div>
+                        <div class=""> <b>Input:</b> You are given an array where each element represents the group size that each person is assigned to.</div>
+                        <div class=""> <b>Example:</b> Input: groupSizes = [3,3,3,3,3,1,3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 500</div>
                             
-                                <div style="margin-left: 20px;"> • s[i] is either &#39;0&#39; or &#39;1&#39;</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= groupSizes[i] &lt;= n</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum cost to make all characters equal in the string.</div>
-                        <div class=""> <b>Example:</b> 3</div>
+                        <div class=""> <b>Output:</b> Return a list of lists, where each list represents a group containing the people who belong to that group.</div>
+                        <div class=""> <b>Example:</b> Output: [[5], [0,1,2], [3,4,6]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • Each person should appear in exactly one group.</div>
+                            
+                                <div style="margin-left: 20px;"> • The number of people in each group must match the values in the input array.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to compute the minimum cost by applying the two types of operations on the string `s`.</div>
+                        <div class=""> <b>Goal:</b> To group people based on the sizes specified in the input array.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the string to determine the best points to apply the flip operations.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the input array and maintain a list of people for each group size.</div>
                             
-                                <div style="margin-left: 20px;"> • Apply the operations considering the costs and track the minimum cost.</div>
+                                <div style="margin-left: 20px;"> • Once a group reaches the required size, add it to the result and start a new group for the next people.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string length is at most 10^5, which means an O(n) or O(n log n) solution is preferable.</div>
+                        <div class=""> <b>Goal:</b> Ensure each person is placed in exactly one group and no group exceeds its specified size.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The groupSizes array has length n.</div>
                             
-                                <div style="margin-left: 20px;"> • s[i] is either &#39;0&#39; or &#39;1&#39;</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= groupSizes[i] &lt;= n</div>
                             
                         </div>
                     </div>        
@@ -405,19 +409,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string is non-empty and contains only &#39;0&#39; and &#39;1&#39; characters.</div>
+                                <div style="margin-left: 20px;"> • The input array will always contain valid values and have a valid solution.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> To make the string &#39;1101&#39; all &#39;0&#39;s or all &#39;1&#39;s, apply the first operation with `i = 1` (cost 2) and the second operation with `i = 2` (cost 1), giving a minimum total cost of 3.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the string &#39;111000&#39;, applying the first operation with `i = 3` (cost 4) results in &#39;111111&#39;, which is the minimum cost to make all characters equal.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: groupSizes = [3,3,3,3,3,1,3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we must group people such that the sizes of the groups correspond to the values in the groupSizes array. For example, the first three people (0, 1, and 2) must form a group of size 3, while the last person (5) must be in a group of size 1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,16 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves checking where to apply flip operations and computing the minimum cost for each scenario.</div>
+                        <div class=""> <b>Approach:</b> The solution uses a greedy approach where people are grouped in batches according to the specified group sizes.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The operations can only flip from the beginning or from the end of the string.</div>
+                                <div style="margin-left: 20px;"> • We need to keep track of people who are yet to be grouped based on their required group size.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to identify points where flipping operations can be applied with minimum cost to make all characters equal.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the groupSizes array, and as each person is processed, maintain a list of current groups. Once a group reaches its specified size, move on to the next group.</div>
                             
                         </div>
                     </div>
@@ -458,9 +458,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Identify positions in the string where flip operations can change the string to all &#39;0&#39;s or all &#39;1&#39;s.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the `groupSizes` array.</div>
                             
-                                <div style="margin-left: 20px;"> • Compute the cost of each operation and return the minimum total cost.</div>
+                                <div style="margin-left: 20px;"> • For each group size, add the corresponding person to the list of the appropriate group.</div>
+                            
+                                <div style="margin-left: 20px;"> • Once a group reaches the required size, add it to the result list and start a new group.</div>
                             
                         </div>
                     </div>
@@ -469,22 +471,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty string is not a valid input.</div>
+                                <div style="margin-left: 20px;"> • If the groupSizes array is empty, there should be no groups formed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large strings (near the upper constraint), the solution should be efficient (O(n) or O(n log n) time complexity).</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution efficiently handles input sizes up to the maximum allowed (500).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string can already be uniform (all &#39;0&#39;s or all &#39;1&#39;s), in which case no operations are needed.</div>
+                                <div style="margin-left: 20px;"> • If all people are required to be in groups of size 1, each person will form their own group.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle up to 100,000 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • Each group will always have the correct number of people as per the input constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -501,49 +503,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 String Manipulations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 String Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Conditional Checks</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Group Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Add Group to Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Checks</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Swap Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Index Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Index Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Boolean Variables</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop Constructs</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Checks</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 No Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Boolean Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Index Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Conditional Checks</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 No Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Boolean Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Index Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
                     
                 </div>
 
@@ -552,68 +526,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minimumCost</span>(string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    0100111
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    0000000 3 + 2 + 1        
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    1011111 4 + 2 + 1   if odd len choose middle
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    0101000
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    1011111 3 + 3 + 2 + 1         
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    0100000 4 + 3 + 2 + 1 if odd len choose middle
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    010111
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    011011
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    011011  0/ 2 + 3 + 1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">            1/ 3 + 2 + 1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    010011
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    010000  2 + 2 + 1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    101111  3
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    011111  3 + 2
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    111111  3 + 2 + 1 = 6
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    010000  3 = 3
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    100000  3 + 2 = 5
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    000000  3 + 2 + 1 = 6
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    */</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">char</span> k <span style="color:#666">=</span> s[n <span style="color:#666">/</span> <span style="color:#666">2</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i, j;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">%</span> <span style="color:#666">2</span>)
-</span></span><span style="display:flex;"><span>        i <span style="color:#666">=</span> n<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> n<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> i <span style="color:#666">=</span> n<span style="color:#666">/</span><span style="color:#666">2</span>, j <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> ltog <span style="color:#666">=</span> <span style="color:#a2f">true</span>, rtog <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> k <span style="color:#666">&amp;&amp;</span> rtog <span style="color:#666">||</span> s[i] <span style="color:#666">!=</span> k <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>rtog) {
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                rtog <span style="color:#666">=</span> <span style="color:#666">!</span>rtog;
-</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> n <span style="color:#666">-</span> i;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((s[j] <span style="color:#666">==</span> k <span style="color:#666">&amp;&amp;</span> ltog) <span style="color:#666">||</span> (s[j] <span style="color:#666">!=</span> k <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>ltog)) {
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                ltog <span style="color:#666">=</span> <span style="color:#666">!</span>ltog;
-</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">--</span>;                
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> groupThePeople(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> gz) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res, gzs(gz.size() <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> gz.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        gzs[gz[i]].push_back(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(gzs[gz[i]].size() <span style="color:#666">==</span> gz[i]) {
+</span></span><span style="display:flex;"><span>            res.push_back({});
+</span></span><span style="display:flex;"><span>            swap(res.back(), gzs[gz[i]]);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -621,223 +543,83 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : String Manipulations</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minimumCost</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> groupThePeople(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> gz) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function to calculate the minimum cost of a string transformation. </div>
+                            <div class=""> Defines a function that takes a vector of group sizes as input and returns grouped indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : String Operations</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res, gzs(gz.size() <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Finds the size of the input string `s`. </div>
+                            <div class=""> Initializes a result vector and an auxiliary grouping vector for grouping based on sizes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Conditional Checks</b></div>
+                            <div class=""> <b>3 : Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> gz.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Handles the edge case where the string has only one character. </div>
+                            <div class=""> Loops through each index in the group size vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Group Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gzs[gz[i]].push_back(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the result variable `res` to store the cost. </div>
+                            <div class=""> Assigns the current index to the group corresponding to its size. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Character Operations</b></div>
+                            <div class=""> <b>5 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">char</span> k <span style="color:#666">=</span> s[n <span style="color:#666">/</span> <span style="color:#666">2</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(gzs[gz[i]].size() <span style="color:#666">==</span> gz[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Determines the target character from the middle of the string. </div>
+                            <div class=""> Checks if the current group has reached the required size. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Add Group to Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i, j;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back({});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares indices for traversal from the middle outwards. </div>
+                            <div class=""> Creates a new subgroup in the result vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Checks</b></div>
+                            <div class=""> <b>7 : Swap Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">%</span> <span style="color:#666">2</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            swap(res.back(), gzs[gz[i]]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks whether the length of the string is odd. </div>
+                            <div class=""> Swaps the last group in the result vector with the filled group. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Index Calculation</b></div>
+                            <div class=""> <b>8 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i <span style="color:#666">=</span> n<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> n<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes traversal indices for an odd-length string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Index Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> i <span style="color:#666">=</span> n<span style="color:#666">/</span><span style="color:#666">2</span>, j <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes traversal indices for an even-length string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Boolean Variables</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> ltog <span style="color:#666">=</span> <span style="color:#a2f">true</span>, rtog <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes toggle variables for tracking left and right flips. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Loop Constructs</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterates over the string from the middle to the edges. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Conditional Checks</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> k <span style="color:#666">&amp;&amp;</span> rtog <span style="color:#666">||</span> s[i] <span style="color:#666">!=</span> k <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>rtog) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks whether the current right character matches the target. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : No Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Handles cases where no action is required. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Boolean Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                rtog <span style="color:#666">=</span> <span style="color:#666">!</span>rtog;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Toggles the right flip state. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">+=</span> n <span style="color:#666">-</span> i;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the cost of flipping the right character. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Index Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves to the next right character. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Conditional Checks</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((s[j] <span style="color:#666">==</span> k <span style="color:#666">&amp;&amp;</span> ltog) <span style="color:#666">||</span> (s[j] <span style="color:#666">!=</span> k <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>ltog)) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks whether the current left character matches the target. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : No Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Handles cases where no action is required. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Boolean Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ltog <span style="color:#666">=</span> <span style="color:#666">!</span>ltog;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Toggles the left flip state. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">+=</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the cost of flipping the left character. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Index Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">--</span>;                
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves to the next left character. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the total calculated cost. </div>
+                            <div class=""> Returns the final grouped result vector. </div>
                         </div>
                     
                 </div>
@@ -860,13 +642,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution runs in linear time since we need to check each character at most once.</div>                                               
+                        <div class=""> <b>Description:</b> The algorithm processes each person once, so the time complexity is O(n), where n is the number of people.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The solution uses constant space as we only store a few variables to track the current state.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the groups in a result list.</div>    
                     </div>
 
                 </div>

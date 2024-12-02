@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a 2D integer array <code>tiles</code>, where each element <code>tiles[i] = [li, ri]</code> represents that all integers from <code>li</code> to <code>ri</code> are painted white on a number line. Additionally, you are given an integer <code>carpetLen</code>, which represents the length of a carpet that can be placed anywhere on the number line. Your task is to return the maximum number of white tiles that can be covered by placing the carpet in a way that it maximizes the number of white tiles covered. </div>
+<div class=""> You are given n gardens labeled from 1 to n, and an array paths where paths[i] = [xi, yi] describes a bidirectional path between garden xi and garden yi. Each garden needs to be assigned one of 4 types of flowers. You need to ensure that for any two gardens connected by a path, they have different types of flowers. Your task is to return any valid flower assignment for all gardens such that no two adjacent gardens share the same flower type. </div>
 
 
 
@@ -359,49 +359,59 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two values: a list `tiles` containing ranges, and a number `carpetLen` representing the length of the carpet.</div>
-                        <div class=""> <b>Example:</b> tiles = [[1, 4], [6, 8], [12, 14]], carpetLen = 5</div>
+                        <div class=""> <b>Input:</b> You are given an integer n, the number of gardens, and a list of pairs paths, where each pair [xi, yi] represents a bidirectional path between garden xi and garden yi.</div>
+                        <div class=""> <b>Example:</b> Input: n = 5, paths = [[1,2], [2,3], [3,4], [4,5]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= tiles.length &lt;= 50,000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • tiles[i].length == 2</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= paths.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= li &lt;= ri &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • paths[i].length == 2</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= carpetLen &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= xi, yi &lt;= n</div>
                             
-                                <div style="margin-left: 20px;"> • The tiles are non-overlapping.</div>
+                                <div style="margin-left: 20px;"> • xi != yi</div>
+                            
+                                <div style="margin-left: 20px;"> • Each garden has at most 3 paths coming into or leaving it.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum number of white tiles that the carpet can cover.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> Return an array where the i-th element represents the type of flower planted in the i-th garden. The flower types are denoted by integers 1, 2, 3, or 4.</div>
+                        <div class=""> <b>Example:</b> Output: [1, 2, 3, 4, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • There is guaranteed to be at least one valid answer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To compute the maximum number of white tiles that can be covered by placing the carpet optimally.</div>
+                        <div class=""> <b>Goal:</b> The goal is to assign flower types to gardens such that no two connected gardens have the same flower type.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the tiles by their left endpoint.</div>
+                                <div style="margin-left: 20px;"> • 1. Represent the gardens and paths as a graph.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window approach to check each possible placement of the carpet over the tiles, and track the maximum number of tiles covered.</div>
-                            
-                                <div style="margin-left: 20px;"> • For each placement, consider whether the carpet fully or partially covers each tile, and adjust the count of white tiles covered accordingly.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a greedy approach to assign flower types to gardens, making sure adjacent gardens get different flower types.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Make sure the solution is efficient enough to handle large inputs and works within the provided constraints.</div>
+                        <div class=""> <b>Goal:</b> The problem has the following constraints:</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays of up to 50,000 tile ranges and large values of `li`, `ri`, and `carpetLen`.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= paths.length &lt;= 2 * 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= xi, yi &lt;= n</div>
+                            
+                                <div style="margin-left: 20px;"> • xi != yi</div>
+                            
+                                <div style="margin-left: 20px;"> • Every garden has at most 3 paths coming into or leaving it.</div>
                             
                         </div>
                     </div>        
@@ -409,19 +419,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The tiles are non-overlapping, so no two tiles will share the same number.</div>
+                                <div style="margin-left: 20px;"> • It is guaranteed that there is always a valid solution.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> tiles = [[1, 5], [10, 11], [12, 18], [20, 25], [30, 32]], carpetLen = 10</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, placing the carpet starting at tile 10 will cover 9 white tiles, which is the maximum number of tiles that can be covered by a carpet of length 10.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5, paths = [[1,2], [2,3], [3,4], [4,5]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can assign flowers such that adjacent gardens have different types. One valid solution is to assign flowers [1, 2, 1, 2, 1] to gardens [1, 2, 3, 4, 5].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> tiles = [[1, 2], [4, 5], [7, 10]], carpetLen = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Placing the carpet from tile 4 to tile 7 covers 4 white tiles, which is the maximum number that can be covered.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 6, paths = [[1,2], [1,3], [2,4], [3,5], [4,6]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, we can assign flowers such that adjacent gardens do not share the same flower type. One valid solution is [1, 2, 3, 4, 3, 2].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +455,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> This problem can be solved using a sliding window approach after sorting the tiles based on their left endpoints. By keeping track of the covered white tiles as the carpet slides over the tile ranges, we can find the maximum number of tiles that the carpet can cover.</div>
+                        <div class=""> <b>Approach:</b> The approach is based on graph coloring, where each garden is a node, and paths between gardens are edges. The goal is to color the nodes (gardens) with 4 colors (flower types) such that no two connected nodes share the same color.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem is about finding the optimal placement of the carpet, which requires considering each possible starting point and adjusting the number of covered tiles dynamically.</div>
+                                <div style="margin-left: 20px;"> • The problem can be viewed as a graph coloring problem, where adjacent gardens must be assigned different flowers.</div>
+                            
+                                <div style="margin-left: 20px;"> • Since each garden has at most 3 paths, we can use a greedy approach to assign flower types.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By using a sliding window technique, we can efficiently determine the maximum coverage without needing to check each position individually.</div>
+                                <div style="margin-left: 20px;"> • A greedy algorithm should suffice for this problem, where we try to assign the lowest available flower type that hasn’t been used by adjacent gardens.</div>
                             
                         </div>
                     </div>
@@ -462,11 +474,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the tiles based on their left coordinate.</div>
+                                <div style="margin-left: 20px;"> • 1. Construct a graph where each garden is a node and each path is an edge.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over each possible position where the carpet can start, and compute the number of white tiles covered.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize an array to store flower types for each garden, initially set to 0.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window to track how many tiles are covered by the carpet for each possible starting position, ensuring that partial tiles are counted correctly.</div>
+                                <div style="margin-left: 20px;"> • 3. For each garden, check the flower types of its neighbors and assign the lowest available flower type.</div>
                             
                         </div>
                     </div>
@@ -475,22 +487,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This problem guarantees that the input array will contain at least one tile, so no need to handle empty input.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees at least one valid path, so no need to handle empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works within the constraints for large inputs (up to 50,000 tiles).</div>
+                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle large inputs, with up to 10^4 gardens and 2 * 10^4 paths.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Tiles where the carpet length exactly matches the size of a tile or the sum of several tiles.</div>
+                                <div style="margin-left: 20px;"> • The constraints ensure there is always a valid solution, so no need to handle cases with no solution.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The carpet&#39;s length should be carefully managed to ensure no overflow or inefficient calculations.</div>
+                                <div style="margin-left: 20px;"> • The number of paths per garden will not exceed 3, so the graph is sparse.</div>
                             
                         </div>                                                                        
                     </div>
@@ -507,35 +519,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Graph Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sort Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Graph Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start for Coverage Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Graph Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check for Full Interval Coverage</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Graph Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Cover Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Max Result Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Color Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Interval Pointer Increment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Adjacent Gardens Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Else Block for Partial Coverage</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Mark Colors Used</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Partial Coverage Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Color Assignment Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Result Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check Available Color</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Cover Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Assign Color</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Interval Pointer Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -544,27 +554,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumWhiteTiles</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> t, <span style="color:#0b0;font-weight:bold">int</span> len) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> t.size(), res <span style="color:#666">=</span> <span style="color:#666">0</span>,
-</span></span><span style="display:flex;"><span>        cover <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>, partial <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    sort(t.begin(), t.end());
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> res <span style="color:#666">&lt;</span> len ; ) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t[j][<span style="color:#666">0</span>] <span style="color:#666">+</span> len <span style="color:#666">&gt;</span> t[i][<span style="color:#666">1</span>]) {
-</span></span><span style="display:flex;"><span>            cover <span style="color:#666">+=</span> t[i][<span style="color:#666">1</span>] <span style="color:#666">-</span> t[i][<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, cover);               
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            partial <span style="color:#666">=</span> max(<span style="color:#666">0</span>, t[j][<span style="color:#666">0</span>] <span style="color:#666">+</span> len <span style="color:#666">-</span> t[i][<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, cover <span style="color:#666">+</span> partial);
-</span></span><span style="display:flex;"><span>            cover <span style="color:#666">-=</span> (t[j][<span style="color:#666">1</span>] <span style="color:#666">-</span> t[j][<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> gardenNoAdj(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> paths) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">p</span>: paths) {
+</span></span><span style="display:flex;"><span>        gph[p[<span style="color:#666">0</span>]<span style="color:#666">-</span><span style="color:#666">1</span>].push_back(p[<span style="color:#666">1</span>]<span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        gph[p[<span style="color:#666">1</span>]<span style="color:#666">-</span><span style="color:#666">1</span>].push_back(p[<span style="color:#666">0</span>]<span style="color:#666">-</span><span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> colors[<span style="color:#666">5</span>] <span style="color:#666">=</span> {};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span>: gph[i]) {
+</span></span><span style="display:flex;"><span>            colors[res[j]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> <span style="color:#666">4</span>; c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; c<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>colors[c])
+</span></span><span style="display:flex;"><span>                res[i] <span style="color:#666">=</span> c;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -572,153 +579,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumWhiteTiles</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> t, <span style="color:#0b0;font-weight:bold">int</span> len) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> gardenNoAdj(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> paths) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function header for `maximumWhiteTiles`, which takes a 2D vector `t` representing intervals and an integer `len` representing the target length, and returns the maximum number of white tiles covered. </div>
+                            <div class=""> Define the function &#39;gardenNoAdj&#39; that solves the problem of coloring the gardens such that no two adjacent gardens share the same color. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> t.size(), res <span style="color:#666">=</span> <span style="color:#666">0</span>,
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `n` to store the size of the input intervals `t`, and initializes `res` to store the result (maximum number of white tiles covered). </div>
+                            <div class=""> Initialize the result vector &#39;res&#39; with size &#39;n&#39; and set all garden colors to 0, indicating that no garden is colored yet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Graph Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cover <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>, partial <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `cover` to keep track of the current covered area, `j` as the pointer for the second interval, and `partial` to store partial coverage for the current interval. </div>
+                            <div class=""> Create an adjacency list &#39;gph&#39; to represent the graph of gardens, where each garden&#39;s neighbors (adjacent gardens) will be stored. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Sort Operation</b></div>
+                            <div class=""> <b>4 : Graph Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(t.begin(), t.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">p</span>: paths) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the intervals in ascending order based on the starting position to facilitate the greedy approach of checking coverage. </div>
+                            <div class=""> Iterate through the paths provided, where each path connects two gardens. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Start for Coverage Calculation</b></div>
+                            <div class=""> <b>5 : Graph Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> res <span style="color:#666">&lt;</span> len ; ) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[p[<span style="color:#666">0</span>]<span style="color:#666">-</span><span style="color:#666">1</span>].push_back(p[<span style="color:#666">1</span>]<span style="color:#666">-</span><span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop where we iterate through the intervals, ensuring the total coverage does not exceed the target `len`. </div>
+                            <div class=""> For each path, add an edge between the two gardens in the adjacency list. Since gardens are 1-indexed, subtract 1 to match the 0-indexed array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check for Full Interval Coverage</b></div>
+                            <div class=""> <b>6 : Graph Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t[j][<span style="color:#666">0</span>] <span style="color:#666">+</span> len <span style="color:#666">&gt;</span> t[i][<span style="color:#666">1</span>]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[p[<span style="color:#666">1</span>]<span style="color:#666">-</span><span style="color:#666">1</span>].push_back(p[<span style="color:#666">0</span>]<span style="color:#666">-</span><span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current interval&#39;s end exceeds the target length `len` by comparing `t[j][0] &#43; len` to `t[i][1]`. If true, it means the interval is fully covered. </div>
+                            <div class=""> Similarly, add the reverse edge to ensure the graph is undirected (both gardens are adjacent to each other). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Cover Update</b></div>
+                            <div class=""> <b>7 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cover <span style="color:#666">+=</span> t[i][<span style="color:#666">1</span>] <span style="color:#666">-</span> t[i][<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates `cover` by adding the length of the current interval, from `t[i][0]` to `t[i][1]`. </div>
+                            <div class=""> Start a loop to iterate through each garden and assign a color to it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Max Result Update</b></div>
+                            <div class=""> <b>8 : Color Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, cover);               
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> colors[<span style="color:#666">5</span>] <span style="color:#666">=</span> {};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the result `res` to be the maximum of the current `res` and `cover`, which tracks the maximum number of tiles covered. </div>
+                            <div class=""> Initialize an array &#39;colors&#39; to keep track of which colors are already used by adjacent gardens. The array size is 5 because there are 4 colors (indexed 1 to 4) and a 0 to indicate unused colors. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Interval Pointer Increment</b></div>
+                            <div class=""> <b>9 : Adjacent Gardens Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span>: gph[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the interval pointer `i` to move to the next interval. </div>
+                            <div class=""> For each garden &#39;i&#39;, loop through its adjacent gardens to find out which colors are already taken. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Else Block for Partial Coverage</b></div>
+                            <div class=""> <b>10 : Mark Colors Used</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            colors[res[j]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current interval is not fully covered, we calculate the partial coverage. </div>
+                            <div class=""> Mark the color of each adjacent garden as used in the &#39;colors&#39; array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Partial Coverage Calculation</b></div>
+                            <div class=""> <b>11 : Color Assignment Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            partial <span style="color:#666">=</span> max(<span style="color:#666">0</span>, t[j][<span style="color:#666">0</span>] <span style="color:#666">+</span> len <span style="color:#666">-</span> t[i][<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> <span style="color:#666">4</span>; c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; c<span style="color:#666">--</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the partial coverage for the current interval, ensuring that the coverage does not go below zero. </div>
+                            <div class=""> Loop through the available colors (from 4 down to 1) and assign the first available color to the current garden. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Max Result Update</b></div>
+                            <div class=""> <b>12 : Check Available Color</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, cover <span style="color:#666">+</span> partial);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>colors[c])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the result `res` with the maximum of the current `res` and the sum of `cover` and `partial` coverage. </div>
+                            <div class=""> If the current color is not used by any adjacent garden (i.e., &#39;colors[c]&#39; is 0), assign this color to the garden. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Cover Update</b></div>
+                            <div class=""> <b>13 : Assign Color</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cover <span style="color:#666">-=</span> (t[j][<span style="color:#666">1</span>] <span style="color:#666">-</span> t[j][<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res[i] <span style="color:#666">=</span> c;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decreases `cover` by the length of the interval that is no longer part of the current coverage. </div>
+                            <div class=""> Assign the color &#39;c&#39; to the garden &#39;i&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Interval Pointer Increment</b></div>
+                            <div class=""> <b>14 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the second interval pointer `j` to move to the next interval. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the result `res`, which is the maximum number of white tiles covered. </div>
+                            <div class=""> Return the &#39;res&#39; vector, which contains the colors assigned to each garden. </div>
                         </div>
                     
                 </div>
@@ -738,16 +735,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n) where `n` is the number of tiles.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n &#43; m), where n is the number of gardens and m is the number of paths.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage needed for the tiles array and any additional variables used for tracking the carpet placement.</div>    
+                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n &#43; m), where n is the number of gardens and m is the number of paths, for storing the graph and flower assignments.</div>    
                     </div>
 
                 </div>

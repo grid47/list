@@ -275,7 +275,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -302,7 +302,7 @@
 
 
 
-<div class=""> You are given a 2D matrix <code>grid</code> of size <code>m x n</code>. In one operation, you can change the value of any cell to any non-negative number. Your task is to perform operations such that each cell is equal to the cell below it, and different from the cell to its right. Return the minimum number of operations needed to achieve these conditions. </div>
+<div class=""> Given a list of customer orders in a restaurant, return a table where each row represents a table number and the columns represent the number of food items ordered at that table, sorted in lexicographical order. </div>
 
 
 
@@ -353,45 +353,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 2D matrix `grid` with `m` rows and `n` columns.</div>
-                        <div class=""> <b>Example:</b> grid = [[2, 1, 3], [2, 0, 3]]</div>
+                        <div class=""> <b>Input:</b> The input is a list of lists, where each sublist contains a customer name, table number, and food item.</div>
+                        <div class=""> <b>Example:</b> orders = [[&#34;John&#34;, &#34;2&#34;, &#34;Burger&#34;], [&#34;Jane&#34;, &#34;1&#34;, &#34;Pasta&#34;], [&#34;David&#34;, &#34;3&#34;, &#34;Pizza&#34;], [&#34;John&#34;, &#34;2&#34;, &#34;Pasta&#34;], [&#34;Jane&#34;, &#34;3&#34;, &#34;Pizza&#34;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= orders.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= grid[i][j] &lt;= 9</div>
+                                <div style="margin-left: 20px;"> • orders[i].length == 3</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= customerName.length, foodItem.length &lt;= 20</div>
+                            
+                                <div style="margin-left: 20px;"> • customerName and foodItem consist of lowercase and uppercase English letters and spaces.</div>
+                            
+                                <div style="margin-left: 20px;"> • tableNumber is an integer between 1 and 500</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of operations needed to make each cell equal to the cell below it and different from the cell to its right.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> The output is a 2D list representing the display table. The first row is a header, with subsequent rows showing the number of orders for each food item at each table.</div>
+                        <div class=""> <b>Example:</b> [[&#34;Table&#34;, &#34;Burger&#34;, &#34;Pasta&#34;, &#34;Pizza&#34;], [&#34;1&#34;, &#34;0&#34;, &#34;1&#34;, &#34;0&#34;], [&#34;2&#34;, &#34;1&#34;, &#34;1&#34;, &#34;0&#34;], [&#34;3&#34;, &#34;0&#34;, &#34;0&#34;, &#34;2&#34;]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output is a 2D list.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the minimum number of operations to make the grid satisfy the given conditions.</div>
+                        <div class=""> <b>Goal:</b> To count the number of orders of each food item at each table and return them in a sorted manner.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a frequency table to count the occurrences of each value in each column of the grid.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the orders and store the counts of each food item per table using a map.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use dynamic programming to recursively calculate the minimum number of operations needed by considering each column and ensuring the constraints are met.</div>
+                                <div style="margin-left: 20px;"> • Sort the food items alphabetically and tables in increasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Memoize the results of subproblems to avoid redundant calculations.</div>
+                                <div style="margin-left: 20px;"> • Construct the output list with table numbers and their respective food item counts.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem constraints define the limits on the size of the matrix and the values within it.</div>
+                        <div class=""> <b>Goal:</b> The problem ensures that input size is manageable for the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • orders.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= grid[i][j] &lt;= 9</div>
+                                <div style="margin-left: 20px;"> • tableNumber between 1 and 500</div>
                             
                         </div>
                     </div>        
@@ -399,25 +407,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix consists of non-negative integers between 0 and 9.</div>
-                            
-                                <div style="margin-left: 20px;"> • There will always be at least one row and one column in the matrix.</div>
+                                <div style="margin-left: 20px;"> • All orders have a valid table number and food item.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[2, 1, 3], [2, 0, 3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The matrix can be modified to [[2, 1, 3], [2, 1, 3]] with 1 operation, changing grid[1][1] to 1.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[3, 3], [3, 3], [3, 3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The matrix already satisfies the conditions, so no operations are needed.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[1, 0], [1, 0], [1, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The matrix can be modified to [[1, 0], [1, 0], [1, 0]] with 1 operation, changing grid[2][1] to 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> orders = [[&#34;David&#34;,&#34;3&#34;,&#34;Ceviche&#34;],[&#34;Corina&#34;,&#34;10&#34;,&#34;Beef Burrito&#34;], [&#34;David&#34;,&#34;3&#34;,&#34;Fried Chicken&#34;], [&#34;Carla&#34;,&#34;5&#34;,&#34;Water&#34;]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For table 3, David orders Ceviche and Fried Chicken, and for table 5, Carla orders Water.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,16 +439,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem using dynamic programming. We will calculate the frequency of each value in every column and use recursion to calculate the minimum number of operations needed to satisfy the constraints.</div>
+                        <div class=""> <b>Approach:</b> Use a hash map to count the number of food items per table, then sort the food items and tables before constructing the result.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix needs to satisfy two conditions: matching values vertically and differing values horizontally.</div>
+                                <div style="margin-left: 20px;"> • The problem involves organizing customer orders by table number.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can optimize the solution by breaking the problem into subproblems and using memoization to avoid redundant calculations.</div>
+                                <div style="margin-left: 20px;"> • We need to sort the food items alphabetically and ensure the output is in table number order.</div>
                             
                         </div>
                     </div>
@@ -458,11 +456,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a frequency table for each column in the grid to count occurrences of values.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Create a map to count food items ordered at each table.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Implement dynamic programming with memoization to compute the minimum operations for each column.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Sort the food items alphabetically.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Combine the results from each column to get the overall minimum number of operations.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Sort the table numbers in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Construct the result with the correct food counts for each table.</div>
                             
                         </div>
                     </div>
@@ -471,22 +471,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid will always contain at least one row and one column, as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • An empty orders array should return an empty table.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle large grids up to the maximum constraints efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure performance is within acceptable limits for 50,000 orders.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the grid already satisfies the conditions, the output should be 0.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where no orders exist for certain food items at specific tables.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix will only contain non-negative integers between 0 and 9.</div>
+                                <div style="margin-left: 20px;"> • Handle edge cases such as no orders or orders for only one table.</div>
                             
                         </div>                                                                        
                     </div>
@@ -503,41 +503,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Constructs</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Set Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Table Insert</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Through Digits</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Skip If Same As Previous</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Constructs</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Dynamic Programming Recursion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Memoization Store</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Control Flow</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Vector Pushback</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Matrix Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 String Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Frequency Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop Constructs</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Memoization Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Vector Pushback</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Frequency Table Filling</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Grid Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Frequency Count Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return DP Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
                     
                 </div>
 
@@ -546,36 +540,30 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m, n;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> frq, mem;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> prv) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> frq.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">9</span>; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">==</span> prv) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, m <span style="color:#666">-</span> frq[i][j] <span style="color:#666">+</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> displayTable(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> orders) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> table(<span style="color:#666">501</span>);
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    frq.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">10</span>, <span style="color:#666">0</span>));
-</span></span><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">11</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        frq[i][grid[j][i]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">v</span> : orders) {
+</span></span><span style="display:flex;"><span>        s.insert(v[<span style="color:#666">2</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#666">++</span>table[stoi(v[<span style="color:#666">1</span>])][v[<span style="color:#666">2</span>]];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>; t <span style="color:#666">&lt;</span> <span style="color:#666">501</span>; t<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (t <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> table[t].empty()) {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        res.push_back(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span>());
+</span></span><span style="display:flex;"><span>        res.back().push_back(t <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> <span style="color:#b44">&#34;Table&#34;</span> <span style="color:#666">:</span> to_string(t));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> begin(s); it <span style="color:#666">!=</span> end(s); it<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            res.back().push_back(t <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">*</span><span style="color:#a0a000">it</span> : to_string(table[t][<span style="color:#666">*</span>it]));
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -583,183 +571,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m, n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> displayTable(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> orders) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare two integer variables &#39;m&#39; and &#39;n&#39; to store the number of rows and columns of the grid, respectively. </div>
+                            <div class=""> Defines the function `displayTable` which takes a vector of orders and returns a table with food item counts per table. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Vector Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> frq, mem;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> table(<span style="color:#666">501</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare two 2D vectors: &#39;frq&#39; to store frequency counts and &#39;mem&#39; for memoization during dynamic programming. </div>
+                            <div class=""> Initializes a vector of unordered maps to track the count of each food item per table. The vector size is 501 to accommodate up to 500 tables. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Function Definition</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> prv) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define a recursive function &#39;dp&#39; that takes the current row index &#39;i&#39; and the previous row&#39;s column value &#39;prv&#39; as parameters. </div>
+                            <div class=""> Initializes a set `s` to store the unique food items encountered in the orders. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case</b></div>
+                            <div class=""> <b>4 : Loop Constructs</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> frq.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">v</span> : orders) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if we&#39;ve reached the end of the rows. If so, return 0 since no more operations are needed. </div>
+                            <div class=""> Begins a loop to iterate over the list of orders. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Memoization Check</b></div>
+                            <div class=""> <b>5 : Set Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.insert(v[<span style="color:#666">2</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the result for the current state has already been computed using memoization. If so, return the stored value. </div>
+                            <div class=""> Inserts the food item (v[2]) from the current order into the set `s` to ensure uniqueness. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Table Insert</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#666">++</span>table[stoi(v[<span style="color:#666">1</span>])][v[<span style="color:#666">2</span>]];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a variable &#39;ans&#39; to store the minimum number of operations, set to the maximum possible value initially. </div>
+                            <div class=""> Increments the count of the food item at the corresponding table index `stoi(v[1])` using the food item `v[2]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop Through Digits</b></div>
+                            <div class=""> <b>7 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">9</span>; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through the digits 0 to 9 and try to pick the optimal value for the current row. </div>
+                            <div class=""> Initializes a 2D vector `res` to store the final table with counts. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Skip If Same As Previous</b></div>
+                            <div class=""> <b>8 : Loop Constructs</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">==</span> prv) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>; t <span style="color:#666">&lt;</span> <span style="color:#666">501</span>; t<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skip this digit if it is the same as the digit from the previous row, as we want distinct values across rows. </div>
+                            <div class=""> Begins a loop to process each table from 0 to 500. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Dynamic Programming Recursion</b></div>
+                            <div class=""> <b>9 : Conditional Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, m <span style="color:#666">-</span> frq[i][j] <span style="color:#666">+</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (t <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> table[t].empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively calculate the minimum number of operations for the next row, adjusting for the frequency of the current digit. </div>
+                            <div class=""> Checks if the current table index `t` is greater than 0 and if the table is empty (no food orders). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Memoization Store</b></div>
+                            <div class=""> <b>10 : Control Flow</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the result in the memoization table for the current state and return the computed value. </div>
+                            <div class=""> Skips the current iteration if the table is empty. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Function Definition</b></div>
+                            <div class=""> <b>11 : Vector Pushback</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span>());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the main function &#39;minimumOperations&#39; that takes the grid as input and calculates the minimum operations. </div>
+                            <div class=""> Adds a new row to the result table `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Matrix Size Calculation</b></div>
+                            <div class=""> <b>12 : String Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.back().push_back(t <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> <span style="color:#b44">&#34;Table&#34;</span> <span style="color:#666">:</span> to_string(t));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the number of rows (&#39;m&#39;) and columns (&#39;n&#39;) from the input grid. </div>
+                            <div class=""> Adds the table label to the first column of the result row. For table 0, it adds the string &#34;Table&#34;, otherwise it adds the table number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Frequency Vector Initialization</b></div>
+                            <div class=""> <b>13 : Loop Constructs</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    frq.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">10</span>, <span style="color:#666">0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> begin(s); it <span style="color:#666">!=</span> end(s); it<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Resize the frequency table &#39;frq&#39; to match the grid&#39;s dimensions, initializing all values to 0. </div>
+                            <div class=""> Begins a loop to iterate over all unique food items in the set `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Memoization Vector Initialization</b></div>
+                            <div class=""> <b>14 : Vector Pushback</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">11</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.back().push_back(t <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">*</span><span style="color:#a0a000">it</span> : to_string(table[t][<span style="color:#666">*</span>it]));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Resize the memoization table &#39;mem&#39; to store results for dynamic programming, initializing all values to -1 (indicating no result stored). </div>
+                            <div class=""> Adds the count of the food item for the current table to the result row. For table 0, it adds the food item name, otherwise it adds the count from `table[t][*it]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Frequency Table Filling</b></div>
+                            <div class=""> <b>15 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the columns of the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Grid Iteration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Loop through the rows of the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Frequency Count Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        frq[i][grid[j][i]]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the frequency table by incrementing the count for the digit found at grid[j][i]. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Return DP Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Call the dynamic programming function to compute the result starting from the first row and no previous value. </div>
+                            <div class=""> Returns the result table `res` containing the counts of food items per table. </div>
                         </div>
                     
                 </div>
@@ -779,16 +737,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the grid. We process each cell once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n), where n is the number of unique food items.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n &#43; m), where m is the number of tables.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n &#43; m), where n is the number of orders and m is the number of tables.</div> 
+                        <div class=""> <b>Description:</b> The sorting and counting operations dominate the time complexity.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n), where we store the frequency table and memoization results for each column.</div>    
+                        <div class=""> <b>Best Case:</b> O(n &#43; m), when the food items and tables are limited.</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m), where n is the number of orders and m is the number of unique food items.</div> 
+                        <div class=""> <b>Description:</b> The space complexity depends on the number of orders and the distinct food items.</div>    
                     </div>
 
                 </div>

@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -301,7 +301,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array <code>nums</code> and a positive integer <code>value</code>. In one operation, you can either add or subtract the integer <code>value</code> from any element of the array <code>nums</code>. The MEX (Minimum Excluded Value) of an array is the smallest non-negative integer that does not appear in the array. Your task is to determine the maximum possible MEX of the array <code>nums</code> after performing the mentioned operations any number of times. </div>
+<div class=""> You are given a callable function f(x, y) with a hidden formula and a target value z. Your task is to find all pairs of positive integers x and y such that f(x, y) == z. The function is monotonically increasing, meaning: f(x, y) &lt; f(x + 1, y) and f(x, y) &lt; f(x, y + 1). Return a list of all such pairs. If no valid pairs are found, return an empty list. </div>
 
 
 
@@ -352,47 +352,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array `nums` and an integer `value`.</div>
-                        <div class=""> <b>Example:</b> For `nums = [3, -10, 9, 15, 8]` and `value = 4`.</div>
+                        <div class=""> <b>Input:</b> The input consists of a function identifier and a target value z. The function_id will be used to choose the formula that defines f(x, y).</div>
+                        <div class=""> <b>Example:</b> Input: function_id = 1, z = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length, value &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= function_id &lt;= 9</div>
                             
-                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= z &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= x, y &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum possible MEX of the array `nums` after applying the allowed operations.</div>
-                        <div class=""> <b>Example:</b> For `nums = [3, -10, 9, 15, 8]` and `value = 4`, the output should be `5`.</div>
+                        <div class=""> <b>Output:</b> The output should be a list of pairs of positive integers [x, y] such that f(x, y) == z. If no such pairs exist, return an empty list.</div>
+                        <div class=""> <b>Example:</b> Output: [[1, 4], [2, 3], [3, 2], [4, 1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result will be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The pairs should be ordered by x first, then by y.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to apply the allowed operations to maximize the MEX of the array `nums`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to reverse-engineer the hidden formula and find all pairs (x, y) such that f(x, y) equals the target value z.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. For each element in `nums`, calculate the possible new values after adding or subtracting `value` any number of times.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate over possible values of x and y within the defined range.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Track the occurrences of all numbers after the operations.</div>
+                                <div style="margin-left: 20px;"> • 2. Use binary search to find the value of y for each x such that f(x, y) == z.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Find the smallest non-negative integer not present in the array to determine the MEX.</div>
+                                <div style="margin-left: 20px;"> • 3. Collect and return all valid pairs.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure the problem is feasible to solve within the given time and space limits.</div>
+                        <div class=""> <b>Goal:</b> The constraints on function_id and z are guaranteed to allow the solutions to fit in the valid range for x and y.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length, value &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= function_id &lt;= 9</div>
                             
-                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= z &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • The function f(x, y) is monotonically increasing.</div>
                             
                         </div>
                     </div>        
@@ -400,21 +404,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array `nums` contains integers between -10^9 and 10^9.</div>
-                            
-                                <div style="margin-left: 20px;"> • The value of `value` is always a positive integer.</div>
+                                <div style="margin-left: 20px;"> • The function f(x, y) is deterministic and will return the same output for the same inputs every time.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For `nums = [3, -10, 9, 15, 8]` and `value = 4`</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By applying the operations as described, you can achieve a maximum MEX of 5.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For `nums = [1, -15, 5, 14, 7]` and `value = 5`</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After applying the allowed operations, the maximum MEX of the array is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: function_id = 1, z = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For function_id = 1, the formula is f(x, y) = x &#43; y. The pairs [1, 4], [2, 3], [3, 2], [4, 1] all give f(x, y) = 5.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,18 +436,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves tracking the possible new values after applying the allowed operations and determining the MEX of the array.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to efficiently search for all valid pairs (x, y) where f(x, y) equals z using a binary search approach.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The operation can add or subtract `value` multiple times.</div>
+                                <div style="margin-left: 20px;"> • The function f(x, y) is monotonically increasing in both x and y.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of possible distinct numbers in the array will be limited by the size of the array and the value of `value`.</div>
+                                <div style="margin-left: 20px;"> • This allows us to apply binary search to reduce the search space.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Efficiently track which numbers are present in the modified array.</div>
+                                <div style="margin-left: 20px;"> • We can iterate through possible values of x and use binary search for y.</div>
                             
                         </div>
                     </div>
@@ -457,11 +455,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. For each element in `nums`, compute the possible remainders after adding or subtracting `value` multiple times.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with x = 1 and iterate up to 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Track the frequency of all possible remainders.</div>
+                                <div style="margin-left: 20px;"> • 2. For each x, perform a binary search on y between 1 and 1000 to find where f(x, y) == z.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Find the smallest non-negative integer not represented in the array to determine the MEX.</div>
+                                <div style="margin-left: 20px;"> • 3. Collect all such pairs and return them.</div>
                             
                         </div>
                     </div>
@@ -470,22 +468,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array will always contain at least one element as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • If no valid pairs exist, the function should return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle large arrays efficiently, with `nums.length` up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • For larger values of z, the approach should efficiently search within the valid range of x and y.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `value` is large relative to the elements in `nums`, fewer operations may be needed.</div>
+                                <div style="margin-left: 20px;"> • The approach should handle edge cases like the smallest and largest possible values of x and y.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle negative and large positive values in `nums` efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the time complexity allows the solution to handle the maximum range of x and y (1 &lt;= x, y &lt;= 1000).</div>
                             
                         </div>                                                                        
                     </div>
@@ -506,23 +504,35 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop to Populate Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Map Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Early Termination Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Binary Search Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop to Find Minimum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Binary Search Boundaries</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition to Update Min</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Binary Search Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Min Index</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Binary Search Midpoint</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Min Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Function Evaluation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Solution Found</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Store Solution</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Break from Binary Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Adjust Search Range</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Adjust Search Range</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Store Valid Pair</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
                     
                 </div>
 
@@ -531,20 +541,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findSmallestInteger</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> value) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mp[(nums[i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> (nums[i] <span style="color:#666">%</span> value <span style="color:#666">+</span> value)<span style="color:#666">%</span><span style="color:#a0a000">value</span>: nums[i]<span style="color:#666">%</span>value)]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>, mn <span style="color:#666">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> value; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[i] <span style="color:#666">&lt;</span> mn) {
-</span></span><span style="display:flex;"><span>            idx <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>            mn <span style="color:#666">=</span> mp[i];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findSolution(CustomFunction<span style="color:#666">&amp;</span> cf, <span style="color:#0b0;font-weight:bold">int</span> z) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> xl <span style="color:#666">=</span> <span style="color:#666">1</span>, xr <span style="color:#666">=</span> <span style="color:#666">1000</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span>; x<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cf.f(x, <span style="color:#666">0</span>) <span style="color:#666">&gt;</span> z) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> yl <span style="color:#666">=</span> <span style="color:#666">1</span>, yr <span style="color:#666">=</span> <span style="color:#666">1000</span>;            
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(yl <span style="color:#666">&lt;=</span> yr) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> ymid <span style="color:#666">=</span> yl <span style="color:#666">+</span> (yr <span style="color:#666">-</span> yl <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sol <span style="color:#666">=</span> cf.f(x, ymid);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">==</span> z) {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#666">=</span> ymid;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">&lt;</span> z) yl <span style="color:#666">=</span> ymid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>        yr <span style="color:#666">=</span> ymid <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ans <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) res.push_back({x, ans});
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mn <span style="color:#666">*</span> value <span style="color:#666">+</span> idx;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -555,110 +574,170 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findSmallestInteger</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> value) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findSolution(CustomFunction<span style="color:#666">&amp;</span> cf, <span style="color:#0b0;font-weight:bold">int</span> z) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;findSmallestInteger&#39; that takes an array of integers &#39;nums&#39; and an integer &#39;value&#39; as inputs. </div>
+                            <div class=""> The function `findSolution` is defined, which takes a `CustomFunction` object `cf` and an integer `z` as input and returns a 2D vector containing the pairs (x, y) where `f(x, y) == z`. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> xl <span style="color:#666">=</span> <span style="color:#666">1</span>, xr <span style="color:#666">=</span> <span style="color:#666">1000</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a map &#39;mp&#39; that will be used to count the occurrences of the modular results of the elements in &#39;nums&#39;. </div>
+                            <div class=""> The variables `xl` and `xr` are initialized to 1 and 1000, respectively, representing the search range for the `x` values. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Size Calculation</b></div>
+                            <div class=""> <b>3 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the size of the &#39;nums&#39; vector and stores it in the variable &#39;n&#39;. </div>
+                            <div class=""> A 2D vector `res` is initialized to store the pairs (x, y) that satisfy the condition `f(x, y) == z`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop to Populate Map</b></div>
+                            <div class=""> <b>4 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span>; x<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each element in the &#39;nums&#39; vector. </div>
+                            <div class=""> An outer loop starts that iterates over all possible values of `x` from 1 to 1000. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Map Update</b></div>
+                            <div class=""> <b>5 : Early Termination Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[(nums[i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> (nums[i] <span style="color:#666">%</span> value <span style="color:#666">+</span> value)<span style="color:#666">%</span><span style="color:#a0a000">value</span>: nums[i]<span style="color:#666">%</span>value)]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cf.f(x, <span style="color:#666">0</span>) <span style="color:#666">&gt;</span> z) <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the modular value of each element in &#39;nums&#39; (adjusting for negative values) and increments its count in the map &#39;mp&#39;. </div>
+                            <div class=""> If the result of `f(x, 0)` is greater than `z`, the loop is broken early as no valid pairs can be found for this `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Binary Search Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>, mn <span style="color:#666">=</span> INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes two variables, &#39;idx&#39; to 0 and &#39;mn&#39; to the maximum possible integer value, to track the smallest count and its index. </div>
+                            <div class=""> The variable `ans` is initialized to -1, indicating that no valid `y` has been found yet for the current `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop to Find Minimum</b></div>
+                            <div class=""> <b>7 : Binary Search Boundaries</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> value; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> yl <span style="color:#666">=</span> <span style="color:#666">1</span>, yr <span style="color:#666">=</span> <span style="color:#666">1000</span>;            
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over the possible modular values (from 0 to value-1). </div>
+                            <div class=""> The binary search range for `y` is initialized with `yl = 1` and `yr = 1000`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Condition to Update Min</b></div>
+                            <div class=""> <b>8 : Binary Search Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[i] <span style="color:#666">&lt;</span> mn) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(yl <span style="color:#666">&lt;=</span> yr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the count for the current modular value is less than the current minimum count. </div>
+                            <div class=""> A while loop begins to perform binary search within the range of `y` values from `yl` to `yr`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Update Min Index</b></div>
+                            <div class=""> <b>9 : Binary Search Midpoint</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            idx <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> ymid <span style="color:#666">=</span> yl <span style="color:#666">+</span> (yr <span style="color:#666">-</span> yl <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the index &#39;idx&#39; to the current modular value if it has a smaller count. </div>
+                            <div class=""> The midpoint `ymid` of the current `y` range is calculated using the formula `yl &#43; (yr - yl &#43; 1) / 2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Min Count</b></div>
+                            <div class=""> <b>10 : Function Evaluation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mn <span style="color:#666">=</span> mp[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sol <span style="color:#666">=</span> cf.f(x, ymid);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the minimum count &#39;mn&#39; to the count of the current modular value. </div>
+                            <div class=""> The function `f(x, ymid)` is evaluated to get the result `sol` for the current `x` and `ymid`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Result</b></div>
+                            <div class=""> <b>11 : Solution Found</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mn <span style="color:#666">*</span> value <span style="color:#666">+</span> idx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">==</span> z) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the smallest integer formed by multiplying the minimum count &#39;mn&#39; by the &#39;value&#39; and adding the index &#39;idx&#39;. </div>
+                            <div class=""> If the result of `f(x, ymid)` is equal to `z`, the solution has been found for this pair (x, ymid). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Store Solution</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ans <span style="color:#666">=</span> ymid;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The variable `ans` is updated with the value of `ymid`, which is the value of `y` that satisfies `f(x, y) == z`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Break from Binary Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The loop breaks because a valid `y` has been found for the current `x`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Adjust Search Range</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">&lt;</span> z) yl <span style="color:#666">=</span> ymid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If `sol` is less than `z`, the search range for `y` is adjusted by setting `yl` to `ymid &#43; 1` to search in the upper half. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Adjust Search Range</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>        yr <span style="color:#666">=</span> ymid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If `sol` is greater than `z`, the search range for `y` is adjusted by setting `yr` to `ymid - 1` to search in the lower half. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Store Valid Pair</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ans <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) res.push_back({x, ans});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a valid `y` has been found (`ans != -1`), the pair (x, ans) is added to the result vector `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the vector `res` containing all valid pairs (x, y) where `f(x, y) == z`. </div>
                         </div>
                     
                 </div>
@@ -678,16 +757,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the size of the array `nums`.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n), where n is the number of possible values of y for each x.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n), where n is the number of values for y.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n), where n is the number of values for x and y.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is logarithmic for each binary search, and linear for iterating through x.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of elements in `nums`.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if no valid pairs are found.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of valid pairs.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is determined by the number of valid pairs returned.</div>    
                     </div>
 
                 </div>

@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Nov 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1087s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1091s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/35.webp" 
            alt="A glowing insertion point in a calm array, gently creating a new position." 
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given an n x n 2D matrix representing an image, rotate the image by 90 degrees clockwise. The rotation should be done in-place, meaning you cannot allocate another 2D matrix. </div>
+<div class=""> Given a sorted array of distinct integers and a target value, return the index of the target if it is present. If the target is not in the array, return the index where it should be inserted to maintain the sorted order. </div>
 
 
 
@@ -370,45 +370,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a 2D matrix representing an image. The matrix is of size n x n, where n is between 1 and 20.</div>
-                        <div class=""> <b>Example:</b> [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</div>
+                        <div class=""> <b>Input:</b> A sorted array of distinct integers and a target value.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [1, 2, 4, 5, 7], target = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 20</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • Each element of the matrix is an integer between -1000 and 1000.</div>
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= nums[i] &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • nums contains distinct values sorted in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= target &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the matrix after rotating it by 90 degrees clockwise.</div>
-                        <div class=""> <b>Example:</b> [[7, 4, 1], [8, 5, 2], [9, 6, 3]]</div>
+                        <div class=""> <b>Output:</b> Return the index of the target if found, or the index where it should be inserted to keep the array sorted.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be the rotated matrix, achieved in-place.</div>
+                                <div style="margin-left: 20px;"> • Return an integer indicating the position of the target or where it should be inserted.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to rotate the matrix 90 degrees clockwise in-place without using extra space for another matrix.</div>
+                        <div class=""> <b>Goal:</b> Find the target&#39;s index or the index for insertion using binary search for O(log n) time complexity.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Reverse the rows of the matrix.</div>
+                                <div style="margin-left: 20px;"> • Initialize two pointers, left and right, at the start and end of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Transpose the matrix by swapping the elements along the diagonal.</div>
+                                <div style="margin-left: 20px;"> • Perform a binary search: calculate mid and compare the value at mid with the target.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the target is equal to the value at mid, return mid.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the target is greater than the value at mid, move the left pointer to mid &#43; 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the target is smaller than the value at mid, move the right pointer to mid - 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the loop ends without finding the target, return the position of left as the index for insertion.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input matrix has a size of n x n, where n is between 1 and 20. All matrix elements are integers between -1000 and 1000.</div>
+                        <div class=""> <b>Goal:</b> The array is sorted, and the elements are distinct.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix size is between 1 and 20.</div>
+                                <div style="margin-left: 20px;"> • Array length is at most 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • Matrix elements are integers in the range [-1000, 1000].</div>
+                                <div style="margin-left: 20px;"> • The array contains distinct integers sorted in ascending order.</div>
                             
                         </div>
                     </div>        
@@ -416,19 +428,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix will always be a square matrix with the same number of rows and columns.</div>
+                                <div style="margin-left: 20px;"> • The input array will always be sorted and contain distinct integers.</div>
+                            
+                                <div style="margin-left: 20px;"> • The target value is within the bounds of the given constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after reversing the rows and transposing, the final result is [[7, 4, 1], [8, 5, 2], [9, 6, 3]].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 4, 5, 7], target = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The target is present at index 2, so we return 2.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after rotating the matrix 90 degrees clockwise, the final result is [[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 4, 5, 7], target = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The target is not found, but it should be inserted at index 2 to keep the array sorted.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 4, 5, 7], target = 6</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The target is not found, but it should be inserted at index 4 to keep the array sorted.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,16 +470,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves reversing the rows of the matrix and then transposing the matrix to achieve a 90-degree rotation.</div>
+                        <div class=""> <b>Approach:</b> Use binary search to find the target&#39;s position or determine where it should be inserted in the sorted array.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Reversing the rows and transposing the matrix will effectively rotate it by 90 degrees clockwise.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved efficiently with a binary search approach due to the sorted nature of the array.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This approach is efficient as it modifies the matrix in place, without requiring additional space.</div>
+                                <div style="margin-left: 20px;"> • Binary search ensures an O(log n) runtime, which is optimal for this problem.</div>
                             
                         </div>
                     </div>
@@ -469,9 +487,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Reverse the order of rows in the matrix.</div>
+                                <div style="margin-left: 20px;"> • Initialize left and right pointers.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Transpose the matrix by swapping each element (i, j) with (j, i).</div>
+                                <div style="margin-left: 20px;"> • Iterate using a binary search approach, adjusting the pointers based on the comparison with the target value.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the position of the target or where the target should be inserted.</div>
                             
                         </div>
                     </div>
@@ -480,22 +500,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix will never be empty since n &gt;= 1.</div>
+                                <div style="margin-left: 20px;"> • The array may not be empty as per constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The maximum size for n is 20, so the matrix size is at most 20 x 20, which is manageable.</div>
+                                <div style="margin-left: 20px;"> • Test with large arrays to ensure the O(log n) time complexity holds.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle matrices with negative values or zeros, as these are valid elements in the matrix.</div>
+                                <div style="margin-left: 20px;"> • Test with a target value that is smaller or larger than all elements in the array.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix will always be square, and its elements will be integers in the range [-1000, 1000].</div>
+                                <div style="margin-left: 20px;"> • Handle edge cases where the target is at the start or end of the array.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,17 +534,19 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Index Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Transposition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Matrix Transposition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Matrix Reflection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Matrix Reflection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check and Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Matrix Reflection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check and Index Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return</button>
                     
                 </div>
 
@@ -533,14 +555,15 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">rotate</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> mtx.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j)
-</span></span><span style="display:flex;"><span>        swap(mtx[i<span style="color:#666">++</span>], mtx[j<span style="color:#666">--</span>]);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> mtx.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> i<span style="color:#666">+</span><span style="color:#666">1</span>; j<span style="color:#666">&lt;</span> mtx.size(); j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        swap(mtx[i][j], mtx[j][i]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">searchInsert</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> mid;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">&lt;</span> target) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -551,70 +574,80 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">rotate</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">searchInsert</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a function named `rotate` that takes a 2D vector `mtx` representing the matrix as input and rotates it in-place. </div>
+                            <div class=""> This line declares a function named &#39;searchInsert&#39; that takes a sorted array &#39;nums&#39; and a target integer &#39;target&#39; as input and returns the index where the target should be inserted. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Index Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> mtx.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes two index variables `i` and `j` to represent the start and end indices of the matrix. </div>
+                            <div class=""> This line initializes two pointers, &#39;l&#39; and &#39;r&#39;, to represent the left and right boundaries of the search range. &#39;l&#39; is initialized to 0 (the start of the array), and &#39;r&#39; is initialized to the index of the last element in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Matrix Transposition</b></div>
+                            <div class=""> <b>3 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line starts a `while` loop to iterate through the matrix diagonally, swapping elements to transpose the matrix. </div>
+                            <div class=""> This line starts a `while` loop that continues as long as the left pointer &#39;l&#39; is less than or equal to the right pointer &#39;r&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Matrix Transposition</b></div>
+                            <div class=""> <b>4 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        swap(mtx[i<span style="color:#666">++</span>], mtx[j<span style="color:#666">--</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inside the loop, the elements at indices `i` and `j` are swapped. The `i` and `j` indices are then incremented and decremented, respectively, to move to the next diagonal pair. </div>
+                            <div class=""> This line calculates the middle index &#39;mid&#39; using a formula that avoids integer overflow for large values of &#39;l&#39; and &#39;r&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Matrix Reflection</b></div>
+                            <div class=""> <b>5 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> mtx.size(); i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> mid;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line starts a nested `for` loop to iterate through the upper triangular part of the matrix. </div>
+                            <div class=""> This line checks if the element at the middle index &#39;mid&#39; is equal to the target. If so, the function returns the index &#39;mid&#39; as the target is already present in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Matrix Reflection</b></div>
+                            <div class=""> <b>6 : Conditional Check and Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> i<span style="color:#666">+</span><span style="color:#666">1</span>; j<span style="color:#666">&lt;</span> mtx.size(); j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">&lt;</span> target) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The inner loop iterates through the elements to the right of the current row. </div>
+                            <div class=""> This line checks if the element at the middle index &#39;mid&#39; is less than the target. If so, it means the target should be inserted after the middle element, so the left pointer &#39;l&#39; is updated to &#39;mid &#43; 1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Matrix Reflection</b></div>
+                            <div class=""> <b>7 : Conditional Check and Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        swap(mtx[i][j], mtx[j][i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The elements at indices `(i, j)` and `(j, i)` are swapped to reflect the matrix along the main diagonal, completing the 90-degree rotation. </div>
+                            <div class=""> If the element at the middle index &#39;mid&#39; is greater than the target, it means the target should be inserted before the middle element, so the right pointer &#39;r&#39; is updated to &#39;mid - 1&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> After the loop terminates, the left pointer &#39;l&#39; will be pointing to the correct insertion index for the target element. The function returns &#39;l&#39; as the result. </div>
                         </div>
                     
                 </div>
@@ -634,16 +667,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n^2) because we need to iterate through all the elements of the matrix for the reverse and transpose operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(log n) because binary search is performed on the sorted array.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as the matrix is modified in-place without using extra space.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(1) as no additional space is used beyond the input array.</div>    
                     </div>
 
                 </div>

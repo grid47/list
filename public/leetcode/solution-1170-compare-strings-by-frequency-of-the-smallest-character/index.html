@@ -275,7 +275,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -302,7 +302,7 @@
 
 
 
-<div class=""> A frog starts on the first stone in a river and wants to jump to the last stone and then return to the first stone. The frog can jump to any stone at most once. The cost of a jump is defined as the absolute difference between the positions of two stones. The frog must choose a path that minimizes the maximum jump length during the entire journey. Return the minimum cost of the path where the cost is defined as the maximum length of any jump. </div>
+<div class=""> Define a function <code>f(s)</code> as the frequency of the lexicographically smallest character in a non-empty string <code>s</code>. For example, for <code>s = 'abc'</code>, <code>f(s) = 1</code> because the smallest character is <code>'a'</code>, appearing once. Given an array of strings <code>queries</code> and another array <code>words</code>, return an array where each entry corresponds to the number of strings in <code>words</code> where <code>f(W)</code> is greater than <code>f(queries[i])</code> for a given <code>i</code>. </div>
 
 
 
@@ -353,49 +353,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array stones where each element represents the position of a stone, sorted in strictly increasing order. The frog will start at the first stone and needs to travel to the last stone and back.</div>
-                        <div class=""> <b>Example:</b> Input: stones = [0, 2, 5, 7, 10]</div>
+                        <div class=""> <b>Input:</b> The input consists of two arrays of strings: `queries` and `words`.</div>
+                        <div class=""> <b>Example:</b> Input: queries = [&#34;xyz&#34;, &#34;aac&#34;], words = [&#34;aaa&#34;, &#34;bbc&#34;, &#34;cccc&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= stones.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= queries.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= stones[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • stones[0] == 0</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= queries[i].length, words[i].length &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • stones is sorted in strictly increasing order</div>
+                                <div style="margin-left: 20px;"> • queries[i][j], words[i][j] consist of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum possible cost of the path where the cost is the maximum length of any jump the frog makes.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> An array of integers representing the count of strings in `words` such that `f(W) &gt; f(queries[i])` for each query.</div>
+                        <div class=""> <b>Example:</b> Output: [3, 2]</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The minimum cost is determined by the path with the smallest maximum jump length.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the minimum cost of a path where the maximum jump length is minimized during the frog&#39;s journey.</div>
+                        <div class=""> <b>Goal:</b> Calculate `f(s)` for each string in `queries` and `words`, then compare the values to determine counts.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through the stones array and calculate the maximum jump length if the frog were to travel from the first stone to the last and back.</div>
+                                <div style="margin-left: 20px;"> • Calculate `f(W)` for all strings in `words` and store the results in a sorted array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each possible jump, calculate the jump length and track the largest jump.</div>
+                                <div style="margin-left: 20px;"> • For each query in `queries`, compute `f(queries[i])`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. The solution is the smallest maximum jump length among all possible paths.</div>
+                                <div style="margin-left: 20px;"> • Use binary search on the sorted `words` array to count the number of `f(W)` values greater than `f(queries[i])`.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the input is valid, with stones sorted in strictly increasing order, and there are at least two stones.</div>
+                        <div class=""> <b>Goal:</b> Constraints on input sizes and character types are provided.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of stones is between 2 and 100,000, and the position of each stone is between 0 and 1 billion.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= queries.length &lt;= 2000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 2000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= queries[i].length, words[i].length &lt;= 10</div>
                             
                         </div>
                     </div>        
@@ -403,19 +405,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The frog always starts at the first stone (position 0) and ends at the last stone, completing the round trip.</div>
+                                <div style="margin-left: 20px;"> • All strings are non-empty and contain only lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stones = [0, 2, 5, 7, 10]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The frog starts at position 0 and needs to jump to 2, then to 5, 7, and finally 10. The maximum jump length is from 5 to 10, which is 5. Hence, the minimum cost is 5.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stones = [0, 3, 9]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The frog starts at 0, jumps to 9, and returns to 0. The maximum jump length is 9. Hence, the minimum cost is 9.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: queries = [&#34;abc&#34;, &#34;dd&#34;], words = [&#34;a&#34;, &#34;bbb&#34;, &#34;cccc&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For query &#39;abc&#39;, `f(abc) = 1`, and the counts of words with higher `f` are 2 (`bbb`, `cccc`). For query &#39;dd&#39;, `f(dd) = 2`, and only `cccc` has a higher `f`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -439,16 +437,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by considering the maximum difference between every second stone (representing the farthest distance the frog might jump at a time), which ensures that the maximum jump length is minimized.</div>
+                        <div class=""> <b>Approach:</b> Use a frequency counting method combined with sorting and binary search to optimize comparisons.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The frog&#39;s journey consists of multiple jumps, and the goal is to minimize the maximum jump distance.</div>
+                                <div style="margin-left: 20px;"> • The calculation of `f(s)` is straightforward by counting character frequencies.</div>
+                            
+                                <div style="margin-left: 20px;"> • Sorting `words` by their `f(W)` values allows efficient comparisons using binary search.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The optimal approach would involve looking at the maximum differences between stones as the frog hops between them.</div>
+                                <div style="margin-left: 20px;"> • Precomputing and sorting `f(W)` for `words` can save computation during query evaluation.</div>
                             
                         </div>
                     </div>
@@ -456,11 +456,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through the list of stones and compute the maximum jump length between each stone and the stone that is two steps ahead.</div>
+                                <div style="margin-left: 20px;"> • Compute and store `f(W)` values for all strings in `words`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. The frog&#39;s path will be optimal when the largest jump between any two stones is minimized.</div>
+                                <div style="margin-left: 20px;"> • Sort the computed `f(W)` values for efficient comparisons.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the maximum jump during the round trip and return it as the minimum cost.</div>
+                                <div style="margin-left: 20px;"> • For each string in `queries`, calculate `f(queries[i])`.</div>
+                            
+                                <div style="margin-left: 20px;"> • Use binary search to determine the number of `f(W)` values greater than `f(queries[i])`.</div>
                             
                         </div>
                     </div>
@@ -469,22 +471,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least two stones, so this case is not applicable.</div>
+                                <div style="margin-left: 20px;"> • Empty `queries` or `words` arrays are invalid per constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution is efficient for large inputs, where the number of stones is near the upper constraint of 100,000.</div>
+                                <div style="margin-left: 20px;"> • Maximum array sizes for `queries` and `words`.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle the case where the frog needs to make large jumps between stones located far apart.</div>
+                                <div style="margin-left: 20px;"> • All characters in a string are the same.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be optimal and run efficiently within time limits for large inputs.</div>
+                                <div style="margin-left: 20px;"> • Minimal and maximal string lengths in both arrays.</div>
                             
                         </div>                                                                        
                     </div>
@@ -503,15 +505,61 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Frequency Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Flow Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Index Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Frequency Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Conditional</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Flow Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Index Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Result Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Binary Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Binary Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Result Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Return</button>
                     
                 </div>
 
@@ -520,12 +568,51 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxJump</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> A[<span style="color:#666">1</span>] <span style="color:#666">-</span> A[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> A.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, A[i] <span style="color:#666">-</span> A[i <span style="color:#666">-</span> <span style="color:#666">2</span>]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> numSmallerByFrequency(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> q, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> w) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bp(<span style="color:#666">26</span>, <span style="color:#666">0</span>), ans(w.size(), <span style="color:#666">0</span>), res(q.size(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: w) {
+</span></span><span style="display:flex;"><span>        bp<span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+</span></span><span style="display:flex;"><span>            bp[x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bp[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                ans[j] <span style="color:#666">=</span> bp[i];
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    sort(ans.begin(), ans.end());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: q) {
+</span></span><span style="display:flex;"><span>        bp<span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+</span></span><span style="display:flex;"><span>            bp[x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bp[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                res[j] <span style="color:#666">=</span> bp[i];
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// for(auto x: res)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//     cout &lt;&lt; x &lt;&lt; &#34; &#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; &#34;\n&#34;;        
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ret(q.size(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> res.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> qr <span style="color:#666">=</span> res[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> upper_bound(ans.begin(), ans.end(), qr);
+</span></span><span style="display:flex;"><span>        ret[i] <span style="color:#666">=</span> ans.end() <span style="color:#666">-</span> it;
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; ret[i] &lt;&lt; &#34; &#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -536,60 +623,290 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxJump</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> numSmallerByFrequency(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> q, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `maxJump` that takes a vector of integers `A` and returns an integer representing the maximum jump between elements with one element skipped in between. </div>
+                            <div class=""> Define the function `numSmallerByFrequency` that takes two vectors of strings `q` and `w` as input and returns a vector of integers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Mathematical Operations</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> A[<span style="color:#666">1</span>] <span style="color:#666">-</span> A[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bp(<span style="color:#666">26</span>, <span style="color:#666">0</span>), ans(w.size(), <span style="color:#666">0</span>), res(q.size(), <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `res` with the difference between the second and first elements of the array, as the first possible jump. </div>
+                            <div class=""> Initialize three vectors: `bp` to store character frequencies, `ans` to store the smallest frequency from each string in `w`, and `res` to store the smallest frequency from each string in `q`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Operations</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> A.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Gets the size of the array `A` and stores it in the variable `n`, which is used to control the loop iteration. </div>
+                            <div class=""> Initialize the index `j` to 0 for traversing the `w` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Looping</b></div>
+                            <div class=""> <b>4 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop from the third element (index 2) of the array and iterates through the rest of the array to compute the jump differences. </div>
+                            <div class=""> Start a loop that iterates through each string `s` in the vector `w`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Mathematical Operations</b></div>
+                            <div class=""> <b>5 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, A[i] <span style="color:#666">-</span> A[i <span style="color:#666">-</span> <span style="color:#666">2</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        bp <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> In each iteration, the difference between the current element `A[i]` and the element two positions earlier `A[i-2]` is calculated. The maximum of this difference and the previous `res` is stored back in `res`. </div>
+                            <div class=""> Reinitialize the `bp` vector to store the frequency of characters in the current string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the maximum jump found after iterating through the array. </div>
+                            <div class=""> Start a loop to count the occurrences of each character in the string `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Frequency Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bp[x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the count for the character `x` in the `bp` vector by adjusting it to the appropriate index (`x - &#39;a&#39;`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to check each index of the `bp` vector to find the smallest frequency of any character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Conditional</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bp[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current character has a non-zero frequency. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ans[j] <span style="color:#666">=</span> bp[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the smallest non-zero frequency found to the corresponding position in the `ans` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Flow Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Exit the loop once the smallest frequency is assigned. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Index Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the index `j` to move to the next string in `w`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(ans.begin(), ans.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the `ans` vector in ascending order to prepare for comparisons with `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Reinitialize `j` to 0 for iterating over the `q` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: q) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop that iterates through each string `s` in the vector `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        bp <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Reinitialize the `bp` vector for the current string `s` in `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to count the occurrences of each character in the string `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Frequency Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bp[x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the count for the character `x` in the `bp` vector by adjusting it to the appropriate index (`x - &#39;a&#39;`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to check each index of the `bp` vector to find the smallest frequency of any character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Conditional</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bp[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current character has a non-zero frequency. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res[j] <span style="color:#666">=</span> bp[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the smallest non-zero frequency found to the corresponding position in the `res` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Flow Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Exit the loop once the smallest frequency is assigned. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Index Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the index `j` to move to the next string in `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Result Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ret(q.size(), <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize the result vector `ret` to store the final result for each string in `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> res.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to calculate the number of strings in `w` that have a smaller smallest character frequency than the corresponding string in `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Binary Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> qr <span style="color:#666">=</span> res[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the smallest frequency for the current string in `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Binary Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> upper_bound(ans.begin(), ans.end(), qr);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Use binary search to find the position in the `ans` vector where `qr` can be inserted to maintain sorted order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Result Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ret[i] <span style="color:#666">=</span> ans.end() <span style="color:#666">-</span> it;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the count of elements greater than `qr` in `ans` to the result vector `ret`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>29 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the result vector `ret`. </div>
                         </div>
                     
                 </div>
@@ -609,16 +926,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear (O(n)) since we only need to iterate through the stones list once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n &#43; m log n) for n = |words| and m = |queries|.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n &#43; m log n).</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n &#43; m log n).</div> 
+                        <div class=""> <b>Description:</b> Precomputing and sorting `words` is O(n log n), and each query is resolved in O(log n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant (O(1)) since we only need a few extra variables to track the maximum jump.</div>    
+                        <div class=""> <b>Best Case:</b> O(n &#43; m).</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m) for storing `f(W)` and results.</div> 
+                        <div class=""> <b>Description:</b> Additional space for arrays to store computed values.</div>    
                     </div>
 
                 </div>

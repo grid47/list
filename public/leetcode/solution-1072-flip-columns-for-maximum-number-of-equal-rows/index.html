@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 22, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You have a water dispenser that dispenses cold, warm, and hot water. Every second, you can either fill up 2 cups with different types of water, or 1 cup of any type of water. You are given an array &lsquo;amount&rsquo; where amount[0], amount[1], and amount[2] represent the number of cold, warm, and hot water cups you need to fill, respectively. Your task is to determine the minimum number of seconds required to fill all the cups. </div>
+<div class=""> You are given an m x n binary matrix. You can choose any number of columns in the matrix and flip every cell in that column (i.e., change the value of the cell from 0 to 1 or vice versa). Your task is to find the maximum number of rows that can be made equal after performing a number of column flips. </div>
 
 
 
@@ -359,47 +359,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array &#39;amount&#39; of length 3, where each element represents the number of cups to be filled with cold, warm, and hot water, respectively.</div>
-                        <div class=""> <b>Example:</b> amount = [3, 6, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of a binary matrix with m rows and n columns, where each element is either 0 or 1.</div>
+                        <div class=""> <b>Example:</b> Input: matrix = [[1,0],[0,0]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • amount.length == 3</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= amount[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • matrix[i][j] is either 0 or 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of seconds needed to fill up all the cups.</div>
-                        <div class=""> <b>Example:</b> 6</div>
+                        <div class=""> <b>Output:</b> The output is an integer, which represents the maximum number of rows that can be made equal after performing some number of column flips.</div>
+                        <div class=""> <b>Example:</b> Output: 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer value representing the maximum number of rows with identical values after flips.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the number of seconds required to fill all cups, utilizing the option of filling two cups per second or one cup per second.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the maximum number of rows that can be made identical after flipping columns in the matrix.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Determine the maximum cups to be filled of any type.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through each row in the matrix.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the total cups to be filled (sum of all cups).</div>
+                                <div style="margin-left: 20px;"> • 2. For each row, convert it into a binary string where flipped columns are taken into account.</div>
                             
-                                <div style="margin-left: 20px;"> • Find the maximum time required, either by filling two cups at a time or by the total sum divided by 2.</div>
+                                <div style="margin-left: 20px;"> • 3. Track how many times each unique row pattern appears using a hashmap.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. The answer will be the maximum frequency of any row pattern.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input has the following constraints:</div>
+                        <div class=""> <b>Goal:</b> The matrix has a manageable size, so the problem can be solved efficiently using hashing to track row patterns.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • amount.length == 3</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= amount[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • matrix[i][j] is either 0 or 1.</div>
                             
                         </div>
                     </div>        
@@ -407,15 +409,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of cups to fill can be zero for any type of water, meaning that filling cups of that type is not needed.</div>
+                                <div style="margin-left: 20px;"> • The input matrix is valid and contains only binary values.</div>
+                            
+                                <div style="margin-left: 20px;"> • The matrix dimensions are within the specified constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> amount = [8, 4, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By efficiently pairing the cold, warm, and hot water cups, it can be completed in 6 seconds.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[0, 1], [1, 1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, no column flips are needed, as only one row has identical values. The output is 1.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[0, 1], [1, 0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Flipping the first column will make both rows identical. The output is 2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[0, 0, 0], [0, 0, 1], [1, 1, 0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Flipping the first two columns will make the second and third rows identical. The output is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -439,20 +451,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To minimize the time, we should try to fill up two cups at once as much as possible, pairing different types of cups. The process is driven by the need to fill the cups with the maximum number of cups first.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem by tracking the frequency of row patterns. By flipping columns, we can create row patterns that can be stored in a hashmap to count their occurrences. The result is the maximum count of any identical row pattern.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can reduce the total time by filling two cups at once.</div>
+                                <div style="margin-left: 20px;"> • Each row can either stay the same or change after flipping columns.</div>
                             
-                                <div style="margin-left: 20px;"> • Filling up the cups with the largest difference should be prioritized.</div>
+                                <div style="margin-left: 20px;"> • The key observation is that rows that are already identical after column flips should be counted together.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • First calculate the maximum number of cups that need to be filled, then compute the sum of cups.</div>
-                            
-                                <div style="margin-left: 20px;"> • The minimum time is either based on pairing the cups or based on the sum divided by 2.</div>
+                                <div style="margin-left: 20px;"> • We need a way to count how often each unique row pattern appears after flipping columns, and the maximum count will be our answer.</div>
                             
                         </div>
                     </div>
@@ -460,11 +470,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Find the maximum number of cups to fill.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a hashmap to store row patterns and their frequencies.</div>
                             
-                                <div style="margin-left: 20px;"> • Compute the sum of the cups.</div>
+                                <div style="margin-left: 20px;"> • 2. For each row in the matrix, create a binary string based on the current state of the row (considering flipped columns).</div>
                             
-                                <div style="margin-left: 20px;"> • Return the maximum of the maximum cups and the half of the total sum (rounded up).</div>
+                                <div style="margin-left: 20px;"> • 3. Track the frequency of each unique binary string.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the maximum frequency from the hashmap as the result.</div>
                             
                         </div>
                     </div>
@@ -473,22 +485,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No cups to fill would result in 0 seconds.</div>
+                                <div style="margin-left: 20px;"> • The problem does not expect an empty matrix, as there must be at least one row and one column.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When the values in &#39;amount&#39; are large, the solution must still compute the result efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution is efficient enough to handle matrices with up to 300 rows and columns.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If any amount[i] is 0, only the remaining cups need to be filled.</div>
+                                <div style="margin-left: 20px;"> • If all elements in the matrix are already the same, no flips are needed, and the result is the number of rows.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases with no cups or large input sizes efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution must operate efficiently within the given input constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -505,17 +517,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Code Block</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 HashMap Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Maximum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 String Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Accumulate Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Top Element Extraction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Row Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Row Normalization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Row Normalization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Map Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Map Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Result Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
                     
                 </div>
 
@@ -524,13 +550,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">fillCups</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span>: A) {
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(a, mx);
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> a;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxEqualRowsAfterFlips</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: mtx) {
+</span></span><span style="display:flex;"><span>        string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> x[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x[i] <span style="color:#666">==</span> top) s <span style="color:#666">+=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">+=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        mp[s]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(mx, (sum <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>); 
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [k, v]<span style="color:#666">:</span> mp)
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, v);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -538,63 +572,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Code Block</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">fillCups</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxEqualRowsAfterFlips</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;fillCups&#39; that takes a vector of integers A, representing the number of cups of each type. </div>
+                            <div class=""> This line defines the function `maxEqualRowsAfterFlips`, which takes a 2D vector `mtx` (a binary matrix) and returns the maximum number of rows that can be made equal by flipping some of them. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : HashMap Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables: &#39;mx&#39; to store the maximum cup count, and &#39;sum&#39; to store the total sum of all cups. </div>
+                            <div class=""> This line initializes an unordered map `mp`, where the keys will be string representations of rows, and the values will be their frequencies (the number of times each row pattern appears). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Matrix Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span>: A) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: mtx) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over each element in the vector &#39;A&#39;, which represents the cup counts. </div>
+                            <div class=""> This loop iterates over each row `x` in the matrix `mtx`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Update Maximum</b></div>
+                            <div class=""> <b>4 : String Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(a, mx);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the maximum cup count &#39;mx&#39; with the current value &#39;a&#39; if it is greater than the current maximum. </div>
+                            <div class=""> This line initializes an empty string `s`, which will be used to store the binary string representation of the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Accumulate Sum</b></div>
+                            <div class=""> <b>5 : Top Element Extraction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> a;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> x[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current cup count &#39;a&#39; to the total sum. </div>
+                            <div class=""> This line stores the first element of the row `x` in the variable `top`. This will be used to normalize the row by flipping the row to make its first element the same for all rows. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Result</b></div>
+                            <div class=""> <b>6 : Row Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(mx, (sum <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the maximum of the &#39;mx&#39; (maximum cup count) or half of the total cups, rounded up, representing the minimum number of moves required. </div>
+                            <div class=""> This loop iterates through each element of the row `x`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Row Normalization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x[i] <span style="color:#666">==</span> top) s <span style="color:#666">+=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line adds &#39;1&#39; to the string `s` if the current element `x[i]` is equal to `top`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Row Normalization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">+=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line adds &#39;0&#39; to the string `s` if the current element `x[i]` is not equal to `top`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Map Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[s]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line updates the map `mp`, incrementing the count of the binary string `s`, which represents the current normalized row. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Result Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line initializes the variable `res`, which will store the maximum frequency of any row pattern in the matrix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Map Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [k, v]<span style="color:#666">:</span> mp)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates over the map `mp`, where `k` is the key (row pattern) and `v` is the frequency of that row pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Result Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, v);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line updates the result `res` with the maximum value between the current value of `res` and the frequency `v` of the current row pattern `k`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line returns the value of `res`, which is the maximum frequency of any row pattern in the matrix. </div>
                         </div>
                     
                 </div>
@@ -614,16 +718,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) for small inputs.</div>
-                        <div class=""> <b>Average Case:</b> O(1) as the problem only involves simple calculations.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as the solution does not involve iterating over large arrays or complex operations.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) due to processing each element in the matrix and hashing the row patterns.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1) as only a few variables are used.</div> 
-                        <div class=""> <b>Description:</b> Space complexity is constant as the space used does not depend on input size.</div>    
+                        <div class=""> <b>Best Case:</b> O(m)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m * n) for storing the row patterns, where m is the number of rows and n is the number of columns in the matrix.</div>    
                     </div>
 
                 </div>

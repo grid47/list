@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 4, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given two strings <code>s1</code> and <code>s2</code> of the same length. You need to check if some permutation of <code>s1</code> can &lsquo;break&rsquo; some permutation of <code>s2</code>, or vice-versa. A string <code>x</code> can break string <code>y</code> if for every character at position <code>i</code>, <code>x[i] &gt;= y[i]</code> when sorted alphabetically. </div>
+<div class=""> You are given a list of logs representing the execution of n functions on a single-threaded CPU. Each log contains a function&rsquo;s ID, whether the function has started or ended, and the timestamp of the event. The goal is to calculate the exclusive time of each function, which is the total time the function spends executing, excluding the time spent on other nested function calls. </div>
 
 
 
@@ -370,47 +370,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two strings `s1` and `s2`, both containing only lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> s1 = &#39;cat&#39;, s2 = &#39;abc&#39;</div>
+                        <div class=""> <b>Input:</b> You are given a list of logs formatted as strings with the structure {function_id}:{start|end}:{timestamp}. The logs indicate when a function starts or ends at a given timestamp.</div>
+                        <div class=""> <b>Example:</b> n = 2, logs = [&#34;0:start:0&#34;, &#34;1:start:2&#34;, &#34;1:end:5&#34;, &#34;0:end:6&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s1.length == s2.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • All strings consist of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= logs.length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= function_id &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= timestamp &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • No two start events will happen at the same timestamp.</div>
+                            
+                                <div style="margin-left: 20px;"> • No two end events will happen at the same timestamp.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a boolean indicating whether one permutation of `s1` can break some permutation of `s2`, or vice-versa.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> Return the exclusive time for each function as an array, where the value at the ith index represents the exclusive time for function i.</div>
+                        <div class=""> <b>Example:</b> [3, 4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is &#39;true&#39; if one permutation can break the other, otherwise &#39;false&#39;.</div>
+                                <div style="margin-left: 20px;"> • The output will be an array of n integers representing the exclusive times for each function.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine if one permutation of `s1` can break some permutation of `s2` or vice-versa.</div>
+                        <div class=""> <b>Goal:</b> Calculate the exclusive time for each function based on the logs.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Sort both strings `s1` and `s2`.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the logs and simulate the execution of the functions using a stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Compare the characters of the sorted strings. If at any position, a character from `s1` is less than the corresponding character from `s2`, return &#39;false&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 3: If no such position is found, return &#39;true&#39;.</div>
+                                <div style="margin-left: 20px;"> • Track the start and end times for each function call and compute the total time spent executing each function.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should efficiently handle strings of length up to 10^5.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle all values of n and logs within the given constraints efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Both strings are of equal length.</div>
+                                <div style="margin-left: 20px;"> • The function must process logs of length up to 500 efficiently.</div>
                             
-                                <div style="margin-left: 20px;"> • The strings consist only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the time spent on each function is calculated correctly, considering recursive calls.</div>
                             
                         </div>
                     </div>        
@@ -418,21 +424,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both input strings are valid and consist of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • Each function has a start and end log.</div>
                             
-                                <div style="margin-left: 20px;"> • The strings are of equal length.</div>
+                                <div style="margin-left: 20px;"> • The logs will be given in chronological order.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;cat&#39;, s2 = &#39;abc&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting both strings, we have &#39;act&#39; and &#39;abc&#39;. Since each character in &#39;act&#39; is greater than or equal to the corresponding character in &#39;abc&#39;, &#39;s1&#39; can break &#39;s2&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s1 = &#39;dog&#39;, s2 = &#39;god&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting both strings, we have &#39;dgo&#39; and &#39;dgo&#39;. Since the strings are identical, neither can break the other.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 2, logs = [&#34;0:start:0&#34;, &#34;1:start:2&#34;, &#34;1:end:5&#34;, &#34;0:end:6&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Function 0 starts at time 0 and runs for 2 units of time, function 1 starts at time 2 and runs for 4 units. Function 0 resumes at time 6 and runs for 1 unit, making the total exclusive time of function 0 equal to 3, and function 1 equal to 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +458,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will compare the sorted versions of both strings to determine if one string can break the other. Sorting ensures that we are comparing the lexicographically ordered characters.</div>
+                        <div class=""> <b>Approach:</b> We use a stack to simulate the function calls and calculate the exclusive time by tracking the start and end timestamps.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the strings ensures that we can directly compare their characters in lexicographical order.</div>
+                                <div style="margin-left: 20px;"> • Each function&#39;s exclusive time needs to account for recursive calls and nested execution times.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By comparing sorted strings character by character, we can determine if one can break the other.</div>
+                                <div style="margin-left: 20px;"> • By using a stack to keep track of function calls and their start times, we can easily calculate the total exclusive time for each function.</div>
                             
                         </div>
                     </div>
@@ -473,11 +475,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Sort both `s1` and `s2`.</div>
+                                <div style="margin-left: 20px;"> • Initialize an array to store the exclusive time of each function.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Compare each character of the sorted strings. If any character of `s1` is smaller than the corresponding character of `s2`, return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 3: If the comparison holds for all characters, return true.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the logs, processing start and end events and adjusting the exclusive time for the functions accordingly.</div>
                             
                         </div>
                     </div>
@@ -486,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs as the problem guarantees non-empty strings.</div>
+                                <div style="margin-left: 20px;"> • The input will not be empty, as logs always contain at least one function call.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles strings up to the length of 10^5 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle up to 500 logs.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where the strings are identical (e.g., &#39;abc&#39; and &#39;abc&#39;).</div>
+                                <div style="margin-left: 20px;"> • Consider cases with recursive function calls where a function calls itself multiple times.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle strings of length up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution is efficient for the given problem size.</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,23 +518,47 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Log Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 String Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Log Parsing</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 String Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Log Variables Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Extract Task ID</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Extract Status</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Extract Time</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Log Item Creation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Start Task Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Push Task to Stack</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 End Task Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Assert Task ID Match</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Calculate Task Duration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Add Duration to Task</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Pop Task from Stack</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Handle Nested Task</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Assert Parent Task is Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Subtract Duration from Parent Task</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return Result</button>
                     
                 </div>
 
@@ -543,17 +567,31 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfCanBreak</span>(string s1, string s2) {
-</span></span><span style="display:flex;"><span>    sort(s1.begin(), s1.end());
-</span></span><span style="display:flex;"><span>    sort(s2.begin(), s2.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
-</span></span><span style="display:flex;"><span>    string a <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s2</span>: s1;
-</span></span><span style="display:flex;"><span>    string b <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s1</span>: s2;   
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; a &lt;&lt; &#34;\n&#34;&lt;&lt; b;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">&lt;</span> b[i]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> exclusiveTime(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> logs) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>Log<span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">log</span> : logs) {
+</span></span><span style="display:flex;"><span>        stringstream <span style="color:#00a000">ss</span>(log);
+</span></span><span style="display:flex;"><span>        string num, adj, time;
+</span></span><span style="display:flex;"><span>        getline(ss, num,  <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>        getline(ss, adj,  <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>        getline(ss, time, <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>        Log item <span style="color:#666">=</span> { stoi(num), adj, stoi(time) };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(item.status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>) {
+</span></span><span style="display:flex;"><span>            stk.push(item);
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            assert(stk.top().id <span style="color:#666">==</span> item.id);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> item.time <span style="color:#666">-</span> stk.top().time <span style="color:#666">+</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            ans[item.id] <span style="color:#666">+=</span> t;
+</span></span><span style="display:flex;"><span>            stk.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()){
+</span></span><span style="display:flex;"><span>                assert(stk.top().status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>);
+</span></span><span style="display:flex;"><span>                ans[stk.top().id] <span style="color:#666">-=</span> t;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -561,93 +599,213 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIfCanBreak</span>(string s1, string s2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> exclusiveTime(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> logs) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `checkIfCanBreak`, which takes two strings `s1` and `s2` as input and determines whether one can break the other. </div>
+                            <div class=""> This line defines the function `exclusiveTime` that takes an integer `n` (number of tasks) and a vector of logs. It returns a vector of integers representing the exclusive time for each task. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(s1.begin(), s1.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the string `s1` in lexicographical order. </div>
+                            <div class=""> A vector `ans` is initialized with size `n` (number of tasks), and all elements are set to 0. This will store the exclusive time for each task. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Sorting</b></div>
+                            <div class=""> <b>3 : Stack Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(s2.begin(), s2.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>Log<span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the string `s2` in lexicographical order. </div>
+                            <div class=""> A stack `stk` is declared to hold `Log` objects, which will track the tasks as they are being processed. The stack is used to manage nested tasks. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Log Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">log</span> : logs) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the size of string `s1` in the variable `n`. Both strings are assumed to have the same length. </div>
+                            <div class=""> A `for` loop is used to iterate through each log in the `logs` vector, where each log is processed to extract task information. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : String Comparison</b></div>
+                            <div class=""> <b>5 : Log Parsing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string a <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s2</span>: s1;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stringstream <span style="color:#00a000">ss</span>(log);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns `a` to be the lexicographically larger of `s1` and `s2`. </div>
+                            <div class=""> A stringstream `ss` is created from the current log to easily extract individual components (task ID, status, and time). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : String Comparison</b></div>
+                            <div class=""> <b>6 : Log Variables Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string b <span style="color:#666">=</span> s1 <span style="color:#666">&lt;</span> s2 <span style="color:#666">?</span> <span style="color:#a0a000">s1</span>: s2;   
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string num, adj, time;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns `b` to be the lexicographically smaller of `s1` and `s2`. </div>
+                            <div class=""> Three string variables `num`, `adj`, and `time` are declared to hold the task ID, status (start or end), and time values extracted from the log. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop</b></div>
+                            <div class=""> <b>7 : Extract Task ID</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        getline(ss, num,  <span style="color:#b44">&#39;:&#39;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop that iterates over each character of the strings `a` and `b`. </div>
+                            <div class=""> The task ID (`num`) is extracted from the log by reading until the first colon `:`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Conditional Check</b></div>
+                            <div class=""> <b>8 : Extract Status</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">&lt;</span> b[i]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        getline(ss, adj,  <span style="color:#b44">&#39;:&#39;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Compares the characters at the same position in `a` and `b`. If any character in `a` is less than the corresponding character in `b`, returns `false`. </div>
+                            <div class=""> The task status (`adj`), which indicates whether the task has started or ended, is extracted by reading the next section of the log. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Extract Time</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        getline(ss, time, <span style="color:#b44">&#39;:&#39;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the loop completes without returning `false`, it means that every character in `a` is greater than or equal to the corresponding character in `b`, so it returns `true`. </div>
+                            <div class=""> The task time (`time`) is extracted by reading the final section of the log. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Log Item Creation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        Log item <span style="color:#666">=</span> { stoi(num), adj, stoi(time) };
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A `Log` object is created with the parsed task ID (`num`), status (`adj`), and time (`time`). The `stoi` function is used to convert the `num` and `time` from strings to integers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Start Task Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(item.status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the task status is &#39;start&#39;, the task is pushed onto the stack, indicating that it has started. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Push Task to Stack</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(item);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `item` (task) is pushed onto the stack to keep track of the active task. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : End Task Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the task status is not &#39;start&#39; (i.e., it&#39;s &#39;end&#39;), the function proceeds to handle the task completion. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Assert Task ID Match</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            assert(stk.top().id <span style="color:#666">==</span> item.id);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This assertion checks that the task ID of the current log matches the task ID of the task at the top of the stack, ensuring that tasks are being ended in the correct order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Calculate Task Duration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> item.time <span style="color:#666">-</span> stk.top().time <span style="color:#666">+</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The exclusive time for the task is calculated as the difference between the current time and the time of the task at the top of the stack, plus 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Add Duration to Task</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[item.id] <span style="color:#666">+=</span> t;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The calculated exclusive time `t` is added to the corresponding task ID in the `ans` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Pop Task from Stack</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The task is removed from the stack after processing its end time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Handle Nested Task</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()){
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there are still tasks in the stack (indicating a nested task), the function continues to handle the exclusive time for the parent task. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Assert Parent Task is Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                assert(stk.top().status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This assertion checks that the task at the top of the stack is a &#39;start&#39; task, ensuring the parent task is still active. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Subtract Duration from Parent Task</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ans[stk.top().id] <span style="color:#666">-=</span> t;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The exclusive time of the parent task is reduced by `t` to ensure the nested task&#39;s time is not counted in the parent. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the `ans` vector, which contains the exclusive time for each task. </div>
                         </div>
                     
                 </div>
@@ -667,16 +825,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n) for sorting the strings.</div>
-                        <div class=""> <b>Average Case:</b> O(n log n) for sorting and O(n) for the comparison.</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n) due to the sorting step.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(m)</div>
+                        <div class=""> <b>Worst Case:</b> O(m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of logs.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), as we need to store the sorted versions of the strings.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for storing the sorted strings.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear, as we are storing the sorted versions of both strings.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the call stack.</div>    
                     </div>
 
                 </div>

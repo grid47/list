@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given an array of integers arr and two integers k and threshold, return the number of subarrays of size k whose average is greater than or equal to the threshold. </div>
+<div class=""> Given four points in a 2D space, determine if these points form a valid square. The points are not necessarily provided in any particular order. </div>
 
 
 
@@ -370,51 +370,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers and two integers, k and threshold.</div>
-                        <div class=""> <b>Example:</b> arr = [1,3,5,7,9,10,12], k = 3, threshold = 7</div>
+                        <div class=""> <b>Input:</b> The input consists of four points, each represented as an array of two integers [x, y], where x and y are the coordinates of the point in the 2D plane.</div>
+                        <div class=""> <b>Example:</b> Input: p1 = [0, 0], p2 = [1, 1], p3 = [1, 0], p4 = [0, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • Each point is represented by two integers, xi and yi, where -10^4 ≤ xi, yi ≤ 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= arr.length</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= threshold &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • The input will always contain exactly four points.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of subarrays of size k whose average is greater than or equal to the threshold.</div>
-                        <div class=""> <b>Example:</b> For arr = [1,3,5,7,9,10,12], k = 3, threshold = 7, the output will be 4.</div>
+                        <div class=""> <b>Output:</b> Return &#39;true&#39; if the four points form a valid square, otherwise return &#39;false&#39;.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;true&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The answer will be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The output is a boolean value indicating whether the points form a valid square.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Count how many subarrays of size k have an average greater than or equal to the threshold.</div>
+                        <div class=""> <b>Goal:</b> To check if the four given points form a valid square by ensuring equal side lengths and 90-degree angles.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use a sliding window of size k to calculate the sum of each subarray.</div>
+                                <div style="margin-left: 20px;"> • Calculate the pairwise distances between the four points.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Compute the average by dividing the sum of the subarray by k.</div>
+                                <div style="margin-left: 20px;"> • Check if there are two unique distances: one for the sides (which should appear four times) and one for the diagonals (which should appear twice).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count the number of subarrays whose average is greater than or equal to the threshold.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the diagonals are longer than the sides, as they should be the hypotenuses of the right triangles formed by the sides.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should efficiently handle large input sizes.</div>
+                        <div class=""> <b>Goal:</b> The points will always form valid coordinates within the range [-10^4, 10^4]. There will be exactly four points provided.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of elements in the array is at most 10^5.</div>
+                                <div style="margin-left: 20px;"> • The number of points is always four.</div>
                             
-                                <div style="margin-left: 20px;"> • The values in the array and threshold are bounded by 10^4.</div>
+                                <div style="margin-left: 20px;"> • The coordinates of the points are within the range [-10^4, 10^4].</div>
                             
                         </div>
                     </div>        
@@ -422,21 +418,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array will always have at least one subarray of the given size k.</div>
-                            
-                                <div style="margin-left: 20px;"> • The array elements and threshold are non-negative integers.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain four valid points, and the points are not guaranteed to be ordered in any way.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: arr = [1, 3, 5, 7, 9, 10, 12], k = 3, threshold = 7</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Subarrays of size 3 are checked, and their averages are compared to the threshold to count the valid subarrays.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> These points form a square as they have equal sides and the diagonals are equal.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: arr = [2, 2, 2, 2, 5, 5, 5, 8], k = 3, threshold = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays are evaluated based on their averages, and only those meeting or exceeding the threshold are counted.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,12]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> These points do not form a square as the sides are not equal.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,16 +454,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, we can use a sliding window technique to efficiently compute the sum of each subarray of size k and check if the average is greater than or equal to the threshold.</div>
+                        <div class=""> <b>Approach:</b> To determine whether the points form a valid square, we compute the distances between each pair of points and check for two unique distances: one for the sides and one for the diagonals.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A sliding window approach ensures we only calculate the sum of each subarray once and adjust it as we move through the array.</div>
+                                <div style="margin-left: 20px;"> • A square has equal side lengths and equal diagonals.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can calculate the squared Euclidean distance between pairs of points.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The sliding window approach is efficient and avoids recalculating the sum from scratch for each subarray, making it optimal for large arrays.</div>
+                                <div style="margin-left: 20px;"> • If there are two distinct distances: one for sides (appearing four times) and one for diagonals (appearing twice), then the points form a square.</div>
                             
                         </div>
                     </div>
@@ -477,13 +473,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a sum variable for the first k elements of the array.</div>
+                                <div style="margin-left: 20px;"> • Calculate the squared distance between all pairs of points.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Slide the window over the array, adding the next element and subtracting the element that moves out of the window.</div>
+                                <div style="margin-left: 20px;"> • Store the distances in a set to ensure uniqueness.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Check if the sum of the current window is greater than or equal to k * threshold.</div>
+                                <div style="margin-left: 20px;"> • Check if there are exactly two distinct distances: one for sides and one for diagonals.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Count such windows and return the count.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the diagonals are longer than the sides.</div>
                             
                         </div>
                     </div>
@@ -492,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty arrays, as the length of arr is always at least 1.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain four points, so empty inputs are not a concern.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, the solution should be efficient and run in O(n) time where n is the length of the array.</div>
+                                <div style="margin-left: 20px;"> • The input coordinates are within a bounded range, so large inputs are not an issue.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The threshold value may be 0, in which case all subarrays with positive values will have an average greater than or equal to the threshold.</div>
+                                <div style="margin-left: 20px;"> • Points with coordinates on axes or forming degenerate squares (e.g., all points on a straight line) need to be handled.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array will contain only positive integers, and the subarray size k will always be valid.</div>
+                                <div style="margin-left: 20px;"> • The points are not guaranteed to be in any specific order.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,25 +522,13 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Distance Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Threshold Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initial Window</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Set Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sum Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Initial Count Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Sliding Window Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Window Update Add</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Window Update Remove</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Count Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
                     
                 </div>
 
@@ -553,19 +537,12 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> th) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    th <span style="color:#666">=</span> th <span style="color:#666">*</span> k;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    cnt <span style="color:#666">+=</span> sum <span style="color:#666">&gt;=</span> th;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> arr[i <span style="color:#666">-</span> k];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> th) cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">d</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (p[<span style="color:#666">0</span>] <span style="color:#666">-</span> q[<span style="color:#666">0</span>])<span style="color:#666">*</span>(p[<span style="color:#666">0</span>] <span style="color:#666">-</span> q[<span style="color:#666">0</span>]) <span style="color:#666">+</span> (p[<span style="color:#666">1</span>] <span style="color:#666">-</span> q[<span style="color:#666">1</span>]) <span style="color:#666">*</span> (p[<span style="color:#666">1</span>] <span style="color:#666">-</span> q[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">validSquare</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p2, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p3, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p4) {
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s({d(p1, p2), d(p2, p3), d(p3, p4), d(p4, p1), d(p1, p3), d(p2, p4)});
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>s.count(<span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> s.size() <span style="color:#666">==</span> <span style="color:#666">2</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -576,110 +553,50 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> th) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">d</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function that takes an array, window size `k`, and a threshold value `th` as inputs and returns the count of subarrays meeting the criteria. </div>
+                            <div class=""> Declares the function `d` that calculates the squared Euclidean distance between two points, `p` and `q`, represented by 2D vectors. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Distance Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (p[<span style="color:#666">0</span>] <span style="color:#666">-</span> q[<span style="color:#666">0</span>])<span style="color:#666">*</span>(p[<span style="color:#666">0</span>] <span style="color:#666">-</span> q[<span style="color:#666">0</span>]) <span style="color:#666">+</span> (p[<span style="color:#666">1</span>] <span style="color:#666">-</span> q[<span style="color:#666">1</span>]) <span style="color:#666">*</span> (p[<span style="color:#666">1</span>] <span style="color:#666">-</span> q[<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `cnt` to track the number of valid subarrays and `sum` to store the current window&#39;s sum. </div>
+                            <div class=""> Calculates the squared distance between the two points `p` and `q`. This avoids the need for a square root calculation, which is computationally expensive. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Threshold Adjustment</b></div>
+                            <div class=""> <b>3 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    th <span style="color:#666">=</span> th <span style="color:#666">*</span> k;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">validSquare</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p2, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p3, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p4) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Converts the threshold to the total sum equivalent for a subarray of size `k` by multiplying it with `k`. </div>
+                            <div class=""> Declares the function `validSquare` that takes four 2D points as input and returns a boolean indicating whether they form a valid square. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Initial Window</b></div>
+                            <div class=""> <b>4 : Set Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s({d(p1, p2), d(p2, p3), d(p3, p4), d(p4, p1), d(p1, p3), d(p2, p4)});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to calculate the sum of the first window of size `k`. </div>
+                            <div class=""> Creates a set `s` to store the squared distances between all pairs of points. Since sets do not allow duplicates, this step helps in identifying whether there are exactly two unique distances (the side length and diagonal). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Sum Update</b></div>
+                            <div class=""> <b>5 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>s.count(<span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> s.size() <span style="color:#666">==</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the current element to the sum for the first window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Initial Count Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cnt <span style="color:#666">+=</span> sum <span style="color:#666">&gt;=</span> th;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the initial window meets the threshold and increments `cnt` if true. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Sliding Window Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Begins the sliding window process to check subsequent windows. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Window Update Add</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds the next element in the array to the current window&#39;s sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Window Update Remove</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> arr[i <span style="color:#666">-</span> k];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes the element that is sliding out of the window from the sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Count Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> th) cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the updated window&#39;s sum meets the threshold and increments `cnt` if true. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the final count of subarrays meeting the threshold criteria. </div>
+                            <div class=""> Checks if there are no zero distances (which would indicate overlapping points) and if the set contains exactly two unique distances, which is a characteristic of a square. </div>
                         </div>
                     
                 </div>
@@ -699,16 +616,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of elements in the array.</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only traverse the array once while maintaining a sliding window.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(6)</div> 
+                        <div class=""> <b>Description:</b> Since there are always exactly four points, the time complexity is constant, O(6), due to the fixed number of pairwise comparisons.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) since we only need a few extra variables to track the sum and count.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is constant, O(1), as we are only storing a fixed number of distances.</div>    
                     </div>
 
                 </div>

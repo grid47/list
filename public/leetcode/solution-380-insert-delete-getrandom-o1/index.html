@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1101s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1100s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/380.webp" 
            alt="A sequence of elements being added or deleted, with each random selection softly highlighted." 
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> You are given several cars starting at different positions along a road. Each car has a specific speed and is trying to reach a target destination. A car cannot pass another car, but it can catch up and travel at the speed of the slower car. Cars that travel together form a fleet. Your task is to determine the number of car fleets that will reach the target. </div>
+<div class=""> Design a data structure that supports three operations: insert, remove, and getRandom. The insert operation adds an element to the set if it is not already present. The remove operation removes an element from the set if it exists. The getRandom operation returns a random element from the set, with each element having an equal probability of being selected. </div>
 
 
 
@@ -373,53 +373,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given the target distance, an array of car positions, and an array of car speeds.</div>
-                        <div class=""> <b>Example:</b> Input: target = 15, position = [12, 5, 2, 9], speed = [3, 4, 2, 5]</div>
+                        <div class=""> <b>Input:</b> The input consists of multiple function calls, starting with the creation of the RandomizedSet object. The operations &#39;insert(val)&#39;, &#39;remove(val)&#39;, and &#39;getRandom()&#39; are called sequentially.</div>
+                        <div class=""> <b>Example:</b> Example input: [[], [1], [2], [2], [], [1], [2], []]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • n == position.length == speed.length</div>
+                                <div style="margin-left: 20px;"> • -2^31 &lt;= val &lt;= 2^31 - 1</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • At most 2 * 10^5 calls will be made to insert, remove, and getRandom.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt; target &lt;= 10^6</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= position[i] &lt; target</div>
-                            
-                                <div style="margin-left: 20px;"> • All the values of position are unique.</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt; speed[i] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • There will always be at least one element in the set when getRandom() is called.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of car fleets that will arrive at the target.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> The output is a list of results corresponding to the sequence of operations performed.</div>
+                        <div class=""> <b>Example:</b> Example output: [null, true, false, true, 2, true, false, 2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find how many fleets will form by considering each car&#39;s starting position and speed, and determining if it will catch up to others.</div>
+                        <div class=""> <b>Goal:</b> Use a combination of a list and a hash map to efficiently perform insertions, removals, and random selections in constant time on average.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Calculate the time it takes for each car to reach the target.</div>
+                                <div style="margin-left: 20px;"> • Use a list to store elements and a hash map to store their indices for fast access.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Sort the cars by their starting position in descending order.</div>
+                                <div style="margin-left: 20px;"> • In the insert operation, check if the element already exists. If not, add it to the list and map the value to its index.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Iterate through the sorted list of cars, comparing the time for each car to reach the target with the previous car&#39;s time.</div>
+                                <div style="margin-left: 20px;"> • In the remove operation, replace the element to be removed with the last element in the list, update its index in the map, and then pop the last element.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If a car reaches the target faster than the previous car, it forms a new fleet. Otherwise, it joins the previous fleet.</div>
+                                <div style="margin-left: 20px;"> • In the getRandom operation, simply pick a random index from the list.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The positions of the cars are guaranteed to be unique and within the range of the target.</div>
+                        <div class=""> <b>Goal:</b> Ensure the insert, remove, and getRandom functions work in O(1) time on average.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array of positions will be sorted before applying the logic.</div>
+                                <div style="margin-left: 20px;"> • -2^31 &lt;= val &lt;= 2^31 - 1</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 2 * 10^5 calls to insert, remove, and getRandom.</div>
                             
                         </div>
                     </div>        
@@ -427,19 +423,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Cars with the same position cannot exist.</div>
+                                <div style="margin-left: 20px;"> • The elements are stored uniquely in the set.</div>
+                            
+                                <div style="margin-left: 20px;"> • The set will always have at least one element when getRandom() is called.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: target = 10, position = [7, 3, 0, 5], speed = [1, 2, 3, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the car starting at position 0 (speed 3) reaches the target before the car starting at position 3 (speed 2), but after the car starting at position 7 (speed 1). The car starting at position 5 (speed 4) forms a fleet with the car starting at position 3 and moves at the same speed. Therefore, there are 2 fleets.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: [[], [1], [2], [2], [], [1], [2], []]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We track elements in the set, and after each operation, we provide the result for that operation. For example, &#39;insert(1)&#39; returns true because 1 is inserted, while &#39;remove(2)&#39; returns false because 2 was not in the set.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: target = 100, position = [0, 10, 20, 30], speed = [10, 5, 2, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the car starting at position 0 (speed 10) forms a fleet by itself. The cars starting at positions 10, 20, and 30 form a single fleet because each catches up to the previous one.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: [[], [5], [], [10], [5], []]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After each operation, the result is either true, false, or a random element from the set.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -463,16 +461,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We solve this problem by first sorting the cars based on their starting positions and then determining how many distinct fleets will reach the target.</div>
+                        <div class=""> <b>Approach:</b> We use a list to store elements and a hash map to store indices, allowing for O(1) average time complexity for all operations.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Cars that are farther ahead will likely have a smaller time to the target, so they may form a new fleet if they travel at a faster speed.</div>
+                                <div style="margin-left: 20px;"> • We need to maintain efficient O(1) time for insert, remove, and getRandom operations.</div>
+                            
+                                <div style="margin-left: 20px;"> • A list allows for O(1) time access, while the hash map helps with O(1) element removal and index tracking.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By calculating the time for each car to reach the target, we can decide if the car forms a new fleet or joins an existing one.</div>
+                                <div style="margin-left: 20px;"> • The key challenge is efficiently handling the removal operation while maintaining the ability to return a random element.</div>
                             
                         </div>
                     </div>
@@ -480,11 +480,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Create a map of cars to their respective time to reach the target.</div>
+                                <div style="margin-left: 20px;"> • Store elements in a list and their indices in a hash map.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Sort the cars by their position in descending order.</div>
+                                <div style="margin-left: 20px;"> • For insert, check if the element is present. If not, append it to the list and update the map.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Compare the times of consecutive cars, incrementing the fleet count if the current car&#39;s time is greater than the previous one.</div>
+                                <div style="margin-left: 20px;"> • For remove, swap the element with the last element in the list to maintain O(1) time complexity and update the map accordingly.</div>
+                            
+                                <div style="margin-left: 20px;"> • For getRandom, pick a random index from the list.</div>
                             
                         </div>
                     </div>
@@ -493,22 +495,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • N/A: The problem guarantees at least one car.</div>
+                                <div style="margin-left: 20px;"> • No empty operations will be allowed as the problem guarantees at least one element when getRandom() is called.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle up to 10^5 cars efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently with up to 2 * 10^5 operations.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there is only one car, it will form one fleet.</div>
+                                <div style="margin-left: 20px;"> • Handle edge cases where the value is at the boundary of the allowed range (-2^31 or 2^31 - 1).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All positions are unique, and the number of cars will not exceed the specified limit.</div>
+                                <div style="margin-left: 20px;"> • Ensure O(1) time complexity for each of the operations.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,23 +527,51 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Insert Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditionals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Fleet Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Insert Action</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Insert Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Insert Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Remove Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Conditionals</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Remove Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Remove Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Remove Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Remove Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Remove Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Remove Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Get Random Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Get Random Action</button>
                     
                 </div>
 
@@ -550,19 +580,36 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">carFleet</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pos, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> v) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> t;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        t[<span style="color:#666">-</span>pos[i]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) (target<span style="color:#666">-</span>pos[i]) <span style="color:#666">/</span> v[i];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> a;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> m;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>RandomizedSet() {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">insert</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(m.find(val)<span style="color:#666">!=</span>m.end())
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>{
+</span></span><span style="display:flex;"><span>        a.push_back(val);
+</span></span><span style="display:flex;"><span>        m[val]<span style="color:#666">=</span>a.size()<span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fleet <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: t) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.second <span style="color:#666">&gt;</span> cur) fleet<span style="color:#666">++</span>, cur <span style="color:#666">=</span> it.second;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">remove</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(m.find(val)<span style="color:#666">==</span>m.end())
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> last<span style="color:#666">=</span>a.back(); 
+</span></span><span style="display:flex;"><span>        a[m[val]]<span style="color:#666">=</span>a.back();
+</span></span><span style="display:flex;"><span>        a.pop_back();
+</span></span><span style="display:flex;"><span>        m[last]<span style="color:#666">=</span>m[val];   
+</span></span><span style="display:flex;"><span>        m.erase(val);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> fleet;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getRandom</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> a[rand()<span style="color:#666">%</span>a.size()];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -570,93 +617,233 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initialization</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">carFleet</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pos, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> v) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> a;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the main function, taking target position, car positions, and car speeds as input. </div>
+                            <div class=""> This line initializes a vector `a` to store the values inserted into the set. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Data Structure</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> t;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> m;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a map to store the time taken for each car to reach the target, using the negative of the position as the key. </div>
+                            <div class=""> This line initializes an unordered map `m` to store each value and its corresponding index in the vector `a`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to calculate the time for each car to reach the target. </div>
+                            <div class=""> This marks the beginning of the public section where functions are defined. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Calculation</b></div>
+                            <div class=""> <b>4 : Constructor Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        t[<span style="color:#666">-</span>pos[i]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) (target<span style="color:#666">-</span>pos[i]) <span style="color:#666">/</span> v[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>RandomizedSet() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each car, calculate the time it will take to reach the target by using the formula: time = (target - position) / speed. </div>
+                            <div class=""> This is the constructor for the RandomizedSet class, initializing the data structures. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Insert Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fleet <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">insert</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the fleet counter to 0. </div>
+                            <div class=""> This function attempts to insert a value `val` into the set. It returns false if the value already exists, otherwise it inserts the value and returns true. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Conditionals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(m.find(val)<span style="color:#666">!=</span>m.end())
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable &#39;cur&#39; to track the current maximum time seen among the fleets. </div>
+                            <div class=""> This checks if the value already exists in the set by looking it up in the unordered map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop</b></div>
+                            <div class=""> <b>7 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: t) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to process each car&#39;s time to reach the target in descending order of positions. </div>
+                            <div class=""> If the value already exists, the function returns `false` to indicate the insertion was unsuccessful. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Fleet Calculation</b></div>
+                            <div class=""> <b>8 : Insert Action</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.second <span style="color:#666">&gt;</span> cur) fleet<span style="color:#666">++</span>, cur <span style="color:#666">=</span> it.second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>{
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current car takes more time than the previous one, it forms a new fleet. Update the current time. </div>
+                            <div class=""> This marks the beginning of the block of code to execute if the value does not already exist. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return</b></div>
+                            <div class=""> <b>9 : Insert Action</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> fleet;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        a.push_back(val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the total number of fleets. </div>
+                            <div class=""> The value is pushed onto the vector `a` to store it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Insert Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        m[val]<span style="color:#666">=</span>a.size()<span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The value is mapped to its index in the vector `a` in the unordered map `m`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the insertion is successful, the function returns `true`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Remove Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">remove</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This function attempts to remove a value `val` from the set. It returns false if the value does not exist, otherwise it removes the value and returns true. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Conditionals</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(m.find(val)<span style="color:#666">==</span>m.end())
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the value exists in the unordered map `m`. If it doesn&#39;t exist, the function will return false. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the value does not exist, the function returns `false` to indicate the removal was unsuccessful. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Remove Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>{
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This marks the beginning of the block of code to execute if the value exists. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Remove Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> last<span style="color:#666">=</span>a.back(); 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The last value from the vector `a` is stored in the variable `last`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Remove Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        a[m[val]]<span style="color:#666">=</span>a.back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The last value is moved to the position of the value being removed in the vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Remove Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        a.pop_back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The last value is removed from the vector `a` after it is moved to the position of the removed value. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Remove Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        m[last]<span style="color:#666">=</span>m[val];   
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The index of the last value is updated in the unordered map `m`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Remove Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        m.erase(val);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The value is removed from the unordered map `m`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the removal is successful, the function returns `true`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Get Random Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getRandom</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This function returns a random value from the set by selecting a random index from the vector `a`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Get Random Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> a[rand()<span style="color:#666">%</span>a.size()];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A random index is selected from the vector `a`, and the corresponding value is returned. </div>
                         </div>
                     
                 </div>
@@ -676,16 +863,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting of the positions of the cars, which takes O(n log n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> All operations (insert, remove, getRandom) have an average time complexity of O(1) due to the use of a list and a hash map.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the times of the cars.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) as we need to store the elements in a list and a hash map, where n is the number of elements in the set.</div>    
                     </div>
 
                 </div>

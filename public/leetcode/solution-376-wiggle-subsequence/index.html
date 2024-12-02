@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Alice has a set of cards, each with a value written on it. She wants to rearrange these cards into groups, where each group consists of <code>groupSize</code> consecutive cards. Given an integer array <code>hand</code> where <code>hand[i]</code> represents the value on the ith card, and an integer <code>groupSize</code>, return <code>true</code> if she can rearrange the cards into groups of consecutive numbers, or <code>false</code> otherwise. </div>
+<div class=""> A wiggle subsequence is a sequence where the differences between successive numbers strictly alternate between positive and negative. The first difference (if one exists) may be either positive or negative. A sequence with one element and a sequence with two non-equal elements are trivially wiggle sequences. Given an integer array <code>nums</code>, return the length of the longest wiggle subsequence of <code>nums</code>. </div>
 
 
 
@@ -371,51 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array `hand` representing the values on the cards and an integer `groupSize` that denotes the required group size.</div>
-                        <div class=""> <b>Example:</b> Input: hand = [10, 12, 13, 11, 14, 15, 16], groupSize = 3</div>
+                        <div class=""> <b>Input:</b> You are given an integer array `nums`.</div>
+                        <div class=""> <b>Example:</b> nums = [1, 8, 3, 5, 2, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= hand.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= hand[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= groupSize &lt;= hand.length</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return `true` if it is possible to rearrange the cards into consecutive groups of size `groupSize`. Otherwise, return `false`.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest subsequence that forms a wiggle sequence.</div>
+                        <div class=""> <b>Example:</b> Output: 6</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • If the length of `hand` is not divisible by `groupSize`, return `false`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine if we can group the cards into valid groups of consecutive numbers of size `groupSize`.</div>
+                        <div class=""> <b>Goal:</b> Determine the longest subsequence that alternates between increasing and decreasing differences.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Count the frequency of each card in the hand using a map.</div>
+                                <div style="margin-left: 20px;"> • Create two arrays to store the lengths of the wiggle subsequences that end in an upward or downward direction.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each unique card, attempt to form a group by selecting consecutive cards. Decrease their frequencies as you form groups.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array and for each element, update the subsequence lengths based on the current and previous elements.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: If at any point, forming a group is not possible (e.g., not enough consecutive cards), return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: If all cards are grouped successfully, return true.</div>
+                                <div style="margin-left: 20px;"> • The final answer is the maximum value between the two subsequence lengths at the end of the array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> We must ensure that the solution can handle the large input size and check for possible groupings efficiently.</div>
+                        <div class=""> <b>Goal:</b> The array should have at least one element, and each element must be a non-negative integer.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of `hand` must be divisible by `groupSize`.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • Each card in the hand must have a value greater than or equal to 0.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1000</div>
                             
                         </div>
                     </div>        
@@ -423,25 +417,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The hand contains at least one card.</div>
-                            
-                                <div style="margin-left: 20px;"> • The values on the cards are non-negative integers.</div>
+                                <div style="margin-left: 20px;"> • The array `nums` is non-empty and contains at least one integer.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hand = [10, 12, 13, 11, 14, 15, 16], groupSize = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The hand can be rearranged into three groups: [10, 11, 12], [13, 14, 15], and [16]. Therefore, the answer is `true`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 8, 3, 5, 2, 7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the entire sequence is a valid wiggle sequence, and the differences between consecutive elements alternate between positive and negative.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hand = [1, 2, 3, 4, 5], groupSize = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The length of the hand is 5, which is not divisible by 4, so it&#39;s impossible to divide the cards into groups of 4. Therefore, the answer is `false`.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hand = [1, 2, 3, 4, 6, 7], groupSize = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It&#39;s not possible to form the required groups because the card with value 5 is missing, which breaks the sequence. Therefore, the answer is `false`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [10, 15, 12, 9, 18, 7, 11, 13]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, a valid wiggle subsequence can be formed as `[10, 15, 9, 18, 7, 13]`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -465,18 +453,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, we first count the frequency of each card and attempt to group consecutive cards by checking if each value can form a valid group with its consecutive numbers.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem efficiently, we can use dynamic programming.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the length of the hand is not divisible by `groupSize`, it&#39;s impossible to form valid groups.</div>
-                            
-                                <div style="margin-left: 20px;"> • We need to efficiently manage card frequencies and check for possible consecutive sequences.</div>
+                                <div style="margin-left: 20px;"> • We can maintain two states: one where the current element is part of an increasing subsequence, and one where it is part of a decreasing subsequence.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This problem can be tackled using a greedy approach by starting from the smallest card value and trying to form groups of consecutive numbers.</div>
+                                <div style="margin-left: 20px;"> • Dynamic programming can be used to store the lengths of subsequences that end in an increasing or decreasing direction.</div>
                             
                         </div>
                     </div>
@@ -484,13 +470,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Create a frequency map of all the cards in the hand.</div>
+                                <div style="margin-left: 20px;"> • Create two arrays: `up` and `down` to store the length of the subsequence ending in an increasing or decreasing direction, respectively.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Start from the smallest card and try to form a group of consecutive cards. Decrease their frequency as you form the group.</div>
+                                <div style="margin-left: 20px;"> • Initialize the first element as 1 for both `up` and `down`.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Repeat the process for all remaining cards, ensuring all cards are part of a valid group.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the array and update `up` and `down` based on the current element compared to the previous one.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If at any point a valid group cannot be formed, return `false`. Otherwise, return `true`.</div>
+                                <div style="margin-left: 20px;"> • Return the maximum value between `up` and `down` at the end of the array.</div>
                             
                         </div>
                     </div>
@@ -499,22 +485,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input cannot be empty as there must be at least one card.</div>
+                                <div style="margin-left: 20px;"> • There are no empty inputs as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution can handle large input sizes (up to 10^4 cards).</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle inputs up to the size of 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the length of the hand is not divisible by `groupSize`, return `false`.</div>
+                                <div style="margin-left: 20px;"> • The input may contain repeated elements, but this does not affect the logic since we are only concerned with the differences between consecutive elements.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays where `groupSize` is larger than the number of unique cards efficiently.</div>
+                                <div style="margin-left: 20px;"> • The array should not contain negative numbers or be empty.</div>
                             
                         </div>                                                                        
                     </div>
@@ -533,25 +519,39 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Edge Case Handling</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Counting Elements</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Through Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Dynamic Programming Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Dynamic Programming Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Initial Condition Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Card Deduction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Initial Condition Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Negative Count Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return False</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check (Decrease)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reset Card Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Dynamic Programming Update (Decrease)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return True</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Dynamic Programming Update (Maintain Up)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition Check (Increase)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Dynamic Programming Update (Increase)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Dynamic Programming Update (Maintain Down)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Condition Check (No Change)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Dynamic Programming Update (No Change)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Dynamic Programming Update (Maintain Up)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Result</button>
                     
                 </div>
 
@@ -560,20 +560,33 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isNStraightHand</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> hand, <span style="color:#0b0;font-weight:bold">int</span> groupSize) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: hand) mp[x]<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">wiggleMaxLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> groupSize; i<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>            mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">-=</span> mp[it.first];
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> up(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> down(n, <span style="color:#666">0</span>);        
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    up[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    down[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            down[i] <span style="color:#666">=</span> up[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            up[i] <span style="color:#666">=</span> up[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        mp[it.first] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) {            
+</span></span><span style="display:flex;"><span>            up[i] <span style="color:#666">=</span> down[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            down[i] <span style="color:#666">=</span> down[i <span style="color:#666">-</span> <span style="color:#666">1</span>];                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            down[i] <span style="color:#666">=</span> down[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>            up[i]   <span style="color:#666">=</span>   up[i <span style="color:#666">-</span> <span style="color:#666">1</span>];                
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(down[n <span style="color:#666">-</span> <span style="color:#666">1</span>], up[n <span style="color:#666">-</span> <span style="color:#666">1</span>]);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -584,110 +597,180 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isNStraightHand</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> hand, <span style="color:#0b0;font-weight:bold">int</span> groupSize) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">wiggleMaxLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `isNStraightHand` takes a hand of cards and checks whether the cards can be grouped into valid straight sequences of the specified size. </div>
+                            <div class=""> This is the function definition for `wiggleMaxLength`, which computes the maximum length of a wiggle subsequence. It takes a vector `nums` as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Edge Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A map `mp` is initialized to store the count of each card in the hand. </div>
+                            <div class=""> Checks if the input array `nums` is empty. If it is, the function returns 0 as there is no wiggle subsequence possible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Counting Elements</b></div>
+                            <div class=""> <b>3 : Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: hand) mp[x]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each card in the hand, increment its count in the map `mp`. </div>
+                            <div class=""> Calculates the size `n` of the input vector `nums`, which is used to initialize dynamic programming tables. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Through Map</b></div>
+                            <div class=""> <b>4 : Dynamic Programming Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> up(n, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over each card in the map `mp`. </div>
+                            <div class=""> Declares a vector `up` of size `n` initialized to zero, which will track the length of the longest subsequence ending in an upward direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Dynamic Programming Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> down(n, <span style="color:#666">0</span>);        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current card has not been used already. </div>
+                            <div class=""> Declares a vector `down` of size `n` initialized to zero, which will track the length of the longest subsequence ending in a downward direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inner Loop</b></div>
+                            <div class=""> <b>6 : Initial Condition Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> groupSize; i<span style="color:#666">++</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    up[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the group size and check if the following cards can form a valid group. </div>
+                            <div class=""> Sets the base case: the first element of the `nums` array is considered to be part of a wiggle sequence of length 1, starting with an upward direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Card Deduction</b></div>
+                            <div class=""> <b>7 : Initial Condition Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">-=</span> mp[it.first];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    down[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrease the count of the card in the map for each card that should be part of the current group. </div>
+                            <div class=""> Sets the base case: the first element of the `nums` array is considered to be part of a wiggle sequence of length 1, starting with a downward direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Negative Count Check</b></div>
+                            <div class=""> <b>8 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If any card required for the group has a negative count, it means the group cannot be formed, so return false. </div>
+                            <div class=""> This loop iterates through the `nums` array starting from the second element, checking whether each element is part of an increasing or decreasing subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return False</b></div>
+                            <div class=""> <b>9 : Condition Check (Decrease)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return false if the cards cannot form a valid straight hand. </div>
+                            <div class=""> Checks if the current number `nums[i]` is less than the previous number `nums[i - 1]`. If true, it signifies a downward direction in the wiggle subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Reset Card Count</b></div>
+                            <div class=""> <b>10 : Dynamic Programming Update (Decrease)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[it.first] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            down[i] <span style="color:#666">=</span> up[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the current card count to 0 after processing it. </div>
+                            <div class=""> Updates the `down[i]` value, representing the longest subsequence ending in a downward direction, considering the previous subsequence&#39;s upward direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return True</b></div>
+                            <div class=""> <b>11 : Dynamic Programming Update (Maintain Up)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            up[i] <span style="color:#666">=</span> up[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return true if all cards can be grouped into valid straight hands. </div>
+                            <div class=""> Maintains the previous `up[i - 1]` value since the current number does not extend the upward sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Condition Check (Increase)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(nums[i] <span style="color:#666">&gt;</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) {            
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current number `nums[i]` is greater than the previous number `nums[i - 1]`. If true, it signifies an upward direction in the wiggle subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Dynamic Programming Update (Increase)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            up[i] <span style="color:#666">=</span> down[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Updates the `up[i]` value, representing the longest subsequence ending in an upward direction, considering the previous subsequence&#39;s downward direction. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Dynamic Programming Update (Maintain Down)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            down[i] <span style="color:#666">=</span> down[i <span style="color:#666">-</span> <span style="color:#666">1</span>];                
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Maintains the previous `down[i - 1]` value since the current number does not extend the downward sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Condition Check (No Change)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handles the case where the current number is equal to the previous number, meaning the sequence does not change direction. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Dynamic Programming Update (No Change)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            down[i] <span style="color:#666">=</span> down[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Maintains the previous `down[i - 1]` value since there is no change in direction. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Dynamic Programming Update (Maintain Up)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            up[i]   <span style="color:#666">=</span>   up[i <span style="color:#666">-</span> <span style="color:#666">1</span>];                
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Maintains the previous `up[i - 1]` value since there is no change in direction. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(down[n <span style="color:#666">-</span> <span style="color:#666">1</span>], up[n <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the maximum value between `down[n - 1]` and `up[n - 1]`, which represents the length of the longest wiggle subsequence. </div>
                         </div>
                     
                 </div>
@@ -707,16 +790,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting of cards, which is O(n log n), followed by the greedy approach to form groups in O(n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we only need to iterate through the array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the frequency map storing the count of each unique card.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the `up` and `down` arrays.</div>    
                     </div>
 
                 </div>

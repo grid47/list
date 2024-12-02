@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 19, 2024
                                     <i class="far fa-clock clock"></i>
-                                    10 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1311s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1309s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/795.webp" 
            alt="A sequence of numbers where subarrays are counted with a bounded maximum, glowing softly as each valid subarray is found." 
@@ -319,10 +319,7 @@
 
 
 
-<div class=""> <p>You are given a connected, undirected, weighted graph with n nodes, labeled from 1 to n. An array &rsquo;edges&rsquo; represents the edges in the graph where each element edges[i] = [ui, vi, weighti] indicates that there is an edge between nodes ui and vi with a weight of weighti. A path from node start to node end is a sequence of nodes [z0, z1, &hellip;, zk] such that z0 = start, zk = end, and there is an edge between zi and zi+1 for each 0 &lt;= i &lt;= k-1.</p>
-<p>The distance of a path is the sum of the weights of the edges along the path. A restricted path is a path where the distance from node &rsquo;n&rsquo; to node zi is strictly greater than the distance from node &rsquo;n&rsquo; to node zi+1 for each 0 &lt;= i &lt;= k-1.</p>
-<p>You need to return the number of restricted paths from node 1 to node n, modulo 10^9 + 7.</p>
- </div>
+<div class=""> Given an integer array <code>nums</code> and two integers <code>left</code> and <code>right</code>, return the number of contiguous non-empty subarrays such that the maximum value in each subarray lies within the inclusive range [left, right]. </div>
 
 
 
@@ -373,63 +370,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer n, representing the number of nodes in the graph. The second input is an array of edges, where each element is an array [ui, vi, weighti], representing an edge between nodes ui and vi with a weight of weighti.</div>
-                        <div class=""> <b>Example:</b> Example: n = 5, edges = [[1, 2, 3], [1, 3, 3], [2, 3, 1], [1, 4, 2], [5, 2, 2], [3, 5, 1], [5, 4, 10]]</div>
+                        <div class=""> <b>Input:</b> You are given an integer array `nums` of size `n`, and two integers `left` and `right` that represent the range of valid maximum values for the subarrays.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [1, 2, 3], left = 2, right = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • n - 1 &lt;= edges.length &lt;= 4 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • edges[i].length == 3</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= ui, vi &lt;= n</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= weighti &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • There is at least one path between any two nodes.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= left &lt;= right &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be an integer, representing the number of restricted paths from node 1 to node n modulo 10^9 &#43; 7.</div>
-                        <div class=""> <b>Example:</b> Example: Output = 3</div>
+                        <div class=""> <b>Output:</b> Return an integer representing the number of valid subarrays where the maximum value lies within the range [left, right].</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Return the number of restricted paths modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • The answer will always fit within a 32-bit integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the number of restricted paths from node 1 to node n in the graph.</div>
+                        <div class=""> <b>Goal:</b> The goal is to count all contiguous subarrays such that the maximum element in each subarray falls within the given range [left, right].</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Build a graph using the given edges.</div>
+                                <div style="margin-left: 20px;"> • Initialize a variable `ans` to keep track of the number of valid subarrays.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use Dijkstra&#39;s algorithm to compute the shortest distances from node n to all other nodes.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each element of `nums` while maintaining a variable `dp` to count valid subarrays ending at the current index.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Perform a Depth First Search (DFS) starting from node 1 to count the number of restricted paths to node n.</div>
+                                <div style="margin-left: 20px;"> • If the current element is less than `left`, add `dp` to `ans` since the subarray formed up to this element is valid.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the current element is greater than `right`, reset `dp` as this element and any subarray containing it are no longer valid.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the current element is within the range [left, right], calculate `dp` as the number of valid subarrays that can be formed with the current element and add it to `ans`.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem has the following constraints:</div>
+                        <div class=""> <b>Goal:</b> Ensure that the input values and array size fall within the provided constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2 * 10^4</div>
+                                <div style="margin-left: 20px;"> • The length of `nums` should be at least 1 and at most 10^5.</div>
                             
-                                <div style="margin-left: 20px;"> • n - 1 &lt;= edges.length &lt;= 4 * 10^4</div>
+                                <div style="margin-left: 20px;"> • Each element in `nums` should be a non-negative integer not exceeding 10^9.</div>
                             
-                                <div style="margin-left: 20px;"> • edges[i].length == 3</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= ui, vi &lt;= n</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= weighti &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • There is at least one path between any two nodes.</div>
+                                <div style="margin-left: 20px;"> • Both `left` and `right` should lie between 0 and 10^9, inclusive.</div>
                             
                         </div>
                     </div>        
@@ -437,21 +426,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The graph is connected, meaning there is always at least one path between any two nodes.</div>
+                                <div style="margin-left: 20px;"> • The array `nums` is non-empty and contains integers.</div>
                             
-                                <div style="margin-left: 20px;"> • The edge weights are positive integers.</div>
+                                <div style="margin-left: 20px;"> • The range [left, right] is valid and falls within the specified bounds.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: n = 5, edges = [[1, 2, 3], [1, 3, 3], [2, 3, 1], [1, 4, 2], [5, 2, 2], [3, 5, 1], [5, 4, 10]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The three restricted paths are: 1 -&gt; 2 -&gt; 5, 1 -&gt; 2 -&gt; 3 -&gt; 5, and 1 -&gt; 3 -&gt; 5. These paths satisfy the condition that for any adjacent nodes on the path, the distance from node n to the current node is greater than the distance from node n to the next node.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 3], left = 2, right = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are four subarrays where the maximum element lies between 2 and 3: [2], [2, 3], [3], and [1, 2, 3].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: n = 7, edges = [[1, 3, 1], [4, 1, 2], [7, 3, 4], [2, 5, 3], [5, 6, 1], [6, 7, 2], [7, 5, 3], [2, 6, 4]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The only restricted path in this example is: 1 -&gt; 3 -&gt; 7. The distance from node n (node 7) decreases as you move along this path from node 1 to node 7.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, 9, 2, 5, 6], left = 2, right = 8</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid subarrays are [2], [2, 9], [9], [2, 9, 2], [2, 9, 2, 5], [9, 2], and [2]. The total count is 7.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -475,16 +464,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we can follow a multi-step approach using Dijkstra&#39;s algorithm and a DFS traversal to count the restricted paths.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem by iterating through the array and using a sliding window approach to count valid subarrays. We keep track of the number of valid subarrays ending at each position using a dynamic programming approach.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Dijkstra&#39;s algorithm is useful for finding the shortest paths in the graph, which will be crucial for verifying the restricted path condition.</div>
+                                <div style="margin-left: 20px;"> • We need an efficient way to count subarrays. A brute force approach could take too long.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Once the shortest distances are calculated, we can traverse the graph and check each path to see if it satisfies the restricted path condition.</div>
+                                <div style="margin-left: 20px;"> • A sliding window approach combined with dynamic programming should work well here, as it allows us to track subarrays in constant time.</div>
                             
                         </div>
                     </div>
@@ -492,11 +481,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Build the graph from the input edges.</div>
+                                <div style="margin-left: 20px;"> • Initialize `ans` to 0, which will store the number of valid subarrays.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use Dijkstra&#39;s algorithm to compute the shortest distance from node n to all other nodes.</div>
+                                <div style="margin-left: 20px;"> • Create a variable `dp` to track the number of valid subarrays ending at each index.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Implement a DFS function that checks the restricted path condition and counts valid paths from node 1 to node n.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array, adjusting `dp` and `ans` based on whether the current element is within the valid range or not.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the element is within the range [left, right], update `dp` and add it to `ans`. If it&#39;s outside the range, reset `dp`.</div>
                             
                         </div>
                     </div>
@@ -505,22 +496,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Empty graph or no edges (though not possible by the problem&#39;s constraints).</div>
+                                <div style="margin-left: 20px;"> • If `nums` is empty, the result should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The graph can have up to 40,000 edges, requiring an efficient implementation of both Dijkstra&#39;s and DFS.</div>
+                                <div style="margin-left: 20px;"> • For large arrays, the solution should still be efficient enough to handle up to 10^5 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Graphs with multiple paths having the same shortest distance.</div>
+                                <div style="margin-left: 20px;"> • If all elements in the array are larger than `right`, no valid subarrays will exist.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The graph will always have a valid path between any two nodes.</div>
+                                <div style="margin-left: 20px;"> • The array should be non-empty, and `left` and `right` should be valid integer values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -537,67 +528,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Variables</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Graph Construction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Get Array Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Edge Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialize Variables</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Edge Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop through Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Graph Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Answer if Element is Less than Left</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Bidirectional Edge</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Add to Answer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Distance Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Handle Element Greater than Right</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Priority Queue Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Reset DP and Update Index</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Start Node Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Previous Index</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Set Distance of Node n</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Check if Element is in Range</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Priority Queue Processing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update DP for Valid Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Node Extraction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Answer for Valid Subarray</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Priority Queue Pop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Neighbor Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Neighbor Extraction</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Distance Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Distance Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Queue Push</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Dynamic Programming Setup</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 DFS Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 DFS Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Base Case</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Memoization Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Modulo Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Neighbor Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Neighbor Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Restricted Path Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Return DP Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Final Answer</button>
                     
                 </div>
 
@@ -606,58 +563,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countRestrictedPaths</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> es) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSubarrayBoundedMax</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> left, <span style="color:#0b0;font-weight:bold">int</span> right) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pii<span style="color:#666">&gt;&gt;</span> gph(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> es.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> u <span style="color:#666">=</span> es[i][<span style="color:#666">0</span>], v <span style="color:#666">=</span> es[i][<span style="color:#666">1</span>], d <span style="color:#666">=</span> es[i][<span style="color:#666">2</span>];
-</span></span><span style="display:flex;"><span>        gph[u].push_back({d, v});
-</span></span><span style="display:flex;"><span>        gph[v].push_back({d, u});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dst(n <span style="color:#666">+</span> <span style="color:#666">1</span>, INT_MAX);
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pii, vector<span style="color:#666">&lt;</span>pii<span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    pq.push({<span style="color:#666">0</span>, n});
-</span></span><span style="display:flex;"><span>    dst[n] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, dp <span style="color:#666">=</span> <span style="color:#666">0</span>, prv <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> [d, u] <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>        pq.pop();
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">x</span>: gph[u]) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> nxt <span style="color:#666">=</span> x.second, t <span style="color:#666">=</span> x.first;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> left)
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">+=</span> dp;
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>           <span style="color:#080;font-style:italic">// if(t != dst[nxt]) continue;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(dst[nxt] <span style="color:#666">&gt;</span> t <span style="color:#666">+</span> d) {
-</span></span><span style="display:flex;"><span>                dst[nxt] <span style="color:#666">=</span> t <span style="color:#666">+</span> d;
-</span></span><span style="display:flex;"><span>                pq.push({t <span style="color:#666">+</span> d, nxt});
-</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;</span> right) {
+</span></span><span style="display:flex;"><span>            dp <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            prv <span style="color:#666">=</span> i;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dfs(gph, dst, n, dp);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pii<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>gph, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>dst, <span style="color:#0b0;font-weight:bold">int</span> s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>dp) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (s <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dp[s] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> dp[s];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, w <span style="color:#666">=</span> <span style="color:#666">0</span>, val <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">v</span> : gph[s]) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        w <span style="color:#666">=</span> dst[s];
-</span></span><span style="display:flex;"><span>        val <span style="color:#666">=</span> dst[v.second];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (val <span style="color:#666">&gt;</span> w) {
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">=</span> (sum <span style="color:#666">%</span> mod<span style="color:#666">+</span> dfs(gph, dst, v.second, dp) <span style="color:#666">%</span> mod) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;=</span> left <span style="color:#666">&amp;&amp;</span> nums[i] <span style="color:#666">&lt;=</span> right) {
+</span></span><span style="display:flex;"><span>            dp <span style="color:#666">=</span> i <span style="color:#666">-</span> prv;
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">+=</span> dp;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[s] <span style="color:#666">=</span> sum <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -665,314 +593,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countRestrictedPaths</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> es) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSubarrayBoundedMax</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> left, <span style="color:#0b0;font-weight:bold">int</span> right) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `countRestrictedPaths`, which takes the number of nodes `n` and an edge list `es` and returns the count of restricted paths from node `n` to node `1`. </div>
+                            <div class=""> Defines the function that calculates the number of subarrays with a bounded maximum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Initialize Variables</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Placeholder for any required initialization or logic at the beginning of the function. </div>
+                            <div class=""> Prepare for the loop and initialize variables used for the calculation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Graph Construction</b></div>
+                            <div class=""> <b>3 : Get Array Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pii<span style="color:#666">&gt;&gt;</span> gph(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an adjacency list `gph` to store the graph where each node will have a list of pairs representing the distance and the connected node. </div>
+                            <div class=""> Calculates the size of the input array nums. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Edge Iteration</b></div>
+                            <div class=""> <b>4 : Initialize Variables</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> es.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, dp <span style="color:#666">=</span> <span style="color:#666">0</span>, prv <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each edge in the edge list `es` to build the graph representation. </div>
+                            <div class=""> Initializes variables: ans for the result, dp for counting valid subarrays, and prv for tracking the previous index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Edge Assignment</b></div>
+                            <div class=""> <b>5 : Loop through Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> u <span style="color:#666">=</span> es[i][<span style="color:#666">0</span>], v <span style="color:#666">=</span> es[i][<span style="color:#666">1</span>], d <span style="color:#666">=</span> es[i][<span style="color:#666">2</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the nodes `u` and `v` and the distance `d` for each edge in the graph. </div>
+                            <div class=""> Begins the iteration through the input array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Graph Population</b></div>
+                            <div class=""> <b>6 : Update Answer if Element is Less than Left</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[u].push_back({d, v});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> left)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the edge from node `u` to node `v` with distance `d` to the graph. </div>
+                            <div class=""> If the current element is less than the left bound, accumulate the result by adding the dynamic programming state. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Bidirectional Edge</b></div>
+                            <div class=""> <b>7 : Add to Answer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[v].push_back({d, u});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">+=</span> dp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the reverse edge from node `v` to node `u` to make the graph bidirectional. </div>
+                            <div class=""> Adds the value of dp to the answer if the current element is less than the left bound. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Distance Initialization</b></div>
+                            <div class=""> <b>8 : Handle Element Greater than Right</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dst(n <span style="color:#666">+</span> <span style="color:#666">1</span>, INT_MAX);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;</span> right) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector `dst` to store the shortest distances from node `n` to all other nodes, with all values set to infinity initially. </div>
+                            <div class=""> Checks if the current element exceeds the upper bound. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Priority Queue Setup</b></div>
+                            <div class=""> <b>9 : Reset DP and Update Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pii, vector<span style="color:#666">&lt;</span>pii<span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dp <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a priority queue `pq` to store nodes based on their distances, ensuring that the smallest distance node is processed first. </div>
+                            <div class=""> Resets the dynamic programming state to zero because no valid subarrays can end at this element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Start Node Initialization</b></div>
+                            <div class=""> <b>10 : Update Previous Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({<span style="color:#666">0</span>, n});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            prv <span style="color:#666">=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the destination node `n` into the priority queue with a distance of 0. </div>
+                            <div class=""> Sets the previous index to the current one, which marks the new boundary for subarray calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Set Distance of Node n</b></div>
+                            <div class=""> <b>11 : Check if Element is in Range</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dst[n] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;=</span> left <span style="color:#666">&amp;&amp;</span> nums[i] <span style="color:#666">&lt;=</span> right) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the distance to the destination node `n` to 0. </div>
+                            <div class=""> Checks if the current element is within the range [left, right]. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Priority Queue Processing</b></div>
+                            <div class=""> <b>12 : Update DP for Valid Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dp <span style="color:#666">=</span> i <span style="color:#666">-</span> prv;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop that processes nodes from the priority queue until it&#39;s empty. </div>
+                            <div class=""> Updates dp to represent the count of subarrays ending at the current element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Node Extraction</b></div>
+                            <div class=""> <b>13 : Update Answer for Valid Subarray</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> [d, u] <span style="color:#666">=</span> pq.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">+=</span> dp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the node `u` with the smallest distance `d` from the priority queue. </div>
+                            <div class=""> Adds the number of valid subarrays (dp) to the total answer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Priority Queue Pop</b></div>
+                            <div class=""> <b>14 : Return Final Answer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the node `u` from the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Neighbor Iteration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">x</span>: gph[u]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterate through the neighbors `x` of the current node `u`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Neighbor Extraction</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> nxt <span style="color:#666">=</span> x.second, t <span style="color:#666">=</span> x.first;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Extract the neighbor node `nxt` and the distance `t` for the edge from `u` to `nxt`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Distance Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(dst[nxt] <span style="color:#666">&gt;</span> t <span style="color:#666">+</span> d) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the current distance to the neighbor `nxt` is greater than the new distance `t &#43; d`. If it is, update the distance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Distance Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dst[nxt] <span style="color:#666">=</span> t <span style="color:#666">+</span> d;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the distance of `nxt` to the new value `t &#43; d`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Queue Push</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                pq.push({t <span style="color:#666">+</span> d, nxt});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the updated node `nxt` with its new distance into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Dynamic Programming Setup</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize a vector `dp` to store the number of restricted paths from each node to the destination node, with all values set to -1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : DFS Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(gph, dst, n, dp);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Call the depth-first search function to compute the number of restricted paths from node `n` to node `1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : DFS Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pii<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>gph, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>dst, <span style="color:#0b0;font-weight:bold">int</span> s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>dp) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the DFS function to recursively calculate the number of restricted paths from node `s` to node `1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Base Case</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (s <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Base case: if the current node is `1`, return 1 as there is exactly one path from `1` to itself. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Memoization Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dp[s] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> dp[s];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the result for the current node `s` is already computed. If so, return the stored value. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Modulo Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the modulo value to avoid overflow when calculating the number of restricted paths. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, w <span style="color:#666">=</span> <span style="color:#666">0</span>, val <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize variables to calculate the total number of restricted paths from node `s`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>27 : Neighbor Iteration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">v</span> : gph[s]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterate through the neighbors of the current node `s`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>28 : Neighbor Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        w <span style="color:#666">=</span> dst[s];
-</span></span><span style="display:flex;"><span>        val <span style="color:#666">=</span> dst[v.second];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Extract the distances `w` and `val` for the current node and its neighbor. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>29 : Restricted Path Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (val <span style="color:#666">&gt;</span> w) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the current path is restricted based on the distance values. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>30 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">=</span> (sum <span style="color:#666">%</span> mod<span style="color:#666">+</span> dfs(gph, dst, v.second, dp) <span style="color:#666">%</span> mod) <span style="color:#666">%</span> mod;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the path is restricted, recursively call `dfs` for the neighbor `v.second` and add the result to the total sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>31 : Return DP Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[s] <span style="color:#666">=</span> sum <span style="color:#666">%</span> mod;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Store and return the result for the current node `s` modulo `1e9 &#43; 7`. </div>
+                            <div class=""> Returns the final count of subarrays with bounded maximum values. </div>
                         </div>
                     
                 </div>
@@ -992,16 +749,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n &#43; e log n), where n is the number of nodes and e is the number of edges.</div>
-                        <div class=""> <b>Average Case:</b> O(n log n &#43; e log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n &#43; e log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity of Dijkstra&#39;s algorithm is O(n log n &#43; e log n), and DFS runs in O(n &#43; e) time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), when the array is small or when no valid subarrays exist.</div>
+                        <div class=""> <b>Average Case:</b> O(n), since we are iterating through the array once.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as we always process each element of the array once.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we process each element of the array exactly once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; e)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; e)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is determined by the storage needed for the graph and the auxiliary data structures (distances, dp table).</div>    
+                        <div class=""> <b>Best Case:</b> O(1), as the space used is constant regardless of input size.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), since we only use a few variables for tracking counts and the solution does not use extra space proportional to the input size.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we only use a fixed amount of additional memory.</div>    
                     </div>
 
                 </div>

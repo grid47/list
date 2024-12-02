@@ -323,7 +323,7 @@
 
 
 
-<div class=""> You are given an array of integers arr and an integer k. You need to remove exactly k elements from the array and find the minimum number of unique integers that remain in the array. </div>
+<div class=""> Given a sorted integer array and two integers k and x, return the k closest integers to x in the array, sorted in ascending order. If two integers are equally close to x, the smaller integer should be preferred. </div>
 
 
 
@@ -374,53 +374,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers arr and an integer k.</div>
-                        <div class=""> <b>Example:</b> [10, 10, 20], k = 1</div>
+                        <div class=""> <b>Input:</b> The input consists of a sorted array of integers arr, and two integers k and x.</div>
+                        <div class=""> <b>Example:</b> arr = [10, 20, 30, 40, 50], k = 3, x = 35</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= arr.length</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= arr.length</div>
+                                <div style="margin-left: 20px;"> • arr is sorted in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= arr[i], x &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer representing the minimum number of unique integers remaining after removing exactly k elements.</div>
-                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Output:</b> The output is a sorted array of the k integers closest to x from the input array arr.</div>
+                        <div class=""> <b>Example:</b> [30, 40, 50]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result is guaranteed to be a valid integer.</div>
+                                <div style="margin-left: 20px;"> • The output array will contain exactly k integers.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to remove exactly k elements while minimizing the number of unique integers left in the array.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the k closest integers to x by comparing the absolute differences of each integer in the array to x, and selecting the k smallest differences.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count the frequency of each element in the array.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a binary search to efficiently locate the closest element to x.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the elements by their frequency in ascending order.</div>
+                                <div style="margin-left: 20px;"> • 2. Expand outward from the closest element to gather k elements (both left and right).</div>
                             
-                                <div style="margin-left: 20px;"> • Remove elements starting from the least frequent until exactly k elements are removed.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the number of unique elements remaining.</div>
+                                <div style="margin-left: 20px;"> • 3. Sort the selected k elements and return them.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure that the input size is large enough to require an efficient approach to minimize the number of unique integers left.</div>
+                        <div class=""> <b>Goal:</b> The input array is sorted, and the number of elements is between 1 and 10^4. The integer values and x are between -10^4 and 10^4.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= arr.length</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= arr.length</div>
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= arr[i], x &lt;= 10^4</div>
                             
                         </div>
                     </div>        
@@ -428,17 +428,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array can contain duplicate elements.</div>
+                                <div style="margin-left: 20px;"> • The input array is always sorted in ascending order.</div>
                             
-                                <div style="margin-left: 20px;"> • The value of k can be zero, meaning no elements need to be removed.</div>
+                                <div style="margin-left: 20px;"> • The value of k will always be valid (1 &lt;= k &lt;= arr.length).</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [10, 10, 20], k = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the optimal approach is to remove the single `20`, leaving only `10` as the remaining unique integer.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> arr = [5, 10, 15, 20, 25, 30], k = 2, x = 12</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The closest integers to 12 are 10 and 15. Sorted, the result is [10, 15].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,16 +462,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, count the frequency of each element, sort the elements based on frequency, and remove the least frequent elements first to minimize the number of unique integers remaining.</div>
+                        <div class=""> <b>Approach:</b> This problem can be solved using binary search to quickly find the nearest element to x, followed by expanding to collect the k closest integers.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires reducing the number of unique elements after removal, so we should focus on removing the least frequent elements.</div>
+                                <div style="margin-left: 20px;"> • Binary search can help quickly locate the closest integer to x in the sorted array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Once the closest element is found, we can expand outward to select the k closest integers.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By sorting the elements based on their frequencies, we can efficiently determine which elements to remove.</div>
+                                <div style="margin-left: 20px;"> • Efficiently finding the closest element using binary search can save time in large arrays. Afterward, we just need to compare adjacent elements to gather the k closest integers.</div>
                             
                         </div>
                     </div>
@@ -479,13 +481,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Count the frequency of each element in the array using a hash map.</div>
+                                <div style="margin-left: 20px;"> • 1. Use binary search to find the position of the element closest to x.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the elements by their frequency in ascending order.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize two pointers, one to the left and one to the right of the closest element, to select the k closest integers.</div>
                             
-                                <div style="margin-left: 20px;"> • Remove elements starting with the least frequent until exactly k elements are removed.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the number of unique elements left after the removal process.</div>
+                                <div style="margin-left: 20px;"> • 3. Sort the selected integers and return them as the result.</div>
                             
                         </div>
                     </div>
@@ -494,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, return 0 since no elements are left.</div>
+                                <div style="margin-left: 20px;"> • The input array will never be empty as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles arrays with up to 10^5 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large arrays (up to 10^4 elements), binary search ensures the solution remains efficient.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If k is 0, no elements are removed, and the number of unique elements should be returned as is.</div>
+                                <div style="margin-left: 20px;"> • The array can contain both negative and positive integers, and edge cases where all elements are either greater or less than x should be considered.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must be efficient enough to handle the upper limit of input size.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the selected k elements are always the closest ones to x, and handle edge cases where the array contains values that are equally close to x.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,21 +526,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Binary Search Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sorting Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculate Midpoint</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Compare Differences</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Left Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Removal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Right Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Result</button>
                     
                 </div>
 
@@ -549,18 +549,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findLeastNumOfUniqueInts</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">m</span> : arr) mp[m]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    sort(begin(arr), end(arr), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mp[x] <span style="color:#666">!=</span> mp[y] <span style="color:#666">?</span> mp[x] <span style="color:#666">&lt;</span> mp[y] <span style="color:#666">:</span> x <span style="color:#666">&lt;</span> y;
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> st;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) st.insert(arr[i]);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> st.size();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findClosestElements(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> arr.size() <span style="color:#666">-</span>k;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> (l <span style="color:#666">+</span> r) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">-</span> arr[m] <span style="color:#666">&gt;</span> arr[m <span style="color:#666">+</span> k] <span style="color:#666">-</span> x) {
+</span></span><span style="display:flex;"><span>            l <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> r <span style="color:#666">=</span> m;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(arr.begin() <span style="color:#666">+</span> l, arr.begin() <span style="color:#666">+</span> l <span style="color:#666">+</span> k);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -568,83 +566,83 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findLeastNumOfUniqueInts</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findClosestElements(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function signature for `findLeastNumOfUniqueInts`, which takes an array `arr` and an integer `k` as inputs and returns the number of unique integers left after removing `k` elements. </div>
+                            <div class=""> This is the function definition for `findClosestElements`, which takes an array `arr`, an integer `k`, and a target value `x`. It returns a vector containing the `k` closest elements to `x` from the sorted array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Data Structure</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> arr.size() <span style="color:#666">-</span> k;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An unordered map `mp` is created to store the frequency of each integer in the array `arr`. </div>
+                            <div class=""> Initialize two pointers: `l` starts at 0 (left boundary), and `r` is set to the index of the last valid element that can form a window of size &#39;k&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Binary Search Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">m</span> : arr) mp[m]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> r) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each element in the array `arr` and increments its frequency in the unordered map `mp`. </div>
+                            <div class=""> A binary search loop is started to find the best position for the `k` closest elements. The loop continues until the left pointer is no longer less than the right pointer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Sorting Logic</b></div>
+                            <div class=""> <b>4 : Calculate Midpoint</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(begin(arr), end(arr), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> (l <span style="color:#666">+</span> r) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `sort` function sorts the elements in `arr` using a custom comparator. It compares the frequency of the integers from the map `mp`. </div>
+                            <div class=""> Calculate the middle index `m` as the average of the left (`l`) and right (`r`) pointers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Comparison</b></div>
+                            <div class=""> <b>5 : Compare Differences</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mp[x] <span style="color:#666">!=</span> mp[y] <span style="color:#666">?</span> mp[x] <span style="color:#666">&lt;</span> mp[y] <span style="color:#666">:</span> x <span style="color:#666">&lt;</span> y;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">-</span> arr[m] <span style="color:#666">&gt;</span> arr[m <span style="color:#666">+</span> k] <span style="color:#666">-</span> x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The comparator sorts first by frequency (`mp[x] &lt; mp[y]`), and if the frequencies are equal, it sorts by the integer value itself (`x &lt; y`). </div>
+                            <div class=""> Compare the distance from `x` to the current element `arr[m]` with the distance from `x` to the element `arr[m &#43; k]`. This is used to decide whether to move the left or right pointer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Update Left Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> st;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            l <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An unordered set `st` is used to store the unique integers remaining after removing `k` elements from the array. </div>
+                            <div class=""> If the distance to `arr[m]` is greater, it means the closest `k` elements are to the right, so we move the left pointer `l` to `m &#43; 1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Removal</b></div>
+                            <div class=""> <b>7 : Update Right Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) st.insert(arr[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> r <span style="color:#666">=</span> m;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starting from index `k`, the remaining elements are inserted into the unordered set `st`, effectively removing the first `k` elements. </div>
+                            <div class=""> Otherwise, the closest `k` elements are either at or before the midpoint, so we move the right pointer `r` to `m`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return</b></div>
+                            <div class=""> <b>8 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> st.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(arr.begin() <span style="color:#666">+</span> l, arr.begin() <span style="color:#666">+</span> l <span style="color:#666">+</span> k);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the size of the set `st`, which is the count of unique integers left in the array after removal. </div>
+                            <div class=""> The function returns a vector containing the `k` closest elements, starting from index `l` to `l &#43; k` in the original array. </div>
                         </div>
                     
                 </div>
@@ -664,16 +662,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n) for sorting the elements based on frequency.</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which is O(n log n), where n is the length of the array.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log(n) &#43; k)</div>
+                        <div class=""> <b>Average Case:</b> O(log(n) &#43; k)</div>
+                        <div class=""> <b>Worst Case:</b> O(log(n) &#43; k)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(log(n) &#43; k) due to the binary search and the subsequent expansion to gather k elements.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for storing the frequency map and the sorted list of elements.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the frequency map and the sorted elements.</div>    
+                        <div class=""> <b>Best Case:</b> O(k)</div>
+                        <div class=""> <b>Worst Case:</b> O(k)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(k) due to the storage required for the k closest integers.</div>    
                     </div>
 
                 </div>

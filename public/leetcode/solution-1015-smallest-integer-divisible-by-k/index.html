@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a binary string <code>s</code> that represents the types of buildings along a street. Each building is either an office (&lsquo;0&rsquo;) or a restaurant (&lsquo;1&rsquo;). You are tasked with selecting 3 buildings for inspection, with the constraint that no two consecutive buildings in the selection can be of the same type. Return the number of valid ways to select 3 buildings where no two consecutive buildings are of the same type. </div>
+<div class=""> Given a positive integer k, find the length of the smallest positive integer n such that n is divisible by k, and n consists only of the digit 1. If no such number exists, return -1. Note that n might not fit into a 64-bit signed integer. </div>
 
 
 
@@ -358,47 +358,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a binary string `s`, where each character is either &#39;0&#39; (for an office) or &#39;1&#39; (for a restaurant).</div>
-                        <div class=""> <b>Example:</b> s = &#39;101010&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a single integer k, where k is a positive integer.</div>
+                        <div class=""> <b>Example:</b> k = 7</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= s.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • s[i] is either &#39;0&#39; or &#39;1&#39;</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of valid ways to select 3 buildings such that no two consecutive buildings are of the same type.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> The output should be an integer representing the length of the smallest integer n that is divisible by k and only contains the digit 1, or -1 if no such integer exists.</div>
+                        <div class=""> <b>Example:</b> Output: 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string will always have at least three characters.</div>
+                                <div style="margin-left: 20px;"> • The result must be an integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to count all possible valid selections of 3 buildings such that no two consecutive buildings in the selected set are of the same type.</div>
+                        <div class=""> <b>Goal:</b> To determine the length of the smallest integer n that is divisible by k and consists only of the digit 1.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count the total number of &#39;0&#39;s and &#39;1&#39;s in the string.</div>
+                                <div style="margin-left: 20px;"> • Iterate through possible lengths of numbers formed only by the digit 1.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string and, for each character, calculate how many valid combinations of 3 buildings can be made, taking care to avoid consecutive buildings of the same type.</div>
+                                <div style="margin-left: 20px;"> • For each length, compute the number formed by that many 1s, and check if it&#39;s divisible by k.</div>
                             
-                                <div style="margin-left: 20px;"> • Use efficient counting to avoid checking each triplet explicitly.</div>
+                                <div style="margin-left: 20px;"> • Return the length of the first such number, or -1 if no such number exists.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string `s` will have at least 3 characters, and each character is either &#39;0&#39; or &#39;1&#39;.</div>
+                        <div class=""> <b>Goal:</b> The solution needs to handle large values of k efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= s.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • s[i] is either &#39;0&#39; or &#39;1&#39;</div>
+                                <div style="margin-left: 20px;"> • The value of k can be as large as 100,000, requiring an efficient solution to avoid brute force checks for large numbers.</div>
                             
                         </div>
                     </div>        
@@ -406,19 +402,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string will always have at least three characters.</div>
+                                <div style="margin-left: 20px;"> • There is always a valid input integer k, and it will be between 1 and 100,000.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;101010&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid selections of 3 buildings are: [0, 2, 4], [0, 2, 5], [1, 2, 4], and [1, 2, 5]. Each of these selections alternates between &#39;0&#39; and &#39;1&#39;, making them valid.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: k = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The smallest number divisible by 1 is simply 1, which has length 1.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;11100&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are no valid selections, as all possible combinations of 3 buildings either have consecutive &#39;1&#39;s or &#39;0&#39;s, violating the problem&#39;s constraints.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is no number formed by 1s that is divisible by 2, so the output is -1.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: k = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The smallest number divisible by 3 is 111, which has length 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +442,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach focuses on counting how many valid selections of 3 buildings can be made by iterating through the string and using efficient counting of &#39;0&#39;s and &#39;1&#39;s.</div>
+                        <div class=""> <b>Approach:</b> The approach is to iteratively compute the remainder when numbers formed by the digit 1 are divided by k, and check when this remainder becomes zero. The first such number will give us the length of the desired number.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each selection of 3 buildings must alternate between &#39;0&#39; and &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • We can form numbers using the digit 1 repeatedly, and compute their remainder with respect to k.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the remainder becomes zero, we&#39;ve found the smallest such number.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use efficient counting and combinatorics to avoid explicitly checking all possible triplets.</div>
+                                <div style="margin-left: 20px;"> • Rather than directly constructing the large number, we can calculate the remainder iteratively by considering the number as a series of digits (all 1s).</div>
                             
                         </div>
                     </div>
@@ -459,9 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize counters for &#39;0&#39;s and &#39;1&#39;s in the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with a remainder of 0 and a number with the digit 1.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string, and for each &#39;0&#39; or &#39;1&#39; encountered, calculate how many valid combinations can be formed from the remaining characters.</div>
+                                <div style="margin-left: 20px;"> • 2. For each subsequent digit, update the remainder using the formula: remainder = (remainder * 10 &#43; 1) % k.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Check if the remainder is 0. If it is, return the length of the number formed.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If no such number is found, return -1.</div>
                             
                         </div>
                     </div>
@@ -470,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always have at least 3 characters, so empty inputs are not a concern.</div>
+                                <div style="margin-left: 20px;"> • The input is guaranteed to be a positive integer k, so no need to handle empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be efficient enough to handle strings of length up to 100,000.</div>
+                                <div style="margin-left: 20px;"> • For large values of k, the solution should handle remainders efficiently without constructing large numbers.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Strings with consecutive identical characters (e.g., &#39;000&#39;, &#39;111&#39;) should return 0 valid selections.</div>
+                                <div style="margin-left: 20px;"> • When k is 1, the smallest number is 1 itself, which has length 1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string will always have at least 3 characters, and each character is either &#39;0&#39; or &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for large k values up to 100,000.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,37 +510,11 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Type Alias</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Modular Arithmetic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Length Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 First Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Count &#39;0&#39;</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Count &#39;1&#39;</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Result Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Second Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Process &#39;0&#39;</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Result for &#39;0&#39;</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Left &#39;0&#39; Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Process &#39;1&#39;</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Update Result for &#39;1&#39;</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Update Left &#39;1&#39; Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return -1</button>
                     
                 </div>
 
@@ -543,40 +523,10 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">numberOfWays</span>(string s) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">typedef</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ll;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> z <span style="color:#666">=</span> <span style="color:#666">0</span>, o <span style="color:#666">=</span> <span style="color:#666">0</span>;        
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.length();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) z<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) o<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> zl <span style="color:#666">=</span> <span style="color:#666">0</span>, ol <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    ll res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (ol <span style="color:#666">*</span> (o <span style="color:#666">-</span> ol));
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            zl<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (zl <span style="color:#666">*</span> (z <span style="color:#666">-</span> zl));            
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            ol<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>                                
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">smallestRepunitDivByK</span>(<span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> <span style="color:#666">0</span>, N <span style="color:#666">=</span> <span style="color:#666">1</span>; N <span style="color:#666">&lt;=</span> k; N<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((r <span style="color:#666">=</span> (r <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#666">1</span>)<span style="color:#666">%</span>k )<span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> N;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -587,170 +537,40 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">numberOfWays</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">smallestRepunitDivByK</span>(<span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function declaration of `numberOfWays`, which takes a string `s` and returns a `long long` integer representing the number of ways to partition the string into subsequences. </div>
+                            <div class=""> Declares the function `smallestRepunitDivByK`, which takes an integer `k` and returns the smallest integer `N` such that the number formed by repeating &#39;1&#39; `N` times is divisible by `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Type Alias</b></div>
+                            <div class=""> <b>2 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">typedef</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ll;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> <span style="color:#666">0</span>, N <span style="color:#666">=</span> <span style="color:#666">1</span>; N <span style="color:#666">&lt;=</span> k; N<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines a type alias `ll` for `long long` to make the code easier to read and more concise. </div>
+                            <div class=""> Initializes a loop with two variables: `r`, which will store the remainder when dividing the current number by `k`, and `N`, which represents the number of &#39;1&#39;s in the current candidate number. The loop continues until `N` exceeds `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Modular Arithmetic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> z <span style="color:#666">=</span> <span style="color:#666">0</span>, o <span style="color:#666">=</span> <span style="color:#666">0</span>;        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((r <span style="color:#666">=</span> (r <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#666">1</span>)<span style="color:#666">%</span>k )<span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> N;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two integer variables, `z` and `o`, are initialized to count the number of &#39;0&#39;s and &#39;1&#39;s in the string `s` respectively. </div>
+                            <div class=""> For each iteration, the number formed by repeating &#39;1&#39; is calculated modulo `k` using the formula `(r * 10 &#43; 1) % k`. If the remainder `r` is zero, it means the number formed by repeating &#39;1&#39; `N` times is divisible by `k`, and the function returns `N`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Length Calculation</b></div>
+                            <div class=""> <b>4 : Return -1</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.length();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The length of the input string `s` is stored in the variable `n`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : First Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This is the first loop that iterates through each character in the string `s`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Count &#39;0&#39;</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) z<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current character is &#39;0&#39;, the variable `z` is incremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Count &#39;1&#39;</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) o<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current character is &#39;1&#39;, the variable `o` is incremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> zl <span style="color:#666">=</span> <span style="color:#666">0</span>, ol <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Two integer variables, `zl` and `ol`, are initialized to keep track of the count of &#39;0&#39;s and &#39;1&#39;s in the left subsequence during the iteration. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Result Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ll res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The result variable `res` is initialized to 0. It will store the number of valid subsequences. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Second Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This is the second loop that iterates through each character in the string `s`, processing each &#39;0&#39; and &#39;1&#39; to compute the result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Process &#39;0&#39;</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current character is &#39;0&#39;, the corresponding calculation for `res` is performed based on the number of &#39;1&#39;s seen so far and the remaining &#39;1&#39;s. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Update Result for &#39;0&#39;</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (ol <span style="color:#666">*</span> (o <span style="color:#666">-</span> ol));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The result `res` is updated by adding the product of the count of &#39;1&#39;s in the left subsequence (`ol`) and the count of &#39;1&#39;s in the right subsequence (`o - ol`). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Update Left &#39;0&#39; Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            zl<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The count of &#39;0&#39;s in the left subsequence is incremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Process &#39;1&#39;</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current character is &#39;1&#39;, the corresponding calculation for `res` is performed based on the number of &#39;0&#39;s seen so far and the remaining &#39;0&#39;s. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Update Result for &#39;1&#39;</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (zl <span style="color:#666">*</span> (z <span style="color:#666">-</span> zl));            
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The result `res` is updated by adding the product of the count of &#39;0&#39;s in the left subsequence (`zl`) and the count of &#39;0&#39;s in the right subsequence (`z - zl`). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Update Left &#39;1&#39; Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ol<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The count of &#39;1&#39;s in the left subsequence is incremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the computed result `res`, which is the number of valid subsequences. </div>
+                            <div class=""> If no such `N` is found after looping through all possible values up to `k`, the function returns `-1`, indicating no solution exists. </div>
                         </div>
                     
                 </div>
@@ -770,16 +590,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the input string, as we only need to iterate through the string once.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as each step involves constant-time operations.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as the string length can go up to 10^5.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the length of the input string.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(k)</div>
+                        <div class=""> <b>Average Case:</b> O(k)</div>
+                        <div class=""> <b>Worst Case:</b> O(k)</div> 
+                        <div class=""> <b>Description:</b> The solution iterates through the remainders for at most k iterations, leading to a time complexity of O(k).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as no additional space is required except for counters.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as the space usage is constant regardless of the input size.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, as only a few counters are needed.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only maintain a few variables to track the remainder and length of the number.</div>    
                     </div>
 
                 </div>

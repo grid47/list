@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given two memory sticks with certain amounts of available memory. A program runs and allocates increasing amounts of memory to the stick with more available memory. If neither stick has enough memory to allocate the required amount, the program crashes. Determine when the program crashes and the remaining memory on each stick. </div>
+<div class=""> You are given two square binary matrices img1 and img2, both of size n x n. Each matrix consists of 0s and 1s. You are allowed to slide img1 over img2 in any direction (up, down, left, or right) without rotating the matrix. Your task is to find the maximum number of overlapping positions where both img1 and img2 have a 1 in the same position after performing a translation. </div>
 
 
 
@@ -358,47 +358,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two integers, memory1 and memory2, representing the available memory on the two sticks.</div>
-                        <div class=""> <b>Example:</b> memory1 = 5, memory2 = 6</div>
+                        <div class=""> <b>Input:</b> The input consists of two n x n binary matrices img1 and img2, both representing images with 0s and 1s.</div>
+                        <div class=""> <b>Example:</b> Input: img1 = [[1,0,0], [1,0,0], [0,0,0]], img2 = [[0,1,0], [0,1,0], [0,0,0]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= memory1, memory2 &lt;= 2^31 - 1</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 30</div>
+                            
+                                <div style="margin-left: 20px;"> • img1[i][j] is either 0 or 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • img2[i][j] is either 0 or 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an array with three elements: the crash time (the second at which the program crashes), the remaining memory on the first stick, and the remaining memory on the second stick.</div>
-                        <div class=""> <b>Example:</b> [4, 0, 2]</div>
+                        <div class=""> <b>Output:</b> The output is an integer representing the largest number of overlapping 1s after translating img1 over img2.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The program crashes when one of the memory sticks cannot allocate the required memory.</div>
+                                <div style="margin-left: 20px;"> • The largest overlap can be calculated as the maximum number of 1s overlapping in both matrices after translation.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Simulate the memory allocation process until the program crashes. At each second, allocate memory to the stick with more available memory, or to the first stick if both sticks have the same available memory. Stop when neither stick has enough memory to allocate.</div>
+                        <div class=""> <b>Goal:</b> The goal is to compute the maximum number of 1s that overlap after translating img1 over img2.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • At each second, compare the available memory on both sticks.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Extract the positions of 1s in both img1 and img2.</div>
                             
-                                <div style="margin-left: 20px;"> • Allocate i bits to the stick with more available memory.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each possible translation (i.e., shifts in horizontal and vertical directions), calculate the number of overlapping 1s.</div>
                             
-                                <div style="margin-left: 20px;"> • If both sticks have the same available memory, allocate to the first stick.</div>
-                            
-                                <div style="margin-left: 20px;"> • If neither stick has enough memory to allocate i bits, return the crash time and the remaining memory on both sticks.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return the maximum overlap found across all translations.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input consists of two integers representing the available memory, and the output should indicate when the program crashes.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the translation does not exceed the boundaries of the matrices.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= memory1, memory2 &lt;= 2^31 - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • The program will crash within a reasonable number of seconds, given the constraints.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the translation does not result in positions going out of bounds.</div>
                             
                         </div>
                     </div>        
@@ -406,15 +406,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both memory sticks have a non-negative amount of memory.</div>
+                                <div style="margin-left: 20px;"> • The matrices img1 and img2 are always of the same size.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: memory1 = 5, memory2 = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The memory is allocated as follows: At the 1st second, 1 bit is allocated to stick 2 (memory2 = 5). At the 2nd second, 2 bits are allocated to stick 2 (memory2 = 3). At the 3rd second, 3 bits are allocated to stick 1 (memory1 = 2). At the 4th second, 4 bits are allocated to stick 2 (memory2 = -1). The program crashes here.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: img1 = [[1,0,0], [1,0,0], [0,0,0]], img2 = [[0,1,0], [0,1,0], [0,0,0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the translation that aligns the 1s in both images gives a maximum overlap of 2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: img1 = [[1,1,0], [0,1,0], [0,1,0]], img2 = [[0,0,0], [0,1,1], [0,0,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After translating img1 right and down by 1 unit, we obtain a maximum overlap of 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,16 +442,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves simulating the memory allocation process, allocating memory in increasing amounts, and stopping when the program crashes due to insufficient memory.</div>
+                        <div class=""> <b>Approach:</b> The key approach is to iterate over all possible translations of img1 and compute the overlap with img2. This can be achieved by iterating through all combinations of shifts along both axes and checking for the overlap of 1s.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The program allocates memory to the stick with more available memory.</div>
+                                <div style="margin-left: 20px;"> • We need to check all possible translations by sliding img1 over img2 in both horizontal and vertical directions.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By simulating the memory allocation process and checking if both sticks have enough memory, we can determine when the program crashes.</div>
+                                <div style="margin-left: 20px;"> • By extracting the positions of 1s and counting the overlaps for each translation, we can find the largest overlap efficiently.</div>
                             
                         </div>
                     </div>
@@ -455,11 +459,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize variables to keep track of the available memory on both sticks.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Identify the positions of all 1s in img1 and img2.</div>
                             
-                                <div style="margin-left: 20px;"> • Loop through each second and allocate memory to the appropriate stick.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each possible horizontal and vertical translation, calculate the overlap between the 1s in img1 and img2.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if either stick has insufficient memory to allocate the required amount, and if so, return the crash time and remaining memory.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Keep track of the maximum overlap encountered during all translations.</div>
                             
                         </div>
                     </div>
@@ -468,22 +472,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs to handle, as memory1 and memory2 will always be non-negative.</div>
+                                <div style="margin-left: 20px;"> • An empty matrix (with all 0s) will result in no overlap.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the values for memory1 or memory2 are extremely large, the loop may run for a large number of iterations.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle the maximum input size (n=30).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The program should handle cases where one memory stick has zero memory.</div>
+                                <div style="margin-left: 20px;"> • Consider cases where one matrix is completely filled with 1s and the other with 0s.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The program should return the correct result even for edge cases.</div>
+                                <div style="margin-left: 20px;"> • Ensure that translations do not cause indices to go out of bounds.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,21 +504,39 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 While Loop Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 If Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Through img1</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memory Reduction (mem1)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Check Condition img1</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Store Position in la</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Increment i</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Through img2</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Check Condition img2</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Store Position in lb</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Nested Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Nested Loop lb</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Map</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Result Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop Through Map</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Update Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
                     
                 </div>
 
@@ -523,15 +545,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> memLeak(<span style="color:#0b0;font-weight:bold">int</span> mem1, <span style="color:#0b0;font-weight:bold">int</span> mem2) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> mem1 <span style="color:#666">||</span> i <span style="color:#666">&lt;=</span> mem2) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mem1 <span style="color:#666">&gt;=</span> mem2) {
-</span></span><span style="display:flex;"><span>            mem1 <span style="color:#666">-=</span> i;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> mem2 <span style="color:#666">-=</span> i;
-</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{i, mem1, mem2};
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">largestOverlap</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> img1, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> img2) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> la, lb;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> img1.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">*</span>n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(img1[i<span style="color:#666">/</span>n][i<span style="color:#666">%</span>n] <span style="color:#666">==</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>        la.push_back(i<span style="color:#666">/</span>n<span style="color:#666">*</span><span style="color:#666">100</span><span style="color:#666">+</span> i<span style="color:#666">%</span>n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">*</span>n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(img2[i<span style="color:#666">/</span>n][i<span style="color:#666">%</span>n] <span style="color:#666">==</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>        lb.push_back(i<span style="color:#666">/</span>n<span style="color:#666">*</span><span style="color:#666">100</span><span style="color:#666">+</span> i<span style="color:#666">%</span>n);
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : la)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span> : lb)
+</span></span><span style="display:flex;"><span>        mp[i<span style="color:#666">-</span>j]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp)
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> max(res, it.second);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -539,83 +569,173 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> memLeak(<span style="color:#0b0;font-weight:bold">int</span> mem1, <span style="color:#0b0;font-weight:bold">int</span> mem2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">largestOverlap</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> img1, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> img2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `memLeak`, which takes two integer inputs `mem1` and `mem2`, representing the memory blocks. </div>
+                            <div class=""> Function declaration: This function takes two 2D vectors `img1` and `img2` representing binary matrices, and returns an integer, the size of the largest overlap. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> la, lb;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable `i` to 1, which represents the amount of memory to be subtracted in each iteration. </div>
+                            <div class=""> Initialization of two vectors `la` and `lb` to store the positions of 1&#39;s in `img1` and `img2` respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : While Loop Condition</b></div>
+                            <div class=""> <b>3 : Matrix Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> mem1 <span style="color:#666">||</span> i <span style="color:#666">&lt;=</span> mem2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> img1.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a `while` loop that continues as long as either memory block has sufficient memory to subtract (i.e., `i` is less than or equal to `mem1` or `mem2`). </div>
+                            <div class=""> Here, `n` stores the size of the matrix, assuming both `img1` and `img2` are square matrices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : If Condition</b></div>
+                            <div class=""> <b>4 : Loop Through img1</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mem1 <span style="color:#666">&gt;=</span> mem2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">*</span>n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if `mem1` is greater than or equal to `mem2`. If true, reduce `mem1` by `i`. </div>
+                            <div class=""> Looping over each index of the matrix `img1` to identify positions of 1&#39;s. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Memory Reduction (mem1)</b></div>
+                            <div class=""> <b>5 : Check Condition img1</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mem1 <span style="color:#666">-=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(img1[i<span style="color:#666">/</span>n][i<span style="color:#666">%</span>n] <span style="color:#666">==</span> <span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Subtract the value of `i` from `mem1`. </div>
+                            <div class=""> Checking if the current element in `img1` is 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Else Condition</b></div>
+                            <div class=""> <b>6 : Store Position in la</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> mem2 <span style="color:#666">-=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        la.push_back(i<span style="color:#666">/</span>n<span style="color:#666">*</span><span style="color:#666">100</span><span style="color:#666">+</span> i<span style="color:#666">%</span>n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the `if` condition is false, subtract the value of `i` from `mem2`. </div>
+                            <div class=""> If the element is 1, store the position of 1 in `la` by encoding the row and column. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Increment i</b></div>
+                            <div class=""> <b>7 : Loop Through img2</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">*</span>n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the value of `i` to gradually increase the memory reduction in each iteration. </div>
+                            <div class=""> Looping over each index of the matrix `img2` to identify positions of 1&#39;s. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class=""> <b>8 : Check Condition img2</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{i, mem1, mem2};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(img2[i<span style="color:#666">/</span>n][i<span style="color:#666">%</span>n] <span style="color:#666">==</span> <span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return a vector containing the iteration count `i`, and the remaining memory in both `mem1` and `mem2`. </div>
+                            <div class=""> Checking if the current element in `img2` is 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Store Position in lb</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lb.push_back(i<span style="color:#666">/</span>n<span style="color:#666">*</span><span style="color:#666">100</span><span style="color:#666">+</span> i<span style="color:#666">%</span>n);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the element is 1, store the position of 1 in `lb` by encoding the row and column. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Map Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create an unordered map `mp` to store the differences of positions between `la` and `lb` and their frequencies. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Nested Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : la)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through the elements in `la`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Nested Loop lb</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span> : lb)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each element in `la`, loop through elements in `lb`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Update Map</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[i<span style="color:#666">-</span>j]<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each pair of positions from `la` and `lb`, calculate the difference and increment its count in the map `mp`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Result Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize the result variable `res` to store the maximum frequency of position differences. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Loop Through Map</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through the entries in the map `mp`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Update Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> max(res, it.second);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the result `res` to store the maximum frequency of the position difference. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the result `res`, which represents the largest overlap of 1&#39;s between `img1` and `img2`. </div>
                         </div>
                     
                 </div>
@@ -635,16 +755,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, the program runs for n seconds, where n is the time before the program crashes.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2), when there are minimal 1s and no significant overlap.</div>
+                        <div class=""> <b>Average Case:</b> O(n^4), due to iterating over all possible translations and computing overlaps.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^4), in the case where there are many 1s and the number of comparisons is large.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the nested loops that check each possible translation and overlap.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we only store the memory values and the current second.</div>    
+                        <div class=""> <b>Best Case:</b> O(n^2), in case we store all the positions of 1s from both matrices.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2), to store the positions of the 1s in both matrices.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is determined by the storage of the positions of 1s in both img1 and img2.</div>    
                     </div>
 
                 </div>

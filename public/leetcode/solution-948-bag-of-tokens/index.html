@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 4, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given the head of a linked list. Your task is to remove the middle node from the linked list and return the modified list. The middle node is defined as the ⌊n / 2⌋th node, where n is the number of nodes in the list, using 0-based indexing. </div>
+<div class=""> You are given an array of tokens and an initial amount of power. The goal is to maximize the score by playing the tokens strategically. In each turn, you can either play a token face-up or face-down. Playing a token face-up costs you power but increases your score, while playing a token face-down gains you power but decreases your score. Your task is to determine the maximum score you can achieve after playing the tokens. </div>
 
 
 
@@ -360,47 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a linked list where each node has a value and a pointer to the next node. The linked list has at least one node.</div>
-                        <div class=""> <b>Example:</b> head = [4, 8, 6, 2, 7, 3]</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array &#39;tokens&#39; representing the values of tokens, and an integer &#39;power&#39; representing the initial power.</div>
+                        <div class=""> <b>Example:</b> Input: tokens = [50, 100, 200], power = 150</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of nodes in the list is in the range [1, 10^5].</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= tokens.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= Node.val &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= tokens[i], power &lt; 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the linked list after removing the middle node. The list should be modified in place.</div>
-                        <div class=""> <b>Example:</b> Output: [4, 8, 2, 7, 3]</div>
+                        <div class=""> <b>Output:</b> Return the maximum score that can be achieved by strategically playing the tokens.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result will always be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to remove the middle node from the linked list and return the modified list.</div>
+                        <div class=""> <b>Goal:</b> The goal is to maximize the score by playing tokens in a way that maximizes the score, considering the constraints of power and score.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use two pointers: one slow and one fast.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the tokens in ascending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Move the fast pointer two steps at a time and the slow pointer one step at a time.</div>
+                                <div style="margin-left: 20px;"> • 2. Use two pointers: one pointing to the smallest token and the other to the largest token.</div>
                             
-                                <div style="margin-left: 20px;"> • When the fast pointer reaches the end, the slow pointer will be at the middle.</div>
+                                <div style="margin-left: 20px;"> • 3. If your current power is sufficient to play the smallest token face-up, play it and increase the score.</div>
                             
-                                <div style="margin-left: 20px;"> • Remove the middle node by linking the previous node of the slow pointer to the next node.</div>
+                                <div style="margin-left: 20px;"> • 4. If your score is at least 1, consider playing the largest token face-down to regain power.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Continue playing tokens in this manner until no more valid moves can be made.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem ensures that the list has a valid number of nodes and the node values are within the specified range.</div>
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the solution handles the number of tokens and their values efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The list has at least one node.</div>
+                                <div style="margin-left: 20px;"> • The number of tokens is between 0 and 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of nodes is between 1 and 10^5.</div>
+                                <div style="margin-left: 20px;"> • Each token&#39;s value and the initial power are within the range [0, 10^4].</div>
                             
                         </div>
                     </div>        
@@ -408,25 +412,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The linked list is not empty.</div>
+                                <div style="margin-left: 20px;"> • The tokens are played in a way that maximizes the score.</div>
                             
-                                <div style="margin-left: 20px;"> • The values in the list are distinct.</div>
+                                <div style="margin-left: 20px;"> • The player can only play tokens when the conditions (either power or score) are met.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: head = [4, 8, 6, 2, 7, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The list has 6 nodes. The middle node is 6 (index 2). After removing it, the list becomes [4, 8, 2, 7, 3].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: tokens = [50, 100], power = 150</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, you can play token0 (50) face-up, reducing power to 100 and increasing the score to 1. The maximum score achievable is 1 because playing token1 (100) would require more power than you currently have.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: head = [10, 20, 30, 40]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The list has 4 nodes. The middle node is 30 (index 2). After removing it, the list becomes [10, 20, 40].</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3: head = [5, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The list has 2 nodes. The middle node is 3 (index 1). After removing it, the list becomes [5].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: tokens = [100, 200, 300], power = 250</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Play token0 (100) face-up, reducing power to 150 and increasing score to 1. Then, play token1 (200) face-up, reducing power to 0 and increasing score to 2. The maximum score achievable is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -450,16 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The key approach to solving this problem involves using two pointers: a slow pointer and a fast pointer. The slow pointer will point to the middle node, while the fast pointer will traverse the list at double the speed to help locate the middle.</div>
+                        <div class=""> <b>Approach:</b> The approach focuses on sorting the tokens and using a two-pointer technique to maximize the score while managing power and score constraints efficiently.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to find the middle node efficiently, ideally with a time complexity of O(n).</div>
+                                <div style="margin-left: 20px;"> • The problem can be viewed as optimizing a process where tokens are played based on the current state of power and score.</div>
+                            
+                                <div style="margin-left: 20px;"> • Sorting the tokens helps in efficiently choosing the smallest and largest tokens to play.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a slow and fast pointer technique ensures we can find the middle node in a single pass through the list.</div>
+                                <div style="margin-left: 20px;"> • By using a greedy strategy with two pointers, we can maximize the score while managing power efficiently.</div>
                             
                         </div>
                     </div>
@@ -467,13 +469,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize two pointers, slow and fast, at the head of the list.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the tokens in ascending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Move the fast pointer two steps for each step the slow pointer takes.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize two pointers: one at the start and one at the end of the sorted list.</div>
                             
-                                <div style="margin-left: 20px;"> • When the fast pointer reaches the end of the list, the slow pointer will be at the middle.</div>
+                                <div style="margin-left: 20px;"> • 3. Loop until no more valid moves are possible.</div>
                             
-                                <div style="margin-left: 20px;"> • Remove the middle node by linking the node before the slow pointer to the node after it.</div>
+                                <div style="margin-left: 20px;"> • 4. If the current power is sufficient to play the token at the start, play it face-up and increase the score.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. If the score is greater than 0, play the token at the end face-down to gain power and decrease the score.</div>
+                            
+                                <div style="margin-left: 20px;"> • 6. Continue the process until all valid moves have been made.</div>
                             
                         </div>
                     </div>
@@ -482,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the list has only one node, removing the middle node should return an empty list.</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty, the result should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works for lists with up to 10^5 nodes.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution efficiently handles large input sizes, especially with the maximum number of tokens.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are only two nodes, remove the second node as it is the middle node.</div>
+                                <div style="margin-left: 20px;"> • If all tokens are larger than the initial power, no tokens can be played face-up.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input list will always have at least one node.</div>
+                                <div style="margin-left: 20px;"> • The solution should run within the time limits for up to 1000 tokens.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,21 +520,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting Tokens</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Pointer Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Main Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 If Enough Power to Spend Token</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Spend Token</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Middle Node Removal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Maximum Score</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Else If Points Available to Re-gain Power</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Re-gain Power by Trading Points</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reduce Points</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 End Loop Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
                     
                 </div>
 
@@ -537,15 +551,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">deleteMiddle</span>(ListNode<span style="color:#666">*</span> head) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>head<span style="color:#666">-&gt;</span>next) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nullptr</span>;
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> slw <span style="color:#666">=</span> head, <span style="color:#666">*</span>fst <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(fst <span style="color:#666">&amp;&amp;</span> fst<span style="color:#666">-&gt;</span>next) {
-</span></span><span style="display:flex;"><span>        fst <span style="color:#666">=</span> fst<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>        slw <span style="color:#666">=</span> slw<span style="color:#666">-&gt;</span>next;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bagOfTokensScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> tokens, <span style="color:#0b0;font-weight:bold">int</span> power) {
+</span></span><span style="display:flex;"><span>    sort(tokens.begin(), tokens.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, pts <span style="color:#666">=</span> <span style="color:#666">0</span>, i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> tokens.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(power <span style="color:#666">&gt;=</span> tokens[i]) {
+</span></span><span style="display:flex;"><span>            power <span style="color:#666">-=</span> tokens[i<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, <span style="color:#666">++</span>pts);
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(pts <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            power <span style="color:#666">+=</span> tokens[j<span style="color:#666">--</span>];
+</span></span><span style="display:flex;"><span>            pts<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    slw<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> slw<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> head;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -553,83 +572,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">deleteMiddle</span>(ListNode<span style="color:#666">*</span> head) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bagOfTokensScore</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> tokens, <span style="color:#0b0;font-weight:bold">int</span> power) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;deleteMiddle&#39; that takes a ListNode pointer as input and returns a ListNode pointer. </div>
+                            <div class=""> The function `bagOfTokensScore` takes in a vector of tokens and a power value, returning the maximum score that can be achieved based on the given rules. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Base Condition</b></div>
+                            <div class=""> <b>2 : Sorting Tokens</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>head<span style="color:#666">-&gt;</span>next) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nullptr</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(tokens.begin(), tokens.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the linked list contains only one node. If true, it returns nullptr, as there&#39;s no middle node to delete. </div>
+                            <div class=""> Sort the tokens in ascending order to facilitate a greedy approach. This ensures that the smallest tokens are considered first to maximize the score. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Pointer Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> slw <span style="color:#666">=</span> head, <span style="color:#666">*</span>fst <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, pts <span style="color:#666">=</span> <span style="color:#666">0</span>, i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> tokens.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes two pointers: &#39;slw&#39; (slow pointer) starting at the head, and &#39;fst&#39; (fast pointer) starting two nodes ahead. </div>
+                            <div class=""> Initialize variables: `res` to track the maximum score, `pts` to track the current points, `i` as the left pointer, and `j` as the right pointer for the token array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Condition</b></div>
+                            <div class=""> <b>4 : Main Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(fst <span style="color:#666">&amp;&amp;</span> fst<span style="color:#666">-&gt;</span>next) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The loop continues as long as &#39;fst&#39; and &#39;fst-&gt;next&#39; are not null, ensuring we don&#39;t exceed the bounds of the list. </div>
+                            <div class=""> Start a while loop that continues as long as the left pointer `i` does not surpass the right pointer `j`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Pointer Update</b></div>
+                            <div class=""> <b>5 : If Enough Power to Spend Token</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        fst <span style="color:#666">=</span> fst<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(power <span style="color:#666">&gt;=</span> tokens[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves the &#39;fst&#39; pointer two nodes ahead in each iteration of the loop. </div>
+                            <div class=""> If there is enough power to spend the token at position `i` (the smallest available token), proceed with the action to gain points. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Pointer Update</b></div>
+                            <div class=""> <b>6 : Spend Token</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        slw <span style="color:#666">=</span> slw<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            power <span style="color:#666">-=</span> tokens[i<span style="color:#666">++</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves the &#39;slw&#39; pointer one node ahead in each iteration of the loop. </div>
+                            <div class=""> Spend the token at position `i` (decrease power) and increment the left pointer `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Middle Node Removal</b></div>
+                            <div class=""> <b>7 : Update Maximum Score</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    slw<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> slw<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, <span style="color:#666">++</span>pts);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the middle node by adjusting the &#39;next&#39; pointer of the &#39;slw&#39; pointer to skip the middle node. </div>
+                            <div class=""> Increase the points (`pts`) and update the maximum score (`res`) if the new score exceeds the previous maximum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class=""> <b>8 : Else If Points Available to Re-gain Power</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> head;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(pts <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the modified linked list with the middle node removed. </div>
+                            <div class=""> If points are available (i.e., `pts &gt; 0`), you can trade points to gain power by taking a token from the right side of the array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Re-gain Power by Trading Points</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            power <span style="color:#666">+=</span> tokens[j<span style="color:#666">--</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Gain power by taking the token at position `j` (the largest available token) and decrementing the right pointer `j`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Reduce Points</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pts<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Reduce the points (`pts`) as one point is used to gain power. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : End Loop Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If neither condition is satisfied (i.e., there is not enough power and no points to trade), break out of the loop. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the maximum score (`res`) achieved. </div>
                         </div>
                     
                 </div>
@@ -649,16 +708,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we are traversing the linked list once to find and remove the middle node.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n), where n is the number of tokens.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) because we are using only a constant amount of extra space.</div>    
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the sorted list of tokens.</div>    
                     </div>
 
                 </div>

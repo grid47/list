@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -288,7 +288,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1112s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1110s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/393.webp" 
            alt="A string being validated for UTF-8 encoding, with each valid byte sequence softly glowing." 
@@ -311,7 +311,7 @@
 
 
 
-<div class=""> Given two integer arrays <code>nums1</code> and <code>nums2</code> of the same length, the goal is to permute <code>nums1</code> in a way that maximizes the number of indices <code>i</code> where <code>nums1[i] &gt; nums2[i]</code>. Return any permutation of <code>nums1</code> that achieves this. </div>
+<div class=""> You are given an array of integers <code>data</code>, where each integer represents one byte of data. Your task is to check whether this sequence of bytes forms a valid UTF-8 encoded string based on the UTF-8 encoding rules for 1 to 4 bytes characters. </div>
 
 
 
@@ -362,51 +362,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> Two integer arrays `nums1` and `nums2`, each containing `n` elements.</div>
-                        <div class=""> <b>Example:</b> Input: nums1 = [1,3,5,7], nums2 = [3,6,8,10]</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array `data` where each integer represents one byte of data.</div>
+                        <div class=""> <b>Example:</b> Input: [197, 130, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= data.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • nums2.length == nums1.length</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums1[i], nums2[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= data[i] &lt;= 255</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return any permutation of `nums1` such that the number of indices `i` where `nums1[i] &gt; nums2[i]` is maximized.</div>
-                        <div class=""> <b>Example:</b> Output: [1,7,5,3]</div>
+                        <div class=""> <b>Output:</b> The output is a boolean indicating whether the input array `data` represents a valid UTF-8 encoding.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a valid permutation of `nums1`.</div>
+                                <div style="margin-left: 20px;"> • The output should be true if the byte sequence represents a valid UTF-8 encoding, otherwise false.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Maximize the number of indices `i` where `nums1[i] &gt; nums2[i]` by reordering `nums1`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to validate if the given byte sequence adheres to the rules of UTF-8 encoding.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort `nums1` and `nums2` while keeping track of the original indices of `nums2`.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array of bytes in `data`.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element in `nums2`, find the smallest element in `nums1` that is greater than the current element in `nums2`.</div>
+                                <div style="margin-left: 20px;"> • Check the first bits of each byte to determine whether it&#39;s the start of a 1, 2, 3, or 4-byte character.</div>
                             
-                                <div style="margin-left: 20px;"> • If such an element is found, assign it to the corresponding position in the result array, otherwise, use the smallest available element from `nums1`.</div>
+                                <div style="margin-left: 20px;"> • For continuation bytes (those starting with `10`), ensure that the correct number of continuation bytes follows.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return true if the entire sequence is valid; otherwise, return false.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should handle the given constraints efficiently.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle the input size within the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • nums2.length == nums1.length</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums1[i], nums2[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays of length up to 2 * 10^4 efficiently.</div>
                             
                         </div>
                     </div>        
@@ -414,21 +410,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both arrays `nums1` and `nums2` contain non-negative integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The size of both arrays is the same and within the specified limits.</div>
+                                <div style="margin-left: 20px;"> • Each integer in `data` represents one byte of data, and the byte values range from 0 to 255.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums1 = [5, 1, 8, 3], nums2 = [6, 3, 7, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting `nums1` as [1, 3, 5, 8] and `nums2` as [2, 3, 6, 7], the optimal permutation is [1, 8, 5, 3], which maximizes the number of `nums1[i] &gt; nums2[i]`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [197, 130, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The byte sequence &#39;11000101 10000010 00000001&#39; represents a valid UTF-8 encoding: a 2-byte character followed by a 1-byte character.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums1 = [2, 4, 6, 8], nums2 = [1, 5, 7, 9]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal permutation of `nums1` is [2, 4, 6, 8], as all elements in `nums1` are greater than the corresponding elements in `nums2`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [235, 140, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The byte sequence &#39;11101011 10001100 00000100&#39; represents an invalid UTF-8 encoding because the second byte does not start with &#39;10&#39; as required for a continuation byte.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,18 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution aims to reorder `nums1` to maximize the number of indices where `nums1[i] &gt; nums2[i]`. This can be done by strategically using a greedy approach with sorting and matching elements.</div>
+                        <div class=""> <b>Approach:</b> The approach involves iterating through the byte array and validating each byte according to the rules for UTF-8 encoding.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the arrays `nums1` and `nums2` allows for efficient matching of elements.</div>
+                                <div style="margin-left: 20px;"> • We need to check the starting bits of each byte to determine the number of bytes that form a character.</div>
                             
-                                <div style="margin-left: 20px;"> • Greedy algorithms are suitable for maximizing the number of successful comparisons.</div>
+                                <div style="margin-left: 20px;"> • For each continuation byte, we need to ensure it starts with &#39;10&#39;.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By sorting `nums1` and `nums2`, we can quickly determine the best match for each element in `nums2`.</div>
+                                <div style="margin-left: 20px;"> • The solution involves a simple traversal of the byte array and checking the bits, ensuring that the sequence follows the UTF-8 encoding rules.</div>
                             
                         </div>
                     </div>
@@ -471,11 +465,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort `nums1` in ascending order and `nums2` in ascending order, keeping track of the original indices of `nums2`.</div>
+                                <div style="margin-left: 20px;"> • Start by initializing a counter to track the number of continuation bytes expected for the current character.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a greedy approach to assign each number in `nums2` the smallest number in `nums1` that is larger than it.</div>
+                                <div style="margin-left: 20px;"> • For each byte, check its most significant bits to determine if it&#39;s the start of a new character or a continuation byte.</div>
                             
-                                <div style="margin-left: 20px;"> • If no number in `nums1` is larger, assign the smallest remaining number from `nums1`.</div>
+                                <div style="margin-left: 20px;"> • If it&#39;s a continuation byte, check if it starts with &#39;10&#39;. If it&#39;s the start byte, update the continuation byte counter.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return false if any byte doesn&#39;t match the expected pattern, and return true if the sequence is valid.</div>
                             
                         </div>
                     </div>
@@ -484,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable since both arrays will always have the same length and contain integers.</div>
+                                <div style="margin-left: 20px;"> • The input is guaranteed to be non-empty, so no need to handle empty arrays.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Efficient sorting and matching should be implemented to handle arrays with up to 10^5 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution must be optimized to handle large inputs with up to 2 * 10^4 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements in `nums1` are smaller than the corresponding elements in `nums2`, the output will be the sorted array `nums1`.</div>
+                                <div style="margin-left: 20px;"> • A sequence with an invalid continuation byte (not starting with &#39;10&#39;) should return false.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should work efficiently within the given constraints, particularly when handling arrays of large size.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently check the validity of the UTF-8 encoding even for the largest inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,17 +514,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Multiset Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Element Selection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Main If Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 UTF-8 First Byte Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Erase Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 UTF-8 First Byte Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 UTF-8 First Byte Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Invalid First Byte Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Else Block for Continuation Bytes</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 UTF-8 Continuation Byte Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Decrement Continuation Byte Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
                 </div>
 
@@ -537,14 +543,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> advantageCount(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
-</span></span><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s(begin(nums1), end(nums1));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> ( <span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums2.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> <span style="color:#666">*</span>s.rbegin() <span style="color:#666">&lt;=</span> nums2[i] <span style="color:#666">?</span> s.begin() <span style="color:#666">:</span> s.upper_bound(nums2[i]);
-</span></span><span style="display:flex;"><span>        nums1[i] <span style="color:#666">=</span> <span style="color:#666">*</span>p;
-</span></span><span style="display:flex;"><span>        s.erase(p);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">validUtf8</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> data) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span> : data) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(count <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">5</span>) <span style="color:#666">==</span> <span style="color:#666">0b110</span>) count <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">4</span>) <span style="color:#666">==</span> <span style="color:#666">0b1110</span>) count <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">3</span>) <span style="color:#666">==</span> <span style="color:#666">0b11110</span>) count <span style="color:#666">=</span> <span style="color:#666">3</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">7</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">6</span>) <span style="color:#666">!=</span> <span style="color:#666">0b10</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            count<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums1;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> count <span style="color:#666">==</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -555,70 +567,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> advantageCount(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">validUtf8</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> data) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `advantageCount` function which aims to reorder `nums1` to maximize its advantage over `nums2`. </div>
+                            <div class=""> Define the function &#39;validUtf8&#39; that takes a vector of integers, &#39;data&#39;, representing a sequence of bytes. It will return a boolean value indicating whether the sequence is a valid UTF-8 encoding. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Multiset Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s(begin(nums1), end(nums1));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a multiset `s` using the elements of `nums1`, which allows efficient element retrieval and removal. </div>
+                            <div class=""> Initialize a variable &#39;count&#39; to track the number of continuation bytes remaining for a valid UTF-8 sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Setup</b></div>
+                            <div class=""> <b>3 : For Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> ( <span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums2.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span> : data) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate over each element in `nums2`, comparing it against the elements in `nums1`. </div>
+                            <div class=""> Start a loop to iterate through each byte &#39;c&#39; in the &#39;data&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Element Selection</b></div>
+                            <div class=""> <b>4 : Main If Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> <span style="color:#666">*</span>s.rbegin() <span style="color:#666">&lt;=</span> nums2[i] <span style="color:#666">?</span> s.begin() <span style="color:#666">:</span> s.upper_bound(nums2[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(count <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Selects the best candidate element from `nums1` that can beat the current element in `nums2`. It checks if the largest element in `nums1` (accessed via `s.rbegin()`) can beat the current element in `nums2`; if not, it chooses the smallest element greater than `nums2[i]`. </div>
+                            <div class=""> Check if no continuation bytes are expected, meaning we are starting a new character in the UTF-8 sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Assignment</b></div>
+                            <div class=""> <b>5 : UTF-8 First Byte Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nums1[i] <span style="color:#666">=</span> <span style="color:#666">*</span>p;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">5</span>) <span style="color:#666">==</span> <span style="color:#666">0b110</span>) count <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the selected element from `nums1` to the current position in `nums1`. </div>
+                            <div class=""> Check if the byte &#39;c&#39; represents a valid starting byte for a 2-byte UTF-8 character. The condition checks the first 3 bits to determine if it matches the &#39;110&#39; prefix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Erase Element</b></div>
+                            <div class=""> <b>6 : UTF-8 First Byte Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.erase(p);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">4</span>) <span style="color:#666">==</span> <span style="color:#666">0b1110</span>) count <span style="color:#666">=</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Erases the selected element from the multiset `s`, as it has already been used. </div>
+                            <div class=""> Check if the byte &#39;c&#39; represents a valid starting byte for a 3-byte UTF-8 character. The condition checks the first 4 bits to determine if it matches the &#39;1110&#39; prefix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class=""> <b>7 : UTF-8 First Byte Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums1;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">3</span>) <span style="color:#666">==</span> <span style="color:#666">0b11110</span>) count <span style="color:#666">=</span> <span style="color:#666">3</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the modified `nums1` with elements rearranged to maximize the advantage over `nums2`. </div>
+                            <div class=""> Check if the byte &#39;c&#39; represents a valid starting byte for a 4-byte UTF-8 character. The condition checks the first 5 bits to determine if it matches the &#39;11110&#39; prefix. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Invalid First Byte Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">7</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the byte does not match any valid starting byte prefix (i.e., the first bit is 1 but does not match any of the expected patterns), return false, indicating an invalid UTF-8 sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Else Block for Continuation Bytes</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If we are expecting continuation bytes (i.e., &#39;count&#39; is not 0), we check if the current byte follows the continuation pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : UTF-8 Continuation Byte Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">6</span>) <span style="color:#666">!=</span> <span style="color:#666">0b10</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the byte &#39;c&#39; is a valid continuation byte. A continuation byte in UTF-8 should start with &#39;10&#39; in its most significant bits. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Decrement Continuation Byte Count</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            count<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrement the &#39;count&#39; variable to indicate that one continuation byte has been successfully processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> count <span style="color:#666">==</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If &#39;count&#39; is 0 at the end of the loop, it means all continuation bytes were matched correctly, and the UTF-8 sequence is valid. Otherwise, return false. </div>
                         </div>
                     
                 </div>
@@ -638,16 +700,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n) time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through each byte in the array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> Space is used for sorting and tracking the indices, resulting in a space complexity of O(n).</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only use a constant amount of extra space.</div>    
                     </div>
 
                 </div>

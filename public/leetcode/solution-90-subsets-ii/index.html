@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1377s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1375s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/90.webp" 
            alt="A glowing, branching set of subsets gently forming in a calm, peaceful pattern." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an integer array where every element appears exactly three times, except for one element which appears only once. Find the element that appears only once and return it. The solution must run in linear time complexity and use constant extra space. </div>
+<div class=""> Given an integer array nums that may contain duplicates, return all possible subsets (the power set) of the array. The solution set should not contain duplicate subsets. The subsets should be returned in any order. </div>
 
 
 
@@ -371,47 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> An array of integers where each element except for one appears three times. The array will contain at least one element.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 1, 2, 1, 2, 2, 4]</div>
+                        <div class=""> <b>Input:</b> The input is an integer array nums, which may contain duplicate values.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [3, 3, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 30,000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • -2^31 &lt;= nums[i] &lt;= 2^31 - 1</div>
+                                <div style="margin-left: 20px;"> • -10 &lt;= nums[i] &lt;= 10</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the element that appears only once in the array.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> The output should be a list of lists, where each inner list represents a unique subset of the input array.</div>
+                        <div class=""> <b>Example:</b> Output: [[], [1], [1, 3], [1, 3, 3], [3], [3, 3]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array contains exactly one element that appears once.</div>
+                                <div style="margin-left: 20px;"> • The subsets must not contain duplicates.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the unique element that appears only once by using bitwise operations.</div>
+                        <div class=""> <b>Goal:</b> The goal is to generate all possible subsets of the input array while avoiding duplicates. This can be done by iterating through the array, considering each element either as part of a subset or not, and ensuring that subsets with duplicate elements are not included.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use two variables (`ones` and `twos`) to track the bits that appear once and twice, respectively.</div>
+                                <div style="margin-left: 20px;"> • Sort the input array to ensure duplicates are adjacent.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through the array, updating the `ones` and `twos` variables using XOR and bitwise AND operations.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. After completing the iteration, `ones` will contain the unique element that appears only once.</div>
+                                <div style="margin-left: 20px;"> • Use a backtracking approach to generate subsets, ensuring that if an element is included, the next occurrence of the same element is only included if it was included previously in the current subset.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure that the solution is efficient for large arrays and operates within the allowed time and space limits.</div>
+                        <div class=""> <b>Goal:</b> The input array length is between 1 and 10, and elements are in the range from -10 to 10.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 30,000</div>
+                                <div style="margin-left: 20px;"> • The input array may contain duplicate values.</div>
                             
-                                <div style="margin-left: 20px;"> • -2^31 &lt;= nums[i] &lt;= 2^31 - 1</div>
+                                <div style="margin-left: 20px;"> • The result should not include duplicate subsets.</div>
                             
                         </div>
                     </div>        
@@ -419,19 +417,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array is non-empty and contains exactly one element that appears only once, while all other elements appear exactly three times.</div>
+                                <div style="margin-left: 20px;"> • The input array is not empty.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input array length is at most 10, so it is feasible to generate all subsets.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 1, 2, 1, 2, 2, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the numbers `1` and `2` appear three times, and `4` appears only once. The result is 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For input [1, 2, 2], the possible unique subsets are: [], [1], [1, 2], [1, 2, 2], [2], and [2, 2]. The subset [2] appears twice, so only one of them is included in the result.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [8, 8, 8, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, `8` appears three times, while `5` appears only once, so the result is 5.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For input [0], the only subsets are the empty set [] and the set containing the element itself [0].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -455,16 +455,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can use bitwise operations to solve this problem in linear time with constant space. The key idea is to maintain two variables to track the bits that appear once and twice.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using backtracking to generate all subsets. Sorting the array first helps ensure that duplicate subsets are avoided by making sure the same elements are adjacent.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Using bitwise XOR and AND operations can efficiently track occurrences of numbers.</div>
+                                <div style="margin-left: 20px;"> • The backtracking approach can help generate subsets by either including or excluding an element.</div>
+                            
+                                <div style="margin-left: 20px;"> • The sorted array ensures that duplicate elements are adjacent and can be handled easily during the backtracking process.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to process each element once and use only a constant amount of space.</div>
+                                <div style="margin-left: 20px;"> • Handling duplicates requires careful management during the backtracking to avoid generating the same subset multiple times.</div>
                             
                         </div>
                     </div>
@@ -472,11 +474,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize two variables `ones` and `twos` to 0.</div>
+                                <div style="margin-left: 20px;"> • Sort the input array to bring duplicates together.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through each element in the array and update `ones` and `twos` with the current element using bitwise XOR and AND operations.</div>
+                                <div style="margin-left: 20px;"> • Use a recursive backtracking function that explores all subsets by including or excluding elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. After the loop, `ones` will hold the element that appears only once.</div>
+                                <div style="margin-left: 20px;"> • Track the subsets in a set or map to automatically discard duplicates.</div>
                             
                         </div>
                     </div>
@@ -485,22 +487,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, return an error or handle it as a constraint violation.</div>
+                                <div style="margin-left: 20px;"> • An empty input array will result in a single subset: the empty set []</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays up to 30,000 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large inputs (n = 10), the solution must handle 2^n subsets efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works for both large and small integer values in the array.</div>
+                                <div style="margin-left: 20px;"> • If the array contains duplicate values, the solution must ensure only unique subsets are returned.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must maintain linear time complexity and constant space complexity even for large inputs.</div>
+                                <div style="margin-left: 20px;"> • The constraints (1 &lt;= nums.length &lt;= 10) allow for generating all subsets directly, as 2^10 subsets is a manageable number.</div>
                             
                         </div>                                                                        
                     </div>
@@ -517,19 +519,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Bitwise Operation (ones)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Bitwise Operation (twos)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Nested Loop Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional, Array Manipulation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Array Manipulation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Array Manipulation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Array Manipulation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Index Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return</button>
                     
                 </div>
 
@@ -538,15 +552,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">singleNumber</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ones <span style="color:#666">=</span> <span style="color:#666">0</span>, twos <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        ones <span style="color:#666">=</span> (ones <span style="color:#666">^</span> nums[i]) <span style="color:#666">&amp;</span> <span style="color:#666">~</span>twos;
-</span></span><span style="display:flex;"><span>        twos <span style="color:#666">=</span> (twos <span style="color:#666">^</span> nums[i]) <span style="color:#666">&amp;</span> <span style="color:#666">~</span>ones;            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> subsetsWithDup(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res <span style="color:#666">=</span> {{}};
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> startIndex <span style="color:#666">=</span> <span style="color:#666">0</span>, endIndex <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> res.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> nums[i] <span style="color:#666">!=</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> startIndex) {
+</span></span><span style="display:flex;"><span>                vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> temp <span style="color:#666">=</span> res[j];
+</span></span><span style="display:flex;"><span>                temp.push_back(nums[i]);
+</span></span><span style="display:flex;"><span>                res.push_back(temp);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        startIndex <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -554,73 +575,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">singleNumber</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> subsetsWithDup(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `singleNumber` is defined to take a vector of integers `nums` as input and returns the integer that appears only once. </div>
+                            <div class=""> Declares a function `subsetsWithDup` that takes a vector of integers `nums` as input and returns a vector of vectors representing all unique subsets. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Size Calculation</b></div>
+                            <div class=""> <b>2 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The size of the input vector `nums` is stored in the variable `n` to control the iteration. </div>
+                            <div class=""> Sorts the input array `nums` in ascending order to handle duplicates efficiently. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ones <span style="color:#666">=</span> <span style="color:#666">0</span>, twos <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res <span style="color:#666">=</span> {{}};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two variables, `ones` and `twos`, to zero. These variables will keep track of the bits that appear once and twice in the input array. </div>
+                            <div class=""> Initializes a vector `res` to store the subsets. The initial empty subset `{}` is added. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Iteration</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> startIndex <span style="color:#666">=</span> <span style="color:#666">0</span>, endIndex <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through the `nums` array. This loop will process each element to update the `ones` and `twos` variables. </div>
+                            <div class=""> Initializes `startIndex` and `endIndex` to keep track of the range of indices to consider for adding elements to subsets. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Bitwise Operation (ones)</b></div>
+                            <div class=""> <b>5 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ones <span style="color:#666">=</span> (ones <span style="color:#666">^</span> nums[i]) <span style="color:#666">&amp;</span> <span style="color:#666">~</span>twos;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The bitwise XOR operation between `ones` and `nums[i]` flips the bits in `ones`. The result is then ANDed with the negation of `twos` to ensure that a bit that appears twice doesn&#39;t get set in `ones`. </div>
+                            <div class=""> Iterates through each element `nums[i]` in the sorted array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Bitwise Operation (twos)</b></div>
+                            <div class=""> <b>6 : Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        twos <span style="color:#666">=</span> (twos <span style="color:#666">^</span> nums[i]) <span style="color:#666">&amp;</span> <span style="color:#666">~</span>ones;            
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> res.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The bitwise XOR operation between `twos` and `nums[i]` flips the bits in `twos`. The result is ANDed with the negation of `ones` to ensure that a bit that appears once doesn&#39;t get set in `twos`. </div>
+                            <div class=""> Stores the current size of the `res` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Nested Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ones;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the value of `ones`, which contains the number that appears only once after all iterations. </div>
+                            <div class=""> Iterates through the existing subsets in `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Conditional, Array Manipulation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> nums[i] <span style="color:#666">!=</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> startIndex) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if it&#39;s the first iteration, or if the current element is different from the previous one, or if we&#39;ve reached the `startIndex` for the current element. This ensures we avoid duplicates. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Array Manipulation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> temp <span style="color:#666">=</span> res[j];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Creates a copy `temp` of the current subset `res[j]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Array Manipulation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                temp.push_back(nums[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the current element `nums[i]` to the `temp` subset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Array Manipulation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res.push_back(temp);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the new subset `temp` to the `res` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Index Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        startIndex <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Updates `startIndex` to the next index for the next iteration, skipping duplicate elements. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the final `res` vector containing all unique subsets. </div>
                         </div>
                     
                 </div>
@@ -640,16 +721,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the array once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(2^n), where n is the number of elements in the input array, since the solution involves generating all possible subsets.</div>
+                        <div class=""> <b>Average Case:</b> O(2^n)</div>
+                        <div class=""> <b>Worst Case:</b> O(2^n), as we must generate and check each subset once.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is exponential, as we are generating 2^n subsets.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as we use only two variables to store intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if no subsets are generated.</div>
+                        <div class=""> <b>Worst Case:</b> O(2^n), since we store all subsets.</div> 
+                        <div class=""> <b>Description:</b> The space complexity depends on the number of subsets stored.</div>    
                     </div>
 
                 </div>

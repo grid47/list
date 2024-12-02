@@ -279,7 +279,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 7, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -306,7 +306,7 @@
 
 
 
-<div class=""> You are given a 0-indexed array of strings <code>words</code> and two integers <code>left</code> and <code>right</code>. A string is considered a vowel string if it starts and ends with a vowel character (vowels are &lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, &lsquo;u&rsquo;). Your task is to return the number of vowel strings in the array <code>words</code> where the indices fall within the range [left, right]. </div>
+<div class=""> Five philosophers sit at a round table with bowls of spaghetti. Each philosopher alternates between thinking and eating. A philosopher can only eat when both their left and right forks are available. Design a system where no philosopher will starve and they can continue alternating between eating and thinking. </div>
 
 
 
@@ -357,53 +357,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `words` and two integers `left` and `right`.</div>
-                        <div class=""> <b>Example:</b> For example, `words = [&#34;apple&#34;, &#34;banana&#34;, &#34;oreo&#34;], left = 0, right = 2`.</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer n representing the number of times each philosopher will call the function wantsToEat. The philosophers are numbered from 0 to 4 in a clockwise direction, and they request the forks one by one.</div>
+                        <div class=""> <b>Example:</b> n = 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 10</div>
-                            
-                                <div style="margin-left: 20px;"> • words[i] consists of only lowercase English letters</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= left &lt;= right &lt; words.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 60</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an integer that represents the number of vowel strings within the specified range of indices.</div>
-                        <div class=""> <b>Example:</b> For input `words = [&#34;apple&#34;, &#34;banana&#34;, &#34;oreo&#34;], left = 0, right = 2`, the output is `2`.</div>
+                        <div class=""> <b>Output:</b> The output consists of an array of operations in the form [a, b, c] where: a is the philosopher id, b indicates the fork (1 for left, 2 for right), and c indicates the operation (1 for pick, 2 for put, 3 for eat).</div>
+                        <div class=""> <b>Example:</b> [[4, 2, 1], [4, 1, 1], [0, 1, 1], [2, 2, 1], [2, 1, 1], [2, 0, 3], [2, 1, 2], [2, 2, 2], [4, 0, 3], [4, 1, 2], [0, 2, 1], [4, 2, 2], [3, 2, 1], [3, 1, 1], [0, 0, 3], [0, 1, 2], [0, 2, 2], [1, 2, 1], [1, 1, 1], [3, 0, 3], [3, 1, 2], [3, 2, 2], [1, 0, 3], [1, 1, 2], [1, 2, 2]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result will always be a valid integer.</div>
+                                <div style="margin-left: 20px;"> • Each philosopher calls the function at least once.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the number of vowel strings in the given range of indices.</div>
+                        <div class=""> <b>Goal:</b> To ensure no philosopher ever starves while alternating between eating and thinking. The philosopher must acquire both forks before eating and release them afterward.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through the array `words` from index `left` to index `right`.</div>
+                                <div style="margin-left: 20px;"> • Each philosopher alternates between thinking and attempting to eat.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each word, check if the first and last characters are vowels.</div>
+                                <div style="margin-left: 20px;"> • The philosopher first picks the left fork, then the right fork (or vice versa depending on the philosopher&#39;s id).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count how many words meet the condition of being a vowel string.</div>
+                                <div style="margin-left: 20px;"> • Once both forks are acquired, the philosopher starts eating.</div>
+                            
+                                <div style="margin-left: 20px;"> • After eating, the philosopher puts down both forks, making them available for others.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The length of the array is at most 1000 and each string in the array has a maximum length of 10 characters.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the philosophers do not conflict over fork usage and that they can indefinitely alternate between thinking and eating.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 60</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 5 philosophers are involved, each with two forks.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= left &lt;= right &lt; words.length</div>
+                                <div style="margin-left: 20px;"> • Each philosopher can pick and put down the forks in any order, but both forks must be acquired before eating.</div>
                             
                         </div>
                     </div>        
@@ -411,15 +407,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array is valid, containing only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • Each philosopher alternates between thinking and eating.</div>
+                            
+                                <div style="margin-left: 20px;"> • A philosopher cannot eat without holding both forks.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For `words = [&#34;apple&#34;, &#34;banana&#34;, &#34;oreo&#34;], left = 0, right = 2`</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid vowel strings in the range are &#34;apple&#34; and &#34;oreo&#34;, so the result is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, each philosopher calls the function once. The result is a series of operations where each philosopher picks up their forks, eats, and then puts down the forks in turn.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -443,16 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, we can loop through the array `words` within the specified range, and for each word, check if it starts and ends with a vowel. This can be achieved using basic string operations.</div>
+                        <div class=""> <b>Approach:</b> To simulate the alternating process of eating and thinking while preventing starvation, we use mutex locks to ensure that philosophers only acquire forks when available and release them when done.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can easily check the start and end characters of each word to see if they are vowels.</div>
+                                <div style="margin-left: 20px;"> • Philosophers should not block each other from eating by acquiring forks in an arbitrary order.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By iterating over the range and checking each word, we can count the number of valid vowel strings efficiently.</div>
+                                <div style="margin-left: 20px;"> • We can implement a mutual exclusion mechanism using mutex locks to ensure forks are picked and released in a safe manner.</div>
                             
                         </div>
                     </div>
@@ -460,11 +458,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Start iterating from index `left` to index `right`.</div>
+                                <div style="margin-left: 20px;"> • Create mutex locks for each fork.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each word in this range, check if the first and last characters are vowels.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. Count the number of words that satisfy this condition.</div>
+                                <div style="margin-left: 20px;"> • Implement the wantsToEat function where each philosopher acquires locks on the forks, eats, and releases the forks in a manner that prevents deadlock.</div>
                             
                         </div>
                     </div>
@@ -473,22 +469,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the input will contain at least one word.</div>
+                                <div style="margin-left: 20px;"> • No empty inputs are allowed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle arrays with up to 1000 words efficiently.</div>
+                                <div style="margin-left: 20px;"> • For larger values of n, the number of philosopher actions will increase, but the system must remain efficient.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `left` equals `right`, we are checking only one word, which should be handled accordingly.</div>
+                                <div style="margin-left: 20px;"> • Ensure that all philosophers can eat indefinitely and never starve.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The given range [left, right] will always be valid for the input array.</div>
+                                <div style="margin-left: 20px;"> • Each philosopher must alternate between thinking and eating without blocking others.</div>
                             
                         </div>                                                                        
                     </div>
@@ -505,41 +501,55 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Priority Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Edge Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Parameter</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Add Root to Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Parameter</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 BFS Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Parameter</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Level Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Parameter</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Level Sum Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Parameter</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Process Each Node at the Level</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Fork Index Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Node Processing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Fork Index Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Sum Accumulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Mutex Lock Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mutex Lock Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Left Child Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Philosopher Eating Logic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Right Child Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Locking Forks</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Push Sum to Priority Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Locking Forks</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Priority Queue Size Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Fork Pickup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Check for kth Largest</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Fork Pickup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return kth Largest Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Philosopher Eating Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Locking Forks</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Locking Forks</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Fork Pickup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Fork Pickup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Eat Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Put Fork Down</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Put Fork Down</button>
                     
                 </div>
 
@@ -548,26 +558,38 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">kthLargestLevelSum</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
-</span></span><span style="display:flex;"><span>    q.push(root);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> it<span style="color:#666">-&gt;</span>val;
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left) q.push(it<span style="color:#666">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right) q.push(it<span style="color:#666">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        pq.push(sum);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&gt;</span> k) pq.pop();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex mtx[<span style="color:#666">5</span>];
+</span></span><span style="display:flex;"><span>DiningPhilosophers() {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">wantsToEat</span>(<span style="color:#0b0;font-weight:bold">int</span> philosopher,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickLeftFork,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickRightFork,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> eat,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putLeftFork,
+</span></span><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putRightFork) {
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> philosopher;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (philosopher <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">5</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck1(mtx[left], defer_lock);
+</span></span><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck2(mtx[right], defer_lock);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(philosopher <span style="color:#666">%</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>        lck1.lock();
+</span></span><span style="display:flex;"><span>        lck2.lock();
+</span></span><span style="display:flex;"><span>        pickLeftFork();
+</span></span><span style="display:flex;"><span>        pickRightFork();
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        lck2.lock();
+</span></span><span style="display:flex;"><span>        lck1.lock();
+</span></span><span style="display:flex;"><span>        pickLeftFork();
+</span></span><span style="display:flex;"><span>        pickRightFork();            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&lt;</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> pq.top();
+</span></span><span style="display:flex;"><span>    eat();
+</span></span><span style="display:flex;"><span>    putLeftFork();
+</span></span><span style="display:flex;"><span>    putRightFork();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -575,183 +597,253 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">kthLargestLevelSum</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex mtx[<span style="color:#666">5</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `kthLargestLevelSum` which takes a `TreeNode* root` (the root of the binary tree) and an integer `k` (the level number to find the kth largest sum for). </div>
+                            <div class=""> A mutex array `mtx[5]` is declared to manage access to the forks (shared resources) for each philosopher. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Priority Queue Initialization</b></div>
+                            <div class=""> <b>2 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>DiningPhilosophers() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Create a min-heap priority queue `pq` to store the sums of levels, which will help track the kth largest sum. </div>
+                            <div class=""> This is the constructor for the `DiningPhilosophers` class, where the mutex array is initialized. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Edge Case Check</b></div>
+                            <div class=""> <b>3 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> wantsToEat(<span style="color:#0b0;font-weight:bold">int</span> philosopher,
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the root is null. If the tree is empty, return 0 since there are no level sums. </div>
+                            <div class=""> This is the function definition for `wantsToEat`, which simulates a philosopher&#39;s request to eat. It accepts the philosopher&#39;s ID and functions for picking up and putting down forks, as well as eating. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Queue Initialization</b></div>
+                            <div class=""> <b>4 : Function Parameter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickLeftFork,
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a queue `q` to perform a breadth-first search (BFS) on the binary tree. </div>
+                            <div class=""> A function parameter `pickLeftFork` that simulates picking up the left fork. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Add Root to Queue</b></div>
+                            <div class=""> <b>5 : Function Parameter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickRightFork,
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the root node into the queue to start the BFS traversal. </div>
+                            <div class=""> A function parameter `pickRightFork` that simulates picking up the right fork. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : BFS Loop</b></div>
+                            <div class=""> <b>6 : Function Parameter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> eat,
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop that runs until the queue is empty, ensuring that we process each level of the binary tree. </div>
+                            <div class=""> A function parameter `eat` that simulates the action of eating. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Level Size Calculation</b></div>
+                            <div class=""> <b>7 : Function Parameter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putLeftFork,
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the number of nodes at the current level (`sz`) in the variable `sz`. </div>
+                            <div class=""> A function parameter `putLeftFork` that simulates putting down the left fork. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Level Sum Initialization</b></div>
+                            <div class=""> <b>8 : Function Parameter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putRightFork) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a variable `sum` to store the sum of the node values at the current level. </div>
+                            <div class=""> A function parameter `putRightFork` that simulates putting down the right fork. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Process Each Node at the Level</b></div>
+                            <div class=""> <b>9 : Fork Index Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> philosopher;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through all nodes at the current level. </div>
+                            <div class=""> The `left` fork is assigned to the philosopher&#39;s position (index), corresponding to the philosopher&#39;s ID. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Node Processing</b></div>
+                            <div class=""> <b>10 : Fork Index Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (philosopher <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">5</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Get the front node from the queue (`it`). </div>
+                            <div class=""> The `right` fork is the next fork, calculated using modulo 5 to handle the circular arrangement of philosophers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Sum Accumulation</b></div>
+                            <div class=""> <b>11 : Mutex Lock Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> it<span style="color:#666">-&gt;</span>val;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck1(mtx[left], defer_lock);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the value of the current node (`it-&gt;val`) to the `sum`. </div>
+                            <div class=""> A `unique_lock` is created for the left fork (`lck1`), with the `defer_lock` option to avoid locking immediately. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Queue Update</b></div>
+                            <div class=""> <b>12 : Mutex Lock Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck2(mtx[right], defer_lock);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the current node from the queue. </div>
+                            <div class=""> A `unique_lock` is created for the right fork (`lck2`), again with the `defer_lock` option. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Left Child Check</b></div>
+                            <div class=""> <b>13 : Philosopher Eating Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left) q.push(it<span style="color:#666">-&gt;</span>left);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(philosopher <span style="color:#666">%</span> <span style="color:#666">2</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current node has a left child, add it to the queue for processing in the next iteration. </div>
+                            <div class=""> An if condition is used to alternate the order in which philosophers acquire the forks to avoid deadlocks. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Right Child Check</b></div>
+                            <div class=""> <b>14 : Locking Forks</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right) q.push(it<span style="color:#666">-&gt;</span>right);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck1.lock();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current node has a right child, add it to the queue for processing in the next iteration. </div>
+                            <div class=""> The left fork is locked. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Push Sum to Priority Queue</b></div>
+                            <div class=""> <b>15 : Locking Forks</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(sum);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck2.lock();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the sum of the current level to the priority queue. </div>
+                            <div class=""> The right fork is locked. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Priority Queue Size Check</b></div>
+                            <div class=""> <b>16 : Fork Pickup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&gt;</span> k) pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickLeftFork();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the priority queue exceeds size `k`, pop the smallest sum to ensure we only keep the top `k` largest sums. </div>
+                            <div class=""> The function to pick up the left fork is called. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Check for kth Largest</b></div>
+                            <div class=""> <b>17 : Fork Pickup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(pq.size() <span style="color:#666">&lt;</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickRightFork();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the priority queue has fewer than `k` sums. If so, return -1 as there are not enough levels. </div>
+                            <div class=""> The function to pick up the right fork is called. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Return kth Largest Sum</b></div>
+                            <div class=""> <b>18 : Philosopher Eating Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> pq.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the top element of the priority queue, which is the kth largest sum of a level. </div>
+                            <div class=""> If the philosopher&#39;s ID is even, the order of locking the forks is reversed to avoid deadlocks. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Locking Forks</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck2.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The right fork is locked first. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Locking Forks</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lck1.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The left fork is locked second. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Fork Pickup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickLeftFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function to pick up the left fork is called. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Fork Pickup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pickRightFork();            
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function to pick up the right fork is called. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Eat Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    eat();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The philosopher eats. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Put Fork Down</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    putLeftFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The philosopher puts down the left fork. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Put Fork Down</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    putRightFork();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The philosopher puts down the right fork. </div>
                         </div>
                     
                 </div>
@@ -771,16 +863,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the length of the range [left, right]. For each word, we perform constant time operations to check if the first and last characters are vowels.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of times each philosopher calls the function.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as each philosopher performs the same number of actions.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), since the system is designed to avoid starvation and deadlock.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of iterations each philosopher makes.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) since we only use a few extra variables for counting and checking the vowels.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since no additional space is required beyond the basic setup.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as we only need a fixed number of mutexes and variables regardless of input size.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant as the number of philosophers is fixed and the operations are performed in constant space.</div>    
                     </div>
 
                 </div>

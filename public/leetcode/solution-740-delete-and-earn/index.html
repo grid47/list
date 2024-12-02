@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1280s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1279s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/740.webp" 
            alt="A series of numbers where the optimal strategy to delete and earn is highlighted, glowing softly as the calculation is made" 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an integer array <code>nums</code> of even length <code>n</code> and an integer <code>limit</code>. In one move, you can replace any element of <code>nums</code> with another integer between <code>1</code> and <code>limit</code> (inclusive). The array <code>nums</code> is complementary if for all indices <code>i</code>, <code>nums[i] + nums[n - 1 - i]</code> equals the same number. Return the minimum number of moves required to make <code>nums</code> complementary. </div>
+<div class=""> You are given an integer array nums. You want to maximize the number of points you can earn by performing the following operation any number of times: Pick any nums[i] and delete it to earn nums[i] points. Afterwards, you must delete every element equal to nums[i] - 1 and every element equal to nums[i] + 1. </div>
 
 
 
@@ -371,53 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array `nums` of even length `n` and an integer `limit`.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 2, 4, 3], limit = 4</div>
+                        <div class=""> <b>Input:</b> The input is an integer array representing the numbers from which you will be selecting elements to delete and earn points.</div>
+                        <div class=""> <b>Example:</b> nums = [5, 6, 4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= limit &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • n is even</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of moves required to make the array complementary.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> Return the maximum number of points you can earn by performing the operation some number of times.</div>
+                        <div class=""> <b>Example:</b> For nums = [5, 6, 4], the output should be 8.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine the minimum number of moves to make `nums` complementary, we need to adjust pairs of elements such that their sums are consistent across the array.</div>
+                        <div class=""> <b>Goal:</b> Maximize the total points earned from deleting elements and ensuring no adjacent elements (nums[i] - 1 or nums[i] &#43; 1) are left.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the first half of the array and consider pairs of elements from the beginning and the end of the array.</div>
+                                <div style="margin-left: 20px;"> • Count the occurrences of each number in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each pair of elements, calculate the range of possible sums (from their minimum to their maximum possible sum).</div>
+                                <div style="margin-left: 20px;"> • Create a dynamic programming array where dp[i] stores the maximum points obtainable by considering numbers from 1 to i.</div>
                             
-                                <div style="margin-left: 20px;"> • Track the frequency of each sum using a differential array.</div>
+                                <div style="margin-left: 20px;"> • For each number, either choose to delete it and earn points or skip it and carry forward the previous maximum.</div>
                             
-                                <div style="margin-left: 20px;"> • Determine the minimum number of moves required by finding the sum with the smallest number of adjustments.</div>
+                                <div style="margin-left: 20px;"> • Return the final value from the dynamic programming array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array `nums` has an even length `n` and satisfies the following constraints:</div>
+                        <div class=""> <b>Goal:</b> The input will always satisfy the given constraints, ensuring a manageable number of operations.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of `nums` is between 2 and 100,000.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • Each element in `nums` is between 1 and `limit`.</div>
-                            
-                                <div style="margin-left: 20px;"> • The value of `limit` is between 1 and 100,000.</div>
-                            
-                                <div style="margin-left: 20px;"> • The length of `nums` is even.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>        
@@ -425,17 +419,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array `nums` will always have an even length.</div>
-                            
-                                <div style="margin-left: 20px;"> • The value of `limit` will be valid and within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The input array nums will always contain at least one element.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 4, 3], limit = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we need to change `nums` to make the sum of each pair equal to 4. This can be achieved by changing the second element `4` to `2`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [5, 6, 4], the output is 8.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By deleting the number 6 and 4, we maximize our points by choosing the best elements to remove.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -459,18 +451,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we can use a greedy approach with a differential array to track the changes required for each possible sum of the pairs.</div>
+                        <div class=""> <b>Approach:</b> A dynamic programming approach to maximize the total points by efficiently handling adjacent numbers.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to find the optimal sum for each pair and count the number of changes required to make all sums equal.</div>
-                            
-                                <div style="margin-left: 20px;"> • Using a differential array will allow us to efficiently track the changes needed for each sum.</div>
+                                <div style="margin-left: 20px;"> • This problem can be reduced to a dynamic programming problem where the state depends on whether we take the current element or skip it.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to ensure that we minimize the total number of changes, which can be done by finding the most frequent sum and adjusting all pairs to match that sum.</div>
+                                <div style="margin-left: 20px;"> • We can optimize our solution by keeping track of maximum points for each number up to the largest value in the array.</div>
                             
                         </div>
                     </div>
@@ -478,13 +468,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a differential array to track the changes required for each sum.</div>
+                                <div style="margin-left: 20px;"> • Count the occurrences of each number in the input array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each pair of elements, calculate their possible sum range.</div>
+                                <div style="margin-left: 20px;"> • Initialize a dynamic programming array where dp[i] holds the maximum points we can earn considering numbers 1 to i.</div>
                             
-                                <div style="margin-left: 20px;"> • Update the differential array with the number of changes required for each sum.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each number, calculating whether to take or skip it by considering the points from taking it versus the previous maximum points.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the differential array to find the sum with the smallest number of changes.</div>
+                                <div style="margin-left: 20px;"> • Return the result from the last element of the dynamic programming array.</div>
                             
                         </div>
                     </div>
@@ -493,22 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array `nums` will always have an even length, so no empty input scenarios are considered.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain at least one element, so no empty array cases will exist.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be optimized to handle input arrays up to the size of 100,000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large inputs (up to 20,000 elements), the algorithm should efficiently handle the array within the time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array elements and the limit will always be within the range of 1 to 100,000.</div>
+                                <div style="margin-left: 20px;"> • If the array contains only one unique number, the algorithm should return the total points earned by deleting all occurrences of that number.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The value of `limit` must be between 1 and 100,000, and each element in the array `nums` must be between 1 and `limit`.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle inputs up to the largest constraint.</div>
                             
                         </div>                                                                        
                     </div>
@@ -529,33 +519,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Dynamic Programming Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop: Populating `val` vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Dynamic Programming Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Base Case Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Dynamic Programming Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Dynamic Programming Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Dynamic Programming Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Dynamic Programming Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Dynamic Programming Transition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Dynamic Programming Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Final Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Dynamic Programming Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Result Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
                 </div>
 
@@ -564,28 +544,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMoves</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> num, <span style="color:#0b0;font-weight:bold">int</span> lmt) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> num.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(<span style="color:#666">2</span><span style="color:#666">*</span>lmt <span style="color:#666">+</span><span style="color:#666">2</span>,<span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">/</span><span style="color:#666">2</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> num[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> num[n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>i];
-</span></span><span style="display:flex;"><span>        dp[<span style="color:#666">2</span>] <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        dp[min(a,b)<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">-=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        dp[a<span style="color:#666">+</span>b] <span style="color:#666">-=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        dp[a<span style="color:#666">+</span>b<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        dp[max(a,b) <span style="color:#666">+</span> lmt <span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">//for(int i = 1; i &lt; n; i++)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>       <span style="color:#080;font-style:italic">// dp[i] += dp[i - 1];
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">2</span><span style="color:#666">*</span> n;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">2</span> <span style="color:#666">*</span> lmt <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> dp[i];
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, cur);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">deleteAndEarn</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">10001</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> val(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp (n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums)
+</span></span><span style="display:flex;"><span>      val[num] <span style="color:#666">+=</span> num;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>] <span style="color:#666">=</span> val[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> max(dp[i], dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> val[i]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -596,160 +568,110 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMoves</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> num, <span style="color:#0b0;font-weight:bold">int</span> lmt) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">deleteAndEarn</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;minMoves&#39; that accepts a reference to a vector of integers &#39;num&#39; and an integer &#39;lmt&#39; representing the limit for the calculation. </div>
+                            <div class=""> Defines the function that solves the problem. It takes an array of integers as input. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> num.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">10001</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the size of the input array &#39;num&#39; in variable &#39;n&#39;. </div>
+                            <div class=""> Initializes a variable `n` to store the size of the `val` and `dp` vectors, based on the maximum possible value in `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Dynamic Programming Array Initialization</b></div>
+                            <div class=""> <b>3 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(<span style="color:#666">2</span><span style="color:#666">*</span>lmt <span style="color:#666">+</span><span style="color:#666">2</span>,<span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> val(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a dynamic programming array &#39;dp&#39; of size &#39;2*lmt &#43; 2&#39; with all elements set to 0. </div>
+                            <div class=""> Creates a vector `val` to store the total points earned for each number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Setup</b></div>
+                            <div class=""> <b>4 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n<span style="color:#666">/</span><span style="color:#666">2</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp (n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through the first half of the array, where the element pairs are compared. </div>
+                            <div class=""> Creates a vector `dp` to store the maximum points that can be earned up to each number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Assignment</b></div>
+                            <div class=""> <b>5 : Loop: Populating `val` vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> num[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assign the element at the &#39;i&#39;-th index of the array &#39;num&#39; to the variable &#39;a&#39;. </div>
+                            <div class=""> Iterates over each number in `nums` and updates the `val` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Assignment</b></div>
+                            <div class=""> <b>6 : Update Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> num[n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>      val[num] <span style="color:#666">+=</span> num;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assign the element at the corresponding index from the end of the array &#39;num&#39; to the variable &#39;b&#39;. </div>
+                            <div class=""> Updates the `val` vector by adding the current number to its corresponding index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>7 : Base Case Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[<span style="color:#666">2</span>] <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increase the value at index 2 in the dynamic programming array &#39;dp&#39; by 2. </div>
+                            <div class=""> Sets the base case for `dp[0]`, which is 0, representing that no points are earned when no numbers are considered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>8 : Base Case Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[min(a,b)<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>] <span style="color:#666">=</span> val[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrease the value at index &#39;min(a,b) &#43; 1&#39; in the DP array &#39;dp&#39; by 1 to track a move. </div>
+                            <div class=""> Sets the base case for `dp[1]` to be the value of `val[0]`, representing that the first number&#39;s point value is considered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>9 : Dynamic Programming Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[a<span style="color:#666">+</span>b] <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrease the value at index &#39;a &#43; b&#39; in the DP array &#39;dp&#39; by 1 to track a move based on the sum of &#39;a&#39; and &#39;b&#39;. </div>
+                            <div class=""> Starts the dynamic programming loop to calculate the maximum points that can be earned up to each number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>10 : Dynamic Programming Transition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[a<span style="color:#666">+</span>b<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> max(dp[i], dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> val[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increase the value at index &#39;a &#43; b &#43; 1&#39; in the DP array &#39;dp&#39; by 1 to adjust the count based on the sum of &#39;a&#39; and &#39;b&#39;. </div>
+                            <div class=""> For each number `i`, calculates the maximum points by either taking the points up to `i` or including the points from `i` and skipping `i - 1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[max(a,b) <span style="color:#666">+</span> lmt <span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increase the value at index &#39;max(a,b) &#43; lmt &#43; 1&#39; in the DP array &#39;dp&#39; by 1, considering the maximum value between &#39;a&#39; and &#39;b&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">2</span><span style="color:#666">*</span> n;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize variables &#39;cur&#39; to 0 and &#39;res&#39; to &#39;2 * n&#39;. &#39;cur&#39; will hold the current cumulative sum of DP values, and &#39;res&#39; will store the minimum result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Final Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">2</span> <span style="color:#666">*</span> lmt <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Start a loop to iterate over the DP array from index 2 to &#39;2 * lmt &#43; 1&#39; to find the minimum number of moves. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Dynamic Programming Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> dp[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the variable &#39;cur&#39; by adding the value from the DP array at index &#39;i&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Result Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, cur);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the result &#39;res&#39; by taking the minimum between the current &#39;res&#39; and &#39;cur&#39;. This keeps track of the least number of moves. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final result &#39;res&#39;, which holds the minimum number of moves required. </div>
+                            <div class=""> Returns the maximum points that can be earned by considering all numbers. </div>
                         </div>
                     
                 </div>
@@ -769,16 +691,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The algorithm performs a linear scan of the array and updates the differential array for each pair of elements, leading to O(n) time complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of elements in the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as the algorithm only processes each element once.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as each element is processed only once in a linear scan.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), as we perform a constant amount of work for each element in the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(limit)</div>
-                        <div class=""> <b>Worst Case:</b> O(limit)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the size of the `limit` because we maintain a differential array for sums.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), as we may need space for both the dynamic programming array and frequency counts.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), due to the space used by the dynamic programming array and frequency count array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space needed for the dynamic programming and frequency count arrays.</div>    
                     </div>
 
                 </div>

@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 19, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1312s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1310s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/797.webp" 
            alt="A graph where all paths are traced from source to target, with each path softly glowing as it is found." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given an undirected star graph consisting of n nodes labeled from 1 to n. A star graph is a type of graph where one central node is connected to all other nodes. In this problem, you are given a list of edges where each edge represents a connection between two nodes. Your task is to find the center of the star graph, which is the node that is connected to every other node. </div>
+<div class=""> You are given a directed acyclic graph (DAG) with <code>n</code> nodes, labeled from 0 to n-1. Find all possible paths from node 0 to node n-1 and return these paths in any order. The graph is represented such that each node has a list of other nodes that can be visited directly from it. </div>
 
 
 
@@ -372,49 +372,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 2D integer array, &#39;edges&#39;, where each element [u, v] represents an edge between nodes u and v.</div>
-                        <div class=""> <b>Example:</b> Input: edges = [[3, 4], [4, 2], [1, 4]]</div>
+                        <div class=""> <b>Input:</b> The input is a list of lists, where `graph[i]` contains all the nodes you can visit directly from node `i`.</div>
+                        <div class=""> <b>Example:</b> Input: graph = [[1, 2], [3], [3], []]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 15</div>
                             
-                                <div style="margin-left: 20px;"> • edges.length == n - 1</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= graph[i][j] &lt; n</div>
                             
-                                <div style="margin-left: 20px;"> • edges[i].length == 2</div>
+                                <div style="margin-left: 20px;"> • graph[i][j] != i (no self-loops)</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= ui, vi &lt;= n</div>
+                                <div style="margin-left: 20px;"> • All elements in graph[i] are unique</div>
                             
-                                <div style="margin-left: 20px;"> • ui != vi</div>
+                                <div style="margin-left: 20px;"> • The input graph is guaranteed to be a DAG</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the center of the star graph, which is the node that is connected to every other node.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> The output should be a list of all possible paths from node 0 to node n-1. Each path is represented as a list of nodes, starting from node 0 and ending at node n-1.</div>
+                        <div class=""> <b>Example:</b> Output: [[0, 1, 3], [0, 2, 3]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The answer will be a list of lists, where each list represents a valid path from node 0 to node n-1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To identify the central node of the star graph from the given edges.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find all paths starting from node 0 to node n-1, respecting the directed edges in the graph.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Check the first two edges and compare the nodes involved in them.</div>
+                                <div style="margin-left: 20px;"> • Use a breadth-first search (BFS) or depth-first search (DFS) approach to explore the graph starting from node 0.</div>
                             
-                                <div style="margin-left: 20px;"> • The center node is the one that appears in both edges, as it connects to all other nodes.</div>
+                                <div style="margin-left: 20px;"> • For each node, explore all possible nodes it can lead to by following the directed edges.</div>
+                            
+                                <div style="margin-left: 20px;"> • Once you reach node n-1, add the path to the result.</div>
+                            
+                                <div style="margin-left: 20px;"> • If a node cannot lead to node n-1, backtrack and explore other paths.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input graph will always form a valid star graph as per the given constraints.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the graph follows the specified constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of nodes (n) is between 3 and 10^5.</div>
+                                <div style="margin-left: 20px;"> • The graph must be a valid directed acyclic graph (DAG).</div>
                             
-                                <div style="margin-left: 20px;"> • There will always be n - 1 edges, ensuring the graph forms a valid star shape.</div>
+                                <div style="margin-left: 20px;"> • Each node has a unique set of nodes it can lead to.</div>
+                            
+                                <div style="margin-left: 20px;"> • The graph must contain at least two nodes.</div>
                             
                         </div>
                     </div>        
@@ -422,19 +430,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The given edges always represent a valid star graph with one center node.</div>
+                                <div style="margin-left: 20px;"> • The graph is non-cyclic, meaning it does not contain any cycles.</div>
+                            
+                                <div style="margin-left: 20px;"> • The graph has at least two nodes (i.e., node 0 and node n-1).</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> edges = [[3, 4], [4, 2], [1, 4]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Node 4 appears in all edges, so it is the center node.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: graph = [[1, 2], [3], [3], []]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this graph, node 0 can reach nodes 1 and 2, node 1 can reach node 3, and node 2 can also reach node 3. The two possible paths from node 0 to node 3 are [0, 1, 3] and [0, 2, 3].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> edges = [[1, 2], [5, 1], [1, 3], [1, 4]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Node 1 appears in all edges, so it is the center node.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: graph = [[4, 3, 1], [3, 2, 4], [3], [4], []]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This graph has multiple paths from node 0 to node 4: [0, 4], [0, 3, 4], [0, 1, 3, 4], [0, 1, 2, 3, 4], and [0, 1, 4].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,18 +468,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To find the center of the star graph, we can use the fact that the center node will appear in multiple edges. By examining just the first two edges, we can easily determine the center node.</div>
+                        <div class=""> <b>Approach:</b> A depth-first search (DFS) approach is used to explore all possible paths from node 0 to node n-1. Starting from node 0, recursively visit each neighboring node, adding it to the current path. When node n-1 is reached, add the path to the result.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The center node is the one that connects to all other nodes.</div>
-                            
-                                <div style="margin-left: 20px;"> • By checking only the first two edges, we can quickly identify the center node.</div>
+                                <div style="margin-left: 20px;"> • We need to explore all possible paths in the DAG from node 0 to node n-1.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Check which node appears in both edges and return it as the center.</div>
+                                <div style="margin-left: 20px;"> • DFS or BFS can be used for exploring the graph, as both approaches allow us to find all paths.</div>
                             
                         </div>
                     </div>
@@ -477,11 +485,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Look at the first two edges from the input.</div>
+                                <div style="margin-left: 20px;"> • Initialize a stack or queue to hold the current node and path.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the first node of the first edge matches the first or second node of the second edge.</div>
+                                <div style="margin-left: 20px;"> • Start DFS from node 0 with the path containing only node 0.</div>
                             
-                                <div style="margin-left: 20px;"> • The matching node will be the center node.</div>
+                                <div style="margin-left: 20px;"> • For each node, recursively explore all its neighbors.</div>
+                            
+                                <div style="margin-left: 20px;"> • When reaching node n-1, add the current path to the result list.</div>
                             
                         </div>
                     </div>
@@ -490,22 +500,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will never be empty input as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • If the graph is empty or contains no edges, no paths can be found.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle up to 10^5 nodes.</div>
+                                <div style="margin-left: 20px;"> • If the graph is very large, ensure the solution can handle it efficiently, particularly considering the constraint of n &lt;= 15.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The star graph is always valid, so we don’t need to check for invalid graphs.</div>
+                                <div style="margin-left: 20px;"> • If all nodes except for node 0 have no outgoing edges, there will be no paths from node 0 to node n-1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input always represents a valid star graph with exactly one center node.</div>
+                                <div style="margin-left: 20px;"> • The graph must have at least two nodes (node 0 and node n-1).</div>
                             
                         </div>                                                                        
                     </div>
@@ -522,9 +532,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Queue Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initial Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 While Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Extract Node</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Extract Path</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pop Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Check Target</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 For Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Push Neighbor</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pop Last Node</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Result</button>
                     
                 </div>
 
@@ -533,8 +567,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findCenter</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> e) {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> e[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> e[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">||</span> e[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> e[<span style="color:#666">1</span>][<span style="color:#666">1</span>] <span style="color:#666">?</span> e[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">:</span> e[<span style="color:#666">0</span>][<span style="color:#666">1</span>];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> allPathsSourceTarget(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> graph) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push({<span style="color:#666">0</span>, {<span style="color:#666">0</span>}});
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> q.front().first;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> t <span style="color:#666">=</span> q.front().second;
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> graph.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) ans.push_back(t);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">k</span>: graph[x]) {
+</span></span><span style="display:flex;"><span>            t.push_back(k);
+</span></span><span style="display:flex;"><span>            q.push({k, t});
+</span></span><span style="display:flex;"><span>            t.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -542,23 +590,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findCenter</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> e) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> allPathsSourceTarget(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> graph) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `findCenter`, which takes a reference to a vector of vectors `e` representing the edges of the graph. The function returns the center of the star graph. </div>
+                            <div class=""> The function starts by defining the return type as a 2D vector of integers, which will store all the possible paths from the source to the target. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Condition Check</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> e[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> e[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">||</span> e[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> e[<span style="color:#666">1</span>][<span style="color:#666">1</span>] <span style="color:#666">?</span> e[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">:</span> e[<span style="color:#666">0</span>][<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the first element of the first edge (`e[0][0]`) is equal to the first or second element of the second edge (`e[1][0]` or `e[1][1]`). If it matches, return that element as the center. Otherwise, return the second element of the first edge (`e[0][1]`). </div>
+                            <div class=""> This line initializes a 2D vector &#39;ans&#39; which will store the valid paths found from source to target. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Queue Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> q;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A queue is initialized to facilitate BFS traversal. Each element in the queue is a pair consisting of a node index and a partial path leading up to that node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Initial Push</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push({<span style="color:#666">0</span>, {<span style="color:#666">0</span>}});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The starting node (0) is pushed onto the queue, along with an initial path that only contains the source node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : While Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This while loop continues until the queue is empty, processing each node in the graph in a breadth-first manner. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Extract Node</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> q.front().first;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The node index &#39;x&#39; is extracted from the front of the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Extract Path</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> t <span style="color:#666">=</span> q.front().second;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The path leading to node &#39;x&#39; is extracted from the front of the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Pop Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The front element (node and path) is removed from the queue to continue processing the next element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Check Target</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> graph.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) ans.push_back(t);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node &#39;x&#39; is the target node, the current path &#39;t&#39; is added to the result set &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : For Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">k</span>: graph[x]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This for loop iterates over all the neighbors &#39;k&#39; of the current node &#39;x&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Push Neighbor</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            t.push_back(k);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The neighbor node &#39;k&#39; is added to the current path &#39;t&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Queue Push</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push({k, t});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The new pair, consisting of the neighbor &#39;k&#39; and the updated path &#39;t&#39;, is pushed onto the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Pop Last Node</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            t.pop_back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> After processing the neighbor, the last node is removed from the path &#39;t&#39; to backtrack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the 2D vector &#39;ans&#39;, which contains all the valid paths from the source to the target node. </div>
                         </div>
                     
                 </div>
@@ -578,16 +746,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), when the center is found after checking the first two edges.</div>
-                        <div class=""> <b>Average Case:</b> O(1), since we only need to check two edges to find the center.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as we are only checking the first two edges.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant since we only need to examine two edges.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of nodes in the graph.</div>
+                        <div class=""> <b>Average Case:</b> O(2^n), considering that in the worst case, there can be an exponential number of paths.</div>
+                        <div class=""> <b>Worst Case:</b> O(2^n), where n is the number of nodes, since each node could potentially lead to multiple paths.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is exponential because we need to explore all possible paths from node 0 to node n-1.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), no additional space needed.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as no extra space is required.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, as the solution does not require additional space that grows with input size.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), as the space used depends on the recursion depth and the number of paths stored.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of nodes, for storing the current path during DFS.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear in the worst case, due to recursion and storing the paths.</div>    
                     </div>
 
                 </div>

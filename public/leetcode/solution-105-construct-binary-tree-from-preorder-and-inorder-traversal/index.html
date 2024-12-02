@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> Given an array nums of size n, return the majority element. The majority element is the element that appears more than n // 2 times. You may assume that the majority element always exists in the array. </div>
+<div class=""> Given two integer arrays, <code>preorder</code> and <code>inorder</code>, representing the preorder and inorder traversals of a binary tree, your task is to reconstruct and return the binary tree. The values in the arrays are unique, and the preorder traversal provides the sequence in which nodes are visited before their children, while the inorder traversal provides the order in which nodes are visited between their children. </div>
 
 
 
@@ -373,47 +373,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array nums of integers of size n, where 1 &lt;= n &lt;= 50,000 and -10^9 &lt;= nums[i] &lt;= 10^9.</div>
-                        <div class=""> <b>Example:</b> nums = [4, 4, 2, 2, 2, 4, 4]</div>
+                        <div class=""> <b>Input:</b> The input consists of two arrays: `preorder` and `inorder`. `preorder` represents the preorder traversal of a binary tree, and `inorder` represents the inorder traversal of the same tree.</div>
+                        <div class=""> <b>Example:</b> preorder = [4,2,1,3,6,5], inorder = [1,2,3,4,5,6]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 5 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= preorder.length &lt;= 3000</div>
                             
-                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • inorder.length == preorder.length</div>
+                            
+                                <div style="margin-left: 20px;"> • -3000 &lt;= preorder[i], inorder[i] &lt;= 3000</div>
+                            
+                                <div style="margin-left: 20px;"> • preorder and inorder consist of unique values.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each value of inorder also appears in preorder.</div>
+                            
+                                <div style="margin-left: 20px;"> • preorder is guaranteed to be the preorder traversal of the tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • inorder is guaranteed to be the inorder traversal of the tree.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the majority element in the input array.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> You should return the root node of the binary tree constructed from the given preorder and inorder traversal arrays.</div>
+                        <div class=""> <b>Example:</b> Output: [4,2,6,1,3,5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will always be a valid majority element, as per the problem assumption.</div>
+                                <div style="margin-left: 20px;"> • The output should be the root node of the reconstructed binary tree.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the majority element in the given array.</div>
+                        <div class=""> <b>Goal:</b> The goal is to rebuild the binary tree by leveraging the properties of preorder and inorder traversals. In preorder, the first element is always the root, and the elements before it in inorder represent the left subtree, while the elements after it represent the right subtree.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to store the current majority element and its count.</div>
+                                <div style="margin-left: 20px;"> • First, create a mapping of each element&#39;s index in the inorder array.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and update the current majority element whenever necessary.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the element that appears more than n // 2 times.</div>
+                                <div style="margin-left: 20px;"> • Then recursively pick elements from the preorder array to form the root, left, and right subtrees using the mapping from inorder.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The size of the array is within a manageable range for typical algorithms. The majority element always exists in the array, and no element should appear less than n // 2 times.</div>
+                        <div class=""> <b>Goal:</b> You need to ensure the solution works efficiently for arrays with up to 3000 elements, given the constraints on the values of the elements.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 50,000</div>
-                            
-                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 3000 nodes efficiently.</div>
                             
                         </div>
                     </div>        
@@ -421,15 +427,31 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The majority element always exists in the array.</div>
+                                <div style="margin-left: 20px;"> • The input arrays represent valid preorder and inorder traversals of the same binary tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [5, 3, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the element 5 appears twice, which is more than half of the array&#39;s length (3 // 2). Therefore, 5 is the majority element.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree can be reconstructed as follows: root is 3 (first in preorder), the left subtree is [9], and the right subtree is [20,15,7]. The resulting tree is:
+
+       3
+      / \
+     9   20
+          /  \
+         15   7
+
+This tree matches the given preorder and inorder traversals.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> preorder = [1], inorder = [1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The tree consists of a single node with value 1, forming a trivial tree where the preorder and inorder arrays both contain just the value [1].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> preorder = [10,5,1,7,15,12,20], inorder = [1,5,7,10,12,15,20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The tree can be reconstructed by recognizing the root (10) from the preorder array, and the left and right subtrees by dividing the inorder array based on the root value.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,16 +475,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through the array and keeping track of the current majority element using a counter.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we use a recursive approach. By using the preorder array to determine the root nodes and the inorder array to determine the left and right subtrees, we can efficiently reconstruct the binary tree.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This is a problem that can be solved efficiently using a linear pass through the array, keeping track of the counts of elements.</div>
+                                <div style="margin-left: 20px;"> • The first element of preorder is always the root, and inorder helps us identify the left and right subtrees.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a counter to track the frequency of the current majority element.</div>
+                                <div style="margin-left: 20px;"> • We can use a hashmap to quickly find the index of a node in the inorder array, allowing us to divide the array and construct the tree recursively.</div>
                             
                         </div>
                     </div>
@@ -470,11 +492,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a counter and a variable for the majority element.</div>
+                                <div style="margin-left: 20px;"> • Create a hashmap to store the index of each element in the inorder array.</div>
                             
-                                <div style="margin-left: 20px;"> • Loop through the array and update the counter for each element.</div>
+                                <div style="margin-left: 20px;"> • Use recursion to build the binary tree by picking the root from the preorder array and dividing the inorder array into left and right subtrees.</div>
                             
-                                <div style="margin-left: 20px;"> • If the counter reaches the threshold (n // 2), return the current element as the majority element.</div>
+                                <div style="margin-left: 20px;"> • Continue recursively for each subtree.</div>
                             
                         </div>
                     </div>
@@ -483,22 +505,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that there is always a majority element, so we do not need to handle the empty array case.</div>
+                                <div style="margin-left: 20px;"> • If either the preorder or inorder array is empty, return NULL as there is no tree to construct.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For larger inputs (up to 50,000 elements), the solution should work efficiently in linear time.</div>
+                                <div style="margin-left: 20px;"> • Ensure the algorithm can handle arrays with up to 3000 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The majority element will always appear more than n // 2 times, so no need to handle cases where no majority exists.</div>
+                                <div style="margin-left: 20px;"> • Handle trees where all nodes are either to the left or right (skewed trees).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work in linear time and handle the maximum input size.</div>
+                                <div style="margin-left: 20px;"> • The arrays must contain unique values, ensuring no ambiguity when building the tree.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,23 +537,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Data Structure Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Frequency Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Frequency Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Map Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Count Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Element Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Helper Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Base Case Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Node Creation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Node</button>
                     
                 </div>
 
@@ -540,17 +570,25 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">majorityElement</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> e <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], cnt <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums) {
-</span></span><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[x] <span style="color:#666">&gt;</span> cnt) {
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> mp[x];
-</span></span><span style="display:flex;"><span>            e <span style="color:#666">=</span> x;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> e;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> preorder, inorder;
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">buildTree</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> preorder, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> inorder) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>preorder <span style="color:#666">=</span> preorder;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>inorder <span style="color:#666">=</span> inorder;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> inorder.size(); i<span style="color:#666">++</span>) mp[inorder[i]] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(<span style="color:#666">0</span>, <span style="color:#666">0</span>, inorder.size() <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">helper</span>(<span style="color:#0b0;font-weight:bold">int</span> ps, <span style="color:#0b0;font-weight:bold">int</span> is, <span style="color:#0b0;font-weight:bold">int</span> ie) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ps <span style="color:#666">&gt;=</span> preorder.size() <span style="color:#666">||</span> is <span style="color:#666">&gt;</span> ie) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(preorder[ps]);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left  <span style="color:#666">=</span> helper(ps <span style="color:#666">+</span> <span style="color:#666">1</span>, is, mp[root<span style="color:#666">-&gt;</span>val] <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> helper(ps <span style="color:#666">+</span> mp[root<span style="color:#666">-&gt;</span>val] <span style="color:#666">-</span> is <span style="color:#666">+</span> <span style="color:#666">1</span>, mp[root<span style="color:#666">-&gt;</span>val] <span style="color:#666">+</span> <span style="color:#666">1</span>, ie);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -558,93 +596,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">majorityElement</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;majorityElement&#39; that takes a vector of integers as input and returns the majority element, which appears more than half the time in the array. </div>
+                            <div class=""> Declare a map to store the index of each element from the inorder traversal for efficient look-up. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> e <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], cnt <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> preorder, inorder;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two variables: &#39;e&#39; (to store the majority element) and &#39;cnt&#39; (to store the count of occurrences of the current majority element). Initially, set &#39;e&#39; to the first element of the array and &#39;cnt&#39; to 1. </div>
+                            <div class=""> Declare vectors to store the preorder and inorder traversal sequences of the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Data Structure Declaration</b></div>
+                            <div class=""> <b>3 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">buildTree</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> preorder, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> inorder) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a map &#39;mp&#39; to keep track of the frequency count of each element in the array. </div>
+                            <div class=""> Define the function &#39;buildTree&#39; which takes in preorder and inorder vectors and returns the root of the constructed binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop</b></div>
+                            <div class=""> <b>4 : Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>preorder <span style="color:#666">=</span> preorder;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each element &#39;x&#39; in the array &#39;nums&#39;. </div>
+                            <div class=""> Store the input preorder vector into the class-level preorder variable. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Frequency Update</b></div>
+                            <div class=""> <b>5 : Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>inorder <span style="color:#666">=</span> inorder;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the frequency count of element &#39;x&#39; in the map. </div>
+                            <div class=""> Store the input inorder vector into the class-level inorder variable. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Frequency Comparison</b></div>
+                            <div class=""> <b>6 : Map Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[x] <span style="color:#666">&gt;</span> cnt) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> inorder.size(); i<span style="color:#666">++</span>) mp[inorder[i]] <span style="color:#666">=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the frequency of the current element &#39;x&#39; is greater than the current maximum count &#39;cnt&#39;. </div>
+                            <div class=""> Populate the map &#39;mp&#39; with each element from the inorder traversal as the key and its index as the value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Count Update</b></div>
+                            <div class=""> <b>7 : Recursive Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> mp[x];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">helper</span>(<span style="color:#666">0</span>, <span style="color:#666">0</span>, inorder.size() <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the frequency of &#39;x&#39; exceeds the current count, update &#39;cnt&#39; to the new frequency of &#39;x&#39;. </div>
+                            <div class=""> Call the recursive &#39;helper&#39; function to construct the tree, passing the initial indices for the preorder and inorder arrays. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Element Update</b></div>
+                            <div class=""> <b>8 : Helper Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            e <span style="color:#666">=</span> x;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">helper</span>(<span style="color:#0b0;font-weight:bold">int</span> ps, <span style="color:#0b0;font-weight:bold">int</span> is, <span style="color:#0b0;font-weight:bold">int</span> ie) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the majority element &#39;e&#39; to the current element &#39;x&#39; as it has the highest frequency so far. </div>
+                            <div class=""> Define the &#39;helper&#39; function that recursively constructs the binary tree by using preorder and inorder indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> e;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ps <span style="color:#666">&gt;=</span> preorder.size() <span style="color:#666">||</span> is <span style="color:#666">&gt;</span> ie) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the majority element &#39;e&#39; that has been identified by the loop. </div>
+                            <div class=""> Base case: If the current indices are out of bounds, return NULL to terminate the recursion. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Node Creation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(preorder[ps]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create a new tree node with the value from the preorder array at the current position (ps). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left  <span style="color:#666">=</span> helper(ps <span style="color:#666">+</span> <span style="color:#666">1</span>, is, mp[root<span style="color:#666">-&gt;</span>val] <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively build the left subtree by updating the preorder and inorder indices. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> helper(ps <span style="color:#666">+</span> mp[root<span style="color:#666">-&gt;</span>val] <span style="color:#666">-</span> is <span style="color:#666">+</span> <span style="color:#666">1</span>, mp[root<span style="color:#666">-&gt;</span>val] <span style="color:#666">+</span> <span style="color:#666">1</span>, ie);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively build the right subtree by updating the preorder and inorder indices. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Node</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the root node of the current subtree. </div>
                         </div>
                     
                 </div>
@@ -667,13 +745,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only iterate through the array once.</div>                                               
+                        <div class=""> <b>Description:</b> In all cases, we traverse each node once and use the hashmap lookup to find indices in O(1) time, resulting in O(n) time complexity.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) because we only use a few extra variables to store the current majority element and counter.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> We use O(n) space to store the hashmap and the recursive stack. In the worst case (a skewed tree), the depth of the recursion is O(n).</div>    
                     </div>
 
                 </div>

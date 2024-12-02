@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a string <code>num</code> consisting of digits, where each digit represents a specific number. The task is to verify if for every index <code>i</code> in the string, the digit at index <code>i</code> appears exactly <code>num[i]</code> times in the entire string. Return <code>true</code> if the condition holds for all indices, and <code>false</code> otherwise. </div>
+<div class=""> You are given an array of integers representing the weights of stones. In each turn, you can select two stones, x and y, with x &lt;= y, and smash them together. The result of the smash is as follows: if x equals y, both stones are destroyed, otherwise, the stone with weight x is destroyed, and the stone with weight y becomes y - x. The process continues until there is at most one stone left. Your task is to return the smallest possible weight of the remaining stone, or return 0 if no stones are left. </div>
 
 
 
@@ -358,41 +358,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a string `num` of length `n` consisting of digits, where 1 &lt;= n &lt;= 10.</div>
-                        <div class=""> <b>Example:</b> Input: num = &#34;2020&#34;</div>
+                        <div class=""> <b>Input:</b> You are given an array of integers representing the weight of each stone.</div>
+                        <div class=""> <b>Example:</b> Input: stones = [3, 9, 6, 5, 8]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= num.length &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones.length &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • num consists of digits.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones[i] &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a boolean value indicating whether the condition holds for every index.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> Return the smallest possible weight of the remaining stone after all possible smashes.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result will be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to verify for each index `i` in the string `num`, the digit `i` must appear exactly `num[i]` times in the string.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the smallest possible remaining stone weight after all smashes.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an array to count the frequency of each digit.</div>
+                                <div style="margin-left: 20px;"> • 1. Calculate the total sum of the stones.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over each digit in the string and check if the frequency matches the expected value at that index.</div>
+                                <div style="margin-left: 20px;"> • 2. Use dynamic programming to find the largest possible subset sum close to half of the total sum.</div>
                             
-                                <div style="margin-left: 20px;"> • Return `true` if all conditions hold, otherwise return `false`.</div>
+                                <div style="margin-left: 20px;"> • 3. The smallest remaining stone weight will be the difference between the total sum and twice the largest subset sum found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input string length is small, so the solution can handle all inputs efficiently.</div>
+                        <div class=""> <b>Goal:</b> You are guaranteed that the number of stones is at most 30, and the weight of each stone is at most 100.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones.length &lt;= 30</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones[i] &lt;= 100</div>
                             
                         </div>
                     </div>        
@@ -400,21 +406,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string contains only digits.</div>
+                                <div style="margin-left: 20px;"> • Each stone is represented by a positive integer weight.</div>
                             
-                                <div style="margin-left: 20px;"> • The length of the string will not exceed 10.</div>
+                                <div style="margin-left: 20px;"> • The number of stones is relatively small, so an approach using dynamic programming is feasible.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: num = &#34;1210&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this input, the conditions hold true because: num[0] = 1, and the digit 0 appears once in the string; num[1] = 2, and the digit 1 appears twice; num[2] = 1, and the digit 2 appears once; num[3] = 0, and the digit 3 appears zero times.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stones = [3, 9, 6, 5, 8]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the best we can achieve is a remaining stone with weight 2, after repeatedly smashing stones together and reducing the total weight progressively.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: num = &#34;1122&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this input, the condition fails because: num[0] = 1, and the digit 0 occurs zero times, which violates the condition.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stones = [4, 6, 7, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For these stones, the final remaining stone will have weight 1 after optimal smashes.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,16 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to count the occurrences of each digit in the string and check if each digit at index `i` matches its expected frequency based on the digit value at `num[i]`.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we use dynamic programming to find a subset of stones that sums up to as close as possible to half of the total sum of the stones, which minimizes the remaining stone weight.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to track the occurrences of digits efficiently.</div>
+                                <div style="margin-left: 20px;"> • The game can be interpreted as a problem of partitioning the stones into two subsets such that the difference between the total weights of the two subsets is minimized.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By iterating through the string and using a simple counting mechanism, we can verify if the condition holds for all indices.</div>
+                                <div style="margin-left: 20px;"> • This is a variation of the knapsack problem where we aim to maximize the subset sum close to half of the total weight of the stones.</div>
                             
                         </div>
                     </div>
@@ -455,11 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create an array `cnt` to track the frequency of each digit in the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Calculate the total weight of all stones.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string and count occurrences of each digit.</div>
+                                <div style="margin-left: 20px;"> • 2. Create a dynamic programming table where dp[i] represents whether it is possible to form a subset with sum i.</div>
                             
-                                <div style="margin-left: 20px;"> • Check for each index `i` if the count of the digit at index `i` matches the value `num[i]`.</div>
+                                <div style="margin-left: 20px;"> • 3. For each stone, update the dp table to include possible new subset sums by adding that stone&#39;s weight.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. The largest possible subset sum that does not exceed half of the total sum will minimize the weight of the remaining stone when subtracted from the total sum.</div>
                             
                         </div>
                     </div>
@@ -468,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string is never empty, as the minimum length is 1.</div>
+                                <div style="margin-left: 20px;"> • If no stones are provided, the result is 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The maximum length of the input string is 10, so performance concerns are minimal.</div>
+                                <div style="margin-left: 20px;"> • The dynamic programming approach works within the problem&#39;s constraints of 30 stones and stone weights up to 100.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string consists of repeated zeros, the condition will fail if any index does not meet the expected count.</div>
+                                <div style="margin-left: 20px;"> • If all stones have the same weight, the remaining stone weight will be the absolute difference between any two stones.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem has a small input size, allowing us to use simple counting techniques.</div>
+                                <div style="margin-left: 20px;"> • The number of stones and their weights are guaranteed to be within the defined limits.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,21 +508,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Count Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through String</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Summing Stones</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Count Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculate Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Through Digits</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 DP Table Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Check Frequency Match</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Outer Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return False</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Inner Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return True</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 DP Table Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 DP Table Update (Else Case)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
                     
                 </div>
 
@@ -523,14 +537,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">digitCount</span>(string num) {
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">10</span>] <span style="color:#666">=</span> {};
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">n</span> : num)
-</span></span><span style="display:flex;"><span>    <span style="color:#666">++</span>cnt[n <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>];
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> num.size(); <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (cnt[i] <span style="color:#666">!=</span> num[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lastStoneWeightII</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> stones) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: stones) sum <span style="color:#666">+=</span> x;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> stones.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(sum <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>  ; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;=</span> stones[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) 
+</span></span><span style="display:flex;"><span>             dp[i][j] <span style="color:#666">=</span> max(dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j], dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> stones[i <span style="color:#666">-</span> <span style="color:#666">1</span>]] <span style="color:#666">+</span> stones[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> dp[n][sum <span style="color:#666">/</span> <span style="color:#666">2</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -538,83 +560,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">digitCount</span>(string num) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lastStoneWeightII</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> stones) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `digitCount` takes a string `num` as input and returns a boolean value indicating whether the frequency of digits in `num` matches the digits at the respective positions. </div>
+                            <div class=""> Define the function &#39;lastStoneWeightII&#39;, which takes a vector of integers &#39;stones&#39; as input and returns the final weight of the last stone after a series of collisions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Initialize Count Array</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">10</span>] <span style="color:#666">=</span> {};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An array `cnt` of size 10 is initialized to 0. This array will be used to store the frequency of each digit (from 0 to 9) in the string `num`. </div>
+                            <div class=""> Initialize the variable &#39;sum&#39; to 0, which will store the total sum of all stones. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through String</b></div>
+                            <div class=""> <b>3 : Summing Stones</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">n</span> : num)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: stones) sum <span style="color:#666">+=</span> x;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This `for` loop iterates over each character in the string `num`, where each character represents a digit. </div>
+                            <div class=""> Loop through each stone in the &#39;stones&#39; vector and add its value to &#39;sum&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Update Count Array</b></div>
+                            <div class=""> <b>4 : Calculate Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#666">++</span>cnt[n <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> stones.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each digit `n` in the string, we convert the character to its integer value (`n - &#39;0&#39;`) and increment the corresponding index in the `cnt` array. </div>
+                            <div class=""> Determine the number of stones by calculating the size of the &#39;stones&#39; vector and store it in &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Through Digits</b></div>
+                            <div class=""> <b>5 : DP Table Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> num.size(); <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(sum <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This second `for` loop iterates over each index `i` of the string `num`, checking whether the frequency of the digit at position `i` matches the digit itself. </div>
+                            <div class=""> Create a dynamic programming (DP) table &#39;dp&#39; with dimensions (n &#43; 1) x (sum / 2 &#43; 1). Each cell will store the maximum sum achievable with a subset of the stones. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Check Frequency Match</b></div>
+                            <div class=""> <b>6 : Outer Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (cnt[i] <span style="color:#666">!=</span> num[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>  ; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This conditional checks if the frequency of digit `i` stored in `cnt[i]` matches the digit at position `i` in the string `num`. If they don&#39;t match, the function will return `false`. </div>
+                            <div class=""> Start a loop that iterates through each stone, from the first stone to the nth stone. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return False</b></div>
+                            <div class=""> <b>7 : Inner Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the frequencies do not match for any digit, the function returns `false` immediately, indicating the number doesn&#39;t satisfy the condition. </div>
+                            <div class=""> Start a nested loop that iterates through possible weight values (from 0 to sum / 2). This loop considers all possible subsets of stones. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return True</b></div>
+                            <div class=""> <b>8 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;=</span> stones[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If all digit frequencies match their respective digits, the function returns `true`, indicating that the number satisfies the condition. </div>
+                            <div class=""> Check if the current weight &#39;j&#39; is greater than or equal to the weight of the current stone. If it is, consider adding the stone to the current subset. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : DP Table Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             dp[i][j] <span style="color:#666">=</span> max(dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j], dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> stones[i <span style="color:#666">-</span> <span style="color:#666">1</span>]] <span style="color:#666">+</span> stones[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the DP table by taking the maximum value between not including the current stone or including it, adding its weight to the existing sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : DP Table Update (Else Case)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current stone&#39;s weight is larger than the current weight &#39;j&#39;, simply carry over the previous value from the DP table. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> dp[n][sum <span style="color:#666">/</span> <span style="color:#666">2</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the result, which is the difference between the total sum of stones and twice the value stored in dp[n][sum / 2]. This gives the minimum possible difference between the two groups of stones. </div>
                         </div>
                     
                 </div>
@@ -634,16 +686,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where `n` is the length of the string, due to the single iteration over the string to count digits.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * sum)</div>
+                        <div class=""> <b>Average Case:</b> O(n * sum)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * sum)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * sum) where n is the number of stones and sum is the total sum of all stones. This is because we need to check all possible subset sums up to half of the total sum.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1), as we only need an array of size 10 to track the frequency of digits.</div>    
+                        <div class=""> <b>Best Case:</b> O(sum)</div>
+                        <div class=""> <b>Worst Case:</b> O(sum)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(sum) due to the dynamic programming table used to store the possible subset sums.</div>    
                     </div>
 
                 </div>

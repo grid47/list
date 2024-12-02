@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Nov 2, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> A robot starts at the top-left corner of an m x n grid and needs to reach the bottom-right corner. The grid contains obstacles (marked as 1) and empty cells (marked as 0). The robot can only move down or right and cannot pass through cells with obstacles. Determine the number of unique paths to the destination. </div>
+<div class=""> You are given a 0-indexed array &rsquo;nums&rsquo; where each element represents the maximum length you can jump forward from that index. You are initially positioned at nums[0], and you need to reach the last index. Return the minimum number of jumps needed to reach the last index. </div>
 
 
 
@@ -371,57 +371,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> An integer 2D array grid where grid[i][j] is either 0 (empty) or 1 (obstacle).</div>
-                        <div class=""> <b>Example:</b> Input: obstacleGrid = [[0,0,1],[0,0,0],[1,0,0]]</div>
+                        <div class=""> <b>Input:</b> You are given a 0-indexed array of integers &#39;nums&#39;. Each integer represents the maximum jump length from that index.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [3, 4, 1, 1, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • m == obstacleGrid.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • n == obstacleGrid[i].length</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • obstacleGrid[i][j] is 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • It&#39;s guaranteed that you can reach nums[n-1].</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of unique paths from the top-left to the bottom-right corner while avoiding obstacles.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return the minimum number of jumps needed to reach the last index of the array.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result will always be less than or equal to 2 * 10^9.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer representing the minimum number of jumps.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Calculate the total number of unique paths from start to destination while avoiding obstacles using dynamic programming.</div>
+                        <div class=""> <b>Goal:</b> The goal is to minimize the number of jumps needed to reach the last index.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a DP table with dimensions m x n to store the number of ways to reach each cell.</div>
+                                <div style="margin-left: 20px;"> • Initialize two variables: &#39;cur&#39; (current index) and &#39;far&#39; (farthest reachable index) to track your position and the furthest you can jump.</div>
                             
-                                <div style="margin-left: 20px;"> • Set dp[0][0] = 1 if grid[0][0] == 0; otherwise set dp[0][0] = 0.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the array, and for each index, update the &#39;far&#39; index to reflect the maximum distance you can reach from that point.</div>
                             
-                                <div style="margin-left: 20px;"> • For each cell (i, j), if grid[i][j] == 0, calculate dp[i][j] as the sum of paths from the top and left neighbors.</div>
+                                <div style="margin-left: 20px;"> • When you reach &#39;cur&#39; (the point where a jump is necessary), update &#39;cur&#39; to &#39;far&#39; and increment the jump count.</div>
                             
-                                <div style="margin-left: 20px;"> • If grid[i][j] == 1, set dp[i][j] = 0 as it is an obstacle.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return dp[m-1][n-1] as the final result.</div>
+                                <div style="margin-left: 20px;"> • Repeat this process until you reach the last index.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The grid size and obstacle placements must adhere to the constraints.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the inputs are valid and you can always reach the last index.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • obstacleGrid[i][j] is either 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • The result will always be less than or equal to 2 * 10^9.</div>
+                                <div style="margin-left: 20px;"> • It&#39;s guaranteed that you can reach nums[n-1].</div>
                             
                         </div>
                     </div>        
@@ -429,23 +425,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The robot starts at grid[0][0] and ends at grid[m-1][n-1].</div>
-                            
-                                <div style="margin-left: 20px;"> • A cell marked with 1 is an obstacle and cannot be part of any path.</div>
-                            
-                                <div style="margin-left: 20px;"> • The robot can only move down or right.</div>
+                                <div style="margin-left: 20px;"> • The input array will always allow a valid path to reach the last index.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: obstacleGrid = [[0,0,1],[0,0,0],[1,0,0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are three unique paths from the top-left to the bottom-right corner avoiding obstacles.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3, 4, 1, 1, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Start at index 0, jump 3 steps to index 1, then jump 4 steps to reach the last index. This takes 2 jumps.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: obstacleGrid = [[0,0,0],[0,1,0],[0,1,0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is only one unique path that avoids obstacles.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, 3, 1, 1, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Jump 1 step to index 1, then jump 3 steps to reach the last index, making it a total of 2 jumps.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 3, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Jump 1 step to index 1, 2 steps to index 3, and 1 step to the last index, resulting in 3 jumps.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -469,18 +465,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a dynamic programming approach to calculate the total paths, where cells with obstacles are marked as 0.</div>
+                        <div class=""> <b>Approach:</b> The problem can be approached using a greedy algorithm that minimizes the number of jumps by always jumping to the farthest possible index within each jump.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires handling obstacles, making it different from the regular unique paths problem.</div>
-                            
-                                <div style="margin-left: 20px;"> • Cells with obstacles contribute 0 paths and block traversal.</div>
+                                <div style="margin-left: 20px;"> • The key observation is that we need to jump to the farthest reachable index to minimize the number of jumps.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Dynamic programming can be adapted by marking obstacle cells as 0.</div>
+                                <div style="margin-left: 20px;"> • We can use a greedy strategy: always try to reach the farthest point from the current position in each jump.</div>
                             
                         </div>
                     </div>
@@ -488,13 +482,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a DP table with dimensions m x n, set dp[0][0] = 1 if the starting cell is empty.</div>
+                                <div style="margin-left: 20px;"> • Initialize two variables &#39;cur&#39; (current index) and &#39;far&#39; (farthest reachable index).</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the grid; for each cell, calculate dp[i][j] = dp[i-1][j] &#43; dp[i][j-1] if grid[i][j] is empty.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array, updating the &#39;far&#39; index for each position.</div>
                             
-                                <div style="margin-left: 20px;"> • Set dp[i][j] = 0 for cells with obstacles.</div>
+                                <div style="margin-left: 20px;"> • When you reach the current jump limit (&#39;cur&#39;), update &#39;cur&#39; to &#39;far&#39; and increment the jump count.</div>
                             
-                                <div style="margin-left: 20px;"> • Return dp[m-1][n-1] as the total number of paths.</div>
+                                <div style="margin-left: 20px;"> • Stop when you reach or exceed the last index.</div>
                             
                         </div>
                     </div>
@@ -503,22 +497,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable as input is guaranteed.</div>
+                                <div style="margin-left: 20px;"> • If nums has only one element, no jump is needed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Maximum grid size with m = 100 and n = 100, with scattered obstacles.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently with large inputs, up to the constraint limit of 10^4 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A grid where the start or end cell is blocked (grid[0][0] or grid[m-1][n-1] = 1).</div>
+                                <div style="margin-left: 20px;"> • Handle the case where nums contains large jump values at the beginning, which could quickly minimize the number of jumps.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm handles all obstacles efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle arrays with lengths up to 10^4.</div>
                             
                         </div>                                                                        
                     </div>
@@ -537,21 +531,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Get Grid Dimensions</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize DP Table</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Handle Starting Obstacle</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Starting Cell</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Fill First Row</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Farthest Reachable Position</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Fill First Column</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Fill the Rest of the DP Table</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Current Position and Jump Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return the Bottom-Right Corner Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
                     
                 </div>
 
@@ -560,38 +554,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">uniquePathsWithObstacles</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> obstacleGrid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> obstacleGrid.size(), n <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Handle the case where the starting cell is an obstacle
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Initialize the first cell as 1, as there&#39;s only one way to reach it
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dp[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Fill the first row
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        dp[<span style="color:#666">0</span>][j] <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>][j] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[<span style="color:#666">0</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Fill the first column
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> obstacleGrid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Fill the rest of the DP table
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> dp[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>            }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">jump</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> jumps <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> far <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        far <span style="color:#666">=</span> max(far, i <span style="color:#666">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> cur) {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> far;
+</span></span><span style="display:flex;"><span>            jumps<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[m <span style="color:#666">-</span> <span style="color:#666">1</span>][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> jumps;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -602,102 +576,91 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">uniquePathsWithObstacles</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> obstacleGrid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">jump</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a function named `uniquePathsWithObstacles` that takes a 2D vector `obstacleGrid` representing the grid with obstacles as input and returns the number of unique paths. </div>
+                            <div class=""> This line declares a function named `jump` that takes a vector of non-negative integers `nums` as input and returns the minimum number of jumps required to reach the end of the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Get Grid Dimensions</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> obstacleGrid.size(), n <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> jumps <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line gets the dimensions of the grid, `m` for rows and `n` for columns. </div>
+                            <div class=""> This line initializes a variable `jumps` to 0 to keep track of the number of jumps made so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialize DP Table</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes a 2D DP table `dp` of size `m x n` to store the number of unique paths to reach each cell. All elements are initially set to 0. </div>
+                            <div class=""> This line initializes a variable `cur` to 0 to represent the current position in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Handle Starting Obstacle</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> far <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition checks if the starting cell is an obstacle. If so, there are no possible paths, so the function returns 0. </div>
+                            <div class=""> This line initializes a variable `far` to 0 to represent the farthest reachable position from the current position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Initialize Starting Cell</b></div>
+                            <div class=""> <b>5 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the starting cell is not an obstacle, it&#39;s initialized with 1, as there&#39;s only one way to reach it. </div>
+                            <div class=""> This line starts a `for` loop to iterate through the array, excluding the last element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Fill First Row</b></div>
+                            <div class=""> <b>6 : Update Farthest Reachable Position</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        dp[<span style="color:#666">0</span>][j] <span style="color:#666">=</span> obstacleGrid[<span style="color:#666">0</span>][j] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[<span style="color:#666">0</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        far <span style="color:#666">=</span> max(far, i <span style="color:#666">+</span> nums[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop fills the first row of the DP table. For each cell, if it&#39;s not an obstacle, the number of paths to reach it is the same as the number of paths to reach the cell to its left. Otherwise, it&#39;s 0. </div>
+                            <div class=""> This line updates the `far` variable to the maximum of its current value and the farthest reachable position from the current index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Fill First Column</b></div>
+                            <div class=""> <b>7 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> obstacleGrid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> cur) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop fills the first column of the DP table. For each cell, if it&#39;s not an obstacle, the number of paths to reach it is the same as the number of paths to reach the cell above it. Otherwise, it&#39;s 0. </div>
+                            <div class=""> This line checks if the current index `i` has reached the current farthest position `cur`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Fill the Rest of the DP Table</b></div>
+                            <div class=""> <b>8 : Update Current Position and Jump Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (obstacleGrid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> dp[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">=</span> far;
+</span></span><span style="display:flex;"><span>            jumps<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This nested loop fills the rest of the DP table. For each cell `(i, j)` that is not an obstacle, the number of paths to reach it is the sum of the number of paths to reach the cell above it and the cell to its left. </div>
+                            <div class=""> If the condition is true, it means we&#39;ve reached the end of a jump. We update the `cur` position to the new farthest reachable position `far` and increment the `jumps` count. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return the Bottom-Right Corner Value</b></div>
+                            <div class=""> <b>9 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[m <span style="color:#666">-</span> <span style="color:#666">1</span>][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> jumps;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After filling the DP table, the function returns the value at the bottom-right corner `dp[m - 1][n - 1]`, which represents the total number of unique paths from the top-left to the bottom-right corner. </div>
+                            <div class=""> This line returns the final value of `jumps`, which represents the minimum number of jumps required to reach the end of the array. </div>
                         </div>
                     
                 </div>
@@ -717,16 +680,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> Each cell is visited exactly once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In all cases, the solution iterates over the array exactly once, giving it a linear time complexity.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The DP table requires O(m * n) space.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant as the solution only uses a few extra variables.</div>    
                     </div>
 
                 </div>

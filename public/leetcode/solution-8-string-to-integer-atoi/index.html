@@ -279,7 +279,7 @@
                                     <i class="far fa-star"></i>
                                     Nov 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -295,7 +295,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1314s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1320s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/8.webp" 
            alt="A glowing number forming from abstract text, transforming from letters to digits." 
@@ -318,7 +318,7 @@
 
 
 
-<div class=""> Given an integer, return true if the number is a palindrome. A number is a palindrome if it reads the same forwards and backwards. If the number is negative, it is automatically not a palindrome. </div>
+<div class=""> Convert a string to a 32-bit signed integer, handling whitespaces, optional signs, and non-digit characters. </div>
 
 
 
@@ -369,45 +369,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a single integer x. The number can be negative or positive.</div>
-                        <div class=""> <b>Example:</b> Input: x = 121</div>
+                        <div class=""> <b>Input:</b> The input is a string s containing English letters, digits, spaces, and optional signs.</div>
+                        <div class=""> <b>Example:</b> s = &#39; 42&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • -231 &lt;= x &lt;= 231 - 1</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= s.length &lt;= 200</div>
+                            
+                                <div style="margin-left: 20px;"> • s consists of English letters (lowercase and uppercase), digits (0-9), spaces, &#39;&#43;&#39; or &#39;-&#39;, and possibly other non-digit characters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a boolean value indicating whether the input integer is a palindrome or not.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> Return the integer value represented by the string after ignoring leading spaces and processing digits, within the 32-bit signed integer range.</div>
+                        <div class=""> <b>Example:</b> For input s = &#39;42&#39;, the output is 42.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Return true if the number is a palindrome, false otherwise.</div>
+                                <div style="margin-left: 20px;"> • The result must be within the range of a 32-bit signed integer: [-231, 231 - 1].</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To check if a given number is a palindrome without converting the integer to a string.</div>
+                        <div class=""> <b>Goal:</b> Parse the string, handle optional signs, ignore non-digit characters after the first integer, and ensure the result remains within the 32-bit signed integer limits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Check if the number is negative. If it is, return false immediately.</div>
+                                <div style="margin-left: 20px;"> • Skip leading spaces.</div>
                             
-                                <div style="margin-left: 20px;"> • Reverse the digits of the number.</div>
+                                <div style="margin-left: 20px;"> • Check for a &#39;&#43;&#39; or &#39;-&#39; sign to determine the number&#39;s sign.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the original number with the reversed number. If they are the same, return true; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • Parse the digits until a non-digit character is encountered.</div>
+                            
+                                <div style="margin-left: 20px;"> • If no digits are found, return 0.</div>
+                            
+                                <div style="margin-left: 20px;"> • Clamp the result to fit within the 32-bit signed integer range.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The number x can be a negative or positive integer, and the solution must handle both cases efficiently.</div>
+                        <div class=""> <b>Goal:</b> Handle edge cases such as empty strings, leading spaces, and large numbers.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number should be within the range of a 32-bit signed integer (-2^31 &lt;= x &lt;= 2^31 - 1).</div>
+                                <div style="margin-left: 20px;"> • The string may have leading or trailing spaces.</div>
                             
-                                <div style="margin-left: 20px;"> • The solution should not convert the integer to a string.</div>
+                                <div style="margin-left: 20px;"> • The string may contain a sign before the number.</div>
+                            
+                                <div style="margin-left: 20px;"> • The number may exceed the 32-bit signed integer range.</div>
                             
                         </div>
                     </div>        
@@ -415,25 +423,33 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • We are guaranteed that the input will be within the specified range (-231 &lt;= x &lt;= 231 - 1).</div>
+                                <div style="margin-left: 20px;"> • The input string can contain digits, spaces, signs, and other characters.</div>
                             
-                                <div style="margin-left: 20px;"> • Negative numbers are not palindromes.</div>
+                                <div style="margin-left: 20px;"> • If no valid number is found, the result should be 0.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: x = 121</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 121 reads the same from left to right and right to left, so it is a palindrome.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: s = &#39; 42&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The function processes the string &#39;42&#39;, ignoring leading spaces, and returns the integer 42.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: x = -121</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number -121 is not a palindrome because the negative sign appears only on the left, not the right.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: s = &#39;   - 0345&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The function reads the number &#39;-345&#39; after ignoring the spaces and the leading zeros.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: x = 10</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 10 is not a palindrome because it reads &#39;01&#39; from right to left, which is not the same as the original number.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3: s = &#39;56x89&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The function reads &#39;56&#39; and stops at the character &#39;x&#39;, returning 56.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 4: s = &#39;0000000000&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> All zeros are ignored, resulting in 0.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 5: s = &#39;words 123&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since the string starts with non-numeric characters, the function returns 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,18 +473,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To check if a number is a palindrome, we reverse its digits and compare the reversed number with the original. We will handle negative numbers immediately as they can never be palindromes.</div>
+                        <div class=""> <b>Approach:</b> The approach is to iterate through the string, parsing the number while handling edge cases and ensuring the final result is within the bounds of a 32-bit signed integer.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A simple approach is to reverse the digits and check if the original and reversed numbers match.</div>
+                                <div style="margin-left: 20px;"> • We need to handle whitespace, signs, and non-digit characters properly.</div>
                             
-                                <div style="margin-left: 20px;"> • We need to handle negative numbers early since they can&#39;t be palindromes.</div>
+                                <div style="margin-left: 20px;"> • The result must be clamped to fit within a 32-bit signed integer range.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We must reverse the digits without converting the number to a string, which can be done by manipulating the number mathematically.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should stop reading when a non-digit character is encountered after parsing valid digits.</div>
                             
                         </div>
                     </div>
@@ -476,11 +492,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check if the number is negative. If it is, return false.</div>
+                                <div style="margin-left: 20px;"> • Trim leading spaces.</div>
                             
-                                <div style="margin-left: 20px;"> • Reverse the digits of the number using a mathematical approach (by taking modulo 10 and dividing the number).</div>
+                                <div style="margin-left: 20px;"> • Identify the sign of the number.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the original number with the reversed number. If they are equal, return true, otherwise return false.</div>
+                                <div style="margin-left: 20px;"> • Process digits until a non-digit character is found.</div>
+                            
+                                <div style="margin-left: 20px;"> • Clamp the result to the 32-bit integer range.</div>
                             
                         </div>
                     </div>
@@ -489,24 +507,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input is always a valid integer within the specified range.</div>
+                                <div style="margin-left: 20px;"> • An empty string should return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle the largest integer values within the range efficiently.</div>
+                                <div style="margin-left: 20px;"> • Large inputs may exceed the 32-bit integer range and should be clamped accordingly.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the number is negative, it will not be a palindrome.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the number ends with a zero and is greater than zero, it cannot be a palindrome.</div>
+                                <div style="margin-left: 20px;"> • If the string contains no digits, return 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Do not convert the number to a string. Reverse the digits mathematically.</div>
+                                <div style="margin-left: 20px;"> • Handle strings with spaces, signs, and non-digit characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,17 +541,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Integer Division</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Value</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mathematical Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Comment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Value</button>
                     
                 </div>
 
@@ -544,14 +574,25 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPalindrome</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> x, z <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(x) {
-</span></span><span style="display:flex;"><span>        z <span style="color:#666">=</span> z <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> x <span style="color:#666">%</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        x <span style="color:#666">/=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> y <span style="color:#666">==</span> z;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">myAtoi</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sgn <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span> <span style="color:#666">||</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;-&#39;</span>))
+</span></span><span style="display:flex;"><span>        sgn <span style="color:#666">=</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span>)<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;9&#39;</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(res <span style="color:#666">&gt;</span> INT_MAX<span style="color:#666">/</span><span style="color:#666">10</span> <span style="color:#666">||</span> 
+</span></span><span style="display:flex;"><span>    (res <span style="color:#666">==</span> INT_MAX<span style="color:#666">/</span><span style="color:#666">10</span> <span style="color:#666">&amp;&amp;</span> ((s[i]<span style="color:#666">-</span><span style="color:#b44">&#39;0&#39;</span>)<span style="color:#666">&gt;</span>(INT_MAX <span style="color:#666">%</span><span style="color:#666">10</span>))))
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (sgn <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)<span style="color:#666">?</span> <span style="color:#a0a000">INT_MAX</span>: INT_MIN;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> res <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; res &lt;&lt; &#34; &#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sgn <span style="color:#666">*</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -562,70 +603,140 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPalindrome</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">myAtoi</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare the `isPalindrome` function, which takes an integer `x` as input and returns a boolean indicating whether it&#39;s a palindrome. </div>
+                            <div class=""> Declare the `myAtoi` function, which takes a string `s` as input and returns an integer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Conditional Check</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the input number `x` is negative. Negative numbers cannot be palindromes, so return `false` immediately. </div>
+                            <div class=""> Initialize a variable `res` to store the result integer. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> x, z <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sgn <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two variables: `y` to store a copy of the original number `x`, and `z` to store the reversed number. </div>
+                            <div class=""> Initialize a variable `sgn` to store the sign of the integer (1 for positive, -1 for negative). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Iteration</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop that continues while `x` is not zero. </div>
+                            <div class=""> Initialize an index `i` to iterate through the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Mathematical Operations</b></div>
+                            <div class=""> <b>5 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        z <span style="color:#666">=</span> z <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> x <span style="color:#666">%</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) i<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the last digit of `x` using the modulo operator and append it to the reversed number `z`. </div>
+                            <div class=""> Skip leading whitespace characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Integer Division</b></div>
+                            <div class=""> <b>6 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        x <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span> <span style="color:#666">||</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;-&#39;</span>))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the last digit from `x` by integer division. </div>
+                            <div class=""> Check if the next character is a sign character (`&#43;` or `-`) </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Value</b></div>
+                            <div class=""> <b>7 : Conditional Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> y <span style="color:#666">==</span> z;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sgn <span style="color:#666">=</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span>)<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Compare the original number `y` with the reversed number `z`. If they are equal, the number is a palindrome, so return `true`. Otherwise, return `false`. </div>
+                            <div class=""> Set the sign based on the character and increment the index `i`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;9&#39;</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate while the current character is a digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(res <span style="color:#666">&gt;</span> INT_MAX<span style="color:#666">/</span><span style="color:#666">10</span> <span style="color:#666">||</span> 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current `res` value is greater than the maximum integer divided by 10. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    (res <span style="color:#666">==</span> INT_MAX<span style="color:#666">/</span><span style="color:#666">10</span> <span style="color:#666">&amp;&amp;</span> ((s[i]<span style="color:#666">-</span><span style="color:#b44">&#39;0&#39;</span>)<span style="color:#666">&gt;</span>(INT_MAX <span style="color:#666">%</span><span style="color:#666">10</span>))))
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if `res` is equal to the maximum integer divided by 10 and the next digit is greater than the maximum integer modulo 10. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Value</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (sgn <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)<span style="color:#666">?</span> <span style="color:#a0a000">INT_MAX</span>: INT_MIN;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If overflow occurs, return `INT_MAX` for positive numbers or `INT_MIN` for negative numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Mathematical Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> res <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the `res` value by multiplying it by 10 and adding the current digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Comment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; res &lt;&lt; &#34; &#34;;
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A commented-out line to print the intermediate `res` value for debugging purposes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Value</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sgn <span style="color:#666">*</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final result multiplied by the sign. </div>
                         </div>
                     
                 </div>
@@ -645,16 +756,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log(x)), where x is the integer. This is because we reverse the digits of the number, and the number of digits is proportional to log(x).</div>
-                        <div class=""> <b>Average Case:</b> O(log(x))</div>
-                        <div class=""> <b>Worst Case:</b> O(log(x)), since we are iterating over all digits to reverse the number.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is logarithmic relative to the size of the integer.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the string.</div>
+                        <div class=""> <b>Average Case:</b> O(n), where n is the length of the string.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the string.</div> 
+                        <div class=""> <b>Description:</b> The time complexity depends on the length of the string as we only make a single pass through it.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1), since we only use a constant amount of extra space for the reversal.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we only use a few variables to store intermediate values.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since the space used is constant.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), since we only use a few variables to store the result and current position.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, O(1), as we don&#39;t use extra space for data structures.</div>    
                     </div>
 
                 </div>

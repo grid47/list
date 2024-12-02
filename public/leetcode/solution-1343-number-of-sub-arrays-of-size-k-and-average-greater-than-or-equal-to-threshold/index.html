@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given an array of integers &rsquo;nums&rsquo;, a positive integer &lsquo;modulo&rsquo;, and a non-negative integer &lsquo;k&rsquo;. Your task is to count the number of subarrays in &rsquo;nums&rsquo; that are interesting. A subarray &rsquo;nums[l..r]&rsquo; is interesting if the count of elements &rsquo;nums[i]&rsquo; such that &rsquo;nums[i] % modulo == k&rsquo; satisfies the condition &lsquo;cnt % modulo == k&rsquo;. Return the total count of such interesting subarrays. </div>
+<div class=""> Given an array of integers arr and two integers k and threshold, return the number of subarrays of size k whose average is greater than or equal to the threshold. </div>
 
 
 
@@ -358,53 +358,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> An integer array &#39;nums&#39;, a positive integer &#39;modulo&#39;, and a non-negative integer &#39;k&#39;.</div>
-                        <div class=""> <b>Example:</b> nums = [2, 4, 6], modulo = 2, k = 0</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers and two integers, k and threshold.</div>
+                        <div class=""> <b>Example:</b> arr = [1,3,5,7,9,10,12], k = 3, threshold = 7</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= modulo &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= arr.length</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt; modulo</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= threshold &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The count of interesting subarrays in the given input.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> Return the number of subarrays of size k whose average is greater than or equal to the threshold.</div>
+                        <div class=""> <b>Example:</b> For arr = [1,3,5,7,9,10,12], k = 3, threshold = 7, the output will be 4.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a single integer representing the count of interesting subarrays.</div>
+                                <div style="margin-left: 20px;"> • The answer will be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Count the number of subarrays that satisfy the condition where the count of elements divisible by &#39;modulo&#39; and equal to &#39;k&#39; satisfies &#39;cnt % modulo == k&#39;.</div>
+                        <div class=""> <b>Goal:</b> Count how many subarrays of size k have an average greater than or equal to the threshold.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a map to store the frequency of prefix sums modulo &#39;modulo&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a sliding window of size k to calculate the sum of each subarray.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, updating the prefix sum and checking if the current prefix sum satisfies the condition with previously encountered prefix sums.</div>
+                                <div style="margin-left: 20px;"> • 2. Compute the average by dividing the sum of the subarray by k.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Count the number of subarrays whose average is greater than or equal to the threshold.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints on the input values for the problem.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle large input sizes.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of elements in the array is at most 10^5.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= modulo &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt; modulo</div>
+                                <div style="margin-left: 20px;"> • The values in the array and threshold are bounded by 10^4.</div>
                             
                         </div>
                     </div>        
@@ -412,17 +410,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array is non-empty.</div>
+                                <div style="margin-left: 20px;"> • The array will always have at least one subarray of the given size k.</div>
                             
-                                <div style="margin-left: 20px;"> • The modulo and k values are valid as per the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The array elements and threshold are non-negative integers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [2, 4, 6], modulo = 2, k = 0</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays that satisfy the condition are those where the count of elements divisible by 2 and equal to 0 gives a remainder of 0 when divided by 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: arr = [1, 3, 5, 7, 9, 10, 12], k = 3, threshold = 7</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Subarrays of size 3 are checked, and their averages are compared to the threshold to count the valid subarrays.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: arr = [2, 2, 2, 2, 5, 5, 5, 8], k = 3, threshold = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays are evaluated based on their averages, and only those meeting or exceeding the threshold are counted.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,18 +448,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through the array and using a map to track the frequency of prefix sums modulo &#39;modulo&#39; to count the interesting subarrays.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem, we can use a sliding window technique to efficiently compute the sum of each subarray of size k and check if the average is greater than or equal to the threshold.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to track the count of elements that satisfy &#39;nums[i] % modulo == k&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • The condition &#39;cnt % modulo == k&#39; can be verified by maintaining a prefix sum modulo &#39;modulo&#39;.</div>
+                                <div style="margin-left: 20px;"> • A sliding window approach ensures we only calculate the sum of each subarray once and adjust it as we move through the array.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem can be solved efficiently by using a map to count the prefix sum modulo occurrences.</div>
+                                <div style="margin-left: 20px;"> • The sliding window approach is efficient and avoids recalculating the sum from scratch for each subarray, making it optimal for large arrays.</div>
                             
                         </div>
                     </div>
@@ -465,11 +465,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a map to keep track of the prefix sum modulo counts.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a sum variable for the first k elements of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, calculate the current prefix sum modulo &#39;modulo&#39;, and check if the condition holds using the map.</div>
+                                <div style="margin-left: 20px;"> • 2. Slide the window over the array, adding the next element and subtracting the element that moves out of the window.</div>
                             
-                                <div style="margin-left: 20px;"> • Count the subarrays that satisfy the condition and return the result.</div>
+                                <div style="margin-left: 20px;"> • 3. Check if the sum of the current window is greater than or equal to k * threshold.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Count such windows and return the count.</div>
                             
                         </div>
                     </div>
@@ -478,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty input arrays are expected as per the problem statement.</div>
+                                <div style="margin-left: 20px;"> • There are no empty arrays, as the length of arr is always at least 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle large arrays efficiently, up to the length of 10^5.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, the solution should be efficient and run in O(n) time where n is the length of the array.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where no subarrays satisfy the condition.</div>
+                                <div style="margin-left: 20px;"> • The threshold value may be 0, in which case all subarrays with positive values will have an average greater than or equal to the threshold.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The approach should work within the time and space constraints provided.</div>
+                                <div style="margin-left: 20px;"> • The array will contain only positive integers, and the subarray size k will always be valid.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,27 +512,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Threshold Adjustment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initial Window</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sum Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Initial Count Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Prefix Modulo</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Sliding Window Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Window Update Add</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Window Update Remove</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Count Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
                     
                 </div>
 
@@ -539,22 +541,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">countInterestingSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> mod, <span style="color:#0b0;font-weight:bold">int</span> k) {        
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>,<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, prefix <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">%</span>mod<span style="color:#666">==</span>k) prefix<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        prefix<span style="color:#666">%=</span>mod;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.find((prefix<span style="color:#666">-</span>k<span style="color:#666">+</span>mod)<span style="color:#666">%</span>mod)<span style="color:#666">!=</span>mp.end()) 
-</span></span><span style="display:flex;"><span>            ans <span style="color:#666">+=</span> mp[(prefix<span style="color:#666">-</span>k<span style="color:#666">+</span>mod)<span style="color:#666">%</span>mod];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        mp[prefix]<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> th) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    th <span style="color:#666">=</span> th <span style="color:#666">*</span> k;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#666">+=</span> sum <span style="color:#666">&gt;=</span> th;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> arr[i <span style="color:#666">-</span> k];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> th) cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -562,113 +561,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">countInterestingSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> mod, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> th) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;countInterestingSubarrays&#39; which takes a vector of integers, and two integers &#39;mod&#39; and &#39;k&#39;. </div>
+                            <div class=""> Defines the function that takes an array, window size `k`, and a threshold value `th` as inputs and returns the count of subarrays meeting the criteria. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span>,<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an unordered map &#39;mp&#39; to store frequencies of mod values encountered during the iteration. </div>
+                            <div class=""> Initializes `cnt` to track the number of valid subarrays and `sum` to store the current window&#39;s sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Threshold Adjustment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, prefix <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    th <span style="color:#666">=</span> th <span style="color:#666">*</span> k;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares and initializes the variables &#39;ans&#39; to store the result, &#39;prefix&#39; to track the current modulo sum, and &#39;n&#39; for the number of elements in the input array. </div>
+                            <div class=""> Converts the threshold to the total sum equivalent for a subarray of size `k` by multiplying it with `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Map Initialization</b></div>
+                            <div class=""> <b>4 : Initial Window</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the count of mod 0 in the map to account for an initial base case. </div>
+                            <div class=""> Starts a loop to calculate the sum of the first window of size `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Setup</b></div>
+                            <div class=""> <b>5 : Sum Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop that iterates through each element in the input array &#39;nums&#39;. </div>
+                            <div class=""> Adds the current element to the sum for the first window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Conditional Check</b></div>
+                            <div class=""> <b>6 : Initial Count Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">%</span>mod<span style="color:#666">==</span>k) prefix<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cnt <span style="color:#666">+=</span> sum <span style="color:#666">&gt;=</span> th;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current element of &#39;nums&#39; modulo &#39;mod&#39; equals &#39;k&#39;, and increments the &#39;prefix&#39; if true. </div>
+                            <div class=""> Checks if the initial window meets the threshold and increments `cnt` if true. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Prefix Modulo</b></div>
+                            <div class=""> <b>7 : Sliding Window Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        prefix<span style="color:#666">%=</span>mod;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the prefix modulo to ensure the prefix is within the bounds of the modulo value. </div>
+                            <div class=""> Begins the sliding window process to check subsequent windows. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Condition Check</b></div>
+                            <div class=""> <b>8 : Window Update Add</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.find((prefix<span style="color:#666">-</span>k<span style="color:#666">+</span>mod)<span style="color:#666">%</span>mod)<span style="color:#666">!=</span>mp.end()) 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> arr[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the adjusted prefix value exists in the map, indicating a valid subarray has been found. </div>
+                            <div class=""> Adds the next element in the array to the current window&#39;s sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Update Answer</b></div>
+                            <div class=""> <b>9 : Window Update Remove</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">+=</span> mp[(prefix<span style="color:#666">-</span>k<span style="color:#666">+</span>mod)<span style="color:#666">%</span>mod];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> arr[i <span style="color:#666">-</span> k];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the frequency of the adjusted prefix to &#39;ans&#39; to accumulate the number of interesting subarrays. </div>
+                            <div class=""> Removes the element that is sliding out of the window from the sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Map</b></div>
+                            <div class=""> <b>10 : Count Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[prefix]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> th) cnt<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the count of the current &#39;prefix&#39; value in the map. </div>
+                            <div class=""> Checks if the updated window&#39;s sum meets the threshold and increments `cnt` if true. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the total count of interesting subarrays stored in &#39;ans&#39;. </div>
+                            <div class=""> Returns the final count of subarrays meeting the threshold criteria. </div>
                         </div>
                     
                 </div>
@@ -688,16 +687,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of elements in the array.</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only iterate over the array once.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only traverse the array once while maintaining a sliding window.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the map used for storing prefix sums modulo.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since we only need a few extra variables to track the sum and count.</div>    
                     </div>
 
                 </div>

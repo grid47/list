@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 17, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1324s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1323s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/817.webp" 
            alt="A linked list where the components are highlighted, each component softly glowing as it is connected." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an integer array nums. In one operation, you can increment any element of the array by 1. The goal is to make the array strictly increasing, meaning that each element should be smaller than the next. Return the minimum number of operations required to achieve this. </div>
+<div class=""> You are given the head of a linked list containing unique integer values, and an array nums which is a subset of the linked list values. A connected component is defined as a sequence of consecutive values in the linked list that all appear in nums. Your task is to return the number of such connected components. </div>
 
 
 
@@ -371,47 +371,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array nums of length n where 1 &lt;= n &lt;= 5000 and 1 &lt;= nums[i] &lt;= 10^4.</div>
-                        <div class=""> <b>Example:</b> For example, nums = [2, 3, 1, 5] means the array consists of four elements: 2, 3, 1, and 5.</div>
+                        <div class=""> <b>Input:</b> The input consists of two parts: a linked list and an array nums. The linked list contains unique integer values, and nums contains integers that are a subset of the linked list&#39;s values.</div>
+                        <div class=""> <b>Example:</b> Input: head = [4,5,6,7,8], nums = [4,5,7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 5000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • All the values in Node.val are unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= n</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt; n</div>
+                            
+                                <div style="margin-left: 20px;"> • All the values of nums are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an integer, which is the minimum number of operations needed to make the array strictly increasing.</div>
-                        <div class=""> <b>Example:</b> For nums = [2, 3, 1, 5], the output is 2 because we need to increment nums[2] (1) to 4 and nums[3] (5) to 6 to make the array strictly increasing.</div>
+                        <div class=""> <b>Output:</b> Return the number of connected components, where two values are connected if they appear consecutively in the linked list.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The number of connected components should be an integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to compute the minimum number of increment operations to make the array strictly increasing.</div>
+                        <div class=""> <b>Goal:</b> The goal is to traverse the linked list and count the number of connected components where consecutive numbers in nums appear in the linked list.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate over the array starting from the second element.</div>
+                                <div style="margin-left: 20px;"> • Create a set from nums to facilitate fast lookups.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If an element is not greater than the previous one, calculate the number of increments needed to make it strictly larger.</div>
+                                <div style="margin-left: 20px;"> • Traverse the linked list while checking for consecutive values that appear in nums.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Keep track of the total number of operations (increments).</div>
+                                <div style="margin-left: 20px;"> • Each time a transition from a number in nums to a non-consecutive value occurs, count a new connected component.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array must be adjusted such that each element is strictly smaller than the next. The minimum number of operations required should be computed efficiently.</div>
+                        <div class=""> <b>Goal:</b> The linked list will contain unique values, and nums is a subset of those values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array must contain at least one element.</div>
+                                <div style="margin-left: 20px;"> • The linked list length can be up to 10,000 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • The elements of the array can range from 1 to 10,000.</div>
+                                <div style="margin-left: 20px;"> • The values in the linked list are unique.</div>
                             
                         </div>
                     </div>        
@@ -419,25 +427,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • If the array is already strictly increasing, no operations are needed.</div>
+                                <div style="margin-left: 20px;"> • The input linked list contains unique integer values.</div>
                             
-                                <div style="margin-left: 20px;"> • The solution should handle arrays with both small and large values efficiently.</div>
+                                <div style="margin-left: 20px;"> • The nums array contains integers that are a subset of the linked list&#39;s values.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, 3, 1, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array is not strictly increasing because 1 is not greater than 3. To make it strictly increasing, we need to increment 1 to 4 and 5 to 6. This results in 2 operations.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [0,1,2,3], nums = [0,1,3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the linked list is [0,1,2,3] and nums is [0,1,3]. The first connected component is [0, 1], and the second one is [3], so the output is 2.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array is already strictly increasing, so no operations are needed.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [8, 7, 5, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array is not strictly increasing because the elements 7 and 5 are not greater than the preceding elements. We need to increment 7 to 9 and 5 to 10 to make the array strictly increasing. This results in 4 operations.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [4,5,6,7,8], nums = [4,5,7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the linked list is [4,5,6,7,8] and nums is [4,5,7]. The connected components are [4, 5] and [7], so the output is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -461,18 +465,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved by iterating through the array and ensuring that each element is strictly greater than the previous one by applying the necessary number of increments.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem by traversing the linked list and checking whether the consecutive nodes in the linked list are part of nums. We will count each group of consecutive nodes that are in nums as a connected component.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The key observation is that for any element nums[i], it must be greater than nums[i-1]. If it is not, the difference between nums[i-1] and nums[i] tells us how many increments are needed.</div>
+                                <div style="margin-left: 20px;"> • We need to check consecutive nodes that belong to nums, so we can leverage a set for quick lookups.</div>
                             
-                                <div style="margin-left: 20px;"> • The problem involves minimizing the number of increments, so we should compute the required increments in a single pass.</div>
+                                <div style="margin-left: 20px;"> • Whenever a node in nums is followed by a non-nums value, we count that as a new component.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The solution is linear in complexity, processing each element in the array once. This ensures that we can solve the problem efficiently even for large arrays.</div>
+                                <div style="margin-left: 20px;"> • The problem involves identifying consecutive connected nodes in a linked list that belong to the nums array.</div>
                             
                         </div>
                     </div>
@@ -480,15 +484,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a variable to keep track of the total number of increments.</div>
+                                <div style="margin-left: 20px;"> • Convert nums into a set for O(1) lookups.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through the array starting from the second element.</div>
+                                <div style="margin-left: 20px;"> • Traverse the linked list. For each node, check if it&#39;s in nums and if the next node is also in nums.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each element, if it&#39;s not greater than the previous one, compute the required increments to make it larger.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Add the required increments to the total count and continue to the next element.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the total number of increments.</div>
+                                <div style="margin-left: 20px;"> • Each time a node from nums is not followed by another node from nums, increment the count of connected components.</div>
                             
                         </div>
                     </div>
@@ -497,22 +497,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array has only one element (no operation needed).</div>
+                                <div style="margin-left: 20px;"> • If the input linked list is empty, return 0 as there are no connected components.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When the array has the maximum length of 5000 elements, the solution must handle this efficiently with linear time complexity.</div>
+                                <div style="margin-left: 20px;"> • For large linked lists (up to 10,000 nodes), ensure that the solution runs efficiently within time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Arrays where all elements are the same or where the array is already strictly increasing.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where nums has only one element or contains all elements from the linked list.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution handles arrays with large values and ensures efficiency with O(n) time complexity.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution efficiently handles up to 10,000 nodes in the linked list.</div>
                             
                         </div>                                                                        
                     </div>
@@ -531,17 +531,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Operation Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Updating Need</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Increment Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Advance to Next Node</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
                     
                 </div>
 
@@ -550,14 +554,15 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, need <span style="color:#666">=</span> nums[<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> max(<span style="color:#666">0</span>, need <span style="color:#666">-</span> nums[i]);
-</span></span><span style="display:flex;"><span>        need <span style="color:#666">=</span> max(nums[i], need) <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numComponents</span>(ListNode<span style="color:#666">*</span> head, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> setG(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span><span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(head <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(setG.count(head<span style="color:#666">-&gt;</span>val) <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>        (head<span style="color:#666">-&gt;</span>next <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">||</span> <span style="color:#666">!</span>setG.count(head<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>val)))
+</span></span><span style="display:flex;"><span>        res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        head <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
@@ -569,70 +574,90 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numComponents</span>(ListNode<span style="color:#666">*</span> head, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the main function `minOperations`, which takes a vector of integers as input and computes the minimum operations needed to make the array strictly increasing. </div>
+                            <div class=""> This line defines the function `numComponents` which takes a linked list `head` and a vector of integers `nums` as inputs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Data Structure Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, need <span style="color:#666">=</span> nums[<span style="color:#666">0</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> setG(nums.begin(), nums.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, `res` is initialized to 0 to store the number of operations, and `need` is set to one more than the first element in the array, representing the smallest required value for the next element. </div>
+                            <div class=""> An unordered set `setG` is created from the vector `nums`, which will be used to quickly check if a node&#39;s value is part of the set. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Size Calculation</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span><span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the size of the `nums` array to determine the number of iterations needed for the loop. </div>
+                            <div class=""> The variable `res` is initialized to 0, which will be used to count the number of connected components. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Setup</b></div>
+                            <div class=""> <b>4 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(head <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for-loop starts from the second element (index 1) to iterate through the array and adjust the values to ensure it is strictly increasing. </div>
+                            <div class=""> The loop starts and will iterate through each node of the linked list as long as `head` is not NULL. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Operation Calculation</b></div>
+                            <div class=""> <b>5 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> max(<span style="color:#666">0</span>, need <span style="color:#666">-</span> nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(setG.count(head<span style="color:#666">-&gt;</span>val) <span style="color:#666">&amp;&amp;</span> 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line computes the number of operations needed to adjust the current element (`nums[i]`). If the element is less than `need`, the difference is added to `res`. </div>
+                            <div class=""> This condition checks if the current node&#39;s value is in the set `setG`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Updating Need</b></div>
+                            <div class=""> <b>6 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        need <span style="color:#666">=</span> max(nums[i], need) <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        (head<span style="color:#666">-&gt;</span>next <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">||</span> <span style="color:#666">!</span>setG.count(head<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>val)))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `need` value is updated to be the maximum of the current element and the previous `need` value, then incremented by 1. This ensures that the next element will be strictly greater than the current one. </div>
+                            <div class=""> This condition checks if the next node is either NULL (end of the list) or its value is not in the set `setG`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Increment Count</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the conditions are met, it indicates the end of a connected component, and `res` is incremented. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Advance to Next Node</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        head <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `head` pointer is advanced to the next node in the linked list. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the total number of operations stored in `res`. </div>
+                            <div class=""> The function returns the value of `res`, which represents the number of connected components. </div>
                         </div>
                     
                 </div>
@@ -652,16 +677,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), when the array is already strictly increasing.</div>
-                        <div class=""> <b>Average Case:</b> O(n), since we are iterating through the array once.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), when we have to increment each element of the array.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear because we only traverse the array once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the linked list.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as each node is processed once.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), since we only traverse the list once and check membership in a set.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the size of the linked list.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), since no additional space is needed.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), since we only need a constant amount of extra space for variables.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we only use a few variables to store intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(m), where m is the size of nums.</div>
+                        <div class=""> <b>Worst Case:</b> O(m), where m is the size of nums, as we store nums in a set for efficient lookups.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear in terms of the size of nums due to the set used for fast lookups.</div>    
                     </div>
 
                 </div>

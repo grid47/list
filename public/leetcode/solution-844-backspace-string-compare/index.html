@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an <code>m x n</code> matrix <code>grid</code>. A <strong>rhombus sum</strong> refers to the sum of the elements that form the border of a rhombus shape. The rhombus should be viewed as a square rotated 45 degrees, with each of its corners centered on a grid cell. Compute the biggest three distinct rhombus sums in the grid and return them in descending order. If there are fewer than three distinct sums, return all of them. </div>
+<div class=""> You are given an integer array <code>arr</code>. A mountain array is an array where the elements first strictly increase to a peak and then strictly decrease after that peak. Your task is to find the length of the longest mountain subarray in the given array. If no such subarray exists, return 0. </div>
 
 
 
@@ -360,49 +360,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 2D matrix `grid` of integers.</div>
-                        <div class=""> <b>Example:</b> For grid = [[5,1,3],[4,2,6],[7,8,9]].</div>
+                        <div class=""> <b>Input:</b> You are given an integer array &#39;arr&#39; where the elements are non-negative integers.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [3, 2, 5, 6, 4, 3, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= grid[i][j] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= arr[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the biggest three distinct rhombus sums in descending order. If fewer than three distinct sums exist, return all of them.</div>
-                        <div class=""> <b>Example:</b> For grid = [[5,1,3],[4,2,6],[7,8,9]], the output is [25, 17, 12].</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest mountain subarray in the given array. If no such subarray exists, return 0.</div>
+                        <div class=""> <b>Example:</b> Output: 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be an array of integers representing the biggest three distinct rhombus sums.</div>
+                                <div style="margin-left: 20px;"> • The array must have at least 3 elements to form a mountain.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the rhombus sums, we need to iterate through all possible centers in the grid and calculate the sum of elements that form the rhombus for each center.</div>
+                        <div class=""> <b>Goal:</b> To find the longest subarray that first strictly increases and then strictly decreases.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate over each cell in the grid to treat it as a potential center of a rhombus.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Traverse through the array and find all potential peaks where the element is greater than its neighbors.</div>
                             
-                                <div style="margin-left: 20px;"> • For each center, compute the sum of all grid elements that form the rhombus border.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each peak, expand to the left and right to determine the length of the mountain.</div>
                             
-                                <div style="margin-left: 20px;"> • Store these sums in a set to ensure distinct values.</div>
-                            
-                                <div style="margin-left: 20px;"> • Sort the set and return the top three distinct sums.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Keep track of the longest mountain found during the traversal.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the grid contains positive integers and is within the allowed size.</div>
+                        <div class=""> <b>Goal:</b> Ensure the array has a valid mountain shape, with a peak element and elements that strictly increase and then strictly decrease.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • The array must have at least 3 elements to form a valid mountain.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= grid[i][j] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The array elements must strictly increase before the peak and strictly decrease after it.</div>
                             
                         </div>
                     </div>        
@@ -410,21 +408,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid is at least 1x1 in size.</div>
+                                <div style="margin-left: 20px;"> • The array is not empty.</div>
                             
-                                <div style="margin-left: 20px;"> • All grid elements are positive integers.</div>
+                                <div style="margin-left: 20px;"> • You are working with integer values only.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For grid = [[5,1,3],[4,2,6],[7,8,9]].</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The rhombus sums for the three biggest distinct rhombuses are: 25, 17, and 12.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [3, 2, 5, 6, 4, 3, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest mountain is [5, 6, 4, 3], which has length 5.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For grid = [[7, 7, 7]].</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since all rhombus sums are the same, the output is [7].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [1, 2, 3, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is no mountain because the array only increases.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [9, 8, 7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is no mountain because the array only decreases.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,16 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach to solving this problem involves calculating the rhombus sum for each possible center in the grid. For each center, we add the values of the grid cells that make up the rhombus and store them. The biggest three distinct sums are then returned.</div>
+                        <div class=""> <b>Approach:</b> The approach involves scanning through the array to find peaks and expanding from those peaks to check for valid mountains. This can be done in a single pass with careful checking of elements before and after the peak.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The rhombus shape can expand out from a center and includes values from adjacent cells at varying distances.</div>
+                                <div style="margin-left: 20px;"> • The problem requires finding subarrays with a specific structure (strictly increasing and then strictly decreasing).</div>
+                            
+                                <div style="margin-left: 20px;"> • We can utilize a two-pointer or sliding window technique to efficiently check for the longest mountain.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to carefully iterate through all possible rhombus shapes, ensuring we compute the correct sums and handle distinct values efficiently.</div>
+                                <div style="margin-left: 20px;"> • A linear pass through the array could be sufficient if we check each element to see if it&#39;s a peak, and then expand outwards to find the boundaries of the mountain.</div>
                             
                         </div>
                     </div>
@@ -465,13 +469,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start by iterating over every cell in the grid, treating it as the center of the rhombus.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Iterate over the array and find peaks, which are elements that are greater than their immediate neighbors.</div>
                             
-                                <div style="margin-left: 20px;"> • For each potential rhombus, compute the sum of its border elements.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each peak, check the elements to the left and right to find the boundaries of the mountain.</div>
                             
-                                <div style="margin-left: 20px;"> • Store all computed sums in a set to ensure uniqueness.</div>
-                            
-                                <div style="margin-left: 20px;"> • Sort the sums in descending order and return the top three distinct sums.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Keep track of the longest mountain found and return its length.</div>
                             
                         </div>
                     </div>
@@ -480,22 +482,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable as the grid is guaranteed to have at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • The input cannot be empty as the array must contain at least 3 elements.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle grids as large as 50x50.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles large inputs efficiently, especially when the array length is at the upper constraint of 10^4.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All elements being the same value or all rhombus sums being identical.</div>
+                                <div style="margin-left: 20px;"> • Arrays with all elements the same do not form a mountain.</div>
+                            
+                                <div style="margin-left: 20px;"> • Arrays that strictly increase or strictly decrease will not form a valid mountain.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid should be within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • Arrays with fewer than 3 elements cannot form a valid mountain.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,45 +516,39 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Type Alias</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Reset</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Backspace Processing S</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Back</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Pointer Decrement S</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Reset Again</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Rhombus Size Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Backspace Processing T</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Back Again</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Diagonal Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pointer Decrement T</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Character Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Second Diagonal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pointer Decrement Both</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Third Diagonal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Pointer Decrement Both</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Fourth Diagonal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Mismatch Found</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Insert to Set</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Exit Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Set Size Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Erase Smallest</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 End Rhombus Size Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Final Check</button>
                     
                 </div>
 
@@ -559,32 +557,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">typedef</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ll;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getBiggestThree(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">+</span> sz <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">-</span> sz <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> sz <span style="color:#666">&lt;</span> n; sz<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>                ll x <span style="color:#666">=</span> i, y <span style="color:#666">=</span> j, rsum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">++</span>][y<span style="color:#666">++</span>]; <span style="color:#a2f;font-weight:bold">while</span>(x <span style="color:#666">&lt;</span> i <span style="color:#666">+</span> sz);
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(sz <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                    
-</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">--</span>][y<span style="color:#666">++</span>]; <span style="color:#a2f;font-weight:bold">while</span>(y <span style="color:#666">&lt;</span> j <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> sz);
-</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">--</span>][y<span style="color:#666">--</span>]; <span style="color:#a2f;font-weight:bold">while</span>(x <span style="color:#666">&gt;</span> i <span style="color:#666">-</span> sz);
-</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">++</span>][y<span style="color:#666">--</span>]; <span style="color:#a2f;font-weight:bold">while</span>(x <span style="color:#666">&lt;</span> i);
-</span></span><span style="display:flex;"><span>                    
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                s.insert(rsum);
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(s.size() <span style="color:#666">&gt;</span> <span style="color:#666">3</span>) {
-</span></span><span style="display:flex;"><span>                    s.erase(begin(s));}
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">backspaceCompare</span>(string S, string T) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> S.length() <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> T.length() <span style="color:#666">-</span> <span style="color:#666">1</span>, back;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#a2f">true</span>) {
+</span></span><span style="display:flex;"><span>        back <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (back <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> S[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>)) {
+</span></span><span style="display:flex;"><span>            back <span style="color:#666">+=</span> S[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">--</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(rbegin(s), rend(s));
+</span></span><span style="display:flex;"><span>        back <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (back <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> T[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>)) {
+</span></span><span style="display:flex;"><span>            back <span style="color:#666">+=</span> T[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            j<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> S[i] <span style="color:#666">==</span> T[j]) {
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            j<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>;        
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -592,203 +585,173 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Class Definition</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> backspace <span style="color:#00a000">Compare</span>(string S, string T) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define a class to encapsulate the solution logic. </div>
+                            <div class=""> Defines the function `backspace Compare` that takes two strings `S` and `T` and compares them after processing the backspaces. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Type Alias</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">typedef</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ll;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> S.length() <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> T.length() <span style="color:#666">-</span> <span style="color:#666">1</span>, back;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define a type alias for long long integers to simplify usage. </div>
+                            <div class=""> Initializes two pointers, `i` and `j`, to point to the end of both strings, and a variable `back` to track the number of backspaces. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Access Modifier</b></div>
+                            <div class=""> <b>3 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#a2f">true</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Specify public access for class members. </div>
+                            <div class=""> Starts an infinite loop to process the strings until the end of the comparison. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Variable Reset</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getBiggestThree(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        back <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define a function to compute the three largest unique rhombus sums in a grid. </div>
+                            <div class=""> Resets the `back` variable to 0 at the start of each loop iteration. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Initialization</b></div>
+                            <div class=""> <b>5 : Backspace Processing S</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (back <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> S[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the grid dimensions. </div>
+                            <div class=""> Processes the string `S` by skipping characters that are backspaces or undoing the effect of backspaces. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Set Initialization</b></div>
+                            <div class=""> <b>6 : Update Back</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            back <span style="color:#666">+=</span> S[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Use a set to store unique rhombus sums, automatically sorted. </div>
+                            <div class=""> Updates the `back` variable, incrementing it when a backspace (&#39;#&#39;) is encountered and decrementing it otherwise. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Outer Loop</b></div>
+                            <div class=""> <b>7 : Pointer Decrement S</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over all rows of the grid. </div>
+                            <div class=""> Moves the pointer `i` to the previous character in string `S`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Inner Loop</b></div>
+                            <div class=""> <b>8 : Variable Reset Again</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        back <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over all columns of the grid. </div>
+                            <div class=""> Resets the `back` variable before processing the string `T`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Rhombus Size Loop</b></div>
+                            <div class=""> <b>9 : Backspace Processing T</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">+</span> sz <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">-</span> sz <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> sz <span style="color:#666">&lt;</span> n; sz<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (back <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> T[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over possible rhombus sizes centered at (i, j). </div>
+                            <div class=""> Processes string `T` by skipping backspaces or undoing the effect of backspaces. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Update Back Again</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ll x <span style="color:#666">=</span> i, y <span style="color:#666">=</span> j, rsum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            back <span style="color:#666">+=</span> T[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables for rhombus calculation. </div>
+                            <div class=""> Updates the `back` variable for string `T`, incrementing for backspaces and decrementing otherwise. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Diagonal Sum</b></div>
+                            <div class=""> <b>11 : Pointer Decrement T</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">++</span>][y<span style="color:#666">++</span>]; <span style="color:#a2f;font-weight:bold">while</span>(x <span style="color:#666">&lt;</span> i <span style="color:#666">+</span> sz);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the sum of the first diagonal. </div>
+                            <div class=""> Moves the pointer `j` to the previous character in string `T`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Check Size</b></div>
+                            <div class=""> <b>12 : Character Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(sz <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> S[i] <span style="color:#666">==</span> T[j]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Proceed with additional rhombus sides if the size is greater than zero. </div>
+                            <div class=""> Compares the characters at positions `i` and `j` in `S` and `T`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Second Diagonal</b></div>
+                            <div class=""> <b>13 : Pointer Decrement Both</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">--</span>][y<span style="color:#666">++</span>]; <span style="color:#a2f;font-weight:bold">while</span>(y <span style="color:#666">&lt;</span> j <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> sz);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the sum of the second diagonal. </div>
+                            <div class=""> Moves the pointer `i` to the previous character in string `S`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Third Diagonal</b></div>
+                            <div class=""> <b>14 : Pointer Decrement Both</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">--</span>][y<span style="color:#666">--</span>]; <span style="color:#a2f;font-weight:bold">while</span>(x <span style="color:#666">&gt;</span> i <span style="color:#666">-</span> sz);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the sum of the third diagonal. </div>
+                            <div class=""> Moves the pointer `j` to the previous character in string `T`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Fourth Diagonal</b></div>
+                            <div class=""> <b>15 : Mismatch Found</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">do</span> rsum <span style="color:#666">+=</span> grid[x<span style="color:#666">++</span>][y<span style="color:#666">--</span>]; <span style="color:#a2f;font-weight:bold">while</span>(x <span style="color:#666">&lt;</span> i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the sum of the fourth diagonal. </div>
+                            <div class=""> Handles the case where the characters at `S[i]` and `T[j]` do not match. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Insert to Set</b></div>
+                            <div class=""> <b>16 : Exit Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                s.insert(rsum);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the calculated rhombus sum into the set. </div>
+                            <div class=""> Exits the loop when a mismatch is found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Set Size Check</b></div>
+                            <div class=""> <b>17 : Final Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(s.size() <span style="color:#666">&gt;</span> <span style="color:#666">3</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Ensure the set only keeps the three largest sums. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Erase Smallest</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    s.erase(begin(s));}
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Remove the smallest sum if the set size exceeds three. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : End Rhombus Size Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> End the loop for iterating rhombus sizes. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(rbegin(s), rend(s));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Convert the set to a vector and return the three largest sums in descending order. </div>
+                            <div class=""> Returns `true` if both strings `S` and `T` have been fully processed and no mismatches were found; otherwise, returns `false`. </div>
                         </div>
                     
                 </div>
@@ -808,16 +771,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n * k)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n * k)</div> 
-                        <div class=""> <b>Description:</b> The time complexity depends on the size of the grid and the maximum possible size of a rhombus that can be formed from each cell.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear as we make a single pass over the array, with constant time checks for each element.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> Space complexity is O(m * n) due to the storage of rhombus sums in a set.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant since we only need a few variables to track the peak and the longest mountain length.</div>    
                     </div>
 
                 </div>

@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 5, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -323,7 +323,7 @@
 
 
 
-<div class=""> You are given a string <code>s</code> and an integer <code>k</code>. Your task is to determine whether it&rsquo;s possible to use all the characters in the string <code>s</code> to construct exactly <code>k</code> palindromic strings. </div>
+<div class=""> Given a list of tasks and a number n, determine the minimum number of CPU intervals required to complete all tasks, respecting the constraint that the same task must be separated by at least n intervals. </div>
 
 
 
@@ -374,49 +374,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s` and an integer `k`.</div>
-                        <div class=""> <b>Example:</b> [&#34;civic&#34;, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of tasks (represented as uppercase English letters) and an integer n, which denotes the cooling period between the same tasks.</div>
+                        <div class=""> <b>Example:</b> tasks = [&#34;A&#34;, &#34;A&#34;, &#34;A&#34;, &#34;B&#34;, &#34;B&#34;, &#34;B&#34;], n = 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= tasks.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • tasks[i] is an uppercase English letter.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= n &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a boolean value indicating whether it is possible to construct exactly `k` palindromic strings from the characters in `s`.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> Return the minimum number of CPU intervals required to execute all tasks, including idle times where no task is executed.</div>
+                        <div class=""> <b>Example:</b> 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is `true` if it&#39;s possible, `false` otherwise.</div>
+                                <div style="margin-left: 20px;"> • The output is a single integer representing the number of intervals.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine if the characters of the string can be rearranged to form `k` palindromes.</div>
+                        <div class=""> <b>Goal:</b> To minimize the number of CPU intervals, the algorithm should schedule tasks in a way that maximizes task completion while respecting the cooling time n.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count the frequency of each character in the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each task.</div>
                             
-                                <div style="margin-left: 20px;"> • To form a palindrome, characters must appear in pairs (even frequency), with at most one character allowed to appear an odd number of times for a single palindrome.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a priority queue to process tasks in the order of their frequency.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of odd character frequencies should be less than or equal to `k`.</div>
+                                <div style="margin-left: 20px;"> • 3. For each task, perform it and then wait for n intervals before performing it again, using idle periods where necessary.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the total number of intervals.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that all the input values are within the defined constraints.</div>
+                        <div class=""> <b>Goal:</b> The constraints include the maximum length of the task list and the cooling period n, both of which should be respected in the solution.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • All strings are lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= tasks.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • The number of palindromes `k` must be less than or equal to the length of the string.</div>
+                                <div style="margin-left: 20px;"> • tasks[i] is an uppercase English letter.</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= n &lt;= 100</div>
                             
                         </div>
                     </div>        
@@ -424,21 +428,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string `s` consists of lowercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • The input tasks list is valid and contains only uppercase English letters.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of palindromes `k` must be a valid integer within the specified range.</div>
+                                <div style="margin-left: 20px;"> • n is a non-negative integer representing the cooling time between tasks of the same type.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#34;civic&#34;, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we can form two palindromes using the characters in &#39;civic&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#34;abcde&#34;, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, it is impossible to form two palindromes with the characters in &#39;abcde&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> tasks = [&#34;A&#34;, &#34;A&#34;, &#34;A&#34;, &#34;B&#34;, &#34;B&#34;, &#34;B&#34;], n = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, task A and task B need to be performed in such a way that there are at least 2 intervals between each repetition of the same task. Thus, idling is required between repetitions.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,16 +462,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves counting the frequency of each character and determining if it&#39;s possible to form the required number of palindromes. The key condition is that the number of odd frequencies should not exceed `k`.</div>
+                        <div class=""> <b>Approach:</b> The approach to solving this problem involves calculating the frequencies of tasks and efficiently scheduling them while respecting the cooling interval using a priority queue.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Palindromes can only be formed if the number of characters with odd frequencies is less than or equal to the number of palindromes.</div>
+                                <div style="margin-left: 20px;"> • This is a scheduling problem with a cooling constraint, which is a typical greedy approach scenario.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Consider the problem as checking if the distribution of character frequencies allows for `k` palindromes.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that tasks are performed in an optimal order to minimize idle times.</div>
                             
                         </div>
                     </div>
@@ -479,11 +479,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Count the frequency of each character in the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each task.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Count how many characters have odd frequencies.</div>
+                                <div style="margin-left: 20px;"> • 2. Push each task and its frequency into a max-heap or priority queue.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the number of odd frequencies is greater than `k`, return false. Otherwise, return true.</div>
+                                <div style="margin-left: 20px;"> • 3. For each cycle of size n &#43; 1, perform tasks and account for idle periods.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Track the number of intervals taken to complete the tasks.</div>
                             
                         </div>
                     </div>
@@ -492,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • What if the string is empty?</div>
+                                <div style="margin-left: 20px;"> • If no tasks are provided (empty list), the result is 0 intervals.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution can handle inputs up to 10^5 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the number of tasks is close to 10^4, requiring efficient scheduling.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • What if `k` is 1 or equal to the length of the string?</div>
+                                <div style="margin-left: 20px;"> • If n = 0, tasks can be performed one after another without idle time.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be efficient enough to handle the maximum constraint sizes.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution can efficiently handle large inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,15 +526,49 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Over Tasks</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Bitset Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Increment Task Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Priority Queue Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Map to Priority Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Push to Priority Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Time Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 While Loop (Priority Queue Processing)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Temporary Task Storage</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Reset Time</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 For Loop (Task Processing)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Task Available Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Push Task to Temporary Storage</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Pop Task from Priority Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Increment Time</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Update Task Counts</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Decrement Task Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Re-add Task to Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Push Task Back to Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Update Net Time</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Result</button>
                     
                 </div>
 
@@ -541,11 +577,35 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canConstruct</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    bitset<span style="color:#666">&lt;</span><span style="color:#666">26</span><span style="color:#666">&gt;</span> odd;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s)
-</span></span><span style="display:flex;"><span>    odd.flip(c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> odd.count() <span style="color:#666">&lt;=</span> k <span style="color:#666">&amp;&amp;</span> k <span style="color:#666">&lt;=</span> s.size();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">leastInterval</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&amp;</span> tasks, <span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// if(n == 0) return tasks.size();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: tasks)
+</span></span><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
+</span></span><span style="display:flex;"><span>        pq.push({it.second, it.first});
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> time <span style="color:#666">=</span> <span style="color:#666">0</span>, net <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>        time <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// cout&lt;&lt;pq.top().first &lt;&lt; &#34; &#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                tmp.push_back(pq.top());
+</span></span><span style="display:flex;"><span>                pq.pop();
+</span></span><span style="display:flex;"><span>                time<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: tmp) {
+</span></span><span style="display:flex;"><span>            it.first<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it.first)
+</span></span><span style="display:flex;"><span>                pq.push(it);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        net <span style="color:#666">+=</span> <span style="color:#666">!</span>pq.empty()<span style="color:#666">?</span> n <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> time;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> net;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -553,53 +613,223 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canConstruct</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">leastInterval</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&amp;</span> tasks, <span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `canConstruct` function which takes a string `s` and an integer `k` as parameters. </div>
+                            <div class=""> Declares the `leastInterval` function, which accepts a list of tasks and a cooling period `n`, and returns the minimum time required to complete all tasks. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bitset<span style="color:#666">&lt;</span><span style="color:#666">26</span><span style="color:#666">&gt;</span> odd;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a bitset `odd` to track the parity (odd or even count) of each letter in the alphabet. </div>
+                            <div class=""> Initializes a map `mp` to store the frequency of each task (character) in the `tasks` list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Operation</b></div>
+                            <div class=""> <b>3 : Loop Over Tasks</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: tasks)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each character `c` in the string `s`. </div>
+                            <div class=""> Iterates over the `tasks` list, counting the frequency of each task using the map `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Bitset Operation</b></div>
+                            <div class=""> <b>4 : Increment Task Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    odd.flip(c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Flips the corresponding bit in the `odd` bitset based on the character `c`. This operation toggles the bit to reflect whether the character appears an odd or even number of times. </div>
+                            <div class=""> Increments the count of task `x` in the map `mp`, recording how many times each task appears. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Return Statement</b></div>
+                            <div class=""> <b>5 : Priority Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> odd.count() <span style="color:#666">&lt;=</span> k <span style="color:#666">&amp;&amp;</span> k <span style="color:#666">&lt;=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns `true` if the number of odd counts is less than or equal to `k` and `k` is less than or equal to the length of the string `s`. Otherwise, returns `false`. </div>
+                            <div class=""> Initializes a priority queue `pq` to store tasks in decreasing order of their frequency, where the task with the highest frequency is processed first. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Map to Priority Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over the map `mp` to push each task and its frequency into the priority queue `pq`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Push to Priority Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({it.second, it.first});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the task-frequency pair (`it.second`, `it.first`) into the priority queue, ensuring that tasks are ordered by frequency. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Time Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> time <span style="color:#666">=</span> <span style="color:#666">0</span>, net <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes variables `time` (to track the current time) and `net` (to track the total time required to complete all tasks). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : While Loop (Priority Queue Processing)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a loop that continues until all tasks are processed, i.e., until the priority queue is empty. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Temporary Task Storage</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> tmp;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Creates a temporary vector `tmp` to store tasks that are processed in the current cycle of `n&#43;1` steps. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Reset Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        time <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Resets the `time` variable to 0 for each new cycle of task processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : For Loop (Task Processing)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over the tasks for the current cycle, allowing up to `n&#43;1` steps in each cycle (processing one task per step). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Task Available Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if there are tasks available in the priority queue to process in the current step. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Push Task to Temporary Storage</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                tmp.push_back(pq.top());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the task with the highest frequency (top of the priority queue) into the temporary vector `tmp`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Pop Task from Priority Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pops the task from the priority queue, as it has been selected for processing in the current cycle. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Increment Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                time<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the `time` variable to account for the time spent processing the current task. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Update Task Counts</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: tmp) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over the tasks in `tmp` (tasks processed in the current cycle) to update their frequencies. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Decrement Task Count</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            it.first<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrements the frequency of the task in `tmp` as it has been processed once. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Re-add Task to Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it.first)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the task still has remaining occurrences (frequency &gt; 0) before re-adding it to the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Push Task Back to Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                pq.push(it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the task back into the priority queue if it still has remaining occurrences. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Update Net Time</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        net <span style="color:#666">+=</span> <span style="color:#666">!</span>pq.empty()<span style="color:#666">?</span> n <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> time;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds either `n &#43; 1` (if tasks are still remaining) or `time` (if no tasks are left) to the total `net` time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> net;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the total time required to complete all tasks, represented by the `net` variable. </div>
                         </div>
                     
                 </div>
@@ -619,16 +849,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) where n is the length of the string (if there are no odd frequencies).</div>
-                        <div class=""> <b>Average Case:</b> O(n) as counting frequencies requires a single scan of the string.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) where n is the length of the string (this is the same as average case because we only need to count frequencies).</div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(N log N)</div>
+                        <div class=""> <b>Average Case:</b> O(N log N)</div>
+                        <div class=""> <b>Worst Case:</b> O(N log N)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the heap operations which take O(log N) time, where N is the number of unique tasks.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) since the number of characters is constant (26 possible characters).</div>
-                        <div class=""> <b>Worst Case:</b> O(1) as we are only using a fixed number of counters for character frequencies (26 letters).</div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(N)</div>
+                        <div class=""> <b>Worst Case:</b> O(N)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(N) where N is the number of unique tasks, as we need to store them in the priority queue.</div>    
                     </div>
 
                 </div>

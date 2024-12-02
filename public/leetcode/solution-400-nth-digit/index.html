@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given a list of people where each person has a certain weight, and a boat with a weight limit. Each boat can carry at most two people at the same time, as long as their combined weight does not exceed the boat&rsquo;s weight limit. Your task is to determine the minimum number of boats required to rescue everyone. </div>
+<div class=""> You are given a positive integer n. Your task is to find the nth digit in an infinite sequence of consecutive integers starting from 1. The sequence starts as [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, &hellip;]. </div>
 
 
 
@@ -370,51 +370,41 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an array of integers where each integer represents the weight of a person. You are also given a weight limit that each boat can carry.</div>
-                        <div class=""> <b>Example:</b> Input: people = [2, 3, 5, 8], limit = 8</div>
+                        <div class=""> <b>Input:</b> You will be given an integer n, where 1 &lt;= n &lt;= 2^31 - 1.</div>
+                        <div class=""> <b>Example:</b> For n = 12, the sequence up to the 12th digit is: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], and the 12th digit is 1.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= people.length &lt;= 5 * 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= people[i] &lt;= limit &lt;= 3 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> You should return a single integer, which represents the minimum number of boats required to carry all the people.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return the nth digit in the infinite sequence of consecutive integers.</div>
+                        <div class=""> <b>Example:</b> For n = 5, the output should be 5.</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The output is a single integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the number of boats used while ensuring that no boat carries more than its weight limit.</div>
+                        <div class=""> <b>Goal:</b> The goal is to identify the nth digit in the infinite sequence efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the list of people by their weight.</div>
+                                <div style="margin-left: 20px;"> • 1. Determine the length of the digits for the current number range.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a two-pointer technique where one pointer starts at the lightest person and the other starts at the heaviest.</div>
+                                <div style="margin-left: 20px;"> • 2. Identify the range where the nth digit falls.</div>
                             
-                                <div style="margin-left: 20px;"> • If the combined weight of the two people is within the limit, they can share a boat.</div>
-                            
-                                <div style="margin-left: 20px;"> • If not, the heavier person takes a boat alone.</div>
-                            
-                                <div style="margin-left: 20px;"> • Continue this process until all people have been assigned to a boat.</div>
+                                <div style="margin-left: 20px;"> • 3. Calculate the specific number and digit within that range.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem must be solved within the constraints of the problem size and time efficiency.</div>
+                        <div class=""> <b>Goal:</b> The problem operates under the constraint 1 &lt;= n &lt;= 2^31 - 1.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution must run efficiently for up to 50,000 people.</div>
-                            
-                                <div style="margin-left: 20px;"> • The algorithm must handle large values for the weight limit (up to 30,000).</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>        
@@ -422,21 +412,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array contains weights of people that range between 1 and the boat&#39;s limit.</div>
+                                <div style="margin-left: 20px;"> • The value of n is always valid and within the given constraints.</div>
                             
-                                <div style="margin-left: 20px;"> • There are no edge cases where a person weighs more than the boat&#39;s limit, as this will never be the case based on the constraints.</div>
+                                <div style="margin-left: 20px;"> • The sequence of integers is unbounded.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: people = [2, 3, 5, 8], limit = 8</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sorted people array is [2, 3, 5, 8]. The heaviest person (8) takes a boat alone, the next pair (2, 5) can share a boat, leaving 3 to take a boat on their own. Hence, 3 boats are needed.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: people = [4, 2, 6, 3], limit = 7</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sorted people array is [2, 3, 4, 6]. The pair (2, 6) shares a boat, and the pair (3, 4) shares a boat. Hence, 2 boats are needed.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For n = 12, the sequence is [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]. The 12th digit is part of the number 12, which is 1.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By breaking the sequence into ranges based on the number of digits, we can pinpoint that the 12th digit lies in the 10-99 range.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,16 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution can be approached using a greedy strategy with a two-pointer technique. By sorting the array of people, we can try to pair the lightest and heaviest people to minimize the number of boats used.</div>
+                        <div class=""> <b>Approach:</b> The approach is to break down the sequence into chunks of numbers with the same number of digits and locate the range containing the nth digit.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The lightest and heaviest people should ideally share a boat if their combined weight is within the limit.</div>
+                                <div style="margin-left: 20px;"> • The sequence starts with single-digit numbers, then transitions to two-digit numbers, and so on.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each range of numbers contributes a different number of digits.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By sorting the people by their weights and applying a two-pointer strategy, we can efficiently assign people to boats.</div>
+                                <div style="margin-left: 20px;"> • We need to calculate which range the nth digit lies in and then pinpoint the exact number and digit.</div>
                             
                         </div>
                     </div>
@@ -477,17 +465,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the people array.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with single-digit numbers and calculate how many digits they contribute to the sequence.</div>
                             
-                                <div style="margin-left: 20px;"> • Initialize two pointers: one at the beginning and the other at the end of the array.</div>
+                                <div style="margin-left: 20px;"> • 2. Move to multi-digit numbers and subtract the number of digits until you locate the correct range.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the sum of the weights at the two pointers is less than or equal to the limit.</div>
-                            
-                                <div style="margin-left: 20px;"> • If so, move both pointers inward and count the boat.</div>
-                            
-                                <div style="margin-left: 20px;"> • If not, move only the pointer at the end inward, counting the boat for the person at the end.</div>
-                            
-                                <div style="margin-left: 20px;"> • Repeat the process until all people are assigned to boats.</div>
+                                <div style="margin-left: 20px;"> • 3. Once the range is located, determine the exact number and digit.</div>
                             
                         </div>
                     </div>
@@ -496,22 +478,14 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem constraints guarantee that there will be at least one person.</div>
-                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • Ensure that the solution can handle up to 50,000 people efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When everyone is of the same weight, pairing them optimally will reduce the number of boats.</div>
-                            
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The input size can be large, so an efficient solution using sorting and two-pointer strategy is required.</div>
                             
                         </div>                                                                        
                     </div>
@@ -530,25 +504,29 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 While Loop End</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Pointer Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update n</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pointer Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Increment Length</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check (Else)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Boats Increment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Find Target Digit</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Convert to String</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
                     
                 </div>
 
@@ -557,21 +535,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numRescueBoats</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> people, <span style="color:#0b0;font-weight:bold">int</span> limit) {
-</span></span><span style="display:flex;"><span>    sort(people.begin(), people.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lo <span style="color:#666">=</span> <span style="color:#666">0</span>, hi <span style="color:#666">=</span> people.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> boats <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(lo <span style="color:#666">&lt;=</span> hi) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findNthDigit</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    lli len <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    lli cnt <span style="color:#666">=</span> <span style="color:#666">9</span>;
+</span></span><span style="display:flex;"><span>    lli start <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n <span style="color:#666">&gt;</span> len <span style="color:#666">*</span> cnt) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">-=</span> len <span style="color:#666">*</span> cnt;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(people[lo] <span style="color:#666">+</span> people[hi] <span style="color:#666">&lt;=</span> limit) {
-</span></span><span style="display:flex;"><span>            lo <span style="color:#666">+=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            hi <span style="color:#666">-=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> hi <span style="color:#666">-=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        boats<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        len<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">*=</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>        start <span style="color:#666">*=</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> boats;
+</span></span><span style="display:flex;"><span>    start <span style="color:#666">+=</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> len;
+</span></span><span style="display:flex;"><span>    string s <span style="color:#666">=</span> to_string(start);     
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s[(n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> len] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -582,110 +561,129 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numRescueBoats</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> people, <span style="color:#0b0;font-weight:bold">int</span> limit) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findNthDigit</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `numRescueBoats` that accepts a vector of people and a limit for the boat&#39;s weight capacity. </div>
+                            <div class=""> Define the function `findNthDigit` that takes an integer `n` as input, which represents the position of the digit to find. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(people.begin(), people.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    lli len <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The list of people is sorted in non-decreasing order to facilitate pairing the heaviest and lightest people. </div>
+                            <div class=""> Initialize `len` to 1, which represents the number of digits in the current group (starting with 1-digit numbers). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lo <span style="color:#666">=</span> <span style="color:#666">0</span>, hi <span style="color:#666">=</span> people.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    lli cnt <span style="color:#666">=</span> <span style="color:#666">9</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two pointers `lo` and `hi` are initialized, where `lo` points to the lightest person, and `hi` points to the heaviest. </div>
+                            <div class=""> Initialize `cnt` to 9, representing the number of 1-digit numbers (1 to 9). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Setup</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> boats <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    lli start <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A counter `boats` is initialized to track the number of boats needed. </div>
+                            <div class=""> Initialize `start` to 1, representing the first number in the current digit group (starting with 1). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Setup</b></div>
+                            <div class=""> <b>5 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(lo <span style="color:#666">&lt;=</span> hi) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n <span style="color:#666">&gt;</span> len <span style="color:#666">*</span> cnt) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The loop continues as long as the `lo` pointer is less than or equal to the `hi` pointer, meaning there are people still unpaired. </div>
+                            <div class=""> Enter a while loop that continues until `n` is less than or equal to the total number of digits in the current group. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : While Loop End</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(people[lo] <span style="color:#666">+</span> people[hi] <span style="color:#666">&lt;=</span> limit) {
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
                             </div>
-                            <div class=""> The condition checks if the lightest (`lo`) and heaviest (`hi`) person can be paired together in one boat without exceeding the weight limit. </div>
+                            <div class=""> End of the while loop that processes the current group of numbers based on their digit length. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Pointer Adjustment</b></div>
+                            <div class=""> <b>7 : Update n</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            lo <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">-=</span> len <span style="color:#666">*</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If they can be paired, the `lo` pointer is moved right to consider the next lightest person. </div>
+                            <div class=""> Subtract the total number of digits in the current group from `n` to shift to the next group of numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Pointer Adjustment</b></div>
+                            <div class=""> <b>8 : Increment Length</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            hi <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        len<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `hi` pointer is moved left to consider the next heaviest person. </div>
+                            <div class=""> Increase the digit length `len` to move to the next group of numbers (e.g., from 1-digit to 2-digit numbers). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Condition Check (Else)</b></div>
+                            <div class=""> <b>9 : Update Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> hi <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt <span style="color:#666">*=</span> <span style="color:#666">10</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the lightest and heaviest people can&#39;t fit together, only the heaviest person (pointed by `hi`) is placed in a boat. </div>
+                            <div class=""> Multiply `cnt` by 10 to account for the next group of numbers (e.g., from 9 one-digit numbers to 90 two-digit numbers). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Boats Increment</b></div>
+                            <div class=""> <b>10 : Update Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        boats<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        start <span style="color:#666">*=</span> <span style="color:#666">10</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Regardless of whether two people are paired or only one person is placed in the boat, the boat count is incremented. </div>
+                            <div class=""> Multiply `start` by 10 to move to the first number of the next group (e.g., from 1 to 10). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Find Target Digit</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> boats;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    start <span style="color:#666">+=</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> len;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the total number of boats needed. </div>
+                            <div class=""> Calculate the starting number in the group that contains the target digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Convert to String</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string s <span style="color:#666">=</span> to_string(start);     
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Convert the calculated starting number `start` to a string for easy indexing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s[(n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> len] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the digit at the target position by converting it from a character to an integer. </div>
                         </div>
                     
                 </div>
@@ -705,16 +703,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which is O(n log n), followed by a linear scan with two pointers.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is logarithmic in terms of n, as we reduce the number of possible ranges by orders of magnitude with each iteration.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required for sorting the array, though this could be O(1) if sorting in place.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, as the solution only requires a fixed amount of space.</div>    
                     </div>
 
                 </div>

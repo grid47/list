@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 2, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> Given two arrays of strings, <code>startWords</code> and <code>targetWords</code>, determine how many strings in <code>targetWords</code> can be formed by appending a letter to any string in <code>startWords</code> and rearranging the letters. </div>
+<div class=""> You are tasked with sorting an array of integers by performing a series of pancake flips. A pancake flip involves reversing the order of elements from the start of the array up to a specified index. The goal is to determine the sequence of flips needed to sort the array in ascending order. </div>
 
 
 
@@ -360,47 +360,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> Two arrays of strings `startWords` and `targetWords`, each containing lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> startWords = [&#34;rat&#34;, &#34;tap&#34;, &#34;part&#34;], targetWords = [&#34;trap&#34;, &#34;pat&#34;, &#34;partz&#34;]</div>
+                        <div class=""> <b>Input:</b> An array of integers where each integer is unique and represents a permutation of numbers from 1 to n.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [5, 1, 4, 2, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= startWords.length, targetWords.length &lt;= 5 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= startWords[i].length, targetWords[j].length &lt;= 26</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= arr.length</div>
                             
-                                <div style="margin-left: 20px;"> • Each string consists of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • All integers in arr are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of strings in `targetWords` that can be formed by appending a letter to a string in `startWords` and rearranging the letters.</div>
-                        <div class=""> <b>Example:</b> Output = 2</div>
+                        <div class=""> <b>Output:</b> An array of integers where each value corresponds to the position up to which a pancake flip is performed. The sequence of flips must sort the input array.</div>
+                        <div class=""> <b>Example:</b> Output: [5, 3, 4, 3, 2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result is a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The number of flips should not exceed 10 * arr.length.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Identify the number of words in `targetWords` that can be formed from `startWords` using the conversion operation.</div>
+                        <div class=""> <b>Goal:</b> Sort the array using a series of pancake flips.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Convert each word in `startWords` and `targetWords` to bitmasks.</div>
+                                <div style="margin-left: 20px;"> • Identify the largest unsorted element in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each word in `targetWords`, check if a matching word in `startWords` exists where only one additional letter is needed.</div>
+                                <div style="margin-left: 20px;"> • Perform a flip to bring the largest element to the beginning of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Perform another flip to move the largest element to its correct position in the sorted part of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Repeat until the entire array is sorted.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input arrays and strings should adhere to the specified constraints for efficiency.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the problem is computationally feasible and the inputs are well-formed.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • startWords and targetWords can each contain up to 50,000 strings.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • Each string has a maximum length of 26 characters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= arr.length</div>
+                            
+                                <div style="margin-left: 20px;"> • All integers in arr are unique.</div>
                             
                         </div>
                     </div>        
@@ -408,17 +414,29 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The strings in both arrays consist of lowercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • The array contains only integers.</div>
                             
-                                <div style="margin-left: 20px;"> • No string in `startWords` or `targetWords` contains duplicate letters.</div>
+                                <div style="margin-left: 20px;"> • Each integer in the array is within the range [1, arr.length].</div>
+                            
+                                <div style="margin-left: 20px;"> • The input array is a permutation of numbers from 1 to arr.length.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> startWords = [&#34;rat&#34;, &#34;tap&#34;, &#34;part&#34;], targetWords = [&#34;trap&#34;, &#34;pat&#34;, &#34;partz&#34;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> From &#39;rat&#39; we can form &#39;trap&#39;, from &#39;tap&#39; we can form &#39;pat&#39;, but &#39;partz&#39; cannot be formed.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [3, 1, 4, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We perform the following flips: 
+1. Flip at k = 3: arr = [4, 1, 3, 2]
+2. Flip at k = 4: arr = [2, 3, 1, 4]
+3. Flip at k = 3: arr = [3, 1, 2, 4]
+4. Flip at k = 2: arr = [1, 3, 2, 4]
+5. Flip at k = 3: arr = [1, 2, 3, 4]
+Final Output: [3, 4, 3, 2, 3]</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [1, 2, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array is already sorted, so no flips are needed. Output: []</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +460,22 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use bitmasking to represent the sets of characters in the words and check if appending one character to a word from `startWords` can form a word in `targetWords`.</div>
+                        <div class=""> <b>Approach:</b> The solution involves iteratively moving the largest unsorted element to its correct position using at most two flips per element.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The conversion operation involves appending one new character and rearranging the letters, which suggests using a bitmask representation.</div>
+                                <div style="margin-left: 20px;"> • A flip only changes the order of elements in the prefix of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • To sort the array, we can repeatedly position the largest unsorted element at its correct location.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a set to store the bitmasks of the start words and check for each target word if one of these masks can be transformed by adding a single bit.</div>
+                                <div style="margin-left: 20px;"> • Identify the position of the largest unsorted element.</div>
+                            
+                                <div style="margin-left: 20px;"> • Perform a flip to move it to the beginning of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Perform another flip to place it at its correct position.</div>
                             
                         </div>
                     </div>
@@ -459,9 +483,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create bitmask representations of each word in `startWords`.</div>
+                                <div style="margin-left: 20px;"> • Start with the entire array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each word in `targetWords`, create its bitmask and check if adding one more bit results in a mask that exists in the `startWords` bitmask set.</div>
+                                <div style="margin-left: 20px;"> • For each iteration, find the position of the largest unsorted element.</div>
+                            
+                                <div style="margin-left: 20px;"> • Perform a flip to bring it to the beginning of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Perform another flip to move it to its correct position in the sorted part of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Repeat until the array is sorted.</div>
                             
                         </div>
                     </div>
@@ -470,22 +500,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Both `startWords` and `targetWords` are non-empty by problem constraints.</div>
+                                <div style="margin-left: 20px;"> • An empty array would not require any flips.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Optimize the solution for large arrays with up to 50,000 strings.</div>
+                                <div style="margin-left: 20px;"> • For an array with maximum length (100), ensure the algorithm completes within 1000 flips.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider words in `startWords` that are already identical to words in `targetWords` (no conversion needed).</div>
+                                <div style="margin-left: 20px;"> • An already sorted array should result in no flips.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that no more than one letter is appended during the conversion operation.</div>
+                                <div style="margin-left: 20px;"> • Verify that the input is a permutation of integers from 1 to n.</div>
                             
                         </div>                                                                        
                     </div>
@@ -502,45 +532,25 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mask Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Construct</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Mask Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Reverse Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Mask Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Vector Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Count Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Reverse Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 End Vector Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Vector Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Mask Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Character Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mask Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Blank</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Bitwise Comparison</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Skip if Bit Not Set</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mask Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Match Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Count Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Break Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
                 </div>
 
@@ -549,32 +559,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">wordCount</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> start, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> end) {
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bit;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: start) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: it)
-</span></span><span style="display:flex;"><span>            mask <span style="color:#666">|=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
-</span></span><span style="display:flex;"><span>        bit.insert(mask);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pancakeSort(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// find next largest
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// flip its index so that largest come first
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// flip one more time, so that the first goes to end
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> arr.size(); x <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; x<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; arr[i] <span style="color:#666">!=</span> x; i<span style="color:#666">++</span>) {};
+</span></span><span style="display:flex;"><span>        reverse(arr.begin(), arr.begin() <span style="color:#666">+</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        res.push_back(i <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        reverse(arr.begin(), arr.begin() <span style="color:#666">+</span> x);
+</span></span><span style="display:flex;"><span>        res.push_back(x);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: end) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: it)
-</span></span><span style="display:flex;"><span>            mask <span style="color:#666">|=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(((mask <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> (mask <span style="color:#666">^</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> i));
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bit.count(tmp)) {
-</span></span><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -582,203 +584,103 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">wordCount</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> start, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> end) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pancakeSort(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the function `wordCount`, which takes two vectors of strings, `start` and `end`, and returns an integer count of words with similar masks. </div>
+                            <div class=""> The function definition begins the implementation of the pancake sorting algorithm. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bit;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a set `bit` to store unique masks representing characters in the strings from the `start` vector. </div>
+                            <div class=""> Initialize a vector `res` to store the sequence of flip operations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Iteration</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: start) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each string in the `start` vector. </div>
+                            <div class=""> Declare an integer `i` for use in loops and iteration. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Mask Calculation</b></div>
+                            <div class=""> <b>4 : Loop Construct</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> arr.size(); x <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; x<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a variable `mask` to 0, which will be used to store the bitwise representation of characters in the string. </div>
+                            <div class=""> Start a loop from the size of the array down to 1 to process all unsorted elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Character Iteration</b></div>
+                            <div class=""> <b>5 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: it)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; arr[i] <span style="color:#666">!=</span> x; i<span style="color:#666">++</span>) {};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each character `x` in the current string `it`. </div>
+                            <div class=""> Find the index `i` of the current largest unsorted element `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Mask Update</b></div>
+                            <div class=""> <b>6 : Reverse Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mask <span style="color:#666">|=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        reverse(arr.begin(), arr.begin() <span style="color:#666">+</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the mask by setting the bit corresponding to the character `x` in the range &#39;a&#39; to &#39;z&#39;. </div>
+                            <div class=""> Reverse the segment of the array from the start to index `i` to bring the largest element to the front. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Mask Insertion</b></div>
+                            <div class=""> <b>7 : Vector Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        bit.insert(mask);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(i <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inserts the computed `mask` into the `bit` set. </div>
+                            <div class=""> Record the flip operation by adding `i &#43; 1` (1-based index) to the result vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Count Initialization</b></div>
+                            <div class=""> <b>8 : Reverse Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        reverse(arr.begin(), arr.begin() <span style="color:#666">+</span> x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a counter `cnt` to 0, which will store the number of valid words found in the `end` vector. </div>
+                            <div class=""> Reverse the segment of the array from the start to index `x`, moving the largest element to its final position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : End Vector Iteration</b></div>
+                            <div class=""> <b>9 : Vector Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: end) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each string in the `end` vector. </div>
+                            <div class=""> Record the second flip operation by adding `x` (the size of the remaining unsorted segment) to the result vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Mask Calculation</b></div>
+                            <div class=""> <b>10 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a new variable `mask` for the current string from the `end` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Character Iteration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: it)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterates over each character `x` in the current string `it`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Mask Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mask <span style="color:#666">|=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Updates the mask for the current string `it` in the `end` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Blank</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Empty line for clarity. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Bitwise Comparison</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterates through each bit position (0 to 25) to check for possible matches. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Skip if Bit Not Set</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(((mask <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Skips the current iteration if the bit at position `i` is not set in the current mask. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Mask Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> (mask <span style="color:#666">^</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> i));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculates a temporary mask by flipping the bit at position `i` in the current `mask`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Match Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bit.count(tmp)) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the modified `tmp` mask exists in the `bit` set. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Count Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments the count `cnt` if a matching mask is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Break Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Breaks the inner loop as soon as a match is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Return Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the count of words in `end` that have matching masks in `start`. </div>
+                            <div class=""> Return the result vector containing the sequence of flip operations. </div>
                         </div>
                     
                 </div>
@@ -799,15 +701,15 @@
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
-                        <div class=""> <b>Description:</b> Where n is the number of words and m is the maximum word length. Time complexity is dominated by checking each target word against the set of bitmasks.</div>                                               
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The worst case involves performing two flips for each of the n elements, resulting in O(n^2) complexity.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> Space complexity is proportional to the number of words and the size of the bitmask set.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The solution operates in-place, so the space complexity is O(1).</div>    
                     </div>
 
                 </div>

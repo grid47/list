@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 22, 2024
                                     <i class="far fa-clock clock"></i>
-                                    10 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1290s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1288s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/763.webp" 
            alt="A string where partitions are made, each partition softly glowing as it is formed." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given two integer arrays, <code>source</code> and <code>target</code>, both of length <code>n</code>, and an array <code>allowedSwaps</code> containing pairs of indices where swapping is allowed. You can perform multiple swaps between the specified pairs to minimize the Hamming distance between <code>source</code> and <code>target</code>. The Hamming distance is the number of indices where the elements of <code>source</code> and <code>target</code> differ. </div>
+<div class=""> You are given a string s. Your task is to divide the string into the maximum number of parts such that each letter appears in at most one part. The resulting parts, when concatenated in order, should form the original string. </div>
 
 
 
@@ -372,65 +372,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two integer arrays `source` and `target`, and an array `allowedSwaps` where each element is a pair of indices representing allowed swaps.</div>
-                        <div class=""> <b>Example:</b> Input: source = [1, 2, 3, 4], target = [2, 1, 4, 5], allowedSwaps = [[0, 1], [2, 3]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;abcacbadefgh&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 500</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= source[i], target[i] &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= allowedSwaps.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • allowedSwaps[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt;= n - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • ai != bi</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum Hamming distance between `source` and `target` after performing any number of allowed swaps.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> Return a list of integers where each integer represents the length of one part after dividing the string.</div>
+                        <div class=""> <b>Example:</b> Output: [6, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The arrays `source` and `target` have the same length `n`.</div>
+                                <div style="margin-left: 20px;"> • The result list should contain the maximum number of partitions possible.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To minimize the Hamming distance, you must swap elements in `source` based on the allowed pairs of indices to make it match `target` as much as possible.</div>
+                        <div class=""> <b>Goal:</b> The goal is to divide the string into the maximum number of parts such that each letter appears in only one part.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a union-find data structure to track connected components formed by the allowed swaps.</div>
+                                <div style="margin-left: 20px;"> • First, find the last occurrence of each character in the string.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each component (group of indices), group the corresponding elements of `source` and `target`.</div>
+                                <div style="margin-left: 20px;"> • Then, iterate over the string, keeping track of the rightmost position where the current partition can end.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Compare the two groups and count how many elements can be matched in order to minimize the Hamming distance.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the minimum Hamming distance after all possible swaps.</div>
+                                <div style="margin-left: 20px;"> • If the current position is equal to the last occurrence of any character in the current partition, finalize the current partition and start a new one.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must efficiently handle the constraints for `n` and `allowedSwaps` as large as 10^5.</div>
+                        <div class=""> <b>Goal:</b> The length of the string s is constrained between 1 and 500.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= source[i], target[i] &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= allowedSwaps.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • allowedSwaps[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt;= n - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • ai != bi</div>
+                                <div style="margin-left: 20px;"> • The string consists only of lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -438,21 +418,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The arrays `source` and `target` are non-empty and have the same length.</div>
-                            
-                                <div style="margin-left: 20px;"> • The allowed swaps provide the flexibility to change the arrangement of `source` elements.</div>
+                                <div style="margin-left: 20px;"> • The string is non-empty and contains only lowercase letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: source = [1, 2, 3, 4], target = [2, 1, 4, 5], allowedSwaps = [[0, 1], [2, 3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By swapping indices 0 and 1, and then indices 2 and 3, the array `source` becomes [2, 1, 4, 3]. This results in a Hamming distance of 1, since only the element at index 3 is different.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: source = [5, 1, 2, 4, 3], target = [1, 5, 4, 2, 3], allowedSwaps = [[0, 4], [4, 2], [1, 3], [1, 4]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By performing the allowed swaps, the `source` array can be transformed into [1, 5, 4, 2, 3], resulting in a Hamming distance of 0, since the arrays now match exactly.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: s = &#34;abcacbadefgh&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the string is divided into two parts: &#34;abcacb&#34; and &#34;adefgh&#34;, with no characters repeating across the parts.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -476,16 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves using a union-find data structure to group indices that can be swapped and then comparing the elements at those indices in `source` and `target` to minimize the Hamming distance.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem by iterating through the string and keeping track of the last occurrence of each character. As we move through the string, we will try to form partitions based on these last occurrences.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The allowed swaps form connected components of indices that can be freely rearranged among themselves.</div>
+                                <div style="margin-left: 20px;"> • We can use a map to store the last occurrence index of each character.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can iterate through the string and dynamically adjust the end of the current partition.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use union-find to efficiently group the indices that can be swapped, and then we can match the corresponding elements from `source` and `target` within each group.</div>
+                                <div style="margin-left: 20px;"> • The key to solving this problem is to recognize when to finalize a partition by checking the farthest position of the characters in the partition.</div>
                             
                         </div>
                     </div>
@@ -493,15 +469,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a union-find structure with each index as its own parent.</div>
+                                <div style="margin-left: 20px;"> • First, traverse the string and store the last index of each character in a map.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each allowed swap, unify the two indices into the same group.</div>
+                                <div style="margin-left: 20px;"> • Then, traverse the string again while maintaining the rightmost index for the current partition.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each group, collect the elements of `source` and `target` at the indices in that group.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Compare the two collections and count how many elements match in order to minimize the Hamming distance.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the minimized Hamming distance.</div>
+                                <div style="margin-left: 20px;"> • When we reach the rightmost index of the current partition, finalize it and start a new partition.</div>
                             
                         </div>
                     </div>
@@ -510,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty array is not a valid input, as the problem assumes that `source` and `target` have at least one element.</div>
+                                <div style="margin-left: 20px;"> • The string is not empty, but if the length is 1, the output should be a single partition of length 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle inputs where `n` and `allowedSwaps.length` are as large as 10^5.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently even for the maximum string length of 500 characters.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If no allowed swaps are given, the result will be the original Hamming distance between `source` and `target`.</div>
+                                <div style="margin-left: 20px;"> • Strings with no repeating characters will have one partition for the entire string.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The arrays `source` and `target` must have the same length.</div>
+                                <div style="margin-left: 20px;"> • Handle strings with repeated characters correctly, ensuring the partitioning respects the rule that each character appears in at most one part.</div>
                             
                         </div>                                                                        
                     </div>
@@ -542,75 +514,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declarations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Control</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 First Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize n</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Resize Parent Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variables Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Resize Rank Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Second Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Initialize Parent Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Maximum Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Set Parent</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Partition Boundary Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Swap Operation Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Push Partition Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Find Roots for Swap</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Partition End</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Find Roots for Swap</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Union by Rank</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Union by Rank</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Increase Rank</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Union by Rank</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Union by Rank</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Increase Rank</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Create Map</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Populate Map</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Add Frequency</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Add Frequency</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Add Frequency</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Calculate Hamming Distance</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Update Hamming Distance</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Update Hamming Distance</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Update Hamming Distance</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Update Hamming Distance</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Increment Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Return Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Find Function</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="32"> 32 Path Compression</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="33"> 33 Path Compression</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="34"> 34 Path Compression</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="35"> 35 Return Representative</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
                 </div>
 
@@ -619,57 +545,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> parent, rnk;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> minimumHammingDistance(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> src, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> dst, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> swp) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> src.size();
-</span></span><span style="display:flex;"><span>    parent.resize(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    rnk.resize(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        parent[i] <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">s</span>: swp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> find(s[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> find(s[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(rnk[x] <span style="color:#666">&lt;</span> rnk[y]) {
-</span></span><span style="display:flex;"><span>            parent[x] <span style="color:#666">=</span> y;
-</span></span><span style="display:flex;"><span>            rnk[y]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            parent[y] <span style="color:#666">=</span> x;
-</span></span><span style="display:flex;"><span>            rnk[x]<span style="color:#666">++</span>;                
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> partitionLabels(string s) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        mp[s[i]] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, mx <span style="color:#666">=</span> mp[s[<span style="color:#666">0</span>]];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, mp[s[i]]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> mx <span style="color:#666">||</span> i <span style="color:#666">==</span> s.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            res.push_back(i <span style="color:#666">-</span> prv);
+</span></span><span style="display:flex;"><span>            prv <span style="color:#666">=</span> mx;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>m <span style="color:#666">=</span> mp[p];
-</span></span><span style="display:flex;"><span>        m[src[i]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>m <span style="color:#666">=</span> mp[p];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((m[dst[i]]<span style="color:#666">--</span>) <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> parent[x];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(y <span style="color:#666">!=</span> x) {
-</span></span><span style="display:flex;"><span>        parent[x] <span style="color:#666">=</span> find(y);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> parent[x];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -677,353 +567,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Class Definition</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> partitionLabels(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The class `Solution` is defined, which contains the function `minimumHammingDistance` that will calculate the minimum Hamming distance between two arrays after performing the allowed swap operations. </div>
+                            <div class=""> This line defines the function &#39;partitionLabels&#39; which takes a string &#39;s&#39; and returns a vector of integers representing the sizes of the partitions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declarations</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> parent, rnk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two vectors `parent` and `rnk` are declared. `parent` will store the representative of each element in the union-find structure, and `rnk` will store the rank (or depth) of the trees in the union-find structure to keep the structure balanced. </div>
+                            <div class=""> This initializes a map &#39;mp&#39; where each character from the string will be mapped to its last occurrence index in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Access Control</b></div>
+                            <div class=""> <b>3 : First Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This marks the beginning of the public section of the class, making the function `minimumHammingDistance` accessible from outside the class. </div>
+                            <div class=""> This loop iterates over each character in the string &#39;s&#39; to record the last occurrence index of each character in the &#39;mp&#39; map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Map Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumHammingDistance</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> src, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> dst, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> swp) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[s[i]] <span style="color:#666">=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `minimumHammingDistance` is defined. It takes three arguments: two integer vectors `src` and `dst` representing the two arrays, and a 2D vector `swp` representing the allowed swap operations between indices. </div>
+                            <div class=""> This updates the map &#39;mp&#39; with the index of the current character &#39;s[i]&#39;. This ensures that the map stores the last occurrence of each character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Initialize n</b></div>
+                            <div class=""> <b>5 : Result Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> src.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The integer `n` is initialized to the size of the `src` array, which is assumed to be the same size as `dst`. </div>
+                            <div class=""> This initializes an empty vector &#39;res&#39; which will store the sizes of the partitions created. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Resize Parent Array</b></div>
+                            <div class=""> <b>6 : Variables Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    parent.resize(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, mx <span style="color:#666">=</span> mp[s[<span style="color:#666">0</span>]];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `parent` array is resized to size `n` and initialized with zeros. Each element will represent its own parent initially. </div>
+                            <div class=""> This initializes two variables: &#39;prv&#39; to -1 (the previous partition&#39;s end index) and &#39;mx&#39; to the last occurrence index of the first character in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Resize Rank Array</b></div>
+                            <div class=""> <b>7 : Second Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    rnk.resize(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `rnk` array is resized to size `n` and initialized with zeros. This array will track the rank of each tree in the union-find structure. </div>
+                            <div class=""> This loop iterates over the string &#39;s&#39; again to determine the boundaries of the partitions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Initialize Parent Array</b></div>
+                            <div class=""> <b>8 : Maximum Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, mp[s[i]]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is initiated to initialize the `parent` array, setting each element&#39;s parent to itself. </div>
+                            <div class=""> This updates the variable &#39;mx&#39; to store the maximum index between the current &#39;mx&#39; and the last occurrence index of the current character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Set Parent</b></div>
+                            <div class=""> <b>9 : Partition Boundary Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        parent[i] <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> mx <span style="color:#666">||</span> i <span style="color:#666">==</span> s.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each element in the `parent` array is set to point to itself, indicating that initially each element is its own representative. </div>
+                            <div class=""> This checks if the current index &#39;i&#39; has reached the end of a partition. A partition ends when &#39;i&#39; equals &#39;mx&#39; (the last occurrence of the current characters in the partition) or when &#39;i&#39; is the last index in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Swap Operation Loop</b></div>
+                            <div class=""> <b>10 : Push Partition Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">s</span>: swp) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(i <span style="color:#666">-</span> prv);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is started to process each swap operation in the `swp` array. Each swap operation is represented as a vector of two integers. </div>
+                            <div class=""> If a partition boundary is found, this line adds the size of the partition (difference between the current index &#39;i&#39; and the previous partition&#39;s end &#39;prv&#39;) to the result vector &#39;res&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Find Roots for Swap</b></div>
+                            <div class=""> <b>11 : Update Partition End</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> find(s[<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            prv <span style="color:#666">=</span> mx;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `find` function is called to get the root (representative) of the first element `s[0]` in the swap operation. </div>
+                            <div class=""> This updates &#39;prv&#39; to &#39;mx&#39;, marking the end of the current partition. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Find Roots for Swap</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> find(s[<span style="color:#666">1</span>]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The `find` function is called to get the root (representative) of the second element `s[1]` in the swap operation. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Union by Rank</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(rnk[x] <span style="color:#666">&lt;</span> rnk[y]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the rank of root `x` is less than that of root `y`, the tree rooted at `x` will be attached to the tree rooted at `y`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Union by Rank</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            parent[x] <span style="color:#666">=</span> y;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The parent of `x` is set to `y`, merging the two sets. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Increase Rank</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            rnk[y]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The rank of root `y` is increased, indicating the depth of the tree has grown. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Union by Rank</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the rank of root `x` is greater than or equal to that of root `y`, the tree rooted at `y` is attached to the tree rooted at `x`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Union by Rank</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            parent[y] <span style="color:#666">=</span> x;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The parent of `y` is set to `x`, merging the two sets. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Increase Rank</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            rnk[x]<span style="color:#666">++</span>;                
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The rank of root `x` is increased. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Create Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> An unordered map `mp` is created to track the frequencies of elements in the `src` array within each connected component. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Populate Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A loop is initiated to populate the map `mp` with the frequency of elements in `src`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Add Frequency</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The representative `p` of the current element `i` is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Add Frequency</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>m <span style="color:#666">=</span> mp[p];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A reference `m` to the map of frequencies for the connected component is obtained. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Add Frequency</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        m[src[i]]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The frequency of `src[i]` is incremented in the map `m` for the connected component `p`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Calculate Hamming Distance</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The integer `res` is initialized to 0. This will store the total Hamming distance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Update Hamming Distance</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A loop is initiated to calculate the Hamming distance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Update Hamming Distance</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The representative `p` of the current element `i` is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>27 : Update Hamming Distance</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>m <span style="color:#666">=</span> mp[p];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A reference `m` to the map of frequencies for the connected component is obtained. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>28 : Update Hamming Distance</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((m[dst[i]]<span style="color:#666">--</span>) <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the frequency of `dst[i]` is not sufficient to match, it indicates a mismatch, and the result is incremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>29 : Increment Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The result is incremented when the frequencies don&#39;t match. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>30 : Return Result</b></div>
+                            <div class=""> <b>12 : Return Statement</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The final Hamming distance is returned. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>31 : Find Function</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The `find` function is defined to find the representative (or root) of a given element `x`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>32 : Path Compression</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> parent[x];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The parent of `x` is stored in `y`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>33 : Path Compression</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(y <span style="color:#666">!=</span> x) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the parent of `x` is not itself, path compression is applied. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>34 : Path Compression</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        parent[x] <span style="color:#666">=</span> find(y);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The parent of `x` is set to the representative of `y` recursively. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>35 : Return Representative</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> parent[x];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The representative (or root) of `x` is returned. </div>
+                            <div class=""> This returns the &#39;res&#39; vector, which contains the sizes of the partitions. </div>
                         </div>
                     
                 </div>
@@ -1043,16 +703,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m), where n is the number of elements in `source` and `target`, and m is the number of allowed swaps.</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; m), as we process each swap and each element in the arrays once.</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m), where n is the number of elements and m is the number of allowed swaps.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of both the number of elements and the number of allowed swaps.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n) when the string is already partitioned optimally.</div>
+                        <div class=""> <b>Average Case:</b> O(n) where n is the length of the string, as we traverse the string twice.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) as we traverse the string and map the last occurrence of each character.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear as we process each character of the string twice.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), as the space used is proportional to the size of the input arrays and the union-find structure.</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m), for storing the union-find data structure and the collections of elements in each group.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear in terms of the number of elements and the number of allowed swaps.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) for space used in the map.</div>
+                        <div class=""> <b>Worst Case:</b> O(1) for storing the last occurrences, as we only store information for 26 characters (lowercase English letters).</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant as we only need to store a fixed number of characters.</div>    
                     </div>
 
                 </div>

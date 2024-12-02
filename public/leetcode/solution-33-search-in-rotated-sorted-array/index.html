@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Nov 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given a list of distinct integers, generate and return all possible permutations of the elements. The result can be returned in any order. </div>
+<div class=""> You are given a sorted array &rsquo;nums&rsquo; which may have been rotated at an unknown pivot. Your task is to search for a target value in this rotated array. Return the index of the target if found, or -1 if not found. The solution must have a runtime complexity of O(log n). </div>
 
 
 
@@ -370,49 +370,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of distinct integers.</div>
-                        <div class=""> <b>Example:</b> [1, 2, 3]</div>
+                        <div class=""> <b>Input:</b> The input is a rotated sorted array &#39;nums&#39; of distinct integers, followed by the target value to search for.</div>
+                        <div class=""> <b>Example:</b> nums = [4, 5, 6, 7, 0, 1, 2], target = 0</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 6</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 5000</div>
                             
-                                <div style="margin-left: 20px;"> • -10 &lt;= nums[i] &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • -104 &lt;= nums[i] &lt;= 104</div>
                             
-                                <div style="margin-left: 20px;"> • All elements of nums are unique.</div>
+                                <div style="margin-left: 20px;"> • All values of nums are unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • nums is a rotated sorted array.</div>
+                            
+                                <div style="margin-left: 20px;"> • -104 &lt;= target &lt;= 104</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return all possible permutations of the input list.</div>
-                        <div class=""> <b>Example:</b> [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]</div>
+                        <div class=""> <b>Output:</b> The output is the index of the target in the rotated array if it exists, otherwise return -1.</div>
+                        <div class=""> <b>Example:</b> For nums = [4, 5, 6, 7, 0, 1, 2], target = 0, the output is 4.</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The number of permutations is n!, where n is the length of the input list.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to generate all possible permutations of the input list of distinct integers.</div>
+                        <div class=""> <b>Goal:</b> The goal is to search for the target value in the rotated array efficiently using binary search.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use a backtracking approach to explore all permutations of the input list.</div>
+                                <div style="margin-left: 20px;"> • Use binary search to find the pivot where the rotation occurs.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. At each step, keep track of elements used and backtrack when a permutation is completed.</div>
+                                <div style="margin-left: 20px;"> • Determine which half of the array is sorted, and narrow down the search to that half.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Once a valid permutation is found, store it in the result list.</div>
+                                <div style="margin-left: 20px;"> • Adjust the search range depending on whether the target is within the sorted half.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array contains up to 6 distinct integers. Each integer is within the range of -10 to 10.</div>
+                        <div class=""> <b>Goal:</b> The array is rotated at some unknown index, and the array contains distinct elements. We need to ensure that the solution operates in O(log n) time.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array length is between 1 and 6.</div>
+                                <div style="margin-left: 20px;"> • The array contains at least one element.</div>
                             
-                                <div style="margin-left: 20px;"> • The integers in the array are distinct.</div>
+                                <div style="margin-left: 20px;"> • The array length is between 1 and 5000.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element is distinct.</div>
                             
                         </div>
                     </div>        
@@ -420,23 +424,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The integers in the input array are distinct.</div>
+                                <div style="margin-left: 20px;"> • The array has been rotated, and the array is sorted in ascending order before the rotation.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [1, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input [1, 2, 3], all possible permutations include [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], and [3, 2, 1].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4, 5, 6, 7, 0, 1, 2], target = 0</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array is rotated at index 3, so the target value 0 is found at index 4 in the rotated array.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [4, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input [4, 5], the two possible permutations are [4, 5] and [5, 4].</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [8]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input [8], the only possible permutation is [8].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4, 5, 6, 7, 0, 1, 2], target = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The target value 3 does not exist in the array, so the output is -1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,18 +460,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution uses backtracking to generate all possible permutations of the input list. At each step, we explore every element that hasn&#39;t been used in the current permutation.</div>
+                        <div class=""> <b>Approach:</b> We will use a modified binary search to efficiently find the target in the rotated array.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of permutations grows factorially with the size of the input list.</div>
+                                <div style="margin-left: 20px;"> • The array is rotated, so we cannot perform a standard binary search directly.</div>
                             
-                                <div style="margin-left: 20px;"> • Backtracking is a good approach for generating all possible combinations.</div>
+                                <div style="margin-left: 20px;"> • We need to identify which half of the array is sorted and determine if the target is within that range.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • To generate the permutations, we can use recursion and backtrack once we find a valid permutation.</div>
+                                <div style="margin-left: 20px;"> • The key observation is that the array is always divided into two subarrays, one of which is sorted.</div>
                             
                         </div>
                     </div>
@@ -479,11 +479,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a helper function for backtracking that will explore every possible permutation.</div>
+                                <div style="margin-left: 20px;"> • Start with the entire array and calculate the midpoint.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Track the used elements in each step to avoid repeating numbers in the current permutation.</div>
+                                <div style="margin-left: 20px;"> • Check if the left side is sorted by comparing the first element with the midpoint.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Once a valid permutation is formed (i.e., its length matches the input length), add it to the results.</div>
+                                <div style="margin-left: 20px;"> • If the target is within the sorted half, adjust the search range accordingly.</div>
+                            
+                                <div style="margin-left: 20px;"> • Otherwise, search in the unsorted half and continue narrowing down the search space.</div>
                             
                         </div>
                     </div>
@@ -492,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will never be empty because the constraints specify a minimum length of 1.</div>
+                                <div style="margin-left: 20px;"> • The array is guaranteed to have at least one element, so no need to handle empty arrays.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The maximum input size is 6, so the solution should handle the factorial growth of the number of permutations.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle arrays with up to 5000 elements efficiently within O(log n) time.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The elements are distinct, so no duplicates will occur in the input.</div>
+                                <div style="margin-left: 20px;"> • If the target is not present in the array, return -1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure efficient backtracking, especially as the number of permutations grows with input size.</div>
+                                <div style="margin-left: 20px;"> • All elements are distinct, so we do not need to worry about duplicate values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,37 +528,33 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Backtracking Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Backtracking Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case and Result Addition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Base Case and Result Addition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Base Case and Result Addition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Skip Used Numbers</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Mark Number as Used</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Add Number to Current Permutation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Backtrack</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Mark Number as Unused</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return</button>
                     
                 </div>
 
@@ -565,28 +563,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> permute(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
-</span></span><span style="display:flex;"><span>    bt(ans, tmp, nums, <span style="color:#666">0</span>, mp);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums, <span style="color:#0b0;font-weight:bold">int</span> idx, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>mp) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) {
-</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">search</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>, e <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s <span style="color:#666">&lt;=</span> e) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> s <span style="color:#666">+</span> (e <span style="color:#666">-</span> s <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> mid;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[s] <span style="color:#666">&lt;=</span> nums[mid]) {<span style="color:#080;font-style:italic">// window contain jerk
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[s] <span style="color:#666">&lt;=</span> target <span style="color:#666">&amp;&amp;</span> target <span style="color:#666">&lt;</span> nums[mid])
+</span></span><span style="display:flex;"><span>                e <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {<span style="color:#080;font-style:italic">// window is linear
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">&lt;</span> target <span style="color:#666">&amp;&amp;</span> target <span style="color:#666">&lt;=</span> nums[e])
+</span></span><span style="display:flex;"><span>                s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> e <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(nums[i])) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        mp[nums[i]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        tmp.push_back(nums[i]);
-</span></span><span style="display:flex;"><span>        bt(ans, tmp, nums, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, mp);
-</span></span><span style="display:flex;"><span>        tmp.pop_back();
-</span></span><span style="display:flex;"><span>        mp.erase(nums[i]);
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -597,170 +590,150 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> permute(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">search</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> target) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a function named `permute` that takes a vector of integers `nums` as input and returns a vector of vectors representing all possible permutations of the input array. </div>
+                            <div class=""> This line declares a function named &#39;search&#39; that takes a vector of integers &#39;nums&#39; and a target integer &#39;target&#39; as input and returns the index of the target element if found, otherwise -1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Map Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes a map `mp` to keep track of which numbers have already been used in the current permutation. </div>
+                            <div class=""> This line stores the size of the input array &#39;nums&#39; in the variable &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Vector Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>, e <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes a 2D vector `ans` to store the resulting permutations. </div>
+                            <div class=""> This line initializes two pointers &#39;s&#39; and &#39;e&#39; to represent the start and end indices of the search range, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Vector Initialization</b></div>
+                            <div class=""> <b>4 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s <span style="color:#666">&lt;=</span> e) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes a vector `tmp` to store the current permutation being built. </div>
+                            <div class=""> This line starts a `while` loop that continues as long as the start index &#39;s&#39; is less than or equal to the end index &#39;e&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Backtracking Function Call</b></div>
+                            <div class=""> <b>5 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(ans, tmp, nums, <span style="color:#666">0</span>, mp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> s <span style="color:#666">+</span> (e <span style="color:#666">-</span> s <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calls the helper function `bt` to perform the backtracking process. The `ans`, `tmp`, `nums`, `0`, and `mp` are passed as arguments. </div>
+                            <div class=""> This line calculates the middle index &#39;mid&#39; using a formula that avoids integer overflow for large values of &#39;s&#39; and &#39;e&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Result</b></div>
+                            <div class=""> <b>6 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> mid;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line returns the `ans` vector containing all possible permutations. </div>
+                            <div class=""> This line checks if the element at the middle index &#39;mid&#39; is equal to the target. If so, the function returns the index &#39;mid&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Backtracking Function Declaration</b></div>
+                            <div class=""> <b>7 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums, <span style="color:#0b0;font-weight:bold">int</span> idx, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>mp) {
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[s] <span style="color:#666">&lt;=</span> nums[mid]) {<span style="color:#080;font-style:italic">// window contain jerk
+</span></span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a recursive backtracking function `bt` that takes the following parameters: `ans` to store the result, `tmp` to store the current permutation, `nums` the input array, `idx` to track the current index in the permutation, and `mp` to keep track of used numbers. </div>
+                            <div class=""> This line checks if the first half of the array is sorted. If it is, the window contains a &#39;jerk&#39; (a point where the array is not sorted). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Base Case and Result Addition</b></div>
+                            <div class=""> <b>8 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[s] <span style="color:#666">&lt;=</span> target <span style="color:#666">&amp;&amp;</span> target <span style="color:#666">&lt;</span> nums[mid])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line checks the base case: if the current index `idx` reaches the end of the array, it means a complete permutation has been formed. The current permutation `tmp` is added to the `ans` vector. </div>
+                            <div class=""> This line checks if the target lies within the sorted first half of the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Base Case and Result Addition</b></div>
+                            <div class=""> <b>9 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(tmp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                e <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line adds the current permutation `tmp` to the `ans` vector. </div>
+                            <div class=""> If the target lies within the sorted first half, the search space is narrowed by updating the end index &#39;e&#39; to &#39;mid - 1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Base Case and Result Addition</b></div>
+                            <div class=""> <b>10 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line returns from the function as a complete permutation has been found. </div>
+                            <div class=""> If the target doesn&#39;t lie within the sorted first half, the search space is narrowed by updating the start index &#39;s&#39; to &#39;mid &#43; 1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop Iteration</b></div>
+                            <div class=""> <b>11 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {<span style="color:#080;font-style:italic">// window is linear
+</span></span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line starts a `for` loop to iterate over each number in the `nums` array. </div>
+                            <div class=""> This line checks if the second half of the array is sorted. If it is, the window is linear. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Skip Used Numbers</b></div>
+                            <div class=""> <b>12 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(nums[i])) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[mid] <span style="color:#666">&lt;</span> target <span style="color:#666">&amp;&amp;</span> target <span style="color:#666">&lt;=</span> nums[e])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line checks if the current number `nums[i]` has already been used in the current permutation. If so, it skips to the next number. </div>
+                            <div class=""> This line checks if the target lies within the sorted second half of the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Mark Number as Used</b></div>
+                            <div class=""> <b>13 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[nums[i]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line marks the current number `nums[i]` as used in the `mp` map. </div>
+                            <div class=""> If the target lies within the sorted second half, the search space is narrowed by updating the start index &#39;s&#39; to &#39;mid &#43; 1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Add Number to Current Permutation</b></div>
+                            <div class=""> <b>14 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp.push_back(nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> e <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line adds the current number `nums[i]` to the current permutation `tmp`. </div>
+                            <div class=""> If the target doesn&#39;t lie within the sorted second half, the search space is narrowed by updating the end index &#39;e&#39; to &#39;mid - 1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Recursive Call</b></div>
+                            <div class=""> <b>15 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        bt(ans, tmp, nums, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, mp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line recursively calls the `bt` function with the updated `idx` to explore the next position in the permutation. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Backtrack</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp.pop_back();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This line removes the last added number from the `tmp` permutation to backtrack to the previous state. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Mark Number as Unused</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp.erase(nums[i]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This line removes the current number `nums[i]` from the `mp` map, indicating that it can be used again in other permutations. </div>
+                            <div class=""> If the target is not found after the loop, the function returns -1 to indicate that the target is not present in the array. </div>
                         </div>
                     
                 </div>
@@ -780,16 +753,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n!)</div>
-                        <div class=""> <b>Average Case:</b> O(n!)</div>
-                        <div class=""> <b>Worst Case:</b> O(n!)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n!) due to the need to generate all possible permutations of n elements.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(log n) because we are using a modified binary search that halves the search space at each step.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n!)</div>
-                        <div class=""> <b>Worst Case:</b> O(n!)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n!) due to the storage of all permutations and the recursive stack.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because the algorithm only uses a constant amount of extra space.</div>    
                     </div>
 
                 </div>

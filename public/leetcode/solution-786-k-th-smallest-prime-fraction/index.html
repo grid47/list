@@ -299,7 +299,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1302s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1312s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/786.webp" 
            alt="A set of fractions where the kth smallest prime fraction is found, glowing softly as it is identified." 
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> Given an array of subarrays <code>groups</code> and a single array <code>nums</code>, your task is to determine whether it is possible to extract each subarray from <code>groups</code> as a contiguous segment from <code>nums</code>. The subarrays must appear in the same order as in <code>groups</code>, and they should be disjoint, meaning no element from <code>nums</code> can belong to more than one subarray. Return true if this is possible, and false otherwise. </div>
+<div class=""> You are given a sorted array of prime numbers and the number 1. You need to find the k-th smallest fraction formed by considering all possible fractions arr[i] / arr[j] where i &lt; j. Return the k-th smallest fraction as an array of two integers, where arr[i] is the numerator and arr[j] is the denominator. </div>
 
 
 
@@ -373,51 +373,59 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 2D array `groups` where each subarray is a sequence of integers. Additionally, you are given an integer array `nums`.</div>
-                        <div class=""> <b>Example:</b> Input: groups = [[2, 3], [1, 2, 3]], nums = [2, 3, 1, 2, 3, 4]</div>
+                        <div class=""> <b>Input:</b> The input consists of a sorted array arr containing prime numbers and the number 1. You are also given an integer k.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [1, 3, 5, 7], k = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= groups.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= arr.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= groups[i].length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 30,000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= sum(groups[i].length) &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • arr[0] == 1</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • arr[i] is a prime number for i &gt; 0</div>
                             
-                                <div style="margin-left: 20px;"> • nums and group elements are between -10^7 and 10^7</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= arr.length * (arr.length - 1) / 2</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if you can find each subarray from `groups` as disjoint subarrays within `nums` while maintaining the order, otherwise return false.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> Return the k-th smallest fraction as an array of two integers. The first integer is the numerator and the second is the denominator of the fraction.</div>
+                        <div class=""> <b>Example:</b> Output: [3, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be an array of two integers representing the k-th smallest fraction.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to check whether each subarray from `groups` can be found in `nums` in the given order and that the subarrays are disjoint.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the k-th smallest fraction by considering all possible fractions in the form arr[i] / arr[j] where i &lt; j.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Start iterating through `nums` while keeping track of the current subarray being matched from `groups`.</div>
+                                <div style="margin-left: 20px;"> • Initialize a priority queue to store the fractions and their indices.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each subarray, check if it appears in `nums` as a contiguous block.</div>
+                                <div style="margin-left: 20px;"> • Push fractions formed by arr[i] and arr[j] into the priority queue.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Once a match is found, ensure no elements from `nums` are reused for the next subarray by continuing the search beyond the matched segment.</div>
+                                <div style="margin-left: 20px;"> • Pop the fractions from the priority queue and keep track of the smallest fractions.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return true if all subarrays are found, otherwise return false.</div>
+                                <div style="margin-left: 20px;"> • Repeat until the k-th smallest fraction is found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle edge cases, such as when there are no possible matches or the input sizes are near their limits.</div>
+                        <div class=""> <b>Goal:</b> The input is a sorted array with prime numbers and the number 1. You need to find the k-th smallest fraction among all pairs i &lt; j.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution must handle cases where `nums` or the subarrays in `groups` are large efficiently.</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= arr.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 30,000</div>
+                            
+                                <div style="margin-left: 20px;"> • arr[0] == 1</div>
+                            
+                                <div style="margin-left: 20px;"> • arr[i] is a prime number for i &gt; 0</div>
                             
                         </div>
                     </div>        
@@ -425,25 +433,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The arrays `nums` and `groups` consist of integers only.</div>
+                                <div style="margin-left: 20px;"> • The array arr is sorted in strictly increasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • Subarrays in `groups` must appear in the same order in `nums`.</div>
+                                <div style="margin-left: 20px;"> • The number of fractions is bounded by n * (n - 1) / 2.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: groups = [[2, 3], [1, 2, 3]], nums = [2, 3, 1, 2, 3, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first subarray [2, 3] can be found at the start of `nums`. The second subarray [1, 2, 3] follows immediately after the first. Thus, the answer is true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: arr = [1, 3, 5, 7], k = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The fractions to be considered in sorted order are: 1/7, 1/5, 1/3, 3/7, 5/7, and 3/5. The 4th smallest fraction is 3/7.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: groups = [[10, -2], [1, 2, 3, 4]], nums = [1, 2, 3, 4, 10, -2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays are not in the same order in `nums`. The second subarray [1, 2, 3, 4] appears before [10, -2], so the answer is false.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: groups = [[3, 4], [5, 6]], nums = [3, 5, 4, 6]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays are disjoint, but they do not appear in the same order. Therefore, the answer is false.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: arr = [1, 2, 7], k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The fractions to be considered are: 1/7, 1/2, and 2/7. The 2nd smallest fraction is 1/7.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -467,16 +471,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution will iterate through `nums` and try to match each subarray from `groups` in sequence. We will attempt to find each subarray as a contiguous block, ensuring that no element is shared between subarrays.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we can use a priority queue to store fractions in ascending order and pop the smallest fraction until the k-th smallest is found.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The subarrays must be found in order, and no overlap should occur between the subarrays in `nums`.</div>
+                                <div style="margin-left: 20px;"> • The number of fractions grows quadratically with the size of the array, making an O(n^2) solution inefficient for large arrays.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • An efficient approach is to use a greedy matching strategy to find each subarray and continue searching from the end of the last match.</div>
+                                <div style="margin-left: 20px;"> • We can optimize the process by using a priority queue to store fractions in sorted order and only keep track of the smallest fractions at each step.</div>
                             
                         </div>
                     </div>
@@ -484,13 +488,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Start iterating through `nums` with an index to check for the first subarray.</div>
+                                <div style="margin-left: 20px;"> • Initialize a max-heap (priority queue) to store fractions and their indices.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each subarray in `groups`, find its exact match in `nums` while ensuring no overlap with previous matches.</div>
+                                <div style="margin-left: 20px;"> • For each i, push fractions formed with the last element (arr[n-1]) into the heap.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Once a subarray is found, move the index in `nums` past that subarray and continue checking for the next subarray in `groups`.</div>
+                                <div style="margin-left: 20px;"> • Pop the smallest fraction from the heap and push the next possible fraction formed by the next smallest element from arr[i] and arr[j-1].</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return true if all subarrays are found, otherwise return false.</div>
+                                <div style="margin-left: 20px;"> • Repeat until k fractions are popped, and return the k-th smallest fraction.</div>
                             
                         </div>
                     </div>
@@ -499,22 +503,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` is empty or if the total sum of lengths of subarrays in `groups` exceeds the length of `nums`, return false.</div>
+                                <div style="margin-left: 20px;"> • The input will always have at least two elements.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle cases where the length of `nums` and the total number of elements in `groups` are close to their upper limits efficiently.</div>
+                                <div style="margin-left: 20px;"> • Handle arrays with up to 1000 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If any group is empty or a group doesn&#39;t have a matching subsequence in `nums`, return false.</div>
+                                <div style="margin-left: 20px;"> • If arr contains only two elements, the answer is straightforward.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be optimized to handle up to 1000 subarrays in `groups` and 1000 elements in `nums`.</div>
+                                <div style="margin-left: 20px;"> • The value of k is always valid and within the bounds.</div>
                             
                         </div>                                                                        
                     </div>
@@ -531,33 +535,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Priority Queue Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Over Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Push Fractions to Priority Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Initialize Indices</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Main Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Increment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pop From Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Block End</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Indices</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Second Index</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Index Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Push New Fraction to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Index Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Else Block</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
                     
                 </div>
 
@@ -566,29 +566,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canChoose</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> group, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numsIdx <span style="color:#666">=</span> <span style="color:#666">0</span>, grpIdx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(numsIdx <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">&amp;&amp;</span> grpIdx <span style="color:#666">&lt;</span> group.size()) {
-</span></span><span style="display:flex;"><span>        
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> kthSmallestPrimeFraction(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span>, pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span>, pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> pq;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> matchCnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(numsIdx <span style="color:#666">+</span> matchCnt <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">&amp;&amp;</span>
-</span></span><span style="display:flex;"><span>             matchCnt <span style="color:#666">&lt;</span> group[grpIdx].size() <span style="color:#666">&amp;&amp;</span>
-</span></span><span style="display:flex;"><span>             nums[numsIdx <span style="color:#666">+</span> matchCnt] <span style="color:#666">==</span> group[grpIdx][matchCnt])
-</span></span><span style="display:flex;"><span>                matchCnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(matchCnt <span style="color:#666">==</span> group[grpIdx].size()) {
-</span></span><span style="display:flex;"><span>            grpIdx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            numsIdx <span style="color:#666">+=</span> matchCnt;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> numsIdx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    pq.push(make_pair(<span style="color:#666">-</span><span style="color:#666">1.0</span><span style="color:#666">*</span>arr[i]<span style="color:#666">/</span>arr[n <span style="color:#666">-</span> <span style="color:#666">1</span>], make_pair(i, n <span style="color:#666">-</span> <span style="color:#666">1</span>)));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i, j;        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> pq.top().second; pq.pop();
+</span></span><span style="display:flex;"><span>        i <span style="color:#666">=</span> p.first;
+</span></span><span style="display:flex;"><span>        j <span style="color:#666">=</span> p.second;
+</span></span><span style="display:flex;"><span>        pq.push(make_pair(<span style="color:#666">-</span><span style="color:#666">1.0</span><span style="color:#666">*</span>arr[i]<span style="color:#666">/</span>arr[j<span style="color:#666">-</span><span style="color:#666">1</span>], make_pair(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>)));
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> grpIdx <span style="color:#666">==</span> group.size();
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{arr[i], arr[j]};
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -596,143 +587,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canChoose</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> group, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> kthSmallestPrimeFraction(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the function for determining if groups can be matched in the given array `nums`. </div>
+                            <div class=""> This defines the function `kthSmallestPrimeFraction`, which takes an array of integers `arr` and an integer `k` to return the kth smallest prime fraction. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numsIdx <span style="color:#666">=</span> <span style="color:#666">0</span>, grpIdx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes indices for tracking the current position in `nums` and `group`. </div>
+                            <div class=""> This line initializes the variable `n` to store the size of the input array `arr`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : While Loop</b></div>
+                            <div class=""> <b>3 : Priority Queue Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(numsIdx <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">&amp;&amp;</span> grpIdx <span style="color:#666">&lt;</span> group.size()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span>, pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span>, pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over `nums` and `group` as long as indices are within bounds. </div>
+                            <div class=""> This declares a priority queue `pq` to store pairs of fractions (in negative form for max-heap behavior) and their respective indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Loop Over Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> matchCnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a counter to track the number of matching elements for the current group. </div>
+                            <div class=""> This starts a loop to iterate over the array `arr`, where `i` represents the index of the first element of the fraction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : While Loop</b></div>
+                            <div class=""> <b>5 : Push Fractions to Priority Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(numsIdx <span style="color:#666">+</span> matchCnt <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">&amp;&amp;</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push(make_pair(<span style="color:#666">-</span><span style="color:#666">1.0</span><span style="color:#666">*</span>arr[i]<span style="color:#666">/</span>arr[n <span style="color:#666">-</span> <span style="color:#666">1</span>], make_pair(i, n <span style="color:#666">-</span> <span style="color:#666">1</span>)));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks for matching elements between the current group and the array `nums`. </div>
+                            <div class=""> This pushes the fractions formed by the current element `arr[i]` and the last element `arr[n-1]` into the priority queue. Fractions are negated to use the max-heap behavior. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Initialize Indices</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             matchCnt <span style="color:#666">&lt;</span> group[grpIdx].size() <span style="color:#666">&amp;&amp;</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i, j;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Ensures the match count does not exceed the size of the current group. </div>
+                            <div class=""> This declares two integer variables `i` and `j`, which will be used to store the indices of the current pair of fractions being processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Condition Check</b></div>
+                            <div class=""> <b>7 : Main Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             nums[numsIdx <span style="color:#666">+</span> matchCnt] <span style="color:#666">==</span> group[grpIdx][matchCnt])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current elements in `nums` and `group` match. </div>
+                            <div class=""> This begins a while loop that runs `k` times, each time extracting the next smallest fraction from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Increment</b></div>
+                            <div class=""> <b>8 : Pop From Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                matchCnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> pq.top().second; pq.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the match count when elements match. </div>
+                            <div class=""> This pops the top fraction from the priority queue and retrieves the pair of indices `i` and `j` corresponding to the fraction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Block End</b></div>
+                            <div class=""> <b>9 : Update Indices</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i <span style="color:#666">=</span> p.first;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Empty line for separating blocks for readability. </div>
+                            <div class=""> This stores the first index `i` from the popped pair in the variable `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Condition Check</b></div>
+                            <div class=""> <b>10 : Update Second Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(matchCnt <span style="color:#666">==</span> group[grpIdx].size()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        j <span style="color:#666">=</span> p.second;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if all elements in the current group have been matched. </div>
+                            <div class=""> This stores the second index `j` from the popped pair in the variable `j`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Index Update</b></div>
+                            <div class=""> <b>11 : Push New Fraction to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grpIdx<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(make_pair(<span style="color:#666">-</span><span style="color:#666">1.0</span><span style="color:#666">*</span>arr[i]<span style="color:#666">/</span>arr[j<span style="color:#666">-</span><span style="color:#666">1</span>], make_pair(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>)));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves to the next group after successfully matching the current group. </div>
+                            <div class=""> This pushes the next fraction formed by `arr[i]` and `arr[j-1]` into the priority queue, decrementing `j` to explore the next smaller fraction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Index Update</b></div>
+                            <div class=""> <b>12 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            numsIdx <span style="color:#666">+=</span> matchCnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{arr[i], arr[j]};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skips past the matched elements in `nums`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Else Block</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> numsIdx<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves to the next element in `nums` if the current group does not match. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> grpIdx <span style="color:#666">==</span> group.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns `true` if all groups were matched successfully; otherwise, `false`. </div>
+                            <div class=""> After extracting the kth smallest fraction, this line returns the fraction as a pair of integers `arr[i]` and `arr[j]`. </div>
                         </div>
                     
                 </div>
@@ -752,16 +723,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^3)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, each subarray needs to be matched against a portion of `nums`, leading to a time complexity of O(n^3) when considering the sum of subarray lengths.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(k log k), since the heap stores and processes up to k fractions.</div>
+                        <div class=""> <b>Average Case:</b> O(k log k), as we process up to k elements.</div>
+                        <div class=""> <b>Worst Case:</b> O(k log k), since we always push and pop fractions from the heap.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the priority queue operations, which run in log k time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since we are only using a few integer variables to track indices and matches.</div>    
+                        <div class=""> <b>Best Case:</b> O(k), as the space used by the heap depends on k.</div>
+                        <div class=""> <b>Worst Case:</b> O(k), since the heap stores up to k fractions at any given time.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of fractions stored in the heap.</div>    
                     </div>
 
                 </div>

@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode74s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode72s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/113.webp" 
            alt="A radiant path of numbers, showing multiple possible paths with gentle branches leading to different sums." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> A happy number is a number that eventually reaches 1 when replaced by the sum of the squares of its digits. If the process results in an endless loop of numbers, the number is not happy. Your task is to determine whether a given number is a happy number. </div>
+<div class=""> Given the root of a binary tree and an integer targetSum, return all paths from the root to the leaf nodes where the sum of the node values along the path equals the targetSum. A root-to-leaf path is defined as any path that starts from the root and ends at a leaf node. A leaf node is a node that does not have any children. </div>
 
 
 
@@ -372,41 +372,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a positive integer n, where 1 &lt;= n &lt;= 231 - 1.</div>
-                        <div class=""> <b>Example:</b> n = 23</div>
+                        <div class=""> <b>Input:</b> The input consists of a binary tree represented by the root node and an integer targetSum. The binary tree is represented as an array where each node is given by its value. Null values represent missing nodes.</div>
+                        <div class=""> <b>Example:</b> Input: root = [10,5,15,3,7,null,20], targetSum = 22</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 231 - 1</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 5000].</div>
+                            
+                                <div style="margin-left: 20px;"> • Each node value is between -1000 and 1000.</div>
+                            
+                                <div style="margin-left: 20px;"> • The targetSum is between -1000 and 1000.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if the number n is a happy number, otherwise return false.</div>
-                        <div class=""> <b>Example:</b> Output: false</div>
+                        <div class=""> <b>Output:</b> The output should be a list of all root-to-leaf paths, where each path is represented as a list of node values that sum up to the given targetSum.</div>
+                        <div class=""> <b>Example:</b> Output: [[10,5,3], [10,15,20]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean value indicating whether the number is happy or not.</div>
+                                <div style="margin-left: 20px;"> • Each path should be a valid root-to-leaf path with the sum of node values equal to targetSum.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to check if the number n becomes 1 by repeatedly replacing it with the sum of the squares of its digits, or if it falls into an endless loop.</div>
+                        <div class=""> <b>Goal:</b> The goal is to traverse the tree and accumulate the path sum from the root to the leaf nodes. If a path&#39;s sum matches the targetSum, it should be added to the result.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create a helper function to calculate the sum of the squares of the digits of a number.</div>
+                                <div style="margin-left: 20px;"> • Traverse the tree using depth-first search (DFS).</div>
                             
-                                <div style="margin-left: 20px;"> • Use the Floyd&#39;s Cycle detection algorithm (also known as the slow and fast pointers technique) to detect if the number falls into a cycle. If the number becomes 1, it&#39;s happy, otherwise it&#39;s not.</div>
+                                <div style="margin-left: 20px;"> • At each node, subtract its value from targetSum and continue exploring both left and right children.</div>
+                            
+                                <div style="margin-left: 20px;"> • If a leaf node is reached and the remaining sum equals 0, add the current path to the result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the solution works efficiently for numbers up to the given limit.</div>
+                        <div class=""> <b>Goal:</b> The tree may have up to 5000 nodes, and each node&#39;s value can range from -1000 to 1000. The solution should handle these efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number n must be a positive integer between 1 and 231 - 1.</div>
+                                <div style="margin-left: 20px;"> • Tree size: 0 &lt;= number of nodes &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • Node values: -1000 &lt;= Node.val &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • Target sum: -1000 &lt;= targetSum &lt;= 1000</div>
                             
                         </div>
                     </div>        
@@ -414,19 +424,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input number is always a valid positive integer within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The input tree is a valid binary tree, where nodes have either zero, one, or two children.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 19</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the sum of the squares of digits is 12 &#43; 92 = 82, then 82 &#43; 22 = 68, then 62 &#43; 82 = 100, and 12 &#43; 02 &#43; 02 = 1. Since the number eventually reaches 1, it&#39;s a happy number.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [10,5,15,3,7,null,20], targetSum = 22</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting from the root (10), we explore the left child (5) and its left child (3), which gives the path [10,5,3] with sum 22. We also explore the right child (15) and its right child (20), which gives the path [10,15,20] with sum 22.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For n = 2, the sum of the squares of digits is 4, then 4 becomes 16, then 37, and so on. Since it falls into a cycle, it is not a happy number.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1,2,3], targetSum = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No path from root to leaf sums up to 5. Therefore, the output is an empty list.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -450,18 +460,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To determine if a number is happy, we use the process of repeatedly replacing the number by the sum of the squares of its digits. If the number eventually reaches 1, it&#39;s happy. If it falls into a cycle, it&#39;s not.</div>
+                        <div class=""> <b>Approach:</b> The solution involves using depth-first search (DFS) to traverse the tree. At each node, we reduce the targetSum by the current node value. If we reach a leaf node with the remaining targetSum equal to 0, we add that path to the result.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A brute force approach of tracking the numbers could be inefficient due to the potential for cycles.</div>
-                            
-                                <div style="margin-left: 20px;"> • Using the Floyd&#39;s Cycle detection method is an optimal approach to detect cycles.</div>
+                                <div style="margin-left: 20px;"> • DFS is ideal for exploring all possible root-to-leaf paths.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using slow and fast pointers will allow us to detect a cycle in linear time, improving efficiency.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that when we reach a leaf node, we check if the path sum equals the targetSum.</div>
                             
                         </div>
                     </div>
@@ -469,13 +477,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a helper function that calculates the sum of the squares of the digits of a number.</div>
+                                <div style="margin-left: 20px;"> • Perform a DFS traversal starting from the root node.</div>
                             
-                                <div style="margin-left: 20px;"> • Initialize two pointers, slow and fast, both starting at n.</div>
+                                <div style="margin-left: 20px;"> • At each node, subtract the node value from the targetSum and store the current path.</div>
                             
-                                <div style="margin-left: 20px;"> • Move the slow pointer one step at a time and the fast pointer two steps at a time by applying the sum of the squares of digits function.</div>
+                                <div style="margin-left: 20px;"> • When a leaf node is reached, if the targetSum is 0, add the path to the result.</div>
                             
-                                <div style="margin-left: 20px;"> • If the slow and fast pointers meet, check if the slow pointer equals 1 to determine if the number is happy.</div>
+                                <div style="margin-left: 20px;"> • Backtrack by removing the last node from the path after exploring both left and right subtrees.</div>
                             
                         </div>
                     </div>
@@ -484,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since n is always a positive integer, there will be no empty inputs.</div>
+                                <div style="margin-left: 20px;"> • If the tree is empty (root is null), the output should be an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large values of n, the approach should work efficiently due to the cycle detection method.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle trees with up to 5000 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The value n = 1 is trivially a happy number since it stays at 1.</div>
+                                <div style="margin-left: 20px;"> • Handle negative targetSum and node values, ensuring the path sum calculation is correct even when values are negative.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle all valid inputs efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should operate within time and space limits for trees with up to 5000 nodes.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,35 +524,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 While Loop Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Extract Last Digit</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sum of Squares of Digits</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Remove Last Digit</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Push Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Evaluation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Vector Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Do While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Slow Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Fast Pointer Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Loop Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Check if Happy</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pop Operation</button>
                     
                 </div>
 
@@ -553,23 +557,26 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sqr</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> tmp <span style="color:#666">*</span> tmp;
-</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pathSum(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> sum) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&gt;</span> paths;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> path;
+</span></span><span style="display:flex;"><span>    findPaths(root, sum, path, paths);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> paths;  
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isHappy</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> slow <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fast <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">do</span> {
-</span></span><span style="display:flex;"><span>        slow <span style="color:#666">=</span> sqr(slow);
-</span></span><span style="display:flex;"><span>        fast <span style="color:#666">=</span> sqr(sqr(fast));
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">while</span>(slow <span style="color:#666">!=</span> fast);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> slow <span style="color:#666">==</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">findPaths</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> sum, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> path, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&gt;&amp;</span> paths) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    path.push_back(node <span style="color:#666">-&gt;</span> val);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>(node <span style="color:#666">-&gt;</span> left) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>(node <span style="color:#666">-&gt;</span> right) <span style="color:#666">&amp;&amp;</span> sum <span style="color:#666">==</span> node <span style="color:#666">-&gt;</span> val)
+</span></span><span style="display:flex;"><span>        paths.push_back(path);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    findPaths(node <span style="color:#666">-&gt;</span> left, sum <span style="color:#666">-</span> node <span style="color:#666">-&gt;</span> val, path, paths);
+</span></span><span style="display:flex;"><span>    findPaths(node <span style="color:#666">-&gt;</span> right, sum <span style="color:#666">-</span> node <span style="color:#666">-&gt;</span> val, path, paths);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    path.pop_back();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -577,153 +584,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sqr</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pathSum(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> sum) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `sqr` that calculates the sum of squares of digits for a given integer. </div>
+                            <div class=""> Declare the main function to find all paths summing to a target value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&gt;</span> paths;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a variable `res` to store the sum of the squares of the digits. </div>
+                            <div class=""> Initialize a 2D vector to store all valid paths. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : While Loop Condition</b></div>
+                            <div class=""> <b>3 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> path;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop that continues until `n` becomes 0. This will process each digit of `n`. </div>
+                            <div class=""> Initialize a 1D vector to temporarily store the current path. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Extract Last Digit</b></div>
+                            <div class=""> <b>4 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    findPaths(root, sum, path, paths);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the last digit of `n` using the modulus operator. </div>
+                            <div class=""> Invoke the helper function to find paths using backtracking. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Sum of Squares of Digits</b></div>
+                            <div class=""> <b>5 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> tmp <span style="color:#666">*</span> tmp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> paths;  
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Square the extracted digit and add it to `res`. </div>
+                            <div class=""> Return the collection of all valid paths. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Remove Last Digit</b></div>
+                            <div class=""> <b>6 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">findPaths</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> sum, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> path, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&gt;&amp;</span> paths) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the last digit of `n` by performing integer division by 10. </div>
+                            <div class=""> Declare the helper function for recursive backtracking. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class=""> <b>7 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the sum of the squares of the digits stored in `res`. </div>
+                            <div class=""> Base case: If the node is null, terminate the current recursive call. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Function Definition</b></div>
+                            <div class=""> <b>8 : Push Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isHappy</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    path.push_back(node <span style="color:#666">-&gt;</span> val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the `isHappy` function which checks if a number `n` is a happy number by using the Tortoise and Hare algorithm. </div>
+                            <div class=""> Add the current node&#39;s value to the path. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Initialization</b></div>
+                            <div class=""> <b>9 : Condition Evaluation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> slow <span style="color:#666">=</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>(node <span style="color:#666">-&gt;</span> left) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>(node <span style="color:#666">-&gt;</span> right) <span style="color:#666">&amp;&amp;</span> sum <span style="color:#666">==</span> node <span style="color:#666">-&gt;</span> val)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `slow` pointer to `n`. It will move one step at a time. </div>
+                            <div class=""> Check if the current node is a leaf and the remaining sum matches its value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Vector Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fast <span style="color:#666">=</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        paths.push_back(path);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `fast` pointer to `n`. It will move two steps at a time. </div>
+                            <div class=""> Record the current path as a valid result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Do While Loop</b></div>
+                            <div class=""> <b>11 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">do</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    findPaths(node <span style="color:#666">-&gt;</span> left, sum <span style="color:#666">-</span> node <span style="color:#666">-&gt;</span> val, path, paths);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a do-while loop to calculate the sum of squares of digits for `slow` and `fast` until they meet. </div>
+                            <div class=""> Recursively explore the left subtree, updating the remaining sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Slow Pointer Update</b></div>
+                            <div class=""> <b>12 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        slow <span style="color:#666">=</span> sqr(slow);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    findPaths(node <span style="color:#666">-&gt;</span> right, sum <span style="color:#666">-</span> node <span style="color:#666">-&gt;</span> val, path, paths);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move the `slow` pointer by calculating the sum of squares of its digits using the `sqr` function. </div>
+                            <div class=""> Recursively explore the right subtree, updating the remaining sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Fast Pointer Update</b></div>
+                            <div class=""> <b>13 : Pop Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        fast <span style="color:#666">=</span> sqr(sqr(fast));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    path.pop_back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move the `fast` pointer by calculating the sum of squares of its digits twice (two steps). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Loop Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">while</span>(slow <span style="color:#666">!=</span> fast);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Repeat the loop until `slow` and `fast` pointers meet. If they meet at 1, the number is happy. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Check if Happy</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> slow <span style="color:#666">==</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return true if `slow` equals 1, indicating that `n` is a happy number. Otherwise, return false. </div>
+                            <div class=""> Backtrack by removing the last node from the path. </div>
                         </div>
                     
                 </div>
@@ -743,16 +730,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log(n))</div>
-                        <div class=""> <b>Average Case:</b> O(log(n))</div>
-                        <div class=""> <b>Worst Case:</b> O(log(n))</div> 
-                        <div class=""> <b>Description:</b> The time complexity is logarithmic due to the number of digits in the number n and the cycle detection method.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we will traverse all nodes in the tree. Therefore, the time complexity is O(n), where n is the number of nodes in the tree.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we are only using a few variables for the pointers and digit calculations.</div>    
+                        <div class=""> <b>Best Case:</b> O(h)</div>
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h), where h is the height of the tree, due to the recursive call stack. In the worst case (unbalanced tree), h can be equal to n.</div>    
                     </div>
 
                 </div>

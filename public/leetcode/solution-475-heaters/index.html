@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 20, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -313,7 +313,7 @@
 
 
 
-<div class=""> You are given a grid of size m x n where each cell is either land (1) or sea (0). Your task is to determine the number of land cells that are completely enclosed by sea cells. A land cell is considered enclosed if it cannot reach the boundary of the grid via other land cells. </div>
+<div class=""> You are given the positions of houses and heaters along a horizontal line. Your task is to find the minimum radius required for the heaters so that all houses are within the heater&rsquo;s warm radius. </div>
 
 
 
@@ -364,45 +364,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an m x n grid, where grid[i][j] is either 1 (land) or 0 (sea).</div>
-                        <div class=""> <b>Example:</b> grid = [[0, 0, 0, 0], [1, 0, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]</div>
+                        <div class=""> <b>Input:</b> The input consists of two arrays: `houses` representing the positions of the houses and `heaters` representing the positions of the heaters.</div>
+                        <div class=""> <b>Example:</b> houses = [2, 5, 7, 10], heaters = [1, 8]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= houses.length, heaters.length &lt;= 3 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= houses[i], heaters[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of land cells that are completely enclosed by sea cells, i.e., they cannot reach the boundary of the grid.</div>
+                        <div class=""> <b>Output:</b> Return the minimum radius required for the heaters to cover all houses.</div>
                         <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The returned number should be an integer representing the count of enclosed land cells.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer representing the minimum radius for heaters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine which land cells are enclosed, we need to find and mark all the land cells connected to the boundary of the grid, and then count the remaining land cells.</div>
+                        <div class=""> <b>Goal:</b> Find the minimum radius required for heaters to ensure all houses are covered.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse the boundary of the grid and mark all land cells connected to it using depth-first search (DFS).</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the positions of both the houses and the heaters.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. After marking the reachable land cells, the remaining unmarked land cells are enclosed.</div>
+                                <div style="margin-left: 20px;"> • 2. For each house, calculate the nearest heater and determine the distance between them.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count and return the number of enclosed land cells.</div>
+                                <div style="margin-left: 20px;"> • 3. The largest distance across all houses will determine the required radius of the heaters.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Make sure the algorithm works efficiently within the grid size constraints and correctly identifies enclosed land cells.</div>
+                        <div class=""> <b>Goal:</b> The constraints are based on the number of houses, heaters, and their positions.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid can be as large as 500 x 500, so the solution should handle grids of this size.</div>
+                                <div style="margin-left: 20px;"> • The length of the `houses` and `heaters` arrays is between 1 and 30,000.</div>
+                            
+                                <div style="margin-left: 20px;"> • The positions of the houses and heaters range between 1 and 10^9.</div>
                             
                         </div>
                     </div>        
@@ -410,19 +412,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input grid is valid and contains only 0s and 1s.</div>
+                                <div style="margin-left: 20px;"> • The heaters can be placed at any position along the horizontal line.</div>
+                            
+                                <div style="margin-left: 20px;"> • There is no overlap in the positions of houses and heaters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[0, 0, 0, 0], [1, 0, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the 1s in positions (1, 0), (1, 2), and (2, 1) are enclosed by 0s. The land cell at position (2, 2) is not enclosed because it is connected to the boundary. Thus, the output is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> houses = [2, 5, 7, 10], heaters = [1, 8]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Heaters at positions 1 and 8 with a radius of 3 can cover all the houses.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 0, 0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, all the 1s are either connected to the boundary or can reach the boundary through other land cells. Therefore, no land cells are enclosed, and the output is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> houses = [5, 10], heaters = [6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> A heater at position 6 with a radius of 4 can cover both houses at positions 5 and 10.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,16 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses depth-first search (DFS) to mark all land cells connected to the boundary, then counts the remaining unmarked land cells.</div>
+                        <div class=""> <b>Approach:</b> The approach involves sorting the house and heater positions, then calculating the minimum required radius by comparing distances.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Boundary cells can directly or indirectly reach the edge, so any land cell connected to the boundary is not enclosed.</div>
+                                <div style="margin-left: 20px;"> • Sorting the houses and heaters simplifies the task of finding the nearest heater for each house.</div>
+                            
+                                <div style="margin-left: 20px;"> • A greedy approach that evaluates the closest heater to each house would be efficient.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem requires marking the land cells that are connected to the boundary using DFS and then counting the unmarked ones.</div>
+                                <div style="margin-left: 20px;"> • By calculating the distance from each house to its nearest heater, we can determine the minimum radius required for coverage.</div>
                             
                         </div>
                     </div>
@@ -463,13 +469,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Loop through the boundary of the grid and perform a DFS for each land cell (1).</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the `houses` and `heaters` arrays.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each DFS, mark the connected land cells by changing their value to a different number (e.g., 2).</div>
+                                <div style="margin-left: 20px;"> • 2. For each house, use a two-pointer or binary search approach to find the nearest heater.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. After the boundary DFS traversal, loop through the grid again and count the land cells that are still 1 (i.e., they are enclosed).</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the count of these enclosed land cells.</div>
+                                <div style="margin-left: 20px;"> • 3. Track the largest distance to the nearest heater, which will be the required minimum radius.</div>
                             
                         </div>
                     </div>
@@ -478,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the grid is empty or contains no land cells, the output should be 0.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least one house and one heater, as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large grids (e.g., 500 x 500), the algorithm should still run within time limits.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the number of houses or heaters is large (up to 30,000).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where all cells are sea cells (0) or all cells are land cells (1).</div>
+                                <div style="margin-left: 20px;"> • Consider cases where all heaters are clustered in one area or spread across a wide range.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the maximum grid size efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently within the constraints of up to 30,000 houses and heaters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,45 +514,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Grid Dimensions</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Boundary Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition for DFS</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Left to Right Sweep</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 DFS Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Count Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Distance</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Count Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Increment Home Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Count Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Increment Heater Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Count Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Right to Left Sweep</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Helper Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Distance</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 DFS Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Decrement Home Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Exit DFS</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Decrement Heater Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mark Visited Cell</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 DFS Recursive Calls</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 DFS Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 DFS Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 DFS Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Final Calculation</button>
                     
                 </div>
 
@@ -557,29 +553,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numEnclaves</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>                dfs(grid, i, j);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) cnt<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findRadius</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> home, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> warm) {
+</span></span><span style="display:flex;"><span>    sort(home.begin(), home.end());
+</span></span><span style="display:flex;"><span>    sort(warm.begin(), warm.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> home.size(), n <span style="color:#666">=</span> warm.size();
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
-</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
-</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(m, INT_MAX);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> <span style="color:#666">0</span>, w <span style="color:#666">=</span> <span style="color:#666">0</span>; h <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> w <span style="color:#666">&lt;</span> n; ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (home[h] <span style="color:#666">&lt;=</span> warm[w]) {
+</span></span><span style="display:flex;"><span>            res[h] <span style="color:#666">=</span> warm[w] <span style="color:#666">-</span> home[h];
+</span></span><span style="display:flex;"><span>            h<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> w<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>, w <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; h <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> w <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (home[h] <span style="color:#666">&gt;=</span> warm[w]) {
+</span></span><span style="display:flex;"><span>            res[h] <span style="color:#666">=</span> min(res[h], home[h] <span style="color:#666">-</span> warm[w]);
+</span></span><span style="display:flex;"><span>            h<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> w<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">*</span>max_element(res.begin(), res.end());
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -587,203 +582,163 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numEnclaves</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findRadius</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> home, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> warm) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `numEnclaves`, which takes a 2D grid as input and returns the number of enclaves (connected regions of 1&#39;s that are not connected to the boundary). </div>
+                            <div class=""> Defines the `findRadius` function, which takes two vectors, `home` and `warm`, representing the positions of homes and warm heaters, and returns the minimum radius required to ensure every home is covered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Grid Dimensions</b></div>
+                            <div class=""> <b>2 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(home.begin(), home.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the number of rows `m` and columns `n` in the grid, which are used to iterate over the grid. </div>
+                            <div class=""> Sorts the `home` vector to facilitate the process of finding the closest heater for each home. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Outer Loop</b></div>
+                            <div class=""> <b>3 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(warm.begin(), warm.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts the first loop to iterate through each row of the grid. </div>
+                            <div class=""> Sorts the `warm` vector to make it easier to check the closest heater to a given home. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Inner Loop</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> home.size(), n <span style="color:#666">=</span> warm.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts the inner loop to iterate through each column of the current row. </div>
+                            <div class=""> Initializes `m` as the number of homes and `n` as the number of heaters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Boundary Check</b></div>
+                            <div class=""> <b>5 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(m, INT_MAX);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current cell is on the boundary of the grid (first row, first column, last row, or last column). </div>
+                            <div class=""> Initializes a vector `res` of size `m` (the number of homes), setting each element to `INT_MAX` as an initial placeholder for the minimum distances to the closest heater. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition for DFS</b></div>
+                            <div class=""> <b>6 : Left to Right Sweep</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> <span style="color:#666">0</span>, w <span style="color:#666">=</span> <span style="color:#666">0</span>; h <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> w <span style="color:#666">&lt;</span> n; ) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current boundary cell contains a 1 (representing land), it calls the `dfs` function to mark all connected land cells. </div>
+                            <div class=""> Begins a loop that iterates over both homes (`h`) and heaters (`w`) from left to right to compute the closest heater to each home. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : DFS Call</b></div>
+                            <div class=""> <b>7 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dfs(grid, i, j);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (home[h] <span style="color:#666">&lt;=</span> warm[w]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calls the helper function `dfs` to mark all connected 1&#39;s from the current cell as visited (by setting them to 2). </div>
+                            <div class=""> Checks if the current home is to the left of or at the current heater position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Count Initialization</b></div>
+                            <div class=""> <b>8 : Update Distance</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res[h] <span style="color:#666">=</span> warm[w] <span style="color:#666">-</span> home[h];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a counter `cnt` to store the number of remaining land cells that are not connected to the boundary. </div>
+                            <div class=""> Updates the minimum distance for home `h` to the current heater `w`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Count Loop</b></div>
+                            <div class=""> <b>9 : Increment Home Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            h<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through each row again to count the remaining land cells. </div>
+                            <div class=""> Increments the home pointer `h` to consider the next home. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Count Inner Loop</b></div>
+                            <div class=""> <b>10 : Increment Heater Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> w<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts an inner loop to iterate through each column of the current row. </div>
+                            <div class=""> If the current home is not covered by the current heater, increments the heater pointer `w` to check the next heater. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Count Update</b></div>
+                            <div class=""> <b>11 : Right to Left Sweep</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>, w <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; h <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> w <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; ) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the counter `cnt` whenever a land cell (1) is found that is not connected to the boundary. </div>
+                            <div class=""> Begins a loop that iterates over both homes (`h`) and heaters (`w`) from right to left to compute the closest heater to each home in the reverse direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Count</b></div>
+                            <div class=""> <b>12 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (home[h] <span style="color:#666">&gt;=</span> warm[w]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the final count of the enclaves (land cells not connected to the boundary). </div>
+                            <div class=""> Checks if the current home is to the right of or at the current heater position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Helper Function Declaration</b></div>
+                            <div class=""> <b>13 : Update Distance</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res[h] <span style="color:#666">=</span> min(res[h], home[h] <span style="color:#666">-</span> warm[w]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the helper function `dfs` that uses Depth-First Search to mark connected land cells starting from position `(i, j)`. It modifies the grid to mark visited cells. </div>
+                            <div class=""> Updates the minimum distance for home `h` by considering the current heater `w` and taking the minimum between the previous calculated distance and the new one. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : DFS Base Case</b></div>
+                            <div class=""> <b>14 : Decrement Home Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            h<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks for out-of-bounds conditions or if the current cell is not land (value is not 1). If any of these conditions are true, the function exits. </div>
+                            <div class=""> Decrements the home pointer `h` to consider the next home in the reverse direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Exit DFS</b></div>
+                            <div class=""> <b>15 : Decrement Heater Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> w<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Exits the DFS function if the cell is invalid or already visited. </div>
+                            <div class=""> If the current home is not covered by the current heater, decrements the heater pointer `w` to check the next heater in the reverse direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Mark Visited Cell</b></div>
+                            <div class=""> <b>16 : Final Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">*</span><span style="color:#00a000">max_element</span>(res.begin(), res.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the current cell as visited by setting its value to 2. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : DFS Recursive Calls</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively calls `dfs` on the cell below the current cell. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : DFS Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively calls `dfs` on the cell to the right of the current cell. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : DFS Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively calls `dfs` on the cell above the current cell. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : DFS Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively calls `dfs` on the cell to the left of the current cell. </div>
+                            <div class=""> Returns the maximum value from the `res` vector, which represents the largest of the minimum distances to the closest heater for all homes. </div>
                         </div>
                     
                 </div>
@@ -803,16 +758,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we are iterating over every cell in the grid, performing a DFS traversal for each boundary land cell.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> Sorting the houses and heaters requires O(n log n) time, where n is the number of houses or heaters.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the recursion stack used by DFS.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for sorting the arrays.</div>    
                     </div>
 
                 </div>

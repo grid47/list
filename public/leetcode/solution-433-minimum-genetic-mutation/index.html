@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 24, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an array of integers, where each integer represents a unique card in a deck. The deck can be shuffled into any order, and the goal is to reorder it such that the cards are revealed in increasing order. To do this, you repeatedly reveal the top card and move the next card to the bottom of the deck until all cards are revealed. The problem is to return the order of cards that would reveal them in increasing order. </div>
+<div class=""> You are given two gene strings, <code>startGene</code> and <code>endGene</code>, both consisting of 8 characters. You also have a gene bank of valid gene strings that can be mutated into one another. A mutation is defined as changing one character at a time, and the mutated gene string must exist in the gene bank. Your task is to determine the minimum number of mutations needed to transform <code>startGene</code> into <code>endGene</code>. If transformation is impossible, return -1. </div>
 
 
 
@@ -371,47 +371,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers representing the deck of cards.</div>
-                        <div class=""> <b>Example:</b> Input: deck = [20, 15, 10, 5, 25]</div>
+                        <div class=""> <b>Input:</b> You are given three inputs: `startGene` (an 8-character gene string), `endGene` (an 8-character gene string), and a `bank` (a list of valid gene strings).</div>
+                        <div class=""> <b>Example:</b> startGene = &#39;AACCGGTT&#39;, endGene = &#39;AACCGGTA&#39;, bank = [&#39;AACCGGTA&#39;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The deck contains between 1 and 1000 cards.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= bank.length &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • Each card value is a unique integer between 1 and 10^6.</div>
+                                <div style="margin-left: 20px;"> • startGene.length == endGene.length == bank[i].length == 8</div>
+                            
+                                <div style="margin-left: 20px;"> • startGene, endGene, and bank[i] consist of only the characters [&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;]</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be an array representing the deck of cards after revealing them in increasing order.</div>
-                        <div class=""> <b>Example:</b> Output: [5, 15, 10, 20, 25]</div>
+                        <div class=""> <b>Output:</b> Return the minimum number of mutations needed to transform `startGene` to `endGene`. If it&#39;s not possible, return -1.</div>
+                        <div class=""> <b>Example:</b> 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must be an array of integers representing the cards in the required order.</div>
+                                <div style="margin-left: 20px;"> • If no mutation path exists, return -1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the order of cards such that revealing them one by one follows the increasing order of their values.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the shortest path from `startGene` to `endGene` by performing valid mutations and using the gene bank.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the deck in increasing order.</div>
+                                <div style="margin-left: 20px;"> • 1. Check if `endGene` exists in the gene bank. If not, return -1.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a queue to simulate the process of revealing the cards and moving the next one to the bottom.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a breadth-first search (BFS) to explore all possible gene strings starting from `startGene`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Place each card in the result based on the queue’s order.</div>
+                                <div style="margin-left: 20px;"> • 3. For each gene string, generate all possible mutations by changing one character at a time.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If a mutated gene string exists in the gene bank, add it to the BFS queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Keep track of the number of mutations, and return the result when `endGene` is reached.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle arrays of varying sizes efficiently.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle cases with small to moderate bank sizes and up to 10 valid mutations.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array will always contain between 1 and 1000 cards.</div>
+                                <div style="margin-left: 20px;"> • The length of the gene bank is between 0 and 10.</div>
                             
-                                <div style="margin-left: 20px;"> • All values in the deck are unique integers.</div>
+                                <div style="margin-left: 20px;"> • All gene strings are 8 characters long and consist of the characters [&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;].</div>
                             
                         </div>
                     </div>        
@@ -419,19 +425,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The deck is shuffled initially, but the goal is to determine the order in which cards should be revealed.</div>
+                                <div style="margin-left: 20px;"> • The startGene is always valid.</div>
+                            
+                                <div style="margin-left: 20px;"> • Mutations are only allowed if the resulting gene string exists in the bank.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: deck = [5, 10, 20, 15]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting, the deck becomes [5, 10, 15, 20]. We simulate revealing the cards as follows: 5 is revealed, 10 moves to the bottom, 15 is revealed, 20 moves to the bottom, 10 is revealed, and finally 20 is revealed.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: startGene = &#39;AACCGGTT&#39;, endGene = &#39;AACCGGTA&#39;, bank = [&#39;AACCGGTA&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We mutate the last character from &#39;T&#39; to &#39;A&#39;, which results in the endGene after one mutation.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: deck = [1, 2, 3, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting, the deck becomes [1, 2, 3, 4]. We simulate revealing them in order: 1, 2, 3, and 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: startGene = &#39;AACCGGTT&#39;, endGene = &#39;AAACGGTA&#39;, bank = [&#39;AACCGGTA&#39;,&#39;AACCGCTA&#39;,&#39;AAACGGTA&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The solution involves two mutations: first from &#39;AACCGGTT&#39; to &#39;AACCGGTA&#39;, and then from &#39;AACCGGTA&#39; to &#39;AAACGGTA&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -455,16 +463,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves sorting the deck and using a queue to simulate the process of revealing and moving cards in the deck.</div>
+                        <div class=""> <b>Approach:</b> We will use a breadth-first search (BFS) approach to find the shortest path from `startGene` to `endGene` by exploring all possible valid mutations in the gene bank.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the deck is the key to ensuring that the cards are revealed in increasing order.</div>
+                                <div style="margin-left: 20px;"> • This is a shortest path problem, and BFS is ideal because it explores all nodes at the present depth level before moving to nodes at the next depth level.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The main challenge is to implement the correct simulation of the card reveal and move-to-bottom steps.</div>
+                                <div style="margin-left: 20px;"> • We need to generate all possible gene strings from the current string by changing one character at a time, and check if the mutated string is in the gene bank.</div>
                             
                         </div>
                     </div>
@@ -472,13 +480,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the deck in ascending order.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a queue for BFS with `startGene`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Initialize a queue with indices of the deck.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a set for fast look-up of valid mutations from the bank.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each card in the sorted deck, place it in the result based on the current position in the queue.</div>
+                                <div style="margin-left: 20px;"> • 3. For each gene string, generate all possible mutations and push valid ones to the queue.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. After placing a card, move the next card in the queue to the bottom, repeating the process until all cards are placed in the result.</div>
+                                <div style="margin-left: 20px;"> • 4. Track the number of mutations and stop when `endGene` is found.</div>
                             
                         </div>
                     </div>
@@ -487,22 +495,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input deck is empty, the output should be an empty array.</div>
+                                <div style="margin-left: 20px;"> • If the gene bank is empty, return -1 unless `startGene` is equal to `endGene`.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the deck contains a large number of cards (e.g., 1000), the solution must efficiently handle the size.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the BFS approach handles up to 10 valid mutations efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the deck contains only one card, the output is simply that card.</div>
+                                <div style="margin-left: 20px;"> • If the `startGene` is equal to `endGene`, return 0 because no mutation is needed.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must be efficient enough to handle up to 1000 cards.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where no valid mutations exist or where the gene bank is empty.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,31 +529,55 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting Deck</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Get Deck Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Condition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Enqueue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Push Indices to Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Start Rearranging</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Place Card in Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Queue Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Remove Card from Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 For Each Level</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Rearrange Cards in Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Front Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Move Front to Back</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Dequeue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pop Card from Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Check Goal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Set Erase</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Copy String</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Character Mutation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Conditional Insertions</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Character Mutation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Conditional Insertions</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Character Mutation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Conditional Insertions</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Character Mutation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Conditional Insertions</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Increment Step</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Return Result</button>
                     
                 </div>
 
@@ -554,24 +586,36 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> deckRevealedIncreasing(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> deck) {
-</span></span><span style="display:flex;"><span>    sort(deck.begin(), deck.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> deck.size();
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        q.push(i);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        res[q.front()] <span style="color:#666">=</span> deck[i];
-</span></span><span style="display:flex;"><span>        q.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>            q.push(q.front());
-</span></span><span style="display:flex;"><span>            q.pop();                
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMutation</span>(string startGene, string endGene, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> bank) {
+</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> st{bank.begin(), bank.end()};
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>st.count(endGene)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(startGene);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>, s;
+</span></span><span style="display:flex;"><span>    string cur, t;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        s <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(s<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> endGene) <span style="color:#a2f;font-weight:bold">return</span> step;
+</span></span><span style="display:flex;"><span>            st.erase(cur);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">8</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                t <span style="color:#666">=</span> cur;
+</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;A&#39;</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;T&#39;</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;G&#39;</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+</span></span><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;C&#39;</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);                    
+</span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -582,140 +626,260 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> deckRevealedIncreasing(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> deck) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMutation</span>(string startGene, string endGene, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> bank) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `deckRevealedIncreasing` takes a vector of integers (representing a deck of cards) and returns a vector representing the deck after rearrangement. </div>
+                            <div class=""> Declares the function to compute the minimum mutations required for gene transformation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sorting Deck</b></div>
+                            <div class=""> <b>2 : Set Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(deck.begin(), deck.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> st{bank.begin(), bank.end()};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sort the deck in increasing order to prepare for the rearrangement process, ensuring that the smallest cards are placed at the front. </div>
+                            <div class=""> Initializes a set with the bank to allow O(1) lookups for gene sequences. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Get Deck Size</b></div>
+                            <div class=""> <b>3 : Base Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> deck.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>st.count(endGene)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the size of the deck (number of cards) in the variable `n`. </div>
+                            <div class=""> Checks if the end gene is in the bank; if not, returns -1 as transformation is impossible. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>4 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a queue `q` that will be used to manage the positions of cards in the deck during the rearrangement process. </div>
+                            <div class=""> Declares a queue for BFS traversal of gene mutations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Result Vector Initialization</b></div>
+                            <div class=""> <b>5 : Enqueue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(startGene);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a result vector `res` of size `n` with all elements set to 0. This vector will hold the final rearranged deck. </div>
+                            <div class=""> Adds the starting gene to the BFS queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Queue Population</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>, s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the deck to populate the queue with the indices of the cards. </div>
+                            <div class=""> Initializes variables for BFS steps and queue size. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Push Indices to Queue</b></div>
+                            <div class=""> <b>7 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.push(i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string cur, t;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the index `i` of each card into the queue, so the queue holds the indices of all cards in the deck. </div>
+                            <div class=""> Declares strings to hold the current gene and temporary mutations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Start Rearranging</b></div>
+                            <div class=""> <b>8 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start another loop to rearrange the deck based on the queue and the sorted cards. </div>
+                            <div class=""> Iterates as long as the queue is not empty. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Place Card in Result</b></div>
+                            <div class=""> <b>9 : Queue Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[q.front()] <span style="color:#666">=</span> deck[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Place the current card from the sorted deck at the position specified by the front of the queue in the result vector. </div>
+                            <div class=""> Stores the current queue size for level-wise processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Remove Card from Queue</b></div>
+                            <div class=""> <b>10 : For Each Level</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(s<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pop the front element from the queue, which represents the index of the card that has just been placed in the result vector. </div>
+                            <div class=""> Processes all nodes at the current level in the BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Rearrange Cards in Queue</b></div>
+                            <div class=""> <b>11 : Front Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>q.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If there are still cards in the queue, proceed to rearrange them. </div>
+                            <div class=""> Gets the current gene at the front of the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Move Front to Back</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(q.front());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the front element of the queue to the back, effectively moving the next card to the back of the deck. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Pop Card from Queue</b></div>
+                            <div class=""> <b>12 : Dequeue</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pop the front element again after moving it to the back. </div>
+                            <div class=""> Removes the processed gene from the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Return Result</b></div>
+                            <div class=""> <b>13 : Check Goal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> endGene) <span style="color:#a2f;font-weight:bold">return</span> step;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the rearranged deck stored in the result vector `res`. </div>
+                            <div class=""> Returns the number of steps if the current gene matches the end gene. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Set Erase</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            st.erase(cur);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Removes the current gene from the set to avoid revisiting. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">8</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates through each character of the current gene to mutate. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Copy String</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t <span style="color:#666">=</span> cur;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Creates a copy of the current gene for mutation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Character Mutation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;A&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mutates the ith character of the gene to &#39;A&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Conditional Insertions</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Character Mutation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;T&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mutates the ith character of the gene to &#39;T&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Conditional Insertions</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Character Mutation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;G&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mutates the ith character of the gene to &#39;G&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Conditional Insertions</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Character Mutation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;C&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mutates the ith character of the gene to &#39;C&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Conditional Insertions</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.count(t)) q.push(t);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the mutated gene is in the set and enqueues it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Increment Step</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        step<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the step counter for the next level of BFS. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns -1 if the end gene is not reachable from the start gene. </div>
                         </div>
                     
                 </div>
@@ -735,16 +899,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The sorting step dominates the time complexity, which is O(n log n) where n is the size of the deck.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1), if startGene is equal to endGene.</div>
+                        <div class=""> <b>Average Case:</b> O(N * 8), where N is the number of gene strings in the bank and each mutation takes O(8) time (since the length of each gene string is 8).</div>
+                        <div class=""> <b>Worst Case:</b> O(N * 8), where N is the number of possible gene mutations.</div> 
+                        <div class=""> <b>Description:</b> BFS explores each possible mutation in the gene bank.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the use of a queue and the result array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if no mutations are required.</div>
+                        <div class=""> <b>Worst Case:</b> O(N), where N is the number of gene strings stored in the queue and the bank.</div> 
+                        <div class=""> <b>Description:</b> The space complexity depends on the number of nodes in the BFS queue.</div>    
                     </div>
 
                 </div>

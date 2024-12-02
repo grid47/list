@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 9, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -323,7 +323,7 @@
 
 
 
-<div class=""> Given a matrix of integers, where each element represents a value, you need to calculate the sum of all elements in a sub-matrix for each cell. For each cell, the sub-matrix includes all elements within a square grid of size (2k+1) x (2k+1) centered at that cell. If the sub-matrix extends beyond the boundaries of the matrix, only the valid elements within the matrix should be considered. </div>
+<div class=""> Given an integer array, find the shortest continuous subarray such that, if you sort this subarray in non-decreasing order, the whole array will become sorted. </div>
 
 
 
@@ -374,43 +374,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 2D matrix of integers and an integer k. The matrix is represented as a list of lists, where each list represents a row. The integer k represents the size of the square grid to calculate the sum for each cell.</div>
-                        <div class=""> <b>Example:</b> mat = [[1,2,3],[4,5,6],[7,8,9]], k = 1</div>
+                        <div class=""> <b>Input:</b> A list of integers, nums, representing the array to be considered.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [3, 8, 6, 10, 12, 9, 14]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n, k &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= mat[i][j] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • -10^5 &lt;= nums[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a matrix where each element represents the sum of the valid sub-matrix for that position in the original matrix.</div>
-                        <div class=""> <b>Example:</b> For mat = [[1,2,3],[4,5,6],[7,8,9]] and k = 1, the output is [[12, 21, 16], [27, 45, 33], [24, 39, 28]]</div>
+                        <div class=""> <b>Output:</b> Return the length of the shortest subarray that needs to be sorted in order to make the whole array sorted.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output must be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To calculate the sum of each sub-matrix centered at each cell in the matrix while considering the bounds of the matrix.</div>
+                        <div class=""> <b>Goal:</b> Find the shortest subarray that needs to be sorted to make the entire array sorted.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use dynamic programming to calculate prefix sums of the matrix.</div>
+                                <div style="margin-left: 20px;"> • Identify the part of the array that is out of order.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each cell in the matrix, calculate the sum of its sub-matrix using the prefix sum array.</div>
+                                <div style="margin-left: 20px;"> • Check for the leftmost and rightmost positions where elements are not in order.</div>
+                            
+                                <div style="margin-left: 20px;"> • Find the subarray between these positions and calculate its length.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the length of the shortest subarray that needs to be sorted.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The matrix dimensions and k are bounded by constraints to ensure the solution is efficient.</div>
+                        <div class=""> <b>Goal:</b> The input array is non-empty, and its length will not exceed 10^4.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n, k &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= mat[i][j] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • -10^5 &lt;= nums[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -418,17 +424,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input matrix is always valid, with at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • The input array is not empty.</div>
                             
-                                <div style="margin-left: 20px;"> • The integer k will be chosen such that the sub-matrix can be calculated within the matrix bounds.</div>
+                                <div style="margin-left: 20px;"> • The array contains only integers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For mat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] and k = 1, the sum of the 3x3 grid surrounding each element is calculated. For example, for the element at mat[1][1] (which is 5), the sum of the 3x3 grid is 45.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum is calculated by considering the elements within a 3x3 grid centered around each element, ensuring that any invalid positions outside the matrix bounds are ignored.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3, 8, 6, 10, 12, 9, 14]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarray [8, 6, 10, 12] is the only part that is out of order, so sorting it will sort the entire array.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 3, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array is already sorted, so the length of the subarray to be sorted is 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,18 +462,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach utilizes a prefix sum technique to efficiently calculate the sum of each sub-matrix by avoiding recalculation of overlapping sub-matrices.</div>
+                        <div class=""> <b>Approach:</b> The key idea is to find the positions where the array stops being sorted and then calculate the length of the subarray that needs to be sorted.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The brute force solution could involve recalculating sums for each cell, but this would be inefficient.</div>
+                                <div style="margin-left: 20px;"> • The problem boils down to finding where the array is unsorted, both from the left and right sides.</div>
                             
-                                <div style="margin-left: 20px;"> • By using a prefix sum array, we can quickly compute the sum of any sub-matrix in constant time.</div>
+                                <div style="margin-left: 20px;"> • We need to find the smallest subarray that, when sorted, sorts the entire array.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We will first compute the prefix sum array for the entire matrix, and then for each element, calculate the sum of its surrounding grid using this array.</div>
+                                <div style="margin-left: 20px;"> • We can scan the array from both ends to identify where the unsorted subarray starts and ends.</div>
                             
                         </div>
                     </div>
@@ -471,9 +481,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a prefix sum array where each entry represents the sum of elements from the top-left corner of the matrix to that point.</div>
+                                <div style="margin-left: 20px;"> • Scan from the left to find the first out-of-order element.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each cell in the matrix, use the prefix sum array to compute the sum of the sub-matrix centered at that cell, while ensuring boundaries are respected.</div>
+                                <div style="margin-left: 20px;"> • Scan from the right to find the last out-of-order element.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the difference between the rightmost and leftmost unsorted positions plus one as the length of the subarray to sort.</div>
                             
                         </div>
                     </div>
@@ -482,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty matrix (0x0 matrix) should return an empty result.</div>
+                                <div style="margin-left: 20px;"> • The input array is always non-empty according to the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle large matrices up to size 100x100 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The input size can be as large as 10^4, so the solution needs to be efficient in time and space.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All elements in the matrix could be the same, or the matrix could contain very large or small values.</div>
+                                <div style="margin-left: 20px;"> • If the array is already sorted, return 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The size of the matrix and the value of k are constrained to ensure that the solution remains efficient.</div>
+                                <div style="margin-left: 20px;"> • The solution must run in O(n) time.</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,21 +530,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Prefix Sum Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Temporary Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Prefix Sum Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Matrix Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Pair Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Outer Loop for Rows</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Array Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Inner Loop for Columns</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization for Indices</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Boundary Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Subarray Identification Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Block Sum Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Index Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Start Index Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 End Index Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check for Already Sorted Array</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Subarray Length</button>
                     
                 </div>
 
@@ -541,30 +559,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> matrixBlockSum(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> sum(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    sum[i][j] <span style="color:#666">=</span> mat[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> (sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> sum[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findUnsortedSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> min(i <span style="color:#666">+</span> k, m);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c1 <span style="color:#666">=</span> min(j <span style="color:#666">+</span> k, n);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r2 <span style="color:#666">=</span> max(i <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c2 <span style="color:#666">=</span> max(j <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        res[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> sum[r1][c1] <span style="color:#666">-</span> sum[r1][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c1] <span style="color:#666">+</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> tmp(n);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    tmp[i] <span style="color:#666">=</span> make_pair(nums[i], i);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    sort(tmp.begin(), tmp.end());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> start <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, end <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">!=</span> tmp[i].second)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (start <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) start <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>               end <span style="color:#666">=</span> i;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(start <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> end <span style="color:#666">-</span> (start <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -575,105 +591,130 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> matrixBlockSum(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findUnsortedSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;matrixBlockSum&#39; is declared, which takes a matrix &#39;mat&#39; and an integer &#39;k&#39; as input. The goal of the function is to calculate the sum of each element&#39;s block of size k x k. </div>
+                            <div class=""> Declares the function `findUnsortedSubarray`, which takes a vector of integers as input and returns the length of the shortest unsorted subarray. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variables &#39;m&#39; and &#39;n&#39; are initialized to represent the number of rows and columns in the matrix &#39;mat&#39;, respectively. </div>
+                            <div class=""> Initializes variables `mn`, `mx`, and `n`. `mn` and `mx` will be used to track the minimum and maximum values within the subarray, while `n` holds the size of the input array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Prefix Sum Initialization</b></div>
+                            <div class=""> <b>3 : Temporary Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> sum(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> tmp(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A &#39;sum&#39; matrix is initialized to store the prefix sum of the input matrix &#39;mat&#39;. It has dimensions (m &#43; 1) x (n &#43; 1), with all values initialized to zero. </div>
+                            <div class=""> Creates a temporary vector `tmp` of pairs, where each pair contains an element from the `nums` array and its corresponding index. This will help track the original order of elements while sorting. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Prefix Sum Calculation</b></div>
+                            <div class=""> <b>4 : Array Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    sum[i][j] <span style="color:#666">=</span> mat[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> (sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> sum[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This nested loop computes the prefix sum for each element of the &#39;sum&#39; matrix. The value at each position is the sum of elements from the top-left corner of the matrix. </div>
+                            <div class=""> Starts a loop to populate the `tmp` vector with pairs. Each pair consists of an element from `nums` and its corresponding index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Result Matrix Initialization</b></div>
+                            <div class=""> <b>5 : Pair Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    tmp[i] <span style="color:#666">=</span> make_pair(nums[i], i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A &#39;res&#39; matrix is initialized to store the final result, which will hold the sum of each k x k block around every element in the matrix. </div>
+                            <div class=""> For each element in `nums`, assigns a pair containing the element and its index to `tmp[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Outer Loop for Rows</b></div>
+                            <div class=""> <b>6 : Array Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(tmp.begin(), tmp.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The outer loop iterates over each row of the matrix to calculate the k x k sum block for each element. </div>
+                            <div class=""> Sorts the `tmp` vector based on the element values. This is essential to compare the original order with the sorted order and identify the subarray that is out of order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Inner Loop for Columns</b></div>
+                            <div class=""> <b>7 : Variable Initialization for Indices</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> start <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, end <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The inner loop iterates over each column of the matrix, processing every element to calculate its k x k sum block. </div>
+                            <div class=""> Initializes two variables `start` and `end` to -1. These will be used to track the first and last indices of the unsorted subarray. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Boundary Calculation</b></div>
+                            <div class=""> <b>8 : Subarray Identification Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> min(i <span style="color:#666">+</span> k, m);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c1 <span style="color:#666">=</span> min(j <span style="color:#666">+</span> k, n);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r2 <span style="color:#666">=</span> max(i <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c2 <span style="color:#666">=</span> max(j <span style="color:#666">-</span> k, <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> These lines calculate the boundaries of the k x k block surrounding the current element. The boundaries are adjusted to ensure they stay within the matrix dimensions. </div>
+                            <div class=""> Starts a loop to compare the indices of the original array (`nums`) with those in the sorted `tmp` array. If the indices don&#39;t match, it identifies the unsorted subarray. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Block Sum Calculation</b></div>
+                            <div class=""> <b>9 : Index Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> sum[r1][c1] <span style="color:#666">-</span> sum[r1][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c1] <span style="color:#666">+</span> sum[r2 <span style="color:#666">-</span> <span style="color:#666">1</span>][c2 <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">!=</span> tmp[i].second)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Using the prefix sum array, this line computes the sum of elements within the k x k block for the current matrix element, and stores the result in the &#39;res&#39; matrix. </div>
+                            <div class=""> Compares the current index `i` with the index in the sorted `tmp` array. If they don&#39;t match, it indicates that this element is part of the unsorted subarray. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Start Index Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (start <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) start <span style="color:#666">=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the &#39;res&#39; matrix, which contains the sum of elements for each k x k block surrounding each element in the matrix. </div>
+                            <div class=""> If `start` is still -1 (not yet set), assigns the current index `i` as the `start` of the unsorted subarray. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : End Index Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>               end <span style="color:#666">=</span> i;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Once `start` is assigned, sets the current index `i` as the `end` of the unsorted subarray. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Check for Already Sorted Array</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(start <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the array is already sorted. If `start` is still -1, it means no unsorted subarray was found, so it returns 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Subarray Length</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> end <span style="color:#666">-</span> (start <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates and returns the length of the unsorted subarray by subtracting `start` from `end`. </div>
                         </div>
                     
                 </div>
@@ -693,16 +734,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m * n) because we compute the prefix sum array in O(m * n) time, and for each cell, we calculate the sub-matrix sum in constant time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> We scan the array once to find the leftmost and rightmost out-of-order elements, resulting in O(n) time complexity.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the storage of the prefix sum array and the result matrix.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The solution only requires a constant amount of extra space.</div>    
                     </div>
 
                 </div>

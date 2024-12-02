@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 9, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given a 0-indexed array nums where each element represents the score of a student. You need to select the scores of exactly k students such that the difference between the highest and the lowest score of the selected students is minimized. Your task is to return the minimum possible difference. </div>
+<div class=""> You are given an array of strings where each string is of the same length. In one move, you can swap any two characters at even indexed positions or any two characters at odd indexed positions in a string. Two strings are considered special-equivalent if they can be made identical after performing any number of such moves. Your task is to determine how many distinct groups of special-equivalent strings exist in the given array. </div>
 
 
 
@@ -360,45 +360,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are provided with an integer array nums and an integer k.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 3, 8, 7, 9], k = 3</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of strings, all of which have the same length. Each string contains only lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> Input: words = [&#34;hello&#34;,&#34;oellh&#34;,&#34;elhol&#34;,&#34;aabb&#34;,&#34;bbaa&#34;,&#34;abab&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 20</div>
+                            
+                                <div style="margin-left: 20px;"> • All strings have the same length.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each string contains lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum possible difference between the highest and the lowest score of the selected k students.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return the number of distinct groups of special-equivalent strings in the given array.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The returned value must be the smallest possible difference.</div>
+                                <div style="margin-left: 20px;"> • The output should be the number of distinct groups of special-equivalent strings.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to select a subset of k students from the array such that the difference between the highest and the lowest score in that subset is minimized.</div>
+                        <div class=""> <b>Goal:</b> The goal is to classify the strings into distinct groups where all strings within a group are special-equivalent.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the array to make the differences easier to calculate.</div>
+                                <div style="margin-left: 20px;"> • For each string in the array, split the characters into two groups: one for even indices and one for odd indices.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the sorted array and consider every contiguous subsequence of length k.</div>
+                                <div style="margin-left: 20px;"> • Sort both groups (even indexed characters and odd indexed characters) to standardize their structure.</div>
                             
-                                <div style="margin-left: 20px;"> • For each subsequence, calculate the difference between the first and the last element, then track the minimum difference.</div>
+                                <div style="margin-left: 20px;"> • Use a set to store each string&#39;s standardized representation (sorted even and odd indexed groups).</div>
+                            
+                                <div style="margin-left: 20px;"> • The number of distinct groups will be equal to the size of the set.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input array can be large, so the algorithm should be efficient.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the solution should be efficient enough to handle up to 1000 strings with a maximum length of 20.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should handle arrays of up to 1000 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The input will always consist of lowercase English letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • All the strings will be of the same length.</div>
                             
                         </div>
                     </div>        
@@ -406,19 +414,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array is not empty, and k is at least 1.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that the input strings have the same length.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 3, 8, 7, 9], k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting the array, we get [1, 3, 7, 8, 9]. Selecting the students with scores 3, 7, and 8 gives a difference of 8 - 3 = 5. The minimum possible difference is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#34;hello&#34;,&#34;oellh&#34;,&#34;elhol&#34;,&#34;aabb&#34;,&#34;bbaa&#34;,&#34;abab&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the strings &#39;hello&#39;, &#39;oellh&#39;, and &#39;elhol&#39; are all special-equivalent to each other because their even and odd indexed characters can be rearranged to match. The strings &#39;aabb&#39;, &#39;bbaa&#39;, and &#39;abab&#39; form another group since they can be rearranged similarly. Thus, there are 3 groups in total.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5, 2, 9, 4], k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sorted array is [2, 4, 5, 9]. Choosing the students with scores 4 and 5 results in a difference of 5 - 4 = 1. This is the minimum possible difference.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#34;abcd&#34;, &#34;dcab&#34;, &#34;acbd&#34;, &#34;xyzz&#34;, &#34;zzxy&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the first three strings form one group as they are special-equivalent. The last two strings form another group as they can be made identical by rearranging even and odd indexed characters.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will sort the array of student scores, and then use a sliding window technique to find the smallest possible difference between the highest and lowest scores in any subsequence of length k.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to identify groups of strings that are special-equivalent. This can be achieved by separating each string into even and odd indexed characters, sorting them, and using a set to track distinct combinations.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the array helps because it allows us to consider only consecutive elements for a valid subsequence.</div>
+                                <div style="margin-left: 20px;"> • We can separate the characters in the string based on their indices (even or odd).</div>
+                            
+                                <div style="margin-left: 20px;"> • Sorting the characters within each group (even and odd) helps in identifying equivalence.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By sliding a window of size k over the sorted array, we can easily compute the difference between the largest and smallest elements in each subsequence.</div>
+                                <div style="margin-left: 20px;"> • We can use a set data structure to track unique combinations of sorted even and odd indexed characters.</div>
                             
                         </div>
                     </div>
@@ -459,11 +469,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the input array nums.</div>
+                                <div style="margin-left: 20px;"> • 1. For each word, separate its characters into two groups: one for even indexed characters and one for odd indexed characters.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array with a sliding window of size k.</div>
+                                <div style="margin-left: 20px;"> • 2. Sort both groups individually.</div>
                             
-                                <div style="margin-left: 20px;"> • For each window, compute the difference between the first and last element and track the minimum difference.</div>
+                                <div style="margin-left: 20px;"> • 3. Store the tuple of the sorted even and odd groups in a set.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. The number of distinct groups is the size of the set.</div>
                             
                         </div>
                     </div>
@@ -472,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, return 0 since there are no students to choose.</div>
+                                <div style="margin-left: 20px;"> • If the input is empty, the result is 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large arrays, ensure the algorithm runs in O(n log n) time due to sorting.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution can handle up to 1000 strings efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If k equals the length of the array, the only valid choice is the entire array.</div>
+                                <div style="margin-left: 20px;"> • Strings with only one character will always form their own group.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle large arrays and ensure that the minimum difference is computed efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure efficient handling of strings up to length 20 and 1000 words.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,17 +516,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Words</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Pair Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Grouping</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Odd Index Character Grouping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Even Index Character Grouping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 End Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Sorting Odd Group</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Sorting Even Group</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Insert Pair into Set</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 End Outer Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Unique Group Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 End Function</button>
                     
                 </div>
 
@@ -523,12 +551,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>sort(begin(nums), end(nums));
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> min(res, nums[i] <span style="color:#666">-</span> nums[i <span style="color:#666">-</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSpecialEquivGroups</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;&gt;</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">const</span> <span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">w</span>: words) {
+</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> p;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> w.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">%</span> <span style="color:#666">2</span>) p.first  <span style="color:#666">+=</span> w[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>       p.second <span style="color:#666">+=</span> w[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        sort(p.first.begin(), p.first.end());
+</span></span><span style="display:flex;"><span>        sort(p.second.begin(), p.second.end());
+</span></span><span style="display:flex;"><span>        s.insert(p);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s.size();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -536,63 +571,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSpecialEquivGroups</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `minimumDifference` that takes a vector `nums` and an integer `k`, representing the array and the size of the subarray, respectively. </div>
+                            <div class=""> Define the function `numSpecialEquivGroups`, which takes a vector of strings as input and returns the number of unique special equivalent groups. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;&gt;</span> s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a variable `res` with the maximum possible integer value to keep track of the minimum difference. </div>
+                            <div class=""> Declare a set `s` to store pairs of sorted odd and even indexed characters from each string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Sorting</b></div>
+                            <div class=""> <b>3 : Loop Through Words</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(begin(nums), end(nums));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">const</span> <span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">w</span>: words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the array `nums` in non-decreasing order, which is necessary for efficiently finding the minimum difference in subsequent steps. </div>
+                            <div class=""> Iterate through each string `w` in the input vector `words`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Looping</b></div>
+                            <div class=""> <b>4 : Pair Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> p;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop from the index `k-1` to iterate through the sorted array `nums` and compare elements that are part of a subarray of size `k`. </div>
+                            <div class=""> Initialize a pair `p` to store the sorted characters from the odd and even indices of the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Mathematical Operations</b></div>
+                            <div class=""> <b>5 : Character Grouping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> min(res, nums[i] <span style="color:#666">-</span> nums[i <span style="color:#666">-</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> w.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the `res` variable by calculating the minimum difference between the current element `nums[i]` and the element `k` positions before it. </div>
+                            <div class=""> Iterate through each character in the string `w`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Odd Index Character Grouping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">%</span> <span style="color:#666">2</span>) p.first  <span style="color:#666">+=</span> w[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the minimum difference found between the elements in any subarray of size `k`. </div>
+                            <div class=""> For characters at odd indices, append them to `p.first`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Even Index Character Grouping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>       p.second <span style="color:#666">+=</span> w[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For characters at even indices, append them to `p.second`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : End Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the loop that processes characters in the string `w`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Sorting Odd Group</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sort(p.first.begin(), p.first.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the characters stored in `p.first` (odd indexed characters). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Sorting Even Group</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sort(p.second.begin(), p.second.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the characters stored in `p.second` (even indexed characters). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Insert Pair into Set</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.insert(p);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Insert the sorted pair `p` into the set `s` to ensure uniqueness of the combinations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : End Outer Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the loop that processes each word in the `words` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Unique Group Count</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the size of the set `s`, which contains the number of unique special equivalent groups. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : End Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the function definition. </div>
                         </div>
                     
                 </div>
@@ -612,16 +727,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> Sorting the array takes O(n log n) time, and iterating through it takes O(n) time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * m log m)</div>
+                        <div class=""> <b>Average Case:</b> O(n * m log m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m log m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * m log m), where n is the number of strings, and m is the length of each string. Sorting the even and odd indexed characters in each string takes O(m log m).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) for the sorted array, and O(1) if we are sorting in place.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n * m) because we store each string&#39;s even and odd indexed characters separately, along with the set of unique combinations.</div>    
                     </div>
 
                 </div>

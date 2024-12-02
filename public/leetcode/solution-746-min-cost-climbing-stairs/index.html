@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 24, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1284s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1281s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/746.webp" 
            alt="A staircase where the minimum cost to climb is calculated, with each step glowing softly as it is taken." 
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> In a tournament with <code>n</code> teams, each round involves pairing teams for matches. The number of matches depends on whether <code>n</code> is even or odd. Calculate the total number of matches played in the tournament until a winner is determined. </div>
+<div class=""> You are climbing a staircase with a cost associated with each step. You can either start at the first or second step. At each step, you can either move one step or skip one step. Find the minimum cost to reach the top of the staircase. </div>
 
 
 
@@ -370,41 +370,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a single integer `n`, the number of teams in the tournament.</div>
-                        <div class=""> <b>Example:</b> Input: n = 9</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array `cost`, where `cost[i]` is the cost of the ith step.</div>
+                        <div class=""> <b>Example:</b> cost = [5, 10, 15, 20]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= cost.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= cost[i] &lt;= 999</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer representing the total number of matches played in the tournament.</div>
-                        <div class=""> <b>Example:</b> Output: 8</div>
+                        <div class=""> <b>Output:</b> Return the minimum cost to reach the top of the staircase.</div>
+                        <div class=""> <b>Example:</b> For cost = [5, 10, 15, 20], the output is 15.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the total number of matches played during the entire tournament, taking into account the number of teams in each round.</div>
+                        <div class=""> <b>Goal:</b> To minimize the cost, choose whether to move one step or skip one step depending on the given costs.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • If the number of teams is even, `n / 2` matches are played and `n / 2` teams advance.</div>
+                                <div style="margin-left: 20px;"> • Use dynamic programming to calculate the minimum cost of reaching each step.</div>
                             
-                                <div style="margin-left: 20px;"> • If the number of teams is odd, `(n - 1) / 2` matches are played and `(n - 1) / 2 &#43; 1` teams advance.</div>
-                            
-                                <div style="margin-left: 20px;"> • Repeat this process until only one team remains, counting the matches at each step.</div>
+                                <div style="margin-left: 20px;"> • For each step, you can either come from the previous step or skip one step, and choose the minimum cost.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input number of teams `n` will be within the given bounds.</div>
+                        <div class=""> <b>Goal:</b> The array `cost` has at least two elements, and each element is a non-negative integer.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= cost.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= cost[i] &lt;= 999</div>
                             
                         </div>
                     </div>        
@@ -412,15 +414,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • At least one team is always present in the tournament.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least two steps in the staircase.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 9</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The tournament progresses through multiple rounds. In each round, the number of matches is determined based on whether the number of teams is even or odd. The total matches are accumulated as we move towards the final winner.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For cost = [5, 10, 15, 20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting at step 1 with cost 10, and skipping to step 3 with cost 15. Total cost: 10 &#43; 15 = 15.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For cost = [1, 20, 10, 5, 30, 10]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting at step 0 with cost 1, skipping steps, and reaching the top with a total cost of 16.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,16 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, simulate the tournament by calculating the number of matches played in each round based on the current number of teams. Keep track of the total number of matches until only one team is left.</div>
+                        <div class=""> <b>Approach:</b> Use dynamic programming to calculate the minimum cost of reaching each step by considering the previous step and the step before it.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of matches in each round is simple to calculate based on whether the number of teams is even or odd.</div>
+                                <div style="margin-left: 20px;"> • The problem is similar to the Fibonacci sequence but with costs associated with each step.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use recursion or iteration to repeatedly reduce the number of teams and accumulate the match count until we reach the final winner.</div>
+                                <div style="margin-left: 20px;"> • Dynamic programming allows us to break down the problem and calculate the optimal cost to reach the top step.</div>
                             
                         </div>
                     </div>
@@ -461,11 +467,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start with the initial number of teams `n`.</div>
+                                <div style="margin-left: 20px;"> • Create an array `dp` where `dp[i]` represents the minimum cost to reach step `i`.</div>
                             
-                                <div style="margin-left: 20px;"> • In each round, calculate the number of matches, reduce the number of teams, and add the match count to the total.</div>
+                                <div style="margin-left: 20px;"> • Initialize `dp[0] = cost[0]` and `dp[1] = cost[1]`.</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat this process until only one team remains.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array and calculate `dp[i] = min(dp[i-1] &#43; cost[i], dp[i-2] &#43; cost[i])`.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the value `dp[n]` where `n` is the last step.</div>
                             
                         </div>
                     </div>
@@ -474,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input `n` should always be a valid positive integer, so empty inputs will not be encountered.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that `cost.length` will be at least 2, so empty inputs are not possible.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle the maximum number of teams, which is 200.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle input sizes up to 1000 steps.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `n` is 1, no matches are played, and the total matches is 0.</div>
+                                <div style="margin-left: 20px;"> • If all costs are the same, the minimum cost will be the same regardless of the steps taken.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works within the constraint `1 &lt;= n &lt;= 200`.</div>
+                                <div style="margin-left: 20px;"> • The solution should work within the provided constraints for both time and space efficiency.</div>
                             
                         </div>                                                                        
                     </div>
@@ -508,21 +516,15 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 DP Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialize Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Odd Players Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 DP Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call (Odd Players)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Else Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call (Even Players)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
                 </div>
 
@@ -531,15 +533,15 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfMatches</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">==</span><span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">==</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&amp;</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> numberOfMatches(n<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
-</span></span><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> numberOfMatches(n<span style="color:#666">/</span><span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minCostClimbingStairs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cost) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> cost.size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> min(dp[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">+</span> cost[i<span style="color:#666">-</span><span style="color:#666">1</span>], dp[i<span style="color:#666">-</span><span style="color:#666">2</span>] <span style="color:#666">+</span> cost[i<span style="color:#666">-</span><span style="color:#666">2</span>]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -550,90 +552,60 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfMatches</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minCostClimbingStairs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cost) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;numberOfMatches&#39; that takes an integer `n`, representing the number of players, and returns the total number of matches in the tournament. </div>
+                            <div class=""> This line defines the function minCostClimbingStairs that takes a vector of integers (cost) as input and returns an integer representing the minimum cost to reach the top. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Base Case 1</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">==</span><span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> cost.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case: If there are no players (`n == 0`), return 0 matches as there are no players to compete. </div>
+                            <div class=""> The variable &#39;n&#39; is initialized to the size of the &#39;cost&#39; vector, representing the number of steps in the staircase. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Base Case 2</b></div>
+                            <div class=""> <b>3 : DP Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">==</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case: If there is only one player (`n == 1`), return 0 matches as a single player cannot compete. </div>
+                            <div class=""> Initialize a dynamic programming (DP) array &#39;dp&#39; of size n&#43;1, with all elements set to 0. This array will store the minimum cost to reach each step. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Initialize Answer</b></div>
+                            <div class=""> <b>4 : For Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the answer `ans` as the integer division of `n` by 2, representing the matches in the current round (each match eliminates one player). </div>
+                            <div class=""> Start of the for loop, which iterates from step 2 to step n, calculating the minimum cost for each step. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Odd Players Check</b></div>
+                            <div class=""> <b>5 : DP Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&amp;</span> <span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> min(dp[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">+</span> cost[i<span style="color:#666">-</span><span style="color:#666">1</span>], dp[i<span style="color:#666">-</span><span style="color:#666">2</span>] <span style="color:#666">+</span> cost[i<span style="color:#666">-</span><span style="color:#666">2</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the number of players `n` is odd using bitwise AND (`n &amp; 1`). If `n` is odd, there will be one player left after the matches in the current round. </div>
+                            <div class=""> At each step, the cost to reach step &#39;i&#39; is calculated by taking the minimum of the cost to reach step &#39;i-1&#39; and step &#39;i-2&#39; plus the respective step costs from the &#39;cost&#39; array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursive Call (Odd Players)</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> numberOfMatches(n<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the number of players is odd, recursively call `numberOfMatches` with `n/2 &#43; 1` players, as one player will have a &#39;bye&#39; and not participate in the current round. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Else Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the number of players is even, proceed to the next step without any players getting a &#39;bye&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Recursive Call (Even Players)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> numberOfMatches(n<span style="color:#666">/</span><span style="color:#666">2</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the number of players is even, recursively call `numberOfMatches` with `n/2` players, as there are no &#39;byes&#39; in this round. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the total number of matches calculated for the current round and all subsequent rounds. </div>
+                            <div class=""> Return the minimum cost to reach the top of the staircase, which is stored in dp[n]. </div>
                         </div>
                     
                 </div>
@@ -653,16 +625,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log n)</div>
-                        <div class=""> <b>Average Case:</b> O(log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(log n) because the number of teams is halved in each round.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the `cost` array.</div>
+                        <div class=""> <b>Average Case:</b> O(n), where n is the length of the `cost` array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the `cost` array.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate over the `cost` array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) since the solution uses constant space.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), the space complexity remains the same for all cases.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), because we use an array `dp` to store the minimum cost at each step.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we need an additional array to store the minimum costs.</div>    
                     </div>
 
                 </div>

@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given an array of integers &rsquo;nums&rsquo; and an integer &lsquo;original&rsquo;. Start with the number &lsquo;original&rsquo; and search for it in the array. If found, multiply it by two. Repeat this process until &lsquo;original&rsquo; is no longer found in &rsquo;nums&rsquo;. Return the final value of &lsquo;original&rsquo;. </div>
+<div class=""> You are given a binary tree with <code>n</code> nodes, where each node contains <code>node.val</code> coins. There are exactly <code>n</code> coins in total across the tree. In one move, you can transfer a coin between two adjacent nodes (parent to child or child to parent). Return the minimum number of moves required to ensure that every node has exactly one coin. </div>
 
 
 
@@ -359,47 +359,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of integers &#39;nums&#39; and an integer &#39;original&#39;.</div>
-                        <div class=""> <b>Example:</b> nums = [4, 2, 8, 1, 16], original = 4</div>
+                        <div class=""> <b>Input:</b> A binary tree represented by an array of integers, where each integer corresponds to the number of coins at that node.</div>
+                        <div class=""> <b>Example:</b> root = [1, 0, 0]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i], original &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= n</div>
+                            
+                                <div style="margin-left: 20px;"> • The sum of all Node.val is n.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the final value of &#39;original&#39; after performing the described operations.</div>
-                        <div class=""> <b>Example:</b> Output: 64</div>
+                        <div class=""> <b>Output:</b> Return the minimum number of moves required to make every node have exactly one coin.</div>
+                        <div class=""> <b>Example:</b> 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The final value of &#39;original&#39; should be returned after the process stops.</div>
+                                <div style="margin-left: 20px;"> • The output must be an integer representing the minimum number of moves.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Check if &#39;original&#39; is in the array, and if so, multiply it by two. Repeat this process until &#39;original&#39; is no longer found in the array.</div>
+                        <div class=""> <b>Goal:</b> We need to calculate the minimum moves by redistributing coins across the binary tree.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create a frequency map to count occurrences of each number in &#39;nums&#39;.</div>
+                                <div style="margin-left: 20px;"> • Traverse the tree recursively.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if &#39;original&#39; is present in &#39;nums&#39; and multiply it by two if found.</div>
+                                <div style="margin-left: 20px;"> • For each node, calculate the difference between the node&#39;s coin count and the desired coin count (which is 1).</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat the process until &#39;original&#39; is not found.</div>
+                                <div style="margin-left: 20px;"> • Accumulate the total moves by summing the absolute differences in coin count for each subtree.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the total number of moves.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array &#39;nums&#39; will contain valid integers, and the value of &#39;original&#39; will be within the given bounds.</div>
+                        <div class=""> <b>Goal:</b> The input binary tree must satisfy the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i], original &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= n</div>
+                            
+                                <div style="margin-left: 20px;"> • The sum of all Node.val is n.</div>
                             
                         </div>
                     </div>        
@@ -407,19 +413,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array contains integers within the specified range, and the number &#39;original&#39; is also within the valid bounds.</div>
+                                <div style="margin-left: 20px;"> • The tree is well-formed, and all nodes are valid.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: nums = [4, 2, 8, 1, 16], original = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 4 is found and doubled to 8, then 8 is found and doubled to 16, and so on until 64 is obtained, which is not found in the array.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1, 0, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The root node has one coin, and both children have none. The solution involves moving coins from the root to its children to balance the tree.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: nums = [1, 3, 5], original = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 2 is not found in the array, so the process stops immediately, and the final value remains 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [0, 2, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, two coins are initially at the left child. We move coins to the root and then move one coin to the right child.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -443,16 +449,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves checking if the number &#39;original&#39; is in the array, and multiplying it by 2 whenever it is found, repeating the process until it is no longer found.</div>
+                        <div class=""> <b>Approach:</b> A recursive approach is used to traverse the tree, compute the difference in coins for each node, and calculate the total moves required.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm needs to check for the presence of a number and keep multiplying it until it is no longer found.</div>
+                                <div style="margin-left: 20px;"> • Each node needs to have exactly one coin.</div>
+                            
+                                <div style="margin-left: 20px;"> • The total number of coins in the tree is already fixed and equal to the number of nodes.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A frequency map can be useful to quickly check if a number exists in the array.</div>
+                                <div style="margin-left: 20px;"> • We need to find an efficient way to traverse the tree and redistribute coins to meet the target distribution.</div>
                             
                         </div>
                     </div>
@@ -460,11 +468,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Build a frequency map for all numbers in &#39;nums&#39;.</div>
+                                <div style="margin-left: 20px;"> • Initialize a recursive function to calculate the moves.</div>
                             
-                                <div style="margin-left: 20px;"> • While &#39;original&#39; is found in the map, double its value and continue.</div>
+                                <div style="margin-left: 20px;"> • For each node, calculate how many coins need to be moved to balance it.</div>
                             
-                                <div style="margin-left: 20px;"> • Return &#39;original&#39; when it is no longer found in the map.</div>
+                                <div style="margin-left: 20px;"> • Accumulate the total moves as the recursive calls return.</div>
                             
                         </div>
                     </div>
@@ -473,22 +481,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Empty input arrays are not allowed by the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • An empty tree is not a valid input based on the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle large arrays with a length of up to 1000.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, ensure that the algorithm handles the maximum number of nodes efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If &#39;original&#39; is not found initially, the algorithm should return the unchanged value of &#39;original&#39;.</div>
+                                <div style="margin-left: 20px;"> • If all nodes already have one coin, no moves are needed.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array &#39;nums&#39; and the value &#39;original&#39; are within specified bounds.</div>
+                                <div style="margin-left: 20px;"> • The tree must contain at least one node.</div>
                             
                         </div>                                                                        
                     </div>
@@ -505,17 +513,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Member Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Frequency Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Public Method Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Control</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Main Method</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Doubling</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Moves</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call to Move</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Helper Method Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Call for Left Subtree</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursive Call for Right Subtree</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Calculate Moves for Current Node</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Value for Current Node</button>
                     
                 </div>
 
@@ -524,14 +546,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findFinalValue</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> o) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> h[<span style="color:#666">1001</span>]<span style="color:#666">=</span>{};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">i</span>:nums) h[i]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(o<span style="color:#666">&lt;=</span><span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> h[o])
-</span></span><span style="display:flex;"><span>        o<span style="color:#666">*=</span><span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> o;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mv;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> distributeCoins(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    mv <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    move(root, mv);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mv;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">move</span>(TreeNode<span style="color:#666">*</span> r, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span> mv) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r <span style="color:#666">==</span> <span style="color:#a2f;font-weight:bold">nullptr</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> move(r<span style="color:#666">-&gt;</span>left, mv);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> move(r<span style="color:#666">-&gt;</span>right, mv);
+</span></span><span style="display:flex;"><span>    mv <span style="color:#666">+=</span> abs(left) <span style="color:#666">+</span> abs(right);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> r<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> left <span style="color:#666">+</span> right <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -539,63 +568,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findFinalValue</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> o) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;findFinalValue&#39; takes an array &#39;nums&#39; and an integer &#39;o&#39;. It calculates a final value by repeatedly doubling &#39;o&#39; if the value exists in &#39;nums&#39;. </div>
+                            <div class=""> Defines the class `Solution` which contains methods for solving the problem of distributing coins in a binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Initialization</b></div>
+                            <div class=""> <b>2 : Member Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> h[<span style="color:#666">1001</span>]<span style="color:#666">=</span>{};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mv;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a frequency array &#39;h&#39; of size 1001 to store the frequency of each integer in &#39;nums&#39;. The array is initially set to zero. </div>
+                            <div class=""> Declares a member variable `mv` which will hold the number of moves required to balance the coins in the binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Frequency Counting</b></div>
+                            <div class=""> <b>3 : Public Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">i</span>:nums) h[i]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over each element in the &#39;nums&#39; array and update the frequency of that element in the array &#39;h&#39;. </div>
+                            <div class=""> Begins the public section of the class, where the methods that can be accessed from outside the class are defined. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Control</b></div>
+                            <div class=""> <b>4 : Main Method</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(o<span style="color:#666">&lt;=</span><span style="color:#666">1000</span> <span style="color:#666">&amp;&amp;</span> h[o])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">distributeCoins</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> While &#39;o&#39; is less than or equal to 1000 and the value &#39;o&#39; exists in the frequency array &#39;h&#39;, keep doubling &#39;o&#39;. </div>
+                            <div class=""> Defines the method `distributeCoins` which takes a pointer to the root of the binary tree and returns the minimum number of moves required to balance the coins. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Doubling</b></div>
+                            <div class=""> <b>5 : Initialize Moves</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        o<span style="color:#666">*=</span><span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mv <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Double the value of &#39;o&#39;. This continues until &#39;o&#39; is not present in the frequency array or exceeds 1000. </div>
+                            <div class=""> Initializes the `mv` variable to 0, which will be used to count the number of moves needed to balance the coins. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Recursive Call to Move</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> o;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    move(root, mv);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final value of &#39;o&#39; after the loop terminates. </div>
+                            <div class=""> Calls the helper method `move` to recursively calculate the required moves, passing the root node and the `mv` variable. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mv;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the total number of moves required to balance the tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Helper Method Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">move</span>(TreeNode<span style="color:#666">*</span> r, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span> mv) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the helper method `move`, which is a recursive function that calculates the number of moves required for each node to balance the coins in its subtree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r <span style="color:#666">==</span> <span style="color:#a2f;font-weight:bold">nullptr</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current node is null. If so, it returns 0, as no moves are needed for a non-existent node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Recursive Call for Left Subtree</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> move(r<span style="color:#666">-&gt;</span>left, mv);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively calls the `move` method on the left child of the current node to calculate the number of moves for the left subtree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Recursive Call for Right Subtree</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> move(r<span style="color:#666">-&gt;</span>right, mv);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively calls the `move` method on the right child of the current node to calculate the number of moves for the right subtree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Calculate Moves for Current Node</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mv <span style="color:#666">+=</span> abs(left) <span style="color:#666">+</span> abs(right);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the total number of moves for the current node by adding the absolute values of the moves required for the left and right subtrees. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Value for Current Node</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> r<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> left <span style="color:#666">+</span> right <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the value for the current node, adjusting for the moves required by its left and right children, and subtracting 1 because each node starts with one coin. </div>
                         </div>
                     
                 </div>
@@ -618,13 +717,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) due to the need to iterate through the array once to build the frequency map.</div>                                               
+                        <div class=""> <b>Description:</b> The solution requires traversing every node in the tree once, resulting in a time complexity of O(n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the frequency map.</div>    
+                        <div class=""> <b>Best Case:</b> O(h)</div>
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h) where h is the height of the tree due to recursion stack usage.</div>    
                     </div>
 
                 </div>

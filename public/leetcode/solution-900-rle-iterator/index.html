@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 9, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given a list of characters&rsquo; properties, where each character has two main attributes: attack and defense. A character is weak if another character exists with both greater attack and defense values. Return the number of weak characters in the list. </div>
+<div class=""> We are given a run-length encoded array where every even-indexed element specifies how many times the following odd-indexed element (a number) is repeated in the original sequence. Your task is to implement an iterator that can return the next &rsquo;n&rsquo; elements from the decoded sequence when requested. </div>
 
 
 
@@ -360,47 +360,56 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 2D array &#39;properties&#39; of length n (2 &lt;= n &lt;= 100,000), where each element is an array [attack_i, defense_i] representing the attack and defense values of the ith character.</div>
-                        <div class=""> <b>Example:</b> properties = [[1, 2], [2, 1], [3, 4]]</div>
+                        <div class=""> <b>Input:</b> You are given a run-length encoded array where encoding[i] gives the frequency of encoding[i&#43;1] in the sequence. You need to create an iterator that can return the next &#39;n&#39; elements when requested.</div>
+                        <div class=""> <b>Example:</b> Input: [&#39;RLEIterator&#39;, &#39;next&#39;, &#39;next&#39;, &#39;next&#39;, &#39;next&#39;]
+[[[2, 10, 1, 20, 3, 5]], [1], [2], [3], [4]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= properties.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= encoding.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= attack_i, defense_i &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • encoding.length is even.</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= encoding[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 1000 calls will be made to next.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of weak characters in the list.</div>
-                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Output:</b> The output is the value of the last element returned after exhausting the next &#39;n&#39; elements from the sequence, or -1 if there are no more elements to exhaust.</div>
+                        <div class=""> <b>Example:</b> Output: [null, 20, 20, 5, -1]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result for each next(n) call will be an integer or -1 if there are no more elements.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> We need to find the weak characters by comparing each character with others to check if there exists a character with strictly greater attack and defense values.</div>
+                        <div class=""> <b>Goal:</b> To create an iterator that processes run-length encoded data and efficiently returns the next &#39;n&#39; elements in sequence.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the characters by their attack value in ascending order. If two characters have the same attack value, sort them by their defense value in descending order.</div>
+                                <div style="margin-left: 20px;"> • 1. Use an index to traverse the run-length encoded array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Traverse through the sorted list and keep track of the highest defense value encountered.</div>
+                                <div style="margin-left: 20px;"> • 2. For each next(n) call, decrement the count of the remaining elements in the current sequence while keeping track of the last number encountered.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If a character&#39;s defense value is smaller than the highest defense value encountered so far, it is a weak character.</div>
+                                <div style="margin-left: 20px;"> • 3. Once the count of a sequence is exhausted, move to the next run-length encoded pair and continue.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Count and return the number of weak characters.</div>
+                                <div style="margin-left: 20px;"> • 4. If no more elements are available, return -1.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure the problem is solvable within time limits for large inputs.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently process the next() calls and ensure that it handles large sequences correctly.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array has between 2 and 100,000 elements.</div>
+                                <div style="margin-left: 20px;"> • At most 1000 calls will be made to next.</div>
                             
-                                <div style="margin-left: 20px;"> • Each attack and defense value is between 1 and 100,000.</div>
+                                <div style="margin-left: 20px;"> • The input encoding array is guaranteed to have an even length.</div>
                             
                         </div>
                     </div>        
@@ -408,15 +417,20 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All characters have distinct attack and defense values.</div>
+                                <div style="margin-left: 20px;"> • The input encoding array will always have an even length.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each encoding pair will be a valid representation of a sequence of numbers.</div>
+                            
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle repeated calls to the &#39;next&#39; method.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> properties = [[3, 5], [6, 3], [7, 8], [4, 7]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the character [3, 5] is weak because there exists a character [6, 3] with strictly greater attack and defense values.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#39;RLEIterator&#39;, &#39;next&#39;, &#39;next&#39;, &#39;next&#39;, &#39;next&#39;]
+[[[2, 10, 1, 20, 3, 5]], [1], [2], [3], [4]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The run-length encoded array [2, 10, 1, 20, 3, 5] represents the sequence [10, 10, 20, 5, 5, 5]. Calling next(1) returns 20, next(2) returns 20 again, next(3) returns 5, and next(4) returns -1 as the sequence is exhausted.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -440,16 +454,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can approach this problem by sorting the characters based on attack and using a greedy strategy to keep track of the maximum defense value seen so far.</div>
+                        <div class=""> <b>Approach:</b> The approach involves iterating over the run-length encoded array, processing each &#39;run&#39; of repeated values, and returning the appropriate number of elements in each next() call.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem boils down to comparing each character with others to see if it&#39;s dominated by another one.</div>
+                                <div style="margin-left: 20px;"> • Since the encoded array is compact, iterating through it and extracting the required elements should be efficient if done incrementally.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Sorting the array and using a greedy approach allows us to efficiently identify weak characters.</div>
+                                <div style="margin-left: 20px;"> • Efficient traversal is key, and handling large values for &#39;n&#39; is important to prevent timeouts or excessive memory usage.</div>
                             
                         </div>
                     </div>
@@ -457,13 +471,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the characters based on attack values in ascending order, and by defense values in descending order if the attack values are the same.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize an index to traverse the encoded array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Initialize a variable to keep track of the maximum defense value seen while traversing the list.</div>
+                                <div style="margin-left: 20px;"> • 2. For each next(n) call, keep track of how many elements need to be skipped or returned.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Traverse the list from left to right and count the number of weak characters.</div>
+                                <div style="margin-left: 20px;"> • 3. Once a &#39;run&#39; is exhausted, move to the next element pair and repeat the process.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the count of weak characters.</div>
+                                <div style="margin-left: 20px;"> • 4. Return -1 if there are no more elements available to return.</div>
                             
                         </div>
                     </div>
@@ -472,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This problem assumes that the input array will always contain at least two characters.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that encoding will not be empty, as the length is at least 2.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should be efficient enough to handle the largest input sizes within time limits.</div>
+                                <div style="margin-left: 20px;"> • Large inputs with values of &#39;n&#39; up to 10^9 should be handled by efficiently skipping over the run-length sequences.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the sorting order works correctly when two characters have the same attack value but different defense values.</div>
+                                <div style="margin-left: 20px;"> • Zero values in the encoding array should be handled gracefully.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The constraints ensure that the input will always be valid and the solution will work within the given limits.</div>
+                                <div style="margin-left: 20px;"> • Efficient memory usage and computation time are necessary given the problem&#39;s constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,33 +518,55 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Access Modifier</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Access Specifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Comparator Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Comparator Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Comparator Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Index Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Comparator Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Constructor End</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Main Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Subtract Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Max Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Else Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Update Frequency</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Value</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 End Else Block</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 End While Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return -1</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Method End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Class End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Documentation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Instantiation Example</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Object Creation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Method Call</button>
                     
                 </div>
 
@@ -539,170 +575,282 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span>
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> comp(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> b[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>RLEIterator(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> encoding) {
+</span></span><span style="display:flex;"><span>    arr <span style="color:#666">=</span> encoding;
+</span></span><span style="display:flex;"><span>    idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfWeakCharacters</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> prpt) {
-</span></span><span style="display:flex;"><span>    sort(prpt.begin(), prpt.end(), comp);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MIN;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> prpt.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(prpt[i][<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> mn) ans<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        mn <span style="color:#666">=</span> max(mn, prpt[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> arr.size()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> arr[idx]) {
+</span></span><span style="display:flex;"><span>            n <span style="color:#666">-=</span> arr[idx];
+</span></span><span style="display:flex;"><span>            idx <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            arr[idx] <span style="color:#666">-=</span> n;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> arr[idx <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your RLEIterator object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * RLEIterator* obj = new RLEIterator(encoding);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;next(n);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Class Definition</b></div>
+                            <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `Solution` class that contains the function `numberOfWeakCharacters` and the comparator function `comp`. </div>
+                            <div class=""> The variable `idx` is declared and initialized to 0, representing the current position in the encoded array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Access Modifier</b></div>
+                            <div class=""> <b>2 : Access Specifier</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Indicates the public section of the class where the methods are accessible. </div>
+                            <div class=""> The access specifier `public` is used to indicate that the following methods are accessible outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Comparator Function</b></div>
+                            <div class=""> <b>3 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">comp</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>RLEIterator(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> encoding) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines a static comparator function `comp` that is used to sort the characters in descending order of their second element and ascending order of their first element. </div>
+                            <div class=""> The constructor `RLEIterator` is defined to initialize the object with a reference to the encoded data array `encoding`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Comparator Logic</b></div>
+                            <div class=""> <b>4 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    arr <span style="color:#666">=</span> encoding;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the first elements of both vectors are equal. </div>
+                            <div class=""> The constructor initializes the member variable `arr` with the provided encoding array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Comparator Logic</b></div>
+                            <div class=""> <b>5 : Index Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> b[<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the first elements are equal, sorts based on the second element in descending order. </div>
+                            <div class=""> The constructor initializes the index variable `idx` to 0, which will be used to traverse the encoding array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Comparator Logic</b></div>
+                            <div class=""> <b>6 : Constructor End</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the first elements are different, sorts based on the first element in ascending order. </div>
+                            <div class=""> End of the constructor definition. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Main Function Definition</b></div>
+                            <div class=""> <b>7 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfWeakCharacters</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> prpt) {
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `numberOfWeakCharacters` which accepts a 2D vector `prpt` representing the characters and returns the number of weak characters. </div>
+                            <div class="">  </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Sorting</b></div>
+                            <div class=""> <b>8 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(prpt.begin(), prpt.end(), comp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the 2D vector `prpt` using the custom comparator `comp` to arrange the characters in the desired order. </div>
+                            <div class=""> The method `next(int n)` is defined to retrieve the next element in the RLE sequence based on the value `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Initialization</b></div>
+                            <div class=""> <b>9 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MIN;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> arr.size()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `mn` to `INT_MIN` to store the maximum second element encountered during the iteration. </div>
+                            <div class=""> A while loop starts, which continues as long as the index `idx` is less than the size of the array `arr`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> arr[idx]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `ans` to 0 to keep track of the count of weak characters. </div>
+                            <div class=""> The condition checks if the remaining value `n` is greater than the current frequency value `arr[idx]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop Start</b></div>
+                            <div class=""> <b>11 : Subtract Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> prpt.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            n <span style="color:#666">-=</span> arr[idx];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop from the last element of the sorted `prpt` vector and iterates backwards. </div>
+                            <div class=""> If `n` is greater than the current frequency, subtract the current frequency `arr[idx]` from `n` and move to the next pair in the encoding. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Condition Check</b></div>
+                            <div class=""> <b>12 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(prpt[i][<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> mn) ans<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            idx <span style="color:#666">+=</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the second element of the current vector is less than `mn`, it means the current character is weak, and the count `ans` is incremented. </div>
+                            <div class=""> The index `idx` is updated to the next element in the encoding (which is a pair of frequency and value, so the index moves by 2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Update Max Value</b></div>
+                            <div class=""> <b>13 : Else Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mn <span style="color:#666">=</span> max(mn, prpt[i][<span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates `mn` to be the maximum of `mn` and the second element of the current vector, ensuring that only characters weaker than the current maximum are counted. </div>
+                            <div class=""> If `n` is not greater than the current frequency `arr[idx]`, the method proceeds to return the value corresponding to this frequency. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class=""> <b>14 : Update Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            arr[idx] <span style="color:#666">-=</span> n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the final count of weak characters. </div>
+                            <div class=""> The frequency at the current index is reduced by `n`, which represents the number of times this value has been accessed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Value</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> arr[idx <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The value corresponding to the current frequency (i.e., `arr[idx &#43; 1]`) is returned. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : End Else Block</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the else block. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : End While Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the while loop. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return -1</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no value can be returned (i.e., the encoding has been exhausted), the function returns -1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Method End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the `next` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Class End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the `RLEIterator` class definition. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : </b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                            </div>
+                            <div class="">  </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Documentation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The following section provides documentation on how to instantiate and use the `RLEIterator` class. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Instantiation Example</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> <span style="color:#666">*</span> Your RLEIterator object will be instantiated and called as <span style="color:#a0a000">such</span>:
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Example usage of the `RLEIterator` class. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Object Creation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> <span style="color:#666">*</span> RLEIterator<span style="color:#666">*</span> obj <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> RLEIterator(encoding);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line shows how to instantiate an `RLEIterator` object with a given encoding vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Method Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> <span style="color:#666">*</span> <span style="color:#0b0;font-weight:bold">int</span> param_1 <span style="color:#666">=</span> obj<span style="color:#666">-&gt;</span>next(n);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line shows how to call the `next` method to retrieve the next element in the sequence. </div>
                         </div>
                     
                 </div>
@@ -722,16 +870,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n) time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1) per next() call when there are enough elements left in the current &#39;run&#39;.</div>
+                        <div class=""> <b>Average Case:</b> O(1) per next() call, assuming the sequence is processed efficiently.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) per next() call in extreme cases when &#39;n&#39; is large and needs to exhaust multiple &#39;runs&#39;.</div> 
+                        <div class=""> <b>Description:</b> In the worst case, each next() call may require iterating over several elements of the encoded array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required for sorting the input array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) as the iterator operates in constant space.</div>
+                        <div class=""> <b>Worst Case:</b> O(1) as no additional space is required beyond storing the encoded array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, as we only need space to store the input and an index to traverse it.</div>    
                     </div>
 
                 </div>

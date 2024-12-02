@@ -322,7 +322,7 @@
 
 
 
-<div class=""> Given a string <code>s</code>, return the number of unique non-empty substrings of <code>s</code> that are present in the infinite wraparound string &lsquo;abcdefghijklmnopqrstuvwxyz&rsquo;. </div>
+<div class=""> Given an array of integers, find the kth largest element without sorting the entire array. </div>
 
 
 
@@ -373,47 +373,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s`.</div>
-                        <div class=""> <b>Example:</b> s = &#39;c&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array nums and an integer k. The array contains n integers, and k is an integer specifying the rank of the largest element to find.</div>
+                        <div class=""> <b>Example:</b> [7, 2, 5, 8, 3, 9], k = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= nums[i] &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of unique substrings of `s` that are found in the infinite wraparound string.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> The output should be the kth largest element from the array.</div>
+                        <div class=""> <b>Example:</b> For input [7, 2, 5, 8, 3, 9] and k = 3, the output is 7.</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The output should be an integer representing the count of unique substrings in the wraparound base string.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find all unique substrings of `s` and check if they exist in the infinite wraparound string.</div>
+                        <div class=""> <b>Goal:</b> Efficiently find the kth largest element in the array.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse the string `s` and find substrings that are contiguous in the wraparound base string.</div>
+                                <div style="margin-left: 20px;"> • Use a priority queue (min-heap) to keep track of the k largest elements encountered so far.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Track the maximum length of continuous substrings from `s` that can be matched to substrings in the base string.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array, pushing each element into the heap. If the heap exceeds size k, remove the smallest element.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count the number of unique substrings by leveraging the tracked maximum lengths.</div>
+                                <div style="margin-left: 20px;"> • After processing the array, the root of the heap will contain the kth largest element.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string&#39;s length can be as large as 10^5, so the solution needs to be efficient.</div>
+                        <div class=""> <b>Goal:</b> The algorithm should handle up to 10^5 elements efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Handle strings with lengths up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • The array size will be at most 10^5 elements.</div>
                             
-                                <div style="margin-left: 20px;"> • The string consists only of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The element values range from -10^4 to 10^4.</div>
                             
                         </div>
                     </div>        
@@ -421,23 +419,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string `s` is non-empty and contains only lowercase letters.</div>
+                                <div style="margin-left: 20px;"> • k will always be a valid number, such that 1 &lt;= k &lt;= nums.length.</div>
+                            
+                                <div style="margin-left: 20px;"> • The array will not be empty.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;c&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substring &#39;c&#39; is present in the infinite base string.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the 3rd largest element is 7. After sorting the array in descending order, the array becomes [9, 8, 7, 5, 3, 2]. The 3rd largest element is 7.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;db&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substrings &#39;d&#39; and &#39;b&#39; are both present in the infinite base string.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;zab&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substrings &#39;z&#39;, &#39;a&#39;, &#39;b&#39;, &#39;za&#39;, &#39;ab&#39;, and &#39;zab&#39; are all present in the infinite base string.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the 2nd largest element is 8. The sorted array is [10, 8, 6, 4, 2, 1]. The 2nd largest element is 8.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -461,16 +457,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We solve the problem by finding the substrings of `s` that can be matched in the infinite wraparound string.</div>
+                        <div class=""> <b>Approach:</b> Use a heap (priority queue) to maintain the k largest elements efficiently without sorting the entire array.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem involves identifying substrings that are continuous in the base string, which requires recognizing circular sequences.</div>
+                                <div style="margin-left: 20px;"> • Sorting the entire array would be inefficient for large arrays. A heap can help achieve this in O(n log k) time.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A key observation is that substrings can be tracked by looking at the maximum length of valid sequences from `s` that match the base string.</div>
+                                <div style="margin-left: 20px;"> • The heap&#39;s size will be kept at k, and we will only insert new elements into the heap when necessary.</div>
                             
                         </div>
                     </div>
@@ -478,11 +474,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize an array to keep track of the length of the longest contiguous substring ending at each character in `s`.</div>
+                                <div style="margin-left: 20px;"> • Initialize a min-heap.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate over the string and check if each character continues a valid substring in the base string, updating the length as needed.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array, adding each element to the heap.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Sum the lengths of unique valid substrings and return the result.</div>
+                                <div style="margin-left: 20px;"> • If the heap exceeds size k, remove the smallest element.</div>
+                            
+                                <div style="margin-left: 20px;"> • After processing all elements, the root of the heap will be the kth largest element.</div>
                             
                         </div>
                     </div>
@@ -491,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty string is not allowed as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • The array will not be empty.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles large inputs efficiently, with lengths up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works for arrays up to size 10^5.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where the string contains repeating characters or sequences, such as &#39;aaaa&#39;.</div>
+                                <div style="margin-left: 20px;"> • If the array contains duplicate elements, the algorithm will still correctly identify the kth largest element.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must run in linear time to handle large inputs.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where all elements in the array are the same.</div>
                             
                         </div>                                                                        
                     </div>
@@ -523,23 +521,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Priority Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 First Character Handling</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Priority Queue Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sequence Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Sequence Reset</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Priority Queue Access</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Lengths</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Priority Queue Removal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Final Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
                     
                 </div>
 
@@ -548,16 +546,17 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findSubstringInWraproundString</span>(string p) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> len(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    len[p[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> p.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((p[i] <span style="color:#666">+</span> <span style="color:#666">26</span> <span style="color:#666">-</span> p[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">%</span> <span style="color:#666">26</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) cur<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> cur <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        len[p[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> max(len[p[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>], cur);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findKthLargest</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pq;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
+</span></span><span style="display:flex;"><span>        pq.push(x);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--&gt;</span><span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        x <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        pq.pop();
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> accumulate(len.begin(), len.end(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -565,93 +564,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findSubstringInWraproundString</span>(string p) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findKthLargest</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `findSubstringInWraproundString` that takes a string `p` and returns the total count of unique substrings that can be formed in a wraparound string. </div>
+                            <div class=""> The method definition for the &#39;findKthLargest&#39; function, which takes a vector of integers &#39;nums&#39; and an integer &#39;k&#39; as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Vector Initialization</b></div>
+                            <div class=""> <b>2 : Priority Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> len(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a vector `len` of size 26 to store the maximum length of substrings ending with each letter of the alphabet, initialized to 0. </div>
+                            <div class=""> Initializes a priority queue &#39;pq&#39; (a max heap by default in C&#43;&#43;) to store the elements of the array &#39;nums&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `cur` to 1, which keeps track of the current length of the ongoing sequence of consecutive characters in the alphabet. </div>
+                            <div class=""> Iterates over each element &#39;x&#39; in the &#39;nums&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : First Character Handling</b></div>
+                            <div class=""> <b>4 : Priority Queue Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    len[p[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the length of the substring ending with the first character of `p` (indexed by `p[0] - &#39;a&#39;`) to 1, as it forms a single-character substring. </div>
+                            <div class=""> Pushes each element &#39;x&#39; from the &#39;nums&#39; vector into the priority queue &#39;pq&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Start</b></div>
+                            <div class=""> <b>5 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> p.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop to iterate through the string `p`, starting from the second character, to check for continuous character sequences. </div>
+                            <div class=""> Declares an integer variable &#39;x&#39; to store the current top element from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Sequence Check</b></div>
+                            <div class=""> <b>6 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((p[i] <span style="color:#666">+</span> <span style="color:#666">26</span> <span style="color:#666">-</span> p[i <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">%</span> <span style="color:#666">26</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) cur<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--&gt;</span><span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current character `p[i]` and the previous character `p[i-1]` are consecutive in the alphabet, considering wraparound behavior. If they are consecutive, it increments `cur`. </div>
+                            <div class=""> A loop that runs &#39;k&#39; times, each time removing the largest element from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Sequence Reset</b></div>
+                            <div class=""> <b>7 : Priority Queue Access</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> cur <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        x <span style="color:#666">=</span> pq.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is not consecutive to the previous one, it resets `cur` to 1, starting a new sequence. </div>
+                            <div class=""> Accesses the top (largest) element of the priority queue and assigns it to the variable &#39;x&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Lengths</b></div>
+                            <div class=""> <b>8 : Priority Queue Removal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        len[p[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> max(len[p[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>], cur);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the maximum length of the substring ending with the character `p[i]` by comparing the current value in `len` and the ongoing sequence length `cur`. </div>
+                            <div class=""> Removes the top element from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Final Calculation</b></div>
+                            <div class=""> <b>9 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">accumulate</span>(len.begin(), len.end(), <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the sum of all the maximum lengths of substrings ending with each letter of the alphabet using the `accumulate` function, returning the total number of unique substrings. </div>
+                            <div class=""> Returns the &#39;kth&#39; largest element (the last element &#39;x&#39; retrieved from the priority queue). </div>
                         </div>
                     
                 </div>
@@ -671,16 +670,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) since we process each character of the string once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log k), where n is the length of the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n log k), as we iterate through the array and perform heap operations.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log k), since each heap operation takes O(log k) time, and we do this for each of the n elements.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is proportional to the number of elements in the array, with the log k factor accounting for the heap operations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(26)</div>
-                        <div class=""> <b>Worst Case:</b> O(26)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(26) due to the fixed array used to track the maximum lengths of substrings for each character.</div>    
+                        <div class=""> <b>Best Case:</b> O(k), since the heap size is always k.</div>
+                        <div class=""> <b>Worst Case:</b> O(k), as we store at most k elements in the heap.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is dominated by the size of the heap, which is k.</div>    
                     </div>
 
                 </div>

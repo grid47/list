@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 2, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -289,7 +289,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1089s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1086s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/357.webp" 
            alt="A sequence of numbers with each unique digit softly illuminated, showing how many unique digits are present." 
@@ -312,7 +312,7 @@
 
 
 
-<div class=""> You are given a string s representing coordinates that have been encoded by removing commas, decimal points, and spaces. Your task is to restore the coordinates to their original form by considering all possible valid ways the digits could be split into two parts: a left part representing the x-coordinate and a right part representing the y-coordinate. Both parts may optionally contain a decimal point. The final coordinates must follow specific rules: no leading zeros are allowed, and the decimal point must be placed correctly. Return a list of all possible valid coordinates, formatted as &lsquo;(x, y)&rsquo;, where x and y represent the respective coordinates. </div>
+<div class=""> Given an integer n, return the count of all numbers with unique digits x, such that 0 &lt;= x &lt; 10^n. </div>
 
 
 
@@ -363,49 +363,44 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a string s that encodes two coordinates in the format &#39;(x, y)&#39;. The string consists of digits and is enclosed by parentheses. The commas, decimal points, and spaces have been removed.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#39;(78910)&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a single integer n, where 0 &lt;= n &lt;= 8.</div>
+                        <div class=""> <b>Example:</b> n = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The length of s is between 4 and 12 characters.</div>
-                            
-                                <div style="margin-left: 20px;"> • The first character of s is &#39;(&#39; and the last character is &#39;)&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • All other characters are digits.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= n &lt;= 8</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list of strings, where each string represents a possible valid coordinate in the format &#39;(x, y)&#39;, with exactly one space after the comma between the x-coordinate and the y-coordinate.</div>
-                        <div class=""> <b>Example:</b> Output: [&#39;(7, 891.0)&#39;, &#39;(7, 8910)&#39;, &#39;(78, 91.0)&#39;, &#39;(78, 910)&#39;, &#39;(789, 10)&#39;]</div>
+                        <div class=""> <b>Output:</b> The output is the count of numbers with unique digits in the range 0 &lt;= x &lt; 10^n.</div>
+                        <div class=""> <b>Example:</b> Input: n = 3
+Output: 739</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output list should contain all possible valid coordinate representations.</div>
+                                <div style="margin-left: 20px;"> • The output should be the total number of valid numbers with unique digits.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To generate all possible valid coordinates from the given encoded string by splitting the string into two parts and checking the validity of each part.</div>
+                        <div class=""> <b>Goal:</b> To count all the numbers from 0 to 10^n-1 that have unique digits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Split the string s at every possible position to create two substrings, each representing a potential x and y coordinate.</div>
+                                <div style="margin-left: 20px;"> • Start with the total valid numbers for n=1 (which is 10).</div>
                             
-                                <div style="margin-left: 20px;"> • For each substring, check if it represents a valid integer or float coordinate (no leading zeros, correct placement of decimal points).</div>
+                                <div style="margin-left: 20px;"> • Iterate for each subsequent value of n and compute the number of unique digit numbers for that value.</div>
                             
-                                <div style="margin-left: 20px;"> • Return all valid coordinates in the specified format.</div>
+                                <div style="margin-left: 20px;"> • For each n, reduce the available digits and multiply by the previous number of unique digits to get the total count.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should handle strings of length between 4 and 12 and ensure that no invalid coordinates (with leading zeros or incorrect decimal placement) are included in the result.</div>
+                        <div class=""> <b>Goal:</b> The input is constrained to be between 0 and 8 inclusive, and the solution should handle these limits efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Do not include coordinates that have invalid decimal points or leading zeros.</div>
-                            
-                                <div style="margin-left: 20px;"> • Ensure that each output coordinate follows the format &#39;(x, y)&#39;.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= n &lt;= 8</div>
                             
                         </div>
                     </div>        
@@ -413,17 +408,16 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string will always start with &#39;(&#39; and end with &#39;)&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • The input will only contain digits after removing the commas and spaces.</div>
+                                <div style="margin-left: 20px;"> • The number of digits n is small enough that the approach of reducing the available digits and multiplying is efficient.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;(12345)&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;(12345)&#39; can be split into several valid coordinates: &#39;(1, 23.45)&#39;, &#39;(1, 2345)&#39;, &#39;(12, 3.45)&#39;, &#39;(12, 345)&#39;, &#39;(123, 4.5)&#39;, and &#39;(123, 45)&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 3
+Output: 739</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For n = 3, the total numbers in the range of 0 to 999 excluding numbers with repeated digits (such as 11, 22, etc.) is 739.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -447,16 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We approach the problem by iterating over all possible positions to split the string s into two parts: one for the x-coordinate and the other for the y-coordinate. For each split, we generate all valid representations of the x and y coordinates and combine them into the desired format.</div>
+                        <div class=""> <b>Approach:</b> We will iterate through the possible numbers of digits and calculate the count of numbers with unique digits using combinatorics.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This is a string manipulation problem that requires careful handling of decimal points and leading zeros.</div>
+                                <div style="margin-left: 20px;"> • The numbers with unique digits are formed by selecting distinct digits from the available pool of digits (0-9).</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to check each possible split and ensure that the resulting coordinates are valid based on the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • We can count how many numbers have unique digits for each number of digits from 1 to n using a decrementing approach.</div>
                             
                         </div>
                     </div>
@@ -464,13 +458,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Loop through all positions to split the string s into two parts.</div>
+                                <div style="margin-left: 20px;"> • 1. If n = 0, return 1 since only the number 0 is valid.</div>
                             
-                                <div style="margin-left: 20px;"> • For each split, extract the left and right parts and generate all valid representations of both coordinates (x and y).</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize a result to 10 for the base case when n = 1.</div>
                             
-                                <div style="margin-left: 20px;"> • Check for valid formats (no leading zeros unless the number is &#39;0&#39;, and handle decimal points correctly).</div>
-                            
-                                <div style="margin-left: 20px;"> • Format each valid pair as &#39;(x, y)&#39; and add it to the result list.</div>
+                                <div style="margin-left: 20px;"> • 3. For each additional digit, calculate how many numbers can be formed by choosing unique digits and multiplying by the previous count.</div>
                             
                         </div>
                     </div>
@@ -479,22 +471,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input is not allowed to be empty, as the length of s is guaranteed to be between 4 and 12.</div>
+                                <div style="margin-left: 20px;"> • When n = 0, the answer should be 1, as there is only one number: 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution can handle strings of maximum length (12).</div>
+                                <div style="margin-left: 20px;"> • When n = 8, the result needs to be computed efficiently using the combinatorial approach.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Test cases where coordinates contain leading zeros (e.g., &#39;(00123)&#39;) or decimal points placed incorrectly (e.g., &#39;(001.23)&#39;) should be handled correctly.</div>
+                                <div style="margin-left: 20px;"> • If n = 1, the result should be 10 (the numbers 0-9).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No leading zeros are allowed unless the coordinate is &#39;0&#39;.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles n values from 0 to 8.</div>
                             
                         </div>                                                                        
                     </div>
@@ -511,33 +503,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Method Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Nested Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
                 </div>
 
@@ -546,22 +534,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ambiguousCoordinates(string S) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> A <span style="color:#666">=</span> f(S.substr(<span style="color:#666">1</span>, i)), B <span style="color:#666">=</span> f(S.substr(i <span style="color:#666">+</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">-</span> i));
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span> : A) <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">b</span> : B) res.push_back(<span style="color:#b44">&#34;(&#34;</span> <span style="color:#666">+</span> a <span style="color:#666">+</span> <span style="color:#b44">&#34;, &#34;</span> <span style="color:#666">+</span> b <span style="color:#666">+</span> <span style="color:#b44">&#34;)&#34;</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span> <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countNumbersWithUniqueDigits</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> available <span style="color:#666">=</span> <span style="color:#666">9</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> unqNums <span style="color:#666">=</span> <span style="color:#666">9</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> available <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        unqNums <span style="color:#666">=</span> unqNums <span style="color:#666">*</span> available;
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> unqNums;
+</span></span><span style="display:flex;"><span>        available<span style="color:#666">--</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> f(string S) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#a2f;font-weight:bold">return</span> {};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#b44">&#34;0.&#34;</span> <span style="color:#666">+</span> S.substr(<span style="color:#666">1</span>)};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {S};
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {S};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) res.push_back(S.substr(<span style="color:#666">0</span>, i) <span style="color:#666">+</span> <span style="color:#b44">&#39;.&#39;</span> <span style="color:#666">+</span> S.substr(i));
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
@@ -570,143 +555,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ambiguousCoordinates(string S) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function ambiguousCoordinates, which takes a string S as input and returns a vector of strings representing all valid coordinates formed from the input string. </div>
+                            <div class=""> This line begins the declaration of the `Solution` class, which contains the method `countNumbersWithUniqueDigits`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Method Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span> <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countNumbersWithUniqueDigits</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the size of the input string and stores it in the variable n. </div>
+                            <div class=""> This is the declaration of the method `countNumbersWithUniqueDigits`, which takes an integer `n` as input and returns an integer representing the number of unique digit numbers that can be formed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Declaration</b></div>
+                            <div class=""> <b>3 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A vector res is declared to store the resulting coordinate pairs. </div>
+                            <div class=""> This line checks if `n` is zero, and if so, it returns 1, as there is only one number (0) with zero digits. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Call</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> A <span style="color:#666">=</span> f(S.substr(<span style="color:#666">1</span>, i)), B <span style="color:#666">=</span> f(S.substr(i <span style="color:#666">+</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">-</span> i));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">10</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line splits the string into two substrings and passes them to the helper function f, which generates all valid numbers from those substrings. </div>
+                            <div class=""> Initializes the variable `res` to 10, which accounts for the numbers with one digit (0-9). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Nested Loop</b></div>
+                            <div class=""> <b>5 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span> : A) <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span> <span style="color:#a0a000">b</span> : B) res.push_back(<span style="color:#b44">&#34;(&#34;</span> <span style="color:#666">+</span> a <span style="color:#666">+</span> <span style="color:#b44">&#34;, &#34;</span> <span style="color:#666">+</span> b <span style="color:#666">+</span> <span style="color:#b44">&#34;)&#34;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> available <span style="color:#666">=</span> <span style="color:#666">9</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> These nested loops iterate over the possible combinations of the two substrings A and B, adding the resulting pairs of coordinates to the result vector res. </div>
+                            <div class=""> Initializes the variable `available` to 9, which represents the number of available digits (1-9) for the next digit in multi-digit numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> unqNums <span style="color:#666">=</span> <span style="color:#666">9</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the variable `unqNums` to 9, which represents the number of possible unique digits for the next digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is a placeholder for a blank line or spacing for readability. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> available <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This is a `while` loop that continues as long as `n` is greater than 1 and there are available digits to use. It iterates through each digit position. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Variable Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        unqNums <span style="color:#666">=</span> unqNums <span style="color:#666">*</span> available;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Multiplies the `unqNums` variable by the number of available digits for the next digit, updating the possible unique numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Variable Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> unqNums;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the newly calculated `unqNums` value to `res`, which keeps track of the total number of unique numbers formed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Variable Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        available<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the `available` variable by 1, as one less digit is available for use in the next digit position. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Statement</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the vector res, containing all valid coordinate pairs formed from the input string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> f(string S) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This is a helper function f, which takes a string S and returns a vector of valid numbers that can be formed from it, considering decimal placements. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Variable Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> S.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This line calculates the size of the string S and stores it in variable n. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#a2f;font-weight:bold">return</span> {};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This checks if the string is empty or contains invalid decimal numbers (like &#39;00&#39;). If true, it returns an empty vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> S[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#b44">&#34;0.&#34;</span> <span style="color:#666">+</span> S.substr(<span style="color:#666">1</span>)};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the string starts with &#39;0&#39; and has more than one character, it returns a valid decimal number like &#39;0.x&#39; by placing a decimal point after &#39;0&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> S[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> {S};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the string is a single character or ends with &#39;0&#39;, it returns the string as it is (no decimal needed). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Variable Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {S};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A vector res is initialized with the original string S. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) res.push_back(S.substr(<span style="color:#666">0</span>, i) <span style="color:#666">+</span> <span style="color:#b44">&#39;.&#39;</span> <span style="color:#666">+</span> S.substr(i));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop adds decimal points at different positions within the string and stores the results in the vector res. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This returns the vector res containing all valid numbers formed by adding decimal points at various positions. </div>
+                            <div class=""> Returns the total number of unique digit numbers (`res`) after completing the loop. </div>
                         </div>
                     
                 </div>
@@ -726,16 +691,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2), where n is the length of the string s. This is because we loop through all possible splits and check the validity of the resulting substrings.</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2), as we check all splits and generate all valid coordinate combinations.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is quadratic due to the nested iteration for splitting and checking substrings.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1) when n = 0.</div>
+                        <div class=""> <b>Average Case:</b> O(n) for values of n up to 8, where the time complexity increases linearly with the value of n.</div>
+                        <div class=""> <b>Worst Case:</b> O(8) since n is capped at 8.</div> 
+                        <div class=""> <b>Description:</b> The solution iterates up to n times, where n is at most 8.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), in case the input string is very simple and only a few valid combinations exist.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2), as the result list can contain up to n^2 valid coordinate combinations.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is quadratic because we store all possible valid coordinate combinations.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) when n = 0.</div>
+                        <div class=""> <b>Worst Case:</b> O(1) as the space complexity is constant and only a few variables are used.</div> 
+                        <div class=""> <b>Description:</b> Space complexity is constant as we only store a few variables for calculation.</div>    
                     </div>
 
                 </div>

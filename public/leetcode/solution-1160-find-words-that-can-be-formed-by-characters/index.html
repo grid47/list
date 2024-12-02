@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 14, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an m x n binary matrix grid. You need to create a difference matrix diff where each element diff[i][j] is calculated by summing the number of ones and subtracting the number of zeros in the respective row and column. </div>
+<div class=""> You are given an array of strings <code>words</code> and a string <code>chars</code>. A string is considered &lsquo;good&rsquo; if it can be formed using characters from <code>chars</code> where each character can be used at most once. Your task is to return the sum of the lengths of all &lsquo;good&rsquo; strings in <code>words</code>. </div>
 
 
 
@@ -360,45 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a binary matrix of size m x n, where each element is either 0 or 1.</div>
-                        <div class=""> <b>Example:</b> grid = [[1,0,1],[0,1,1],[1,1,0]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of strings `words` and a string `chars`.</div>
+                        <div class=""> <b>Example:</b> Input: words = [&#34;dog&#34;, &#34;cat&#34;, &#34;bat&#34;, &#34;tree&#34;], chars = &#34;atagcbd&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m * n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length, chars.length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • words[i] and chars consist of lowercase English letters</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the difference matrix diff, which is of the same size as the input matrix grid.</div>
-                        <div class=""> <b>Example:</b> Output: [[4, 4, 2], [2, 2, 4], [4, 4, 2]]</div>
+                        <div class=""> <b>Output:</b> The output should be an integer representing the sum of lengths of all good strings in the array `words`.</div>
+                        <div class=""> <b>Example:</b> Output: 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a matrix of integers with the same dimensions as the input.</div>
+                                <div style="margin-left: 20px;"> • The output should be the total length of all &#39;good&#39; strings.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the difference matrix based on the number of ones and zeros in each row and column.</div>
+                        <div class=""> <b>Goal:</b> The goal is to calculate the total length of all good strings in `words` that can be formed using characters from `chars`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. First, calculate the number of ones and zeros in each row and column.</div>
+                                <div style="margin-left: 20px;"> • Create a frequency array for the characters in `chars`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use the formula for diff[i][j] = onesRow_i &#43; onesCol_j - zerosRow_i - zerosCol_j to calculate each value of the matrix diff.</div>
+                                <div style="margin-left: 20px;"> • For each word in `words`, check if it can be formed using characters from `chars`.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the word can be formed, add its length to the result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> You are guaranteed that the input grid has at least one row and one column, and the grid will have a maximum size of 10^5 elements.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle arrays with up to 1000 words and strings of up to 100 characters efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m * n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length, chars.length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • words[i] and chars consist of lowercase English letters</div>
                             
                         </div>
                     </div>        
@@ -406,15 +412,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid will always contain binary values (0 or 1).</div>
+                                <div style="margin-left: 20px;"> • Each character in `chars` can be used at most once to form a word.</div>
+                            
+                                <div style="margin-left: 20px;"> • The characters in `chars` and `words` are all lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: grid = [[1,0,1],[0,1,1],[1,1,0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For each position in the grid, the number of ones and zeros in its respective row and column are used to calculate the difference matrix. The result will depend on how the number of ones and zeros are distributed.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#34;dog&#34;, &#34;cat&#34;, &#34;bat&#34;, &#34;tree&#34;], chars = &#34;atagcbd&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The strings &#39;dog&#39; and &#39;cat&#39; can be formed using characters from &#39;atagcbd&#39;. The total length is 3 &#43; 3 = 6.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,16 +446,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can approach this problem by first calculating the number of ones and zeros in each row and column, then using that data to calculate the difference matrix.</div>
+                        <div class=""> <b>Approach:</b> We will use a greedy approach to check each word in `words` and see if it can be formed using characters from `chars`. If so, we will sum the lengths of the valid words.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to efficiently calculate the number of ones and zeros in each row and column, which can be done in O(m*n) time.</div>
+                                <div style="margin-left: 20px;"> • We need to check if each word can be formed by using each character in `chars` at most once.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Once we have the row and column sums, calculating the diff matrix is straightforward.</div>
+                                <div style="margin-left: 20px;"> • A simple way to solve this is by counting the frequency of each character in both `chars` and each word in `words`.</div>
                             
                         </div>
                     </div>
@@ -455,11 +463,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize arrays for row and column sums.</div>
+                                <div style="margin-left: 20px;"> • Count the frequency of each character in `chars`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Loop through the grid to populate these sums.</div>
+                                <div style="margin-left: 20px;"> • For each word in `words`, check if it can be formed by comparing the frequency of each character in the word with the available characters in `chars`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Construct the diff matrix by applying the formula to each element.</div>
+                                <div style="margin-left: 20px;"> • Sum the lengths of all words that can be formed.</div>
                             
                         </div>
                     </div>
@@ -468,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one element in the grid, as m and n are guaranteed to be at least 1.</div>
+                                <div style="margin-left: 20px;"> • If `words` is empty, the result should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The maximum size of m*n is 10^5, which is feasible for a solution with O(m*n) time complexity.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles the upper limit of 1000 words efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the grid is filled entirely with zeros, the diff matrix will be filled with zeros.</div>
+                                <div style="margin-left: 20px;"> • If `chars` contains fewer characters than required to form a word, that word should be excluded.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that m and n are within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • Handle both small and large inputs within time limits.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,29 +508,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Count Characters in Available String</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Row and Column Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Character Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Nested Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Through Words</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Row Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization for Word</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Column Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Through Characters of Word</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Matrix Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Check Character Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Matrix Calculation Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Flag Word as Unmatchable</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Nested Matrix Calculation Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Break Loop on Mismatch</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Matrix Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Add Word Length to Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
                     
                 </div>
 
@@ -531,21 +541,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> onesMinusZeros(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m), col(n);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        row[i] <span style="color:#666">+=</span> grid[i][j];
-</span></span><span style="display:flex;"><span>        col[j] <span style="color:#666">+=</span> grid[i][j];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCharacters</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words, string chars) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">26</span>] <span style="color:#666">=</span> {}, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : chars) 
+</span></span><span style="display:flex;"><span>        <span style="color:#666">++</span>cnt[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">w</span> : words) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt1[<span style="color:#666">26</span>] <span style="color:#666">=</span> {}, match <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : w)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">++</span>cnt1[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">&gt;</span> cnt[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) {
+</span></span><span style="display:flex;"><span>            match <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (match) 
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> w.size();
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> g(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        g[i][j] <span style="color:#666">=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> row[i] <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> col[j] <span style="color:#666">-</span> m <span style="color:#666">-</span> n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> g;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -553,123 +563,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> onesMinusZeros(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCharacters</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words, string chars) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `onesMinusZeros`, which takes a 2D vector `grid` as input and returns a 2D vector `g` as the output. </div>
+                            <div class=""> Define the function `countCharacters` that takes a list of words and a string of available characters, then returns the sum of the lengths of the words that can be formed with the available characters. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">26</span>] <span style="color:#666">=</span> {}, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The dimensions of the grid are stored in `m` (number of rows) and `n` (number of columns). </div>
+                            <div class=""> Initialize an array `cnt` of size 26 to count the occurrences of each character in the string `chars`, and a variable `res` to store the result (sum of lengths of valid words). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Vector Initialization</b></div>
+                            <div class=""> <b>3 : Count Characters in Available String</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(m), col(n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : chars) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two vectors, `row` and `col`, are initialized to store the counts of 1&#39;s in each row and column of the grid. </div>
+                            <div class=""> Iterate over each character in the string `chars` to populate the `cnt` array with the frequency of each character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Row and Column Counting</b></div>
+                            <div class=""> <b>4 : Update Character Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#666">++</span>cnt[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each row of the grid. </div>
+                            <div class=""> Increment the corresponding index in the `cnt` array for each character in `chars`. The index is determined by the character&#39;s ASCII value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Nested Loop</b></div>
+                            <div class=""> <b>5 : Loop Through Words</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">w</span> : words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Nested loop to iterate over each column of the grid. </div>
+                            <div class=""> Loop through each word in the `words` list to check if it can be formed using the characters in `chars`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Row Counting</b></div>
+                            <div class=""> <b>6 : Variable Initialization for Word</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        row[i] <span style="color:#666">+=</span> grid[i][j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt1[<span style="color:#666">26</span>] <span style="color:#666">=</span> {}, match <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the count for the current row `i` based on the value of the cell `grid[i][j]`. </div>
+                            <div class=""> Initialize a temporary array `cnt1` to track the frequency of characters in the current word, and a boolean flag `match` to track if the word can be formed with the available characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Column Counting</b></div>
+                            <div class=""> <b>7 : Loop Through Characters of Word</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        col[j] <span style="color:#666">+=</span> grid[i][j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : w)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the count for the current column `j` based on the value of the cell `grid[i][j]`. </div>
+                            <div class=""> Loop through each character in the current word `w`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Matrix Initialization</b></div>
+                            <div class=""> <b>8 : Check Character Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> g(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">++</span>cnt1[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">&gt;</span> cnt[ch <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a new matrix `g` of size `m x n` with all elements set to 0. </div>
+                            <div class=""> For each character in the word, increment its count in the `cnt1` array. If the count exceeds the available count in `cnt` (meaning the word cannot be formed), set `match` to false. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Matrix Calculation Loop</b></div>
+                            <div class=""> <b>9 : Flag Word as Unmatchable</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            match <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each row of the result matrix `g`. </div>
+                            <div class=""> If the word cannot be formed due to insufficient characters, set the `match` flag to `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Nested Matrix Calculation Loop</b></div>
+                            <div class=""> <b>10 : Break Loop on Mismatch</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Nested loop to iterate through each column of the result matrix `g`. </div>
+                            <div class=""> Exit the inner loop early if a mismatch is found, as the word cannot be formed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Matrix Calculation</b></div>
+                            <div class=""> <b>11 : Add Word Length to Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        g[i][j] <span style="color:#666">=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> row[i] <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> col[j] <span style="color:#666">-</span> m <span style="color:#666">-</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (match) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each element of the result matrix `g[i][j]` is computed using the formula `2 * row[i] &#43; 2 * col[j] - m - n`, where `row[i]` and `col[j]` represent the count of 1&#39;s in the respective row and column. </div>
+                            <div class=""> If the word can be formed (i.e., `match` is `true`), add its length to the result `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Update Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> g;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> w.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the resulting matrix `g` which has been calculated based on the counts of 1&#39;s in the respective rows and columns. </div>
+                            <div class=""> Add the length of the current valid word to the result `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final result `res`, which is the total length of all words that can be formed from the characters in `chars`. </div>
                         </div>
                     
                 </div>
@@ -689,16 +709,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m*n)</div>
-                        <div class=""> <b>Average Case:</b> O(m*n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m*n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m*n) as we need to traverse the grid to compute row and column sums and then calculate the diff matrix.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n * m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we check each word in `words` against all characters in `chars`, where `n` is the number of words and `m` is the length of the words.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m*n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m*n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m*n) due to the storage of the input grid and the result matrix.</div>    
+                        <div class=""> <b>Best Case:</b> O(26)</div>
+                        <div class=""> <b>Worst Case:</b> O(26)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant since we only store a fixed number of frequencies for each character (26 letters).</div>    
                     </div>
 
                 </div>

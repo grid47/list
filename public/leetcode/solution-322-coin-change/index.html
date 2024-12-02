@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given a network of <code>n</code> nodes and a list of directed edges with travel times. You need to send a signal from a given node <code>k</code>. Return the minimum time it takes for all nodes to receive the signal, or return <code>-1</code> if it is impossible. </div>
+<div class=""> You are given a set of coins with different denominations and a target amount. Your task is to determine the fewest number of coins required to make the target amount. If it&rsquo;s not possible, return -1. </div>
 
 
 
@@ -371,59 +371,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a list of directed edges `times[i] = (ui, vi, wi)` representing the travel time from node `ui` to node `vi`, as well as the number of nodes `n` and the starting node `k`.</div>
-                        <div class=""> <b>Example:</b> times = [[1, 2, 1], [1, 3, 2], [3, 4, 1]], n = 4, k = 1</div>
+                        <div class=""> <b>Input:</b> You are given an array of integers, coins, representing the different coin denominations, and an integer, amount, representing the target amount.</div>
+                        <div class=""> <b>Example:</b> coins = [1, 2, 5], amount = 11</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= coins.length &lt;= 12</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= times.length &lt;= 6000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= coins[i] &lt;= 2^31 - 1</div>
                             
-                                <div style="margin-left: 20px;"> • times[i].length == 3</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= ui, vi &lt;= n</div>
-                            
-                                <div style="margin-left: 20px;"> • ui != vi</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= wi &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • All (ui, vi) pairs are unique.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= amount &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum time it takes for all `n` nodes to receive the signal, or return `-1` if it is impossible for all nodes to receive the signal.</div>
-                        <div class=""> <b>Example:</b> For times = [[1, 2, 1], [1, 3, 2], [3, 4, 1]], n = 4, k = 1, the output is 3.</div>
+                        <div class=""> <b>Output:</b> Return the fewest number of coins needed to make the amount. If it&#39;s not possible to make up the amount, return -1.</div>
+                        <div class=""> <b>Example:</b> 3</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be an integer indicating the minimum number of coins required.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the minimum time it takes for all nodes to receive the signal or determine if it is impossible.</div>
+                        <div class=""> <b>Goal:</b> To find the minimum number of coins needed to form the target amount using dynamic programming.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a graph representation to model the nodes and edges with the travel times.</div>
+                                <div style="margin-left: 20px;"> • Use dynamic programming to solve this problem.</div>
                             
-                                <div style="margin-left: 20px;"> • Use Dijkstra&#39;s algorithm to find the shortest path from the starting node `k` to all other nodes.</div>
+                                <div style="margin-left: 20px;"> • Create a dp array where dp[i] represents the minimum number of coins needed to make amount i.</div>
                             
-                                <div style="margin-left: 20px;"> • If all nodes are reachable, return the maximum time taken by the farthest node.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the coins array and update the dp array accordingly.</div>
                             
-                                <div style="margin-left: 20px;"> • If any node is unreachable, return `-1`.</div>
+                                <div style="margin-left: 20px;"> • If the dp value for the target amount is still infinity, return -1 as it&#39;s impossible to form the amount.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input graph has up to 100 nodes and 6000 edges. The graph is directed, and there are no multiple edges between any two nodes.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle small to large values of coins and amounts efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The input coins array has a maximum size of 12 elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= times.length &lt;= 6000</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= wi &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The target amount will not exceed 10,000.</div>
                             
                         </div>
                     </div>        
@@ -431,15 +423,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The network will be represented as a directed graph with unique edges.</div>
+                                <div style="margin-left: 20px;"> • You have an infinite supply of each coin denomination.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input coins array will not be empty, and all denominations are positive integers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For times = [[1, 2, 1], [1, 3, 2], [3, 4, 1]], n = 4, k = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By using Dijkstra&#39;s algorithm, we can calculate the shortest time for the signal to reach each node, and we find that the signal reaches all nodes in 3 units of time.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> coins = [1, 2, 5], amount = 11</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can form the amount 11 by using two 5-coin denominations (5 &#43; 5) and one 1-coin denomination, so the minimum number of coins required is 3.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> coins = [2], amount = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since 3 cannot be formed with the coin denomination of 2, the result is -1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -463,18 +461,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> This problem can be solved using Dijkstra&#39;s algorithm to find the shortest path from the starting node to all other nodes in the graph.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using dynamic programming (DP) to find the minimum number of coins needed to form the target amount.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to find the shortest time for a signal to reach all nodes from the starting node.</div>
+                                <div style="margin-left: 20px;"> • The problem is a variation of the &#39;coin change&#39; problem, commonly solved using DP.</div>
                             
-                                <div style="margin-left: 20px;"> • The problem can be modeled as a shortest path problem in a weighted directed graph.</div>
+                                <div style="margin-left: 20px;"> • We need to keep track of the minimum number of coins required for each possible amount up to the target amount.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Since the graph can have up to 6000 edges, Dijkstra&#39;s algorithm with a priority queue should be efficient enough.</div>
+                                <div style="margin-left: 20px;"> • The solution should focus on building up the minimum coin count for each amount from 0 to the target amount.</div>
                             
                         </div>
                     </div>
@@ -482,13 +480,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a map to represent the directed graph with travel times.</div>
+                                <div style="margin-left: 20px;"> • Create a dp array with size amount&#43;1 where each element represents the minimum number of coins needed to form that amount.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a priority queue to implement Dijkstra&#39;s algorithm for finding the shortest time from node `k` to all other nodes.</div>
+                                <div style="margin-left: 20px;"> • Initialize dp[0] to 0 since no coins are needed to make amount 0.</div>
                             
-                                <div style="margin-left: 20px;"> • For each node, update the shortest time to reach it and continue until all reachable nodes are processed.</div>
-                            
-                                <div style="margin-left: 20px;"> • If any node is unreachable, return `-1`. Otherwise, return the maximum time it took to reach all nodes.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each coin and update the dp array by checking if using that coin results in fewer coins for any amount.</div>
                             
                         </div>
                     </div>
@@ -497,22 +493,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one node and one edge, so no empty graph cases.</div>
+                                <div style="margin-left: 20px;"> • If the input amount is 0, return 0 as no coins are needed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs (with up to 6000 edges), the solution should be optimized to handle the upper limits efficiently.</div>
+                                <div style="margin-left: 20px;"> • If the amount is very large, the solution should efficiently calculate the minimum coins without unnecessary computations.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the starting node `k` is isolated or there are disconnected nodes, the function should return `-1`.</div>
+                                <div style="margin-left: 20px;"> • If the amount cannot be formed with the given coins, return -1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the algorithm works efficiently for graphs with up to 6000 edges.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle edge cases where no combination of coins can form the given amount.</div>
                             
                         </div>                                                                        
                     </div>
@@ -529,41 +525,47 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Helper Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Helper Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Priority Queue Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Recursive Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Visited Nodes Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Push Initial Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Memoization Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Extract Minimum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Decision Making</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop from Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursion and Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Skip Visited</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursion and Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mark as Visited</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Decrement Nodes</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Else Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Check Completion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Recursion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Edge Traversal Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Memoization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Process Neighbors</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Main Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Push Neighbors to Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Failure</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Coin Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Memoization Table Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Calling dp</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Result</button>
                     
                 </div>
 
@@ -572,31 +574,37 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">networkDelayTime</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> times, <span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> coin;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> a <span style="color:#666">&gt;</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> amnt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> coin.size()) <span style="color:#a2f;font-weight:bold">return</span> amnt <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> INT_MAX<span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> times.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mp[times[i][<span style="color:#666">0</span>]][times[i][<span style="color:#666">1</span>]] <span style="color:#666">=</span> times[i][<span style="color:#666">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][amnt] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][amnt];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> coin[idx]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dp(idx, amnt <span style="color:#666">-</span> coin[idx]);            
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r2 <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, amnt);
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(r1, r2);
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, amnt);
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][amnt] <span style="color:#666">=</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">coinChange</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> coins, <span style="color:#0b0;font-weight:bold">int</span> amount) {
+</span></span><span style="display:flex;"><span>    sort(coins.begin(), coins.end(), cmp);
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    pq.push(make_pair(<span style="color:#666">0</span>, k));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>coin <span style="color:#666">=</span> coins;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>        pq.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(vis[it.second]) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        vis[it.second] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        n<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> it.first;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(it.second))
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> mp[it.second]) {
-</span></span><span style="display:flex;"><span>                pq.push(make_pair(val <span style="color:#666">+</span> it.first, key));
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    memo.resize(coin.size(),vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(amount <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>) );
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(<span style="color:#666">0</span>, amount);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">==</span> INT_MAX<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">?-</span><span style="color:#666">1</span><span style="color:#666">:</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -604,183 +612,213 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">networkDelayTime</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> times, <span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> coin;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Function that computes the time it takes for all nodes to receive the signal starting from node &#39;k&#39;. </div>
+                            <div class=""> This initializes a vector `coin` that will store the denominations of coins. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This map stores the network connections where each node is mapped to another node with its travel time. </div>
+                            <div class=""> This initializes a 2D vector `memo` for memoization to store intermediate results of subproblems, avoiding redundant calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Setup</b></div>
+                            <div class=""> <b>3 : Helper Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> times.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop to iterate through the &#39;times&#39; array and populate the map with edges (nodes and weights). </div>
+                            <div class=""> This is a helper function used for sorting the coins in descending order before starting the dynamic programming process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Map Update</b></div>
+                            <div class=""> <b>4 : Helper Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[times[i][<span style="color:#666">0</span>]][times[i][<span style="color:#666">1</span>]] <span style="color:#666">=</span> times[i][<span style="color:#666">2</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> a <span style="color:#666">&gt;</span> b;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updating the map with the source node, destination node, and the travel time between them. </div>
+                            <div class=""> The `cmp` function compares two integers and returns true if the first integer is greater than the second, ensuring coins are sorted in descending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Priority Queue Setup</b></div>
+                            <div class=""> <b>5 : Recursive Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> amnt) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A priority queue to always process the node with the smallest time first. </div>
+                            <div class=""> This declares the recursive function `dp`, which solves the coin change problem by evaluating all possible subproblems for a given index and remaining amount. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Visited Nodes Setup</b></div>
+                            <div class=""> <b>6 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> coin.size()) <span style="color:#a2f;font-weight:bold">return</span> amnt <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> INT_MAX<span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A vector to track which nodes have been visited. </div>
+                            <div class=""> This base case handles the scenario where all coins have been considered. If the remaining amount (`amnt`) is zero, it returns 0 (no more coins needed). Otherwise, it returns `INT_MAX-1` to signify an invalid solution. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Push Initial Node</b></div>
+                            <div class=""> <b>7 : Memoization Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push(make_pair(<span style="color:#666">0</span>, k));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][amnt] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][amnt];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the starting node &#39;k&#39; with an initial time of 0 into the priority queue. </div>
+                            <div class=""> This checks if the result for the current subproblem (`dp(idx, amnt)`) has already been computed. If it has, the function returns the stored value to avoid redundant computation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : While Loop</b></div>
+                            <div class=""> <b>8 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> While the priority queue is not empty, process each node. </div>
+                            <div class=""> Declaring the variable `res` to store the result of the subproblem. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Extract Minimum</b></div>
+                            <div class=""> <b>9 : Decision Making</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> coin[idx]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the node with the smallest accumulated time from the priority queue. </div>
+                            <div class=""> If the remaining amount (`amnt`) is greater than or equal to the value of the current coin (`coin[idx]`), two choices are considered: use the current coin or skip it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pop from Queue</b></div>
+                            <div class=""> <b>10 : Recursion and Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r1 <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dp(idx, amnt <span style="color:#666">-</span> coin[idx]);            
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the top element (current node) from the priority queue. </div>
+                            <div class=""> Here, we recursively call the `dp` function to include the current coin (`coin[idx]`), reducing the remaining amount by that coin&#39;s value. `1 &#43;` is added to account for using this coin. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Skip Visited</b></div>
+                            <div class=""> <b>11 : Recursion and Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(vis[it.second]) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r2 <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, amnt);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skip nodes that have already been visited to avoid unnecessary processing. </div>
+                            <div class=""> This recursive call evaluates the option where the current coin is skipped, moving to the next coin (`idx &#43; 1`) and keeping the amount the same. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Mark as Visited</b></div>
+                            <div class=""> <b>12 : Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vis[it.second] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(r1, r2);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Mark the current node as visited. </div>
+                            <div class=""> The result `res` is determined by taking the minimum of the two recursive results (`r1` and `r2`), which represents the minimum coins required. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Decrement Nodes</b></div>
+                            <div class=""> <b>13 : Else Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrement the number of remaining nodes to be processed. </div>
+                            <div class=""> If the current coin cannot be used (i.e., `amnt &lt; coin[idx]`), we proceed to the next coin. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Check Completion</b></div>
+                            <div class=""> <b>14 : Recursion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> it.first;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, amnt);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If all nodes are visited, return the accumulated time to reach the farthest node. </div>
+                            <div class=""> This recursive call evaluates the option where the current coin is skipped, moving to the next coin without reducing the amount. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Edge Traversal Check</b></div>
+                            <div class=""> <b>15 : Memoization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(it.second))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][amnt] <span style="color:#666">=</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current node has any outgoing edges. </div>
+                            <div class=""> Store the computed result for the current subproblem in the `memo` table to avoid redundant calculations in future calls. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Process Neighbors</b></div>
+                            <div class=""> <b>16 : Main Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> mp[it.second]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">coinChange</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> coins, <span style="color:#0b0;font-weight:bold">int</span> amount) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over all neighboring nodes of the current node. </div>
+                            <div class=""> This is the main function where the coin change problem is solved. It initializes the coins and memoization table and calls the recursive `dp` function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Push Neighbors to Queue</b></div>
+                            <div class=""> <b>17 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                pq.push(make_pair(val <span style="color:#666">+</span> it.first, key));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(coins.begin(), coins.end(), cmp);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the neighboring nodes into the priority queue with the updated accumulated time. </div>
+                            <div class=""> The coins are sorted in descending order using the `cmp` function to improve the efficiency of the dynamic programming solution. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Return Failure</b></div>
+                            <div class=""> <b>18 : Coin Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>coin <span style="color:#666">=</span> coins;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return -1 if it&#39;s not possible to visit all nodes. </div>
+                            <div class=""> The sorted coin denominations are assigned to the `coin` vector for use in the recursive `dp` function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Memoization Table Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memo.resize(coin.size(),vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(amount <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>) );
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The memoization table is resized to match the number of coins and the amount. Each cell is initialized to `-1`, indicating that no subproblem has been solved yet. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Calling dp</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(<span style="color:#666">0</span>, amount);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `dp` function is called with the initial index `0` and the target `amount`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">==</span> INT_MAX<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">?-</span><span style="color:#666">1</span><span style="color:#666">:</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the result is `INT_MAX-1`, it indicates that the problem has no solution, so `-1` is returned. Otherwise, the result (minimum number of coins) is returned. </div>
                         </div>
                     
                 </div>
@@ -800,16 +838,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(E log V), where E is the number of edges and V is the number of nodes.</div>
-                        <div class=""> <b>Average Case:</b> O(E log V), as each edge and node is processed once.</div>
-                        <div class=""> <b>Worst Case:</b> O(E log V), where E is the number of edges and V is the number of nodes.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(E log V), where E is the number of edges and V is the number of nodes, due to the priority queue operations in Dijkstra&#39;s algorithm.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(amount * coins.length)</div>
+                        <div class=""> <b>Average Case:</b> O(amount * coins.length)</div>
+                        <div class=""> <b>Worst Case:</b> O(amount * coins.length)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is determined by the number of iterations over the dp array and the coins array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(V &#43; E), for storing the graph and the priority queue.</div>
-                        <div class=""> <b>Worst Case:</b> O(V &#43; E), where V is the number of nodes and E is the number of edges.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(V &#43; E) due to the storage required for the graph and the priority queue.</div>    
+                        <div class=""> <b>Best Case:</b> O(amount)</div>
+                        <div class=""> <b>Worst Case:</b> O(amount)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(amount) due to the dp array.</div>    
                     </div>
 
                 </div>

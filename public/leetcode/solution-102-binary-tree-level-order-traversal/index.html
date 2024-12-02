@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given a list of integers, nums. A peak element is an element that is strictly greater than its neighbors. You need to find and return the index of any peak element in the list. The algorithm should run in O(log n) time. </div>
+<div class=""> Given the root of a binary tree, your task is to return the level order traversal of its nodes&rsquo; values. This means you should traverse the tree level by level, from left to right at each level. </div>
 
 
 
@@ -371,53 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a list of integers, nums. The list has at least one element.</div>
-                        <div class=""> <b>Example:</b> [1, 3, 2, 1]</div>
+                        <div class=""> <b>Input:</b> You are given the root of a binary tree, where each node has a value and pointers to its left and right children.</div>
+                        <div class=""> <b>Example:</b> root = [5,3,8,1,4,null,9]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 2000].</div>
                             
-                                <div style="margin-left: 20px;"> • -231 &lt;= nums[i] &lt;= 231 - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • nums[i] != nums[i &#43; 1] for all valid i.</div>
+                                <div style="margin-left: 20px;"> • -1000 &lt;= Node.val &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the index of any peak element in the list.</div>
-                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Output:</b> The output should be a 2D array where each element represents a level in the binary tree. Each level is a list of node values at that level, traversed from left to right.</div>
+                        <div class=""> <b>Example:</b> Output: [[5], [3, 8], [1, 4, 9]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one peak element in the array.</div>
+                                <div style="margin-left: 20px;"> • The output should be an array of arrays where each inner array contains the values of the nodes at that level.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the peak element index in O(log n) time.</div>
+                        <div class=""> <b>Goal:</b> The goal is to perform a level order traversal of the binary tree using a queue to process nodes level by level.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Perform a binary search to find the peak element.</div>
+                                <div style="margin-left: 20px;"> • Start by checking if the root is null. If it is, return an empty list.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the middle element is greater than its neighbors.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue with the root node.</div>
                             
-                                <div style="margin-left: 20px;"> • If the middle element is a peak, return its index.</div>
+                                <div style="margin-left: 20px;"> • While the queue is not empty, process each node at the current level.</div>
                             
-                                <div style="margin-left: 20px;"> • If the left neighbor is greater, search the left half of the array.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the right neighbor is greater, search the right half of the array.</div>
+                                <div style="margin-left: 20px;"> • For each level, create a list of node values and add the left and right children of each node to the queue.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array length will always be at least 1, and there will always be at least one peak element.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution can handle a tree with up to 2000 nodes efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array will have at least one peak element.</div>
-                            
-                                <div style="margin-left: 20px;"> • The algorithm must run in O(log n) time.</div>
+                                <div style="margin-left: 20px;"> • The tree can have between 0 and 2000 nodes.</div>
                             
                         </div>
                     </div>        
@@ -425,15 +419,31 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array will always contain at least one peak element.</div>
+                                <div style="margin-left: 20px;"> • The input is always a valid binary tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [1, 3, 2, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the element 3 is the peak element as it is greater than its neighbors 1 and 2. Therefore, the function returns index 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [3,9,20,null,null,15,7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree has the following structure:
+
+       3
+      / \
+     9  20
+        /  \
+       15   7
+
+The level order traversal is: [[3], [9, 20], [15, 7]]</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree consists of just one node, which is the root node. The level order traversal is: [[1]]</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = []</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> An empty tree has no nodes, so the level order traversal is: []</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,18 +467,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use binary search to find a peak element in the array. Binary search will allow us to find the peak in O(log n) time.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved using a breadth-first search (BFS) approach where we explore the tree level by level, ensuring nodes at each level are processed from left to right.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A peak is an element greater than its neighbors.</div>
-                            
-                                <div style="margin-left: 20px;"> • Binary search can help us efficiently narrow down the peak element.</div>
+                                <div style="margin-left: 20px;"> • Level order traversal can be efficiently implemented using a queue.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Since we are only asked to find any peak, binary search will efficiently locate one in O(log n) time.</div>
+                                <div style="margin-left: 20px;"> • By using a queue, we can ensure that we process nodes level by level, which is the key to solving this problem.</div>
                             
                         </div>
                     </div>
@@ -476,17 +484,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize two pointers, left and right, pointing to the start and end of the array.</div>
+                                <div style="margin-left: 20px;"> • Check if the root is null, return an empty list if it is.</div>
                             
-                                <div style="margin-left: 20px;"> • While left &lt;= right, find the middle element.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue and add the root node to it.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the middle element is greater than its neighbors.</div>
+                                <div style="margin-left: 20px;"> • While the queue is not empty, process each level by iterating over the nodes in the queue.</div>
                             
-                                <div style="margin-left: 20px;"> • If the middle element is a peak, return its index.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the left neighbor is greater, move the right pointer to mid-1 to search the left half.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the right neighbor is greater, move the left pointer to mid&#43;1 to search the right half.</div>
+                                <div style="margin-left: 20px;"> • For each node in the current level, add its value to the result list and enqueue its left and right children if they exist.</div>
                             
                         </div>
                     </div>
@@ -495,22 +499,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always have at least one element.</div>
+                                <div style="margin-left: 20px;"> • If the tree is empty (i.e., the root is null), return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work efficiently for arrays of up to 1000 elements.</div>
+                                <div style="margin-left: 20px;"> • For large trees with up to 2000 nodes, ensure the solution handles the input efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle arrays where elements are strictly increasing or strictly decreasing.</div>
+                                <div style="margin-left: 20px;"> • If a node has only one child (either left or right), make sure it is properly handled during the level order traversal.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm runs in O(log n) time.</div>
+                                <div style="margin-left: 20px;"> • The tree must be processed within the provided constraints (2000 nodes).</div>
                             
                         </div>                                                                        
                     </div>
@@ -529,27 +533,35 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Push Root to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Boolean Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Main BFS Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Boolean Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Level Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Result Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Level Nodes Processing</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue Front</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Add Node Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Pop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Left Child Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Right Child Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Push Level to Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Result</button>
                     
                 </div>
 
@@ -558,23 +570,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findPeakElement</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> x <span style="color:#666">=</span> mid <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> arr[mid <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;</span> arr[mid] <span style="color:#666">:</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> y <span style="color:#666">=</span> mid <span style="color:#666">&lt;</span> n <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">?</span> arr[mid <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;</span> arr[mid] <span style="color:#666">:</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&amp;&amp;</span> y) <span style="color:#a2f;font-weight:bold">return</span> mid;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>x <span style="color:#666">&amp;&amp;</span> y) r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>y) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;            
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> tmp <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            res.push_back(tmp<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>left) q.push(tmp<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right) q.push(tmp<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ans.push_back(res);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -585,120 +598,160 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findPeakElement</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;findPeakElement&#39; which takes a vector of integers as input and returns the index of a peak element. </div>
+                            <div class=""> Define the function &#39;levelOrder&#39; which takes the root of the tree and returns a 2D vector of integers, representing the tree&#39;s level-order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare and initialize &#39;n&#39; to store the size of the input array &#39;arr&#39;. </div>
+                            <div class=""> Initialize an empty 2D vector &#39;ans&#39; to store the values of each level of the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two variables &#39;l&#39; and &#39;r&#39; to represent the left and right boundaries of the search space. </div>
+                            <div class=""> If the tree is empty (root is NULL), return the empty result vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop to perform binary search, continuing as long as the left boundary is less than or equal to the right boundary. </div>
+                            <div class=""> Create a queue to assist in performing a breadth-first search (BFS). The queue will hold nodes at each level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Calculation</b></div>
+                            <div class=""> <b>5 : Push Root to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the middle index &#39;mid&#39; using the formula to avoid overflow. </div>
+                            <div class=""> Push the root node to the queue to begin the level-order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Boolean Expression</b></div>
+                            <div class=""> <b>6 : Main BFS Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> x <span style="color:#666">=</span> mid <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> arr[mid <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;</span> arr[mid] <span style="color:#666">:</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current element is greater than its left neighbor, or if it&#39;s the first element (in which case it is treated as a peak). </div>
+                            <div class=""> While the queue is not empty, continue processing the nodes level by level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Boolean Expression</b></div>
+                            <div class=""> <b>7 : Level Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> y <span style="color:#666">=</span> mid <span style="color:#666">&lt;</span> n <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">?</span> arr[mid <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;</span> arr[mid] <span style="color:#666">:</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current element is greater than its right neighbor, or if it&#39;s the last element (in which case it is treated as a peak). </div>
+                            <div class=""> Store the current size of the queue, which represents the number of nodes at the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Conditional Check</b></div>
+                            <div class=""> <b>8 : Result Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&amp;&amp;</span> y) <span style="color:#a2f;font-weight:bold">return</span> mid;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If both &#39;x&#39; and &#39;y&#39; are true, the current element is a peak, so return the index &#39;mid&#39;. </div>
+                            <div class=""> Initialize a temporary vector &#39;res&#39; to hold the node values for the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Conditional Check</b></div>
+                            <div class=""> <b>9 : Level Nodes Processing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>x <span style="color:#666">&amp;&amp;</span> y) r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element is smaller than its left neighbor, move the right boundary &#39;r&#39; to &#39;mid - 1&#39; to search the left half. </div>
+                            <div class=""> Process each node at the current level by looping through the queue until all nodes at this level are visited. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Conditional Check</b></div>
+                            <div class=""> <b>10 : Queue Front</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(x <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>y) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> tmp <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element is greater than its left neighbor but smaller than its right neighbor, move the left boundary &#39;l&#39; to &#39;mid &#43; 1&#39; to search the right half. </div>
+                            <div class=""> Get the front node from the queue, which is the current node to be processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Conditional Check</b></div>
+                            <div class=""> <b>11 : Add Node Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;            
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(tmp<span style="color:#666">-&gt;</span>val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If neither of the above conditions is met, adjust the right boundary &#39;r&#39; to search the left half. </div>
+                            <div class=""> Add the value of the current node to the &#39;res&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Queue Pop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If no peak is found during the binary search, return the left boundary &#39;l&#39;, which will point to the index of the peak element. </div>
+                            <div class=""> Pop the processed node from the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Left Child Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>left) q.push(tmp<span style="color:#666">-&gt;</span>left);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node has a left child, push it onto the queue for the next level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Right Child Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right) q.push(tmp<span style="color:#666">-&gt;</span>right);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node has a right child, push it onto the queue for the next level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Push Level to Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(res);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> After processing all nodes at the current level, add the &#39;res&#39; vector to the final result vector &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final 2D vector &#39;ans&#39; which contains the level-order traversal of the tree. </div>
                         </div>
                     
                 </div>
@@ -718,16 +771,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log n)</div>
-                        <div class=""> <b>Average Case:</b> O(log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
-                        <div class=""> <b>Description:</b> Each binary search step reduces the search space by half, resulting in O(log n) time complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In all cases, we must visit each node in the tree once, so the time complexity is O(n), where n is the number of nodes in the tree.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only use a few variables for indexing and comparisons.</div>    
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, the queue may hold all the nodes at the last level of the tree, resulting in a space complexity of O(n). In the best case, when the tree is perfectly balanced, the space complexity could be reduced to O(log n).</div>    
                     </div>
 
                 </div>

@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 20, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given a list of coin denominations and a target value. Your task is to determine the minimum number of new coin denominations you need to add to the list, so that every integer value from 1 to the target can be formed as a sum of some subset of the coins. A coin denomination can be added if it helps form values that cannot be formed using the existing coins. </div>
+<div class=""> You are given a list of soldiers, each with a unique rating. You need to form teams of 3 soldiers from this list. A valid team is one where the soldiers&rsquo; ratings are either strictly increasing or strictly decreasing as we move from left to right in the team. The team must satisfy the condition that the indices (i, j, k) follow 0 &lt;= i &lt; j &lt; k &lt; n. </div>
 
 
 
@@ -360,53 +360,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A list of integers `coins` representing the denominations of the available coins and an integer `target` representing the target value.</div>
-                        <div class=""> <b>Example:</b> coins = [1, 4, 10], target = 19</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of integers representing the soldiers&#39; ratings.</div>
+                        <div class=""> <b>Example:</b> rating = [3, 6, 1, 4, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 100000</div>
+                                <div style="margin-left: 20px;"> • n == rating.length</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= coins.length &lt;= 100000</div>
+                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= coins[i] &lt;= target</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= rating[i] &lt;= 105</div>
+                            
+                                <div style="margin-left: 20px;"> • All the integers in rating are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of coins needed to be added to the list so that every integer value from 1 to the target can be formed.</div>
-                        <div class=""> <b>Example:</b> 2</div>
+                        <div class=""> <b>Output:</b> The output is the total number of valid teams of size 3 that can be formed based on the ratings.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be an integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine the minimum number of coin denominations to add so that all integers from 1 to the target can be formed.</div>
+                        <div class=""> <b>Goal:</b> To count the number of valid teams that can be formed.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the existing coins.</div>
+                                <div style="margin-left: 20px;"> • For each combination of three indices (i, j, k), check if the ratings are in increasing or decreasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • Start with a sum of 0 and try to form all numbers up to the target.</div>
-                            
-                                <div style="margin-left: 20px;"> • If a coin can contribute to the current sum, add it to the sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the coin cannot contribute, add the next required coin (current_sum &#43; 1).</div>
-                            
-                                <div style="margin-left: 20px;"> • Repeat this until the sum reaches the target.</div>
+                                <div style="margin-left: 20px;"> • Sum up all valid teams.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input list must have at least 1 coin, and the target must be a positive integer.</div>
+                        <div class=""> <b>Goal:</b> The problem must be solved efficiently given the constraints of n being as large as 1000.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 100000</div>
+                                <div style="margin-left: 20px;"> • n is at least 3 and at most 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= coins.length &lt;= 100000</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= coins[i] &lt;= target</div>
+                                <div style="margin-left: 20px;"> • The ratings are unique integers.</div>
                             
                         </div>
                     </div>        
@@ -414,15 +410,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The list of coins is initially sorted.</div>
+                                <div style="margin-left: 20px;"> • The ratings are given in an array, and no two soldiers have the same rating.</div>
+                            
+                                <div style="margin-left: 20px;"> • You can form multiple teams with the same soldiers in different orders.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: coins = [1, 4, 10], target = 19</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We need to add coins with values 2 and 8 to make it possible to form all integers from 1 to 19.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> rating = [3, 6, 1, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid teams are: (3, 4, 5), (6, 1, 4), (6, 1, 5), and (6, 4, 1).</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,16 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating over the coins and determining which coin values need to be added in order to ensure that all numbers from 1 to the target can be formed.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved by brute force, where we check each possible triplet of indices (i, j, k) and verify if they form a valid team.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The key is to always check if the next coin in the list can extend the reachable sum.</div>
+                                <div style="margin-left: 20px;"> • We need to check all combinations of 3 soldiers from the list.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Start by sorting the coins and track the largest sum that can be formed. If the next coin is not reachable, add the next smallest coin that would bridge the gap.</div>
+                                <div style="margin-left: 20px;"> • We can optimize by using dynamic programming or a memoization approach to reduce redundant checks.</div>
                             
                         </div>
                     </div>
@@ -463,13 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the coins array.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a counter for the valid teams.</div>
                             
-                                <div style="margin-left: 20px;"> • Initialize the current sum to 0 and set the counter for added coins to 0.</div>
+                                <div style="margin-left: 20px;"> • 2. For each combination of indices (i, j, k), check if the ratings form an increasing or decreasing sequence.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the coins array and check if the current coin can extend the sum.</div>
+                                <div style="margin-left: 20px;"> • 3. Increment the counter for each valid combination.</div>
                             
-                                <div style="margin-left: 20px;"> • If not, add the smallest possible coin that would help extend the sum.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the total count of valid teams.</div>
                             
                         </div>
                     </div>
@@ -478,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable as there will always be coins provided.</div>
+                                <div style="margin-left: 20px;"> • Not applicable as n is always at least 3.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution is efficient even when there are up to 100,000 coins and the target is 100,000.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the approach scales for large inputs, up to n = 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the coins array already covers all sums up to the target, no new coins are needed.</div>
+                                <div style="margin-left: 20px;"> • Consider inputs where the ratings are in strictly increasing or strictly decreasing order.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input list will have at least 1 coin.</div>
+                                <div style="margin-left: 20px;"> • Avoid brute force solutions that involve checking all possible triplets for larger inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,31 +508,43 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sort Coins</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize Current Max</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialize Additions</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Index</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Memoization Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check Coin Feasibility</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Current Max with Coin</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Increment Index</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Else Case - Add Missing Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Add Missing Value to Current Max</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Memoization Storage</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Increment Additions</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Main Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Memoization Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Reverse Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Memoization Setup</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Final Calculation</button>
                     
                 </div>
 
@@ -543,24 +553,34 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumAddedCoins</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> coins, <span style="color:#0b0;font-weight:bold">int</span> target) {
-</span></span><span style="display:flex;"><span>    sort(coins.begin(), coins.end());
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">1001</span>][<span style="color:#666">1001</span>][<span style="color:#666">4</span>];
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rate;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> current_max <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> additions <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> index <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (current_max <span style="color:#666">&lt;</span> target) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (index <span style="color:#666">&lt;</span> coins.size() <span style="color:#666">&amp;&amp;</span> coins[index] <span style="color:#666">&lt;=</span> current_max <span style="color:#666">+</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>            current_max <span style="color:#666">+=</span> coins[index];
-</span></span><span style="display:flex;"><span>            index<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            current_max <span style="color:#666">+=</span> current_max <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            additions<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> prv, <span style="color:#0b0;font-weight:bold">int</span> cnt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> rate.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][prv <span style="color:#666">+</span> <span style="color:#666">1</span>][cnt] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][prv <span style="color:#666">+</span> <span style="color:#666">1</span>][cnt];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(prv <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">||</span> rate[idx] <span style="color:#666">&gt;</span> rate[prv]) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, idx, cnt <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, prv, cnt);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][prv <span style="color:#666">+</span> <span style="color:#666">1</span>][cnt] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> additions;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numTeams</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rate) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>rate <span style="color:#666">=</span> rate;
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res1 <span style="color:#666">=</span> dp(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    reverse(<span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>rate.begin(),<span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>rate.end());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));        
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res2 <span style="color:#666">=</span> dp(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res1 <span style="color:#666">+</span> res2;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -568,133 +588,193 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumAddedCoins</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> coins, <span style="color:#0b0;font-weight:bold">int</span> target) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">1001</span>][<span style="color:#666">1001</span>][<span style="color:#666">4</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;minimumAddedCoins&#39; that takes a vector of coin denominations &#39;coins&#39; and a target value &#39;target&#39;, and returns the minimum number of additional coins required. </div>
+                            <div class=""> We create a memoization table &#39;memo&#39; to store intermediate results of subproblems. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sort Coins</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(coins.begin(), coins.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rate;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the coins in ascending order to facilitate finding the smallest possible values that can be used to reach the target. </div>
+                            <div class=""> We declare a vector &#39;rate&#39; to store the ratings of the players. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialize Current Max</b></div>
+                            <div class=""> <b>3 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> current_max <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> prv, <span style="color:#0b0;font-weight:bold">int</span> cnt) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes &#39;current_max&#39; to zero, which tracks the largest value that can be formed with the available coins. </div>
+                            <div class=""> The function takes three arguments: the current index &#39;idx&#39;, the previous index &#39;prv&#39;, and the count of players in the current team &#39;cnt&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Initialize Additions</b></div>
+                            <div class=""> <b>4 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> additions <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes &#39;additions&#39; to zero, which will count how many times we add the smallest missing coin. </div>
+                            <div class=""> If we have selected three players, we return 1, as a valid team has been formed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Initialize Index</b></div>
+                            <div class=""> <b>5 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> index <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> rate.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes &#39;index&#39; to zero, used to iterate through the sorted coins. </div>
+                            <div class=""> If we have processed all the ratings and haven’t formed a team, we return 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : While Loop</b></div>
+                            <div class=""> <b>6 : Memoization Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (current_max <span style="color:#666">&lt;</span> target) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][prv <span style="color:#666">+</span> <span style="color:#666">1</span>][cnt] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][prv <span style="color:#666">+</span> <span style="color:#666">1</span>][cnt];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop that continues until the &#39;current_max&#39; reaches or exceeds the target. </div>
+                            <div class=""> If the result for the current state is already computed, we return the stored result to avoid redundant calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Check Coin Feasibility</b></div>
+                            <div class=""> <b>7 : Recursive Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (index <span style="color:#666">&lt;</span> coins.size() <span style="color:#666">&amp;&amp;</span> coins[index] <span style="color:#666">&lt;=</span> current_max <span style="color:#666">+</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current coin can be used to form the next value. If the coin is less than or equal to &#39;current_max &#43; 1&#39;, it can be used. </div>
+                            <div class=""> We initialize a variable &#39;ans&#39; to store the number of valid teams. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Current Max with Coin</b></div>
+                            <div class=""> <b>8 : Recursive Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            current_max <span style="color:#666">+=</span> coins[index];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(prv <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">||</span> rate[idx] <span style="color:#666">&gt;</span> rate[prv]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the coin can be used, it is added to &#39;current_max&#39;, updating the largest value that can be formed. </div>
+                            <div class=""> If the current rating is greater than the previous player&#39;s rating, we proceed to form a team. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Increment Index</b></div>
+                            <div class=""> <b>9 : Recursive Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            index<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, idx, cnt <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the index to check the next coin in the sorted array. </div>
+                            <div class=""> We call the &#39;dp&#39; function recursively to include the current player and increase the team count. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Else Case - Add Missing Value</b></div>
+                            <div class=""> <b>10 : Recursive Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">+=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, prv, cnt);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current coin cannot be used, we add the smallest missing value (current_max &#43; 1). </div>
+                            <div class=""> We also recursively check if the current player can be skipped (no change in team). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Add Missing Value to Current Max</b></div>
+                            <div class=""> <b>11 : Memoization Storage</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            current_max <span style="color:#666">+=</span> current_max <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][prv <span style="color:#666">+</span> <span style="color:#666">1</span>][cnt] <span style="color:#666">=</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the smallest missing value to &#39;current_max&#39; to ensure we progress toward the target. </div>
+                            <div class=""> Return the computed result and store it in the memoization table for future reference. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Increment Additions</b></div>
+                            <div class=""> <b>12 : Main Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            additions<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numTeams</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rate) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the &#39;additions&#39; counter since we added the smallest missing value. </div>
+                            <div class=""> The &#39;numTeams&#39; function calculates the total number of valid teams. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Return Result</b></div>
+                            <div class=""> <b>13 : Variable Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> additions;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>rate <span style="color:#666">=</span> rate;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the total number of coin additions made to reach the target. </div>
+                            <div class=""> We store the input ratings in the class variable &#39;rate&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Memoization Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We initialize the memoization table with -1 to signify that no subproblem has been solved yet. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res1 <span style="color:#666">=</span> dp(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We call the &#39;dp&#39; function to calculate the result for the first order of ratings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Reverse Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    reverse(<span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>rate.begin(),<span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>rate.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We reverse the &#39;rate&#39; vector to handle the reversed case. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Memoization Setup</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Reinitialize the memoization table before calling the &#39;dp&#39; function again. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res2 <span style="color:#666">=</span> dp(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We calculate the result for the reversed ratings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Final Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res1 <span style="color:#666">+</span> res2;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the total number of valid teams from both the original and reversed rating order. </div>
                         </div>
                     
                 </div>
@@ -714,16 +794,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The best, average, and worst case time complexities are all O(n log n) due to sorting the list of coins.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^3)</div>
+                        <div class=""> <b>Average Case:</b> O(n^3)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^3)</div> 
+                        <div class=""> <b>Description:</b> Since we are checking each combination of 3 soldiers, the time complexity is cubic in the worst case.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the coins list. In the best case, no additional space is required.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> We use a constant amount of space beyond the input list, so the space complexity is O(1).</div>    
                     </div>
 
                 </div>

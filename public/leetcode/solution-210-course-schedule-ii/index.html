@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 17, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given four integer arrays nums1, nums2, nums3, and nums4 all of length n. Your task is to find the number of quadruples (i, j, k, l) such that nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0. The indices i, j, k, and l should be between 0 and n-1. </div>
+<div class=""> You are given a set of courses with prerequisites, and you need to find a valid order to take them, or return an empty array if no valid order exists. </div>
 
 
 
@@ -372,45 +372,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of four arrays nums1, nums2, nums3, nums4 of length n, where each array contains integers.</div>
-                        <div class=""> <b>Example:</b> nums1 = [1, 2], nums2 = [-2, -1], nums3 = [-1, 2], nums4 = [0, 2]</div>
+                        <div class=""> <b>Input:</b> You are given a number of courses, `numCourses`, and a list of prerequisite pairs where each pair [ai, bi] indicates that you need to take course bi before course ai.</div>
+                        <div class=""> <b>Example:</b> [numCourses = 3, prerequisites = [[1,0], [2,1]]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= numCourses &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • -228 &lt;= nums1[i], nums2[i], nums3[i], nums4[i] &lt;= 228</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= prerequisites.length &lt;= numCourses * (numCourses - 1)</div>
+                            
+                                <div style="margin-left: 20px;"> • prerequisites[i].length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt; numCourses</div>
+                            
+                                <div style="margin-left: 20px;"> • ai != bi</div>
+                            
+                                <div style="margin-left: 20px;"> • All pairs [ai, bi] are distinct.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of quadruples (i, j, k, l) such that nums1[i] &#43; nums2[j] &#43; nums3[k] &#43; nums4[l] == 0.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return a valid order in which to complete all the courses, or an empty array if no valid order exists.</div>
+                        <div class=""> <b>Example:</b> For numCourses = 3 and prerequisites = [[1,0], [2,1]], the output is [0, 1, 2].</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The result should be the count of all valid quadruples.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to efficiently find the number of quadruples whose sum is zero.</div>
+                        <div class=""> <b>Goal:</b> To determine if it is possible to complete all the courses by sorting the courses in a valid order considering their prerequisites.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through all possible pairs of sums from nums1 and nums2, and store their results in a hash map.</div>
+                                <div style="margin-left: 20px;"> • Represent the courses and their prerequisites as a directed graph.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through all pairs of sums from nums3 and nums4, and for each pair, check if the negative of the sum exists in the hash map from step 1.</div>
+                                <div style="margin-left: 20px;"> • Perform topological sorting on the graph using a queue to process nodes with no prerequisites.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count how many such pairs exist and return the total count.</div>
+                                <div style="margin-left: 20px;"> • Return the topologically sorted order if all courses can be taken, otherwise return an empty array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The algorithm should efficiently handle the problem within the given constraints.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure the problem can be solved with an efficient algorithm for large inputs.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The algorithm must handle arrays of size n up to 200 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The number of courses can be up to 2000, so the solution should handle graphs with up to 2000 nodes and edges efficiently.</div>
                             
                         </div>
                     </div>        
@@ -418,21 +424,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The arrays nums1, nums2, nums3, and nums4 are all of equal length.</div>
-                            
-                                <div style="margin-left: 20px;"> • All values in the arrays are integers.</div>
+                                <div style="margin-left: 20px;"> • The input courses and prerequisites form a directed graph, which may or may not have cycles.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums1 = [1, 2], nums2 = [-2, -1], nums3 = [-1, 2], nums4 = [0, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the two valid quadruples are (0, 0, 0, 1) and (1, 1, 0, 0).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, you need to take course 1 after course 0, and course 2 after course 1, so the valid order is [0, 1, 2].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums1 = [0], nums2 = [0], nums3 = [0], nums4 = [0]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the only valid quadruple is (0, 0, 0, 0).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The courses form a directed graph with dependencies, and a valid order is [0, 2, 1, 3].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The prerequisites form a cycle, making it impossible to complete the courses, so the output is an empty array.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +464,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves using a hash map to efficiently find and count the valid quadruples.</div>
+                        <div class=""> <b>Approach:</b> This problem can be solved using topological sorting on a directed graph representing course dependencies.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be reduced to finding pairs of sums that add up to zero.</div>
+                                <div style="margin-left: 20px;"> • The problem involves checking if a directed graph is acyclic and finding a valid topological order.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a hash map to store pairs of sums will allow us to quickly check if the negative of a given sum exists, reducing the time complexity.</div>
+                                <div style="margin-left: 20px;"> • A queue can be used to process nodes with no incoming edges (prerequisites), and we can iteratively build the valid order.</div>
                             
                         </div>
                     </div>
@@ -473,11 +481,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through all pairs (i, j) from nums1 and nums2, and store the sum in a hash map.</div>
+                                <div style="margin-left: 20px;"> • Represent the courses and their prerequisites as a directed graph.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through all pairs (k, l) from nums3 and nums4. For each pair, check if the negative sum exists in the hash map.</div>
+                                <div style="margin-left: 20px;"> • Track the number of incoming edges (prerequisites) for each course.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each match, increment the result counter.</div>
+                                <div style="margin-left: 20px;"> • Use a queue to process courses that have no prerequisites (i.e., courses with zero incoming edges).</div>
+                            
+                                <div style="margin-left: 20px;"> • For each processed course, reduce the incoming edges of its dependent courses and add those with no remaining prerequisites to the queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • If all courses are processed, return the topologically sorted order. Otherwise, return an empty array.</div>
                             
                         </div>
                     </div>
@@ -486,22 +498,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the arrays are empty, the result should be zero.</div>
+                                <div style="margin-left: 20px;"> • If no prerequisites are given, the courses can be completed in any order.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must handle arrays of size up to 200 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle up to 2000 courses efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the sum of four numbers equals zero, it should be counted as a valid quadruple.</div>
+                                <div style="margin-left: 20px;"> • If the prerequisites form a cycle, it is impossible to complete the courses.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should operate within a time complexity of O(n^2).</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works within the time limits for large arrays (O(n &#43; m) time complexity).</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,23 +532,43 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Graph Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 In-degree Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop (Array A)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Building Graph</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop (Array B)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Graph Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Map Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 In-degree Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Outer Loop (Array C)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Inner Loop (Array D)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Queue Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Map Lookup and Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 In-degree Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Answer Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Processing Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Node Processing</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Answer Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Pop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Graph Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 In-degree Decrement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Queue Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Queue Push Again</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Statement</button>
                     
                 </div>
 
@@ -545,16 +577,31 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">fourSumCount</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> B, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> C, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> D) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : A)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">b</span> : B)
-</span></span><span style="display:flex;"><span>    mp[a<span style="color:#666">+</span>b]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">c</span> : C)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">d</span> : D)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(<span style="color:#666">-</span>c<span style="color:#666">-</span>d)) res<span style="color:#666">+=</span> mp[<span style="color:#666">-</span>c<span style="color:#666">-</span>d];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findOrder(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pre) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph(n);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> incnt(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pre.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        gph[pre[i][<span style="color:#666">1</span>]].push_back(pre[i][<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>        incnt[pre[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(incnt[i] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>            q.push(i);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        ans.push_back(y);
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: gph[y]) {
+</span></span><span style="display:flex;"><span>            incnt[x]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(incnt[x] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>                q.push(x);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans.size() <span style="color:#666">==</span> n<span style="color:#666">?</span> <span style="color:#a0a000">ans</span>: vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -565,100 +612,200 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">fourSumCount</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> B, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> C, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> D) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findOrder(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> pre) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `fourSumCount` that takes four integer vectors as input and returns the number of valid quadruples where the sum of elements from the arrays is zero. </div>
+                            <div class=""> Define the function `findOrder`, which takes an integer `n` (number of courses/nodes) and a 2D vector `pre` (prerequisites), and returns the topological order of nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Graph Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a variable `res` to 0, which will hold the count of valid quadruples. </div>
+                            <div class=""> Initialize an adjacency list `gph` to represent the directed graph, where each node will store a list of its neighbors (nodes that depend on it). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Map Initialization</b></div>
+                            <div class=""> <b>3 : In-degree Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> incnt(n, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares an unordered map `mp` that will store the sum of pairs from arrays A and B as keys, and their frequency as values. </div>
+                            <div class=""> Initialize a vector `incnt` to keep track of the in-degree (number of incoming edges) for each node. Set all in-degrees initially to 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Outer Loop (Array A)</b></div>
+                            <div class=""> <b>4 : Building Graph</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : A)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pre.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop that iterates through each element of array `A`. </div>
+                            <div class=""> Loop through the prerequisite pairs in `pre` to build the graph and update the in-degrees. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Inner Loop (Array B)</b></div>
+                            <div class=""> <b>5 : Graph Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">b</span> : B)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[pre[i][<span style="color:#666">1</span>]].push_back(pre[i][<span style="color:#666">0</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a nested loop that iterates through each element of array `B` for every element in `A`. </div>
+                            <div class=""> For each pair in `pre`, add the directed edge from `pre[i][1]` to `pre[i][0]` in the adjacency list `gph`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Map Update</b></div>
+                            <div class=""> <b>6 : In-degree Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[a<span style="color:#666">+</span>b]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        incnt[pre[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the sum of `a` and `b` to the map `mp`, incrementing its count. This stores the frequency of each pair sum from arrays `A` and `B`. </div>
+                            <div class=""> Increase the in-degree of the node `pre[i][0]`, indicating that it has one more prerequisite. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Outer Loop (Array C)</b></div>
+                            <div class=""> <b>7 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">c</span> : C)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop that iterates through each element of array `C`. </div>
+                            <div class=""> Initialize a queue `q` to keep track of nodes with no prerequisites (i.e., nodes with an in-degree of 0). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Inner Loop (Array D)</b></div>
+                            <div class=""> <b>8 : Queue Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">d</span> : D)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a nested loop that iterates through each element of array `D` for every element in `C`. </div>
+                            <div class=""> Loop through all nodes and add those with no incoming edges (in-degree of 0) to the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Map Lookup and Update</b></div>
+                            <div class=""> <b>9 : In-degree Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(<span style="color:#666">-</span>c<span style="color:#666">-</span>d)) res<span style="color:#666">+=</span> mp[<span style="color:#666">-</span>c<span style="color:#666">-</span>d];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(incnt[i] <span style="color:#666">==</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the negated sum `-c-d` exists in the map `mp`. If it does, it adds the frequency of that sum to `res`, indicating the number of valid quadruples found. </div>
+                            <div class=""> Check if the current node has no prerequisites (in-degree 0), indicating it can be processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Queue Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the count of valid quadruples stored in `res`. </div>
+                            <div class=""> Add the current node with no prerequisites to the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Answer Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize an empty vector `ans` to store the topologically sorted nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Processing Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> While the queue is not empty, process each node in topological order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Node Processing</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> q.front();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Get the front node from the queue to process. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Answer Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(y);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the current node `y` to the answer vector `ans` as part of the topological order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Queue Pop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the processed node from the front of the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Graph Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: gph[y]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each node `x` that depends on the current node `y`, reduce its in-degree by 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : In-degree Decrement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            incnt[x]<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrement the in-degree of node `x`, as one of its prerequisites (`y`) has been processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Queue Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(incnt[x] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If node `x` now has no prerequisites left (in-degree 0), it can be added to the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Queue Push Again</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push(x);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add node `x` to the queue for processing. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans.size() <span style="color:#666">==</span> n<span style="color:#666">?</span> <span style="color:#a0a000">ans</span>: vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If all nodes have been processed (i.e., the answer size equals `n`), return the topologically sorted order; otherwise, return an empty vector indicating a cycle or an impossible ordering. </div>
                         </div>
                     
                 </div>
@@ -678,16 +825,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n^2) because we need to check all pairs of sums from the four arrays.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n &#43; m), where n is the number of courses and m is the number of prerequisites.</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; m), since all nodes and edges must be processed.</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m), in the worst case all courses and prerequisites must be processed.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the graph traversal and topological sorting.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the storage of pairs of sums in the hash map.</div>    
+                        <div class=""> <b>Best Case:</b> O(n &#43; m), since all the nodes and edges must be stored in memory.</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m), to store the graph and incoming edges.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of nodes (courses) and edges (prerequisites).</div>    
                     </div>
 
                 </div>

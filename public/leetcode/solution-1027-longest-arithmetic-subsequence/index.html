@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given a string of digits, <code>s</code>, and an integer <code>k</code>. Your task is to repeatedly process the string until its length becomes less than or equal to <code>k</code>. In each step, divide the string into consecutive groups of size <code>k</code>. If the last group is smaller than <code>k</code>, process it as is. For each group, calculate the sum of its digits, convert the result back to a string, and merge all groups to form a new string. Repeat the process until the string length is <code>≤ k</code>, and return the final string. </div>
+<div class=""> Given an array of integers, you need to return the length of the longest subsequence where the difference between consecutive elements is constant. A subsequence is derived by deleting some elements without changing the order of the remaining elements. A sequence is considered arithmetic if the difference between consecutive elements remains the same. </div>
 
 
 
@@ -360,55 +360,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s` and an integer `k`.</div>
-                        <div class=""> <b>Example:</b> For example, `s = &#34;987654&#34;` and `k = 2`.</div>
+                        <div class=""> <b>Input:</b> The input consists of a single array of integers.</div>
+                        <div class=""> <b>Example:</b> nums = [5,10,15,20]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= k &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • The string `s` consists of digits only.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 500</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The function returns the final processed string after applying the digit-sum transformation until the length of `s` becomes less than or equal to `k`.</div>
-                        <div class=""> <b>Example:</b> If `s = &#34;987654&#34;` and `k = 2`, the output will be `&#34;3011&#34;`.</div>
+                        <div class=""> <b>Output:</b> The output is a single integer representing the length of the longest arithmetic subsequence in the given array.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output string will have a length of at most `k`.</div>
+                                <div style="margin-left: 20px;"> • The arithmetic subsequence is derived by deleting some elements without changing the order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Transform the string `s` iteratively by dividing it into groups of size `k`, summing the digits of each group, and merging the results until its length is less than or equal to `k`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the length of the longest subsequence with a constant difference between consecutive elements. This can be done using dynamic programming.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • While the length of `s` is greater than `k`, perform the following:</div>
+                                <div style="margin-left: 20px;"> • 1. Use dynamic programming with a hash map to track the longest arithmetic subsequences for each difference between pairs of elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 1. Divide `s` into groups of size `k`.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through each pair of elements in the array and compute the difference.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each group, calculate the sum of its digits.</div>
+                                <div style="margin-left: 20px;"> • 3. Update the hash map with the longest subsequence length for the calculated difference.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Replace the group with the sum as a string.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Merge all groups to form the new string `s`.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return `s` when its length is less than or equal to `k`.</div>
+                                <div style="margin-left: 20px;"> • 4. Keep track of the longest subsequence found during the iteration.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the transformation respects input constraints.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle arrays with up to 1000 elements efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string `s` must consist only of numeric digits.</div>
-                            
-                                <div style="margin-left: 20px;"> • The integer `k` must be at least 2 and no larger than the length of `s`.</div>
+                                <div style="margin-left: 20px;"> • The solution must compute the longest subsequence in O(n^2) time complexity.</div>
                             
                         </div>
                     </div>        
@@ -416,24 +408,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string `s` is non-empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • The value of `k` is always valid.</div>
+                                <div style="margin-left: 20px;"> • The input array has at least 2 elements.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: `s = &#34;987654321&#34;, k = 3`</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 1. Divide `s` into groups: `&#34;987&#34;`, `&#34;654&#34;`, `&#34;321&#34;`. 
-2. Sum digits in each group: `9&#43;8&#43;7=24`, `6&#43;5&#43;4=15`, `3&#43;2&#43;1=6`. 
-3. Merge results: `&#34;24156&#34;`. Repeat for `&#34;24156&#34;`. 
-4. Divide: `&#34;241&#34;`, `&#34;56&#34;`. Sum: `2&#43;4&#43;1=7`, `5&#43;6=11`. Merge: `&#34;711&#34;`. Stop as length ≤ `k`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5,10,15,20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the difference between each consecutive pair of elements is 5. The entire array forms an arithmetic subsequence with length 4.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: `s = &#34;1234&#34;, k = 2`</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 1. Divide: `&#34;12&#34;`, `&#34;34&#34;`. Sum: `1&#43;2=3`, `3&#43;4=7`. Merge: `&#34;37&#34;`. Stop as length ≤ `k`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [10, 5, 15, 25, 30]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the longest arithmetic subsequence is [5, 15, 25] with a difference of 10, so the output is 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,20 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Iteratively process the string until its length is less than or equal to `k` by dividing into groups, summing digits, and merging results.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using dynamic programming (DP) where we maintain a hash map for each element to store the length of the longest subsequence for each difference encountered.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each group can be processed independently.</div>
-                            
-                                <div style="margin-left: 20px;"> • The transformation involves simple arithmetic operations.</div>
+                                <div style="margin-left: 20px;"> • The problem involves finding subsequences, which suggests a dynamic programming approach.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Use a loop to handle iterations.</div>
-                            
-                                <div style="margin-left: 20px;"> • Handle groups efficiently using slicing or indexing.</div>
+                                <div style="margin-left: 20px;"> • The use of hash maps allows us to efficiently track the longest subsequences for each difference, reducing redundant calculations.</div>
                             
                         </div>
                     </div>
@@ -478,15 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a loop to process the string while its length exceeds `k`.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a vector of hash maps where each element&#39;s map tracks the length of subsequences for each possible difference.</div>
                             
-                                <div style="margin-left: 20px;"> • Slice the string into groups of size `k`.</div>
+                                <div style="margin-left: 20px;"> • 2. Loop through each pair of elements in the array to calculate the difference between them.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the sum of digits for each group.</div>
+                                <div style="margin-left: 20px;"> • 3. Update the map for the current element based on the difference and the longest subsequence length found so far.</div>
                             
-                                <div style="margin-left: 20px;"> • Convert the sums to strings and concatenate them.</div>
-                            
-                                <div style="margin-left: 20px;"> • Update the string and repeat until its length is less than or equal to `k`.</div>
+                                <div style="margin-left: 20px;"> • 4. The longest subsequence will be the maximum length stored in the hash maps.</div>
                             
                         </div>
                     </div>
@@ -495,24 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable as `s` is guaranteed to be non-empty.</div>
+                                <div style="margin-left: 20px;"> • An array with fewer than 2 elements should not be given (based on the constraints).</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the implementation handles strings close to the maximum length of 100 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle arrays with up to 1000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • `k` equals the length of `s`: return `s` immediately.</div>
-                            
-                                <div style="margin-left: 20px;"> • `s` contains only zeros: ensure the sum correctly results in zeros.</div>
+                                <div style="margin-left: 20px;"> • If all elements are the same, the longest arithmetic subsequence is the entire array, since the difference is 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure all calculations respect numeric constraints for digits.</div>
+                                <div style="margin-left: 20px;"> • The array will not contain values outside the range 0 to 500.</div>
                             
                         </div>                                                                        
                     </div>
@@ -531,19 +510,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Loop Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Data Structure Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Resize Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Accumulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Lambda Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Swap Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Calculate Difference</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Map</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Initialize Difference</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
                     
                 </div>
 
@@ -552,15 +539,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">digitSum</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(s.size() <span style="color:#666">&gt;</span> k) {
-</span></span><span style="display:flex;"><span>    string s1;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i <span style="color:#666">+=</span> k)
-</span></span><span style="display:flex;"><span>        s1 <span style="color:#666">+=</span> to_string(accumulate(begin(s) <span style="color:#666">+</span> i, begin(s) <span style="color:#666">+</span> min((<span style="color:#0b0;font-weight:bold">int</span>)s.size(), i <span style="color:#666">+</span> k), <span style="color:#666">0</span>, 
-</span></span><span style="display:flex;"><span>            [](<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">char</span> ch){ <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">+</span> ch <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>; }));
-</span></span><span style="display:flex;"><span>    swap(s1, s);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> s;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestArithSeqLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    mp.resize(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> nums[j] <span style="color:#666">-</span> nums[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[j].count(d)) mp[i][d] <span style="color:#666">=</span> max(mp[i][d], mp[j][d] <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> mp[i][d] <span style="color:#666">=</span> max(mp[i][d], <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(mp[i][d], res);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -571,80 +564,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">digitSum</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestArithSeqLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function &#39;digitSum&#39;, which takes a string &#39;s&#39; and an integer &#39;k&#39; as input. </div>
+                            <div class=""> Define the function `longestArithSeqLength` which calculates the length of the longest arithmetic subsequence in the given array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Loop Condition</b></div>
+                            <div class=""> <b>2 : Initialize Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(s.size() <span style="color:#666">&gt;</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The while loop continues as long as the size of the string &#39;s&#39; is greater than &#39;k&#39;. </div>
+                            <div class=""> Store the size of the input array `nums` into the variable `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Data Structure Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string s1;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A temporary string &#39;s1&#39; is initialized to store the sum of digits in each segment. </div>
+                            <div class=""> Declare a vector of unordered maps to store the difference and its count for each element in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop</b></div>
+                            <div class=""> <b>4 : Resize Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i <span style="color:#666">+=</span> k)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp.resize(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This for loop iterates over the string &#39;s&#39; in steps of &#39;k&#39;, processing &#39;k&#39; digits at a time. </div>
+                            <div class=""> Resize the vector of unordered maps to the size of the input array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Accumulation</b></div>
+                            <div class=""> <b>5 : Initialize Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s1 <span style="color:#666">+=</span> to_string(accumulate(begin(s) <span style="color:#666">+</span> i, begin(s) <span style="color:#666">+</span> min((<span style="color:#0b0;font-weight:bold">int</span>)s.size(), i <span style="color:#666">+</span> k), <span style="color:#666">0</span>, 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line accumulates the sum of the &#39;k&#39; digits starting from index &#39;i&#39;. The &#39;accumulate&#39; function adds each digit&#39;s numeric value to the total. </div>
+                            <div class=""> Initialize the result variable `res` to 1, as the minimum possible arithmetic subsequence length is 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Lambda Function</b></div>
+                            <div class=""> <b>6 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            [](<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">char</span> ch){ <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">+</span> ch <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>; }));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The lambda function inside &#39;accumulate&#39; converts each character &#39;ch&#39; to its corresponding integer value by subtracting &#39;0&#39;. </div>
+                            <div class=""> Iterate over the array elements with index `i` as the end of a potential arithmetic subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Swap Operation</b></div>
+                            <div class=""> <b>7 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    swap(s1, s);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After each iteration, the new string &#39;s1&#39; is swapped with &#39;s&#39;, so the process continues on the updated string. </div>
+                            <div class=""> Iterate over previous elements with index `j` to calculate the difference `d` between elements at indices `j` and `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class=""> <b>8 : Calculate Difference</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> nums[j] <span style="color:#666">-</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Once the string size is less than or equal to &#39;k&#39;, the function returns the final string &#39;s&#39;. </div>
+                            <div class=""> Calculate the difference `d` between elements at indices `j` and `i`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Update Map</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[j].count(d)) mp[i][d] <span style="color:#666">=</span> max(mp[i][d], mp[j][d] <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the difference `d` exists in the map for index `j`, update the map for index `i` with the incremented count of the subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Initialize Difference</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> mp[i][d] <span style="color:#666">=</span> max(mp[i][d], <span style="color:#666">2</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the difference `d` does not exist in the map for index `j`, initialize it with a value of 2. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Update Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(mp[i][d], res);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the result `res` to the maximum length found so far. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the length of the longest arithmetic subsequence. </div>
                         </div>
                     
                 </div>
@@ -664,16 +697,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> Each iteration processes the string in linear time, and the length of `s` reduces logarithmically over iterations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n^2) due to the nested loop over pairs of elements.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> In-place modifications reduce space requirements; however, slicing may require extra memory proportional to the input size.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the hash maps storing subsequences for each difference.</div>    
                     </div>
 
                 </div>

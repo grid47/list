@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given a string consisting of parentheses. In one move, you can insert a parenthesis (either &lsquo;(&rsquo; or &lsquo;)&rsquo;) at any position in the string. Your task is to return the minimum number of moves required to make the string valid, meaning all parentheses are properly balanced. </div>
+<div class=""> You are given a grid representing a battleship field, where &lsquo;X&rsquo; marks the location of a part of a battleship and &lsquo;.&rsquo; represents an empty sea cell. A battleship is either placed horizontally or vertically on the grid, with no adjacent battleships (there must be at least one empty cell between any two battleships). Your task is to count the number of distinct battleships on the grid. </div>
 
 
 
@@ -371,49 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string of parentheses, with each character being either &#39;(&#39; or &#39;)&#39;.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;(()))&#34;</div>
+                        <div class=""> <b>Input:</b> The input is a 2D character grid where each cell contains either &#39;X&#39; (part of a battleship) or &#39;.&#39; (empty sea).</div>
+                        <div class=""> <b>Example:</b> Input: board = [[&#39;X&#39;, &#39;.&#39;, &#39;.&#39;, &#39;X&#39;], [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;X&#39;], [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;X&#39;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 200</div>
                             
-                                <div style="margin-left: 20px;"> • Each character in s is either &#39;(&#39; or &#39;)&#39;.</div>
+                                <div style="margin-left: 20px;"> • board[i][j] is either &#39;.&#39; or &#39;X&#39;</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be an integer representing the minimum number of moves required to make the parentheses string valid.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> The output should be an integer representing the number of distinct battleships on the board.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string will contain only &#39;(&#39; and &#39;)&#39;.</div>
+                                <div style="margin-left: 20px;"> • The output is an integer indicating the number of distinct battleships.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate how many parentheses need to be added in order to balance the string.</div>
+                        <div class=""> <b>Goal:</b> The goal is to count the number of distinct battleships by identifying connected parts of &#39;X&#39; (either horizontally or vertically).</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Traverse through the string character by character.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the grid cell by cell.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a stack to keep track of unmatched opening parentheses &#39;(&#39;.</div>
+                                <div style="margin-left: 20px;"> • For each &#39;X&#39;, check if it is the start of a new battleship (i.e., if there is no &#39;X&#39; directly above or to the left of it).</div>
                             
-                                <div style="margin-left: 20px;"> • For each closing parenthesis &#39;)&#39;, pop from the stack if there is a matching opening parenthesis, otherwise count it as a required move.</div>
-                            
-                                <div style="margin-left: 20px;"> • At the end, the stack will contain unmatched opening parentheses, and the number of required moves will be equal to the size of the stack.</div>
+                                <div style="margin-left: 20px;"> • Count it as a new battleship if it is the start of one, and continue scanning the grid.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the input string satisfies the constraints for length and valid parentheses.</div>
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the grid size is manageable and the number of battleships is determined only by the layout of &#39;X&#39; cells.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string will be between 1 and 1000 characters long.</div>
+                                <div style="margin-left: 20px;"> • The grid can have a maximum size of 200x200.</div>
                             
-                                <div style="margin-left: 20px;"> • Each character in the input string will be either &#39;(&#39; or &#39;)&#39;.</div>
+                                <div style="margin-left: 20px;"> • Each cell in the grid is either an &#39;X&#39; or a &#39;.&#39; character.</div>
                             
                         </div>
                     </div>        
@@ -421,19 +419,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string contains only parentheses.</div>
+                                <div style="margin-left: 20px;"> • The grid contains valid characters (either &#39;X&#39; or &#39;.&#39;).</div>
+                            
+                                <div style="margin-left: 20px;"> • There is at least one row and one column in the grid.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;())&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string has one unmatched closing parenthesis. To balance it, we need to insert one opening parenthesis at the beginning. So, the answer is 1.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;(((&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string has three unmatched opening parentheses. To balance it, we need to insert three closing parentheses at the end. So, the answer is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: board = [[&#39;X&#39;, &#39;.&#39;, &#39;.&#39;, &#39;X&#39;], [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;X&#39;], [&#39;.&#39;, &#39;.&#39;, &#39;.&#39;, &#39;X&#39;]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, there are two distinct battleships. The first one is placed horizontally from (0,0) to (0,3), and the second one is placed vertically from (0,3) to (2,3). Thus, the output is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,18 +453,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves using a stack to keep track of unmatched parentheses while traversing the string. We also count the required moves for unmatched closing parentheses and opening parentheses.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, iterate through each cell of the grid. For each &#39;X&#39;, check if it is the start of a new battleship by ensuring there are no other &#39;X&#39; directly above or to the left of it. If it is, increment the battleship count.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can use a stack to efficiently manage unmatched parentheses.</div>
+                                <div style="margin-left: 20px;"> • We need to avoid counting the same battleship multiple times.</div>
                             
-                                <div style="margin-left: 20px;"> • By traversing the string once, we can determine the minimum moves needed.</div>
+                                <div style="margin-left: 20px;"> • Each battleship can only be counted once, either from the start of the row or the start of the column.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A stack is a good choice for tracking unmatched opening parentheses. For unmatched closing parentheses, we can simply count the number of insertions needed.</div>
+                                <div style="margin-left: 20px;"> • By checking the adjacent cells (above and to the left), we can avoid double-counting parts of the same battleship.</div>
                             
                         </div>
                     </div>
@@ -476,15 +472,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize a stack to store unmatched opening parentheses.</div>
+                                <div style="margin-left: 20px;"> • Initialize a counter to track the number of battleships.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Traverse the string character by character.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the grid, cell by cell.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: If the character is an opening parenthesis &#39;(&#39;, push it onto the stack.</div>
+                                <div style="margin-left: 20px;"> • For each &#39;X&#39;, check if it is not adjacent to another &#39;X&#39; from above or to the left.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If the character is a closing parenthesis &#39;)&#39;, check if the stack is empty. If it&#39;s not, pop an element from the stack. Otherwise, increment the count for required moves.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 5: After traversing the string, the size of the stack will give the number of unmatched opening parentheses, which also corresponds to the required moves.</div>
+                                <div style="margin-left: 20px;"> • If it is not, count it as the start of a new battleship.</div>
                             
                         </div>
                     </div>
@@ -493,22 +487,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string will always have at least one character, so we don&#39;t need to handle empty strings.</div>
+                                <div style="margin-left: 20px;"> • If the board is empty (no rows or columns), the output should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle up to 1000 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large grids (up to 200x200), ensure the solution can handle the maximum input size efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string contains only one unmatched opening or closing parenthesis, it will need one move to balance.</div>
+                                <div style="margin-left: 20px;"> • A grid where all cells are empty should return 0, as there are no battleships.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string will only contain parentheses, and we will always need to insert parentheses to balance it.</div>
+                                <div style="margin-left: 20px;"> • The solution should work within the problem&#39;s constraints, with a maximum grid size of 200x200.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,31 +519,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Edge Case Handling</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Stack Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Empty Stack Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Increment Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Stack Pop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Stack</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Stack Size Addition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
                     
                 </div>
 
@@ -558,23 +542,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minAddToMakeValid</span>(string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">a</span> : s) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
-</span></span><span style="display:flex;"><span>            stk.push(a);
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(stk.empty()) {
-</span></span><span style="display:flex;"><span>                res<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                stk.pop();
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countBattleships</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(board.empty() <span style="color:#666">||</span> board[<span style="color:#666">0</span>].empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span> cnt <span style="color:#666">+=</span> (board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;X&#39;</span>) <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> board[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">!=</span> <span style="color:#b44">&#39;X&#39;</span>) <span style="color:#666">&amp;&amp;</span> (j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> board[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#b44">&#39;X&#39;</span>); 
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> stk.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -582,133 +559,83 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minAddToMakeValid</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countBattleships</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;minAddToMakeValid&#39;, which takes a string &#39;s&#39; and returns an integer representing the number of parentheses needed to balance the string. </div>
+                            <div class=""> This line declares the `countBattleships` function, which takes a 2D vector of characters representing the board and returns an integer representing the number of battleships. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Edge Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(board.empty() <span style="color:#666">||</span> board[<span style="color:#666">0</span>].empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare an integer variable &#39;res&#39; to keep track of the number of parentheses to be added for balancing the string. </div>
+                            <div class=""> This checks if the board is empty or if the first row is empty. If either condition is true, it returns 0 as there are no battleships to count. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Stack Declaration</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a stack &#39;stk&#39; to help track the open parentheses. </div>
+                            <div class=""> Here, we initialize the variables `m` and `n` to represent the number of rows and columns in the board. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">a</span> : s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each character &#39;a&#39; in the input string &#39;s&#39;. </div>
+                            <div class=""> This initializes the `cnt` variable to keep track of the number of battleships found on the board. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition</b></div>
+                            <div class=""> <b>5 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current character is an opening parenthesis &#39;(&#39;. </div>
+                            <div class=""> This starts a loop to iterate over each row of the board. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Stack Operation</b></div>
+                            <div class=""> <b>6 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(a);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the character is an opening parenthesis, push it onto the stack. </div>
+                            <div class=""> This starts a nested loop to iterate over each column within the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Else Condition</b></div>
+                            <div class=""> <b>7 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> cnt <span style="color:#666">+=</span> (board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;X&#39;</span>) <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> board[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">!=</span> <span style="color:#b44">&#39;X&#39;</span>) <span style="color:#666">&amp;&amp;</span> (j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> board[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#b44">&#39;X&#39;</span>); 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is not an opening parenthesis, proceed with the else block. </div>
+                            <div class=""> This line checks if the current cell is an &#39;X&#39; (part of a battleship). It also ensures that the current cell is not part of a battleship that has already been counted (i.e., no adjacent &#39;X&#39; cells to the left or above). If both conditions are true, it increments the `cnt` variable. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Empty Stack Check</b></div>
+                            <div class=""> <b>8 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(stk.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the stack is empty, indicating there is no matching opening parenthesis for the closing parenthesis. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Increment Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the stack is empty (no matching opening parenthesis), increment &#39;res&#39; as one more parenthesis is needed to balance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Stack Pop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the stack is not empty, it means there is a matching opening parenthesis for the closing parenthesis. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Pop Stack</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                stk.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pop the matching opening parenthesis from the stack, as the pair is balanced. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Stack Size Addition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">+=</span> stk.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After processing all characters, add the number of unmatched opening parentheses left in the stack to &#39;res&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final count of parentheses that need to be added to make the string valid. </div>
+                            <div class=""> This returns the final count of battleships found on the board. </div>
                         </div>
                     
                 </div>
@@ -728,16 +655,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only need to traverse the string once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n), where m is the number of rows and n is the number of columns in the grid.</div>
+                        <div class=""> <b>Average Case:</b> O(m * n), as we must inspect every cell in the grid.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n), since we iterate through the entire grid once.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the size of the grid.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, we may need to store up to n unmatched parentheses in the stack. Hence, the space complexity is O(n).</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since no additional space is required besides the input grid.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as the solution uses only a constant amount of extra memory.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we do not use any extra data structures that depend on the size of the grid.</div>    
                     </div>
 
                 </div>

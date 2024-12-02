@@ -306,7 +306,7 @@
 
 
 
-<div class=""> Given a 0-indexed integer array &rsquo;nums&rsquo;, find the leftmost index where the sum of elements to the left of that index is equal to the sum of elements to the right of that index. If such an index exists, return the smallest such index, otherwise return -1. The sum of the elements before the first index is considered 0, and similarly, the sum of elements after the last index is also 0. </div>
+<div class=""> An array is said to be monotonic if it is either monotonically increasing or monotonically decreasing. A monotonically increasing array is one where each element is greater than or equal to the previous one, and a monotonically decreasing array is one where each element is less than or equal to the previous one. Given an integer array, return true if the array is monotonic, and false otherwise. </div>
 
 
 
@@ -357,43 +357,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array &#39;nums&#39; where each element represents an integer.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 2, 3, -1, 2]</div>
+                        <div class=""> <b>Input:</b> You are given an array of integers, nums, and you need to determine if the array is monotonic.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [3, 3, 4, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • -1000 &lt;= nums[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • -10^5 &lt;= nums[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the leftmost index where the sum of elements to the left equals the sum of elements to the right. If no such index exists, return -1.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return a boolean value, true if the array is monotonic, and false otherwise.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be an integer representing the leftmost index or -1 if no such index exists.</div>
+                                <div style="margin-left: 20px;"> • The output is either true or false based on whether the array is monotonic.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the leftmost index where the sum of elements to the left is equal to the sum of elements to the right.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check whether the given array is either monotonically increasing or decreasing.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Calculate the prefix sum for the input array, which is the cumulative sum of elements from the start up to each index.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize two boolean variables, inc and dec, to true. These will track whether the array is monotonically increasing or decreasing.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the prefix sum at each index with the total sum to find the middle index where the two sides are balanced.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse the array and check if each pair of adjacent elements follows the increasing or decreasing pattern.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If any element fails to maintain the increasing pattern, set inc to false; if it fails to maintain the decreasing pattern, set dec to false.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. After traversing the array, if either inc or dec remains true, return true. Otherwise, return false.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution handles arrays of up to 100 elements efficiently.</div>
+                        <div class=""> <b>Goal:</b> The problem involves checking if the array is monotonic within the given constraints of the array size and element range.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the array is small enough to use an approach that computes cumulative sums.</div>
+                                <div style="margin-left: 20px;"> • The length of nums will be between 1 and 100,000.</div>
+                            
+                                <div style="margin-left: 20px;"> • The values in nums will range from -100,000 to 100,000.</div>
                             
                         </div>
                     </div>        
@@ -401,19 +407,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array is non-empty, and its length will be between 1 and 100.</div>
+                                <div style="margin-left: 20px;"> • The input array will contain at least one element.</div>
+                            
+                                <div style="margin-left: 20px;"> • The array may contain negative, zero, or positive values.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 3, -1, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum of elements to the left of index 3 is 1 &#43; 2 &#43; 3 = 6, and the sum of elements to the right is -1 &#43; 2 = 6. Hence, index 3 is the middle index.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3, 3, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This array is monotonically increasing because each element is greater than or equal to the one before it.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is no index where the sum of elements to the left equals the sum of elements to the right, so the result is -1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5, 4, 4, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This array is monotonically decreasing because each element is less than or equal to the one before it.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 3, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This array is neither increasing nor decreasing, so the output is false.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -437,16 +449,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves calculating the prefix sums of the array, and then checking if there exists an index where the sum of elements to the left equals the sum to the right. This can be achieved in linear time.</div>
+                        <div class=""> <b>Approach:</b> To determine if the array is monotonic, we check if it is either monotonically increasing or decreasing by comparing adjacent elements. This can be done efficiently in a single pass through the array.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires comparing the sum of elements on both sides of each index in the array.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that we only traverse the array once to keep the solution efficient.</div>
+                            
+                                <div style="margin-left: 20px;"> • The problem can be solved by maintaining two boolean variables to track if the array is increasing or decreasing.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A prefix sum approach is optimal for this problem since it allows us to efficiently check each index with a running sum calculation.</div>
+                                <div style="margin-left: 20px;"> • Using a single pass and two boolean flags allows us to solve this problem in linear time.</div>
                             
                         </div>
                     </div>
@@ -454,9 +468,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Calculate the total sum of the array.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize two boolean flags, inc and dec, both set to true.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each index and check if the sum of elements to the left equals the sum of elements to the right by comparing the prefix sum with the total sum.</div>
+                                <div style="margin-left: 20px;"> • 2. Loop through the array starting from the second element.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. For each pair of consecutive elements, check if the array is increasing or decreasing and update the flags accordingly.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. At the end of the loop, return true if either inc or dec is true, otherwise return false.</div>
                             
                         </div>
                     </div>
@@ -465,22 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always contain at least one element, so no need to handle an empty array.</div>
+                                <div style="margin-left: 20px;"> • If the array contains only one element, it is trivially monotonic.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm is efficient enough for arrays of length up to 100.</div>
+                                <div style="margin-left: 20px;"> • For large arrays, the solution should still work efficiently within the time constraints.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle arrays with negative numbers and arrays where all elements are the same.</div>
+                                <div style="margin-left: 20px;"> • Arrays with all identical elements are considered monotonic.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution runs efficiently for the maximum input size.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle large inputs up to the constraint limits efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -497,23 +515,17 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Cumulative Sum Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Net Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Through Elements</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function End</button>
                     
                 </div>
 
@@ -522,18 +534,11 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMiddleIndex</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sum(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        sum[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> nums[i] <span style="color:#666">+</span> sum[i];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> sum[n];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(net <span style="color:#666">-</span> sum[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> sum[i]) <span style="color:#a2f;font-weight:bold">return</span> i;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isMonotonic</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> A) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> inc <span style="color:#666">=</span> <span style="color:#a2f">true</span>, dec <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>i)
+</span></span><span style="display:flex;"><span>        inc <span style="color:#666">&amp;=</span> A[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> A[i], dec <span style="color:#666">&amp;=</span> A[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> A[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> inc <span style="color:#666">||</span> dec;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -541,93 +546,63 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMiddleIndex</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isMonotonic</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> A) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `findMiddleIndex`, which calculates the index where the sum of elements to the left equals the sum of elements to the right. </div>
+                            <div class=""> This line declares a function `isMonotonic` that takes a vector of integers `A` as input and returns a boolean value. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> inc <span style="color:#666">=</span> <span style="color:#a2f">true</span>, dec <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `n` to store the size of the input vector `nums`. </div>
+                            <div class=""> Two boolean variables `inc` and `dec` are initialized to `true`. These will be used to track whether the array is non-decreasing (`inc`) or non-increasing (`dec`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Initialization</b></div>
+                            <div class=""> <b>3 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> sum(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>i)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a cumulative sum array `sum` initialized to zeros, where `sum[i]` will store the sum of the first `i` elements of `nums`. </div>
+                            <div class=""> A `for` loop is started, iterating through the vector `A` starting from index 1. This loop checks the relationship between consecutive elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Initialization</b></div>
+                            <div class=""> <b>4 : Condition Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        inc <span style="color:#666">&amp;=</span> A[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> A[i], dec <span style="color:#666">&amp;=</span> A[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> A[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through the input vector `nums`. </div>
+                            <div class=""> The boolean variables `inc` and `dec` are updated. The `&amp;=` operator ensures that `inc` remains true if each pair of consecutive elements is non-decreasing, and `dec` remains true if the elements are non-increasing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Cumulative Sum Calculation</b></div>
+                            <div class=""> <b>5 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> nums[i] <span style="color:#666">+</span> sum[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> inc <span style="color:#666">||</span> dec;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the cumulative sum by adding the current element `nums[i]` to the sum of all previous elements stored in `sum[i]`. </div>
+                            <div class=""> The function returns `true` if either `inc` or `dec` is true, meaning the array is monotonic (non-decreasing or non-increasing). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Net Sum Calculation</b></div>
+                            <div class=""> <b>6 : Function End</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> sum[n];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the total sum of all elements in the array `nums` by using `sum[n]`, where `n` is the size of the array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Loop Through Elements</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Starts a loop to iterate through each index `i` of the input vector `nums`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(net <span style="color:#666">-</span> sum[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> sum[i]) <span style="color:#a2f;font-weight:bold">return</span> i;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the sum of elements to the left of index `i` equals the sum of elements to the right. If so, returns the index `i`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If no middle index is found, returns `-1` to indicate that no such index exists. </div>
+                            <div class=""> The function ends here. </div>
                         </div>
                     
                 </div>
@@ -650,13 +625,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We only need to make a single pass through the array to compute the sums and compare each index.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we traverse the array once, where n is the number of elements in the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant if we calculate the sum in place and only store the running sum.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because we only use a constant amount of extra space to store the two boolean flags.</div>    
                     </div>
 
                 </div>

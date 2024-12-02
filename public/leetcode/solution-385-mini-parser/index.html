@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 29, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -312,7 +312,7 @@
 
 
 
-<div class=""> You are managing a lemonade stand where each lemonade costs $5. Customers are standing in line to buy one lemonade each, paying with either a $5, $10, or $20 bill. Your task is to determine if you can provide the correct change to every customer as they arrive in line. At the start, you have no change, and you must provide each customer with the appropriate change for their bill. </div>
+<div class=""> Given a string s representing a serialized nested list, implement a parser to deserialize it and return the deserialized NestedInteger. </div>
 
 
 
@@ -363,49 +363,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array, bills, where each element represents the bill a customer uses to pay for their lemonade. The bills array contains values of either 5, 10, or 20, corresponding to the bill used by each customer.</div>
-                        <div class=""> <b>Example:</b> Input: bills = [5, 5, 10, 5, 20]</div>
+                        <div class=""> <b>Input:</b> The input is a string s representing the serialized nested list.</div>
+                        <div class=""> <b>Example:</b> s = &#39;[789, [1011, 1213], 1415]&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= bills.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 50,000</div>
                             
-                                <div style="margin-left: 20px;"> • bills[i] is either 5, 10, or 20.</div>
+                                <div style="margin-left: 20px;"> • s consists of digits, square brackets &#39;[]&#39;, negative sign &#39;-&#39;, and commas &#39;,&#39;</div>
+                            
+                                <div style="margin-left: 20px;"> • The string s is the serialization of a valid NestedInteger</div>
+                            
+                                <div style="margin-left: 20px;"> • All values are within the range [-10^6, 10^6]</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if it is possible to provide the correct change for every customer in line. Otherwise, return false.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output is a NestedInteger object representing the deserialized nested list.</div>
+                        <div class=""> <b>Example:</b> Output: [789, [1011, 1213], 1415]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The deserialized object should match the nested list structure.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to check if the change can be provided to each customer in the order they arrive.</div>
+                        <div class=""> <b>Goal:</b> The goal is to parse the serialized string and reconstruct the correct NestedInteger object.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Iterate through the array of bills and for each customer, check the bill they provide.</div>
+                                <div style="margin-left: 20px;"> • Traverse the string character by character.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: If the customer pays with a $5 bill, increment the count of $5 bills.</div>
+                                <div style="margin-left: 20px;"> • Identify numbers and handle their potential negative signs.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: If the customer pays with a $10 bill, ensure that you have at least one $5 bill to give change. If so, give the change and update the count of $5 and $10 bills.</div>
+                                <div style="margin-left: 20px;"> • Identify opening brackets &#39;[&#39; and create new NestedInteger objects for lists.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If the customer pays with a $20 bill, check if you have one $10 bill and one $5 bill to give $15 in change. If not, check if you have at least three $5 bills to provide $15 in change.</div>
+                                <div style="margin-left: 20px;"> • Identify closing brackets &#39;]&#39; and complete the current list.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 5: If you cannot provide the correct change at any point, return false.</div>
+                                <div style="margin-left: 20px;"> • Use a stack to maintain the current state while parsing nested lists.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The bills array must meet the following constraints:</div>
+                        <div class=""> <b>Goal:</b> The solution must be efficient to handle large inputs.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the bills array is between 1 and 10^5.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each bill in the array is either a $5, $10, or $20 bill.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 50,000 characters in the input string efficiently.</div>
                             
                         </div>
                     </div>        
@@ -413,21 +417,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one customer in the queue.</div>
-                            
-                                <div style="margin-left: 20px;"> • The customers will always pay with one of the allowed bills: $5, $10, or $20.</div>
+                                <div style="margin-left: 20px;"> • The input string is a valid serialized NestedInteger and will not contain malformed lists.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: bills = [5, 5, 10, 5, 20]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the first two customers pay with $5 bills. The third customer pays with a $10 bill, and we can give $5 change. The fourth customer pays with a $5 bill, and the fifth customer pays with a $20 bill. We give them $10 change using one $10 bill and one $5 bill, and the correct change is provided for all customers.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: bills = [5, 5, 10, 10, 20]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the first two customers pay with $5 bills. The next two customers pay with $10 bills, but we can&#39;t provide the correct change for the fourth customer because we only have one $5 bill, not enough to give $5 change. Therefore, the answer is false.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: &#39;[789, [1011, 1213], 1415]&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string represents a list with three elements: 789, a nested list [1011, 1213], and 1415.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -451,18 +449,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to simulate the process of serving each customer while keeping track of the number of $5 and $10 bills we have. At each step, we must ensure that we can give the correct change to each customer in the order they arrive.</div>
+                        <div class=""> <b>Approach:</b> The approach involves parsing the string to correctly build a NestedInteger object, using a stack to handle nested lists and ensuring that each element is correctly identified as an integer or list.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to carefully manage the number of $5 and $10 bills because these are required to provide change to customers paying with $10 and $20 bills.</div>
-                            
-                                <div style="margin-left: 20px;"> • If there are more $10 bills than $5 bills, it becomes impossible to give the correct change.</div>
+                                <div style="margin-left: 20px;"> • We need to distinguish between integers and lists while parsing the string.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A greedy approach works well here: as we process each bill, we attempt to give the required change, and if we can&#39;t, we return false.</div>
+                                <div style="margin-left: 20px;"> • A stack will be useful to manage the nesting of lists during parsing.</div>
                             
                         </div>
                     </div>
@@ -470,17 +466,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize counters for $5 and $10 bills to 0.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Loop through the bills array and process each customer one by one.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each character of the string.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: If the customer pays with a $5 bill, increment the $5 bill counter.</div>
+                                <div style="margin-left: 20px;"> • When encountering a number, extract the number and add it as a NestedInteger.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If the customer pays with a $10 bill, check if we have a $5 bill to give change. If yes, update the counters, otherwise return false.</div>
+                                <div style="margin-left: 20px;"> • When encountering a &#39;[&#39; symbol, push a new NestedInteger (representing a new list) onto the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 5: If the customer pays with a $20 bill, check if we have a $10 bill and a $5 bill to give $15 in change. If not, check if we have at least three $5 bills. If neither condition is met, return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 6: If we reach the end of the list without any issues, return true.</div>
+                                <div style="margin-left: 20px;"> • When encountering a &#39;]&#39; symbol, pop the top of the stack and add it to the NestedInteger object beneath it.</div>
                             
                         </div>
                     </div>
@@ -489,22 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • N/A: There will always be at least one customer in the queue.</div>
+                                <div style="margin-left: 20px;"> • Ensure that input strings are non-empty and valid.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays with up to 100,000 bills efficiently.</div>
+                                <div style="margin-left: 20px;"> • Handle input strings as large as 50,000 characters efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the customer always pays with $5 bills, there is no issue with providing change.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles negative numbers and deep nesting correctly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of customers and the values of the bills must adhere to the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The solution must parse the string in linear time relative to its length.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,29 +515,47 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Lambda Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Check for 5-dollar bill</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Push Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Check for 10-dollar bill</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Iterator</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Provide Change for 10-dollar Bill</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Character Access</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return False for Inability to Provide Change</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check for Number</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Check for 20-dollar bill</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Find Non-Number</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Provide Change for 20-dollar Bill with 10-dollar Bill</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Integer Conversion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Provide Change for 20-dollar Bill with Three 5-dollar Bills</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Add to Stack</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return False for Inability to Provide Change</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Iterator</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return True</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Else Block</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Opening Bracket Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Push New NestedInteger</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Closing Bracket Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Pop and Add to Parent</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Pop Stack</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Add to Parent List</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Increment Iterator</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return Result</button>
                     
                 </div>
 
@@ -552,20 +564,34 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">lemonadeChange</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bills) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> five <span style="color:#666">=</span> <span style="color:#666">0</span>, ten <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : bills) {
-</span></span><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span> (x <span style="color:#666">==</span> <span style="color:#666">5</span>) five<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (x <span style="color:#666">==</span> <span style="color:#666">10</span>) {
-</span></span><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> ten <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) five <span style="color:#666">-=</span> <span style="color:#666">3</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NestedInteger <span style="color:#00a000">deserialize</span>(string s) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span>(<span style="color:#0b0;font-weight:bold">char</span>)<span style="color:#666">&gt;</span> isnumber <span style="color:#666">=</span> [](<span style="color:#0b0;font-weight:bold">char</span> c) { <span style="color:#a2f;font-weight:bold">return</span> (c <span style="color:#666">==</span> <span style="color:#b44">&#39;-&#39;</span>) <span style="color:#666">||</span> isdigit(c); };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>NestedInteger<span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    stk.push(NestedInteger());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> s.begin(); it <span style="color:#666">!=</span> s.end();) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span>c <span style="color:#666">=</span> <span style="color:#666">*</span>it;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isnumber(c)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> find_if_not(it, s.end(), isnumber);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> val <span style="color:#666">=</span> stoi(string(it, it2));
+</span></span><span style="display:flex;"><span>            stk.top().add(NestedInteger(val));
+</span></span><span style="display:flex;"><span>            it <span style="color:#666">=</span> it2;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {
+</span></span><span style="display:flex;"><span>                stk.push(NestedInteger());
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (c <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span>) {
+</span></span><span style="display:flex;"><span>                NestedInteger ni <span style="color:#666">=</span> stk.top();
+</span></span><span style="display:flex;"><span>                stk.pop();
+</span></span><span style="display:flex;"><span>                stk.top().add(ni);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            it<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    NestedInteger res <span style="color:#666">=</span> stk.top().getList().front();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -573,123 +599,213 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">lemonadeChange</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bills) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NestedInteger <span style="color:#00a000">deserialize</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function begins by accepting a vector of bills that represent the bills customers pay. </div>
+                            <div class=""> This is the function definition of &#39;deserialize&#39; which takes a string &#39;s&#39; as input and returns a NestedInteger object. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Lambda Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> five <span style="color:#666">=</span> <span style="color:#666">0</span>, ten <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span>(<span style="color:#0b0;font-weight:bold">char</span>)<span style="color:#666">&gt;</span> isnumber <span style="color:#666">=</span> [](<span style="color:#0b0;font-weight:bold">char</span> c) { <span style="color:#a2f;font-weight:bold">return</span> (c <span style="color:#666">==</span> <span style="color:#b44">&#39;-&#39;</span>) <span style="color:#666">||</span> isdigit(c); };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two integer variables are initialized to track the count of 5-dollar and 10-dollar bills received. </div>
+                            <div class=""> This lambda function checks if a character is a number (including negative sign). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop</b></div>
+                            <div class=""> <b>3 : Stack Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : bills) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>NestedInteger<span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The for loop iterates over the bills array to process each bill one by one. </div>
+                            <div class=""> A stack to store NestedInteger objects which will help in building the deserialized structure. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Check for 5-dollar bill</b></div>
+                            <div class=""> <b>4 : Push Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span> (x <span style="color:#666">==</span> <span style="color:#666">5</span>) five<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stk.push(NestedInteger());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current bill is 5 dollars, increment the count of 5-dollar bills. </div>
+                            <div class=""> Push an empty NestedInteger to the stack as the starting point for building the structure. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Check for 10-dollar bill</b></div>
+                            <div class=""> <b>5 : Iterator</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (x <span style="color:#666">==</span> <span style="color:#666">10</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> s.begin(); it <span style="color:#666">!=</span> s.end();) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current bill is 10 dollars, check if we can give the correct change. </div>
+                            <div class=""> A for-loop to iterate through each character in the string &#39;s&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Provide Change for 10-dollar Bill</b></div>
+                            <div class=""> <b>6 : Character Access</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">&amp;</span>c <span style="color:#666">=</span> <span style="color:#666">*</span>it;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we have at least one 5-dollar bill, give one 5-dollar bill as change and accept the 10-dollar bill. </div>
+                            <div class=""> Access the current character of the string &#39;s&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return False for Inability to Provide Change</b></div>
+                            <div class=""> <b>7 : Check for Number</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isnumber(c)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we don&#39;t have any 5-dollar bills to provide change, return false indicating we can&#39;t provide change. </div>
+                            <div class=""> Check if the current character is a number (either positive or negative). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Check for 20-dollar bill</b></div>
+                            <div class=""> <b>8 : Find Non-Number</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> find_if_not(it, s.end(), isnumber);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the bill is not 5 or 10 dollars, it must be a 20-dollar bill. </div>
+                            <div class=""> Find the first character in the string &#39;s&#39; that is not a number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Provide Change for 20-dollar Bill with 10-dollar Bill</b></div>
+                            <div class=""> <b>9 : Integer Conversion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> ten <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> val <span style="color:#666">=</span> stoi(string(it, it2));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we have both 5-dollar and 10-dollar bills, give one of each as change. </div>
+                            <div class=""> Convert the substring representing a number into an integer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Provide Change for 20-dollar Bill with Three 5-dollar Bills</b></div>
+                            <div class=""> <b>10 : Add to Stack</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) five <span style="color:#666">-=</span> <span style="color:#666">3</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.top().add(NestedInteger(val));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we don&#39;t have a 10-dollar bill, check if we have at least three 5-dollar bills to provide change. </div>
+                            <div class=""> Add the integer value as a NestedInteger object to the top of the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return False for Inability to Provide Change</b></div>
+                            <div class=""> <b>11 : Update Iterator</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            it <span style="color:#666">=</span> it2;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we don&#39;t have sufficient 5-dollar bills to provide change, return false indicating it&#39;s not possible. </div>
+                            <div class=""> Update the iterator to the next non-number character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return True</b></div>
+                            <div class=""> <b>12 : Else Block</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we have processed all bills successfully and returned the correct change for each, return true. </div>
+                            <div class=""> If the character is not a number, check for the special characters &#39;[&#39; or &#39;]&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Opening Bracket Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the character is an opening bracket &#39;[&#39; which indicates the start of a new list. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Push New NestedInteger</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                stk.push(NestedInteger());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push a new empty NestedInteger to the stack to represent the new list. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Closing Bracket Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (c <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the character is a closing bracket &#39;]&#39; which indicates the end of a list. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Pop and Add to Parent</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                NestedInteger ni <span style="color:#666">=</span> stk.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top NestedInteger object from the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Pop Stack</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                stk.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element from the stack after storing it in &#39;ni&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Add to Parent List</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                stk.top().add(ni);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the popped NestedInteger object to the top NestedInteger in the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Increment Iterator</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            it<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the iterator to move to the next character in the string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    NestedInteger res <span style="color:#666">=</span> stk.top().getList().front();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Get the first element from the list in the top NestedInteger object in the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the deserialized NestedInteger object. </div>
                         </div>
                     
                 </div>
@@ -709,16 +825,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the bills array. This occurs when every customer pays with a $5 bill.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as each customer is processed in constant time.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the bills array.</div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the length of the input string.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as no extra space is required apart from the counters.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), since we are only using a fixed amount of extra space for the counters.</div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required for the stack and NestedInteger objects.</div>    
                     </div>
 
                 </div>

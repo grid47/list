@@ -300,7 +300,7 @@
 
 
 
-<div class=""> You are given a string <code>answerKey</code> where each character represents a question&rsquo;s answer (either &lsquo;T&rsquo; for True or &lsquo;F&rsquo; for False), and an integer <code>k</code>. You are allowed to change at most <code>k</code> answers. Your task is to find the maximum number of consecutive &lsquo;T&rsquo;s or &lsquo;F&rsquo;s in the string after performing at most <code>k</code> changes. </div>
+<div class=""> Given two arrays of strings <code>words1</code> and <code>words2</code>, find all the strings in <code>words1</code> that are universal. A string from <code>words1</code> is considered universal if it contains all the letters of every string in <code>words2</code>, including multiplicity. Each string in <code>words2</code> is a subset of the string from <code>words1</code>. </div>
 
 
 
@@ -351,51 +351,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `answerKey` where each character is either &#39;T&#39; or &#39;F&#39;, and an integer `k` representing the maximum number of changes allowed.</div>
-                        <div class=""> <b>Example:</b> answerKey = &#34;FFTT&#34;, k = 2</div>
+                        <div class=""> <b>Input:</b> You are given two arrays of strings `words1` and `words2`.</div>
+                        <div class=""> <b>Example:</b> Input: words1 = [&#34;hello&#34;, &#34;world&#34;, &#34;goodbye&#34;, &#34;example&#34;], words2 = [&#34;h&#34;, &#34;e&#34;, &#34;l&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= answerKey.length &lt;= 50000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words1.length, words2.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= answerKey.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words1[i].length, words2[i].length &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • answerKey[i] is either &#39;T&#39; or &#39;F&#39;.</div>
+                                <div style="margin-left: 20px;"> • words1[i] and words2[i] consist only of lowercase English letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • All the strings in words1 are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum number of consecutive &#39;T&#39;s or &#39;F&#39;s that can be achieved after performing at most `k` changes.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> Return an array containing all the strings from `words1` that are universal, which means they contain all the letters from every string in `words2`.</div>
+                        <div class=""> <b>Example:</b> Output: [&#34;hello&#34;, &#34;goodbye&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The answer must be the maximum consecutive occurrence of either &#39;T&#39; or &#39;F&#39;.</div>
+                                <div style="margin-left: 20px;"> • The output should be an array of strings from `words1`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the longest subsequence of consecutive &#39;T&#39;s or &#39;F&#39;s that can be formed after changing at most `k` characters.</div>
+                        <div class=""> <b>Goal:</b> The goal is to identify strings from `words1` that are universal, meaning they contain all the characters (with correct multiplicity) of each string in `words2`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use a sliding window approach where you iterate over the string while maintaining a window of consecutive characters that are either &#39;T&#39; or &#39;F&#39;.</div>
+                                <div style="margin-left: 20px;"> • Count the frequency of each character in all strings of `words2`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Track the number of changes you make and adjust the window size such that the number of changes does not exceed `k`.</div>
+                                <div style="margin-left: 20px;"> • For each string in `words1`, count its characters and check if it contains the required characters with at least the same multiplicity as in `words2`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Update the result as you move through the string to ensure the maximum length of consecutive &#39;T&#39;s or &#39;F&#39;s is obtained.</div>
+                                <div style="margin-left: 20px;"> • If a string meets the criteria, include it in the result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints for input values and operations.</div>
+                        <div class=""> <b>Goal:</b> The input arrays and strings should adhere to the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= answerKey.length &lt;= 50000</div>
+                                <div style="margin-left: 20px;"> • The arrays `words1` and `words2` have lengths between 1 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= answerKey.length</div>
+                                <div style="margin-left: 20px;"> • Each string in `words1` and `words2` has a length between 1 and 10, and they consist only of lowercase English letters.</div>
                             
-                                <div style="margin-left: 20px;"> • answerKey[i] is either &#39;T&#39; or &#39;F&#39;.</div>
+                                <div style="margin-left: 20px;"> • All strings in `words1` are unique.</div>
                             
                         </div>
                     </div>        
@@ -403,25 +405,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string `answerKey` contains only the characters &#39;T&#39; and &#39;F&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of changes is limited by the integer `k`.</div>
+                                <div style="margin-left: 20px;"> • We assume that the input arrays contain valid strings and that all the strings in `words1` are unique.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> answerKey = &#34;FFTT&#34;, k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can replace both &#39;F&#39;s with &#39;T&#39;s, forming the string &#39;TTTT&#39;, which gives us 4 consecutive &#39;T&#39;s.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> answerKey = &#34;TFTF&#34;, k = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can replace one &#39;F&#39; with &#39;T&#39;, forming either &#39;TTTF&#39; or &#39;TTFT&#39;, which gives us 3 consecutive &#39;T&#39;s.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> answerKey = &#34;FTFTFT&#34;, k = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can replace one &#39;F&#39; with &#39;T&#39;, resulting in either &#39;TTFTFT&#39; or &#39;FTTTFT&#39;, both giving us 3 consecutive &#39;T&#39;s.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words1 = [&#34;hello&#34;, &#34;world&#34;, &#34;goodbye&#34;, &#34;example&#34;], words2 = [&#34;h&#34;, &#34;e&#34;, &#34;l&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this example, the string &#34;hello&#34; contains all the characters in `words2` (&#39;h&#39;, &#39;e&#39;, and &#39;l&#39;) with the correct multiplicity, so it&#39;s a valid answer. The string &#34;world&#34; does not contain all characters required by `words2`, so it&#39;s not a valid answer. The string &#34;goodbye&#34; is also valid as it contains all the characters required by `words2`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +437,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem efficiently using a sliding window approach to track the maximum number of consecutive &#39;T&#39;s or &#39;F&#39;s that can be formed with at most `k` changes.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we first calculate the required frequencies for all characters in `words2`. Then, we check each string in `words1` to see if it meets these frequency requirements. If a string contains the necessary characters in the correct amounts, we add it to the result.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be reduced to finding the longest subsequence of &#39;T&#39;s or &#39;F&#39;s after changing at most `k` elements.</div>
+                                <div style="margin-left: 20px;"> • We need to check the frequency of each character in both `words1` and `words2`.</div>
+                            
+                                <div style="margin-left: 20px;"> • The size of the arrays is large, so the solution must be efficient.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By applying a sliding window, we can efficiently find the longest possible subsequence that meets the constraints.</div>
+                                <div style="margin-left: 20px;"> • Using frequency counting for each string and comparing these counts for every word in `words1` should be an efficient approach.</div>
                             
                         </div>
                     </div>
@@ -462,13 +456,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize two sliding windows: one for &#39;T&#39; and one for &#39;F&#39;.</div>
+                                <div style="margin-left: 20px;"> • Initialize a frequency array to store the maximum required frequency of each character in `words2`.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. As you iterate over the string, track the number of changes made to convert the current window into all &#39;T&#39;s or all &#39;F&#39;s.</div>
+                                <div style="margin-left: 20px;"> • For each string in `words2`, update the frequency array for each character.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Adjust the window size such that the number of changes does not exceed `k`.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Track the maximum length of any valid window during the process.</div>
+                                <div style="margin-left: 20px;"> • For each string in `words1`, check if it contains at least the required number of each character from `words2`. If so, add it to the result.</div>
                             
                         </div>
                     </div>
@@ -477,22 +469,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input string is empty, return 0.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that both arrays will have at least one string, so no need to handle empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution efficiently handles the maximum input size (up to 50000 characters).</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle cases where both `words1` and `words2` have up to 10^4 strings.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `k` is 0, no changes can be made, and the answer should be the longest sequence of consecutive &#39;T&#39;s or &#39;F&#39;s in the original string.</div>
+                                <div style="margin-left: 20px;"> • If `words2` contains strings with characters that do not appear in any string in `words1`, no strings from `words1` will be valid.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution does not exceed time limits for large inputs.</div>
+                                <div style="margin-left: 20px;"> • The constraints ensure that the input will always contain valid strings and the solution must work within the given bounds.</div>
                             
                         </div>                                                                        
                     </div>
@@ -509,35 +501,41 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Character Frequency Counting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Frequency Counting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Window Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Frequency Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Window Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Window Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Looping</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Window Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Character Frequency Counting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Window Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Flag Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Window Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Frequency Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Update Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Checking</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Flag Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Loop Exit</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Adding Valid Words</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Statement</button>
                     
                 </div>
 
@@ -546,24 +544,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxConsecutiveAnswers</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fidx <span style="color:#666">=</span> <span style="color:#666">0</span>, tidx <span style="color:#666">=</span> <span style="color:#666">0</span>, fcnt <span style="color:#666">=</span> <span style="color:#666">0</span>, tcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> key.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(key[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> tcnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(fcnt <span style="color:#666">&gt;</span> k) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[tidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            tidx<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> wordSubsets(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words1, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words2) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words2) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) {
+</span></span><span style="display:flex;"><span>            tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> max(frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>], tmp[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> tidx <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(tcnt <span style="color:#666">&gt;</span> k) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[fidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;T&#39;</span>) tcnt<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            fidx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> fidx <span style="color:#666">+</span> <span style="color:#666">1</span>);            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words1) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp[i] <span style="color:#666">&lt;</span> frq[i]) {
+</span></span><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(flag) res.push_back(s);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -571,153 +574,183 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxConsecutiveAnswers</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> wordSubsets(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words1, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function &#39;maxConsecutiveAnswers&#39;, which takes a string &#39;key&#39; and an integer &#39;k&#39;. It returns the maximum length of a subsequence where at most &#39;k&#39; characters can be changed to either &#39;F&#39; or &#39;T&#39;. </div>
+                            <div class=""> Define the function &#39;wordSubsets&#39; which takes two vectors of strings, &#39;words1&#39; and &#39;words2&#39;, and returns a vector of strings representing words from &#39;words1&#39; that are supersets of the words in &#39;words2&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes an integer variable &#39;ans&#39; to store the maximum length of consecutive answers. The initial value is set to 1 since the minimum answer will be 1. </div>
+                            <div class=""> Initialize a vector &#39;frq&#39; to keep track of the maximum frequency required for each letter (&#39;a&#39; to &#39;z&#39;) across all words in &#39;words2&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Looping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fidx <span style="color:#666">=</span> <span style="color:#666">0</span>, tidx <span style="color:#666">=</span> <span style="color:#666">0</span>, fcnt <span style="color:#666">=</span> <span style="color:#666">0</span>, tcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> These variables are initialized to keep track of the indices and counts for &#39;F&#39; and &#39;T&#39; characters. &#39;fidx&#39; and &#39;tidx&#39; are indices for the start of the window, while &#39;fcnt&#39; and &#39;tcnt&#39; are the counts of &#39;F&#39; and &#39;T&#39; characters within the window. </div>
+                            <div class=""> Loop through each word in &#39;words2&#39; to compute the required frequency of each character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Start</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> key.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each character in the string &#39;key&#39; to explore different possible subsequences. </div>
+                            <div class=""> For each word in &#39;words2&#39;, initialize a temporary frequency vector &#39;tmp&#39; to count the occurrences of each letter. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Character Frequency Counting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(key[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the current character is &#39;F&#39;. If it is, the count of &#39;F&#39; characters within the current window (&#39;fcnt&#39;) is incremented. </div>
+                            <div class=""> Iterate through each character of the current word in &#39;words2&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Frequency Counting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> tcnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is &#39;T&#39;, the count of &#39;T&#39; characters within the current window (&#39;tcnt&#39;) is incremented. </div>
+                            <div class=""> Update the frequency count for the current character in the temporary frequency vector &#39;tmp&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Window Adjustment</b></div>
+                            <div class=""> <b>7 : Frequency Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(fcnt <span style="color:#666">&gt;</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> max(frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>], tmp[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop ensures that the number of &#39;F&#39; characters within the window does not exceed &#39;k&#39;. If the count of &#39;F&#39; exceeds &#39;k&#39;, the window is adjusted. </div>
+                            <div class=""> Update the global frequency vector &#39;frq&#39; to store the maximum frequency encountered for each character across all words in &#39;words2&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Window Adjustment</b></div>
+                            <div class=""> <b>8 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[tidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;F&#39;</span>) fcnt<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the character at the leftmost index (&#39;tidx&#39;) is &#39;F&#39;. If it is, the count of &#39;F&#39; characters (&#39;fcnt&#39;) is decreased. </div>
+                            <div class=""> Initialize an empty vector &#39;res&#39; to store the valid words from &#39;words1&#39; that meet the criteria. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Window Adjustment</b></div>
+                            <div class=""> <b>9 : Looping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tidx<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words1) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This moves the leftmost index of the window (&#39;tidx&#39;) to the right, effectively shrinking the window from the left. </div>
+                            <div class=""> Loop through each word in &#39;words1&#39; to check if it is a valid superset of the words in &#39;words2&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Answer</b></div>
+                            <div class=""> <b>10 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> tidx <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This updates the value of &#39;ans&#39; by comparing the current answer with the length of the current window (i - tidx &#43; 1). It ensures that &#39;ans&#39; always holds the maximum length of a valid subsequence. </div>
+                            <div class=""> Initialize a temporary frequency vector &#39;tmp&#39; to count the characters in the current word from &#39;words1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Window Adjustment</b></div>
+                            <div class=""> <b>11 : Character Frequency Counting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(tcnt <span style="color:#666">&gt;</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop ensures that the number of &#39;T&#39; characters within the window does not exceed &#39;k&#39;. If the count of &#39;T&#39; exceeds &#39;k&#39;, the window is adjusted. </div>
+                            <div class=""> Count the occurrences of each character in the current word from &#39;words1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Window Adjustment</b></div>
+                            <div class=""> <b>12 : Flag Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(key[fidx] <span style="color:#666">==</span> <span style="color:#b44">&#39;T&#39;</span>) tcnt<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the character at the leftmost index (&#39;fidx&#39;) is &#39;T&#39;. If it is, the count of &#39;T&#39; characters (&#39;tcnt&#39;) is decreased. </div>
+                            <div class=""> Initialize a flag to &#39;true&#39;, which will be used to check if the current word is a valid superset. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Window Adjustment</b></div>
+                            <div class=""> <b>13 : Frequency Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            fidx<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This moves the leftmost index of the window (&#39;fidx&#39;) to the right, shrinking the window from the left. </div>
+                            <div class=""> Iterate over each character in the alphabet to compare the frequencies of characters in the current word from &#39;words1&#39; with the required frequencies stored in &#39;frq&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Update Answer</b></div>
+                            <div class=""> <b>14 : Condition Checking</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, i <span style="color:#666">-</span> fidx <span style="color:#666">+</span> <span style="color:#666">1</span>);            
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp[i] <span style="color:#666">&lt;</span> frq[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This updates &#39;ans&#39; again by comparing it with the length of the current window (i - fidx &#43; 1). </div>
+                            <div class=""> If the current word does not meet the required frequency for any character, set the flag to &#39;false&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class=""> <b>15 : Flag Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the final result, which is the length of the longest valid subsequence where at most &#39;k&#39; characters can be changed. </div>
+                            <div class=""> Set the flag to &#39;false&#39; if the current word does not contain enough of the character &#39;i&#39; compared to &#39;words2&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Loop Exit</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Exit the loop early if any character in the word does not satisfy the frequency condition. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Adding Valid Words</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(flag) res.push_back(s);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the word is a valid superset (flag is true), add it to the result vector &#39;res&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the vector &#39;res&#39; containing all valid words from &#39;words1&#39; that are supersets of the words in &#39;words2&#39;. </div>
                         </div>
                     
                 </div>
@@ -737,16 +770,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The sliding window approach iterates through the string once, resulting in a time complexity of O(n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n &#43; m), where n is the length of `words1` and m is the length of `words2`</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * k &#43; m * k), where k is the average length of strings in `words1` and `words2`</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the size of the input arrays, with an additional factor for processing each character in the strings.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as the solution only requires a few variables to track the window and counts.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1) for the frequency array of size 26</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant due to the frequency array for each character and the result array which holds the universal strings.</div>    
                     </div>
 
                 </div>

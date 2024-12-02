@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 16, 2024
                                     <i class="far fa-clock clock"></i>
-                                    9 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given an instance of the class <code>ZeroEvenOdd</code>, which contains three functions: <code>zero</code>, <code>even</code>, and <code>odd</code>. The same instance of <code>ZeroEvenOdd</code> is passed to three different threads. Thread A calls <code>zero()</code> to print zeros, thread B calls <code>even()</code> to print even numbers, and thread C calls <code>odd()</code> to print odd numbers. The goal is to output a sequence of numbers in the order: 0, 1, 2, 3, &hellip;, 2n, where n is the given number, and the length of the sequence is <code>2n</code>. The threads should execute asynchronously, ensuring that the sequence is printed correctly. </div>
+<div class=""> Given the root of a binary tree, return the leftmost value in the last row of the tree. </div>
 
 
 
@@ -372,43 +372,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer `n`, which represents the length of the series to be printed. The total number of elements in the output series will be `2n`.</div>
-                        <div class=""> <b>Example:</b> Input: n = 3</div>
+                        <div class=""> <b>Input:</b> The input is the root of a binary tree, represented as an array in level order.</div>
+                        <div class=""> <b>Example:</b> root = [1, 2, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [1, 10^4].</div>
+                            
+                                <div style="margin-left: 20px;"> • Node values range from -231 to 231 - 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a string that represents the sequence starting with &#39;0&#39;, followed by odd and even numbers alternating, up to `2n`.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;010203&#39;</div>
+                        <div class=""> <b>Output:</b> The output should be the leftmost value in the last row of the tree.</div>
+                        <div class=""> <b>Example:</b> 7</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must contain the numbers in the correct order, alternating between 0, odd, and even numbers, starting with 0.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer, representing the leftmost value at the deepest level.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to ensure that the threads execute in the correct order, printing the sequence: &#39;0&#39;, odd, even, and so on until `2n`.</div>
+                        <div class=""> <b>Goal:</b> To find the leftmost value in the last row of the tree by traversing the tree level by level.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use mutexes to control the execution order of the threads. Each thread should print its number in the sequence.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a queue for level order traversal.</div>
                             
-                                <div style="margin-left: 20px;"> • Thread A prints 0, then thread C prints the first odd number, and thread B prints the first even number, alternating until the sequence is completed.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse the tree level by level using the queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. For each level, update the result to the value of the first node in that level.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Continue until all levels have been processed.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return the value of the first node of the last level.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the threads execute asynchronously and print the sequence in the correct order without missing any number.</div>
+                        <div class=""> <b>Goal:</b> The constraints specify that the tree can have up to 10^4 nodes and the node values are within the specified range.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The threads should alternate correctly between printing 0, odd, and even numbers.</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [1, 10^4].</div>
                             
-                                <div style="margin-left: 20px;"> • The sequence must be printed exactly in the correct order for `2n` numbers.</div>
+                                <div style="margin-left: 20px;"> • Node values range from -231 to 231 - 1.</div>
                             
                         </div>
                     </div>        
@@ -416,19 +424,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Threads will be executed asynchronously, and we need to control the execution order using synchronization mechanisms.</div>
+                                <div style="margin-left: 20px;"> • The binary tree will be represented as an array using level order traversal.</div>
+                            
+                                <div style="margin-left: 20px;"> • There will always be at least one node in the tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the output sequence is &#39;010&#39;, where thread A prints 0, thread C prints the first odd number 1, and thread B prints the first even number 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1, 2, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the tree [1, 2, 3], the last row is at the second level, and the leftmost value is 2.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The output should be &#39;0102&#39;, as thread A prints 0, thread C prints the first odd number 1, and thread B prints the second even number 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1, 2, 3, 4, null, 5, 6, null, null, 7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the tree [1, 2, 3, 4, null, 5, 6, null, null, 7], the last row is at the fourth level, and the leftmost value is 7.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,16 +462,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses three threads and mutexes to ensure that the numbers are printed in the correct order. Thread A prints 0, thread C prints odd numbers, and thread B prints even numbers, following the specified order.</div>
+                        <div class=""> <b>Approach:</b> The approach is to use level order traversal (breadth-first search) to traverse the tree and capture the leftmost value in the last row.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires synchronization to control the order of execution for the threads.</div>
+                                <div style="margin-left: 20px;"> • Level order traversal is ideal for this problem, as it processes nodes row by row.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can use a queue to manage the nodes at each level.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By using mutexes, we can ensure that each thread waits for the appropriate signal to print its number in the correct sequence.</div>
+                                <div style="margin-left: 20px;"> • The leftmost value in the last row is always the first node encountered at the deepest level.</div>
                             
                         </div>
                     </div>
@@ -469,13 +481,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize three mutexes to control the order of execution for each thread.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a queue to store nodes for level order traversal.</div>
                             
-                                <div style="margin-left: 20px;"> • Thread A locks the first mutex, prints 0, and unlocks the second mutex for thread C to print the first odd number.</div>
+                                <div style="margin-left: 20px;"> • 2. While the queue is not empty, process nodes at the current level.</div>
                             
-                                <div style="margin-left: 20px;"> • Thread C locks the second mutex, prints the odd number, and unlocks the third mutex for thread B to print the first even number.</div>
+                                <div style="margin-left: 20px;"> • 3. For each level, record the first node&#39;s value as the result.</div>
                             
-                                <div style="margin-left: 20px;"> • Thread B locks the third mutex, prints the even number, and unlocks the first mutex for thread A to print the next 0.</div>
+                                <div style="margin-left: 20px;"> • 4. Continue processing until all levels are covered.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return the value of the first node of the last level.</div>
                             
                         </div>
                     </div>
@@ -484,22 +498,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The minimum value for `n` is 1, so there will always be at least one number in the output sequence.</div>
+                                <div style="margin-left: 20px;"> • The tree will not be empty, as the problem guarantees at least one node.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large values of `n`, the program should efficiently handle multiple threads without causing delays or errors.</div>
+                                <div style="margin-left: 20px;"> • The approach efficiently handles up to 10^4 nodes with a time complexity of O(n).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When `n` is 1, the output should be &#39;010&#39;.</div>
+                                <div style="margin-left: 20px;"> • A tree with only one node should return that node&#39;s value.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be able to handle values of `n` up to 1000 without performance issues.</div>
+                                <div style="margin-left: 20px;"> • Ensure the tree is traversed level by level without skipping any levels.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,87 +530,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Mutex Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Control</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Push Root to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialize Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Locking</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 BFS Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Locking</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Constructor End</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Level Traversal Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Process Current Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Node from Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop Control</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Push Left Child</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mutex Lock</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Push Right Child</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Print Function</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Flag Change</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mutex Unlock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Else Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Flag Reset</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Mutex Unlock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Loop End</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Function End</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Function End</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Function Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Loop Control</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Mutex Lock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Print Function</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Mutex Unlock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Loop End</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="32"> 32 Function End</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="33"> 33 Function Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="34"> 34 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="35"> 35 Loop Control</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="36"> 36 Mutex Lock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="37"> 37 Print Function</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="38"> 38 Mutex Unlock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="39"> 39 Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="40"> 40 Loop End</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="41"> 41 Function End</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
                     
                 </div>
 
@@ -605,51 +563,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
-</span></span><span style="display:flex;"><span>mutex mtx1, mtx2, mtx;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>ZeroEvenOdd(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    mtx1.lock();
-</span></span><span style="display:flex;"><span>    mtx2.lock();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// printNumber(x) outputs &#34;x&#34;, where x is an integer.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">zero</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; j &lt;&lt; &#34; &#34;;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        mtx.lock();
-</span></span><span style="display:flex;"><span>        printNumber(<span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            mtx1.unlock();         
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findBottomLeftValue</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> q.front()<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> q.front()<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            root <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>left)  q.push(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>right) q.push(root<span style="color:#666">-&gt;</span>right);                
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>            mtx2.unlock();            
-</span></span><span style="display:flex;"><span>        }            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">even</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>        mtx2.lock();
-</span></span><span style="display:flex;"><span>        printNumber(i);
-</span></span><span style="display:flex;"><span>        mtx.unlock();
-</span></span><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">odd</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>        mtx1.lock();
-</span></span><span style="display:flex;"><span>        printNumber(i);        
-</span></span><span style="display:flex;"><span>        mtx.unlock();
-</span></span><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -657,413 +585,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findBottomLeftValue</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares an integer variable `n` which holds the value for the range of numbers to be printed. </div>
+                            <div class=""> Defines the `findBottomLeftValue` function that takes a pointer to the root of a binary tree and returns the bottom-leftmost value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Mutex Declaration</b></div>
+                            <div class=""> <b>2 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex mtx1, mtx2, mtx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares three mutex objects: `mtx1`, `mtx2`, and `mtx`, used for controlling access to shared resources between the threads. </div>
+                            <div class=""> Declares a queue `q` to perform a breadth-first traversal of the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Access Control</b></div>
+                            <div class=""> <b>3 : Push Root to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the access specifier for the methods and constructor, allowing them to be accessed publicly. </div>
+                            <div class=""> Pushes the root node of the tree into the queue to start the BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Constructor</b></div>
+                            <div class=""> <b>4 : Initialize Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ZeroEvenOdd(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> q.front()<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Constructor that initializes the value of `n` and locks `mtx1` and `mtx2` to ensure proper synchronization. </div>
+                            <div class=""> Initializes `res` to store the value of the first node in the queue (i.e., the root node&#39;s value). This will be updated as we traverse the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Locking</b></div>
+                            <div class=""> <b>5 : BFS Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mtx1.lock();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Locks the mutex `mtx1` to prevent other threads from accessing the shared resource until the lock is released. </div>
+                            <div class=""> Starts a while loop that continues as long as the queue is not empty, ensuring all tree nodes are processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Locking</b></div>
+                            <div class=""> <b>6 : Queue Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mtx2.lock();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Locks the mutex `mtx2`, ensuring synchronization between the threads for printing even and odd numbers. </div>
+                            <div class=""> Calculates the number of nodes at the current level by checking the size of the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Assignment</b></div>
+                            <div class=""> <b>7 : Update Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> q.front()<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the parameter value `n` to the class&#39;s `n` variable, defining the range of numbers to be printed. </div>
+                            <div class=""> Updates `res` to the value of the leftmost node at the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Constructor End</b></div>
+                            <div class=""> <b>8 : Level Traversal Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the end of the constructor method. </div>
+                            <div class=""> Begins an inner loop to process all nodes at the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Function Declaration</b></div>
+                            <div class=""> <b>9 : Process Current Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">zero</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            root <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `zero` function, which prints zero followed by odd and even numbers in alternating sequence. </div>
+                            <div class=""> Assigns the front node of the queue to `root` for further processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Pop Node from Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a flag variable `t` that helps control whether `mtx1` or `mtx2` is unlocked. </div>
+                            <div class=""> Removes the front node from the queue after processing it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop Control</b></div>
+                            <div class=""> <b>11 : Push Left Child</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>left)  q.push(root<span style="color:#666">-&gt;</span>left);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through the range from 0 to `n`, controlling the printing sequence. </div>
+                            <div class=""> Pushes the left child of the current node to the queue if it exists. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Mutex Lock</b></div>
+                            <div class=""> <b>12 : Push Right Child</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx.lock();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>right) q.push(root<span style="color:#666">-&gt;</span>right);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Locks the main mutex `mtx` to ensure exclusive access to the shared resource (printing). </div>
+                            <div class=""> Pushes the right child of the current node to the queue if it exists. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Print Function</b></div>
+                            <div class=""> <b>13 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        printNumber(<span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Prints the number 0 using the provided `printNumber` function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the flag `t` is 0, which determines whether to unlock `mtx1` or `mtx2`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Flag Change</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Changes the flag `t` to 1 to indicate that the next step will unlock `mtx1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Mutex Unlock</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mtx1.unlock();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Unlocks `mtx1` to allow the next thread (even or odd) to proceed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Else Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Ends the first condition block for controlling the unlocking of `mtx1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If `t` was 1, this else block executes to unlock `mtx2`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Flag Reset</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Resets the flag `t` to 0 to switch back to unlocking `mtx1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Mutex Unlock</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mtx2.unlock();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Unlocks `mtx2` to allow the next thread to print its number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Loop End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Ends the `if-else` block for controlling which mutex to unlock. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Function End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Marks the end of the `for` loop in the `zero` method. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Function End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Marks the end of the `zero` method. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Function Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">even</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Defines the `even` function, which prints the even numbers in the sequence. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes the variable `i` to 2, representing the first even number to be printed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Loop Control</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Continues the loop until `i` exceeds `n`, printing all even numbers. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>27 : Mutex Lock</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx2.lock();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Locks the `mtx2` mutex to synchronize access to the shared resource while printing even numbers. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>28 : Print Function</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        printNumber(i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Prints the even number `i` using the provided `printNumber` function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>29 : Mutex Unlock</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx.unlock();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Unlocks the main mutex `mtx`, allowing the next thread (odd) to proceed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>30 : Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments `i` by 2 to move to the next even number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>31 : Loop End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Ends the `while` loop in the `even` method. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>32 : Function End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Marks the end of the `even` method. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>33 : Function Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">odd</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Defines the `odd` function, which prints the odd numbers in the sequence. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>34 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes the variable `i` to 1, representing the first odd number to be printed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>35 : Loop Control</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Continues the loop until `i` exceeds `n`, printing all odd numbers. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>36 : Mutex Lock</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx1.lock();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Locks the `mtx1` mutex to synchronize access to the shared resource while printing odd numbers. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>37 : Print Function</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        printNumber(i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Prints the odd number `i` using the provided `printNumber` function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>38 : Mutex Unlock</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx.unlock();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Unlocks the main mutex `mtx`, allowing the next thread (even) to proceed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>39 : Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments `i` by 2 to move to the next odd number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>40 : Loop End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Ends the `while` loop in the `odd` method. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>41 : Function End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Marks the end of the `odd` method. </div>
+                            <div class=""> Returns the value stored in `res`, which is the bottom-leftmost node&#39;s value. </div>
                         </div>
                     
                 </div>
@@ -1086,13 +734,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) since each thread executes a fixed number of times based on `n`, and there are no nested iterations.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the number of nodes in the tree, as we traverse each node exactly once.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) because only a few variables are needed for synchronization, and no additional space is required.</div>    
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) in the worst case due to the queue storing nodes at the current level. In the best case (a skewed tree), the space complexity is O(1).</div>    
                     </div>
 
                 </div>

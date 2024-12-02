@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 12, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are at the bottom of a ladder with several rungs already placed. The distance between consecutive rungs should not exceed a given value &lsquo;dist&rsquo;. If the gap between any two rungs exceeds &lsquo;dist&rsquo;, you can insert additional rungs to make the ladder climbable. Return the minimum number of rungs that need to be added. </div>
+<div class=""> Given two integer arrays <code>nums1</code> and <code>nums2</code> of the same length, the goal is to permute <code>nums1</code> in a way that maximizes the number of indices <code>i</code> where <code>nums1[i] &gt; nums2[i]</code>. Return any permutation of <code>nums1</code> that achieves this. </div>
 
 
 
@@ -360,51 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two parameters: a list of integers &#39;rungs&#39;, where each element represents the height of a rung, and an integer &#39;dist&#39; which represents the maximum allowed distance between consecutive rungs.</div>
-                        <div class=""> <b>Example:</b> rungs = [2, 5, 8, 14], dist = 3</div>
+                        <div class=""> <b>Input:</b> Two integer arrays `nums1` and `nums2`, each containing `n` elements.</div>
+                        <div class=""> <b>Example:</b> Input: nums1 = [1,3,5,7], nums2 = [3,6,8,10]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= rungs.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= rungs[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • nums2.length == nums1.length</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= dist &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • rungs is strictly increasing.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums1[i], nums2[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of rungs that need to be added to make the ladder climbable.</div>
-                        <div class=""> <b>Example:</b> 2</div>
+                        <div class=""> <b>Output:</b> Return any permutation of `nums1` such that the number of indices `i` where `nums1[i] &gt; nums2[i]` is maximized.</div>
+                        <div class=""> <b>Example:</b> Output: [1,7,5,3]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be a valid permutation of `nums1`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the minimum number of rungs that must be inserted to ensure that the gap between any two consecutive rungs does not exceed the maximum allowed distance &#39;dist&#39;.</div>
+                        <div class=""> <b>Goal:</b> Maximize the number of indices `i` where `nums1[i] &gt; nums2[i]` by reordering `nums1`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the rungs and check the distance between each consecutive pair.</div>
+                                <div style="margin-left: 20px;"> • Sort `nums1` and `nums2` while keeping track of the original indices of `nums2`.</div>
                             
-                                <div style="margin-left: 20px;"> • If the gap is greater than &#39;dist&#39;, calculate how many rungs need to be added to fill the gap.</div>
+                                <div style="margin-left: 20px;"> • For each element in `nums2`, find the smallest element in `nums1` that is greater than the current element in `nums2`.</div>
                             
-                                <div style="margin-left: 20px;"> • Accumulate the total number of rungs that need to be added.</div>
+                                <div style="margin-left: 20px;"> • If such an element is found, assign it to the corresponding position in the result array, otherwise, use the smallest available element from `nums1`.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input size is large, so the solution must be efficient.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle the given constraints efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of rungs is between 1 and 100,000.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • The height of the rungs is between 1 and 1 billion.</div>
+                                <div style="margin-left: 20px;"> • nums2.length == nums1.length</div>
                             
-                                <div style="margin-left: 20px;"> • The maximum allowed climbing distance &#39;dist&#39; is between 1 and 1 billion.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums1[i], nums2[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>        
@@ -412,17 +412,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The rungs are always strictly increasing.</div>
+                                <div style="margin-left: 20px;"> • Both arrays `nums1` and `nums2` contain non-negative integers.</div>
                             
-                                <div style="margin-left: 20px;"> • The ladder can have gaps larger than the maximum climbing distance, requiring additional rungs to be inserted.</div>
+                                <div style="margin-left: 20px;"> • The size of both arrays is the same and within the specified limits.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> rungs = [2, 5, 8, 14], dist = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There is a gap of 3 between rung 5 and rung 8. This gap exceeds the allowed distance, so we need to insert two rungs (at heights 11 and 12) to make the ladder climbable. Hence, the answer is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums1 = [5, 1, 8, 3], nums2 = [6, 3, 7, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting `nums1` as [1, 3, 5, 8] and `nums2` as [2, 3, 6, 7], the optimal permutation is [1, 8, 5, 3], which maximizes the number of `nums1[i] &gt; nums2[i]`.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums1 = [2, 4, 6, 8], nums2 = [1, 5, 7, 9]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal permutation of `nums1` is [2, 4, 6, 8], as all elements in `nums1` are greater than the corresponding elements in `nums2`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,16 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to iterate over the rungs and check the gap between each consecutive pair. If the gap is larger than the allowed climbing distance, we calculate how many rungs to add to fill the gap.</div>
+                        <div class=""> <b>Approach:</b> The solution aims to reorder `nums1` to maximize the number of indices where `nums1[i] &gt; nums2[i]`. This can be done by strategically using a greedy approach with sorting and matching elements.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of rungs that need to be added can be calculated by dividing the gap by the allowed distance and rounding up.</div>
+                                <div style="margin-left: 20px;"> • Sorting the arrays `nums1` and `nums2` allows for efficient matching of elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • Greedy algorithms are suitable for maximizing the number of successful comparisons.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We will process each gap one by one, and accumulate the number of rungs to be added.</div>
+                                <div style="margin-left: 20px;"> • By sorting `nums1` and `nums2`, we can quickly determine the best match for each element in `nums2`.</div>
                             
                         </div>
                     </div>
@@ -463,13 +469,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to keep track of the number of rungs to be added.</div>
+                                <div style="margin-left: 20px;"> • Sort `nums1` in ascending order and `nums2` in ascending order, keeping track of the original indices of `nums2`.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the rungs and check the gap between each consecutive pair.</div>
+                                <div style="margin-left: 20px;"> • Use a greedy approach to assign each number in `nums2` the smallest number in `nums1` that is larger than it.</div>
                             
-                                <div style="margin-left: 20px;"> • If the gap is larger than &#39;dist&#39;, calculate the number of rungs needed and add it to the total.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the total number of rungs added.</div>
+                                <div style="margin-left: 20px;"> • If no number in `nums1` is larger, assign the smallest remaining number from `nums1`.</div>
                             
                         </div>
                     </div>
@@ -478,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no rungs, the ladder cannot be climbed, so the number of rungs to add is zero.</div>
+                                <div style="margin-left: 20px;"> • Not applicable since both arrays will always have the same length and contain integers.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle large input sizes, with up to 100,000 rungs.</div>
+                                <div style="margin-left: 20px;"> • Efficient sorting and matching should be implemented to handle arrays with up to 10^5 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the gap between any two rungs is exactly &#39;dist&#39;, no new rungs need to be added.</div>
+                                <div style="margin-left: 20px;"> • If all elements in `nums1` are smaller than the corresponding elements in `nums2`, the output will be the sorted array `nums1`.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should run in linear time relative to the number of rungs to handle the upper limit efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should work efficiently within the given constraints, particularly when handling arrays of large size.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,35 +516,17 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Multiset Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Decision</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Element Selection</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Erase Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Action</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Action</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
                     
                 </div>
 
@@ -549,44 +535,14 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rec</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> dist, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>node) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&gt;=</span> node[node.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&lt;</span> node[idx]) {
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> dist;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> rec(cur, idx, dist, node);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> node[idx];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> rec(cur, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, dist, node);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> advantageCount(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
+</span></span><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s(begin(nums1), end(nums1));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> ( <span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums2.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> <span style="color:#666">*</span>s.rbegin() <span style="color:#666">&lt;=</span> nums2[i] <span style="color:#666">?</span> s.begin() <span style="color:#666">:</span> s.upper_bound(nums2[i]);
+</span></span><span style="display:flex;"><span>        nums1[i] <span style="color:#666">=</span> <span style="color:#666">*</span>p;
+</span></span><span style="display:flex;"><span>        s.erase(p);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">addRungs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> node, <span style="color:#0b0;font-weight:bold">int</span> dist) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> node.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node[i] <span style="color:#666">-</span> prv <span style="color:#666">&gt;</span> dist) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (node[i] <span style="color:#666">-</span> prv <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> dist;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        prv <span style="color:#666">=</span> node[i];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// while(cur + dist &lt; node[node.size() - 1]) {
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//     if(cur + dist &lt; node[idx]) {
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//         cur += dist;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//         res++;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//     } else {
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//         cur = node[idx];
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//         idx++;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//     }
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// }
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;<span style="color:#080;font-style:italic">//rec(cur, idx, dist, node);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums1;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -597,160 +553,70 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rec</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> dist, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>node) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> advantageCount(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the recursive function `rec` that takes the current position (`cur`), the current index (`idx`), the maximum distance (`dist`), and the list of positions (`node`). </div>
+                            <div class=""> Defines the `advantageCount` function which aims to reorder `nums1` to maximize its advantage over `nums2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Condition Check</b></div>
+                            <div class=""> <b>2 : Multiset Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&gt;=</span> node[node.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s(begin(nums1), end(nums1));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current position plus the distance exceeds or reaches the last node, return 0 as no more rungs are needed. </div>
+                            <div class=""> Initializes a multiset `s` using the elements of `nums1`, which allows efficient element retrieval and removal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Decision</b></div>
+                            <div class=""> <b>3 : Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&lt;</span> node[idx]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> ( <span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums2.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current position plus the distance is less than the current node position, continue to move forward by adding the distance. </div>
+                            <div class=""> Starts a loop to iterate over each element in `nums2`, comparing it against the elements in `nums1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Action</b></div>
+                            <div class=""> <b>4 : Element Selection</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> dist;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> <span style="color:#666">*</span>s.rbegin() <span style="color:#666">&lt;=</span> nums2[i] <span style="color:#666">?</span> s.begin() <span style="color:#666">:</span> s.upper_bound(nums2[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move the current position forward by the specified distance. </div>
+                            <div class=""> Selects the best candidate element from `nums1` that can beat the current element in `nums2`. It checks if the largest element in `nums1` (accessed via `s.rbegin()`) can beat the current element in `nums2`; if not, it chooses the smallest element greater than `nums2[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Recursive Call</b></div>
+                            <div class=""> <b>5 : Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> rec(cur, idx, dist, node);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nums1[i] <span style="color:#666">=</span> <span style="color:#666">*</span>p;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively call the function to check for the next gap after moving the current position forward. </div>
+                            <div class=""> Assigns the selected element from `nums1` to the current position in `nums1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Else Condition</b></div>
+                            <div class=""> <b>6 : Erase Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s.erase(p);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current position plus the distance is not less than the current node, proceed to the next node. </div>
+                            <div class=""> Erases the selected element from the multiset `s`, as it has already been used. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Action</b></div>
+                            <div class=""> <b>7 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">=</span> node[idx];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums1;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the current position to the current node&#39;s position. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">rec</span>(cur, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, dist, node);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Recursively call the function, advancing the index to check the next node. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">addRungs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> node, <span style="color:#0b0;font-weight:bold">int</span> dist) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the main function `addRungs`, which calculates the total number of rungs needed based on the positions in the `node` list and the given `dist`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize variables: `cur` to track the current position, `idx` for the current index in the node array, and `res` for counting the required rungs. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize the variable `prv` to track the previous position in the node array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> node.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterate through each element in the `node` array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node[i] <span style="color:#666">-</span> prv <span style="color:#666">&gt;</span> dist) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the gap between the current node and the previous node exceeds the given distance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Action</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (node[i] <span style="color:#666">-</span> prv <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> dist;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculate how many rungs are needed to fill the gap and add that to the result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        prv <span style="color:#666">=</span> node[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the previous position to the current node. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final result of the number of rungs required. </div>
+                            <div class=""> Returns the modified `nums1` with elements rearranged to maximize the advantage over `nums2`. </div>
                         </div>
                     
                 </div>
@@ -770,16 +636,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the number of rungs, because we are iterating through the rungs only once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n) time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1), since we only need a constant amount of extra space.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Space is used for sorting and tracking the indices, resulting in a space complexity of O(n).</div>    
                     </div>
 
                 </div>

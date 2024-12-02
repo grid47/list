@@ -295,7 +295,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1202s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1201s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/57.webp" 
            alt="A glowing new interval gently being inserted into an existing flow of light." 
@@ -318,7 +318,7 @@
 
 
 
-<div class=""> You are given a 2D grid <code>board</code> containing characters and a string <code>word</code>. The task is to determine whether the given word can be formed by starting at any cell in the grid and moving to adjacent cells, which are horizontally or vertically neighboring. The same cell cannot be reused in forming the word. </div>
+<div class=""> You are given an array of non-overlapping intervals where intervals[i] = [starti, endi] represent the start and the end of the ith interval, and intervals are sorted in ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start and end of another interval. Insert newInterval into intervals such that intervals is still sorted and there are no overlapping intervals. Merge overlapping intervals if necessary and return the updated list of intervals. </div>
 
 
 
@@ -369,49 +369,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 2D grid `board` of characters and a string `word`.</div>
-                        <div class=""> <b>Example:</b> board = [[&#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;E&#34;],[&#34;S&#34;,&#34;F&#34;,&#34;C&#34;,&#34;S&#34;],[&#34;A&#34;,&#34;D&#34;,&#34;E&#34;,&#34;E&#34;]], word = &#34;ABCCED&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of intervals sorted by their starting values and a new interval to insert.</div>
+                        <div class=""> <b>Example:</b> [[2, 4], [6, 8]], newInterval = [5, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 6</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= intervals.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= word.length &lt;= 15</div>
+                                <div style="margin-left: 20px;"> • intervals[i].length == 2</div>
                             
-                                <div style="margin-left: 20px;"> • board and word consist of only uppercase and lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= starti &lt;= endi &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • intervals is sorted by starti in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • newInterval.length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt;= end &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return `true` if the word exists in the grid, otherwise return `false`.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> The output should be a list of intervals after inserting the new interval and merging any overlapping intervals.</div>
+                        <div class=""> <b>Example:</b> [[2, 4], [5, 8]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should return true if the word can be formed from the grid, and false otherwise.</div>
+                                <div style="margin-left: 20px;"> • The list should be sorted by the starting values of the intervals.</div>
+                            
+                                <div style="margin-left: 20px;"> • All intervals in the list should be non-overlapping after the insertion.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To check if a word can be formed by navigating the grid&#39;s adjacent cells.</div>
+                        <div class=""> <b>Goal:</b> The goal is to merge overlapping intervals after inserting the new interval into the list.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate over each cell in the grid.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through the intervals and insert the new interval in the correct position based on its start value.</div>
                             
-                                <div style="margin-left: 20px;"> • For each cell, perform a Depth-First Search (DFS) to explore all possible paths that form the word, marking cells as visited.</div>
+                                <div style="margin-left: 20px;"> • 2. Merge the new interval with any overlapping intervals as needed.</div>
                             
-                                <div style="margin-left: 20px;"> • If a complete path that forms the word is found, return true; otherwise, continue the search.</div>
+                                <div style="margin-left: 20px;"> • 3. Return the final list of intervals after the insertion.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem constraints ensure that the grid size is small and the word length is manageable.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle intervals in sorted order and ensure no overlaps after the insertion.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 6</div>
+                                <div style="margin-left: 20px;"> • Intervals are sorted by start time, so insertion must maintain this order.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= word.length &lt;= 15</div>
+                                <div style="margin-left: 20px;"> • Intervals may be empty, and the solution should handle edge cases where no intervals exist.</div>
                             
                         </div>
                     </div>        
@@ -419,23 +427,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid and word consist only of valid English alphabetic characters.</div>
+                                <div style="margin-left: 20px;"> • The input intervals are sorted by their start times.</div>
+                            
+                                <div style="margin-left: 20px;"> • The new interval may overlap with multiple intervals.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> board = [[&#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;E&#34;],[&#34;S&#34;,&#34;F&#34;,&#34;C&#34;,&#34;S&#34;],[&#34;A&#34;,&#34;D&#34;,&#34;E&#34;,&#34;E&#34;]], word = &#34;ABCCED&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting at the top-left corner, the word &#39;ABCCED&#39; can be formed by moving through adjacent cells.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[2, 4], [6, 8]], newInterval = [5, 7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the new interval overlaps with the interval [6, 8], so they are merged into [5, 8]. The result is [[2, 4], [5, 8]].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> board = [[&#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;E&#34;],[&#34;S&#34;,&#34;F&#34;,&#34;C&#34;,&#34;S&#34;],[&#34;A&#34;,&#34;D&#34;,&#34;E&#34;,&#34;E&#34;]], word = &#34;SEE&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The word &#39;SEE&#39; can be formed by starting from the bottom-left corner.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> board = [[&#34;A&#34;,&#34;B&#34;,&#34;C&#34;,&#34;E&#34;],[&#34;S&#34;,&#34;F&#34;,&#34;C&#34;,&#34;S&#34;],[&#34;A&#34;,&#34;D&#34;,&#34;E&#34;,&#34;E&#34;]], word = &#34;ABCB&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The word &#39;ABCB&#39; cannot be formed because the letter &#39;B&#39; would need to be reused.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 3], [5, 6], [8, 10]], newInterval = [4, 8]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the new interval [4, 8] overlaps with [5, 6] and [8, 10], and the merged interval becomes [4, 10]. The result is [[1, 3], [4, 10]].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -459,16 +465,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses Depth-First Search (DFS) to explore possible paths for forming the word, pruning the search if a path leads to an invalid state.</div>
+                        <div class=""> <b>Approach:</b> The approach involves inserting the new interval and merging overlapping intervals using a two-pass approach.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • DFS is an ideal approach for exploring all paths in a grid.</div>
+                                <div style="margin-left: 20px;"> • Intervals are already sorted by their start time, which simplifies the insertion process.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By using a visited matrix to mark cells already used, we can prevent revisiting cells.</div>
+                                <div style="margin-left: 20px;"> • By iterating through the list of intervals, we can find where the new interval fits and merge it with any overlapping intervals.</div>
                             
                         </div>
                     </div>
@@ -476,13 +482,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a visited matrix to keep track of visited cells.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize an empty result array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each cell in the grid, start a DFS if the first letter of the word matches the cell.</div>
+                                <div style="margin-left: 20px;"> • 2. Add all intervals that end before the new interval starts to the result array.</div>
                             
-                                <div style="margin-left: 20px;"> • Perform DFS in four directions: up, down, left, and right, ensuring to prune invalid paths.</div>
+                                <div style="margin-left: 20px;"> • 3. Merge the new interval with all overlapping intervals.</div>
                             
-                                <div style="margin-left: 20px;"> • Return true if a valid path that forms the word is found; otherwise, continue searching.</div>
+                                <div style="margin-left: 20px;"> • 4. Add all intervals that start after the new interval ends to the result array.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return the result array.</div>
                             
                         </div>
                     </div>
@@ -491,22 +499,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the grid is empty or the word length is 0, the result should be false.</div>
+                                <div style="margin-left: 20px;"> • If the input list is empty, the solution should return the new interval as the only interval.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently for the maximum grid size (6x6).</div>
+                                <div style="margin-left: 20px;"> • The algorithm should handle up to 10^4 intervals efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where the word contains repeated characters or if the grid contains the same character multiple times.</div>
+                                <div style="margin-left: 20px;"> • If the new interval does not overlap with any existing intervals, it should be inserted in the correct position.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure the word does not exceed the maximum length of 15.</div>
+                                <div style="margin-left: 20px;"> • The solution must run efficiently with a time complexity of O(n), where n is the number of intervals.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,31 +533,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Index Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Nested Loops</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Iterate Over Non-Overlapping Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Add Non-Overlapping Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Merge Overlapping Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update New Interval</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Increment Index</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Add Merged Interval</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Add Remaining Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Add Remaining Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Merged Intervals</button>
                     
                 </div>
 
@@ -558,35 +562,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">exist</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, string word) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> visited(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n));
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> insert(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> intervals, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> newInterval) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> merged;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>j) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (dfs(board, visited, i, j, word, <span style="color:#666">0</span>)) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;&amp;</span> visited, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j, string<span style="color:#666">&amp;</span> word, <span style="color:#0b0;font-weight:bold">int</span> idx) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (idx <span style="color:#666">==</span> word.size()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> board.size() <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> board[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> visited[i][j] <span style="color:#666">||</span> board[i][j] <span style="color:#666">!=</span> word[idx]) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&lt;</span> intervals.size() <span style="color:#666">&amp;&amp;</span> intervals[i][<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> newInterval[<span style="color:#666">0</span>]) {
+</span></span><span style="display:flex;"><span>        merged.push_back(intervals[i<span style="color:#666">++</span>]);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    visited[i][j] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> found <span style="color:#666">=</span> dfs(board, visited, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>                 dfs(board, visited, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>                 dfs(board, visited, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>                 dfs(board, visited, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    visited[i][j] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> found;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&lt;</span> intervals.size() <span style="color:#666">&amp;&amp;</span> intervals[i][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> newInterval[<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>        newInterval[<span style="color:#666">0</span>] <span style="color:#666">=</span> min(intervals[i][<span style="color:#666">0</span>], newInterval[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>        newInterval[<span style="color:#666">1</span>] <span style="color:#666">=</span> max(intervals[i][<span style="color:#666">1</span>], newInterval[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    merged.push_back(newInterval);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&lt;</span> intervals.size()) {
+</span></span><span style="display:flex;"><span>        merged.push_back(intervals[i<span style="color:#666">++</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> merged;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -597,152 +593,121 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">exist</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, string word) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> insert(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> intervals, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> newInterval) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a function `exist` that takes a 2D character grid `board` and a string `word` as input and returns a boolean indicating whether the word exists in the grid. </div>
+                            <div class=""> This line declares a function named `insert` that takes a vector of intervals `intervals` and a new interval `newInterval` as input and returns a vector of merged intervals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Result Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> merged;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the dimensions of the board in `m` and `n`. </div>
+                            <div class=""> This line initializes an empty vector `merged` to store the merged intervals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Index Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> visited(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a 2D boolean array `visited` to track visited cells during DFS. </div>
+                            <div class=""> This line initializes an index `i` to 0, which will be used to iterate over the `intervals` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Nested Loops</b></div>
+                            <div class=""> <b>4 : Iterate Over Non-Overlapping Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&lt;</span> intervals.size() <span style="color:#666">&amp;&amp;</span> intervals[i][<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> newInterval[<span style="color:#666">0</span>]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through each cell in the grid. </div>
+                            <div class=""> This loop iterates over the intervals in `intervals` as long as their end points are less than the start of the `newInterval`. These intervals don&#39;t overlap with `newInterval`, so they are added directly to the `merged` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Recursive Call</b></div>
+                            <div class=""> <b>5 : Add Non-Overlapping Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (dfs(board, visited, i, j, word, <span style="color:#666">0</span>)) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        merged.push_back(intervals[i<span style="color:#666">++</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calls the `dfs` function to start the DFS from the current cell and returns `true` if the word is found. </div>
+                            <div class=""> The current interval `intervals[i]` is added to the `merged` vector, and the `i` index is incremented. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return</b></div>
+                            <div class=""> <b>6 : Merge Overlapping Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&lt;</span> intervals.size() <span style="color:#666">&amp;&amp;</span> intervals[i][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> newInterval[<span style="color:#666">1</span>]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns `false` if the word is not found after checking all cells. </div>
+                            <div class=""> This loop iterates over the intervals that overlap with `newInterval`. The start of `newInterval` is updated to the minimum of its current start and the start of the current interval, and the end of `newInterval` is updated to the maximum of its current end and the end of the current interval. This effectively merges the overlapping intervals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Function Declaration</b></div>
+                            <div class=""> <b>7 : Update New Interval</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;&amp;</span> visited, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j, string<span style="color:#666">&amp;</span> word, <span style="color:#0b0;font-weight:bold">int</span> idx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        newInterval[<span style="color:#666">0</span>] <span style="color:#666">=</span> min(intervals[i][<span style="color:#666">0</span>], newInterval[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>        newInterval[<span style="color:#666">1</span>] <span style="color:#666">=</span> max(intervals[i][<span style="color:#666">1</span>], newInterval[<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a recursive `dfs` function to perform DFS from a given cell. </div>
+                            <div class=""> The `newInterval` is updated to encompass the overlapping interval. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Base Case</b></div>
+                            <div class=""> <b>8 : Increment Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (idx <span style="color:#666">==</span> word.size()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case: If the current index `idx` reaches the end of the word, the word is found. </div>
+                            <div class=""> The `i` index is incremented to move to the next interval. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Conditional</b></div>
+                            <div class=""> <b>9 : Add Merged Interval</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> board.size() <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> board[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> visited[i][j] <span style="color:#666">||</span> board[i][j] <span style="color:#666">!=</span> word[idx]) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    merged.push_back(newInterval);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current cell is out of bounds, already visited, or doesn&#39;t match the current character in the word. </div>
+                            <div class=""> After processing the overlapping intervals, the merged `newInterval` is added to the `merged` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Assignment</b></div>
+                            <div class=""> <b>10 : Add Remaining Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    visited[i][j] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&lt;</span> intervals.size()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the current cell as visited. </div>
+                            <div class=""> This loop iterates over the remaining intervals that don&#39;t overlap with `newInterval` and adds them to the `merged` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Variable Initialization</b></div>
+                            <div class=""> <b>11 : Add Remaining Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> found <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        merged.push_back(intervals[i<span style="color:#666">++</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a boolean variable `found` to track if the word is found in any of the four directions. </div>
+                            <div class=""> The current interval `intervals[i]` is added to the `merged` vector, and the `i` index is incremented. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Recursive Call</b></div>
+                            <div class=""> <b>12 : Return Merged Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    found <span style="color:#666">=</span> dfs(board, visited, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>                 dfs(board, visited, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>                 dfs(board, visited, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>                 dfs(board, visited, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>, word, idx <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> merged;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively calls the `dfs` function to explore the four neighboring cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Variable Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    visited[i][j] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Unmarks the current cell as visited after exploring its neighbors. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> found;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns `true` if the word is found in any of the four directions, otherwise `false`. </div>
+                            <div class=""> The function returns the `merged` vector containing the final list of merged intervals. </div>
                         </div>
                     
                 </div>
@@ -762,16 +727,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m*n)</div>
-                        <div class=""> <b>Average Case:</b> O(3^(len(word)))</div>
-                        <div class=""> <b>Worst Case:</b> O(3^(len(word)))</div> 
-                        <div class=""> <b>Description:</b> The worst-case time complexity is proportional to the maximum number of recursive DFS calls, which is bounded by the length of the word and the grid size.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the intervals once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m*n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m*n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is dominated by the recursion stack and the visited matrix, both of which are proportional to the grid size.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the number of intervals, due to the need to store the result array.</div>    
                     </div>
 
                 </div>

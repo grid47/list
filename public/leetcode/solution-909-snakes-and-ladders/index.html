@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 8, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,14 +308,7 @@
 
 
 
-<div class=""> <p>You are given an integer array &rsquo;nums&rsquo;. For each index i (1 &lt;= i &lt;= nums.length - 2), calculate the beauty of nums[i] based on the following conditions:</p>
-<ul>
-<li>The beauty of nums[i] is 2 if for all indices j before i and for all indices k after i, nums[j] &lt; nums[i] &lt; nums[k].</li>
-<li>The beauty of nums[i] is 1 if nums[i-1] &lt; nums[i] &lt; nums[i+1] but the previous condition is not met.</li>
-<li>The beauty of nums[i] is 0 if neither of the above conditions holds.</li>
-</ul>
-<p>Return the sum of beauty values for all nums[i] where 1 &lt;= i &lt;= nums.length - 2.</p>
- </div>
+<div class=""> You are given an n x n integer matrix <code>board</code> where the cells are numbered from 1 to n² in a zigzag pattern starting from the bottom-left corner. Each cell may contain either <code>-1</code> (indicating no special feature) or a number indicating a snake or ladder destination. You start at square 1 and can roll a 6-sided die to move between 1 and 6 steps. If you land on a square with a snake or ladder, you must move to its destination. Determine the minimum number of dice rolls needed to reach the final square <code>n²</code>. Return -1 if it is not possible. </div>
 
 
 
@@ -366,47 +359,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a list of integers, nums, representing the array.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 5, 3, 6, 2]</div>
+                        <div class=""> <b>Input:</b> An `n x n` matrix `board` where each cell represents a square in the game, containing either `-1` or a number indicating a snake or ladder destination.</div>
+                        <div class=""> <b>Example:</b> Input: board = [[-1,-1,-1],[-1,-1,-1],[-1,-1,2]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= nums.length &lt;= 100000</div>
+                                <div style="margin-left: 20px;"> • n == board.length == board[i].length</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100000</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 20</div>
+                            
+                                <div style="margin-left: 20px;"> • board[i][j] is either -1 or in the range [1, n²]</div>
+                            
+                                <div style="margin-left: 20px;"> • Squares 1 and n² are not the start of any snake or ladder.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the sum of beauty of all nums[i] where 1 &lt;= i &lt;= nums.length - 2.</div>
+                        <div class=""> <b>Output:</b> The minimum number of dice rolls required to reach the final square `n²`. If unreachable, return -1.</div>
                         <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result will be a non-negative integer.</div>
-                            
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to efficiently calculate the sum of beauties for all indices i where 1 &lt;= i &lt;= nums.length - 2.</div>
+                        <div class=""> <b>Goal:</b> Use Breadth-First Search (BFS) to calculate the minimum steps to reach square `n²`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Precompute the &#39;left&#39; and &#39;right&#39; arrays that hold the smallest and largest values for each index i respectively.</div>
+                                <div style="margin-left: 20px;"> • Convert the 2D matrix to a 1D representation for easier traversal.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the array and calculate the beauty for each index based on the given conditions.</div>
+                                <div style="margin-left: 20px;"> • Use BFS starting from square 1, keeping track of visited squares to avoid revisits.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the beauties and return the total.</div>
+                                <div style="margin-left: 20px;"> • For each square, simulate a dice roll (1 to 6 steps) and determine the next position.</div>
+                            
+                                <div style="margin-left: 20px;"> • If a square has a snake or ladder, move to its destination; otherwise, move normally.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the final square `n²` is reached, return the current roll count. If the queue is empty and `n²` is not reached, return -1.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array length can range from 3 to 100,000 elements, and each element in the array is between 1 and 100,000.</div>
+                        <div class=""> <b>Goal:</b> Limitations and conditions for the game board and movement.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of nums is at least 3.</div>
+                                <div style="margin-left: 20px;"> • The board is always square (n x n).</div>
                             
-                                <div style="margin-left: 20px;"> • Each element of nums is between 1 and 100,000.</div>
+                                <div style="margin-left: 20px;"> • Values in the board are either `-1` or valid destinations within the range of the board.</div>
+                            
+                                <div style="margin-left: 20px;"> • There are no snakes or ladders at squares 1 and `n²`.</div>
                             
                         </div>
                     </div>        
@@ -414,25 +415,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • You are assuming the array has at least 3 elements.</div>
+                                <div style="margin-left: 20px;"> • The board dimensions are valid (n x n).</div>
                             
-                                <div style="margin-left: 20px;"> • There will be no invalid indices; the index range for beauty calculation is between 1 and nums.length - 2.</div>
+                                <div style="margin-left: 20px;"> • Dice rolls always provide up to 6 possible moves unless constrained by board size.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: nums = [1, 5, 3, 6, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For each index i in the range 1 &lt;= i &lt;= 3: The beauty of nums[1] is 2 (because nums[0] &lt; nums[1] &lt; nums[2], nums[3], nums[4]). The beauty of nums[2] is 1 (because nums[1] &lt; nums[2] &lt; nums[3] but doesn&#39;t meet the first condition). The beauty of nums[3] is 0 (it doesn&#39;t satisfy any condition). Sum = 2 &#43; 1 &#43; 0 = 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: board = [[-1,-1,-1],[6,-1,-1],[-1,-1,2]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Start at square 1. Move to square 2 and follow the ladder to square 6. Then, roll to square 7 and follow the snake to square 2. Finally, roll to square 9 to win in 3 moves.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: nums = [4, 2, 7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For each index i in the range 1 &lt;= i &lt;= 1: The beauty of nums[1] is 1 (because nums[0] &lt; nums[1] &lt; nums[2] but doesn&#39;t meet the first condition). Sum = 1.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3: Input: nums = [10, 5, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For each index i in the range 1 &lt;= i &lt;= 1: The beauty of nums[1] is 0 (it doesn&#39;t satisfy any condition). Sum = 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: board = [[-1,-1],[-1,-1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are no snakes or ladders. The quickest path is to roll the dice 2 times to reach square 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,18 +453,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to identify the beauty conditions for each index i and efficiently compute the beauty values using a sliding window approach.</div>
+                        <div class=""> <b>Approach:</b> Use BFS to explore the shortest path to square `n²` in terms of dice rolls, accounting for snakes and ladders.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The conditions involve comparing nums[i] with both its neighbors and all previous and future elements.</div>
+                                <div style="margin-left: 20px;"> • This problem can be modeled as a shortest-path problem in an unweighted graph.</div>
                             
-                                <div style="margin-left: 20px;"> • The sliding window approach can help precompute left and right bounds efficiently.</div>
+                                <div style="margin-left: 20px;"> • Snakes and ladders alter the natural progression, requiring specific handling.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can optimize the calculation by precomputing two arrays, &#39;left&#39; and &#39;right&#39;, to store the necessary values for each index, thus avoiding nested loops.</div>
+                                <div style="margin-left: 20px;"> • Using BFS ensures we explore the shortest path first due to its level-order traversal.</div>
                             
                         </div>
                     </div>
@@ -475,11 +472,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Create two arrays &#39;left&#39; and &#39;right&#39; that store the smallest element seen up to each index and the largest element seen from each index.</div>
+                                <div style="margin-left: 20px;"> • Define a helper function to convert a square number to its corresponding row and column in the zigzag board layout.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Traverse the array and for each index, check the conditions for beauty based on the precomputed left and right arrays.</div>
+                                <div style="margin-left: 20px;"> • Use BFS to traverse from square 1 to `n²`.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Sum the beauties and return the result.</div>
+                                <div style="margin-left: 20px;"> • For each square, calculate potential destinations (up to 6 moves ahead).</div>
+                            
+                                <div style="margin-left: 20px;"> • Check if the destination square has a snake or ladder and adjust the position accordingly.</div>
+                            
+                                <div style="margin-left: 20px;"> • Keep track of visited squares to prevent redundant computations.</div>
                             
                         </div>
                     </div>
@@ -488,22 +489,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will never be empty due to the constraint of nums.length being at least 3.</div>
+                                <div style="margin-left: 20px;"> • The board has the smallest possible size (2x2).</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large arrays with up to 100,000 elements, we ensure the algorithm runs efficiently in O(n) time.</div>
+                                <div style="margin-left: 20px;"> • The board has the largest possible size (20x20) with complex snake and ladder placements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When all elements are the same, the beauty of all indices will be 0.</div>
+                                <div style="margin-left: 20px;"> • The board has no snakes or ladders.</div>
+                            
+                                <div style="margin-left: 20px;"> • The board is entirely filled with snakes or ladders, forcing specific paths.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the input array follows the constraint of having at least 3 elements.</div>
+                                <div style="margin-left: 20px;"> • The dice roll moves beyond the board&#39;s bounds.</div>
                             
                         </div>                                                                        
                     </div>
@@ -522,45 +525,51 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Formula</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Formula</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Left Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Conditional</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Action</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Left Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Left Array Continuation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Data Structure</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Right Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Action</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Right Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Right Array Continuation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Sum Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Conditional</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Update Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Update Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Sum Continuation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Action</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Conditional</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Queue Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return</button>
                     
                 </div>
 
@@ -569,31 +578,34 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumOfBeauties</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> left(n), right(n);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    left[<span style="color:#666">0</span>] <span style="color:#666">=</span> make_pair(nums[<span style="color:#666">0</span>], <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;=</span> left[i <span style="color:#666">-</span> <span style="color:#666">1</span>].first) {
-</span></span><span style="display:flex;"><span>            left[i] <span style="color:#666">=</span> make_pair(nums[i], i);
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> left[i] <span style="color:#666">=</span> left[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    right[n<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> make_pair(nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>], n <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> right[i <span style="color:#666">+</span> <span style="color:#666">1</span>].first) {
-</span></span><span style="display:flex;"><span>            right[i] <span style="color:#666">=</span> make_pair(nums[i], i);
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> right[i] <span style="color:#666">=</span> right[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left[i <span style="color:#666">-</span> <span style="color:#666">1</span>].first <span style="color:#666">&lt;</span> nums[i] <span style="color:#666">&amp;&amp;</span> right[i <span style="color:#666">+</span> <span style="color:#666">1</span>].first <span style="color:#666">&gt;</span> nums[i])
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(nums[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">&lt;</span> nums[i] <span style="color:#666">&amp;&amp;</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> nums[i])
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> sum <span style="color:#666">+=</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">getCoordinate</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> s, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>row, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>col) {
+</span></span><span style="display:flex;"><span>    row <span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>(s<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span>n;
+</span></span><span style="display:flex;"><span>    col <span style="color:#666">=</span> (s<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">%</span>n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((n<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> row<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">1</span>) <span style="color:#666">||</span> (n<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> row<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">0</span>))
+</span></span><span style="display:flex;"><span>        col<span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>col;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">snakesAndLadders</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> board) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> board.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> seen(n<span style="color:#666">*</span>n<span style="color:#666">+</span><span style="color:#666">1</span>, <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>    seen[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push({<span style="color:#666">1</span>, <span style="color:#666">0</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> row, col, s <span style="color:#666">=</span> p.first, dist <span style="color:#666">=</span> p.second;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s <span style="color:#666">==</span> n<span style="color:#666">*</span>n) 
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> dist;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; s<span style="color:#666">+</span>i<span style="color:#666">&lt;=</span> n <span style="color:#666">*</span>n <span style="color:#666">&amp;&amp;</span> i<span style="color:#666">&lt;=</span><span style="color:#666">6</span>;i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            getCoordinate(n, s<span style="color:#666">+</span>i, row, col);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sfinal <span style="color:#666">=</span> board[row][col] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">?</span> s<span style="color:#666">+</span><span style="color:#a0a000">i</span>:board[row][col];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(seen[sfinal] <span style="color:#666">==</span> <span style="color:#a2f">false</span>) {
+</span></span><span style="display:flex;"><span>                seen[sfinal] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                q.push({sfinal, dist <span style="color:#666">+</span> <span style="color:#666">1</span>});
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -604,210 +616,240 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumOfBeauties</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">getCoordinate</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> s, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>row, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>col) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `sumOfBeauties`, which takes a vector of integers `nums` and calculates the sum of beauties for each element based on specific rules. </div>
+                            <div class=""> Define the function `getCoordinate` to compute the row and column based on the given board size and the cell number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Formula</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    row <span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>(s<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span>n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `n` to store the size of the `nums` vector, which is used in subsequent iterations. </div>
+                            <div class=""> Calculate the row of the cell based on the board size and the cell number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Formula</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> left(n), right(n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    col <span style="color:#666">=</span> (s<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">%</span>n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates two vectors of pairs `left` and `right` to store the largest element and its index for each element, from left and right directions respectively. </div>
+                            <div class=""> Calculate the column of the cell based on the board size and the cell number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Left Array Initialization</b></div>
+                            <div class=""> <b>4 : Conditional</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    left[<span style="color:#666">0</span>] <span style="color:#666">=</span> make_pair(nums[<span style="color:#666">0</span>], <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((n<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> row<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">1</span>) <span style="color:#666">||</span> (n<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> row<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">0</span>))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the first element of the `left` array with the first element of `nums` and its index. </div>
+                            <div class=""> Check if the row needs to be reversed based on the board size and row parity. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Initialization</b></div>
+                            <div class=""> <b>5 : Action</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        col<span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>col;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a for loop to iterate through the `nums` vector, starting from the second element. </div>
+                            <div class=""> Reverse the column if the row direction is reversed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Conditional Check</b></div>
+                            <div class=""> <b>6 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;=</span> left[i <span style="color:#666">-</span> <span style="color:#666">1</span>].first) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">snakesAndLadders</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> board) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current element `nums[i]` is greater than or equal to the largest element seen so far from the left (i.e., `left[i - 1]`), which would update the `left` array. </div>
+                            <div class=""> Define the `snakesAndLadders` function to solve the problem using BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update Left Array</b></div>
+                            <div class=""> <b>7 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            left[i] <span style="color:#666">=</span> make_pair(nums[i], i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> board.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the `left` array with the current element `nums[i]` and its index. </div>
+                            <div class=""> Initialize `n` as the size of the board. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Left Array Continuation</b></div>
+                            <div class=""> <b>8 : Data Structure</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> left[i] <span style="color:#666">=</span> left[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> seen(n<span style="color:#666">*</span>n<span style="color:#666">+</span><span style="color:#666">1</span>, <span style="color:#a2f">false</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element `nums[i]` is smaller than the previous largest element from the left, the current `left[i]` is set to the previous value. </div>
+                            <div class=""> Create a vector `seen` to track visited cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Right Array Initialization</b></div>
+                            <div class=""> <b>9 : Action</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    right[n<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> make_pair(nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>], n <span style="color:#666">-</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    seen[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the last element of the `right` array with the last element of `nums` and its index. </div>
+                            <div class=""> Mark the first cell as visited. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Loop Initialization</b></div>
+                            <div class=""> <b>10 : Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a reverse loop from the second-to-last element of `nums` to the first element. </div>
+                            <div class=""> Initialize a queue to store the current cell and the number of moves taken to reach it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Conditional Check</b></div>
+                            <div class=""> <b>11 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> right[i <span style="color:#666">+</span> <span style="color:#666">1</span>].first) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push({<span style="color:#666">1</span>, <span style="color:#666">0</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current element `nums[i]` is less than or equal to the smallest element seen so far from the right (i.e., `right[i &#43; 1]`). </div>
+                            <div class=""> Push the starting cell (1, 0 moves) into the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Update Right Array</b></div>
+                            <div class=""> <b>12 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            right[i] <span style="color:#666">=</span> make_pair(nums[i], i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the `right` array with the current element `nums[i]` and its index. </div>
+                            <div class=""> Start a while loop to process cells in the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Right Array Continuation</b></div>
+                            <div class=""> <b>13 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> right[i] <span style="color:#666">=</span> right[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element `nums[i]` is greater than the smallest element from the right, the current `right[i]` is set to the previous value. </div>
+                            <div class=""> Retrieve the front element of the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Sum Initialization</b></div>
+                            <div class=""> <b>14 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `sum` to 0, which will hold the final beauty sum. </div>
+                            <div class=""> Pop the front element from the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Loop Initialization</b></div>
+                            <div class=""> <b>15 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> row, col, s <span style="color:#666">=</span> p.first, dist <span style="color:#666">=</span> p.second;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop to iterate over the middle elements of the `nums` array, excluding the first and last elements. </div>
+                            <div class=""> Extract the current cell and distance from the pair. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Conditional Check</b></div>
+                            <div class=""> <b>16 : Conditional</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left[i <span style="color:#666">-</span> <span style="color:#666">1</span>].first <span style="color:#666">&lt;</span> nums[i] <span style="color:#666">&amp;&amp;</span> right[i <span style="color:#666">+</span> <span style="color:#666">1</span>].first <span style="color:#666">&gt;</span> nums[i])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s <span style="color:#666">==</span> n<span style="color:#666">*</span>n) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current element `nums[i]` is greater than the previous element in the `left` array and smaller than the next element in the `right` array. </div>
+                            <div class=""> Check if the current cell is the last cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Update Sum</b></div>
+                            <div class=""> <b>17 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> dist;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition is true, adds 2 to the `sum`, indicating a higher beauty for `nums[i]`. </div>
+                            <div class=""> Return the current distance if the last cell is reached. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Conditional Check</b></div>
+                            <div class=""> <b>18 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(nums[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">&lt;</span> nums[i] <span style="color:#666">&amp;&amp;</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> nums[i])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; s<span style="color:#666">+</span>i<span style="color:#666">&lt;=</span> n <span style="color:#666">*</span>n <span style="color:#666">&amp;&amp;</span> i<span style="color:#666">&lt;=</span><span style="color:#666">6</span>;i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if `nums[i]` is greater than the previous element and smaller than the next element, indicating a lower beauty. </div>
+                            <div class=""> Loop through the next possible cells (dice rolls 1 to 6). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Update Sum</b></div>
+                            <div class=""> <b>19 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            getCoordinate(n, s<span style="color:#666">+</span>i, row, col);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition is true, adds 1 to the `sum`, indicating a lower beauty for `nums[i]`. </div>
+                            <div class=""> Call `getCoordinate` to compute the row and column for the new cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>20 : Sum Continuation</b></div>
+                            <div class=""> <b>20 : Action</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> sum <span style="color:#666">+=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sfinal <span style="color:#666">=</span> board[row][col] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">?</span> s<span style="color:#666">+</span><span style="color:#a0a000">i</span>:board[row][col];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If neither condition is true, adds 0 to the `sum`. </div>
+                            <div class=""> Determine the final cell based on ladders or snakes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>21 : Return Statement</b></div>
+                            <div class=""> <b>21 : Conditional</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(seen[sfinal] <span style="color:#666">==</span> <span style="color:#a2f">false</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the final value of `sum`, which is the sum of beauties of the elements. </div>
+                            <div class=""> Check if the final cell has already been visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                seen[sfinal] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mark the final cell as visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Queue Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push({sfinal, dist <span style="color:#666">+</span> <span style="color:#666">1</span>});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the final cell into the queue with the updated distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return -1 if no solution is found. </div>
                         </div>
                     
                 </div>
@@ -827,16 +869,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the input array.</div>
-                        <div class=""> <b>Average Case:</b> O(n), where n is the length of the input array.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the input array.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear since we only traverse the array a constant number of times.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n²)</div>
+                        <div class=""> <b>Average Case:</b> O(n²)</div>
+                        <div class=""> <b>Worst Case:</b> O(n²)</div> 
+                        <div class=""> <b>Description:</b> Each square is visited once, and up to 6 moves are checked for each square.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), as the space complexity remains the same even in the best case.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the input array, due to the space used by the left and right arrays.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear due to the extra space used for the left and right arrays.</div>    
+                        <div class=""> <b>Best Case:</b> O(n²)</div>
+                        <div class=""> <b>Worst Case:</b> O(n²)</div> 
+                        <div class=""> <b>Description:</b> The BFS queue and visited array each store up to n² elements.</div>    
                     </div>
 
                 </div>

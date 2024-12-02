@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Nov 2, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You need to climb a ladder with n steps to reach the top. Each time, you can either climb 1 step or 2 steps. Find the number of distinct ways to climb to the top. </div>
+<div class=""> You are given an array of strings. Group the strings that are anagrams of each other together and return them as a list of lists. An anagram is a word or phrase formed by rearranging the letters of another word or phrase. </div>
 
 
 
@@ -372,47 +372,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A single integer n, representing the total number of steps in the ladder.</div>
-                        <div class=""> <b>Example:</b> Input: n = 4</div>
+                        <div class=""> <b>Input:</b> The input is an array of strings, where each string is a lowercase English word.</div>
+                        <div class=""> <b>Example:</b> [&#34;listen&#34;, &#34;silent&#34;, &#34;enlist&#34;, &#34;rat&#34;, &#34;tar&#34;, &#34;art&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 45</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= strs.length &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= strs[i].length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • Each string in strs consists of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an integer representing the total number of distinct ways to climb the ladder.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> Return a list of lists, where each inner list contains strings that are anagrams of each other.</div>
+                        <div class=""> <b>Example:</b> [[&#34;listen&#34;, &#34;silent&#34;, &#34;enlist&#34;], [&#34;rat&#34;, &#34;tar&#34;, &#34;art&#34;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must be a valid integer that corresponds to the number of distinct ways.</div>
+                                <div style="margin-left: 20px;"> • The output should contain all anagram groups.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Calculate the total number of ways to climb the ladder using a dynamic programming approach.</div>
+                        <div class=""> <b>Goal:</b> The goal is to group the strings that are anagrams of each other and return them in a list of lists.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Define an array dp, where dp[i] represents the number of ways to climb to the ith step.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a map to store groups of anagrams.</div>
                             
-                                <div style="margin-left: 20px;"> • Initialize dp[0] = 1 (1 way to stay at the start) and dp[1] = 1 (1 way to climb the first step).</div>
+                                <div style="margin-left: 20px;"> • 2. For each string, generate a signature (like a sorted version or a character count).</div>
                             
-                                <div style="margin-left: 20px;"> • Iteratively calculate dp[i] for 2 &lt;= i &lt;= n using the relation dp[i] = dp[i-1] &#43; dp[i-2].</div>
+                                <div style="margin-left: 20px;"> • 3. Use this signature as the key in the map and add the string to the corresponding list.</div>
                             
-                                <div style="margin-left: 20px;"> • Return dp[n] as the result.</div>
+                                <div style="margin-left: 20px;"> • 4. After processing all strings, return the list of values from the map.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input value n must meet the specified constraints, and the function must efficiently compute results within the range.</div>
+                        <div class=""> <b>Goal:</b> The input array has a length between 1 and 10^4, and each string has a length of up to 100 characters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 45</div>
+                                <div style="margin-left: 20px;"> • The length of the input array is at most 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • Handle inputs efficiently to avoid performance issues.</div>
+                                <div style="margin-left: 20px;"> • Each string has a length of at most 100.</div>
+                            
+                                <div style="margin-left: 20px;"> • Strings only contain lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -420,21 +426,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input n is a valid integer.</div>
-                            
-                                <div style="margin-left: 20px;"> • There are no additional environmental constraints affecting the problem.</div>
+                                <div style="margin-left: 20px;"> • There will be no empty strings in the input unless explicitly stated (e.g., in Example 3).</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number of distinct ways to climb 4 steps is 5, as shown in the example above.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [&#34;listen&#34;, &#34;silent&#34;, &#34;enlist&#34;, &#34;rat&#34;, &#34;tar&#34;, &#34;art&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the strings &#34;listen&#34;, &#34;silent&#34;, and &#34;enlist&#34; form one group of anagrams, while &#34;rat&#34;, &#34;tar&#34;, and &#34;art&#34; form another group.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number of distinct ways to climb 5 steps is 8, as shown in the example above.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [&#34;cat&#34;, &#34;dog&#34;, &#34;god&#34;, &#34;act&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, &#34;cat&#34; and &#34;act&#34; are anagrams of each other, while &#34;dog&#34; and &#34;god&#34; form a separate group.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,18 +462,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use dynamic programming to calculate the number of ways to climb the ladder iteratively.</div>
+                        <div class=""> <b>Approach:</b> The approach involves using a map to group the strings that are anagrams of each other based on a unique signature (e.g., sorted characters or character count).</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be broken down recursively: the number of ways to climb n steps depends on the number of ways to climb n-1 and n-2 steps.</div>
-                            
-                                <div style="margin-left: 20px;"> • This is similar to the Fibonacci sequence.</div>
+                                <div style="margin-left: 20px;"> • Anagrams can be identified by sorting the characters in the string or by using a frequency count of characters.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Use an iterative approach with an array to store intermediate results for efficiency.</div>
+                                <div style="margin-left: 20px;"> • Using a frequency count or sorted string as a key in a map can efficiently group the anagrams.</div>
                             
                         </div>
                     </div>
@@ -477,13 +479,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an array dp of size n&#43;1, where dp[i] represents the number of ways to climb i steps.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a map to store groups of anagrams.</div>
                             
-                                <div style="margin-left: 20px;"> • Set dp[0] = 1 and dp[1] = 1 as the base cases.</div>
+                                <div style="margin-left: 20px;"> • 2. For each string, generate a unique signature (e.g., sorted version of the string or a frequency count of characters).</div>
                             
-                                <div style="margin-left: 20px;"> • Iteratively compute dp[i] for i = 2 to n using the formula dp[i] = dp[i-1] &#43; dp[i-2].</div>
+                                <div style="margin-left: 20px;"> • 3. Use this signature as the key in the map and add the string to the corresponding list of anagrams.</div>
                             
-                                <div style="margin-left: 20px;"> • Return dp[n] as the final result.</div>
+                                <div style="margin-left: 20px;"> • 4. After processing all strings, return the values from the map, which are the grouped anagrams.</div>
                             
                         </div>
                     </div>
@@ -492,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable since the input n is guaranteed to be within the constraints.</div>
+                                <div style="margin-left: 20px;"> • If the input contains an empty string, it should be grouped separately.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • n = 45, the upper limit of the constraint.</div>
+                                <div style="margin-left: 20px;"> • For larger inputs, the algorithm should still efficiently group anagrams within the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • n = 1, the smallest number of steps.</div>
+                                <div style="margin-left: 20px;"> • Anagrams with only one character should be grouped together.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the implementation works for both small and large values of n within the range.</div>
+                                <div style="margin-left: 20px;"> • The input strings contain only lowercase letters and have lengths between 0 and 100.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,17 +528,39 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Cases</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize Variables</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Character Frequency Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Iterative Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Character Frequency Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Calculate Ways to Climb i Stairs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 String Stream Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Variables</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 String Stream Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 String Stream Manipulation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 String Stream Manipulation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Frequency String</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Main Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Map Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Iterate Over Strings</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Generate Character Frequency String</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Group Anagrams</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Result Vector Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Populate Result Vector</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Populate Result Vector</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Result</button>
                     
                 </div>
 
@@ -545,19 +569,31 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">climbStairs</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&lt;=</span> <span style="color:#666">2</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> n;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>string <span style="color:#00a000">code</span>(string x) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        q[x[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> first <span style="color:#666">=</span> <span style="color:#666">1</span>, second <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> third <span style="color:#666">=</span> first <span style="color:#666">+</span> second;
-</span></span><span style="display:flex;"><span>        first <span style="color:#666">=</span> second;
-</span></span><span style="display:flex;"><span>        second <span style="color:#666">=</span> third;
+</span></span><span style="display:flex;"><span>    stringstream ss;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">!=</span> <span style="color:#666">0</span>) ss <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39;,&#39;</span>;
+</span></span><span style="display:flex;"><span>        ss <span style="color:#666">&lt;&lt;</span> q[i];
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ss.str();
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> second;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> groupAnagrams(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> strs) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ma;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">x</span>: strs) {
+</span></span><span style="display:flex;"><span>        string mask <span style="color:#666">=</span> code(x);
+</span></span><span style="display:flex;"><span>        ma[mask].push_back(x);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> ma)
+</span></span><span style="display:flex;"><span>        ans.push_back(val);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -568,73 +604,180 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">climbStairs</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">code</span>(string x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a function named `climbStairs` that takes an integer `n` representing the number of stairs as input and returns the number of distinct ways to climb them. </div>
+                            <div class=""> This line declares a function named `code` that takes a string `x` as input and returns a string representing the character frequency of the input string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Base Cases</b></div>
+                            <div class=""> <b>2 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&lt;=</span> <span style="color:#666">2</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> n;
-</span></span><span style="display:flex;"><span>    }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This block handles the base cases: if `n` is 1 or 2, there&#39;s only one way to climb the stairs. </div>
+                            <div class=""> This line initializes a vector `q` of size 26 to store the frequency of each lowercase letter. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialize Variables</b></div>
+                            <div class=""> <b>3 : Character Frequency Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> first <span style="color:#666">=</span> <span style="color:#666">1</span>, second <span style="color:#666">=</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `first` and `second` to represent the number of ways to climb 1 and 2 stairs, respectively. </div>
+                            <div class=""> This loop iterates over each character in the input string `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Iterative Calculation</b></div>
+                            <div class=""> <b>4 : Character Frequency Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q[x[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates from 3 to `n`, calculating the number of ways to climb `i` stairs. </div>
+                            <div class=""> The frequency of the current character `x[i]` is incremented in the corresponding index of the `q` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Calculate Ways to Climb i Stairs</b></div>
+                            <div class=""> <b>5 : String Stream Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> third <span style="color:#666">=</span> first <span style="color:#666">+</span> second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stringstream ss;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the number of ways to climb `i` stairs by adding the ways to climb `i-1` and `i-2` stairs. </div>
+                            <div class=""> A string stream `ss` is initialized to construct the character frequency string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Update Variables</b></div>
+                            <div class=""> <b>6 : String Stream Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        first <span style="color:#666">=</span> second;
-</span></span><span style="display:flex;"><span>        second <span style="color:#666">=</span> third;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update `first` and `second` for the next iteration. </div>
+                            <div class=""> This loop iterates over the frequency array `q`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Result</b></div>
+                            <div class=""> <b>7 : String Stream Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">!=</span> <span style="color:#666">0</span>) ss <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39;,&#39;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After the loop, `second` will hold the number of ways to climb `n` stairs, so return it. </div>
+                            <div class=""> If it&#39;s not the first iteration, a comma is added to the string stream as a separator. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : String Stream Manipulation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ss <span style="color:#666">&lt;&lt;</span> q[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The frequency of the current character is appended to the string stream. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Frequency String</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ss.str();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The final string representation of the character frequencies is returned. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Main Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> groupAnagrams(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> strs) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line declares the main function `groupAnagrams` that takes a vector of strings `strs` as input and returns a vector of vectors containing grouped anagrams. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Map Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ma;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A map `ma` is initialized to store the character frequency string as the key and a vector of anagrams as the value. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Iterate Over Strings</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">x</span>: strs) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates over each string `x` in the input vector `strs`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Generate Character Frequency String</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string mask <span style="color:#666">=</span> code(x);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `code` function is called to generate the character frequency string `mask` for the current string `x`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Group Anagrams</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ma[mask].push_back(x);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The current string `x` is added to the vector of anagrams associated with the `mask` key in the `ma` map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Result Vector Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A 2D vector `ans` is initialized to store the grouped anagrams. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Populate Result Vector</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> ma)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates over the key-value pairs in the `ma` map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Populate Result Vector</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(val);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The vector of anagrams associated with the current key is added to the `ans` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The `ans` vector containing the grouped anagrams is returned. </div>
                         </div>
                     
                 </div>
@@ -654,16 +797,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> Each step from 2 to n is computed once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * k log k)</div>
+                        <div class=""> <b>Average Case:</b> O(n * k log k)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * k log k)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * k log k), where n is the number of strings and k is the length of the longest string. Sorting each string takes O(k log k) time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) with optimization (using two variables instead of an array).</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space required depends on whether an array or two variables are used.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * k)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n * k) where n is the number of strings and k is the average length of the strings, due to the space used by the map to store the anagram groups.</div>    
                     </div>
 
                 </div>

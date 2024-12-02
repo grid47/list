@@ -284,7 +284,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -323,7 +323,7 @@
 
 
 
-<div class=""> You are given an encoded string consisting of letters and digits. The string is decoded such that for each digit, the preceding segment of the decoded string is repeated (digit - 1) additional times. Your task is to return the kth character (1-indexed) in the decoded string, where k is a positive integer. The decoded string could be extremely large, so you are not expected to fully decode the string. </div>
+<div class=""> You are given a list of equations and their corresponding values, where each equation represents a division between two variables. Your task is to determine the result of several queries asking for the division result of two given variables. </div>
 
 
 
@@ -374,53 +374,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an encoded string containing lowercase English letters and digits between 2 and 9. The string always starts with a letter.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#39;abc3de2&#39;, k = 5</div>
+                        <div class=""> <b>Input:</b> You are given two lists: `equations` representing division relations and `values` representing the results of those divisions. You are also given a list of `queries` that you need to evaluate.</div>
+                        <div class=""> <b>Example:</b> Input: equations = [[&#39;a&#39;, &#39;b&#39;], [&#39;b&#39;, &#39;c&#39;]], values = [2.0, 3.0], queries = [[&#39;a&#39;, &#39;c&#39;], [&#39;b&#39;, &#39;a&#39;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= equations.length &lt;= 20</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters and digits 2 through 9.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= queries.length &lt;= 20</div>
                             
-                                <div style="margin-left: 20px;"> • s starts with a letter.</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • It is guaranteed that k is less than or equal to the length of the decoded string.</div>
-                            
-                                <div style="margin-left: 20px;"> • The decoded string will have fewer than 2^63 letters.</div>
+                                <div style="margin-left: 20px;"> • Each equation contains two strings with lengths from 1 to 5.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> You should return a string representing the kth character in the decoded string.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;d&#39;</div>
+                        <div class=""> <b>Output:</b> For each query, return the result of the division if it can be determined, otherwise return -1.0.</div>
+                        <div class=""> <b>Example:</b> Output: [6.0, 0.5, -1.0, 1.0, -1.0]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a single lowercase letter.</div>
+                                <div style="margin-left: 20px;"> • The division is guaranteed to be valid for each equation.</div>
+                            
+                                <div style="margin-left: 20px;"> • Queries asking for divisions between undefined variables must return -1.0.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To efficiently determine the kth character without fully decoding the string.</div>
+                        <div class=""> <b>Goal:</b> Use depth-first search (DFS) to explore possible paths in the graph and compute the result of each query.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • First, calculate the total length of the decoded string by iterating over the encoded string.</div>
+                                <div style="margin-left: 20px;"> • Construct a graph where each variable is a node, and each equation provides an edge with a weight representing the division result.</div>
                             
-                                <div style="margin-left: 20px;"> • Identify the range in which the kth character lies by adjusting the index in reverse.</div>
-                            
-                                <div style="margin-left: 20px;"> • When a digit is encountered, divide the total length by that digit to adjust the range, and continue until the correct position is found.</div>
+                                <div style="margin-left: 20px;"> • For each query, use DFS to explore the graph from the starting node (variable) to the target node and compute the division result along the path.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem has constraints that ensure that the decoded string is large enough that fully decoding it is impractical. The goal is to calculate the position of the kth character without decoding the entire string.</div>
+                        <div class=""> <b>Goal:</b> Ensure that there are no contradictions in the input equations and that division by zero does not occur.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of characters to decode can grow very large, so a brute-force solution that fully decodes the string would be inefficient.</div>
+                                <div style="margin-left: 20px;"> • The variables in queries must be part of the equations provided.</div>
                             
                         </div>
                     </div>        
@@ -428,21 +422,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • It is guaranteed that k is less than or equal to the length of the decoded string.</div>
+                                <div style="margin-left: 20px;"> • All equations are valid and there are no contradictions.</div>
                             
-                                <div style="margin-left: 20px;"> • The input string contains only lowercase letters and digits between 2 and 9.</div>
+                                <div style="margin-left: 20px;"> • Evaluating queries will not result in division by zero.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;abc3de2&#39;, k = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;abc3de2&#39; decodes to &#39;abcdeabcde&#39;. The 5th character is &#39;d&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;xy2z3&#39;, k = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;xy2z3&#39; decodes to &#39;xyzxyzxyzxyz&#39;. The 6th character is &#39;z&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For the equations [[&#39;a&#39;, &#39;b&#39;], [&#39;b&#39;, &#39;c&#39;]] and values [2.0, 3.0], the query [&#39;a&#39;, &#39;c&#39;] will return 6.0 because a / b = 2 and b / c = 3, so a / c = 2 * 3 = 6.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We first find the direct relations between variables and then use those relations to compute the result for each query.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -466,16 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The key observation is that you do not need to fully decode the string. Instead, track the length of the string dynamically as you process the encoded string. By identifying when the kth character falls within a segment, you can reverse the encoding process to find the character.</div>
+                        <div class=""> <b>Approach:</b> The problem can be approached by constructing a graph from the equations, where each node represents a variable, and each edge represents a division relation. DFS is then used to traverse the graph to find answers to the queries.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Instead of decoding the string fully, keep track of the lengths of the decoded segments as you parse the string.</div>
+                                <div style="margin-left: 20px;"> • Equations form a graph structure, with variables as nodes and division results as edge weights.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Reverse the decoding process to determine the position of the kth character efficiently.</div>
+                                <div style="margin-left: 20px;"> • We need to perform DFS to explore possible paths and compute the result for each query.</div>
                             
                         </div>
                     </div>
@@ -483,11 +473,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate through the encoded string and calculate the total length of the decoded string as you go.</div>
+                                <div style="margin-left: 20px;"> • 1. Build a graph of variables with their corresponding division results.</div>
                             
-                                <div style="margin-left: 20px;"> • When encountering a digit, multiply the length of the current segment by the digit to account for repetition.</div>
-                            
-                                <div style="margin-left: 20px;"> • When encountering a letter, decrement the length and check if it corresponds to the kth character. If so, return it.</div>
+                                <div style="margin-left: 20px;"> • 2. For each query, perform DFS to compute the result, keeping track of visited nodes to avoid cycles.</div>
                             
                         </div>
                     </div>
@@ -496,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one letter, so empty input will not occur.</div>
+                                <div style="margin-left: 20px;"> • Queries for undefined variables should return -1.0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle cases where the length of the decoded string exceeds the practical limit for direct storage.</div>
+                                <div style="margin-left: 20px;"> • Handle large numbers of equations and queries efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where the kth character is located within a repetitive segment.</div>
+                                <div style="margin-left: 20px;"> • Return -1.0 for queries involving variables that do not appear in the equations.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure the solution works within the problem&#39;s constraints, particularly the large value of k.</div>
+                                <div style="margin-left: 20px;"> • Queries involving variables not present in the equations are invalid and should return -1.0.</div>
                             
                         </div>                                                                        
                     </div>
@@ -528,29 +516,53 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Access Modifier</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Graph Representation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Graph Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Graph Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Graph Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Edge Case Handling</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Graph Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Arithmetic Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Arithmetic Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Query Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Expression</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Visited Set</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Edge Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Store Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 DFS Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 DFS Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Mark Visited</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 DFS Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 DFS Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 DFS Pruning</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Recursive DFS</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 DFS Result Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Default</button>
                     
                 </div>
 
@@ -559,27 +571,40 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>string decodeAtIndex(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> calcEquation(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> eqn, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&amp;</span> val, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> q) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;&gt;</span> graph;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> N <span style="color:#666">=</span> <span style="color:#666">0</span>, i;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; N <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        N <span style="color:#666">=</span> isdigit(s[i])<span style="color:#666">?</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#a0a000">N</span>: N <span style="color:#666">+</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isdigit(s[i])) {
-</span></span><span style="display:flex;"><span>            N <span style="color:#666">/=</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
-</span></span><span style="display:flex;"><span>            k <span style="color:#666">%=</span> N;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (k <span style="color:#666">%</span> N<span style="color:#666">--</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> string(<span style="color:#666">1</span>, s[i]);
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> w <span style="color:#666">=</span> val[i];
+</span></span><span style="display:flex;"><span>        graph[eqn[i][<span style="color:#666">0</span>]].push_back(make_pair(eqn[i][<span style="color:#666">1</span>], w));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (w <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        graph[eqn[i][<span style="color:#666">1</span>]].push_back(make_pair(eqn[i][<span style="color:#666">0</span>], <span style="color:#666">1</span> <span style="color:#666">/</span> w));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;hello yasir&#34;</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> vis;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> res <span style="color:#666">=</span> dfs(q[i][<span style="color:#666">0</span>], q[i][<span style="color:#666">1</span>], vis, graph);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) res <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        ans.push_back(res);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">dfs</span>(string start, string end, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>vis, map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;&gt;</span> <span style="color:#666">&amp;</span>gph) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(start <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> gph.count(start)<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    vis.insert(start);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(pair<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">x</span>: gph[start]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(vis.count(x.first)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> res <span style="color:#666">=</span> x.second <span style="color:#666">*</span> dfs(x.first, end, vis, gph);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -587,123 +612,243 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Access Modifier</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> calcEquation(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> eqn, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&amp;</span> val, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> q) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Access modifier `public` allows the method `decodeAtIndex` to be accessed from outside the class. </div>
+                            <div class=""> Define the main function `calcEquation` that takes the list of equations (`eqn`), their corresponding values (`val`), and queries (`q`) as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function</b></div>
+                            <div class=""> <b>2 : Graph Representation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">decodeAtIndex</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;&gt;</span> graph;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function `decodeAtIndex` takes a string `s` and an integer `k`, and decodes the string to find the k-th character. </div>
+                            <div class=""> Create a graph to represent the equations where each node is a string (variable) and each edge is a pair (connected variable and the corresponding value). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Declaration</b></div>
+                            <div class=""> <b>3 : Graph Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> N <span style="color:#666">=</span> <span style="color:#666">0</span>, i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares two variables `N` (used to track the length of the decoded string) and `i` (used for iteration). </div>
+                            <div class=""> Loop through the list of equations to build the graph with the given relationships between variables. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Graph Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; N <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> w <span style="color:#666">=</span> val[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop that iterates through the string `s`, updating `N` to track the decoded length until it reaches `k`. </div>
+                            <div class=""> Extract the weight (value) associated with the current equation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Conditional Expression</b></div>
+                            <div class=""> <b>5 : Graph Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        N <span style="color:#666">=</span> isdigit(s[i])<span style="color:#666">?</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#a0a000">N</span>: N <span style="color:#666">+</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        graph[eqn[i][<span style="color:#666">0</span>]].push_back(make_pair(eqn[i][<span style="color:#666">1</span>], w));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates `N` based on whether the character at `s[i]` is a digit or not. If it&#39;s a digit, `N` is multiplied; otherwise, it&#39;s incremented. </div>
+                            <div class=""> For each equation, add the relationship between the first variable and the second variable with the corresponding value to the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Edge Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (w <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A while loop that iterates backwards through the string to find the character corresponding to the k-th position. </div>
+                            <div class=""> Skip equations where the value is zero to avoid division by zero. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Expression</b></div>
+                            <div class=""> <b>7 : Graph Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isdigit(s[i])) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        graph[eqn[i][<span style="color:#666">1</span>]].push_back(make_pair(eqn[i][<span style="color:#666">0</span>], <span style="color:#666">1</span> <span style="color:#666">/</span> w));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current character is a digit. </div>
+                            <div class=""> Add the inverse relationship to the graph for the second variable. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Arithmetic Operation</b></div>
+                            <div class=""> <b>8 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            N <span style="color:#666">/=</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Divides `N` by the value of the digit at `s[i]`. </div>
+                            <div class=""> Initialize a vector `ans` to store the results of the queries. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Arithmetic Operation</b></div>
+                            <div class=""> <b>9 : Query Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            k <span style="color:#666">%=</span> N;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the remainder of `k` after dividing it by `N` to find the new position of `k`. </div>
+                            <div class=""> Loop through the queries to calculate the result for each pair of variables. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Conditional Expression</b></div>
+                            <div class=""> <b>10 : Visited Set</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (k <span style="color:#666">%</span> N<span style="color:#666">--</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> vis;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if `k` is divisible by `N` and decrements `N` after the check. </div>
+                            <div class=""> Create a set `vis` to keep track of visited nodes (variables) during the DFS traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">string</span>(<span style="color:#666">1</span>, s[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> res <span style="color:#666">=</span> dfs(q[i][<span style="color:#666">0</span>], q[i][<span style="color:#666">1</span>], vis, graph);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the character at `s[i]` as a string when the k-th position is found. </div>
+                            <div class=""> Call the `dfs` function to compute the result of the query. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Edge Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;hello yasir&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) res <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns a default string &#34;hello yasir&#34; if the character is not found. </div>
+                            <div class=""> If the result is negative (meaning no path was found), set the result to -1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Store Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(res);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the result of the query in the `ans` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the vector `ans` containing the results of all queries. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : DFS Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">dfs</span>(string start, string end, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>vis, map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;&gt;</span> <span style="color:#666">&amp;</span>gph) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the `dfs` function that performs a depth-first search to find the path between two variables. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : DFS Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(start <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> gph.count(start)<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the start and end variables are the same, return 1 if the variable exists in the graph, or -1 if not. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Mark Visited</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vis.insert(start);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mark the current node (variable) as visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : DFS Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a variable `ans` to store the result of the DFS traversal. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : DFS Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(pair<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> <span style="color:#a0a000">x</span>: gph[start]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate through all neighbors of the current node (variable). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : DFS Pruning</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(vis.count(x.first)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skip already visited nodes to avoid infinite loops. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Recursive DFS</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> res <span style="color:#666">=</span> x.second <span style="color:#666">*</span> dfs(x.first, end, vis, gph);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call the `dfs` function for the neighboring node and calculate the result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : DFS Result Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the result of the recursive call is negative (no path found), continue to the next neighbor. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a valid result is found, return it. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Return Default</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no valid result was found, return the default value (-1). </div>
                         </div>
                     
                 </div>
@@ -723,16 +868,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the length of the input string, as we only need to process the string once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(V &#43; E) where V is the number of vertices (variables) and E is the number of edges (equations).</div>
+                        <div class=""> <b>Average Case:</b> O(V &#43; E) per query.</div>
+                        <div class=""> <b>Worst Case:</b> O(V &#43; E) per query.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of variables and equations, and each query requires traversal of the graph.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since we are only keeping track of a few variables and do not need to store the decoded string.</div>    
+                        <div class=""> <b>Best Case:</b> O(V &#43; E) for storing the graph.</div>
+                        <div class=""> <b>Worst Case:</b> O(V &#43; E) where V is the number of vertices and E is the number of edges.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the size of the graph created from the equations.</div>    
                     </div>
 
                 </div>

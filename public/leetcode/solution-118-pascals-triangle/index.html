@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given an array of positive integers and a target value, find the minimal length of a contiguous subarray whose sum is greater than or equal to the target. If no such subarray exists, return 0. </div>
+<div class=""> Given an integer numRows, return the first numRows of Pascal&rsquo;s triangle. In Pascal&rsquo;s triangle, each number is the sum of the two numbers directly above it. Your task is to generate and return the first &rsquo;numRows&rsquo; of the triangle. </div>
 
 
 
@@ -370,47 +370,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a list of integers, `nums`, and an integer `target`.</div>
-                        <div class=""> <b>Example:</b> [target = 8, nums = [1, 4, 4, 2, 1, 5]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a single integer, numRows, which represents the number of rows to be generated from Pascal&#39;s triangle.</div>
+                        <div class=""> <b>Example:</b> Input: numRows = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The value of target is between 1 and 10^9.</div>
-                            
-                                <div style="margin-left: 20px;"> • The length of nums is between 1 and 100,000.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each element of nums is between 1 and 10^4.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= numRows &lt;= 30</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the minimal length of a subarray whose sum is greater than or equal to the target, or 0 if no such subarray exists.</div>
-                        <div class=""> <b>Example:</b> For target = 8 and nums = [1, 4, 4, 2, 1, 5], the output is 2.</div>
+                        <div class=""> <b>Output:</b> The output should be a 2D array, where each row represents the corresponding row of Pascal&#39;s triangle, starting from the top.</div>
+                        <div class=""> <b>Example:</b> Output: [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The number of rows in the output should not exceed &#39;numRows&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To efficiently find the smallest subarray whose sum is greater than or equal to the target.</div>
+                        <div class=""> <b>Goal:</b> The goal is to generate Pascal&#39;s triangle row by row, where each row can be constructed by adding the elements directly above it from the previous row.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Start iterating over the array while maintaining a running sum of the elements.</div>
+                                <div style="margin-left: 20px;"> • Start with the first row, which is always [1].</div>
                             
-                                <div style="margin-left: 20px;"> • If the sum becomes greater than or equal to the target, update the minimal subarray length and reduce the sum by removing elements from the start of the subarray.</div>
+                                <div style="margin-left: 20px;"> • For each subsequent row, initialize the row with 1 at the start and end.</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat until you have considered all subarrays.</div>
+                                <div style="margin-left: 20px;"> • For each intermediate position in the row, calculate the value by adding the two numbers directly above it from the previous row.</div>
+                            
+                                <div style="margin-left: 20px;"> • Repeat this process for &#39;numRows&#39; rows.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure that the solution must handle large inputs efficiently.</div>
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the value of numRows will be between 1 and 30.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array length is between 1 and 100,000, requiring an efficient O(n) solution.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each element is between 1 and 10,000, which ensures the sum can grow large but remains manageable.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= numRows &lt;= 30</div>
                             
                         </div>
                     </div>        
@@ -418,23 +416,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array contains only positive integers.</div>
+                                <div style="margin-left: 20px;"> • The input value numRows is always valid and within the given constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the subarray `[4, 4]` is the smallest subarray whose sum is at least 8, and its length is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: numRows = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input numRows = 4, Pascal&#39;s triangle is generated as follows: the first row is [1], the second row is [1, 1], the third row is [1, 2, 1], and the fourth row is [1, 3, 3, 1].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarray `[3, 4]` sums to 7, which is greater than or equal to the target 6, and it has the minimal length of 2.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, no subarray&#39;s sum can reach 12, so the answer is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: numRows = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For the input numRows = 2, the output will be [[1], [1, 1]].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +452,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses a sliding window technique to find the minimal length of a subarray with a sum greater than or equal to the target.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved iteratively by constructing each row based on the previous one. Each new row is initialized with 1 at the boundaries, and the intermediate values are calculated by summing the two values directly above.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sliding window techniques are ideal for problems involving subarrays with conditions on their sum.</div>
+                                <div style="margin-left: 20px;"> • We can generate each row by leveraging the values of the previous row.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By maintaining a running sum and sliding the window over the array, we can find the minimal subarray efficiently.</div>
+                                <div style="margin-left: 20px;"> • A direct approach will involve iterating through each row and filling in the values based on the previous row.</div>
                             
                         </div>
                     </div>
@@ -475,11 +469,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate over the array, keeping track of a running sum.</div>
+                                <div style="margin-left: 20px;"> • Initialize the result as an empty 2D array.</div>
                             
-                                <div style="margin-left: 20px;"> • Whenever the sum exceeds or meets the target, update the minimum subarray length and shrink the window from the left.</div>
+                                <div style="margin-left: 20px;"> • For each row from 1 to numRows, initialize the row with the appropriate number of elements (starting and ending with 1).</div>
                             
-                                <div style="margin-left: 20px;"> • Return the smallest subarray length that satisfies the condition or 0 if no such subarray is found.</div>
+                                <div style="margin-left: 20px;"> • For each intermediate position in the row, compute the value by adding the corresponding elements from the previous row.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the resulting 2D array after generating all rows.</div>
                             
                         </div>
                     </div>
@@ -488,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty or the target is very large, the result will be 0.</div>
+                                <div style="margin-left: 20px;"> • If numRows is 1, the output will just be [[1]].</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large arrays, ensure the solution handles up to 100,000 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 30 rows efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the target is 1 and the array contains only 1s, the smallest subarray will always have length 1.</div>
+                                <div style="margin-left: 20px;"> • For numRows = 1, the output is [[1]].</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works within the time limits for large arrays (O(n) time complexity).</div>
+                                <div style="margin-left: 20px;"> • The input will always satisfy 1 &lt;= numRows &lt;= 30.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,25 +516,21 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sum Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Row Resize</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Row Boundaries</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Window Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Sum Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Dynamic Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Left Pointer Move</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Right Pointer Move</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
                     
                 </div>
 
@@ -547,19 +539,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSubArrayLen</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>, g <span style="color:#666">=</span> INT_MAX, bdx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> nums.size()) {
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[idx];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> generate(<span style="color:#0b0;font-weight:bold">int</span> numRows) {
+</span></span><span style="display:flex;"><span>      vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> r(numRows);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sum <span style="color:#666">&gt;=</span> target) {
-</span></span><span style="display:flex;"><span>            g <span style="color:#666">=</span> min(g, idx <span style="color:#666">-</span> bdx <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">-=</span> nums[bdx];
-</span></span><span style="display:flex;"><span>            bdx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        idx<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> numRows; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        r[i].resize(i <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        r[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> r[i][i] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            r[i][j] <span style="color:#666">=</span> r[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> r[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> g <span style="color:#666">==</span> INT_MAX<span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> g;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> r;      
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -567,103 +558,83 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minSubArrayLen</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> generate(<span style="color:#0b0;font-weight:bold">int</span> numRows) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `minSubArrayLen` that takes a target sum and an array of integers, `nums`, and returns the minimum length of a subarray whose sum is at least equal to the target. </div>
+                            <div class=""> Declare a function to generate Pascal&#39;s Triangle for a given number of rows. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>, g <span style="color:#666">=</span> INT_MAX, bdx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>      vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> r(numRows);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables: `sum` to track the current sum of the window, `idx` as the right pointer of the window, `g` to store the minimum length of the subarray, and `bdx` as the left pointer of the window. </div>
+                            <div class=""> Initialize a 2D vector to store the rows of Pascal&#39;s Triangle. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Iteration</b></div>
+                            <div class=""> <b>3 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> nums.size()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> numRows; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop that iterates through the array with the right pointer `idx`. </div>
+                            <div class=""> Iterate over each row to populate Pascal&#39;s Triangle. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Sum Update</b></div>
+                            <div class=""> <b>4 : Row Resize</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[idx];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        r[i].resize(i <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current element of `nums` at index `idx` to the sum of the current subarray. </div>
+                            <div class=""> Resize the current row to accommodate the required number of elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Inner While Loop</b></div>
+                            <div class=""> <b>5 : Row Boundaries</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sum <span style="color:#666">&gt;=</span> target) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        r[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> r[i][i] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an inner while loop that checks if the sum of the current subarray is greater than or equal to the target. If true, try to shrink the window. </div>
+                            <div class=""> Set the first and last elements of the row to 1, as they are boundaries in Pascal&#39;s Triangle. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Window Update</b></div>
+                            <div class=""> <b>6 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            g <span style="color:#666">=</span> min(g, idx <span style="color:#666">-</span> bdx <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the minimum subarray length `g` with the current window length, which is `idx - bdx &#43; 1`. </div>
+                            <div class=""> Iterate over the internal elements of the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Sum Update</b></div>
+                            <div class=""> <b>7 : Dynamic Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">-=</span> nums[bdx];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r[i][j] <span style="color:#666">=</span> r[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> r[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Shrink the window by subtracting the value at the left pointer `bdx` from the current sum. </div>
+                            <div class=""> Compute each internal element as the sum of two elements directly above it in the triangle. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Left Pointer Move</b></div>
+                            <div class=""> <b>8 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bdx<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> r;      
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move the left pointer `bdx` to the right to shrink the window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Right Pointer Move</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        idx<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Move the right pointer `idx` to the next element, expanding the window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> g <span style="color:#666">==</span> INT_MAX<span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> g;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the minimum length of the subarray. If no valid subarray is found, return 0 (indicating no subarray meets the target sum). </div>
+                            <div class=""> Return the completed Pascal&#39;s Triangle as a 2D vector. </div>
                         </div>
                     
                 </div>
@@ -683,16 +654,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), when the sum of elements exceeds the target early in the iteration.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as we process each element exactly once.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), in the worst case where the window moves across the entire array.</div> 
-                        <div class=""> <b>Description:</b> The sliding window technique ensures that we only iterate over the array once, making the time complexity linear.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(numRows^2)</div>
+                        <div class=""> <b>Average Case:</b> O(numRows^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(numRows^2)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(numRows^2) because we process each element in the triangle once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as no additional space is required.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as the space complexity is constant, only requiring variables for sum and indexes.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we are only using a few variables to keep track of the running sum and indices.</div>    
+                        <div class=""> <b>Best Case:</b> O(numRows^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(numRows^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(numRows^2) because the result contains a 2D array of size numRows x numRows in the worst case.</div>    
                     </div>
 
                 </div>

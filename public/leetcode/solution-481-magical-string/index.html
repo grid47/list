@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 19, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given an array of integers <code>nums</code> and two integers <code>firstLen</code> and <code>secondLen</code>. Your task is to find the maximum sum of elements from two non-overlapping subarrays of lengths <code>firstLen</code> and <code>secondLen</code>. The subarrays can appear in any order, but they must not overlap. </div>
+<div class=""> A magical string consists of only &lsquo;1&rsquo; and &lsquo;2&rsquo; and follows a special rule: the number of consecutive occurrences of characters &lsquo;1&rsquo; and &lsquo;2&rsquo; generates the string itself. Given an integer <code>n</code>, return the number of &lsquo;1&rsquo;s in the first <code>n</code> characters of the magical string. </div>
 
 
 
@@ -370,51 +370,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array `nums` and two integers `firstLen` and `secondLen`, representing the lengths of the two subarrays.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 2, 9, 5, 6, 3, 8, 7], firstLen = 2, secondLen = 3</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer `n`, the length of the desired substring of the magical string.</div>
+                        <div class=""> <b>Example:</b> n = 7</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= firstLen, secondLen &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • 2 &lt;= firstLen &#43; secondLen &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • firstLen &#43; secondLen &lt;= nums.length &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum sum of the elements of the two non-overlapping subarrays.</div>
-                        <div class=""> <b>Example:</b> Output: 30</div>
+                        <div class=""> <b>Output:</b> Return the number of &#39;1&#39;s in the first `n` characters of the magical string.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sum of the elements from the two non-overlapping subarrays must be maximized.</div>
+                                <div style="margin-left: 20px;"> • The result will be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find two non-overlapping subarrays whose sum is as large as possible.</div>
+                        <div class=""> <b>Goal:</b> Generate the magical string up to `n` characters and count the number of &#39;1&#39;s.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use a sliding window to calculate the sum of every subarray of length `firstLen` and `secondLen`.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with the base string &#39;122&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Track the maximum sum of subarrays of length `firstLen` up to each index.</div>
+                                <div style="margin-left: 20px;"> • 2. Generate the magical string by adding segments based on the number of previous occurrences.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the maximum sum of subarrays of length `secondLen` starting from each index.</div>
+                                <div style="margin-left: 20px;"> • 3. For each segment, append the opposite digit (either &#39;1&#39; or &#39;2&#39;) based on the previous occurrence.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Combine the results to maximize the sum of the two non-overlapping subarrays.</div>
+                                <div style="margin-left: 20px;"> • 4. Once the string is generated up to `n` characters, count the number of &#39;1&#39;s in the substring.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> You must implement a solution that handles the constraints efficiently, especially for large inputs.</div>
+                        <div class=""> <b>Goal:</b> The constraints on the input are as follows.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays of up to 1000 elements.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -422,19 +416,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array always has enough elements for both subarrays.</div>
+                                <div style="margin-left: 20px;"> • The value of `n` will always be within the given range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 9, 5, 6, 3, 8, 7], firstLen = 2, secondLen = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal choice is to take the subarray [9, 5] with length 2 and [6, 3, 8] with length 3. The sum is 9 &#43; 5 &#43; 6 &#43; 3 &#43; 8 = 30.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 7</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first 7 characters of the magical string are &#39;1221121&#39;. This string has four &#39;1&#39;s, so the output is 4.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3, 8, 1, 5, 2, 9], firstLen = 2, secondLen = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> One optimal choice is the subarray [8, 1] with length 2 and [5, 2] with length 2. The sum is 8 &#43; 1 &#43; 5 &#43; 2 = 16.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first 3 characters of the magical string are &#39;122&#39;. This string has two &#39;1&#39;s, so the output is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +452,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem using dynamic programming or sliding windows. The idea is to maintain a rolling sum of the two subarrays and track the best possible combination of the two sums.</div>
+                        <div class=""> <b>Approach:</b> The approach involves constructing the magical string by iterating through the number of occurrences of &#39;1&#39; and &#39;2&#39; and generating the corresponding sequence.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This problem is a typical example of maximizing the sum of non-overlapping subarrays.</div>
+                                <div style="margin-left: 20px;"> • We can generate the magical string by appending based on the previous occurrences of &#39;1&#39; and &#39;2&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • The string grows gradually, so we can stop once we have the first `n` elements.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to efficiently calculate the sum of different subarrays using sliding windows and then combine them to find the maximum sum.</div>
+                                <div style="margin-left: 20px;"> • We need to efficiently construct the magical string and keep track of the occurrences of &#39;1&#39;s.</div>
                             
                         </div>
                     </div>
@@ -475,13 +471,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Use a sliding window to calculate the sum of all subarrays of length `firstLen` and store them in an array `leftSum`.</div>
+                                <div style="margin-left: 20px;"> • 1. Start with the base string &#39;122&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a sliding window to calculate the sum of all subarrays of length `secondLen` and store them in an array `rightSum`.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a loop to expand the string by adding segments of &#39;1&#39; and &#39;2&#39; based on the number of occurrences in the previous elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each possible split of the array, calculate the sum of the two subarrays and track the maximum sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the maximum sum found.</div>
+                                <div style="margin-left: 20px;"> • 3. After generating the first `n` elements, count the occurrences of &#39;1&#39;.</div>
                             
                         </div>
                     </div>
@@ -490,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will always have at least two subarrays, so empty arrays are not possible.</div>
+                                <div style="margin-left: 20px;"> • The input will always have at least 1 element (n &gt;= 1).</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle arrays with a size of up to 1000 elements.</div>
+                                <div style="margin-left: 20px;"> • For large values of `n`, the algorithm should handle constructing the string efficiently up to 10^5 characters.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements are zero, the result will be zero.</div>
+                                <div style="margin-left: 20px;"> • When `n = 1`, the string is just &#39;1&#39;, so the output will be 1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The length of both subarrays will be less than or equal to the total length of the array.</div>
+                                <div style="margin-left: 20px;"> • The solution should be able to handle up to 10^5 elements in the magical string.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,29 +518,15 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Vectors</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 String Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iterate Over Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Prefix Sums</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Store Maximum Prefix</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 String Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Store Maximum Suffix</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Adjust Window L</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Adjust Window M</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Calculate Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Helper Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Main Function Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Call Helper Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
                 </div>
 
@@ -555,29 +535,12 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> L, <span style="color:#0b0;font-weight:bold">int</span> M, <span style="color:#0b0;font-weight:bold">int</span> sz, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left(sz<span style="color:#666">+</span><span style="color:#666">1</span>), right(sz<span style="color:#666">+</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> sz <span style="color:#666">-</span> <span style="color:#666">1</span>, s_r <span style="color:#666">=</span> <span style="color:#666">0</span>, s_l <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; <span style="color:#666">++</span>i, <span style="color:#666">--</span>j) {
-</span></span><span style="display:flex;"><span>        s_l <span style="color:#666">+=</span> A[i], s_r <span style="color:#666">+=</span> A[j];
-</span></span><span style="display:flex;"><span>        left[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> max(left[i], s_l);
-</span></span><span style="display:flex;"><span>        right[j] <span style="color:#666">=</span> max(right[j <span style="color:#666">+</span> <span style="color:#666">1</span>], s_r);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> L) s_l <span style="color:#666">-=</span> A[i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> M) s_r <span style="color:#666">-=</span> A[j <span style="color:#666">+</span> M <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, left[i] <span style="color:#666">+</span> right[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> firstLen, <span style="color:#0b0;font-weight:bold">int</span> secondLen) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(maxTwoNoOverlap(nums, firstLen, secondLen, nums.size()),
-</span></span><span style="display:flex;"><span>               maxTwoNoOverlap(nums, secondLen, firstLen, nums.size()));
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">magicalString</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    string s <span style="color:#666">=</span> <span style="color:#b44">&#34;122&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s.size() <span style="color:#666">&lt;</span> n)
+</span></span><span style="display:flex;"><span>    s <span style="color:#666">+=</span> string(s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>, s.back() <span style="color:#666">^</span> <span style="color:#666">3</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> count(s.begin(), s.begin() <span style="color:#666">+</span> n, <span style="color:#b44">&#39;1&#39;</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -588,130 +551,60 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> L, <span style="color:#0b0;font-weight:bold">int</span> M, <span style="color:#0b0;font-weight:bold">int</span> sz, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">magicalString</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the helper function `maxTwoNoOverlap` that calculates the maximum sum of two non-overlapping subarrays of lengths L and M. </div>
+                            <div class=""> Defines the `magicalString` function, which generates a magical string up to the `n`th character and counts the number of &#39;1&#39;s. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Initialize Vectors</b></div>
+                            <div class=""> <b>2 : String Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left(sz<span style="color:#666">+</span><span style="color:#666">1</span>), right(sz<span style="color:#666">+</span><span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string s <span style="color:#666">=</span> <span style="color:#b44">&#34;122&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two vectors `left` and `right` to store maximum prefix sums from left to right and right to left. </div>
+                            <div class=""> Initializes the string `s` with the value &#34;122&#34;. This is the base case for the magical string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Iterate Over Array</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> sz <span style="color:#666">-</span> <span style="color:#666">1</span>, s_r <span style="color:#666">=</span> <span style="color:#666">0</span>, s_l <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; <span style="color:#666">++</span>i, <span style="color:#666">--</span>j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over the array from both ends to calculate prefix sums for the left and right vectors. </div>
+                            <div class=""> Initializes the variable `i` to 2. This will be used to track the current index in the string while constructing new elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Update Prefix Sums</b></div>
+                            <div class=""> <b>4 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s_l <span style="color:#666">+=</span> A[i], s_r <span style="color:#666">+=</span> A[j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(s.size() <span style="color:#666">&lt;</span> n)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the running sums for the left-to-right and right-to-left prefix sums. </div>
+                            <div class=""> Starts a `while` loop that continues to run until the size of the string `s` reaches or exceeds the given number `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Store Maximum Prefix</b></div>
+                            <div class=""> <b>5 : String Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        left[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> max(left[i], s_l);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s <span style="color:#666">+=</span> string(s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>, s.back() <span style="color:#666">^</span> <span style="color:#666">3</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the maximum prefix sum for the left-to-right traversal. </div>
+                            <div class=""> Appends new characters to the string `s`. The number of new characters is determined by the value of the current character at index `i`. The new characters are the inverse of the last character in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Store Maximum Suffix</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        right[j] <span style="color:#666">=</span> max(right[j <span style="color:#666">+</span> <span style="color:#666">1</span>], s_r);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">count</span>(s.begin(), s.begin() <span style="color:#666">+</span> n, <span style="color:#b44">&#39;1&#39;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the maximum prefix sum for the right-to-left traversal. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Adjust Window L</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> L) s_l <span style="color:#666">-=</span> A[i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adjust the left-to-right window by subtracting the element that moves out of the L-sized window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Adjust Window M</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> M) s_r <span style="color:#666">-=</span> A[j <span style="color:#666">+</span> M <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adjust the right-to-left window by subtracting the element that moves out of the M-sized window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Calculate Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>i) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterate through the array to calculate the maximum sum of two non-overlapping subarrays. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Update Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, left[i] <span style="color:#666">+</span> right[i]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the result with the maximum sum of the two non-overlapping subarrays at each point. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Helper Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the calculated result for the helper function `maxTwoNoOverlap`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Main Function Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> firstLen, <span style="color:#0b0;font-weight:bold">int</span> secondLen) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the main function `maxSumTwoNoOverlap` that computes the maximum sum using the helper function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Call Helper Function</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(maxTwoNoOverlap(nums, firstLen, secondLen, nums.size()),
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Call the helper function with both possible orderings of the subarray lengths and return the maximum. </div>
+                            <div class=""> Returns the count of &#39;1&#39;s in the string `s` from the beginning up to the `n`th position. </div>
                         </div>
                     
                 </div>
@@ -734,13 +627,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only iterate through the array a few times.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we generate the magical string up to `n` characters and count the number of &#39;1&#39;s in the first `n` elements.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the sliding window sums.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the magical string up to `n` characters.</div>    
                     </div>
 
                 </div>

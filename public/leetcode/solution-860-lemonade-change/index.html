@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> Given an integer array nums, your goal is to select four distinct indices w, x, y, and z such that the product difference between two pairs of numbers, (nums[w], nums[x]) and (nums[y], nums[z]), is maximized. The product difference is defined as (nums[w] * nums[x]) - (nums[y] * nums[z]). Return the maximum product difference between these two pairs. </div>
+<div class=""> You are managing a lemonade stand where each lemonade costs $5. Customers are standing in line to buy one lemonade each, paying with either a $5, $10, or $20 bill. Your task is to determine if you can provide the correct change to every customer as they arrive in line. At the start, you have no change, and you must provide each customer with the appropriate change for their bill. </div>
 
 
 
@@ -358,43 +358,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array nums, where each element is a positive integer.</div>
-                        <div class=""> <b>Example:</b> nums = [5,6,2,7,4]</div>
+                        <div class=""> <b>Input:</b> You are given an integer array, bills, where each element represents the bill a customer uses to pay for their lemonade. The bills array contains values of either 5, 10, or 20, corresponding to the bill used by each customer.</div>
+                        <div class=""> <b>Example:</b> Input: bills = [5, 5, 10, 5, 20]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 4 &lt;= nums.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= bills.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • bills[i] is either 5, 10, or 20.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum product difference between the two pairs.</div>
-                        <div class=""> <b>Example:</b> 34</div>
+                        <div class=""> <b>Output:</b> Return true if it is possible to provide the correct change for every customer in line. Otherwise, return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To calculate the maximum product difference by finding the optimal pairs of elements.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if the change can be provided to each customer in the order they arrive.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Identify the two largest elements in the array and the two smallest elements in the array.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Iterate through the array of bills and for each customer, check the bill they provide.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the product difference using these values: (max1 * max2) - (min1 * min2).</div>
+                                <div style="margin-left: 20px;"> • Step 2: If the customer pays with a $5 bill, increment the count of $5 bills.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: If the customer pays with a $10 bill, ensure that you have at least one $5 bill to give change. If so, give the change and update the count of $5 and $10 bills.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If the customer pays with a $20 bill, check if you have one $10 bill and one $5 bill to give $15 in change. If not, check if you have at least three $5 bills to provide $15 in change.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: If you cannot provide the correct change at any point, return false.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution handles the constraints efficiently for large inputs.</div>
+                        <div class=""> <b>Goal:</b> The bills array must meet the following constraints:</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • nums has at least 4 elements and at most 10^4 elements.</div>
+                                <div style="margin-left: 20px;"> • The length of the bills array is between 1 and 10^5.</div>
                             
-                                <div style="margin-left: 20px;"> • Each element in nums is between 1 and 10^4.</div>
+                                <div style="margin-left: 20px;"> • Each bill in the array is either a $5, $10, or $20 bill.</div>
                             
                         </div>
                     </div>        
@@ -402,15 +408,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array has at least 4 elements, as the problem requires selecting four distinct indices.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least one customer in the queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • The customers will always pay with one of the allowed bills: $5, $10, or $20.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [5,6,2,7,4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum product difference is obtained by selecting indices 1 and 3 for the first pair (6, 7) and indices 2 and 4 for the second pair (2, 4). Thus, the product difference is (6 * 7) - (2 * 4) = 34.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: bills = [5, 5, 10, 5, 20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the first two customers pay with $5 bills. The third customer pays with a $10 bill, and we can give $5 change. The fourth customer pays with a $5 bill, and the fifth customer pays with a $20 bill. We give them $10 change using one $10 bill and one $5 bill, and the correct change is provided for all customers.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: bills = [5, 5, 10, 10, 20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the first two customers pay with $5 bills. The next two customers pay with $10 bills, but we can&#39;t provide the correct change for the fourth customer because we only have one $5 bill, not enough to give $5 change. Therefore, the answer is false.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -434,16 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to identify the two largest and two smallest values in the array and then compute their product difference.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to simulate the process of serving each customer while keeping track of the number of $5 and $10 bills we have. At each step, we must ensure that we can give the correct change to each customer in the order they arrive.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to find the largest and smallest elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • We need to carefully manage the number of $5 and $10 bills because these are required to provide change to customers paying with $10 and $20 bills.</div>
+                            
+                                <div style="margin-left: 20px;"> • If there are more $10 bills than $5 bills, it becomes impossible to give the correct change.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a single loop to identify the two largest and two smallest elements in the array would be the most efficient approach.</div>
+                                <div style="margin-left: 20px;"> • A greedy approach works well here: as we process each bill, we attempt to give the required change, and if we can&#39;t, we return false.</div>
                             
                         </div>
                     </div>
@@ -451,11 +465,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize four variables: max1, max2, min1, and min2.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize counters for $5 and $10 bills to 0.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, updating these variables to track the two largest and two smallest elements.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Loop through the bills array and process each customer one by one.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the product difference using the formula (max1 * max2) - (min1 * min2).</div>
+                                <div style="margin-left: 20px;"> • Step 3: If the customer pays with a $5 bill, increment the $5 bill counter.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If the customer pays with a $10 bill, check if we have a $5 bill to give change. If yes, update the counters, otherwise return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: If the customer pays with a $20 bill, check if we have a $10 bill and a $5 bill to give $15 in change. If not, check if we have at least three $5 bills. If neither condition is met, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 6: If we reach the end of the list without any issues, return true.</div>
                             
                         </div>
                     </div>
@@ -464,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where the input array has fewer than 4 elements, though this won&#39;t occur based on the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • N/A: There will always be at least one customer in the queue.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently with arrays of size up to 10^4.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays with up to 100,000 bills efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where all elements are the same or all are very large.</div>
+                                <div style="margin-left: 20px;"> • If the customer always pays with $5 bills, there is no issue with providing change.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution handles the constraints efficiently.</div>
+                                <div style="margin-left: 20px;"> • The number of customers and the values of the bills must adhere to the given constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -496,39 +516,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Signature</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Check for 5-dollar bill</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Check for 10-dollar bill</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Provide Change for 10-dollar Bill</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return False for Inability to Provide Change</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Check for 20-dollar bill</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Provide Change for 20-dollar Bill with 10-dollar Bill</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Provide Change for 20-dollar Bill with Three 5-dollar Bills</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return False for Inability to Provide Change</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return True</button>
                     
                 </div>
 
@@ -537,42 +547,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProductDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">//we have to return the result of
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">// (firstMax*secondMax) - (firstMin*secondMin)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> max1<span style="color:#666">=</span>INT_MIN;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> max2<span style="color:#666">=</span>INT_MIN;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> min1<span style="color:#666">=</span>INT_MAX;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> min2<span style="color:#666">=</span>INT_MAX;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>nums.size();i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&gt;</span>max1)
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">//assign the second max to max2
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            max2<span style="color:#666">=</span>max1;
-</span></span><span style="display:flex;"><span>            max1<span style="color:#666">=</span>nums[i];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&gt;</span>max2)
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">//it can become second max
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            max2<span style="color:#666">=</span> nums[i];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">//check for the minimum
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&lt;</span>min1)
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">//it can become first minimum
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            min2<span style="color:#666">=</span>min1;
-</span></span><span style="display:flex;"><span>            min1<span style="color:#666">=</span>nums[i];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&lt;</span>min2)
-</span></span><span style="display:flex;"><span>        {
-</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">//it can become second minimum
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            min2<span style="color:#666">=</span>nums[i];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">lemonadeChange</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bills) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> five <span style="color:#666">=</span> <span style="color:#666">0</span>, ten <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : bills) {
+</span></span><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span> (x <span style="color:#666">==</span> <span style="color:#666">5</span>) five<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (x <span style="color:#666">==</span> <span style="color:#666">10</span>) {
+</span></span><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> ten <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) five <span style="color:#666">-=</span> <span style="color:#666">3</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (max1<span style="color:#666">*</span>max2)<span style="color:#666">-</span> (min1<span style="color:#666">*</span>min2);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -580,173 +568,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Signature</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProductDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">lemonadeChange</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bills) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function signature, defining a function called &#39;maxProductDifference&#39; which takes a vector of integers as input. </div>
+                            <div class=""> The function begins by accepting a vector of bills that represent the bills customers pay. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> max1<span style="color:#666">=</span>INT_MIN;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> five <span style="color:#666">=</span> <span style="color:#666">0</span>, ten <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes &#39;max1&#39; to the smallest possible integer, which will hold the maximum value from the array. </div>
+                            <div class=""> Two integer variables are initialized to track the count of 5-dollar and 10-dollar bills received. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : For Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> max2<span style="color:#666">=</span>INT_MIN;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : bills) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes &#39;max2&#39; to the smallest possible integer, which will hold the second maximum value from the array. </div>
+                            <div class=""> The for loop iterates over the bills array to process each bill one by one. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Check for 5-dollar bill</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> min1<span style="color:#666">=</span>INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span> (x <span style="color:#666">==</span> <span style="color:#666">5</span>) five<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes &#39;min1&#39; to the largest possible integer, which will hold the minimum value from the array. </div>
+                            <div class=""> If the current bill is 5 dollars, increment the count of 5-dollar bills. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Check for 10-dollar bill</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> min2<span style="color:#666">=</span>INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (x <span style="color:#666">==</span> <span style="color:#666">10</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes &#39;min2&#39; to the largest possible integer, which will hold the second minimum value from the array. </div>
+                            <div class=""> If the current bill is 10 dollars, check if we can give the correct change. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Provide Change for 10-dollar Bill</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>nums.size();i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for-loop iterates through each element of the &#39;nums&#39; array to evaluate the maximum and minimum values. </div>
+                            <div class=""> If we have at least one 5-dollar bill, give one 5-dollar bill as change and accept the 10-dollar bill. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Condition</b></div>
+                            <div class=""> <b>7 : Return False for Inability to Provide Change</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&gt;</span>max1)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current number is greater than &#39;max1&#39; (the largest number found so far). </div>
+                            <div class=""> If we don&#39;t have any 5-dollar bills to provide change, return false indicating we can&#39;t provide change. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Assignment</b></div>
+                            <div class=""> <b>8 : Check for 20-dollar bill</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            max2<span style="color:#666">=</span>max1;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the previous &#39;max1&#39; to &#39;max2&#39; because a new larger number has been found. </div>
+                            <div class=""> If the bill is not 5 or 10 dollars, it must be a 20-dollar bill. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Assignment</b></div>
+                            <div class=""> <b>9 : Provide Change for 20-dollar Bill with 10-dollar Bill</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            max1<span style="color:#666">=</span>nums[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> ten <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) five<span style="color:#666">--</span>, ten<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the current number to &#39;max1&#39; as it is now the largest number found. </div>
+                            <div class=""> If we have both 5-dollar and 10-dollar bills, give one of each as change. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Condition</b></div>
+                            <div class=""> <b>10 : Provide Change for 20-dollar Bill with Three 5-dollar Bills</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&gt;</span>max2)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (five <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) five <span style="color:#666">-=</span> <span style="color:#666">3</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current number is greater than &#39;max2&#39; but less than or equal to &#39;max1&#39;. </div>
+                            <div class=""> If we don&#39;t have a 10-dollar bill, check if we have at least three 5-dollar bills to provide change. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Assignment</b></div>
+                            <div class=""> <b>11 : Return False for Inability to Provide Change</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            max2<span style="color:#666">=</span> nums[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the current number to &#39;max2&#39; as it is now the second largest number. </div>
+                            <div class=""> If we don&#39;t have sufficient 5-dollar bills to provide change, return false indicating it&#39;s not possible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Condition</b></div>
+                            <div class=""> <b>12 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&lt;</span>min1)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current number is smaller than &#39;min1&#39; (the smallest number found so far). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            min2<span style="color:#666">=</span>min1;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assigns the previous &#39;min1&#39; to &#39;min2&#39; because a new smaller number has been found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            min1<span style="color:#666">=</span>nums[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assigns the current number to &#39;min1&#39; as it is now the smallest number found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(nums[i]<span style="color:#666">&lt;</span>min2)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the current number is smaller than &#39;min2&#39; but greater than or equal to &#39;min1&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            min2<span style="color:#666">=</span>nums[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assigns the current number to &#39;min2&#39; as it is now the second smallest number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (max1<span style="color:#666">*</span>max2)<span style="color:#666">-</span> (min1<span style="color:#666">*</span>min2);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the product difference between the largest two numbers and the smallest two numbers. </div>
+                            <div class=""> If we have processed all bills successfully and returned the correct change for each, return true. </div>
                         </div>
                     
                 </div>
@@ -766,16 +704,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear because we are iterating through the array once to find the two largest and two smallest values.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the bills array. This occurs when every customer pays with a $5 bill.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as each customer is processed in constant time.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the bills array.</div> 
+                        <div class=""> <b>Description:</b> </div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we are only using a fixed amount of extra space for tracking the four values.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), as no extra space is required apart from the counters.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), since we are only using a fixed amount of extra space for the counters.</div> 
+                        <div class=""> <b>Description:</b> </div>    
                     </div>
 
                 </div>

@@ -321,7 +321,7 @@
 
 
 
-<div class=""> Given an integer array nums, find the sum of divisors of all integers in that array that have exactly four divisors. If there are no such integers, return 0. </div>
+<div class=""> Given two binary trees, merge them into a new binary tree where overlapping nodes are summed, and non-overlapping nodes are retained as they are. </div>
 
 
 
@@ -372,49 +372,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array nums.</div>
-                        <div class=""> <b>Example:</b> For nums = [21, 7, 6, 35], the output is 92.</div>
+                        <div class=""> <b>Input:</b> The input consists of two binary trees, represented by their root nodes. Each node contains an integer value.</div>
+                        <div class=""> <b>Example:</b> root1 = [1, 3, 2, 5], root2 = [2, 1, 3, None, 4, None, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in each tree is in the range [0, 2000].</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= Node.val &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the sum of divisors of the numbers that have exactly four divisors.</div>
-                        <div class=""> <b>Example:</b> For nums = [21, 7, 6, 35], the output is 92.</div>
+                        <div class=""> <b>Output:</b> Return the root of the merged binary tree.</div>
+                        <div class=""> <b>Example:</b> [3, 4, 5, 5, 4, None, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If no number has exactly four divisors, return 0.</div>
+                                <div style="margin-left: 20px;"> • The merged tree should be returned as the root node of the new binary tree.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find numbers with exactly four divisors and sum those divisors.</div>
+                        <div class=""> <b>Goal:</b> Merge two binary trees by summing overlapping nodes and using non-overlapping nodes directly.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Loop through each number in nums.</div>
+                                <div style="margin-left: 20px;"> • 1. If both nodes are non-null, sum the values and recursively merge the left and right subtrees.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each number, find its divisors.</div>
+                                <div style="margin-left: 20px;"> • 2. If one of the nodes is null, return the non-null node as it is.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Check if the number has exactly four divisors.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If so, sum those divisors and add to the final sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the final sum after processing all numbers.</div>
+                                <div style="margin-left: 20px;"> • 3. If both nodes are null, return null.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle arrays of size up to 10^4 and elements up to 10^5 efficiently.</div>
+                        <div class=""> <b>Goal:</b> Both trees are binary trees, and their number of nodes and values are within the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • nums[i] will be a positive integer.</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in both trees is between 0 and 2000.</div>
+                            
+                                <div style="margin-left: 20px;"> • Node values are between -10^4 and 10^4.</div>
                             
                         </div>
                     </div>        
@@ -422,15 +420,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • You can assume that the input will always be valid.</div>
+                                <div style="margin-left: 20px;"> • Both input trees are valid binary trees.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [21, 7, 6, 35], the divisors of 21 are [1, 3, 7, 21] (exactly 4), and the divisors of 6 are [1, 2, 3, 6] (exactly 4). The sum of divisors is 92.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We only consider numbers with exactly four divisors. For each such number, we calculate and sum the divisors.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root1 = [1, 3, 2, 5], root2 = [2, 1, 3, None, 4, None, 7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the root nodes (1 and 2) are merged into 3. The left children (3 and 1) are merged into 4, and similarly for the right children. The leaves are merged by summing the node values.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,16 +452,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, for each number in the array, find its divisors and check if it has exactly four divisors. If so, add the sum of its divisors to the final result.</div>
+                        <div class=""> <b>Approach:</b> We will merge the trees recursively by comparing the values of the nodes and summing them where both nodes are non-null, or directly using the non-null node if one is null.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need an efficient way to find divisors for large numbers.</div>
+                                <div style="margin-left: 20px;"> • The problem is a classic example of recursion where we merge two binary trees.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Iterating through each number and finding its divisors up to the square root of the number can help minimize time complexity.</div>
+                                <div style="margin-left: 20px;"> • We will recursively traverse both trees and merge them by summing the overlapping nodes and retaining the non-overlapping nodes.</div>
                             
                         </div>
                     </div>
@@ -471,15 +469,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a variable to keep track of the total sum of divisors.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a new TreeNode to hold the merged tree.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Loop through each number in the input array.</div>
+                                <div style="margin-left: 20px;"> • 2. If both nodes are non-null, sum their values and recursively merge their left and right subtrees.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each number, find its divisors by iterating up to its square root.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If the number has exactly four divisors, add them to the sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the sum after processing all numbers.</div>
+                                <div style="margin-left: 20px;"> • 3. If one of the nodes is null, use the other node as the result for that subtree.</div>
                             
                         </div>
                     </div>
@@ -488,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will never be empty.</div>
+                                <div style="margin-left: 20px;"> • If both trees are empty, return null.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must handle arrays of size up to 10^4 and values up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the trees have up to 2000 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If no number has exactly four divisors, return 0.</div>
+                                <div style="margin-left: 20px;"> • Trees with null nodes or trees that have only one node.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider the upper bounds when finding divisors efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the function handles the merging of trees efficiently within the input size constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,33 +514,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Node Creation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case (NULL check)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Both Nodes Present</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Nested Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sum Values of Both Nodes</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Divisor Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Only First Node Present</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Divisor Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Use Value from Second Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Divisor Reset</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Only Second Node Present</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Divisor Conflict</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Use Value from First Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reset Divisor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Left Subtree Merge</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Break Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursive Right Subtree Merge</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Divisor Validation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Merged Tree</button>
                     
                 </div>
 
@@ -555,28 +545,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumFourDivisors</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">n</span>: nums) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">*</span> i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">%</span> i <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(d <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                    d <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                    d <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(d <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> d <span style="color:#666">!=</span> n<span style="color:#666">/</span>d) {
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> n <span style="color:#666">+</span> d <span style="color:#666">+</span> n<span style="color:#666">/</span>d;
-</span></span><span style="display:flex;"><span>        }            
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">mergeTrees</span>(TreeNode<span style="color:#666">*</span> r1, TreeNode<span style="color:#666">*</span> r2) {
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> ans <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> r2 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> r2 <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r1<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> r2<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r2<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r1<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    ans<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> mergeTrees(r1<span style="color:#666">?</span>r1<span style="color:#666">-&gt;</span><span style="color:#a0a000">left</span>:<span style="color:#a2f">NULL</span>, r2<span style="color:#666">?</span>r2<span style="color:#666">-&gt;</span><span style="color:#a0a000">left</span>:<span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>    ans<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> mergeTrees(r1<span style="color:#666">?</span>r1<span style="color:#666">-&gt;</span><span style="color:#a0a000">right</span>:<span style="color:#a2f">NULL</span>, r2<span style="color:#666">?</span>r2<span style="color:#666">-&gt;</span><span style="color:#a0a000">right</span>:<span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -584,143 +564,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sumFourDivisors</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">mergeTrees</span>(TreeNode<span style="color:#666">*</span> r1, TreeNode<span style="color:#666">*</span> r2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `sumFourDivisors`, which takes a vector of integers `nums` and returns the sum of divisors for numbers with exactly four divisors. </div>
+                            <div class=""> Defines the `mergeTrees` function that takes two binary tree nodes (`r1` and `r2`) as input and returns a new merged tree rooted at `ans`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Node Creation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> ans <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable `sum` to 0. This will hold the running total of divisors for the numbers in `nums`. </div>
+                            <div class=""> Creates a new `TreeNode` named `ans` and initializes its value to `0`. This will hold the merged values from both trees. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Base Case (NULL check)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">n</span>: nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> r2 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate over each number `n` in the `nums` array. </div>
+                            <div class=""> Checks if both input nodes are NULL. If so, it returns NULL because there is no tree to merge. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Both Nodes Present</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> r2 <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable `d` to 0. This will track the divisor of `n` while checking for exactly four divisors. </div>
+                            <div class=""> Checks if both input nodes (`r1` and `r2`) are non-NULL. If true, their values will be added together to form the value of the merged node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Nested Loop</b></div>
+                            <div class=""> <b>5 : Sum Values of Both Nodes</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">*</span> i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r1<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> r2<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through potential divisors `i` starting from 2, going up to the square root of `n`. </div>
+                            <div class=""> If both nodes are non-NULL, the values from both nodes (`r1-&gt;val` and `r2-&gt;val`) are summed and stored in `ans-&gt;val`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Divisor Check</b></div>
+                            <div class=""> <b>6 : Only First Node Present</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">%</span> i <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if `i` is a divisor of `n`. </div>
+                            <div class=""> Checks if the first node (`r1`) is NULL, meaning only `r2` has a node at this position in the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Divisor Assignment</b></div>
+                            <div class=""> <b>7 : Use Value from Second Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(d <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r2<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If this is the first divisor found, assign `i` to `d`. </div>
+                            <div class=""> If `r1` is NULL, the value from `r2` is assigned to `ans-&gt;val`, as `r2` is the only valid node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Divisor Reset</b></div>
+                            <div class=""> <b>8 : Only Second Node Present</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    d <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assign `i` to `d` as the first divisor of `n`. </div>
+                            <div class=""> If neither of the previous conditions was met, it implies that `r2` is NULL and only `r1` is valid at this position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Divisor Conflict</b></div>
+                            <div class=""> <b>9 : Use Value from First Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r1<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a second divisor is found, reset `d` to 0 and break the loop. </div>
+                            <div class=""> If `r2` is NULL, the value from `r1` is assigned to `ans-&gt;val`, as `r1` is the only valid node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Reset Divisor</b></div>
+                            <div class=""> <b>10 : Recursive Left Subtree Merge</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    d <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> mergeTrees(r1<span style="color:#666">?</span>r1<span style="color:#666">-&gt;</span><span style="color:#a0a000">left</span>:<span style="color:#a2f">NULL</span>, r2<span style="color:#666">?</span>r2<span style="color:#666">-&gt;</span><span style="color:#a0a000">left</span>:<span style="color:#a2f">NULL</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Reset `d` to 0, indicating that the number has more than two divisors, so it won&#39;t have exactly four divisors. </div>
+                            <div class=""> Recursively merges the left subtrees of `r1` and `r2`. If a tree is missing a left child, it passes NULL instead. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Break Loop</b></div>
+                            <div class=""> <b>11 : Recursive Right Subtree Merge</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> mergeTrees(r1<span style="color:#666">?</span>r1<span style="color:#666">-&gt;</span><span style="color:#a0a000">right</span>:<span style="color:#a2f">NULL</span>, r2<span style="color:#666">?</span>r2<span style="color:#666">-&gt;</span><span style="color:#a0a000">right</span>:<span style="color:#a2f">NULL</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Exit the loop since more than two divisors have been found. </div>
+                            <div class=""> Recursively merges the right subtrees of `r1` and `r2`. Similar to the left subtree, NULL is passed if a tree has no right child. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Divisor Validation</b></div>
+                            <div class=""> <b>12 : Return Merged Tree</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(d <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> d <span style="color:#666">!=</span> n<span style="color:#666">/</span>d) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if exactly four divisors are found: `d` and `n/d` must be distinct, and `d` must be greater than 0. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> n <span style="color:#666">+</span> d <span style="color:#666">+</span> n<span style="color:#666">/</span>d;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the number has exactly four divisors, add them to the `sum`. The divisors are `1`, `n`, `d`, and `n/d`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final sum of divisors for all numbers with exactly four divisors. </div>
+                            <div class=""> Returns the root of the merged tree, which has been constructed by recursively merging nodes and their children. </div>
                         </div>
                     
                 </div>
@@ -740,16 +700,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * sqrt(m))</div>
-                        <div class=""> <b>Average Case:</b> O(n * sqrt(m))</div>
-                        <div class=""> <b>Worst Case:</b> O(n * sqrt(m))</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n * sqrt(m)) where n is the length of the array and m is the largest value in nums.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(N)</div>
+                        <div class=""> <b>Average Case:</b> O(N)</div>
+                        <div class=""> <b>Worst Case:</b> O(N)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(N) where N is the total number of nodes in both trees, as we visit each node once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only use a constant amount of extra space.</div>    
+                        <div class=""> <b>Best Case:</b> O(H)</div>
+                        <div class=""> <b>Worst Case:</b> O(H)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(H) where H is the height of the tree due to the recursive call stack.</div>    
                     </div>
 
                 </div>

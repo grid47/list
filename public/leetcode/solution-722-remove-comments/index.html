@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -288,7 +288,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1270s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1268s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/722.webp" 
            alt="A source code where comments are removed, with the comments fading out and the code glowing softly." 
@@ -311,7 +311,7 @@
 
 
 
-<div class=""> Given two strings s and t, count the number of ways to choose a non-empty substring of s and replace exactly one character such that the resulting substring becomes a substring of t. In other words, find how many substrings in s differ from substrings in t by exactly one character. </div>
+<div class=""> You are given a C++ program represented as an array of strings, where each string corresponds to a line of code. Your task is to remove all comments from the code. The two types of comments in C++ are line comments (//) and block comments (/* &hellip; */). After removing comments, return the modified code as an array of strings, excluding any empty lines. </div>
 
 
 
@@ -362,47 +362,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two strings s and t. Both strings are lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> s = &#34;cat&#34;, t = &#34;bat&#34;</div>
+                        <div class=""> <b>Input:</b> An array of strings representing lines of a C&#43;&#43; program.</div>
+                        <div class=""> <b>Example:</b> [&#34;/*This is a test program*/&#34;, &#34;int main()&#34;, &#34;{&#34;, &#34;  // This is a variable declaration&#34;, &#34;int a, b, c;&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length, t.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= source.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • s and t consist of lowercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= source[i].length &lt;= 80</div>
+                            
+                                <div style="margin-left: 20px;"> • No single or double quotes in the input</div>
+                            
+                                <div style="margin-left: 20px;"> • Every open block comment will eventually be closed</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the number of substrings in s that differ from some substring in t by exactly one character.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return the modified program as an array of strings where all comments are removed, and empty lines are excluded.</div>
+                        <div class=""> <b>Example:</b> [&#34;int main()&#34;, &#34;{&#34;, &#34;  int a, b, c;&#34;, &#34;  a = b &#43; c;&#34;, &#34;}&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • Each output string will be non-empty.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to count how many substrings in s differ by exactly one character from substrings in t.</div>
+                        <div class=""> <b>Goal:</b> To remove comments from the given C&#43;&#43; program code and return the cleaned code.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate over all possible substrings of s and t.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each line of the source code.</div>
                             
-                                <div style="margin-left: 20px;"> • For each pair of substrings, check if they differ by exactly one character.</div>
+                                <div style="margin-left: 20px;"> • Identify and skip characters inside block comments (/*...*/).</div>
                             
-                                <div style="margin-left: 20px;"> • Count the number of valid substring pairs.</div>
+                                <div style="margin-left: 20px;"> • Identify line comments (//) and ignore the remainder of the line.</div>
+                            
+                                <div style="margin-left: 20px;"> • Ensure that lines which become empty after removing comments are not included in the result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The length of the strings s and t is between 1 and 100, and both consist of lowercase English letters.</div>
+                        <div class=""> <b>Goal:</b> The input will always contain valid and properly closed comments.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length, t.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • Each string in the input contains printable ASCII characters.</div>
                             
-                                <div style="margin-left: 20px;"> • s and t consist of lowercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • There will be no single-quote or double-quote characters.</div>
+                            
+                                <div style="margin-left: 20px;"> • Every open block comment will eventually be closed.</div>
                             
                         </div>
                     </div>        
@@ -410,15 +418,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The strings s and t will always contain at least one character.</div>
+                                <div style="margin-left: 20px;"> • The input is always valid with properly closed comments.</div>
+                            
+                                <div style="margin-left: 20px;"> • There are no macros or defines that affect the comments.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;cat&#34;, t = &#34;bat&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substrings that differ by exactly one character are &#39;cat&#39; vs &#39;bat&#39;, which gives a count of 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the block comment removes multiple lines and part of a line, while the line comment removes everything after the &#39;//&#39; in the line.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the block comment starts and ends in the middle of the string, removing implicit newlines between &#39;a&#39; and &#39;b&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +456,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will solve this problem by iterating through all possible substrings of s and t, checking if they differ by exactly one character, and counting those pairs.</div>
+                        <div class=""> <b>Approach:</b> The solution uses an iterative approach to process each line of code, removing comments based on whether the code is inside a block comment or a line comment.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Checking every pair of substrings from s and t is a brute force approach.</div>
+                                <div style="margin-left: 20px;"> • The code must handle two types of comments: line comments and block comments.</div>
+                            
+                                <div style="margin-left: 20px;"> • Block comments can span multiple lines, and a line comment is limited to the current line.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Optimizing the approach to check for only those substrings that are similar in size might improve performance.</div>
+                                <div style="margin-left: 20px;"> • A simple loop that processes each character in the string will help identify and remove comments.</div>
                             
                         </div>
                     </div>
@@ -459,11 +475,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Generate all substrings of s and t.</div>
+                                <div style="margin-left: 20px;"> • Initialize a variable to track if we are inside a block comment.</div>
                             
-                                <div style="margin-left: 20px;"> • For each pair of substrings, compare them character by character to count how many characters differ.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each line and each character in the line.</div>
                             
-                                <div style="margin-left: 20px;"> • If exactly one character differs, increase the count.</div>
+                                <div style="margin-left: 20px;"> • Skip characters inside block comments, and ignore the remainder of the line when a line comment is detected.</div>
+                            
+                                <div style="margin-left: 20px;"> • When a block comment ends, resume normal processing of the line.</div>
                             
                         </div>
                     </div>
@@ -472,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Both strings will have at least one character, so no need to handle empty inputs.</div>
+                                <div style="margin-left: 20px;"> • Handle empty input arrays gracefully.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, the algorithm may need optimization to avoid exceeding time limits.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle inputs of maximum length.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Substrings of length 1 should be handled carefully.</div>
+                                <div style="margin-left: 20px;"> • Ensure that multiline block comments and line comments are processed correctly even when nested.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the algorithm works for all valid lengths of strings.</div>
+                                <div style="margin-left: 20px;"> • Ensure that every block comment is closed, as guaranteed by the problem constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,37 +522,53 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Constructs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Constructs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Looping Through Source</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Processing Current String</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Resetting Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Helper Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 If Not In Multi-line Comment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop Constructs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Handling Single-line Comment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Breaking for Single-line Comment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Handling Multi-line Comment Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Entering Multi-line Comment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Reset</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Skipping Character in Multi-line Comment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Mathematical Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Adding Non-comment Character</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Accumulating Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 If In Multi-line Comment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Handling Multi-line Comment End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Exiting Multi-line Comment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Skipping Character in Multi-line Comment End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 End of If-Else</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Final Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Function End</button>
                     
                 </div>
 
@@ -543,190 +577,284 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countSubstrings</span>(string s, string t) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> helper(s, t, i, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> t.size(); j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> helper(s, t, <span style="color:#666">0</span>, j);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">helper</span>(string s, string t, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, pre <span style="color:#666">=</span> <span style="color:#666">0</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size(), m <span style="color:#666">=</span> t.size(); i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>, j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        cur<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">!=</span> t[j]) {
-</span></span><span style="display:flex;"><span>            pre <span style="color:#666">=</span> cur;
-</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> removeComments(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> source) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> is_mul <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> source.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        string str <span style="color:#666">=</span> source[i];
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> is_mul<span style="color:#666">?</span> <span style="color:#a0a000">res</span>:<span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> str.size() ; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>is_mul) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>) {
+</span></span><span style="display:flex;"><span>                    is_mul <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                    j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> str[j];
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
+</span></span><span style="display:flex;"><span>                    is_mul <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                    j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> pre;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>is_mul <span style="color:#666">&amp;&amp;</span> res <span style="color:#666">!=</span> <span style="color:#b44">&#34;&#34;</span>) ans.push_back(res);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">//
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/* */</span>
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method Definition</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countSubstrings</span>(string s, string t) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> removeComments(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> source) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the method &#39;countSubstrings&#39; that takes two strings, &#39;s&#39; and &#39;t&#39;, as input and calculates the number of matching substrings. </div>
+                            <div class=""> Defines the &#39;removeComments&#39; function that takes a reference to a vector of strings and returns a vector of strings after removing comments. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a result variable &#39;res&#39; to store the total count of matching substrings. </div>
+                            <div class=""> Declares a vector &#39;ans&#39; that will store the final result after comments are removed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Constructs</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> is_mul <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop that iterates over the string &#39;s&#39; from the first to the last character. </div>
+                            <div class=""> Declares a boolean variable &#39;is_mul&#39; to track whether multi-line comments are being processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Call</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> helper(s, t, i, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Call the helper function for each starting position &#39;i&#39; in string &#39;s&#39; and fixed starting position 0 in string &#39;t&#39;. </div>
+                            <div class=""> Declares a string variable &#39;res&#39; to accumulate non-comment characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Constructs</b></div>
+                            <div class=""> <b>5 : Looping Through Source</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> t.size(); j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> source.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start another loop that iterates over the string &#39;t&#39; from the second character to the last. </div>
+                            <div class=""> Starts a loop to iterate over each string in the &#39;source&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Function Call</b></div>
+                            <div class=""> <b>6 : Processing Current String</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> helper(s, t, <span style="color:#666">0</span>, j);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string str <span style="color:#666">=</span> source[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Call the helper function for each starting position &#39;j&#39; in string &#39;t&#39; and fixed starting position 0 in string &#39;s&#39;. </div>
+                            <div class=""> Assigns the current string in the vector to &#39;str&#39; for further processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Resetting Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> is_mul<span style="color:#666">?</span> <span style="color:#a0a000">res</span>:<span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final result, which is the total number of matching substrings. </div>
+                            <div class=""> If currently inside a multi-line comment, keeps &#39;res&#39; unchanged, otherwise resets it to an empty string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Helper Function Definition</b></div>
+                            <div class=""> <b>8 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">helper</span>(string s, string t, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> str.size() ; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the helper function that counts matching substrings starting from the given positions &#39;i&#39; in string &#39;s&#39; and &#39;j&#39; in string &#39;t&#39;. </div>
+                            <div class=""> Starts an inner loop to process each character of the current string &#39;str&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Initialization</b></div>
+                            <div class=""> <b>9 : If Not In Multi-line Comment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, pre <span style="color:#666">=</span> <span style="color:#666">0</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>is_mul) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables &#39;res&#39; for the total count of matches, &#39;pre&#39; for tracking previous matches, and &#39;cur&#39; for the current matching length. </div>
+                            <div class=""> Checks if the current character is not inside a multi-line comment. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Loop Constructs</b></div>
+                            <div class=""> <b>10 : Handling Single-line Comment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size(), m <span style="color:#666">=</span> t.size(); i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>, j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop that iterates over the strings &#39;s&#39; and &#39;t&#39; as long as both indices &#39;i&#39; and &#39;j&#39; are within the bounds of their respective strings. </div>
+                            <div class=""> Checks for the start of a single-line comment (&#39;//&#39;). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Mathematical Operations</b></div>
+                            <div class=""> <b>11 : Breaking for Single-line Comment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the &#39;cur&#39; variable as we find a matching character at the current positions &#39;i&#39; and &#39;j&#39;. </div>
+                            <div class=""> If a single-line comment is detected, breaks out of the loop to stop processing further characters in the line. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Conditional Statement</b></div>
+                            <div class=""> <b>12 : Handling Multi-line Comment Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">!=</span> t[j]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the characters at positions &#39;i&#39; in string &#39;s&#39; and &#39;j&#39; in string &#39;t&#39; do not match. </div>
+                            <div class=""> Checks for the start of a multi-line comment (&#39;/*&#39;). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Variable Update</b></div>
+                            <div class=""> <b>13 : Entering Multi-line Comment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pre <span style="color:#666">=</span> cur;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    is_mul <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the characters don&#39;t match, store the value of &#39;cur&#39; (the length of the previous match) in &#39;pre&#39;. </div>
+                            <div class=""> Marks the beginning of a multi-line comment. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Variable Reset</b></div>
+                            <div class=""> <b>14 : Skipping Character in Multi-line Comment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    j<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Reset &#39;cur&#39; to 0 because the match was broken. </div>
+                            <div class=""> Skips the next character in the string as part of multi-line comment handling. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Mathematical Operations</b></div>
+                            <div class=""> <b>15 : Adding Non-comment Character</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> pre;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the value of &#39;pre&#39; (previous match length) to &#39;res&#39;. </div>
+                            <div class=""> If the current character is not part of a comment, adds it to the result string &#39;res&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Return Statement</b></div>
+                            <div class=""> <b>16 : Accumulating Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> str[j];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the total number of matching substrings found by the helper function. </div>
+                            <div class=""> Adds the current character to the &#39;res&#39; string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : If In Multi-line Comment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handles the case where the current character is inside a multi-line comment. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Handling Multi-line Comment End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks for the end of a multi-line comment (&#39;*/&#39;). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Exiting Multi-line Comment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    is_mul <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the end of a multi-line comment. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Skipping Character in Multi-line Comment End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    j<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Skips the next character in the string after detecting the end of a multi-line comment. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : End of If-Else</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the conditional check for the multi-line comment. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>is_mul <span style="color:#666">&amp;&amp;</span> res <span style="color:#666">!=</span> <span style="color:#b44">&#34;&#34;</span>) ans.push_back(res);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the processed string (without comments) to the result vector if it is not empty. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Final Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the final result vector with all comments removed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Function End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the function definition. </div>
                         </div>
                     
                 </div>
@@ -746,16 +874,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n^2) because we are generating and comparing all possible substrings.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the total number of characters in the input.</div>
+                        <div class=""> <b>Average Case:</b> O(n), where n is the total number of characters in the input.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the total number of characters in the input.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear relative to the size of the input.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to storing all possible substrings.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), where n is the total number of characters in the input.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the total number of characters in the input.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is also linear, as we store the cleaned lines in a separate array.</div>    
                     </div>
 
                 </div>

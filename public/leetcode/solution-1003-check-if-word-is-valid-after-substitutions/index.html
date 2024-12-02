@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 29, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given an <code>n x n</code> grid and a list of rectangular artifacts buried under it. Each artifact is represented by a list <code>[r1, c1, r2, c2]</code>, where <code>(r1, c1)</code> is the top-left corner and <code>(r2, c2)</code> is the bottom-right corner of the artifact. You are also given a list of <code>dig</code> coordinates representing cells in the grid where excavation occurs. Once all parts of an artifact are uncovered, you can extract it. Your task is to return the total number of artifacts that you can fully uncover and extract. </div>
+<div class=""> You are given a string s consisting of only the characters &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo;. A string is considered valid if it can be formed by repeatedly inserting the substring &lsquo;abc&rsquo; into any position of an empty string. Your task is to determine if s can be a valid string after performing this operation any number of times. </div>
 
 
 
@@ -358,65 +358,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer `n`, representing the grid size, a 2D list `artifacts` where each element is a list `[r1, c1, r2, c2]` representing a rectangular artifact, and a 2D list `dig` representing the coordinates of cells to be excavated.</div>
-                        <div class=""> <b>Example:</b> n = 3, artifacts = [[0,0,0,0], [1,1,2,2]], dig = [[0,0], [0,1], [1,1], [2,1], [2,2]]</div>
+                        <div class=""> <b>Input:</b> The input is a string s of length n (1 &lt;= n &lt;= 2 * 10^4), consisting of only the characters &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
+                        <div class=""> <b>Example:</b> s = &#39;abccba&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= artifacts.length, dig.length &lt;= min(n^2, 10^5)</div>
-                            
-                                <div style="margin-left: 20px;"> • artifacts[i].length == 4</div>
-                            
-                                <div style="margin-left: 20px;"> • dig[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= r1i, c1i, r2i, c2i, ri, ci &lt;= n - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • r1i &lt;= r2i</div>
-                            
-                                <div style="margin-left: 20px;"> • c1i &lt;= c2i</div>
-                            
-                                <div style="margin-left: 20px;"> • No two artifacts will overlap.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of cells covered by an artifact is at most 4.</div>
-                            
-                                <div style="margin-left: 20px;"> • The entries of dig are unique.</div>
+                                <div style="margin-left: 20px;"> • s consists of only the characters &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the total number of artifacts that can be fully extracted after performing all excavations.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return true if the string s is valid, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be an integer representing the number of fully extracted artifacts.</div>
+                                <div style="margin-left: 20px;"> • The output will be a boolean value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the number of artifacts that can be fully uncovered after the given excavations.</div>
+                        <div class=""> <b>Goal:</b> To determine if a string can be formed by inserting &#39;abc&#39; into an empty string any number of times.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Create a grid to represent all the artifacts buried under each cell.</div>
+                                <div style="margin-left: 20px;"> • Use a stack to track the characters &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Mark all the cells that are dug up as uncovered.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string. If a &#39;c&#39; is encountered, check if the last two characters in the stack are &#39;b&#39; and &#39;a&#39;, respectively.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each artifact, check if all its parts are uncovered by checking the corresponding cells in the grid.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Count the number of artifacts that are fully uncovered and return that count.</div>
+                                <div style="margin-left: 20px;"> • If the stack is valid after processing all characters in s, return true. Otherwise, return false.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the grid size, number of artifacts, and dig operations are within the given constraints.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution works efficiently within the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid size is at most 1000x1000.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of dig operations and artifacts will not exceed 10^5.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle strings of length up to 20,000.</div>
                             
                         </div>
                     </div>        
@@ -424,17 +404,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • No artifacts overlap in the grid.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each artifact can cover at most 4 cells.</div>
+                                <div style="margin-left: 20px;"> • The input string only contains &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 3, artifacts = [[0,0,0,0], [1,1,2,2]], dig = [[0,0], [0,1], [1,1], [2,1], [2,2]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, both artifacts are fully uncovered by the specified dig operations, so the output is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;abcabc&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;abcabc&#39; is valid because it can be formed by repeatedly inserting &#39;abc&#39; into an empty string: &#39;&#39; -&gt; &#39;abc&#39; -&gt; &#39;abcabc&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;aabcbc&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;aabcbc&#39; is valid because it can be formed by inserting &#39;abc&#39; into the string: &#39;&#39; -&gt; &#39;abc&#39; -&gt; &#39;aabcbc&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;abccba&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;abccba&#39; is invalid because it is impossible to form it by inserting &#39;abc&#39; into an empty string.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, you will iterate over the list of artifacts and mark the corresponding grid cells. Then, mark the excavated cells as uncovered and check which artifacts are fully uncovered.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we can use a stack-based approach where we check for the proper sequence of characters while iterating through the string.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The artifacts do not overlap, and no artifact covers more than 4 cells.</div>
+                                <div style="margin-left: 20px;"> • The string must follow a strict &#39;abc&#39; insertion pattern, meaning every &#39;c&#39; must follow &#39;b&#39; and &#39;a&#39;.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Efficiently tracking the excavation process is key to solving this problem.</div>
+                                <div style="margin-left: 20px;"> • Using a stack will help efficiently track the characters in the correct order.</div>
                             
                         </div>
                     </div>
@@ -475,11 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a grid to store the artifact IDs at the corresponding positions.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty stack.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each dig operation, mark the grid cells as uncovered.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the string, pushing &#39;a&#39; and &#39;b&#39; into the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Check which artifacts have all parts uncovered and count them.</div>
+                                <div style="margin-left: 20px;"> • When &#39;c&#39; is encountered, check if the top two elements of the stack are &#39;b&#39; and &#39;a&#39;. If true, pop the stack twice, otherwise return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • At the end of the iteration, if the stack is empty, return true. If not, return false.</div>
                             
                         </div>
                     </div>
@@ -488,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If no cells are dug, no artifact can be extracted.</div>
+                                <div style="margin-left: 20px;"> • If the string is empty, return false since no valid string can be formed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the algorithm can handle up to 10^5 dig operations efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles strings of maximum length (20,000 characters).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all the artifacts are covered by only 1 or 2 cells, ensure the logic works correctly for these smaller cases.</div>
+                                <div style="margin-left: 20px;"> • If the string contains characters other than &#39;a&#39;, &#39;b&#39;, or &#39;c&#39;, return false.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Artifacts are guaranteed to not overlap, simplifying the grid setup.</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient in both time and space to handle large inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -522,35 +510,29 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Stack Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iterate Over String</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Iterate over Artifacts</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Check for &#39;c&#39;</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Increment Artifact Counter</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Get Stack Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Nested Loop for Grid Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Check Sequence Validity</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Nested Loop for Grid Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Validate Last Characters</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Assign Artifact Number</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Validate Preceding Character</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return False</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Iterate over Digs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Mark Digged Cells</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop &#39;a&#39; from Stack</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Nested Loop for Grid Processing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Push Character to Stack</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Nested Loop for Grid Processing</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Check for Remaining Artifacts</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Insert Distinct Artifacts</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Remaining Artifacts Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Stack Validity</button>
                     
                 </div>
 
@@ -559,30 +541,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">digArtifacts</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> artifacts, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> dig) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: artifacts) {
-</span></span><span style="display:flex;"><span>        k<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> it[<span style="color:#666">0</span>]; i <span style="color:#666">&lt;=</span> it[<span style="color:#666">2</span>]; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> it[<span style="color:#666">1</span>]; j <span style="color:#666">&lt;=</span> it[<span style="color:#666">3</span>]; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">=</span> k;
-</span></span><span style="display:flex;"><span>
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isValid</span>(string s) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39;c&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> stk.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&lt;</span> <span style="color:#666">2</span> <span style="color:#666">||</span>
+</span></span><span style="display:flex;"><span>              stk[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#b44">&#39;b&#39;</span> <span style="color:#666">||</span>
+</span></span><span style="display:flex;"><span>              stk[n <span style="color:#666">-</span> <span style="color:#666">2</span>] <span style="color:#666">!=</span> <span style="color:#b44">&#39;a&#39;</span> ) 
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            stk.pop_back();
+</span></span><span style="display:flex;"><span>            stk.pop_back();
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> stk.push_back(c);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: dig)
-</span></span><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>            cnt.insert(grid[i][j]);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> k <span style="color:#666">-</span> cnt.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.size() <span style="color:#666">==</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -593,160 +566,130 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">digArtifacts</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> artifacts, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> dig) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isValid</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `digArtifacts` with parameters `n`, `artifacts`, and `dig`. </div>
+                            <div class=""> Defines the function `isValid`, which checks whether the string `s` follows the specific sequence rule: &#39;a&#39; -&gt; &#39;b&#39; -&gt; &#39;c&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Set Initialization</b></div>
+                            <div class=""> <b>2 : Stack Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a grid of size `n x n` with all values set to -1, representing unprocessed cells. </div>
+                            <div class=""> Initializes an empty stack `stk` to help track the sequence of characters in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Iterate Over String</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a counter variable `k` to track the artifact numbers. </div>
+                            <div class=""> Iterates through each character `c` in the input string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Iterate over Artifacts</b></div>
+                            <div class=""> <b>4 : Check for &#39;c&#39;</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: artifacts) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39;c&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each artifact in the `artifacts` list to mark the grid cells occupied by it. </div>
+                            <div class=""> Checks if the current character `c` is &#39;c&#39;. If it is, it will attempt to verify if it follows the &#39;a&#39; and &#39;b&#39; sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Increment Artifact Counter</b></div>
+                            <div class=""> <b>5 : Get Stack Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        k<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> stk.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the artifact counter `k` for each new artifact. </div>
+                            <div class=""> Stores the current size of the stack in `n` to check if there are enough characters to form the required sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Nested Loop for Grid Assignment</b></div>
+                            <div class=""> <b>6 : Check Sequence Validity</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> it[<span style="color:#666">0</span>]; i <span style="color:#666">&lt;=</span> it[<span style="color:#666">2</span>]; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&lt;</span> <span style="color:#666">2</span> <span style="color:#666">||</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an inner loop to iterate through the grid rows that the current artifact occupies. </div>
+                            <div class=""> Checks if the stack has fewer than two characters, which would make it impossible to form the &#39;a&#39; -&gt; &#39;b&#39; sequence before &#39;c&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Nested Loop for Grid Assignment</b></div>
+                            <div class=""> <b>7 : Validate Last Characters</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> it[<span style="color:#666">1</span>]; j <span style="color:#666">&lt;=</span> it[<span style="color:#666">3</span>]; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>              stk[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#b44">&#39;b&#39;</span> <span style="color:#666">||</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start another inner loop to iterate through the grid columns that the current artifact occupies. </div>
+                            <div class=""> Ensures the last character in the stack is &#39;b&#39;, which must precede &#39;c&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Assign Artifact Number</b></div>
+                            <div class=""> <b>8 : Validate Preceding Character</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">=</span> k;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>              stk[n <span style="color:#666">-</span> <span style="color:#666">2</span>] <span style="color:#666">!=</span> <span style="color:#b44">&#39;a&#39;</span> ) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assign the artifact number `k` to the cells occupied by the artifact in the grid. </div>
+                            <div class=""> Ensures that the second-to-last character in the stack is &#39;a&#39;, which must precede &#39;b&#39; and &#39;c&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Set Initialization</b></div>
+                            <div class=""> <b>9 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a set `cnt` to track the distinct artifact numbers that have been dug up. </div>
+                            <div class=""> If the sequence is invalid (either there are not enough characters or the sequence is incorrect), return `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Iterate over Digs</b></div>
+                            <div class=""> <b>10 : Pop Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: dig)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop_back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each dig in the `dig` list and mark the corresponding cells as dug up. </div>
+                            <div class=""> Pops the last character (&#39;b&#39;) from the stack after confirming the sequence &#39;a&#39; -&gt; &#39;b&#39; -&gt; &#39;c&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Mark Digged Cells</b></div>
+                            <div class=""> <b>11 : Pop &#39;a&#39; from Stack</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop_back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the value of the grid cell corresponding to the dig position to -1, indicating it has been dug up. </div>
+                            <div class=""> Pops the second-to-last character (&#39;a&#39;) from the stack to complete the valid sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Nested Loop for Grid Processing</b></div>
+                            <div class=""> <b>12 : Push Character to Stack</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> stk.push_back(c);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an outer loop to iterate through all rows of the grid. </div>
+                            <div class=""> If the character is not &#39;c&#39;, it is added to the stack for future validation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Nested Loop for Grid Processing</b></div>
+                            <div class=""> <b>13 : Return Stack Validity</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.size() <span style="color:#666">==</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an inner loop to iterate through all columns of the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Check for Remaining Artifacts</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the grid cell has not been dug up (i.e., its value is not -1). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Insert Distinct Artifacts</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt.insert(grid[i][j]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Insert the artifact number into the set `cnt` if the grid cell has not been dug up. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return Remaining Artifacts Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> k <span style="color:#666">-</span> cnt.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the number of remaining artifacts by subtracting the size of the set `cnt` from the total artifact count `k`. </div>
+                            <div class=""> Checks if the stack is empty at the end, which would indicate that all characters were successfully processed according to the rule. If the stack is not empty, the sequence is invalid. </div>
                         </div>
                     
                 </div>
@@ -766,16 +709,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2), where n is the grid size.</div>
-                        <div class=""> <b>Average Case:</b> O(n^2), where n is the grid size.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2), where n is the grid size.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the grid size and the need to check each cell for excavation and artifact extraction.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the string once, where n is the length of the string.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2), where n is the grid size.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2), where n is the grid size.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the grid and the need to store artifact positions.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the stack used to track the characters.</div>    
                     </div>
 
                 </div>

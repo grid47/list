@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 19, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given an array <code>nums</code> containing positive integers. Your task is to find the total frequency of the elements in <code>nums</code> that appear the maximum number of times. The frequency of an element is defined as the number of times that element occurs in the array. You need to return the sum of frequencies of all elements that have the maximum frequency. </div>
+<div class=""> You are given three integers, a, b, and c, representing the maximum occurrences of &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo; that can appear in a string. Your task is to return the longest string that can be formed using these letters such that it does not contain the substrings &lsquo;aaa&rsquo;, &lsquo;bbb&rsquo;, or &lsquo;ccc&rsquo;. The string should contain at most a occurrences of &lsquo;a&rsquo;, at most b occurrences of &lsquo;b&rsquo;, and at most c occurrences of &lsquo;c&rsquo;. </div>
 
 
 
@@ -359,45 +359,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `nums` of positive integers. The task is to compute the sum of the frequencies of the elements in `nums` with the maximum frequency.</div>
-                        <div class=""> <b>Example:</b> nums = [2, 3, 2, 4, 5, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of three integers: a, b, and c.</div>
+                        <div class=""> <b>Example:</b> a = 2, b = 2, c = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= a, b, c &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • a &#43; b &#43; c &gt; 0</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the sum of frequencies of elements in the array that have the maximum frequency.</div>
-                        <div class=""> <b>Example:</b> Output: 6</div>
+                        <div class=""> <b>Output:</b> The output is the longest possible happy string that satisfies the given conditions, or an empty string if no such string exists.</div>
+                        <div class=""> <b>Example:</b> &#34;ccbccbcc&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The string should contain at most a occurrences of &#39;a&#39;, b occurrences of &#39;b&#39;, and c occurrences of &#39;c&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • The string should not contain &#39;aaa&#39;, &#39;bbb&#39;, or &#39;ccc&#39; as substrings.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the total frequency of the elements that appear the most frequently in the array.</div>
+                        <div class=""> <b>Goal:</b> The goal is to construct the longest string possible with the given constraints on the occurrences of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create a frequency map to store the count of each element in the array.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a priority queue to manage the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39; in decreasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • Determine the maximum frequency of any element in the array.</div>
+                                <div style="margin-left: 20px;"> • 2. Add characters to the result string, ensuring that no character appears more than twice consecutively.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the frequencies of all elements that have the maximum frequency.</div>
+                                <div style="margin-left: 20px;"> • 3. After each addition, update the counts and push the characters back into the priority queue if their counts are still non-zero.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array `nums` contains integers between 1 and 100, and its length is between 1 and 100.</div>
+                        <div class=""> <b>Goal:</b> The input integers a, b, and c represent the maximum number of occurrences of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39; respectively. The total sum of a &#43; b &#43; c must be greater than 0.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • a, b, and c are non-negative integers.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • a &#43; b &#43; c must be greater than 0.</div>
                             
                         </div>
                     </div>        
@@ -405,23 +409,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input will always have at least one element in the array.</div>
+                                <div style="margin-left: 20px;"> • It is assumed that at least one of a, b, or c is greater than zero.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, 3, 2, 4, 5, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The frequency of 2 is the highest (3 occurrences). Thus, the total frequency of the element with the highest frequency is 6 (3 &#43; 3).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 2, b = 2, c = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> &#34;ccbccbcc&#34; is a valid string because it respects the maximum occurrences for &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, and does not contain &#39;aaa&#39;, &#39;bbb&#39;, or &#39;ccc&#39;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 1, 2, 2, 3, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> All elements appear twice, so the sum of the maximum frequencies is 6 (2 &#43; 2 &#43; 2).</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [10, 20, 30]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> All elements have a frequency of 1. Thus, the sum of the maximum frequencies is 3 (1 &#43; 1 &#43; 1).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 3, b = 3, c = 0</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> &#34;ababab&#34; is the only valid string because there are no &#39;c&#39; characters allowed, and it doesn&#39;t contain any invalid substrings.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +445,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we can use a frequency map (or hash map) to count the occurrences of each element. After counting, we find the maximum frequency and sum the frequencies of all elements with that maximum count.</div>
+                        <div class=""> <b>Approach:</b> We can use a greedy algorithm combined with a priority queue to keep track of the remaining counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, ensuring we always add the most frequent character while adhering to the constraints.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to efficiently count the occurrences of elements and track the maximum frequency.</div>
+                                <div style="margin-left: 20px;"> • The problem requires managing character counts while adhering to a restriction on consecutive occurrences.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a frequency map allows us to count occurrences in linear time, making the solution efficient.</div>
+                                <div style="margin-left: 20px;"> • A greedy approach using a priority queue allows us to always select the character with the highest remaining count.</div>
                             
                         </div>
                     </div>
@@ -462,13 +462,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty frequency map.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a priority queue (max-heap) to manage the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array `nums`, counting the occurrences of each element.</div>
+                                <div style="margin-left: 20px;"> • 2. Pop the most frequent character and append it to the result string.</div>
                             
-                                <div style="margin-left: 20px;"> • Determine the maximum frequency from the frequency map.</div>
+                                <div style="margin-left: 20px;"> • 3. If the character was added twice, ensure the next character is different to avoid violating the rule.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the frequencies of all elements that have the maximum frequency.</div>
+                                <div style="margin-left: 20px;"> • 4. Repeat the process until all characters are used or no valid string can be formed.</div>
                             
                         </div>
                     </div>
@@ -477,22 +477,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since `nums` will always have at least one element, we don&#39;t need to handle empty input.</div>
+                                <div style="margin-left: 20px;"> • The input will always have at least one non-zero count for a, b, or c.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for arrays of length 100, the upper constraint.</div>
+                                <div style="margin-left: 20px;"> • Ensure the algorithm efficiently handles the case where a, b, and c are large, up to 100.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements are distinct, the maximum frequency is 1, and we sum the frequencies of all elements.</div>
+                                <div style="margin-left: 20px;"> • Consider the case where one of a, b, or c is zero, and how the algorithm should handle this.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array contains integers between 1 and 100, and its length is between 1 and 100.</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient even when a, b, and c are at their maximum values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -509,29 +509,49 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Priority Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Condition Check for &#39;a&#39;</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Over Elements</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Push &#39;a&#39; to Priority Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Update Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check for &#39;b&#39;</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Track Maximum Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push &#39;b&#39; to Priority Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Initialize Count Variable</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check for &#39;c&#39;</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Over Frequency Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Push &#39;c&#39; to Priority Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Check for Maximum Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 String Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Main Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Calculate Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop from Priority Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Pop from Priority Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Add Characters to Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Decrease Count of Character</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Break if Empty</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Pop Second Character</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Pop Second Character</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Add Second Character to Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Decrease Second Character Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Push Back Characters to Priority Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Push Back Characters to Priority Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Result</button>
                     
                 </div>
 
@@ -540,23 +560,35 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxFrequencyElements</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
-</span></span><span style="display:flex;"><span>        frq[num]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, frq[num]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">longestDiverseString</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>    pq.push({a, <span style="color:#b44">&#39;a&#39;</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>    pq.push({b, <span style="color:#b44">&#39;b&#39;</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>    pq.push({c, <span style="color:#b44">&#39;c&#39;</span>});
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(<span style="color:#666">2</span>, it.first), it.second);
+</span></span><span style="display:flex;"><span>        it.first <span style="color:#666">-=</span> min(<span style="color:#666">2</span>, it.first);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first), it2.second);
+</span></span><span style="display:flex;"><span>        it2.first <span style="color:#666">-=</span> min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it2.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it2);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : frq) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (it.second <span style="color:#666">==</span> mx)
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> mx <span style="color:#666">*</span> cnt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> net;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -564,123 +596,223 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxFrequencyElements</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">longestDiverseString</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `maxFrequencyElements` that takes a vector of integers `nums` and returns an integer representing the product of the maximum frequency of elements in the array and the count of such elements. </div>
+                            <div class=""> Defines the method `longestDiverseString`, which takes three integers representing the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, and returns the longest string possible with no more than two consecutive characters being the same. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Data Structure Initialization</b></div>
+                            <div class=""> <b>2 : Priority Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an unordered map `frq` to store the frequency of each element in the array `nums`. </div>
+                            <div class=""> Creates a max heap (priority queue) to store characters with their respective counts, ensuring the character with the highest count is always at the top. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Condition Check for &#39;a&#39;</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `mx` to store the maximum frequency found while processing the elements of `nums`. </div>
+                            <div class=""> Checks if the count of &#39;a&#39; is greater than 0. If so, &#39;a&#39; is pushed into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Over Elements</b></div>
+                            <div class=""> <b>4 : Push &#39;a&#39; to Priority Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({a, <span style="color:#b44">&#39;a&#39;</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through each element `num` in the input vector `nums`. </div>
+                            <div class=""> Pushes the pair containing the count of &#39;a&#39; and the character &#39;a&#39; into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Update Frequency</b></div>
+                            <div class=""> <b>5 : Condition Check for &#39;b&#39;</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        frq[num]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the frequency of the current element `num` in the `frq` map. </div>
+                            <div class=""> Checks if the count of &#39;b&#39; is greater than 0. If so, &#39;b&#39; is pushed into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Track Maximum Frequency</b></div>
+                            <div class=""> <b>6 : Push &#39;b&#39; to Priority Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, frq[num]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({b, <span style="color:#b44">&#39;b&#39;</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates `mx` to hold the maximum frequency found so far by comparing the current frequency of `num` with the previous maximum. </div>
+                            <div class=""> Pushes the pair containing the count of &#39;b&#39; and the character &#39;b&#39; into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Initialize Count Variable</b></div>
+                            <div class=""> <b>7 : Condition Check for &#39;c&#39;</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `cnt` to count how many elements have the maximum frequency `mx`. </div>
+                            <div class=""> Checks if the count of &#39;c&#39; is greater than 0. If so, &#39;c&#39; is pushed into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Loop Over Frequency Map</b></div>
+                            <div class=""> <b>8 : Push &#39;c&#39; to Priority Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : frq) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({c, <span style="color:#b44">&#39;c&#39;</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate over each key-value pair (`it`) in the frequency map `frq`. </div>
+                            <div class=""> Pushes the pair containing the count of &#39;c&#39; and the character &#39;c&#39; into the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Check for Maximum Frequency</b></div>
+                            <div class=""> <b>9 : String Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (it.second <span style="color:#666">==</span> mx)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the frequency of the current element (`it.second`) equals the maximum frequency `mx`. </div>
+                            <div class=""> Initializes the result string `res`, which will be built by appending characters from the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Count</b></div>
+                            <div class=""> <b>10 : Main Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the count `cnt` if the current element&#39;s frequency matches the maximum frequency. </div>
+                            <div class=""> Starts a `while` loop that continues as long as there are elements in the priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Calculate Result</b></div>
+                            <div class=""> <b>11 : Pop from Priority Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> mx <span style="color:#666">*</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the result `net` as the product of the maximum frequency `mx` and the count `cnt` of elements with that frequency. </div>
+                            <div class=""> Retrieves the top element from the priority queue, which is the character with the highest remaining count. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class=""> <b>12 : Pop from Priority Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> net;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the calculated result `net`, which represents the product of the maximum frequency and the count of elements with that frequency. </div>
+                            <div class=""> Removes the top element from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Add Characters to Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(<span style="color:#666">2</span>, it.first), it.second);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds up to two characters of the top character to the result string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Decrease Count of Character</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it.first <span style="color:#666">-=</span> min(<span style="color:#666">2</span>, it.first);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the count of the character after adding it to the result string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Break if Empty</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the priority queue is empty. If so, the loop breaks. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Pop Second Character</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> pq.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Retrieves the second character (with the next highest count) from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Pop Second Character</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Removes the second element from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Add Second Character to Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first), it2.second);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds one or two characters of the second character to the result string, based on its remaining count. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Decrease Second Character Count</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it2.first <span style="color:#666">-=</span> min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decreases the count of the second character after adding it to the result string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Push Back Characters to Priority Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the first character still has a count greater than 0, it is pushed back into the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Push Back Characters to Priority Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it2.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it2);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the second character still has a count greater than 0, it is pushed back into the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the resulting string that follows the constraints. </div>
                         </div>
                     
                 </div>
@@ -700,16 +832,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the array once to count frequencies and once to find the maximum frequency.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the total sum of a, b, and c, as we process each character only once.</div>
+                        <div class=""> <b>Average Case:</b> O(n log 3), since the priority queue operations involve logarithmic time complexity for each insertion or extraction.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log 3), since the priority queue is accessed a maximum of n times.</div> 
+                        <div class=""> <b>Description:</b> </div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of frequencies in a map, where `n` is the number of unique elements in the array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), as we do not need additional space beyond the priority queue.</div>
+                        <div class=""> <b>Worst Case:</b> O(3), since we only store a small number of values in the priority queue (3 values at most).</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we only need to store the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>    
                     </div>
 
                 </div>

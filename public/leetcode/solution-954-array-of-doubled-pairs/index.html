@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    9 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> Alice and Bob are tasked with watering a garden of n plants. The plants are arranged in a row and need varying amounts of water. Alice waters the plants from left to right, while Bob waters them from right to left. They both begin with full watering cans. If they don’t have enough water for the next plant, they refill their cans. In case they both reach the same plant, the one with more water in their can should water the plant, or Alice waters it in case of a tie. The goal is to determine how many times Alice and Bob have to refill their cans to water all the plants. </div>
+<div class=""> Given an integer array of even length, determine if it is possible to reorder the array such that for every index i, arr[2 * i + 1] = 2 * arr[2 * i] holds true. If it is possible to reorder the array in this way, return true, otherwise return false. </div>
 
 
 
@@ -360,51 +360,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 0-indexed integer array, plants, where each element represents the amount of water a corresponding plant needs. Additionally, two integers, capacityA and capacityB, represent the capacities of Alice’s and Bob’s watering cans, respectively.</div>
-                        <div class=""> <b>Example:</b> plants = [3, 2, 5, 4], capacityA = 6, capacityB = 6</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers, arr, with even length.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [6, 3, 4, 8]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= plants.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= arr.length &lt;= 30000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= plants[i] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • arr.length is even.</div>
                             
-                                <div style="margin-left: 20px;"> • max(plants[i]) &lt;= capacityA, capacityB &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • -105 &lt;= arr[i] &lt;= 105</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of times Alice and Bob need to refill their watering cans in order to water all the plants.</div>
-                        <div class=""> <b>Example:</b> For plants = [3, 2, 5, 4], capacityA = 6, capacityB = 6, the output is 2.</div>
+                        <div class=""> <b>Output:</b> The output should be a boolean value: true if the array can be reordered as described, false otherwise.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be a boolean indicating if the array can be reordered accordingly.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to efficiently compute the number of refills required by simulating the watering process while tracking the remaining water in Alice&#39;s and Bob&#39;s cans.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check whether we can reorder the elements in pairs such that each second element is twice the first element.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize two pointers, one for Alice starting from the left (i = 0) and one for Bob starting from the right (j = n - 1).</div>
+                                <div style="margin-left: 20px;"> • 1. Create a frequency map to count occurrences of each element.</div>
                             
-                                <div style="margin-left: 20px;"> • Initialize counters for Alice&#39;s and Bob&#39;s current water levels (alice, bob) with the respective capacities.</div>
+                                <div style="margin-left: 20px;"> • 2. Sort the unique elements by their absolute values.</div>
                             
-                                <div style="margin-left: 20px;"> • Simulate the process of watering plants for both Alice and Bob, adjusting the number of refills as needed.</div>
+                                <div style="margin-left: 20px;"> • 3. For each element, check if the frequency of its double exists. If not, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • If either Alice or Bob runs out of water for their current plant, they refill their can and continue watering.</div>
+                                <div style="margin-left: 20px;"> • 4. Adjust the frequencies accordingly after each pair is formed.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. If all elements are successfully paired, return true; otherwise, return false.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem involves a large input size (up to 10^5 plants), and the amount of water required by each plant can be as large as 10^6.</div>
+                        <div class=""> <b>Goal:</b> The input array will always have an even length, and the solution must handle arrays of size up to 30000 efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of plants (n) can be up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • The input array length is always even.</div>
                             
-                                <div style="margin-left: 20px;"> • Each plant&#39;s water requirement can be as large as 10^6.</div>
+                                <div style="margin-left: 20px;"> • The array elements are in the range [-105, 105].</div>
                             
-                                <div style="margin-left: 20px;"> • The capacities of Alice and Bob’s cans can be as large as 10^9.</div>
+                                <div style="margin-left: 20px;"> • The array will contain unique integers.</div>
                             
                         </div>
                     </div>        
@@ -412,17 +416,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Alice and Bob always start with full watering cans.</div>
+                                <div style="margin-left: 20px;"> • The array will always have an even number of elements.</div>
                             
-                                <div style="margin-left: 20px;"> • Alice waters the plants from left to right, and Bob waters the plants from right to left.</div>
+                                <div style="margin-left: 20px;"> • We assume the input array is non-empty.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: plants = [3, 2, 5, 4], capacityA = 6, capacityB = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Initially, both Alice and Bob have 6 units of water. Alice waters plant 0 (3 units), leaving 3 units in her can. Bob waters plant 3 (4 units), leaving 2 units in his can. Alice then waters plant 1 (2 units), leaving 1 unit in her can, and Bob refills and waters plant 2 (5 units), leaving 1 unit in his can. Total refills = 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [6, 3, 4, 8]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we cannot reorder the array such that for every i, arr[2 * i &#43; 1] = 2 * arr[2 * i] because the elements do not form valid pairs.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [4, -2, 2, -4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, we can form pairs [-2, -4] and [2, 4], so the array can be reordered to form a valid sequence.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,18 +454,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to simulate the watering process for both Alice and Bob. We keep track of their current water levels and count how many times they need to refill during the process.</div>
+                        <div class=""> <b>Approach:</b> The approach involves sorting the elements of the array based on their absolute values and then checking if we can pair each element with its double while adjusting frequencies.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to simulate a simultaneous watering process for both Alice and Bob, which means tracking their water usage at the same time.</div>
-                            
-                                <div style="margin-left: 20px;"> • Refills are required when either Alice or Bob doesn&#39;t have enough water to water the next plant.</div>
+                                <div style="margin-left: 20px;"> • The key observation is that we need to pair each element with its double, so sorting the elements will allow us to efficiently check this condition.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Efficiently handling the watering process and counting refills is key to solving this problem in optimal time.</div>
+                                <div style="margin-left: 20px;"> • Using a frequency map to track the occurrences of elements is an efficient way to ensure we can match each element with its double.</div>
                             
                         </div>
                     </div>
@@ -465,11 +471,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start with two pointers, one for Alice and one for Bob.</div>
+                                <div style="margin-left: 20px;"> • 1. Build a frequency map of the input array to count the occurrences of each element.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the plants, adjusting the water levels and counting refills when necessary.</div>
+                                <div style="margin-left: 20px;"> • 2. Sort the elements by their absolute values to handle the smallest numbers first.</div>
                             
-                                <div style="margin-left: 20px;"> • When both Alice and Bob reach the same plant, the one with more water should water it; if their water levels are equal, Alice will water it.</div>
+                                <div style="margin-left: 20px;"> • 3. For each element, check if its double exists in the map with sufficient count. If not, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Decrease the count of the double as it has been paired with the current element.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. If all elements are successfully paired, return true; otherwise, return false.</div>
                             
                         </div>
                     </div>
@@ -478,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no plants (empty list), no watering is needed and thus no refills.</div>
+                                <div style="margin-left: 20px;"> • The input will not be empty as the length of the array is guaranteed to be at least 2.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For very large input sizes, ensuring the algorithm is efficient enough to handle up to 10^5 plants is crucial.</div>
+                                <div style="margin-left: 20px;"> • For large arrays up to the size limit of 30000, the solution should run in linearithmic time due to sorting, followed by linear passes for pairing.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all plants require less water than the capacities of Alice and Bob, no refills are needed.</div>
+                                <div style="margin-left: 20px;"> • Special values like 0 and negative numbers are valid as long as they satisfy the pairing condition.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should operate within O(n) time complexity to handle the upper constraint of 10^5 plants.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must run efficiently for large input sizes, particularly for arrays of length up to 30000.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,81 +520,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Frequency Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Increment Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Key Extraction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Control Flow</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Iterate Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Control Flow</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Push Keys</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Sort Keys</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Modification</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Absolute Value Comparison</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Iterate Keys</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Modification</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pair Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return False</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Modification</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Adjust Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Control Flow</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="32"> 32 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="33"> 33 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="34"> 34 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="35"> 35 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="36"> 36 Variable Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="37"> 37 Loop End</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="38"> 38 Function Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return True</button>
                     
                 </div>
 
@@ -593,54 +555,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumRefill</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> plant, <span style="color:#0b0;font-weight:bold">int</span> capA, <span style="color:#0b0;font-weight:bold">int</span> capB) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> plant.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canReorderDoubled</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> alice <span style="color:#666">=</span> capA, bob <span style="color:#666">=</span> capB;
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : arr)
+</span></span><span style="display:flex;"><span>        c[i]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> j) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(alice <span style="color:#666">&gt;=</span> plant[i]) {
-</span></span><span style="display:flex;"><span>                alice <span style="color:#666">-=</span> plant[i];
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                alice <span style="color:#666">=</span> capA;
-</span></span><span style="display:flex;"><span>                alice <span style="color:#666">-=</span> plant[i];
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bob <span style="color:#666">&gt;=</span> plant[j]) {
-</span></span><span style="display:flex;"><span>                bob <span style="color:#666">-=</span> plant[j];
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                bob <span style="color:#666">=</span> capB;
-</span></span><span style="display:flex;"><span>                bob <span style="color:#666">-=</span> plant[j];
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(alice <span style="color:#666">&gt;=</span> bob) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(alice <span style="color:#666">&gt;=</span> plant[i]) {
-</span></span><span style="display:flex;"><span>                    alice <span style="color:#666">-=</span> plant[i];
-</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                    cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                    alice <span style="color:#666">=</span> capA;
-</span></span><span style="display:flex;"><span>                    alice <span style="color:#666">-=</span> plant[i];                        
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(bob <span style="color:#666">&gt;=</span> plant[i]) {
-</span></span><span style="display:flex;"><span>                    bob <span style="color:#666">-=</span> plant[i];
-</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                    cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                    bob <span style="color:#666">=</span> capB;
-</span></span><span style="display:flex;"><span>                    bob <span style="color:#666">-=</span> plant[i];                        
-</span></span><span style="display:flex;"><span>                }                    
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> keys;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: c)
+</span></span><span style="display:flex;"><span>        keys.push_back(it.first);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    sort(keys.begin(), keys.end(), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> abs(a) <span style="color:#666">&lt;</span> abs(b);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: keys) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(c[x] <span style="color:#666">&gt;</span> c[<span style="color:#666">2</span> <span style="color:#666">*</span> x])
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        c[<span style="color:#666">2</span> <span style="color:#666">*</span> x] <span style="color:#666">-=</span> c[x];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -648,383 +583,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumRefill</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> plant, <span style="color:#0b0;font-weight:bold">int</span> capA, <span style="color:#0b0;font-weight:bold">int</span> capB) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canReorderDoubled</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function minimumRefill that accepts the plant water requirements and the tank capacities of Alice and Bob. </div>
+                            <div class=""> The function `canReorderDoubled` takes an array and determines if it can be reordered to form valid (x, 2x) pairs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> plant.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Get the size of the plant array (number of plants). </div>
+                            <div class=""> Create a hash map `c` to count the frequency of each element in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Frequency Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : arr)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two pointers, i and j, to represent Alice and Bob&#39;s positions in the plant array. i starts at the beginning, and j starts at the end. </div>
+                            <div class=""> Iterate through the array to populate the frequency map `c`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Increment Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        c[i]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a counter to track the number of refills. </div>
+                            <div class=""> Increase the count of the current element in the frequency map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Key Extraction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> alice <span style="color:#666">=</span> capA, bob <span style="color:#666">=</span> capB;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> keys;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the initial water levels for Alice and Bob to their respective tank capacities. </div>
+                            <div class=""> Create a vector `keys` to store unique elements from the frequency map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Control Flow</b></div>
+                            <div class=""> <b>6 : Iterate Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: c)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a while loop to iterate while i and j are within bounds, representing that Alice and Bob have plants to water. </div>
+                            <div class=""> Iterate through the frequency map to extract unique keys. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Control Flow</b></div>
+                            <div class=""> <b>7 : Push Keys</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        keys.push_back(it.first);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if there are plants to be watered by both Alice and Bob. </div>
+                            <div class=""> Push each unique key into the `keys` vector for further processing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Condition Check</b></div>
+                            <div class=""> <b>8 : Sort Keys</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(alice <span style="color:#666">&gt;=</span> plant[i]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(keys.begin(), keys.end(), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b){
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if Alice has enough water to water the plant at index i. </div>
+                            <div class=""> Sort the keys in ascending order of their absolute values using a lambda function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Modification</b></div>
+                            <div class=""> <b>9 : Absolute Value Comparison</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                alice <span style="color:#666">-=</span> plant[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">abs</span>(a) <span style="color:#666">&lt;</span> abs(b);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Subtract the amount of water Alice uses to water the plant. </div>
+                            <div class=""> Compare the absolute values of two elements to determine their order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Condition Check</b></div>
+                            <div class=""> <b>10 : Iterate Keys</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: keys) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If Alice doesn&#39;t have enough water, refill the tank. </div>
+                            <div class=""> Iterate through the sorted keys to verify the (x, 2x) pairs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Variable Modification</b></div>
+                            <div class=""> <b>11 : Pair Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(c[x] <span style="color:#666">&gt;</span> c[<span style="color:#666">2</span> <span style="color:#666">*</span> x])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the refill counter since Alice needs to refill her tank. </div>
+                            <div class=""> If there are more occurrences of `x` than `2x`, the pairing is invalid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Variable Assignment</b></div>
+                            <div class=""> <b>12 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                alice <span style="color:#666">=</span> capA;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Refill Alice&#39;s tank to its full capacity. </div>
+                            <div class=""> Return `false` immediately if a valid pair cannot be formed for the current key. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Variable Modification</b></div>
+                            <div class=""> <b>13 : Adjust Frequency</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                alice <span style="color:#666">-=</span> plant[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        c[<span style="color:#666">2</span> <span style="color:#666">*</span> x] <span style="color:#666">-=</span> c[x];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After refilling, subtract the water Alice uses for the plant. </div>
+                            <div class=""> Adjust the frequency of `2x` by subtracting the count of `x` after pairing. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Variable Modification</b></div>
+                            <div class=""> <b>14 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move Alice&#39;s pointer forward to the next plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(bob <span style="color:#666">&gt;=</span> plant[j]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if Bob has enough water to water the plant at index j. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                bob <span style="color:#666">-=</span> plant[j];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Subtract the amount of water Bob uses to water the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If Bob doesn&#39;t have enough water, refill his tank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increment the refill counter since Bob needs to refill his tank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Variable Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                bob <span style="color:#666">=</span> capB;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Refill Bob&#39;s tank to its full capacity. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                bob <span style="color:#666">-=</span> plant[j];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After refilling, subtract the water Bob uses for the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">--</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Move Bob&#39;s pointer backward to the next plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Control Flow</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Else block for when there is only one plant left for either Alice or Bob. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(alice <span style="color:#666">&gt;=</span> bob) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if Alice has more water than Bob to prioritize her watering the next plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(alice <span style="color:#666">&gt;=</span> plant[i]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if Alice has enough water for the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    alice <span style="color:#666">-=</span> plant[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Subtract the water used by Alice for the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If Alice doesn&#39;t have enough water, refill her tank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>27 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increment the refill counter since Alice needs to refill her tank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>28 : Variable Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    alice <span style="color:#666">=</span> capA;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Refill Alice&#39;s tank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>29 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    alice <span style="color:#666">-=</span> plant[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After refilling, subtract the water Alice uses for the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>30 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If Bob has more water than Alice, Bob waters the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>31 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(bob <span style="color:#666">&gt;=</span> plant[i]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if Bob has enough water for the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>32 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    bob <span style="color:#666">-=</span> plant[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Subtract the water used by Bob. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>33 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If Bob doesn&#39;t have enough water, refill his tank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>34 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increment the refill counter. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>35 : Variable Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    bob <span style="color:#666">=</span> capB;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Refill Bob&#39;s tank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>36 : Variable Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    bob <span style="color:#666">-=</span> plant[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After refilling, subtract the water Bob uses for the plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>37 : Loop End</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Move both pointers to the next plant. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>38 : Function Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the number of refills made. </div>
+                            <div class=""> Return `true` indicating the array can be reordered to form valid pairs. </div>
                         </div>
                     
                 </div>
@@ -1044,16 +739,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear because we only iterate through the list of plants once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the sorting step, followed by linear scans to check the pairing conditions.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we only need a few variables to track the water levels and the current plant positions.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the frequency map and the sorted keys.</div>    
                     </div>
 
                 </div>

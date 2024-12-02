@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 5, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array <code>nums</code> and an integer <code>p</code>. Your task is to find <code>p</code> pairs of indices such that the maximum absolute difference between any of the pairs is minimized. Each index can be used in at most one pair. Return the minimized value of the maximum difference among all the pairs. </div>
+<div class=""> You are given a string s containing lowercase English letters and parentheses. Your task is to remove the minimum number of parentheses to make the string valid. </div>
 
 
 
@@ -358,49 +358,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array `nums` and an integer `p`. The array `nums` contains integers, and `p` specifies the number of pairs to form.</div>
-                        <div class=""> <b>Example:</b> nums = [8, 3, 7, 1, 2, 9], p = 3</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s that contains parentheses and lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> s = &#34;abc(de(f)gh)&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= p &lt;= (nums.length)/2</div>
+                                <div style="margin-left: 20px;"> • s[i] is either &#39;(&#39; , &#39;)&#39;, or lowercase English letter</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum possible value of the maximum absolute difference between any of the formed pairs.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return the string after removing the minimum number of parentheses to make it valid.</div>
+                        <div class=""> <b>Example:</b> &#34;abc(de(f)gh)&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The answer will be a non-negative integer representing the minimized maximum difference.</div>
+                                <div style="margin-left: 20px;"> • The output string should be valid after removing parentheses.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to select `p` pairs such that the maximum absolute difference between any pair is as small as possible.</div>
+                        <div class=""> <b>Goal:</b> Ensure the string is valid by removing unnecessary parentheses.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Sort the array to allow easier pairing of close values.</div>
+                                <div style="margin-left: 20px;"> • Use a stack to track the indices of unmatched parentheses.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use binary search to minimize the maximum difference by testing different possible differences and adjusting accordingly.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string, removing parentheses that do not form a valid pair.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: For each candidate difference, count the number of valid pairs that can be formed and determine if it&#39;s feasible to achieve that difference.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Return the smallest possible maximum difference after the binary search concludes.</div>
+                                <div style="margin-left: 20px;"> • Construct and return the new string without invalid parentheses.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The algorithm needs to efficiently handle input sizes up to 100,000 elements and values up to 10^9. The number of pairs `p` can be up to half of the array length.</div>
+                        <div class=""> <b>Goal:</b> The string is non-empty and can contain up to 100,000 characters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The algorithm should run in a time complexity that allows handling arrays of size up to 100,000.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • s[i] is either &#39;(&#39; , &#39;)&#39;, or lowercase English letter</div>
                             
                         </div>
                     </div>        
@@ -408,21 +406,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All elements in `nums` are non-negative integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The array `nums` can contain duplicate values, and the goal is to pair distinct indices that minimize the maximum difference.</div>
+                                <div style="margin-left: 20px;"> • The string contains only valid parentheses or lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [8, 3, 7, 1, 2, 9], p = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting the array as [1, 2, 3, 7, 8, 9], the best way to form 3 pairs is by selecting (1, 2), (3, 7), and (8, 9). The maximum difference is 2 (from the pair (7, 3)), which is the minimized maximum difference.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;abc(de(f)gh)&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string is already valid, so no parentheses are removed.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [10, 1, 2, 7, 1, 3], p = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array is sorted as [1, 1, 2, 3, 7, 10]. The two best pairs are (1, 1) and (2, 3), with the maximum difference being 1, which is the minimized maximum.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;a)b(c)d&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first &#39;)&#39; is removed to make the string valid, resulting in &#39;ab(c)d&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;))((&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> All parentheses are removed, leaving an empty string, which is valid.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,16 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses sorting and binary search to find the minimized maximum difference efficiently. The binary search narrows down the possible maximum differences, while sorting simplifies pairing close elements.</div>
+                        <div class=""> <b>Approach:</b> The solution involves using a stack to track unmatched parentheses and iterating over the string to remove invalid ones.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Brute force approaches could be too slow, so we need to optimize the solution.</div>
+                                <div style="margin-left: 20px;"> • The problem requires finding invalid parentheses and removing them.</div>
+                            
+                                <div style="margin-left: 20px;"> • A stack is a natural data structure for this type of matching problem.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By sorting the array and applying binary search, we can efficiently minimize the maximum difference while ensuring the correct number of valid pairs.</div>
+                                <div style="margin-left: 20px;"> • We can process the string and ensure parentheses are balanced by using a stack to track unmatched opening parentheses and their indices.</div>
                             
                         </div>
                     </div>
@@ -463,15 +465,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Sort the array `nums` to make pairing easier.</div>
+                                <div style="margin-left: 20px;"> • Initialize a stack to store indices of unmatched parentheses.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Initialize binary search bounds. The lower bound is 0, and the upper bound is the difference between the largest and smallest elements in `nums`.</div>
+                                <div style="margin-left: 20px;"> • Traverse the string and push the indices of &#39;(&#39; onto the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Perform binary search. For each mid value (candidate for maximum difference), check how many valid pairs can be formed with differences less than or equal to `mid`.</div>
+                                <div style="margin-left: 20px;"> • For each &#39;)&#39;, check if it forms a valid pair with a previous &#39;(&#39; (using the stack). If not, mark it for removal.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If `p` valid pairs can be formed, adjust the binary search bounds to minimize the maximum difference.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 5: Return the smallest maximum difference found.</div>
+                                <div style="margin-left: 20px;"> • After processing the string, construct the final string by skipping indices of unmatched parentheses.</div>
                             
                         </div>
                     </div>
@@ -480,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` is empty, return 0.</div>
+                                <div style="margin-left: 20px;"> • If the string is empty, the result is also empty.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays up to 100,000 elements.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle strings of size up to 100,000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `p` is 0, the answer should be 0 since no pairs are formed.</div>
+                                <div style="margin-left: 20px;"> • If there are no parentheses in the string, return the original string.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm runs in O(n log(maxDifference)) time where n is the size of the array and maxDifference is the range of values in `nums`.</div>
+                                <div style="margin-left: 20px;"> • Ensure the algorithm works within the given time complexity constraints for large inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,35 +512,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Code Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through String</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Binary Search</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Character Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Middle Point Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Handle Opening Parenthesis</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Remaining Pairs Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Handle Closing Parenthesis</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Pair Evaluation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Handle Unmatched Closing Parenthesis</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pair Selection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Match Parentheses</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Decrement Allowed Pairs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Unmatched Closing Parenthesis</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Skip Next Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Initialize Result String</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Answer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Create Set from Stack</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Binary Search Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop Through String Again</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Search Range Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Check Invalid Indices</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Search Range Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Build Result String</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Final Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
                     
                 </div>
 
@@ -549,27 +549,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizeMax</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> p) {
-</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size(), l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> nums[<span style="color:#666">0</span>], ans <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> nums[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> p;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">-</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> mid) {
-</span></span><span style="display:flex;"><span>                k<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>                i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">minRemoveToMakeValid</span>(string s) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk, itk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">char</span> a <span style="color:#666">=</span> s[i];
+</span></span><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) { stk.push_back(i); }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span>) {
+</span></span><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span>(stk.size()    <span style="color:#666">==</span> <span style="color:#666">0</span>)    stk.push_back(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(s[stk.back()] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>)  stk.pop_back();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> stk.push_back(i);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> mid;
-</span></span><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> st(stk.begin(), stk.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st.count(i)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> s[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -577,153 +574,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Code Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizeMax</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> p) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">minRemoveToMakeValid</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the function minimizeMax, taking a vector of integers and an integer p as input. </div>
+                            <div class=""> This is the function definition of `minRemoveToMakeValid`, which takes a string `s` as input and returns a modified string with the minimum number of parentheses removed to make it valid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk, itk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sort the array nums to facilitate comparison of adjacent elements for minimizing the maximum difference. </div>
+                            <div class=""> Two vectors, `stk` and `itk`, are initialized. `stk` will store the indices of unmatched parentheses, and `itk` is unused in this implementation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Setup</b></div>
+                            <div class=""> <b>3 : Loop Through String</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size(), l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> nums[<span style="color:#666">0</span>], ans <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> nums[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the initial values for binary search range (l, r) and the answer variable (ans). </div>
+                            <div class=""> A loop is used to iterate through each character of the string `s`. The loop index `i` is used to access each character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Binary Search</b></div>
+                            <div class=""> <b>4 : Character Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">char</span> a <span style="color:#666">=</span> s[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the binary search loop to narrow down the range for the minimum maximum difference. </div>
+                            <div class=""> The current character `a` is assigned the value of the character at position `i` in the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Middle Point Calculation</b></div>
+                            <div class=""> <b>5 : Handle Opening Parenthesis</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) { stk.push_back(i); }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the midpoint (mid) for the current search range to test the possible maximum difference. </div>
+                            <div class=""> If the current character is an opening parenthesis &#39;(&#39;, its index is pushed onto the `stk` vector to track its position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Remaining Pairs Setup</b></div>
+                            <div class=""> <b>6 : Handle Closing Parenthesis</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> p;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(a <span style="color:#666">==</span> <span style="">&#39;</span>)<span style="">&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the number of allowed pairs (k) to p, which is passed as an argument. </div>
+                            <div class=""> If the current character is a closing parenthesis &#39;)&#39;, we check if there is an unmatched opening parenthesis. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Pair Evaluation</b></div>
+                            <div class=""> <b>7 : Handle Unmatched Closing Parenthesis</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span>(stk.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) stk.push_back(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the array to evaluate possible pairs based on the current maximum allowed difference. </div>
+                            <div class=""> If the `stk` is empty, meaning there is no corresponding opening parenthesis for this closing parenthesis, its index is added to `stk`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Pair Selection</b></div>
+                            <div class=""> <b>8 : Match Parentheses</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">-</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> mid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(s[stk.back()] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>)  stk.pop_back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current pair meets the condition of having a maximum difference less than or equal to mid. </div>
+                            <div class=""> If the last element in `stk` corresponds to an opening parenthesis, it is removed (the parentheses are matched). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Decrement Allowed Pairs</b></div>
+                            <div class=""> <b>9 : Unmatched Closing Parenthesis</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                k<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> stk.push_back(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrement the number of remaining pairs after successfully selecting a pair. </div>
+                            <div class=""> If the current closing parenthesis cannot be matched with the last opening parenthesis, its index is added to `stk`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Skip Next Element</b></div>
+                            <div class=""> <b>10 : Initialize Result String</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                i<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skip the next element in the array as it has been paired with the current element. </div>
+                            <div class=""> A string `res` is initialized to store the final result after removing the invalid parentheses. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Answer Update</b></div>
+                            <div class=""> <b>11 : Create Set from Stack</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> st(stk.begin(), stk.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If no more pairs can be made, update the answer with the current mid value. </div>
+                            <div class=""> A set `st` is created from the `stk` vector to efficiently check if an index is in the list of invalid parentheses. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Binary Search Adjustment</b></div>
+                            <div class=""> <b>12 : Loop Through String Again</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> mid;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the answer to the current mid value as it represents a potential minimum maximum difference. </div>
+                            <div class=""> Another loop is used to iterate through the string `s` and build the result string by excluding the indices stored in `st`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Search Range Update</b></div>
+                            <div class=""> <b>13 : Check Invalid Indices</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st.count(i)) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Narrow the binary search range by adjusting the right boundary to mid - 1. </div>
+                            <div class=""> If the current index `i` is found in the set `st` (meaning it corresponds to an invalid parenthesis), skip it and continue with the next character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Search Range Update</b></div>
+                            <div class=""> <b>14 : Build Result String</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> s[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If no valid pairs are found, adjust the left boundary of the binary search range to mid &#43; 1. </div>
+                            <div class=""> If the current index `i` is valid, append the character at index `i` to the result string `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Return Final Answer</b></div>
+                            <div class=""> <b>15 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the result, which is the minimized maximum difference between pairs. </div>
+                            <div class=""> Return the result string `res`, which now contains the valid string with the minimum number of parentheses removed. </div>
                         </div>
                     
                 </div>
@@ -743,16 +740,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n), followed by a binary search for the maximum difference.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The algorithm processes the string once, so the time complexity is O(n), where n is the length of the string.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required to store the sorted array.</div>    
+                        <div class=""> <b>Description:</b> In the worst case, all parentheses could be unmatched, so the space complexity is O(n).</div>    
                     </div>
 
                 </div>

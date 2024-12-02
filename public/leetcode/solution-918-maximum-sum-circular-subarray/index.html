@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 7, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are given an array of <code>m</code> observations, each representing a die roll from a 6-sided die, and an average value <code>mean</code> of all <code>n + m</code> rolls. Your task is to calculate the missing <code>n</code> observations such that the overall average of all <code>n + m</code> rolls equals the provided <code>mean</code>. If multiple valid answers exist, return any of them. If it is impossible to achieve the desired average, return an empty array. </div>
+<div class=""> You are given a circular integer array <code>nums</code> of length <code>n</code>. A circular array means that the end of the array connects back to the beginning. Your task is to find the maximum possible sum of a non-empty subarray of <code>nums</code>, which can wrap around the array. Formally, you need to find the maximum sum of a subarray where the subarray can either be within the linear array or it can wrap around from the end to the beginning. </div>
 
 
 
@@ -361,51 +361,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `rolls` representing `m` observed die rolls, and two integers `mean` and `n`, where `n` is the number of missing rolls.</div>
-                        <div class=""> <b>Example:</b> rolls = [1, 2, 3], mean = 4, n = 3</div>
+                        <div class=""> <b>Input:</b> You are given an integer array `nums` representing the circular array.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [2, -1, 3, -2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= rolls.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 3 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= rolls[i], mean &lt;= 6</div>
+                                <div style="margin-left: 20px;"> • -3 * 10^4 &lt;= nums[i] &lt;= 3 * 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an array containing the `n` missing observations such that the average of all `n &#43; m` rolls is equal to `mean`. If no such array exists, return an empty array.</div>
-                        <div class=""> <b>Example:</b> Output: [5, 5, 5]</div>
+                        <div class=""> <b>Output:</b> Return the maximum possible sum of a non-empty subarray of `nums`. The subarray can wrap around from the end of the array to the beginning.</div>
+                        <div class=""> <b>Example:</b> Output: 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If multiple solutions exist, any valid array is acceptable.</div>
-                            
-                                <div style="margin-left: 20px;"> • If it&#39;s impossible to achieve the desired mean, return an empty array.</div>
+                                <div style="margin-left: 20px;"> • The input array will have at least one element.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine the missing `n` observations whose sum, together with the sum of the observed rolls, results in the exact average of `mean`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the maximum sum of a subarray that can be either a linear subarray or one that wraps around the end and the start of the array.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Compute the required sum of all `n &#43; m` rolls by multiplying the mean by `n &#43; m`.</div>
+                                <div style="margin-left: 20px;"> • First, compute the maximum sum subarray for the normal linear case using Kadane&#39;s algorithm.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Subtract the sum of the observed rolls from the required sum to get the sum of the missing rolls.</div>
+                                <div style="margin-left: 20px;"> • Then, compute the minimum sum subarray for the array, and subtract it from the total sum of the array to account for the case where the subarray wraps around.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Check if the sum of the missing rolls is feasible (i.e., within the possible range of `n` die rolls).</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If feasible, divide the sum by `n` to get the average roll value for the missing rolls and distribute any remainder evenly across the missing rolls.</div>
+                                <div style="margin-left: 20px;"> • The result is the maximum of the linear subarray sum and the wrapped subarray sum (only if the array contains at least one non-negative element).</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints for input values and operations.</div>
+                        <div class=""> <b>Goal:</b> The input array will contain at least one element and follow the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= rolls.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The array length `n` will be between 1 and 30,000.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= rolls[i], mean &lt;= 6</div>
+                                <div style="margin-left: 20px;"> • Each element in the array `nums[i]` will be between -30,000 and 30,000.</div>
                             
                         </div>
                     </div>        
@@ -413,23 +409,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The value of `mean` is an integer and the sum of all rolls should be divisible by `n &#43; m`.</div>
+                                <div style="margin-left: 20px;"> • We assume that the input array contains valid integers and is not empty.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> rolls = [1, 2, 3], mean = 4, n = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The total sum needed is (1 &#43; 2 &#43; 3 &#43; 5 &#43; 5 &#43; 5) = 24, and the average is 24 / 6 = 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, -1, 3, -2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the maximum sum subarray that can be found is [3], which has a sum of 3. The subarray [2, -1, 3] is also valid, but its sum is smaller (4). The array does not contain any subarrays that wrap around, so the final result is 3.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> rolls = [1, 5, 6], mean = 3, n = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The total sum needed is (1 &#43; 5 &#43; 6 &#43; 2 &#43; 3 &#43; 2 &#43; 2) = 21, and the average is 21 / 7 = 3.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> rolls = [1, 2, 3, 4], mean = 6, n = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is impossible to achieve an average of 6 because the sum would be too large for the missing rolls to fit the required range.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5, -3, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the best subarray is [5, 5], which wraps around and sums to 10. The maximum sum subarray without wrapping would be [5], summing to 5. Therefore, the result is 10.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,16 +445,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to determine the sum of the missing `n` rolls and ensure it fits within the possible range for `n` dice rolls. We then distribute this sum evenly and handle any remainder appropriately.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved by finding two possible cases for the maximum sum: one where the subarray is within the array, and one where it wraps around the end and the beginning of the array. To handle both cases, we use Kadane’s algorithm for the linear case and compute the total sum minus the minimum subarray sum for the circular case.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sum of the missing rolls should be between `n` and `6 * n` (because each roll is between 1 and 6).</div>
+                                <div style="margin-left: 20px;"> • We need to compute the maximum subarray sum for both linear and circular subarrays.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can compute the required sum and divide it evenly. The remainder can be distributed across the missing rolls.</div>
+                                <div style="margin-left: 20px;"> • Kadane&#39;s algorithm is a good fit for finding the maximum sum subarray in a linear array. To handle the circular case, we can compute the total sum of the array and subtract the minimum subarray sum.</div>
                             
                         </div>
                     </div>
@@ -470,13 +462,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the total sum required for the `n &#43; m` rolls.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Use Kadane’s algorithm to find the maximum subarray sum for the normal array (non-circular case).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Subtract the sum of the observed rolls from the total sum to get the sum for the missing rolls.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Compute the total sum of the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Check if the sum of the missing rolls is valid (between `n` and `6 * n`).</div>
+                                <div style="margin-left: 20px;"> • Step 3: Use Kadane’s algorithm to find the minimum subarray sum for the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Distribute the sum among the missing rolls, adding extra values to some rolls if needed.</div>
+                                <div style="margin-left: 20px;"> • Step 4: The result is the maximum of the normal maximum subarray sum and the total sum minus the minimum subarray sum (for the circular case).</div>
                             
                         </div>
                     </div>
@@ -485,22 +477,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable as `rolls` cannot be empty.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that the array will contain at least one element, so we do not need to handle empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution is efficient enough for large inputs (up to 10^5).</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle large arrays with up to 30,000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `mean` is not achievable based on the sum of the rolls, return an empty array.</div>
+                                <div style="margin-left: 20px;"> • If the array consists entirely of negative numbers, the best solution is just the single largest negative number.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution runs within time limits for large inputs.</div>
+                                <div style="margin-left: 20px;"> • The solution should work within the given constraints for both time and space.</div>
                             
                         </div>                                                                        
                     </div>
@@ -517,33 +509,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sum Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Looping</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Accumulate Rolls</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Accumulate Sum</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Net Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Max Subarray Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Sum Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Max Subarray Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Min Subarray Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Min Subarray Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Vector Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop Start</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Distribute Remainder</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
                 </div>
 
@@ -552,31 +538,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> missingRolls(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rolls, <span style="color:#0b0;font-weight:bold">int</span> mean, <span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> rolls.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> rolls[i];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> mean <span style="color:#666">*</span> (m <span style="color:#666">+</span> n);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    sum <span style="color:#666">=</span> net <span style="color:#666">-</span> sum;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// create an array of size n with sum = sum and elements 1 - 6
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&lt;</span> n <span style="color:#666">||</span> sum <span style="color:#666">&gt;</span> <span style="color:#666">6</span> <span style="color:#666">*</span> n) <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> sum <span style="color:#666">/</span> n, rem <span style="color:#666">=</span> sum <span style="color:#666">%</span> n;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, x);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> rem; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        res[i]<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSubarraySumCircular</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], lmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> gmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], gmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>        lmax <span style="color:#666">=</span> max(nums[i], lmax <span style="color:#666">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>        gmax <span style="color:#666">=</span> max(lmax, gmax);
+</span></span><span style="display:flex;"><span>        lmin <span style="color:#666">=</span> min(nums[i], lmin <span style="color:#666">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>        gmin <span style="color:#666">=</span> min(lmin, gmin);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> gmax <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> max(gmax, sum <span style="color:#666">-</span> gmin)<span style="color:#666">:</span> gmax;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -584,143 +557,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Declaration</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> memo;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSubarraySumCircular</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A memoization table is declared, but it is not used in this function. It might be intended for optimization in case of complex cases. </div>
+                            <div class=""> Define the function &#39;maxSubarraySumCircular&#39; which takes a vector of integers &#39;nums&#39; and returns an integer representing the maximum sum of a subarray in a circular array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> missingRolls(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rolls, <span style="color:#0b0;font-weight:bold">int</span> mean, <span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], lmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function &#39;missingRolls&#39; that takes a vector of rolls, the mean value, and the number of missing rolls &#39;n&#39;. It returns a vector containing the missing rolls that would satisfy the mean. </div>
+                            <div class=""> Initialize &#39;lmax&#39; and &#39;lmin&#39; to the first element of the array, representing the current maximum and minimum subarray sums respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Size</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> rolls.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> gmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], gmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the size of the &#39;rolls&#39; vector to determine how many rolls have already been made. </div>
+                            <div class=""> Initialize &#39;gmax&#39; and &#39;gmin&#39; to the first element of the array, representing the global maximum and minimum subarray sums respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Sum Initialization</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a variable &#39;sum&#39; to accumulate the total of the current rolls. </div>
+                            <div class=""> Initialize &#39;sum&#39; to the first element of the array, which will store the total sum of all elements in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Start</b></div>
+                            <div class=""> <b>5 : Looping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This starts a loop to iterate over each of the current rolls. </div>
+                            <div class=""> Start a loop from the second element to the end of the array to compute the maximum and minimum subarray sums dynamically. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Accumulate Rolls</b></div>
+                            <div class=""> <b>6 : Accumulate Sum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> rolls[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This adds the value of the current roll to the &#39;sum&#39; variable. </div>
+                            <div class=""> Add the current element &#39;nums[i]&#39; to the &#39;sum&#39; to keep track of the total sum of the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Net Calculation</b></div>
+                            <div class=""> <b>7 : Max Subarray Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> mean <span style="color:#666">*</span> (m <span style="color:#666">+</span> n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lmax <span style="color:#666">=</span> max(nums[i], lmax <span style="color:#666">+</span> nums[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the total sum required to achieve the given mean, based on the number of rolls (m) and missing rolls (n). </div>
+                            <div class=""> Update &#39;lmax&#39; to be the maximum of the current element &#39;nums[i]&#39; or the sum of the previous maximum subarray and the current element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Sum Adjustment</b></div>
+                            <div class=""> <b>8 : Max Subarray Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sum <span style="color:#666">=</span> net <span style="color:#666">-</span> sum;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gmax <span style="color:#666">=</span> max(lmax, gmax);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This adjusts the sum to reflect the remaining total needed to achieve the required mean. </div>
+                            <div class=""> Update &#39;gmax&#39; to the maximum value between &#39;lmax&#39; and the global maximum subarray sum so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Condition Check</b></div>
+                            <div class=""> <b>9 : Min Subarray Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&lt;</span> n <span style="color:#666">||</span> sum <span style="color:#666">&gt;</span> <span style="color:#666">6</span> <span style="color:#666">*</span> n) <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lmin <span style="color:#666">=</span> min(nums[i], lmin <span style="color:#666">+</span> nums[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the sum is impossible to achieve with &#39;n&#39; rolls. If the sum is less than &#39;n&#39; or greater than the maximum possible sum (6 * n), it returns an empty vector. </div>
+                            <div class=""> Update &#39;lmin&#39; to be the minimum of the current element &#39;nums[i]&#39; or the sum of the previous minimum subarray and the current element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Min Subarray Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> sum <span style="color:#666">/</span> n, rem <span style="color:#666">=</span> sum <span style="color:#666">%</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gmin <span style="color:#666">=</span> min(lmin, gmin);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the base value &#39;x&#39; that each roll will have and the remainder &#39;rem&#39; that needs to be distributed across the rolls. </div>
+                            <div class=""> Update &#39;gmin&#39; to the minimum value between &#39;lmin&#39; and the global minimum subarray sum so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Vector Initialization</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, x);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> gmax <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> max(gmax, sum <span style="color:#666">-</span> gmin)<span style="color:#666">:</span> gmax;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes the result vector &#39;res&#39; of size &#39;n&#39;, with each element set to the base value &#39;x&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Loop Start</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> rem; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This starts a loop to distribute the remainder &#39;rem&#39; across the result vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Distribute Remainder</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This increments the first &#39;rem&#39; elements of the result vector by 1 to properly distribute the remainder. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This returns the result vector containing the missing rolls that satisfy the mean. </div>
+                            <div class=""> Return the maximum value between &#39;gmax&#39; and the difference between the total sum of the array and &#39;gmin&#39; if &#39;gmax&#39; is greater than 0. Otherwise, return &#39;gmax&#39;. This step considers both circular and non-circular subarrays. </div>
                         </div>
                     
                 </div>
@@ -740,16 +683,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
-                        <div class=""> <b>Description:</b> The algorithm runs in linear time relative to the number of rolls and missing observations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the array at most three times: once for the total sum, once for the maximum subarray sum, and once for the minimum subarray sum.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear, as we need to store the missing rolls.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because we use only a few extra variables to store the sum and intermediate results.</div>    
                     </div>
 
                 </div>

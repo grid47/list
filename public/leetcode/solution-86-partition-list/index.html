@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given a string s. Partition the string into all possible substrings such that each substring is a palindrome. </div>
+<div class=""> Given the head of a linked list and a value x, partition the list such that all nodes with values less than x appear before nodes with values greater than or equal to x. The relative order of the nodes in each partition should be preserved. </div>
 
 
 
@@ -370,49 +370,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a string s of lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> &#39;aab&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of the head of a singly linked list and an integer x. The linked list contains nodes with integer values.</div>
+                        <div class=""> <b>Example:</b> Input: head = [6,2,5,3,8,1], x = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 16</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the list is between 0 and 200.</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • -100 &lt;= Node.val &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • -200 &lt;= x &lt;= 200</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a list of all possible palindromic partitions of the input string.</div>
-                        <div class=""> <b>Example:</b> [[&#39;a&#39;, &#39;a&#39;, &#39;b&#39;], [&#39;aa&#39;, &#39;b&#39;]]</div>
+                        <div class=""> <b>Output:</b> The output should return the head of the partitioned linked list, where nodes less than x appear first, followed by nodes greater than or equal to x. The relative order of nodes in each partition should be preserved.</div>
+                        <div class=""> <b>Example:</b> Output: [2,3,1,6,5,8]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be a list of lists, where each list contains palindromic substrings.</div>
+                                <div style="margin-left: 20px;"> • The list should maintain the relative order of elements within each partition.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find all partitions of the string such that each substring is a palindrome.</div>
+                        <div class=""> <b>Goal:</b> To partition the linked list around the given value x such that all nodes with values less than x come before those with values greater than or equal to x, preserving the original order of the nodes.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Perform a backtracking approach to explore all partitions of the string.</div>
+                                <div style="margin-left: 20px;"> • Create two separate lists: one for values less than x, and one for values greater than or equal to x.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each substring, check if it is a palindrome.</div>
+                                <div style="margin-left: 20px;"> • Traverse the original list, and for each node, append it to the appropriate list based on its value.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If it is a palindrome, add it to the current partition and proceed to partition the remaining part of the string.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If we reach the end of the string, add the partition to the result.</div>
+                                <div style="margin-left: 20px;"> • Once the traversal is complete, merge the two lists by connecting the last node of the first list to the head of the second list.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string s will contain only lowercase English letters.</div>
+                        <div class=""> <b>Goal:</b> The solution must be efficient enough to handle up to 200 nodes in the linked list.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 16</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the list is between 0 and 200.</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • Node values range from -100 to 100.</div>
+                            
+                                <div style="margin-left: 20px;"> • The integer x lies between -200 and 200.</div>
                             
                         </div>
                     </div>        
@@ -420,19 +422,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string s is non-empty and only contains lowercase letters.</div>
+                                <div style="margin-left: 20px;"> • The input list will always be a valid linked list with the specified range of values.</div>
+                            
+                                <div style="margin-left: 20px;"> • The partitioning will maintain the relative order of nodes within each partition.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> &#39;aab&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string can be partitioned into [&#39;a&#39;, &#39;a&#39;, &#39;b&#39;] or [&#39;aa&#39;, &#39;b&#39;], as both are palindromes.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [6,2,5,3,8,1], x = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The list is partitioned into nodes less than 5 (2, 3, 1) and nodes greater than or equal to 5 (6, 5, 8), maintaining their relative order.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> &#39;a&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since the string is just a single character, it is inherently a palindrome, and the only valid partition is [&#39;a&#39;].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [4, 2, 7, 3], x = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Nodes less than 5 (4, 2, 3) appear first, followed by nodes greater than or equal to 5 (7). The relative order of each partition is preserved.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,18 +460,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can use a backtracking approach to explore all possible partitions of the string, checking if each substring is a palindrome.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem, we create two separate linked lists: one for nodes with values less than x, and one for nodes with values greater than or equal to x. After traversing the input list, we merge these two lists together to form the final partitioned list.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check if substrings are palindromes.</div>
+                                <div style="margin-left: 20px;"> • We can easily partition the list by separating the nodes into two lists based on their value relative to x.</div>
                             
-                                <div style="margin-left: 20px;"> • We will explore all possible partitions of the string.</div>
+                                <div style="margin-left: 20px;"> • The challenge is to ensure that the relative order of nodes in each partition is maintained.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A backtracking approach works well because we can build the solution incrementally and backtrack when a non-palindromic substring is found.</div>
+                                <div style="margin-left: 20px;"> • By iterating through the original list and adding nodes to two new lists, we can preserve the order and later merge the lists together.</div>
                             
                         </div>
                     </div>
@@ -475,13 +479,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a helper function to check if a substring is a palindrome.</div>
+                                <div style="margin-left: 20px;"> • Initialize two dummy nodes: one for values less than x and one for values greater than or equal to x.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a recursive function with backtracking to explore all substrings of the string.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the linked list and append each node to the appropriate dummy node&#39;s next pointer.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. At each step, add palindromic substrings to the current partition and move forward.</div>
+                                <div style="margin-left: 20px;"> • Once the iteration is complete, link the last node of the first list to the second list&#39;s head.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Once a complete partition is found, add it to the result.</div>
+                                <div style="margin-left: 20px;"> • Return the merged list starting from the node next to the first dummy node.</div>
                             
                         </div>
                     </div>
@@ -490,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input string is empty, return an empty list.</div>
+                                <div style="margin-left: 20px;"> • If the input linked list is empty (head is null), the output should also be null.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should be able to handle the maximum string length of 16.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution can handle up to 200 nodes efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string consists of a single character, the result should just be that character in a list.</div>
+                                <div style="margin-left: 20px;"> • If all nodes have values less than x or greater than or equal to x, the list should still maintain its relative order.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string will contain only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The solution must not modify the relative order of nodes within each partition.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,45 +528,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Backtracking Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Backtracking Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Node Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Base Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Pointer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Push Partition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Node Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop Through Substrings</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pointer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Palindrome Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pointer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Add Substring to Partition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Node Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Node Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Remove Last Substring</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 End Backtracking Function</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Palindrome Check Function Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Loop for Palindrome Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Character Comparison</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return False</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Move Pointers</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return True</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return</button>
                     
                 </div>
 
@@ -571,36 +561,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> partition(string s) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> tmp;
-</span></span><span style="display:flex;"><span>    bt(ans, tmp, s, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">partition</span>(ListNode<span style="color:#666">*</span> head, <span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>    ListNode <span style="color:#666">*</span>dummy1 <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>), <span style="color:#666">*</span>dummy2 <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    ListNode <span style="color:#666">*</span>p1 <span style="color:#666">=</span> dummy1, <span style="color:#666">*</span>p2 <span style="color:#666">=</span> dummy2;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, string s, <span style="color:#0b0;font-weight:bold">int</span> idx) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> s.size()) {
-</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isPal(s, idx, i)) {
-</span></span><span style="display:flex;"><span>          
-</span></span><span style="display:flex;"><span>            tmp.push_back(s.substr(idx, i <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>            bt(ans, tmp, s, i <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>            tmp.pop_back();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (head) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (head<span style="color:#666">-&gt;</span>val <span style="color:#666">&lt;</span> x) {
+</span></span><span style="display:flex;"><span>            p1<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>            p1 <span style="color:#666">=</span> p1<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            p2<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>            p2 <span style="color:#666">=</span> p2<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        head <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPal</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">!=</span> s[j])
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    p2<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">nullptr</span>;
+</span></span><span style="display:flex;"><span>    p1<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> dummy2<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dummy1<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -611,210 +589,140 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> partition(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">partition</span>(ListNode<span style="color:#666">*</span> head, <span style="color:#0b0;font-weight:bold">int</span> x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the `partition` function, which takes a string `s` and returns all possible palindrome partitions of the string. </div>
+                            <div class=""> Declares a function `partition` that takes a linked list `head` and a pivot value `x` as input and returns the head of the partitioned list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode <span style="color:#666">*</span>dummy1 <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>), <span style="color:#666">*</span>dummy2 <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a 2D vector `ans` to store the resulting palindrome partitions. </div>
+                            <div class=""> Creates two dummy nodes `dummy1` and `dummy2` to act as the heads of two new lists: one for nodes less than `x` and one for nodes greater than or equal to `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Declaration</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> tmp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode <span style="color:#666">*</span>p1 <span style="color:#666">=</span> dummy1, <span style="color:#666">*</span>p2 <span style="color:#666">=</span> dummy2;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a temporary vector `tmp` to store the current palindrome partition while exploring. </div>
+                            <div class=""> Initializes pointers `p1` and `p2` to point to the dummy nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Backtracking Call</b></div>
+                            <div class=""> <b>4 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(ans, tmp, s, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (head) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Call the backtracking function `bt` to explore all possible partitions of the string starting from index 0. </div>
+                            <div class=""> Iterates through the original linked list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Return Statement</b></div>
+                            <div class=""> <b>5 : Conditional</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (head<span style="color:#666">-&gt;</span>val <span style="color:#666">&lt;</span> x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the resulting 2D vector `ans` containing all valid palindrome partitions. </div>
+                            <div class=""> Checks if the current node&#39;s value is less than `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Backtracking Function Declaration</b></div>
+                            <div class=""> <b>6 : Node Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, string s, <span style="color:#0b0;font-weight:bold">int</span> idx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            p1<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the `bt` function that performs backtracking to explore all possible palindrome partitions. </div>
+                            <div class=""> Appends the current node to the first list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Base Case Check</b></div>
+                            <div class=""> <b>7 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> s.size()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            p1 <span style="color:#666">=</span> p1<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current index has reached the end of the string, indicating a valid partition. </div>
+                            <div class=""> Moves the `p1` pointer to the next node in the first list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Push Partition</b></div>
+                            <div class=""> <b>8 : Conditional</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(tmp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current palindrome partition stored in `tmp` to the result vector `ans`. </div>
+                            <div class=""> If the current node&#39;s value is greater than or equal to `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Node Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            p2<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return from the function since we have found a valid partition. </div>
+                            <div class=""> Appends the current node to the second list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Loop Through Substrings</b></div>
+                            <div class=""> <b>10 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            p2 <span style="color:#666">=</span> p2<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through all possible substring endings starting from the current index `idx`. </div>
+                            <div class=""> Moves the `p2` pointer to the next node in the second list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Palindrome Check</b></div>
+                            <div class=""> <b>11 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isPal(s, idx, i)) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        head <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current substring from `idx` to `i` is a palindrome using the `isPal` function. </div>
+                            <div class=""> Moves to the next node in the original linked list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Add Substring to Partition</b></div>
+                            <div class=""> <b>12 : Node Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp.push_back(s.substr(idx, i <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    p2<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">nullptr</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the substring is a palindrome, add it to the temporary partition vector `tmp`. </div>
+                            <div class=""> Sets the `next` pointer of the last node in the second list to `null`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Recursive Call</b></div>
+                            <div class=""> <b>13 : Node Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bt(ans, tmp, s, i <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    p1<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> dummy2<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively call the backtracking function `bt` to explore further partitions starting from the next index `i &#43; 1`. </div>
+                            <div class=""> Connects the two lists by setting the `next` pointer of the last node in the first list to the head of the second list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Remove Last Substring</b></div>
+                            <div class=""> <b>14 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp.pop_back();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dummy1<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the last added substring from the temporary partition to explore other possible partitions. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : End Backtracking Function</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> End of the backtracking function `bt`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Palindrome Check Function Declaration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPal</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Define the `isPal` function to check if a substring of `s` from index `i` to `j` is a palindrome. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Loop for Palindrome Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Use a loop to compare characters at both ends of the substring, moving towards the center. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Character Comparison</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">!=</span> s[j])
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If characters at the current positions `i` and `j` don&#39;t match, return `false` since the substring is not a palindrome. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Return False</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return `false` if the substring is not a palindrome. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Move Pointers</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i<span style="color:#666">++</span>, j<span style="color:#666">--</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Move the pointers `i` and `j` towards the center of the substring. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Return True</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return `true` if the entire substring is a palindrome. </div>
+                            <div class=""> Returns the head of the partitioned list, which is the `next` node of `dummy1`. </div>
                         </div>
                     
                 </div>
@@ -834,16 +742,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2), where n is the length of the string. In the best case, the string has no valid partitions and only the single character partitions are considered.</div>
-                        <div class=""> <b>Average Case:</b> O(2^n), since there are potentially 2^n ways to partition the string.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2 * 2^n), where n is the length of the string, because we check each substring for being a palindrome for each partition.</div> 
-                        <div class=""> <b>Description:</b> The time complexity arises from the recursive exploration of all partitions and palindrome checks.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of nodes in the list. We perform a single pass through the list.</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n), since we traverse the list once and then merge the partitions.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we iterate through the list once to partition the nodes.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), when only a few recursive calls are made.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), due to the recursive call stack in the backtracking approach.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is dominated by the recursive stack and the space used to store the palindromic substrings.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of nodes in the list, as we create two new lists to hold the partitions.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear due to the need to store the two partitioned lists.</div>    
                     </div>
 
                 </div>

@@ -275,7 +275,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 10, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -302,7 +302,7 @@
 
 
 
-<div class=""> You are in a city with <code>n</code> intersections, and roads connecting them with specific travel times. Your task is to find the number of different ways you can travel from intersection 0 to intersection n-1 in the shortest time possible. Since the result could be large, return it modulo (10^9 + 7). </div>
+<div class=""> You are given two integer arrays representing the preorder and postorder traversals of a binary tree. Your task is to reconstruct the binary tree from these two traversals and return the root node of the tree. </div>
 
 
 
@@ -353,59 +353,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer `n` (the number of intersections) and a 2D integer array `roads` where each road is represented by three integers `[u, v, time]`, indicating a road between intersection `u` and `v` that takes `time` minutes to travel.</div>
-                        <div class=""> <b>Example:</b> n = 4, roads = [[0, 1, 1], [1, 2, 1], [2, 3, 1], [0, 2, 2], [1, 3, 2]]</div>
+                        <div class=""> <b>Input:</b> You are provided with two integer arrays, preorder and postorder, where preorder is the preorder traversal and postorder is the postorder traversal of a binary tree.</div>
+                        <div class=""> <b>Example:</b> Input: preorder = [1, 2, 4, 5, 3], postorder = [4, 5, 2, 3, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 200</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= preorder.length &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • n - 1 &lt;= roads.length &lt;= n * (n - 1) / 2</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= preorder[i] &lt;= preorder.length</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= ui, vi &lt;= n - 1</div>
+                                <div style="margin-left: 20px;"> • All the values in preorder are unique.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= time &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • postorder.length == preorder.length</div>
                             
-                                <div style="margin-left: 20px;"> • ui != vi</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= postorder[i] &lt;= postorder.length</div>
                             
-                                <div style="margin-left: 20px;"> • There is at most one road between any two intersections</div>
+                                <div style="margin-left: 20px;"> • All the values in postorder are unique.</div>
                             
-                                <div style="margin-left: 20px;"> • You can reach any intersection from any other intersection</div>
+                                <div style="margin-left: 20px;"> • It is guaranteed that preorder and postorder represent the same binary tree.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer, representing the number of different ways to travel from intersection 0 to intersection n-1 using the shortest time. The answer should be returned modulo (10^9 &#43; 7).</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return the root node of the reconstructed binary tree.</div>
+                        <div class=""> <b>Example:</b> Output: [1, 2, 3, 4, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be an integer.</div>
+                                <div style="margin-left: 20px;"> • The output should be the root node of the reconstructed tree.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the number of ways to travel from intersection 0 to intersection n-1 in the shortest time.</div>
+                        <div class=""> <b>Goal:</b> The goal is to use the preorder and postorder traversal information to reconstruct the binary tree. Preorder provides the root first, and postorder gives the root last. We need to identify the left and right subtrees and recursively reconstruct the tree.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Build a graph where each node represents an intersection and each edge represents a road with a time cost.</div>
+                                <div style="margin-left: 20px;"> • Start with the root node from preorder, which is the first element.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use Dijkstra&#39;s algorithm to find the shortest time to reach all intersections from intersection 0.</div>
+                                <div style="margin-left: 20px;"> • Use postorder to identify when we reach the root of the current subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Track the number of ways to reach each intersection with the shortest time, updating the count whenever a shorter path is found or an equal-length path is discovered.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Return the number of ways to reach intersection n-1, modulo (10^9 &#43; 7).</div>
+                                <div style="margin-left: 20px;"> • Recursively build the left and right subtrees by using the remaining elements of preorder and postorder, ensuring the structure is consistent with both traversals.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must be efficient enough to handle the problem&#39;s constraints.</div>
+                        <div class=""> <b>Goal:</b> The problem must be solved with the given constraints and efficient enough to handle the maximum input size.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix size `n` can be as large as 200.</div>
+                                <div style="margin-left: 20px;"> • The input arrays can have a maximum length of 30.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of roads can be as large as ( n(n - 1)/2 ), so the solution must be optimized.</div>
+                                <div style="margin-left: 20px;"> • The tree is guaranteed to have distinct values, making it easier to identify nodes.</div>
                             
                         </div>
                     </div>        
@@ -413,21 +411,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The graph is connected, meaning there&#39;s always a path from intersection 0 to intersection n-1.</div>
-                            
-                                <div style="margin-left: 20px;"> • There is only one road between any two intersections.</div>
+                                <div style="margin-left: 20px;"> • The preorder and postorder arrays represent the same binary tree and contain distinct values.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 4, roads = [[0, 1, 1], [1, 2, 1], [2, 3, 1], [0, 2, 2], [1, 3, 2]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the shortest time to go from intersection 0 to intersection 3 is 3 minutes, and there are two ways to achieve this: [0 -&gt; 1 -&gt; 2 -&gt; 3] and [0 -&gt; 2 -&gt; 3].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: preorder = [1, 2, 4, 5, 3], postorder = [4, 5, 2, 3, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the preorder traversal gives us the root of the tree first, and the postorder traversal tells us the root of the tree last. From the preorder traversal, we start with node 1 as the root. The left and right subtrees are identified by examining the first and last few elements of the arrays, reconstructing the tree recursively.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 3, roads = [[0, 1, 5], [1, 2, 10]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the only possible way to go from intersection 0 to intersection 2 takes 15 minutes: [0 -&gt; 1 -&gt; 2].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: preorder = [1], postorder = [1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the tree consists of just one node, 1, which is both the root and the only node in the tree.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -451,18 +447,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves using Dijkstra&#39;s algorithm to find the shortest paths from intersection 0 to all other intersections, while keeping track of the number of ways to reach each intersection with the shortest time.</div>
+                        <div class=""> <b>Approach:</b> The problem requires reconstructing the binary tree from the preorder and postorder traversals. We need to use the information in the traversals to identify the root, left, and right subtrees recursively.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Dijkstra&#39;s algorithm is a natural fit for finding the shortest path in a graph with weighted edges.</div>
+                                <div style="margin-left: 20px;"> • Preorder traversal provides the root first, which helps in identifying the root of the tree at each level.</div>
                             
-                                <div style="margin-left: 20px;"> • We need to track not only the shortest distances but also the number of ways to reach each node with those distances.</div>
+                                <div style="margin-left: 20px;"> • Postorder traversal provides the root last, allowing us to identify the boundaries of the left and right subtrees.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to modify Dijkstra&#39;s algorithm to maintain the count of ways to reach each node in the shortest time.</div>
+                                <div style="margin-left: 20px;"> • We can use recursion to process each subtree by maintaining the preorder and postorder arrays, adjusting the indices as we recursively construct the tree.</div>
                             
                         </div>
                     </div>
@@ -470,15 +466,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize a priority queue for Dijkstra&#39;s algorithm with the start node (intersection 0).</div>
+                                <div style="margin-left: 20px;"> • 1. Start with the first element of preorder as the root of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Use a `ways` array to keep track of the number of ways to reach each intersection, and a `dst` array for the shortest time to each intersection.</div>
+                                <div style="margin-left: 20px;"> • 2. Identify the left and right subtrees using the postorder traversal, where the last element is the root of the current subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: For each node, examine its neighbors. If a shorter path is found, update the time and the number of ways to reach that neighbor.</div>
+                                <div style="margin-left: 20px;"> • 3. Recursively build the left and right subtrees using the remaining elements from preorder and postorder arrays, ensuring the tree structure matches both traversals.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: If an equal-length path is found, add the number of ways from the current node to the neighbor modulo (10^9 &#43; 7).</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 5: After processing all nodes, return the value of `ways[n-1]`.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the root node after constructing the entire tree.</div>
                             
                         </div>
                     </div>
@@ -487,22 +481,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that there is always at least one road connecting the intersections.</div>
+                                <div style="margin-left: 20px;"> • If both preorder and postorder are empty, the tree is empty, and we return null.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution can handle the maximum number of roads and intersections, with up to 200 intersections.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the case where the length of the input arrays is 30.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the graph has only two nodes, the answer is always 1 because there&#39;s exactly one road between them.</div>
+                                <div style="margin-left: 20px;"> • If the tree consists of only one node, both preorder and postorder will have a single element.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the result is calculated modulo (10^9 &#43; 7).</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works for arrays with maximum size of 30 and handles recursion efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -519,53 +513,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structures</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Node Creation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Graph Construction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Recursive Left Child Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Graph Construction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Right Child Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Postorder Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Priority Queue Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Priority Queue Push</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Main Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Priority Queue Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Priority Queue Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Graph Traversal</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Update Distance and Path</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Update Path Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Push to Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Path Count Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Path Count Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Root</button>
                     
                 </div>
 
@@ -574,45 +538,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countPaths</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rds) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;&gt;</span> gph(n);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">e</span> : rds) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> u <span style="color:#666">=</span> e[<span style="color:#666">0</span>], v <span style="color:#666">=</span> e[<span style="color:#666">1</span>], time <span style="color:#666">=</span> e[<span style="color:#666">2</span>];
-</span></span><span style="display:flex;"><span>        gph[u].push_back({v, time});
-</span></span><span style="display:flex;"><span>        gph[v].push_back({u, time});
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>ll<span style="color:#666">&gt;</span> ways(n, <span style="color:#666">0</span>), dst(n, LLONG_MAX);
-</span></span><span style="display:flex;"><span>    ways[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>     dst[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pll, vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    pq.push({<span style="color:#666">0</span>, <span style="color:#666">0</span>});
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>      <span style="color:#a2f;font-weight:bold">auto</span> [d, u] <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>      pq.pop();
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">for</span>(pll <span style="color:#a0a000">nb</span> : gph[u]) {
-</span></span><span style="display:flex;"><span>          <span style="color:#0b0;font-weight:bold">int</span> nxt <span style="color:#666">=</span> nb.first, t <span style="color:#666">=</span> nb.second;
-</span></span><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">if</span>(dst[nxt] <span style="color:#666">&gt;</span> d <span style="color:#666">+</span> t) {
-</span></span><span style="display:flex;"><span>       
-</span></span><span style="display:flex;"><span>       dst[nxt] <span style="color:#666">=</span> d <span style="color:#666">+</span> t;
-</span></span><span style="display:flex;"><span>       ways[nxt] <span style="color:#666">=</span> ways[u];
-</span></span><span style="display:flex;"><span>       pq.push({d <span style="color:#666">+</span> t, nxt});
-</span></span><span style="display:flex;"><span>   } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (dst[nxt] <span style="color:#666">==</span> d <span style="color:#666">+</span> t) {
-</span></span><span style="display:flex;"><span>       ways[nxt] <span style="color:#666">=</span> (ways[nxt] <span style="color:#666">+</span> ways[u]) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
-</span></span><span style="display:flex;"><span>   }
-</span></span><span style="display:flex;"><span>   
-</span></span><span style="display:flex;"><span>   }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ways[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> preIdx <span style="color:#666">=</span> <span style="color:#666">0</span>, postIdx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">constructFromPrePost</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> preorder, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> postorder) {
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(preorder[preIdx<span style="color:#666">++</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>val  <span style="color:#666">!=</span> postorder[postIdx])
+</span></span><span style="display:flex;"><span>        root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> constructFromPrePost(preorder, postorder);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>val  <span style="color:#666">!=</span> postorder[postIdx])
+</span></span><span style="display:flex;"><span>        root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> constructFromPrePost(preorder, postorder);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    postIdx<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -620,243 +557,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countPaths</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rds) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> preIdx <span style="color:#666">=</span> <span style="color:#666">0</span>, postIdx <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `countPaths`, which takes an integer `n` (number of nodes) and a 2D vector `rds` (edges and times) as input. </div>
+                            <div class=""> Initialize two index variables, preIdx and postIdx, to traverse the preorder and postorder arrays respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Data Structures</b></div>
+                            <div class=""> <b>2 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;&gt;</span> gph(n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">constructFromPrePost</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> preorder, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> postorder) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a graph `gph` represented as an adjacency list of pairs, where each pair holds a neighboring node and the edge&#39;s weight. </div>
+                            <div class=""> Define the recursive function to construct the binary tree from preorder and postorder traversals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Node Creation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">e</span> : rds) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(preorder[preIdx<span style="color:#666">++</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This begins a loop over the input vector `rds`, which represents the edges of the graph, where each edge is described by a triplet (u, v, time). </div>
+                            <div class=""> Create a new tree node with the current value from the preorder array and increment the preIdx to move to the next element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Assignment</b></div>
+                            <div class=""> <b>4 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> u <span style="color:#666">=</span> e[<span style="color:#666">0</span>], v <span style="color:#666">=</span> e[<span style="color:#666">1</span>], time <span style="color:#666">=</span> e[<span style="color:#666">2</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>val  <span style="color:#666">!=</span> postorder[postIdx])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each edge `e`, the values of `u` (start node), `v` (end node), and `time` (edge weight) are extracted. </div>
+                            <div class=""> Check if the current node&#39;s value does not match the value in the postorder array. If it doesn&#39;t, the left child is not fully constructed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Graph Construction</b></div>
+                            <div class=""> <b>5 : Recursive Left Child Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[u].push_back({v, time});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> constructFromPrePost(preorder, postorder);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This adds the edge (v, time) to the adjacency list of node `u`, indicating a directed edge from `u` to `v` with weight `time`. </div>
+                            <div class=""> Recursively construct the left subtree if the root&#39;s value doesn&#39;t match the postorder value at postIdx. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Graph Construction</b></div>
+                            <div class=""> <b>6 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        gph[v].push_back({u, time});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>val  <span style="color:#666">!=</span> postorder[postIdx])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Similarly, this adds the edge (u, time) to the adjacency list of node `v`, making the graph undirected. </div>
+                            <div class=""> Check again for the root&#39;s value not matching the postorder array. If it still doesn&#39;t match, the right child is not fully constructed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class=""> <b>7 : Recursive Right Child Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>ll<span style="color:#666">&gt;</span> ways(n, <span style="color:#666">0</span>), dst(n, LLONG_MAX);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> constructFromPrePost(preorder, postorder);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two vectors are initialized: `ways` to store the number of ways to reach each node, and `dst` to store the shortest distance to each node. </div>
+                            <div class=""> Recursively construct the right subtree if the root&#39;s value still doesn&#39;t match the postorder value at postIdx. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Variable Assignment</b></div>
+                            <div class=""> <b>8 : Postorder Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ways[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    postIdx<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the number of ways to reach the starting node (node 0) to 1. </div>
+                            <div class=""> Increment the postIdx to move to the next element in the postorder traversal after constructing both left and right subtrees. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Assignment</b></div>
+                            <div class=""> <b>9 : Return Root</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>     dst[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the distance to the starting node to 0. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Priority Queue Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pll, vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A priority queue `pq` is initialized, which will be used to process nodes based on the shortest distance (min-heap). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Priority Queue Push</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({<span style="color:#666">0</span>, <span style="color:#666">0</span>});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the starting node (0) with distance 0 into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize a variable `ans` to store the result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Main Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Start a loop to process the nodes in the priority queue, which will always process the node with the smallest distance first. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Priority Queue Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>      <span style="color:#a2f;font-weight:bold">auto</span> [d, u] <span style="color:#666">=</span> pq.top();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Extract the node with the smallest distance from the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Priority Queue Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>      pq.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pop the node from the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Graph Traversal</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">for</span>(pll <span style="color:#a0a000">nb</span> : gph[u]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Traverse the neighbors of node `u` in the graph. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Variable Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>          <span style="color:#0b0;font-weight:bold">int</span> nxt <span style="color:#666">=</span> nb.first, t <span style="color:#666">=</span> nb.second;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Extract the next node (`nxt`) and edge weight (`t`) from the neighbor pair. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">if</span>(dst[nxt] <span style="color:#666">&gt;</span> d <span style="color:#666">+</span> t) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if a shorter path to `nxt` is found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Update Distance and Path</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       dst[nxt] <span style="color:#666">=</span> d <span style="color:#666">+</span> t;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the shortest distance to `nxt`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Update Path Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       ways[nxt] <span style="color:#666">=</span> ways[u];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Set the number of ways to reach `nxt` to the number of ways to reach `u`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Push to Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       pq.push({d <span style="color:#666">+</span> t, nxt});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the updated node `nxt` with its new distance to the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Path Count Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>   } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (dst[nxt] <span style="color:#666">==</span> d <span style="color:#666">+</span> t) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current path to `nxt` is equal to the best known distance, update the number of ways. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Path Count Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       ways[nxt] <span style="color:#666">=</span> (ways[nxt] <span style="color:#666">+</span> ways[u]) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Add the number of ways to reach `u` to the number of ways to reach `nxt`, keeping it modulo 1000000007. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ways[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the number of ways to reach the last node (`n - 1`). </div>
+                            <div class=""> Return the root node, which now has its left and right subtrees properly linked. </div>
                         </div>
                     
                 </div>
@@ -876,16 +663,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O((n &#43; m) log n), where n is the number of intersections and m is the number of roads.</div>
-                        <div class=""> <b>Average Case:</b> O((n &#43; m) log n)</div>
-                        <div class=""> <b>Worst Case:</b> O((n &#43; m) log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the priority queue operations in Dijkstra&#39;s algorithm.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear, O(n), where n is the number of nodes in the tree, as we visit each node once during the recursion.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m), where n is the number of intersections and m is the number of roads.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is dominated by the storage required for the graph representation and the arrays used in Dijkstra&#39;s algorithm.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the recursion stack and the space needed to store the tree structure.</div>    
                     </div>
 
                 </div>

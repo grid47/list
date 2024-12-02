@@ -321,7 +321,7 @@
 
 
 
-<div class=""> Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet. </div>
+<div class=""> You are given the root of a binary tree. Your task is to return the maximum depth of the tree. The maximum depth is defined as the number of nodes along the longest path from the root node down to the farthest leaf node. </div>
 
 
 
@@ -372,43 +372,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer columnNumber, which represents the column number to be converted to Excel column title.</div>
-                        <div class=""> <b>Example:</b> columnNumber = 27</div>
+                        <div class=""> <b>Input:</b> You are given the root node of a binary tree, where each node contains a value, and pointers to its left and right children.</div>
+                        <div class=""> <b>Example:</b> root = [5,3,8,2,4,7,9]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= columnNumber &lt;= 2^31 - 1</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 10^4].</div>
+                            
+                                <div style="margin-left: 20px;"> • -100 &lt;= Node.val &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a string representing the column title corresponding to the input columnNumber.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;AA&#39;</div>
+                        <div class=""> <b>Output:</b> You should return an integer representing the maximum depth of the binary tree.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a valid Excel column title.</div>
+                                <div style="margin-left: 20px;"> • The output should be a single integer representing the depth of the tree.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the Excel column title corresponding to a given integer columnNumber.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the maximum depth of the binary tree by recursively calculating the depth of the left and right subtrees, and returning the larger of the two depths plus one.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Reduce the columnNumber by 1 (to make the conversion zero-indexed).</div>
+                                <div style="margin-left: 20px;"> • Base Case: If the root is NULL, return 0.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the remainder when divided by 26, and map it to the corresponding alphabet (A-Z).</div>
+                                <div style="margin-left: 20px;"> • Recursively find the maximum depth of the left subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • Update columnNumber by dividing it by 26, and continue the process until columnNumber becomes 0.</div>
+                                <div style="margin-left: 20px;"> • Recursively find the maximum depth of the right subtree.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the larger of the two depths plus one to account for the current node.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input columnNumber is within a valid range, and the conversion should correctly map the number to its column title.</div>
+                        <div class=""> <b>Goal:</b> The solution should be able to handle trees with up to 10,000 nodes efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= columnNumber &lt;= 2^31 - 1</div>
+                                <div style="margin-left: 20px;"> • The tree can contain up to 10,000 nodes.</div>
                             
                         </div>
                     </div>        
@@ -416,15 +420,31 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The column number will always have a valid corresponding Excel column title.</div>
+                                <div style="margin-left: 20px;"> • The input will always represent a valid binary tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> columnNumber = 27</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The column title corresponding to 27 is &#39;AA&#39;. This is because after reducing 27 by 1, we get 26, which corresponds to &#39;Z&#39;. Dividing by 26 gives us 1, which corresponds to &#39;A&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [3,9,20,null,null,15,7]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree has the following structure:
+
+       3
+      / \
+     9  20
+        /  \
+       15   7
+
+The longest path is from root (3) to leaf nodes (15 or 7), which has a depth of 3.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [1,null,2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary tree consists of the root node (1) and its right child (2), forming a path of depth 2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> root = []</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> An empty tree has no nodes, so the maximum depth is 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,16 +468,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will convert the integer columnNumber into its corresponding Excel column title by repeatedly calculating remainders and mapping them to characters.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved using a recursive approach to traverse the tree and calculate the depth of each subtree.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem involves repeatedly dividing the number by 26 and mapping the result to a letter in the alphabet.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved using recursion by finding the depth of the left and right subtrees at each node.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This problem can be solved by simulating the conversion process using basic modular arithmetic.</div>
+                                <div style="margin-left: 20px;"> • By utilizing recursion, we can efficiently calculate the maximum depth of the tree by always comparing the depths of the left and right subtrees.</div>
                             
                         </div>
                     </div>
@@ -465,15 +485,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty string to store the result.</div>
+                                <div style="margin-left: 20px;"> • Check if the root is null. If so, return 0.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate while columnNumber is greater than 0.</div>
+                                <div style="margin-left: 20px;"> • Recursively calculate the maximum depth of the left subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • In each iteration, calculate the remainder of columnNumber - 1 divided by 26, which gives the corresponding letter.</div>
+                                <div style="margin-left: 20px;"> • Recursively calculate the maximum depth of the right subtree.</div>
                             
-                                <div style="margin-left: 20px;"> • Append the letter to the result string.</div>
-                            
-                                <div style="margin-left: 20px;"> • Update columnNumber by dividing it by 26.</div>
+                                <div style="margin-left: 20px;"> • Return the larger of the two depths, plus one to account for the current node.</div>
                             
                         </div>
                     </div>
@@ -482,22 +500,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that columnNumber will be at least 1, so no need to handle empty inputs.</div>
+                                <div style="margin-left: 20px;"> • If the tree is empty, return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large columnNumbers, the solution must handle the division and string construction efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large trees with up to 10,000 nodes, ensure the solution handles the input efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If columnNumber is 1, the result should be &#39;A&#39;.</div>
+                                <div style="margin-left: 20px;"> • If the tree is heavily unbalanced (e.g., all nodes are on one side), the depth should be calculated correctly based on the longest path.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The approach should work efficiently for values up to 2^31 - 1.</div>
+                                <div style="margin-left: 20px;"> • The tree can contain up to 10,000 nodes, so the algorithm should be efficient in terms of time complexity.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,21 +534,9 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 While Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Modulo Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Character Conversion</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 String Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Column Division</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Recursive Call</button>
                     
                 </div>
 
@@ -539,16 +545,9 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">convertToTitle</span>(<span style="color:#0b0;font-weight:bold">int</span> columnNumber) {
-</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(columnNumber <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        mod <span style="color:#666">=</span> <span style="color:#666">--</span>columnNumber <span style="color:#666">%</span> <span style="color:#666">26</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">char</span> x <span style="color:#666">=</span> (<span style="color:#b44">&#39;A&#39;</span> <span style="color:#666">+</span> mod);
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> x <span style="color:#666">+</span> res;
-</span></span><span style="display:flex;"><span>        columnNumber <span style="color:#666">/=</span> <span style="color:#666">26</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDepth</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> max(maxDepth(root<span style="color:#666">-&gt;</span>left), maxDepth(root<span style="color:#666">-&gt;</span>right));
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -559,90 +558,30 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">convertToTitle</span>(<span style="color:#0b0;font-weight:bold">int</span> columnNumber) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDepth</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;convertToTitle&#39; that converts an integer column number to its corresponding Excel column title (e.g., 1 -&gt; &#39;A&#39;). </div>
+                            <div class=""> Define the function &#39;maxDepth&#39; which takes the root of a binary tree and returns the maximum depth of the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty string &#39;res&#39; to build the resulting column title as we compute it. </div>
+                            <div class=""> Check if the current node is null. If it is, return a depth of 0, representing the base case of the recursion. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Declaration</b></div>
+                            <div class=""> <b>3 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> max(maxDepth(root<span style="color:#666">-&gt;</span>left), maxDepth(root<span style="color:#666">-&gt;</span>right));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare an integer &#39;mod&#39; to store the result of the modulo operation, which will be used to calculate the characters of the column title. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>4 : While Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(columnNumber <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Start a while loop that continues until &#39;columnNumber&#39; becomes zero, which means we have processed all digits of the title. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : Modulo Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mod <span style="color:#666">=</span> <span style="color:#666">--</span>columnNumber <span style="color:#666">%</span> <span style="color:#666">26</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Decrement &#39;columnNumber&#39; by 1 to handle the &#39;A&#39; as 0 case, then compute the remainder when dividing by 26 to get the corresponding character&#39;s index. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Character Conversion</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">char</span> x <span style="color:#666">=</span> (<span style="color:#b44">&#39;A&#39;</span> <span style="color:#666">+</span> mod);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Convert the calculated remainder (&#39;mod&#39;) to the corresponding character in the alphabet by adding it to the ASCII value of &#39;A&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : String Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> x <span style="color:#666">+</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Prepend the character &#39;x&#39; to the result string &#39;res&#39;, so that the title is built in the correct order from right to left. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Column Division</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        columnNumber <span style="color:#666">/=</span> <span style="color:#666">26</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Divide &#39;columnNumber&#39; by 26 to move to the next significant digit of the Excel column title. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the computed column title stored in the &#39;res&#39; string. </div>
+                            <div class=""> Recursively calculate the maximum depth of the left and right subtrees, add 1 to account for the current node, and return the result. </div>
                         </div>
                     
                 </div>
@@ -662,16 +601,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(log(columnNumber))</div>
-                        <div class=""> <b>Average Case:</b> O(log(columnNumber))</div>
-                        <div class=""> <b>Worst Case:</b> O(log(columnNumber))</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(log(columnNumber)) because we divide columnNumber by 26 in each iteration.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we need to visit each node in the tree, so the time complexity is O(n), where n is the number of nodes.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(log(columnNumber))</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(log(columnNumber)) due to the string being built in the result.</div>    
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h) in the worst case, where h is the height of the tree. In the best case, the tree is perfectly balanced, and the space complexity is O(1).</div>    
                     </div>
 
                 </div>

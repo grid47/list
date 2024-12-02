@@ -323,7 +323,7 @@
 
 
 
-<div class=""> Given an integer n, find how many integers in the range [1, n] are &lsquo;good&rsquo; integers. A number is considered &lsquo;good&rsquo; if after rotating each of its digits by 180 degrees, it becomes a valid different number. The rotation rules for digits are as follows: 0, 1, and 8 stay the same, 2 and 5 swap places, 6 and 9 swap places, and other digits are not valid when rotated. </div>
+<div class=""> You are given a nested list of integers nestedList, where each element can either be an integer or a sublist containing integers or other sublists. Implement an iterator to flatten this nested list. </div>
 
 
 
@@ -374,45 +374,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer n representing the upper bound of the range. You need to check for all integers from 1 to n which are &#39;good&#39;.</div>
-                        <div class=""> <b>Example:</b> n = 15</div>
+                        <div class=""> <b>Input:</b> The input is a nested list of integers where each element is either an integer or a list of integers.</div>
+                        <div class=""> <b>Example:</b> nestedList = [[2,3],4,[5,6]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nestedList.length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • The integer values in the nested list are within the range [-10^6, 10^6].</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the count of &#39;good&#39; integers between 1 and n, inclusive.</div>
-                        <div class=""> <b>Example:</b> Output: 6</div>
+                        <div class=""> <b>Output:</b> The output is a list of integers that is the flattened version of the nested list.</div>
+                        <div class=""> <b>Example:</b> [2, 3, 4, 5, 6]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be a non-negative integer.</div>
+                                <div style="margin-left: 20px;"> • The flattened list should maintain the order of the elements from the original nested list.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine how many integers in the range [1, n] are &#39;good&#39; by rotating their digits and ensuring the result is a valid, different number.</div>
+                        <div class=""> <b>Goal:</b> The goal is to implement an iterator that flattens the nested list efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each number in the range [1, n], break the number into its individual digits.</div>
+                                <div style="margin-left: 20px;"> • Use a stack to keep track of the current position in the nested list.</div>
                             
-                                <div style="margin-left: 20px;"> • For each digit, check if its rotation results in a valid number (refer to the rotation rules).</div>
+                                <div style="margin-left: 20px;"> • For each call to next(), move to the next element in the flattened list.</div>
                             
-                                <div style="margin-left: 20px;"> • If the number becomes valid and different from the original, count it as &#39;good&#39;.</div>
+                                <div style="margin-left: 20px;"> • For each call to hasNext(), check if there are more elements left to return in the nested list.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the input is within the bounds specified by the constraints.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle nested lists of size up to 500 and integer values in the range [-10^6, 10^6].</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • n must be between 1 and 10^4.</div>
-                            
-                                <div style="margin-left: 20px;"> • Digits other than 0, 1, 2, 5, 6, 8, 9 are invalid when rotated.</div>
+                                <div style="margin-left: 20px;"> • The solution must ensure that it handles nested lists efficiently without excessive recursion or memory usage.</div>
                             
                         </div>
                     </div>        
@@ -420,23 +420,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • It is assumed that the input number is valid and within the specified range.</div>
+                                <div style="margin-left: 20px;"> • The input list may contain nested sublists of various depths.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 10</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The integers from 1 to 10 include 2, 5, 6, and 9, which are the &#39;good&#39; numbers. Other numbers remain unchanged after rotation.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nestedList = [[2,3],4,[5,6]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The input nested list contains sublists and integers. The iterator should flatten this list to return the integers in the order [2, 3, 4, 5, 6].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The only integer in the range is 1, which remains unchanged after rotation. Therefore, the count of &#39;good&#39; integers is 0.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 15</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The &#39;good&#39; integers in this range are 2, 5, 6, 9, 10, 11, 12, 15. Therefore, the output will be 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nestedList = [1, [2, [3, 4]]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The input list has nested sublists. The iterator should flatten it to return the integers in the order [1, 2, 3, 4].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,16 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we can iterate through each integer from 1 to n and check if rotating its digits results in a valid and different number. We can map each digit to its rotated counterpart and verify whether the number changes or not.</div>
+                        <div class=""> <b>Approach:</b> The approach to flattening the nested list is to use a stack to iteratively traverse the elements and flatten them.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check each digit of the number and ensure it can be rotated into another valid digit.</div>
+                                <div style="margin-left: 20px;"> • The nested list contains integers and sublists of integers.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The main challenge is checking each digit of the number and ensuring that the rotated version is different from the original number.</div>
+                                <div style="margin-left: 20px;"> • A stack can help manage the state of the iterator and allow efficient traversal through the nested list.</div>
                             
                         </div>
                     </div>
@@ -477,13 +473,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a lookup table for each digit&#39;s valid rotated counterpart.</div>
+                                <div style="margin-left: 20px;"> • Initialize a stack with the beginning and end iterators of the nested list.</div>
                             
-                                <div style="margin-left: 20px;"> • For each number from 1 to n, break it down into digits.</div>
-                            
-                                <div style="margin-left: 20px;"> • For each digit, check its rotated value and ensure it forms a valid new number.</div>
-                            
-                                <div style="margin-left: 20px;"> • Count the numbers that are &#39;good&#39; and return the result.</div>
+                                <div style="margin-left: 20px;"> • Use the stack to traverse the nested list. For each integer, return it; for each list, dive into its elements.</div>
                             
                         </div>
                     </div>
@@ -492,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs since n is always a valid integer.</div>
+                                <div style="margin-left: 20px;"> • If the nested list is empty, the iterator should immediately return false from hasNext() and not produce any output.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs up to 10^4, ensure the algorithm runs efficiently by iterating through all numbers from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • For larger nested lists, the solution must avoid excessive recursion and handle deeply nested sublists efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If n is very small (like 1 or 2), check that the edge cases are handled correctly.</div>
+                                <div style="margin-left: 20px;"> • Consider cases where the nested list contains only integers or only empty sublists.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works within the provided constraints (1 &lt;= n &lt;= 10^4).</div>
+                                <div style="margin-left: 20px;"> • The iterator should not exceed O(n) time complexity, where n is the total number of integers in the flattened list.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,27 +516,47 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Push Begin Iterator</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Push End Iterator</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Next Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 HasNext Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Integer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 HasNext Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Digit Processing</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Digit Reduction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Check End of Current List</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Iterators</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop End Iterator</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Else Block Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Check if Integer</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return True if Integer</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return True</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Increment Iterator</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Push Next Level Begin Iterator</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Push Next Level End Iterator</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return False</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Private Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Private Data Members</button>
                     
                 </div>
 
@@ -553,133 +565,248 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rotatedDigits</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> f[] <span style="color:#666">=</span> {<span style="color:#666">1</span>,<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">2</span>,<span style="color:#666">2</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">2</span>};
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(p) {
-</span></span><span style="display:flex;"><span>            s <span style="color:#666">*=</span> f[p<span style="color:#666">%</span><span style="color:#666">10</span>];
-</span></span><span style="display:flex;"><span>            p <span style="color:#666">/=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s <span style="color:#666">&gt;=</span> <span style="color:#666">2</span>) res <span style="color:#666">+=</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    }        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NestedIterator(vector<span style="color:#666">&lt;</span>NestedInteger<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nestedList) {
+</span></span><span style="display:flex;"><span>    begins.push(nestedList.begin());
+</span></span><span style="display:flex;"><span>    ends.push(nestedList.end());
 </span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>() {
+</span></span><span style="display:flex;"><span>    hasNext();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (begins.top()<span style="color:#666">++</span>)<span style="color:#666">-&gt;</span>getInteger();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">hasNext</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (begins.size()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (begins.top() <span style="color:#666">==</span> ends.top()) {
+</span></span><span style="display:flex;"><span>            begins.pop();
+</span></span><span style="display:flex;"><span>            ends.pop();
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> x <span style="color:#666">=</span> begins.top();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (x<span style="color:#666">-&gt;</span>isInteger())
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            begins.top()<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            begins.push(x<span style="color:#666">-&gt;</span>getList().begin());
+</span></span><span style="display:flex;"><span>            ends.push(x<span style="color:#666">-&gt;</span>getList().end());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>stack<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>NestedInteger<span style="color:#666">&gt;::</span>iterator<span style="color:#666">&gt;</span> begins, ends;
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rotatedDigits</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NestedIterator(vector<span style="color:#666">&lt;</span>NestedInteger<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nestedList) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function definition for &#39;rotatedDigits&#39;, where &#39;n&#39; is the upper limit for the range of numbers to check. </div>
+                            <div class=""> The constructor takes a reference to a vector of `NestedInteger` objects, representing a potentially nested list, and initializes two stacks to keep track of the current and end iterators for each list level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Array Initialization</b></div>
+                            <div class=""> <b>2 : Push Begin Iterator</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> f[] <span style="color:#666">=</span> {<span style="color:#666">1</span>,<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>,<span style="color:#666">2</span>,<span style="color:#666">2</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">2</span>};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    begins.push(nestedList.begin());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An array &#39;f&#39; is initialized to represent the valid transformations for each digit. Digits 0, 1, 8 are valid and map to themselves, while digits 2, 5, 6, 9 are valid and map to each other. </div>
+                            <div class=""> The begin iterator for the first level of the nested list is pushed onto the `begins` stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Push End Iterator</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ends.push(nestedList.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;res&#39; is initialized to count the number of valid numbers. </div>
+                            <div class=""> The end iterator for the first level of the nested list is pushed onto the `ends` stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Next Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is set to iterate from 0 to &#39;n&#39; to check all numbers in this range. </div>
+                            <div class=""> The `next()` function retrieves the next integer in the nested structure, if available. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Assignment</b></div>
+                            <div class=""> <b>5 : HasNext Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    hasNext();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The current number &#39;i&#39; is stored in variable &#39;p&#39; to process its digits. </div>
+                            <div class=""> Calls `hasNext()` to ensure there is an integer available before proceeding to retrieve it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Return Integer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (begins.top()<span style="color:#666">++</span>)<span style="color:#666">-&gt;</span>getInteger();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;s&#39; is initialized to 1. This will track the validity of the digits as they are processed. </div>
+                            <div class=""> The next integer is retrieved from the top of the `begins` stack by advancing the iterator and calling `getInteger()` on the current `NestedInteger` object. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Loop</b></div>
+                            <div class=""> <b>7 : HasNext Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(p) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">hasNext</span>() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This while loop processes each digit of the number &#39;p&#39; one by one. </div>
+                            <div class=""> The `hasNext()` function checks if there are more integers available in the nested list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Digit Processing</b></div>
+                            <div class=""> <b>8 : While Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s <span style="color:#666">*=</span> f[p<span style="color:#666">%</span><span style="color:#666">10</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (begins.size()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line checks the validity of the current digit by looking it up in the array &#39;f&#39;. If the digit is invalid, &#39;s&#39; will become 0, marking the number as invalid. </div>
+                            <div class=""> This `while` loop continues as long as there are elements in the `begins` stack, indicating that there are more levels in the nested list to explore. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Digit Reduction</b></div>
+                            <div class=""> <b>9 : Check End of Current List</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            p <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (begins.top() <span style="color:#666">==</span> ends.top()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The number &#39;p&#39; is reduced by removing its last digit, preparing for the next iteration. </div>
+                            <div class=""> Checks if the current iterator has reached the end of the current list level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Condition Check</b></div>
+                            <div class=""> <b>10 : Pop Iterators</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s <span style="color:#666">&gt;=</span> <span style="color:#666">2</span>) res <span style="color:#666">+=</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            begins.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;s&#39; is greater than or equal to 2, it means the number is valid after rotation, and the result counter &#39;res&#39; is incremented. </div>
+                            <div class=""> If the iterator has reached the end, both the `begins` and `ends` iterators for that level are popped off the stacks. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Pop End Iterator</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ends.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the total count of valid numbers after checking all numbers from 0 to &#39;n&#39;. </div>
+                            <div class=""> Pops the end iterator for the current level. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Else Block Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current iterator has not reached the end, continue processing the current element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Check if Integer</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> x <span style="color:#666">=</span> begins.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Grabs the current `NestedInteger` from the top of the `begins` stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return True if Integer</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (x<span style="color:#666">-&gt;</span>isInteger())
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current `NestedInteger` is an integer. If it is, the function returns `true`, indicating that the next integer is available. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return True</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns `true` indicating that the next integer is available. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Increment Iterator</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            begins.top()<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Advances the iterator to the next element in the current list. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Push Next Level Begin Iterator</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            begins.push(x<span style="color:#666">-&gt;</span>getList().begin());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current `NestedInteger` is a list, pushes the begin iterator of the nested list onto the `begins` stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Push Next Level End Iterator</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ends.push(x<span style="color:#666">-&gt;</span>getList().end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the end iterator of the nested list onto the `ends` stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return False</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns `false` if there are no more integers available in the nested structure. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Private Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declares the private section of the class. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Private Data Members</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>NestedInteger<span style="color:#666">&gt;::</span>iterator<span style="color:#666">&gt;</span> begins, ends;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Two stacks are declared to keep track of iterators for traversing the nested list: `begins` holds the current iterators, and `ends` holds the end iterators for each level. </div>
                         </div>
                     
                 </div>
@@ -699,16 +826,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the input number.</div>
-                        <div class=""> <b>Average Case:</b> O(n * d), where d is the average number of digits in the numbers from 1 to n.</div>
-                        <div class=""> <b>Worst Case:</b> O(n * d), where n is up to 10^4 and d is the number of digits in the largest number.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of integers to check, with an additional factor of d for processing each digit.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because each integer is visited once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), if no additional space is required beyond the iteration.</div>
-                        <div class=""> <b>Worst Case:</b> O(d), where d is the number of digits in the largest number (since we store the digits of the number).</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant for each number, only requiring space for storing its digits during the check.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the stack used for traversal and the result storage.</div>    
                     </div>
 
                 </div>

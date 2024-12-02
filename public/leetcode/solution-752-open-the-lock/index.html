@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 23, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1286s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1283s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/752.webp" 
            alt="A lock with combination digits, where each correct digit softly glows as it’s guessed correctly." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> A restaurant with a single chef serves customers. Each customer arrives at a specific time and waits for the chef to prepare their order. The chef can only serve one customer at a time and prepares orders in the order they were received. The goal is to calculate the average waiting time of all customers. The waiting time of a customer is the time between their arrival and when they receive their order. </div>
+<div class=""> You are given a lock with 4 rotating wheels, each containing 10 slots labeled &lsquo;0&rsquo; to &lsquo;9&rsquo;. The wheels can rotate freely and wrap around. You must determine the minimum number of moves required to reach a target lock configuration, avoiding certain deadends. </div>
 
 
 
@@ -372,51 +372,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 2D array where each entry represents a customer, with the first value indicating the arrival time and the second value indicating the time required to prepare the order.</div>
-                        <div class=""> <b>Example:</b> [[1, 2], [3, 4], [6, 1]]</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of deadends and a target string, representing the lock&#39;s target configuration.</div>
+                        <div class=""> <b>Example:</b> deadends = [&#39;0201&#39;, &#39;0101&#39;, &#39;0102&#39;, &#39;1212&#39;, &#39;2002&#39;], target = &#39;0202&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= customers.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= deadends.length &lt;= 500</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= arrivali, timei &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • deadends[i].length == 4</div>
                             
-                                <div style="margin-left: 20px;"> • arrivali &lt;= arrivali&#43;1</div>
+                                <div style="margin-left: 20px;"> • target.length == 4</div>
+                            
+                                <div style="margin-left: 20px;"> • target will not be in the list of deadends</div>
+                            
+                                <div style="margin-left: 20px;"> • target and deadends[i] consist of digits only</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a floating-point number representing the average waiting time for all customers.</div>
-                        <div class=""> <b>Example:</b> 3.33333</div>
+                        <div class=""> <b>Output:</b> Return the minimum number of turns required to reach the target configuration, or -1 if it is impossible.</div>
+                        <div class=""> <b>Example:</b> For deadends = [&#39;0201&#39;, &#39;0101&#39;, &#39;0102&#39;, &#39;1212&#39;, &#39;2002&#39;] and target = &#39;0202&#39;, the output is 6.</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The result must be accurate within 10^-5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To calculate the average waiting time of all customers.</div>
+                        <div class=""> <b>Goal:</b> To find the shortest path from &#39;0000&#39; to the target configuration, avoiding deadends.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize the current time to the arrival time of the first customer.</div>
+                                <div style="margin-left: 20px;"> • Use a breadth-first search (BFS) starting from &#39;0000&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each customer, check if the chef is idle or still working on a previous order.</div>
+                                <div style="margin-left: 20px;"> • At each step, generate all possible valid configurations by rotating one of the wheels.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the chef is idle, the chef starts preparing the order immediately; otherwise, the chef waits for the chef to finish the current order.</div>
+                                <div style="margin-left: 20px;"> • If the generated configuration is a deadend, skip it.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Add the waiting time (current time - arrival time) to the total waiting time.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. After processing all customers, return the total waiting time divided by the number of customers.</div>
+                                <div style="margin-left: 20px;"> • If the configuration matches the target, return the number of moves taken to reach it.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution adheres to the constraints to avoid performance issues, especially with large inputs.</div>
+                        <div class=""> <b>Goal:</b> The input guarantees that the target is not part of the deadends list.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should handle up to 100,000 customers efficiently.</div>
+                                <div style="margin-left: 20px;"> • The list of deadends will contain between 1 and 500 elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • The length of each deadend string is exactly 4 characters.</div>
+                            
+                                <div style="margin-left: 20px;"> • The target string has a length of 4 characters.</div>
                             
                         </div>
                     </div>        
@@ -424,17 +428,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The customer arrival times are provided in non-decreasing order.</div>
+                                <div style="margin-left: 20px;"> • The input deadends and target strings consist only of digits between &#39;0&#39; and &#39;9&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • The chef serves customers in the order they arrive.</div>
+                                <div style="margin-left: 20px;"> • The target configuration is not present in the list of deadends.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 2], [2, 5], [4, 3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the first customer arrives at time 1 and waits 2 units of time, so their waiting time is 2. The second customer arrives at time 2 but waits until the chef is free at time 3, so their waiting time is 6. The third customer arrives at time 4 and waits until the chef is free at time 8, giving them a waiting time of 7. The average waiting time is (2 &#43; 6 &#43; 7) / 3 = 5.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> deadends = [&#39;0201&#39;, &#39;0101&#39;, &#39;0102&#39;, &#39;1212&#39;, &#39;2002&#39;], target = &#39;0202&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting from &#39;0000&#39;, the sequence &#39;0000&#39; -&gt; &#39;1000&#39; -&gt; &#39;1100&#39; -&gt; &#39;1200&#39; -&gt; &#39;1201&#39; -&gt; &#39;1202&#39; -&gt; &#39;0202&#39; leads to the target, taking 6 moves.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> deadends = [&#39;8888&#39;], target = &#39;0009&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting from &#39;0000&#39;, the sequence &#39;0000&#39; -&gt; &#39;0009&#39; requires just 1 move.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> deadends = [&#39;8887&#39;, &#39;8889&#39;, &#39;8878&#39;, &#39;8898&#39;, &#39;8788&#39;, &#39;8988&#39;, &#39;7888&#39;, &#39;9888&#39;], target = &#39;8888&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is impossible to reach the target without hitting a deadend.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +470,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution iterates through the customer list while managing the time taken for each customer’s order. We track when each customer starts and finishes their order to calculate their waiting time.</div>
+                        <div class=""> <b>Approach:</b> Use BFS to explore all possible configurations starting from &#39;0000&#39;, avoiding deadends, and tracking the number of moves to reach the target.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The chef prepares orders one at a time and cannot start a new order until the previous one is finished.</div>
+                                <div style="margin-left: 20px;"> • BFS is an ideal approach for finding the shortest path in an unweighted graph of configurations.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem requires managing the flow of customers and calculating each one&#39;s waiting time. The key observation is that the chef can only serve one customer at a time and must wait for previous orders to be completed.</div>
+                                <div style="margin-left: 20px;"> • Each valid configuration can be viewed as a node, and each move as an edge connecting nodes. The BFS ensures the shortest path to the target.</div>
                             
                         </div>
                     </div>
@@ -475,13 +487,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize current time to the first customer&#39;s arrival time.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue for BFS with the starting configuration &#39;0000&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through the customer list, calculating the waiting time for each customer based on the current time.</div>
+                                <div style="margin-left: 20px;"> • Mark the starting configuration and deadends as visited.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Update the current time after serving each customer.</div>
+                                <div style="margin-left: 20px;"> • For each configuration, generate its neighbors (by rotating each wheel).</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Accumulate the waiting times and return the average after processing all customers.</div>
+                                <div style="margin-left: 20px;"> • If the neighbor is not a deadend and hasn&#39;t been visited, enqueue it.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the target is reached, return the number of moves taken. If the queue is exhausted, return -1.</div>
                             
                         </div>
                     </div>
@@ -490,22 +504,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no customers, return 0.</div>
+                                <div style="margin-left: 20px;"> • The constraints guarantee at least one deadend and one target configuration, so empty inputs are not possible.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution can handle inputs with 100,000 customers efficiently.</div>
+                                <div style="margin-left: 20px;"> • The BFS approach handles up to 500 deadends efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When all customers have the same arrival time and order time, the waiting time will be calculated sequentially based on the previous customer&#39;s finish time.</div>
+                                <div style="margin-left: 20px;"> • The initial configuration &#39;0000&#39; cannot be a deadend.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input constraints should be respected to avoid performance issues with large inputs.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle up to 500 deadends and a target of length 4.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,23 +538,45 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initial Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Edge Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Through Customers</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 BFS Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Customer Time Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 BFS Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Current Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Current Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Goal Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Accumulate Waiting Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Exploration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Average Waiting Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Deadend Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 State Exploration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 State Exploration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Failure</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Neighbouring Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Neighbouring Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Loop Over Digits</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Loop Over Digits</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 State Change</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 State Change</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Neighbouring Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Neighbouring Function</button>
                     
                 </div>
 
@@ -549,25 +585,36 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">averageWaitingTime</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> cust) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">openLock</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> deadends, string target) {
+</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> dead(deadends.begin(), deadends.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dead.count(<span style="color:#b44">&#34;0000&#34;</span>)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q({<span style="color:#b44">&#34;0000&#34;</span>});
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> cust[<span style="color:#666">0</span>][<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> n <span style="color:#666">=</span> cust.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> cust[i][<span style="color:#666">0</span>])
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> cust[i][<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> cust[i][<span style="color:#666">0</span>] <span style="color:#666">+</span> cust[i][<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> cur <span style="color:#666">-</span> cust[i][<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> turn <span style="color:#666">=</span> <span style="color:#666">0</span>;<span style="color:#666">!</span>q.empty(); turn<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> q.size(); i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> curr <span style="color:#666">=</span> q.front(); q.pop();
+</span></span><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> curr <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39; &#39;</span> <span style="color:#666">&lt;&lt;</span> target <span style="color:#666">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (curr <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> turn;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : neighbours(curr)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(dead.count(it)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                dead.insert(it);
+</span></span><span style="display:flex;"><span>                q.push(it);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">/</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> neighbours(<span style="color:#a2f;font-weight:bold">const</span> string <span style="color:#666">&amp;</span>code) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> diff <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; diff <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; diff<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            string nei <span style="color:#666">=</span> code;
+</span></span><span style="display:flex;"><span>            nei[i] <span style="color:#666">=</span> (nei[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> diff <span style="color:#666">+</span> <span style="color:#666">10</span>) <span style="color:#666">%</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>            res.push_back(nei);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -578,100 +625,210 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">averageWaitingTime</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> cust) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">openLock</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> deadends, string target) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `averageWaitingTime`, which calculates the average waiting time for customers based on their arrival times and service durations. </div>
+                            <div class=""> Defines the main function &#39;openLock&#39; which takes a list of deadends and the target string. It attempts to open the lock by exploring all valid moves. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Initial Setup</b></div>
+                            <div class=""> <b>2 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> cust[<span style="color:#666">0</span>][<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> dead(deadends.begin(), deadends.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the `cur` variable to represent the current time, starting with the arrival time of the first customer. </div>
+                            <div class=""> Initializes the &#39;dead&#39; set with the deadends, preventing any movement into these states during the BFS traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Edge Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> n <span style="color:#666">=</span> cust.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dead.count(<span style="color:#b44">&#34;0000&#34;</span>)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the variable `n` to the total number of customers in the `cust` array, which helps in calculating the average later. </div>
+                            <div class=""> Checks if the starting point (&#39;0000&#39;) is in the deadends. If it is, the lock cannot be opened, and the function returns -1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q({<span style="color:#b44">&#34;0000&#34;</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a variable `sum` to 0, which will hold the total waiting time for all customers. </div>
+                            <div class=""> Initializes the queue with the starting point (&#39;0000&#39;), which is the initial state of the lock. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Through Customers</b></div>
+                            <div class=""> <b>5 : BFS Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> turn <span style="color:#666">=</span> <span style="color:#666">0</span>;<span style="color:#666">!</span>q.empty(); turn<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through all customers in the `cust` array. </div>
+                            <div class=""> A loop that continues as long as the queue is not empty, incrementing the &#39;turn&#39; at each level of BFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Customer Time Check</b></div>
+                            <div class=""> <b>6 : BFS Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> cust[i][<span style="color:#666">0</span>])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> q.size(); i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current time (`cur`) is greater than the arrival time of the current customer. If true, the customer can start being served immediately. </div>
+                            <div class=""> Iterates over all elements in the queue at the current level (turn), processing each one by one. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update Current Time</b></div>
+                            <div class=""> <b>7 : Queue Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> cust[i][<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> curr <span style="color:#666">=</span> q.front(); q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current customer can be served immediately, add their service duration to the current time (`cur`). </div>
+                            <div class=""> Pops the front element from the queue and assigns it to &#39;curr&#39;, representing the current lock state. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Current Time</b></div>
+                            <div class=""> <b>8 : Goal Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">=</span> cust[i][<span style="color:#666">0</span>] <span style="color:#666">+</span> cust[i][<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (curr <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> turn;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the customer arrives after the current time, set the `cur` to their arrival time plus their service duration. </div>
+                            <div class=""> Checks if the current state matches the target. If so, returns the number of turns taken to reach it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Accumulate Waiting Time</b></div>
+                            <div class=""> <b>9 : Exploration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> cur <span style="color:#666">-</span> cust[i][<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : neighbours(curr)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the waiting time of the current customer to `sum`, which is the difference between the current time (`cur`) and their arrival time. </div>
+                            <div class=""> Loops through all the possible neighbouring states of the current state by calling the &#39;neighbours&#39; function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Average Waiting Time</b></div>
+                            <div class=""> <b>10 : Deadend Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">/</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(dead.count(it)) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the average waiting time by dividing the total accumulated waiting time (`sum`) by the number of customers (`n`). </div>
+                            <div class=""> Checks if a neighbouring state is a deadend. If it is, it is skipped. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : State Exploration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dead.insert(it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the neighbouring state as visited by inserting it into the &#39;dead&#39; set. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : State Exploration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push(it);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the valid neighbouring state into the queue to be processed in subsequent turns. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Failure</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the queue is empty and the target hasn&#39;t been reached, the function returns -1, indicating the lock cannot be opened. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Neighbouring Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> neighbours(<span style="color:#a2f;font-weight:bold">const</span> string <span style="color:#666">&amp;</span>code) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the &#39;neighbours&#39; function that takes a lock code and returns all the possible states that are one turn away. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Neighbouring Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a vector to store the neighbouring states. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Loop Over Digits</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates over each digit in the 4-digit lock code. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Loop Over Digits</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> diff <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; diff <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; diff<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each digit, it iterates over the possible changes (-1, 0, 1), representing turning the dial. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : State Change</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string nei <span style="color:#666">=</span> code;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Creates a copy of the current lock code to modify. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : State Change</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            nei[i] <span style="color:#666">=</span> (nei[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> diff <span style="color:#666">+</span> <span style="color:#666">10</span>) <span style="color:#666">%</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Modifies the i-th digit of the lock code by applying the change, ensuring the new digit is valid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Neighbouring Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(nei);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the newly generated neighbour state to the results vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Neighbouring Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the vector of all valid neighbouring states. </div>
                         </div>
                     
                 </div>
@@ -691,16 +848,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of customers. The best case occurs when the chef is always idle and the customers are served immediately.</div>
-                        <div class=""> <b>Average Case:</b> O(n), where n is the number of customers. The average case assumes that customers arrive in a reasonable distribution.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of customers. The worst case happens when each customer arrives after the previous one and needs to wait for their turn.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear because we iterate over the customers once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1), when the target is &#39;0000&#39;.</div>
+                        <div class=""> <b>Average Case:</b> O(n), where n is the number of configurations explored (bounded by 10^4).</div>
+                        <div class=""> <b>Worst Case:</b> O(10^4), when the BFS explores all possible configurations.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the number of explored configurations, and there are at most 10^4 configurations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), since we only need a constant amount of space for variables like current time and total waiting time.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of customers, due to the input size.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear because we are storing a list of customers and only require a small amount of additional space for tracking the time and sums.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), for trivial cases.</div>
+                        <div class=""> <b>Worst Case:</b> O(10^4), for the queue and visited configurations.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) where n is the number of configurations being tracked in BFS.</div>    
                     </div>
 
                 </div>

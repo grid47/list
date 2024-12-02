@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 12, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an array of integers nums and an integer k. A subarray is considered &rsquo;nice&rsquo; if it contains exactly k odd numbers. Your task is to return the number of nice subarrays in the given array. </div>
+<div class=""> Given a positive integer n, find the smallest integer which can be formed by rearranging the digits of n and is greater than n. If no such integer exists, return -1. </div>
 
 
 
@@ -371,49 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an array nums of integers and an integer k.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 1, 2, 1, 1], k = 3</div>
+                        <div class=""> <b>Input:</b> The input is a positive integer n, which can be up to 2^31-1.</div>
+                        <div class=""> <b>Example:</b> Input: n = 123</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 50000</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of nice subarrays that contain exactly k odd numbers.</div>
-                        <div class=""> <b>Example:</b> 2</div>
+                        <div class=""> <b>Output:</b> The output should be the smallest integer greater than n formed by rearranging its digits, or -1 if no such integer exists.</div>
+                        <div class=""> <b>Example:</b> Output: 132</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Return 0 if no nice subarrays exist.</div>
+                                <div style="margin-left: 20px;"> • The returned value should be within the 32-bit signed integer range.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the number of subarrays with exactly k odd numbers.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the smallest integer greater than n that can be formed using the digits of n.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a sliding window technique to count the number of subarrays with at most k odd numbers.</div>
+                                <div style="margin-left: 20px;"> • Convert n to a string of digits.</div>
                             
-                                <div style="margin-left: 20px;"> • The result is the difference between the number of subarrays with at most k odd numbers and those with at most k-1 odd numbers.</div>
+                                <div style="margin-left: 20px;"> • Find the next permutation of the digits that is greater than n.</div>
+                            
+                                <div style="margin-left: 20px;"> • If such a permutation exists and it fits within the 32-bit integer range, return it.</div>
+                            
+                                <div style="margin-left: 20px;"> • If no permutation is possible or the resulting number exceeds the 32-bit limit, return -1.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array length is bounded and the elements of the array are positive integers.</div>
+                        <div class=""> <b>Goal:</b> The input integer n will be within the range of 1 to 2^31-1.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 50000</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>        
@@ -421,15 +417,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array has at least 1 element and contains only integers.</div>
+                                <div style="margin-left: 20px;"> • The input will always be a valid positive integer within the specified range.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 1, 2, 1, 1], k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarrays with exactly 3 odd numbers are [1, 1, 2, 1] and [1, 2, 1, 1], so the result is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 123</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The next permutation of the digits of 123 is 132, which is the smallest number greater than 123 that can be formed.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 321</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since no larger number can be formed with the digits of 321, the answer is -1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,16 +453,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we use a sliding window approach to count the number of subarrays with exactly k odd numbers.</div>
+                        <div class=""> <b>Approach:</b> The approach involves finding the next permutation of the digits of n that is greater than n. If no such permutation exists, return -1.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be broken down into counting subarrays with at most k odd numbers and using this to calculate the result.</div>
+                                <div style="margin-left: 20px;"> • Finding the next permutation is a well-known algorithmic problem. It requires rearranging digits to find the smallest number greater than the current number.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can calculate the number of subarrays with at most k odd numbers by maintaining a window and counting the odd numbers in the window.</div>
+                                <div style="margin-left: 20px;"> • The algorithm can be implemented using a series of steps that involve finding a digit that can be swapped to form the next greater number.</div>
                             
                         </div>
                     </div>
@@ -470,11 +470,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a helper function atmost(nums, k) to count the subarrays with at most k odd numbers.</div>
+                                <div style="margin-left: 20px;"> • Convert the integer n to a string of digits.</div>
                             
-                                <div style="margin-left: 20px;"> • The sliding window technique is used to maintain the count of odd numbers in the current window.</div>
+                                <div style="margin-left: 20px;"> • Find the first digit from the right that is smaller than the digit next to it.</div>
                             
-                                <div style="margin-left: 20px;"> • The final result is the difference between the number of subarrays with at most k odd numbers and those with at most k-1 odd numbers.</div>
+                                <div style="margin-left: 20px;"> • Find the smallest digit greater than this digit and swap them.</div>
+                            
+                                <div style="margin-left: 20px;"> • Reverse the digits to the right of the swapped digit to get the smallest possible number.</div>
+                            
+                                <div style="margin-left: 20px;"> • If no such rearrangement is possible, return -1.</div>
                             
                         </div>
                     </div>
@@ -483,22 +487,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, return 0.</div>
+                                <div style="margin-left: 20px;"> • There are no empty inputs as n is always a valid positive integer.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays of size up to 50,000.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle the maximum value of n (2^31-1) without exceeding the 32-bit integer limit.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If k is larger than the number of odd numbers in the array, return 0.</div>
+                                <div style="margin-left: 20px;"> • For values like 999, no next permutation is possible, and the result should be -1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works for large inputs and edge cases such as all numbers being even or odd.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must be efficient to handle large inputs within the problem constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -517,27 +521,13 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 String Conversion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Helper Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Next Permutation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 String to Integer Conversion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Through Array</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Adjust Sliding Window</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Adjust Sliding Window</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Adjust Sliding Window</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Edge Case Handling, Return Statement</button>
                     
                 </div>
 
@@ -546,22 +536,11 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> atmost(nums, k) <span style="color:#666">-</span> atmost(nums, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">atmost</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">2</span>] <span style="color:#666">=</span> {};
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        cnt[nums[i]<span style="color:#666">%</span><span style="color:#666">2</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(cnt[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> k) {
-</span></span><span style="display:flex;"><span>            cnt[nums[j]<span style="color:#666">%</span><span style="color:#666">2</span>]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">nextGreaterElement</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> digits <span style="color:#666">=</span> to_string(n);
+</span></span><span style="display:flex;"><span>    next_permutation(begin(digits), end(digits));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> res <span style="color:#666">=</span> stoll(digits);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (res <span style="color:#666">&gt;</span> INT_MAX <span style="color:#666">||</span> res <span style="color:#666">&lt;=</span> n)<span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -572,120 +551,50 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfSubarrays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">nextGreaterElement</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function is defined to count the number of subarrays with at most `k` odd numbers. It takes a vector `nums` and an integer `k` as inputs. </div>
+                            <div class=""> Defines the function `nextGreaterElement`, which takes an integer `n` and returns the next greater integer that can be formed by rearranging its digits. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Return Statement</b></div>
+                            <div class=""> <b>2 : String Conversion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">atmost</span>(nums, k) <span style="color:#666">-</span> atmost(nums, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> digits <span style="color:#666">=</span> to_string(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The result is calculated by subtracting the result of calling `atmost(nums, k-1)` from `atmost(nums, k)`. This gives the number of subarrays with exactly `k` odd numbers. </div>
+                            <div class=""> Converts the integer `n` into a string representation to easily manipulate its digits. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Helper Function Definition</b></div>
+                            <div class=""> <b>3 : Next Permutation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">atmost</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    next_permutation(begin(digits), end(digits));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This helper function counts the number of subarrays with at most `k` odd numbers using a sliding window technique. </div>
+                            <div class=""> Uses the `next_permutation` function to rearrange the digits of the string into the next lexicographically greater permutation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : String to Integer Conversion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">2</span>] <span style="color:#666">=</span> {};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> res <span style="color:#666">=</span> stoll(digits);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `cnt` array is initialized to track the counts of even and odd numbers in the current sliding window. `cnt[0]` tracks even numbers and `cnt[1]` tracks odd numbers. </div>
+                            <div class=""> Converts the string `digits` back into an integer using `stoll` (string to long long). This represents the next greater permutation of digits. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Edge Case Handling, Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (res <span style="color:#666">&gt;</span> INT_MAX <span style="color:#666">||</span> res <span style="color:#666">&lt;=</span> n)<span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `res` is initialized to count the total number of subarrays, and `j` is the left pointer for the sliding window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Loop Through Array</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A loop is used to iterate through the elements of `nums` using the index `i` as the right pointer of the sliding window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Update Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt[nums[i]<span style="color:#666">%</span><span style="color:#666">2</span>]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The count of either even or odd numbers is updated in the `cnt` array based on the current element in `nums`. If `nums[i]` is odd, `cnt[1]` is incremented. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Adjust Sliding Window</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(cnt[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> k) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the number of odd numbers in the current window exceeds `k`, the left pointer `j` is moved to the right to shrink the window until there are at most `k` odd numbers. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Adjust Sliding Window</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt[nums[j]<span style="color:#666">%</span><span style="color:#666">2</span>]<span style="color:#666">--</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The count of the element at the left pointer `j` is decremented, and the window is adjusted by moving `j` to the right. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Adjust Sliding Window</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increment the left pointer `j` to shrink the window from the left side. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Update Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Add the number of subarrays with at most `k` odd numbers in the current window to the result. The number of such subarrays is `(i - j &#43; 1)`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the total number of subarrays with at most `k` odd numbers. </div>
+                            <div class=""> Checks if the resulting number exceeds the maximum allowable integer value (`INT_MAX`) or if it&#39;s not greater than the original number. If either condition is true, it returns -1, otherwise it returns the next greater number. </div>
                         </div>
                     
                 </div>
@@ -705,16 +614,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear, O(n), where n is the length of the array.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(d)</div>
+                        <div class=""> <b>Average Case:</b> O(d)</div>
+                        <div class=""> <b>Worst Case:</b> O(d)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of digits, which is at most 10 for a 32-bit integer.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, O(1), as we only use a few extra variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(d)</div>
+                        <div class=""> <b>Worst Case:</b> O(d)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(d) due to the storage of the digits of the integer.</div>    
                     </div>
 
                 </div>

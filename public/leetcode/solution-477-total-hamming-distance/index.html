@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 20, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -312,7 +312,7 @@
 
 
 
-<div class=""> You are given a set of video clips from a sporting event that lasts a specified duration in seconds. The clips may overlap and have varying lengths. The goal is to determine the minimum number of clips required to cover the entire event. If it&rsquo;s impossible to cover the entire event, return -1. </div>
+<div class=""> The Hamming distance between two integers is the number of positions at which the corresponding bits differ. Given an integer array <code>nums</code>, return the sum of Hamming distances between all pairs of integers in <code>nums</code>. </div>
 
 
 
@@ -363,51 +363,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of clips, where each clip is represented by a pair of integers [start, end] indicating the start and end times of the clip. Additionally, a single integer, time, specifies the duration of the event to be covered.</div>
-                        <div class=""> <b>Example:</b> clips = [[0, 3], [4, 7], [2, 5], [6, 8], [5, 9]], time = 9</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array `nums`.</div>
+                        <div class=""> <b>Example:</b> nums = [3, 10, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= clips.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= starti &lt;= endi &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= time &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer representing the minimum number of clips needed to cover the entire event. If it&#39;s impossible to cover the event, return -1.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return the sum of Hamming distances between all pairs of integers in `nums`.</div>
+                        <div class=""> <b>Example:</b> Output: 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the clips cannot cover the entire event, return -1.</div>
+                                <div style="margin-left: 20px;"> • The answer will fit in a 32-bit integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The task is to determine the smallest number of clips that can be used to cover the entire duration of the sporting event. This is a greedy problem where we need to select the clips that maximize the coverage of the event, ensuring we cover the entire time range from 0 to time.</div>
+                        <div class=""> <b>Goal:</b> Calculate the total Hamming distance between all pairs of integers in the array.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the clips based on their start times.</div>
+                                <div style="margin-left: 20px;"> • 1. Loop through each bit position (from 0 to 31, as numbers are within the 32-bit range).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a greedy approach to select clips, always choosing the one that extends the coverage the most without skipping any part of the event.</div>
+                                <div style="margin-left: 20px;"> • 2. For each bit position, count how many numbers have that bit set (1).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If at any point the selected clips cannot extend the coverage, return -1.</div>
+                                <div style="margin-left: 20px;"> • 3. For each bit position, the total number of differing bits is `bitCount * (n - bitCount)`, where `n` is the size of the array and `bitCount` is the number of 1s in the current bit position.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Otherwise, return the number of clips selected.</div>
+                                <div style="margin-left: 20px;"> • 4. Sum up the contributions from all bit positions.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the solution works for the given input size constraints.</div>
+                        <div class=""> <b>Goal:</b> The constraints involve the length of the array and the values of the integers.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should handle up to 100 clips, with start and end times between 0 and 100 seconds.</div>
+                                <div style="margin-left: 20px;"> • The length of `nums` is between 1 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • The event duration is between 1 and 100 seconds.</div>
+                                <div style="margin-left: 20px;"> • Each integer in `nums` is between 0 and 10^9.</div>
                             
                         </div>
                     </div>        
@@ -415,19 +413,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The clips array will be non-empty and the event duration will be positive.</div>
+                                <div style="margin-left: 20px;"> • The values in `nums` are non-negative integers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: clips = [[0, 3], [4, 7], [2, 5], [6, 8], [5, 9]], time = 9</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can take the clips [0, 3], [2, 5], and [5, 9], which cover the entire event from 0 to 9. So, the output is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [3, 10, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary representations of 3, 10, and 5 are compared bit by bit to calculate the Hamming distances between all pairs.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: clips = [[0, 1], [1, 2]], time = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, it is impossible to cover the event duration from 0 to 5 using just the clips [0, 1] and [1, 2], so the output is -1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [2, 3, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the binary representations of 2, 3, and 2 are used to calculate the Hamming distances.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -451,16 +449,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses a greedy strategy where we attempt to cover the event by iteratively selecting the clip that extends the current coverage the furthest.</div>
+                        <div class=""> <b>Approach:</b> The approach involves calculating the Hamming distance by iterating through each bit position and counting how many numbers have a 1 at each position.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the clips by start time allows us to systematically check which clips to select for covering the event.</div>
+                                <div style="margin-left: 20px;"> • The problem is a bitwise problem, which makes it suitable for bit manipulation techniques.</div>
+                            
+                                <div style="margin-left: 20px;"> • By considering each bit position separately, we can efficiently calculate the total Hamming distance.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By always picking the clip that extends the coverage the most, we can minimize the number of clips needed.</div>
+                                <div style="margin-left: 20px;"> • We can process each bit independently to determine how many numbers have differing bits in that position.</div>
                             
                         </div>
                     </div>
@@ -468,15 +468,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the clips by their start times.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate over all 32 bit positions.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Initialize variables to track the current end time of the covered event and the number of clips selected.</div>
+                                <div style="margin-left: 20px;"> • 2. For each bit position, count how many numbers have a 1 at that position.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each clip, check if it extends the current coverage. If it does, update the coverage and increment the count of clips.</div>
+                                <div style="margin-left: 20px;"> • 3. Compute the contribution to the total Hamming distance using the formula `bitCount * (n - bitCount)`.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. If at any point we cannot extend the coverage, return -1.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the number of clips selected once the entire event is covered.</div>
+                                <div style="margin-left: 20px;"> • 4. Sum the results from all bit positions.</div>
                             
                         </div>
                     </div>
@@ -485,22 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no clips, return -1 unless the event duration is 0.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least one element in the array, as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must efficiently handle inputs with up to 100 clips.</div>
+                                <div style="margin-left: 20px;"> • The solution needs to handle large arrays of size up to 10^4 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If a clip exactly matches the time, it should be counted as one clip.</div>
+                                <div style="margin-left: 20px;"> • If all numbers in `nums` are the same, the Hamming distance between any pair will be 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution handles cases where no set of clips can cover the entire event.</div>
+                                <div style="margin-left: 20px;"> • The solution must work within the constraints, where the array size is up to 10^4 and the numbers can be as large as 10^9.</div>
                             
                         </div>                                                                        
                     </div>
@@ -519,17 +517,17 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Bit Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Bitwise Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Max Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Bitwise Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Accumulation</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
                     
@@ -540,15 +538,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">videoStitching</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> clips, <span style="color:#0b0;font-weight:bold">int</span> time) {
-</span></span><span style="display:flex;"><span>    sort(clips.begin(), clips.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, st <span style="color:#666">=</span> <span style="color:#666">0</span>, end <span style="color:#666">=</span> <span style="color:#666">0</span>; st <span style="color:#666">&lt;</span> time; st<span style="color:#666">=</span>end, <span style="color:#666">++</span>res){
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(; i <span style="color:#666">&lt;</span> clips.size() <span style="color:#666">&amp;&amp;</span> clips[i][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> st; <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>            end <span style="color:#666">=</span> max(end, clips[i][<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">totalHammingDistance</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> total <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">32</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> bitCnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> nums.size(); j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            bitCnt <span style="color:#666">+=</span> (nums[j] <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        total <span style="color:#666">+=</span> bitCnt <span style="color:#666">*</span> (n <span style="color:#666">-</span> bitCnt);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> total;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -559,80 +558,80 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">videoStitching</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> clips, <span style="color:#0b0;font-weight:bold">int</span> time) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">totalHammingDistance</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `videoStitching`, which takes a list of clips and a target time interval to cover. </div>
+                            <div class=""> Defines the `totalHammingDistance` function that takes a vector of integers `nums` and calculates the total Hamming distance between all pairs of integers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(clips.begin(), clips.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> total <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sort the clips by their start times to make it easier to find overlapping intervals and select the optimal clips. </div>
+                            <div class=""> Initializes two variables: `total` to accumulate the total Hamming distance, and `n` to store the size of the `nums` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Bit Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">32</span>; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the result variable `res` to 0, which will store the number of clips used to cover the time interval. </div>
+                            <div class=""> Begins a loop that iterates over all 32 bits (assuming 32-bit integers) to calculate the Hamming distance for each bit position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Looping</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, st <span style="color:#666">=</span> <span style="color:#666">0</span>, end <span style="color:#666">=</span> <span style="color:#666">0</span>; st <span style="color:#666">&lt;</span> time; st<span style="color:#666">=</span>end, <span style="color:#666">++</span>res){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> bitCnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop where `i` is the index for iterating through the clips, `st` is the start of the current covered interval, and `end` is the end of the last selected clip. </div>
+                            <div class=""> Initializes the `bitCnt` variable to count how many numbers have a `1` at the current bit position `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Looping</b></div>
+                            <div class=""> <b>5 : Bitwise Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(; i <span style="color:#666">&lt;</span> clips.size() <span style="color:#666">&amp;&amp;</span> clips[i][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> st; <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> nums.size(); j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the clips and find the clip whose start time is less than or equal to the current start time (`st`). </div>
+                            <div class=""> Begins a loop that iterates through each number in the `nums` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Max Calculation</b></div>
+                            <div class=""> <b>6 : Bitwise Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            end <span style="color:#666">=</span> max(end, clips[i][<span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bitCnt <span style="color:#666">+=</span> (nums[j] <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the `end` time by taking the maximum of the current `end` and the end time of the current clip, which extends the covered interval. </div>
+                            <div class=""> Performs a bitwise right shift on `nums[j]` to examine the `i`th bit. If the bit is `1`, increments `bitCnt`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Condition Check</b></div>
+                            <div class=""> <b>7 : Accumulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        total <span style="color:#666">+=</span> bitCnt <span style="color:#666">*</span> (n <span style="color:#666">-</span> bitCnt);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current start time `st` is the same as the end time `end`, it means no clip can extend the coverage. Return -1 to indicate it&#39;s impossible to cover the entire time interval. </div>
+                            <div class=""> Updates the `total` by adding the number of differing bits between pairs. For each bit, the number of differing bits is the product of `bitCnt` and `(n - bitCnt)`. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>8 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> total;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the number of clips used to cover the time interval. </div>
+                            <div class=""> Returns the total Hamming distance. </div>
                         </div>
                     
                 </div>
@@ -652,16 +651,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n), where n is the number of clips.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * 32)</div>
+                        <div class=""> <b>Average Case:</b> O(n * 32)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * 32)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n * 32), where n is the size of the `nums` array, and 32 is the number of bits to consider.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required for sorting the clips.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since the solution uses only a few variables to track the bit counts.</div>    
                     </div>
 
                 </div>

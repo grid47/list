@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an array nums of integers. A move consists of selecting any element and decreasing it by 1. A zigzag array is an array where either every even-indexed element is greater than its adjacent elements or every odd-indexed element is greater than its adjacent elements. Your task is to return the minimum number of moves required to transform the given array into a zigzag array. </div>
+<div class=""> Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1. </div>
 
 
 
@@ -371,49 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array nums of integers.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [3, 1, 4]</div>
+                        <div class=""> <b>Input:</b> The input consists of a binary array of integers nums, where each element is either 0 or 1.</div>
+                        <div class=""> <b>Example:</b> nums = [1, 0, 1, 0]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • nums[i] is either 0 or 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of moves required to transform the given array into a zigzag array.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> Return the maximum length of a contiguous subarray with an equal number of 0s and 1s.</div>
+                        <div class=""> <b>Example:</b> 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be a single integer representing the minimum number of moves.</div>
+                                <div style="margin-left: 20px;"> • The output is an integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to transform the array into a zigzag array by minimizing the number of moves.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the length of the longest contiguous subarray that has an equal number of 0s and 1s.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate over the array and compare each element with its adjacent elements.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a score to track the difference between the count of 1s and 0s.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each element, check if it violates the zigzag condition. If it does, calculate the number of moves to fix it.</div>
+                                <div style="margin-left: 20px;"> • 2. If the score is zero at any point, it means that the subarray from the start to the current index has an equal number of 1s and 0s.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the total number of moves for both the even-indexed and odd-indexed conditions.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the minimum number of moves required.</div>
+                                <div style="margin-left: 20px;"> • 3. Use a hash map to store the first occurrence of each score, and calculate the length of the subarray whenever the score is repeated.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The algorithm must work efficiently for arrays with a length up to 1000.</div>
+                        <div class=""> <b>Goal:</b> The constraints are designed to ensure the solution can handle large inputs efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • nums[i] is either 0 or 1.</div>
                             
                         </div>
                     </div>        
@@ -421,21 +419,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array may contain both small and large numbers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The length of the array will be between 1 and 1000.</div>
+                                <div style="margin-left: 20px;"> • The input array nums contains only 0s and 1s.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3, 1, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we can decrease 4 to 2, resulting in the zigzag array [3, 1, 2], and the number of moves is 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 0, 1, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The entire array is a contiguous subarray with an equal number of 0s and 1s, so the answer is 4.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [6, 4, 2, 8, 10]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, we decrease 6 to 4 and 8 to 6, resulting in the zigzag array [4, 4, 2, 6, 10], and the number of moves is 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 1, 0, 0, 1, 0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest contiguous subarray with an equal number of 0s and 1s is the entire array itself, so the answer is 6.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -459,16 +455,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by calculating the minimum number of moves required to fix the zigzag condition for both the even-indexed and odd-indexed conditions. For each condition, we will check each element and adjust it if necessary.</div>
+                        <div class=""> <b>Approach:</b> The approach involves using a score to track the difference between the counts of 1s and 0s in the array, and using a hash map to efficiently calculate the longest subarray with an equal number of 0s and 1s.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be solved by iterating through the array and comparing each element with its neighbors.</div>
+                                <div style="margin-left: 20px;"> • This problem can be solved using a technique based on prefix sums or difference arrays.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A greedy approach that minimizes the number of moves for each element will work well for this problem.</div>
+                                <div style="margin-left: 20px;"> • By treating 1 as &#43;1 and 0 as -1, we can use a cumulative sum to track the difference.</div>
                             
                         </div>
                     </div>
@@ -476,13 +472,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize two variables to track the number of moves for even-indexed and odd-indexed conditions.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a score variable to 0 and a hash map to store the first occurrence of each score.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Loop through the array and check for violations of the zigzag condition for both even and odd indexed elements.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse through the array. For each element, update the score by adding 1 for a 1 or subtracting 1 for a 0.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each violation, calculate how many moves are needed to fix it.</div>
+                                <div style="margin-left: 20px;"> • 3. If the score is 0, update the maximum subarray length as the current index &#43; 1.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the minimum of the two calculated move counts.</div>
+                                <div style="margin-left: 20px;"> • 4. If the score is already in the hash map, calculate the length of the subarray from the first occurrence of the score to the current index and update the maximum length.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return the maximum length found.</div>
                             
                         </div>
                     </div>
@@ -491,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, the result should be 0.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle the edge case of an empty array.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should be optimized to handle arrays of length 1000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle large arrays with a length up to 10^5.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements are the same, no moves are required.</div>
+                                <div style="margin-left: 20px;"> • If the array contains only 0s or only 1s, the result should be 0 since no subarray with an equal number of 0s and 1s exists.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be efficient in terms of both time and space complexity.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays of length up to 10^5 in O(n) time complexity.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,19 +523,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Hash Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Left Neighbor Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Main Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Right Neighbor Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Balance Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Zigzag Move Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check for Zero Balance</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Final Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Handle Non-Zero Balance</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Check Map for Existing Balance</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Insert Score into Map</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
                     
                 </div>
 
@@ -546,18 +552,25 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">movesToMakeZigzag</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size(), left, right;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(<span style="color:#666">2</span>, <span style="color:#666">0</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMaxLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> score <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        score <span style="color:#666">+=</span> nums[i]<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        left  <span style="color:#666">=</span> ( i     <span style="color:#666">&gt;</span> <span style="color:#666">0</span> ) <span style="color:#666">?</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">1001</span>;
-</span></span><span style="display:flex;"><span>        right <span style="color:#666">=</span> ( i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n ) <span style="color:#666">?</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">1001</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(score <span style="color:#666">==</span> <span style="color:#666">0</span>) res <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        res[i <span style="color:#666">%</span> <span style="color:#666">2</span>] <span style="color:#666">+=</span> max(<span style="color:#666">0</span>, nums[i] <span style="color:#666">-</span> min(left, right) <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp.count(score))
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[score]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(score)) mp[score] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> min(res[<span style="color:#666">0</span>], res[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -568,80 +581,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">movesToMakeZigzag</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMaxLength</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function `movesToMakeZigzag`, which takes a vector of integers `nums` and returns the minimum number of moves to convert the array into a zigzag pattern. </div>
+                            <div class=""> Defines the function `findMaxLength` that takes a vector `nums` of 1s and 0s, and returns the maximum length of a contiguous subarray where the number of 1s equals the number of 0s. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size(), left, right;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, the variable `n` stores the size of the array `nums`, while `left` and `right` are used to store the adjacent elements for comparison when calculating the required changes for the zigzag pattern. </div>
+                            <div class=""> Initializes the variable `n` to store the size of the input array `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Vector Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(<span style="color:#666">2</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> score <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a vector `res` with two elements, both set to 0. The vector will be used to store the number of changes required to convert the array into a zigzag pattern for even and odd indexed elements. </div>
+                            <div class=""> Initializes two variables: `score` to track the current balance of 1s and 0s, and `res` to store the maximum length of the valid subarray found so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Initialization</b></div>
+                            <div class=""> <b>4 : Hash Map Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a hash map `mp` that will store the first occurrence of each balance (`score`). This helps in finding the longest subarray with a sum of zero. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Main Loop</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initiates a loop that iterates through each element of the array `nums`. </div>
+                            <div class=""> Starts a loop to iterate through the array `nums`, updating the `score` and checking for the longest valid subarray. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Left Neighbor Calculation</b></div>
+                            <div class=""> <b>6 : Balance Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        left  <span style="color:#666">=</span> ( i     <span style="color:#666">&gt;</span> <span style="color:#666">0</span> ) <span style="color:#666">?</span> nums[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">1001</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        score <span style="color:#666">+=</span> nums[i]<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the value of the left neighbor of the current element. If `i` is greater than 0, it assigns `left` to the previous element (`nums[i - 1]`), otherwise, it assigns a large value (1001) to `left` as a default. </div>
+                            <div class=""> Updates the `score` by adding 1 if `nums[i]` is 1, or subtracting 1 if it is 0. This represents the balance of 1s and 0s. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Right Neighbor Calculation</b></div>
+                            <div class=""> <b>7 : Check for Zero Balance</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        right <span style="color:#666">=</span> ( i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n ) <span style="color:#666">?</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">1001</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(score <span style="color:#666">==</span> <span style="color:#666">0</span>) res <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the value of the right neighbor of the current element. If `i &#43; 1` is less than `n` (the size of the array), it assigns `right` to the next element (`nums[i &#43; 1]`), otherwise, it assigns a large value (1001) to `right` as a default. </div>
+                            <div class=""> Checks if the `score` is zero, which means the subarray from the beginning to the current index has an equal number of 1s and 0s. If so, it updates `res` to be the length of this subarray. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Zigzag Move Calculation</b></div>
+                            <div class=""> <b>8 : Handle Non-Zero Balance</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i <span style="color:#666">%</span> <span style="color:#666">2</span>] <span style="color:#666">+=</span> max(<span style="color:#666">0</span>, nums[i] <span style="color:#666">-</span> min(left, right) <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the number of moves required to make the current element a part of a zigzag sequence. It updates the corresponding index in the `res` vector based on whether `i` is even or odd, and adds the minimum number of moves calculated between `left` and `right`. </div>
+                            <div class=""> If `score` is not zero, it checks the hash map `mp` to determine the longest valid subarray. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Final Calculation</b></div>
+                            <div class=""> <b>9 : Check Map for Existing Balance</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">min</span>(res[<span style="color:#666">0</span>], res[<span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp.count(score))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the minimum value between the two possible results stored in `res[0]` and `res[1]`, representing the minimum number of moves required for the zigzag pattern starting with even and odd indexed elements. </div>
+                            <div class=""> Checks if the `score` has been encountered before in the hash map `mp`. If it has, it means there exists a subarray that sums to zero between the previous occurrence of this balance and the current index. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Update Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[score]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Updates `res` to the maximum length of the subarray found so far. This is done by comparing the current length (`i - mp[score]`) with the previous maximum length stored in `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Insert Score into Map</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(score)) mp[score] <span style="color:#666">=</span> i;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the `score` has not been encountered before, it is added to the hash map `mp` with its index `i` as the value. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the maximum length of a subarray with an equal number of 1s and 0s. </div>
                         </div>
                     
                 </div>
@@ -661,16 +714,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the array.</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the input array, as we only iterate through the array once.</div>                                               
+                        <div class=""> <b>Description:</b> In all cases, the time complexity is O(n) since we traverse the array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) since we only need a constant amount of space to track the number of moves.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if the score repeats immediately.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of distinct scores encountered.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the hash map storing the first occurrence of each score.</div>    
                     </div>
 
                 </div>

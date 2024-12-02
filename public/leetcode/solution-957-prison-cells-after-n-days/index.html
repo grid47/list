@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 3, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an integer array prices representing the daily price history of a stock, where prices[i] is the stock price on the ith day. A smooth descent period of a stock consists of contiguous days such that the price on each day decreases by exactly 1 from the previous day. The first day of the period can be a single-day smooth descent. Return the total number of smooth descent periods. </div>
+<div class=""> You are given a row of 8 prison cells, where each cell is either occupied or vacant. The state of the cells changes every day according to the following rules: If a cell has two adjacent neighbors that are either both occupied or both vacant, the cell becomes occupied; otherwise, it becomes vacant. The first and last cells don&rsquo;t have two neighbors, so they are excluded from the rule. You need to determine the state of the cells after &rsquo;n&rsquo; days of changes. </div>
 
 
 
@@ -360,43 +360,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a list of integers representing the stock prices over multiple days.</div>
-                        <div class=""> <b>Example:</b> prices = [5, 4, 3, 6]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of 8 integers representing the state of the prison cells, where 1 indicates an occupied cell and 0 indicates a vacant cell, followed by an integer n representing the number of days.</div>
+                        <div class=""> <b>Example:</b> Input: cells = [1,0,0,1,0,0,1,0], n = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= prices.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of cells is always 8.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= prices[i] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • Each cell is represented as 0 or 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^9.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of smooth descent periods where each period consists of one or more contiguous days where the price decreases by exactly 1 each day.</div>
-                        <div class=""> <b>Example:</b> For prices = [5, 4, 3, 6], the output should be 6.</div>
+                        <div class=""> <b>Output:</b> The output should be an array of 8 integers representing the state of the prison cells after &#39;n&#39; days of changes.</div>
+                        <div class=""> <b>Example:</b> Output: [0,0,1,1,0,0,1,0]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will always contain 8 integers.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the number of smooth descent periods from the given stock price list.</div>
+                        <div class=""> <b>Goal:</b> The goal is to simulate the state changes for &#39;n&#39; days, but since the state can repeat after a certain number of days, we need to optimize the solution.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to keep track of the current descent period length.</div>
+                                <div style="margin-left: 20px;"> • 1. Track the states of the cells on each day.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the prices list, and for each day, check if the price is exactly 1 less than the previous day&#39;s price.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a set to detect repeating cell configurations to optimize the simulation process.</div>
                             
-                                <div style="margin-left: 20px;"> • For each valid descent period, increment the count of descent periods.</div>
+                                <div style="margin-left: 20px;"> • 3. If a state repeats, the simulation enters a cycle. Thus, we can skip unnecessary days by calculating the effective number of days based on the cycle length.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution can handle large input sizes efficiently.</div>
+                        <div class=""> <b>Goal:</b> The input consists of exactly 8 cells, with each cell represented by either 0 or 1. The number of days &#39;n&#39; can be very large (up to 10^9), so efficiency is important.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input list can be as large as 10^5 elements.</div>
+                                <div style="margin-left: 20px;"> • The number of days &#39;n&#39; can be as large as 10^9, so the simulation must be optimized.</div>
                             
                         </div>
                     </div>        
@@ -404,21 +408,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The list of prices contains only positive integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The stock price list can have both increasing and decreasing price sequences.</div>
+                                <div style="margin-left: 20px;"> • The input array will always have 8 cells, and each cell is either 0 or 1.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: prices = [5, 4, 3, 6]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The smooth descent periods are: [5], [4], [3], [6], [5,4], and [4,3], resulting in a total of 6 smooth descent periods.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: cells = [1,0,0,1,0,0,1,0], n = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the prison cells will go through a series of changes, but after 4 days, the state of the cells will be [0,0,1,1,0,0,1,0].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: prices = [8, 6, 5, 7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The smooth descent periods are: [8], [6], [5], and [7]. There are no multi-day descent periods here.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: cells = [0,1,0,1,0,1,0,1], n = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After 2 days, the prison cells will change according to the rules and reach the final state [1,0,1,1,0,1,0,1].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,18 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through the list of stock prices and counting the smooth descent periods by checking the difference between consecutive days.</div>
+                        <div class=""> <b>Approach:</b> The key to solving this problem efficiently is to detect repeating states, which would indicate the start of a cycle. Once a cycle is detected, we can skip unnecessary steps.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each descent period consists of a sequence of days where the price decreases by exactly 1 from one day to the next.</div>
-                            
-                                <div style="margin-left: 20px;"> • For each contiguous sequence of days with this property, we can count the number of possible subarrays that form valid descent periods.</div>
+                                <div style="margin-left: 20px;"> • The number of cells is fixed at 8, so the possible states are limited. This makes it possible to track and detect cycles.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This can be done in a single pass over the input list to ensure efficient performance.</div>
+                                <div style="margin-left: 20px;"> • To optimize the solution, we can use a set to track previously seen states. If a state repeats, we can calculate the effective number of days and avoid unnecessary computations.</div>
                             
                         </div>
                     </div>
@@ -461,13 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a counter for the total smooth descent periods.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a function to compute the next state of the cells.</div>
                             
-                                <div style="margin-left: 20px;"> • Loop through the array starting from the second element.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a set to store all previously seen states.</div>
                             
-                                <div style="margin-left: 20px;"> • For each day, check if the current price is exactly 1 less than the previous day&#39;s price.</div>
+                                <div style="margin-left: 20px;"> • 3. For each day, check if the current state has been seen before. If yes, calculate the cycle length and use modulus to determine the effective day count.</div>
                             
-                                <div style="margin-left: 20px;"> • If so, extend the current descent period; otherwise, start a new period.</div>
+                                <div style="margin-left: 20px;"> • 4. Continue the simulation until the final state is reached.</div>
                             
                         </div>
                     </div>
@@ -476,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input array is empty, return 0.</div>
+                                <div style="margin-left: 20px;"> • There are no empty inputs, as the number of cells is always 8.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles arrays of length up to 100,000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large values of n (up to 10^9), we must avoid iterating over each day by detecting cycles early.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array contains only one price, there is exactly one smooth descent period.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain exactly 8 cells, and the values will be binary (0 or 1).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should process the input in linear time, O(n).</div>
+                                <div style="margin-left: 20px;"> • The simulation must be optimized to handle the upper constraint of n (up to 10^9).</div>
                             
                         </div>                                                                        
                     </div>
@@ -508,25 +508,43 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initial Value Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Temporary Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Get Next State</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Descent Length</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Cycle Detection</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Reset Descent Length</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Insert State</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Accumulate Total Descent Periods</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update State</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Cycle Found</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Cycle Optimization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Get Next in Cycle</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return State Early</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Final State</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Helper Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Initialize Next State</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Update Cell State</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Next State</button>
                     
                 </div>
 
@@ -535,17 +553,30 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">getDescentPeriods</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(prices.size(), <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> prices.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(prices[i] <span style="color:#666">==</span> prices[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> dp[i] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> dp[i];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> prisonAfterNDays(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cells, <span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> seen;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, flag <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v <span style="color:#666">=</span> getNext(cells);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(v)) {
+</span></span><span style="display:flex;"><span>            seen.insert(v);
+</span></span><span style="display:flex;"><span>            cells <span style="color:#666">=</span> v;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">%</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                cells <span style="color:#666">=</span> getNext(cells);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> cells;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cells;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getNext(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>cells) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> n(cells.size(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> cells.size() <span style="color:#666">-</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        n[i] <span style="color:#666">=</span> cells[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">==</span> cells[i<span style="color:#666">+</span><span style="color:#666">1</span>]<span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span><span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -553,103 +584,193 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">getDescentPeriods</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> prisonAfterNDays(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cells, <span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `getDescentPeriods` that takes a vector of integers `prices` representing stock prices and returns the total number of descent periods. </div>
+                            <div class=""> Function declaration for `prisonAfterNDays` which takes the initial state of cells and the number of days as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Vector Initialization</b></div>
+                            <div class=""> <b>2 : Data Structure Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(prices.size(), <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> seen;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector `dp` of the same size as `prices` to store the length of the current descent period for each price. All values are initially set to 0. </div>
+                            <div class=""> Initialize a set to keep track of previously seen states of the cells, used for detecting cycles. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initial Value Assignment</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, flag <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the first element of `dp` to 1, representing that the first price is a valid descent period of length 1. </div>
+                            <div class=""> Initialize variables `i` for iteration and `flag` for condition tracking (not used here). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Temporary Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable `ans` to 1 to track the total number of descent periods, starting with the first price. </div>
+                            <div class=""> Declare a temporary vector `c` (not used in this implementation). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Start</b></div>
+                            <div class=""> <b>5 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> prices.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop from the second price in the list to check if it continues the descent from the previous price. </div>
+                            <div class=""> Iterate over each day up to `n` to compute the state transitions of the cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Get Next State</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(prices[i] <span style="color:#666">==</span> prices[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v <span style="color:#666">=</span> getNext(cells);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current price `prices[i]` is exactly 1 less than the previous price, indicating a descent period. </div>
+                            <div class=""> Calculate the next state of the cells using the `getNext` helper function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update Descent Length</b></div>
+                            <div class=""> <b>7 : Cycle Detection</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(v)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a descent is found, set `dp[i]` to the length of the previous descent period (`dp[i - 1]`) plus 1. </div>
+                            <div class=""> Check if the current state has been seen before to detect a cycle. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Reset Descent Length</b></div>
+                            <div class=""> <b>8 : Insert State</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> dp[i] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            seen.insert(v);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current price does not continue the descent, reset `dp[i]` to 1, indicating a new descent period. </div>
+                            <div class=""> Insert the current state into the set of seen states to keep track of cycles. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Accumulate Total Descent Periods</b></div>
+                            <div class=""> <b>9 : Update State</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> dp[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cells <span style="color:#666">=</span> v;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the length of the current descent period (`dp[i]`) to the total count `ans`. </div>
+                            <div class=""> Update the cells to the next state. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Cycle Found</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the total number of descent periods stored in `ans`. </div>
+                            <div class=""> If a cycle is detected, exit the main loop and compute the state based on the cycle length. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Cycle Optimization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">%</span> i; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate only the remaining days modulo the cycle length to compute the final state. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Get Next in Cycle</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                cells <span style="color:#666">=</span> getNext(cells);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the cells state iteratively within the cycle to find the final state. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return State Early</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> cells;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the cells&#39; state once the final state within the cycle is computed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Final State</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cells;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final state of the cells after `n` days. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Helper Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getNext(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>cells) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Helper function declaration for `getNext` which calculates the next state of the cells. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Initialize Next State</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> n(cells.size(), <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a vector `n` with the same size as `cells` to store the next state. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> cells.size() <span style="color:#666">-</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate through the cells, skipping the first and last ones, to calculate the next state. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Update Cell State</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n[i] <span style="color:#666">=</span> cells[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">==</span> cells[i<span style="color:#666">+</span><span style="color:#666">1</span>]<span style="color:#666">?</span><span style="color:#666">1</span><span style="color:#666">:</span><span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the state of each cell based on the parity of its neighbors. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return Next State</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the computed next state of the cells. </div>
                         </div>
                     
                 </div>
@@ -669,16 +790,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the number of days (length of the prices array).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(k &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(k &#43; m)</div> 
+                        <div class=""> <b>Description:</b> Where k is the length of the cycle and m is the maximum number of iterations before detecting a cycle. In the worst case, the cycle detection is a constant-time operation after some iterations.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) if a new array or counter is used, but could be O(1) with optimized space usage.</div>    
+                        <div class=""> <b>Worst Case:</b> O(k)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(k), where k is the number of distinct states that can occur before the system cycles.</div>    
                     </div>
 
                 </div>

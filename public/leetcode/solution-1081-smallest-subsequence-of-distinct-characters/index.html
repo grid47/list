@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 21, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -301,7 +301,7 @@
 
 
 
-<div class=""> Given a string s of lowercase English letters, return the first letter that appears twice. </div>
+<div class=""> You are given a string s, and your task is to return the lexicographically smallest subsequence of s that contains all the distinct characters of s exactly once. The subsequence must be in the same order as the original string, but the characters should not repeat. </div>
 
 
 
@@ -352,51 +352,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s` consisting of lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;axybczab&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s that contains lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;zabcde&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
                                 <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
                             
-                                <div style="margin-left: 20px;"> • s contains at least one repeated letter.</div>
-                            
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the first letter that appears twice in the string.</div>
-                        <div class=""> <b>Example:</b> Output: &#34;a&#34;</div>
+                        <div class=""> <b>Output:</b> The output should be the lexicographically smallest subsequence containing all the distinct characters of s exactly once.</div>
+                        <div class=""> <b>Example:</b> Output: &#34;abcde&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string will contain at least one repeated letter.</div>
+                                <div style="margin-left: 20px;"> • The subsequence should preserve the order of the original string.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the first letter that appears twice in the string by tracking each letter&#39;s occurrence.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the lexicographically smallest subsequence of the string containing each distinct character exactly once while maintaining the order.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string and track the occurrence of each character.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the last occurrence index of each character in the string.</div>
                             
-                                <div style="margin-left: 20px;"> • If a character appears again, return it immediately.</div>
-                            
-                                <div style="margin-left: 20px;"> • If no character appears twice, the function should return the first character that repeats.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse the string and construct the result by considering whether to add each character based on its lexicographical order and ensuring that it doesn&#39;t repeat.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must efficiently handle strings of length up to 100.</div>
+                        <div class=""> <b>Goal:</b> The solution must efficiently handle strings with up to 1000 characters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
                                 <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
-                            
-                                <div style="margin-left: 20px;"> • At least one letter repeats.</div>
                             
                         </div>
                     </div>        
@@ -404,15 +398,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string will contain at least one repeated letter.</div>
+                                <div style="margin-left: 20px;"> • The input string is non-empty and contains lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;axybczab&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the letter &#39;a&#39; is the first to appear twice, so it is returned.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;bcabc&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the lexicographically smallest subsequence that contains all the distinct characters exactly once is &#34;abc&#34;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;cbacdcbc&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the lexicographically smallest subsequence is &#34;acdb&#34;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -436,16 +434,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a set to track the characters that have been seen as we iterate through the string.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using a greedy algorithm that ensures the lexicographically smallest subsequence. By keeping track of the characters we have seen and the last occurrence of each character, we can decide which character to add to the result at each step.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem is asking for the first repeating letter, so we should stop as soon as we encounter the second occurrence of a letter.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that each character appears only once in the subsequence and that the subsequence is the lexicographically smallest.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A set can be used to keep track of characters we&#39;ve already seen, and we return the first one that repeats.</div>
+                                <div style="margin-left: 20px;"> • Using a stack can help us maintain the order and ensure the smallest lexicographical subsequence.</div>
                             
                         </div>
                     </div>
@@ -453,13 +451,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create an empty set to track the letters we&#39;ve seen.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a stack to build the result subsequence.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the string one character at a time.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse the string from left to right.</div>
                             
-                                <div style="margin-left: 20px;"> • If the character is in the set, return it as the result.</div>
+                                <div style="margin-left: 20px;"> • 3. For each character, if it hasn&#39;t been added to the subsequence, check whether it can be added by comparing with the top character of the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • If the character is not in the set, add it to the set and continue.</div>
+                                <div style="margin-left: 20px;"> • 4. If the current character is smaller than the top character and the top character appears later, pop the stack to ensure the subsequence is lexicographically smaller.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Add the current character to the stack and mark it as seen.</div>
                             
                         </div>
                     </div>
@@ -468,22 +468,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always contain at least one repeated letter, so there are no empty inputs.</div>
+                                <div style="margin-left: 20px;"> • If the string is empty, return an empty string.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle input strings up to the length of 100 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle large strings (up to 1000 characters) efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string contains multiple letters repeating, the first one encountered in the string is the answer.</div>
+                                <div style="margin-left: 20px;"> • If the string consists of the same repeated character, the result should be that character alone.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works for all strings of length between 2 and 100.</div>
+                                <div style="margin-left: 20px;"> • The solution should be optimized to handle the input string within the provided constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,17 +500,39 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Count Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop - Storing Last Occurrence</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Store Last Occurrence</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Vector Initialization - Stack</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop - Main Logic</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Character Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Skip Duplicates</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Remove Ineligible Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Reset Seen for Popped Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pop Character from Stack</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Push Current Character</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Build Result Subsequence</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Construct Result String</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
                     
                 </div>
 
@@ -519,77 +541,204 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">char</span> <span style="color:#00a000">repeatedCharacter</span>(string s) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v(<span style="color:#666">26</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>:s){
-</span></span><span style="display:flex;"><span>        v[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(v[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">&gt;</span><span style="color:#666">1</span>)<span style="color:#a2f;font-weight:bold">return</span> c;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">smallestSubsequence</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> in(<span style="color:#666">26</span>, <span style="color:#666">0</span>), seen(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        in[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (seen[c]<span style="color:#666">++</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.back() <span style="color:#666">&gt;</span> c <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> in[stk.back()]) {
+</span></span><span style="display:flex;"><span>            seen[stk.back()] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            stk.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        stk.push_back(c);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> stk.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (<span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> stk[i]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">char</span> <span style="color:#00a000">repeatedCharacter</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">smallestSubsequence</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `repeatedCharacter` is declared, which accepts a string `s` and returns a character. </div>
+                            <div class=""> This line defines the function `smallestSubsequence`, which takes a string `s` as input and will return the smallest subsequence of characters from `s`. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v(<span style="color:#666">26</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A vector `v` of size 26 is initialized to count the occurrences of each lowercase letter (&#39;a&#39; to &#39;z&#39;). </div>
+                            <div class=""> The size of the string `s` is stored in the variable `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Start</b></div>
+                            <div class=""> <b>3 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>:s){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is initiated to iterate over each character `c` in the string `s`. </div>
+                            <div class=""> An empty string `res` is initialized to build the result subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Count Character</b></div>
+                            <div class=""> <b>4 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        v[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> in(<span style="color:#666">26</span>, <span style="color:#666">0</span>), seen(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character `c`, the corresponding index in the vector `v` is incremented to count the occurrences of that character. </div>
+                            <div class=""> Two vectors are initialized: `in` stores the last occurrence index of each character, and `seen` tracks whether a character is already in the result subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check</b></div>
+                            <div class=""> <b>5 : Loop - Storing Last Occurrence</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(v[c<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">&gt;</span><span style="color:#666">1</span>)<span style="color:#a2f;font-weight:bold">return</span> c;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the count of the current character exceeds 1, meaning it has been repeated, the function immediately returns that character. </div>
+                            <div class=""> This loop iterates over each character in the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Store Last Occurrence</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#39;a&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        in[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If no repeated character is found, the function returns &#39;a&#39; by default, assuming no repeats are found in the string. </div>
+                            <div class=""> For each character in `s`, the index of its last occurrence is stored in the `in` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Vector Initialization - Stack</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> An empty vector `stk` is initialized to act as a stack for the characters that will form the smallest subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop - Main Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop processes each character in the string `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Character Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line calculates the index `c` of the character `s[i]` relative to &#39;a&#39;, where &#39;a&#39; corresponds to 0, &#39;b&#39; to 1, and so on. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Skip Duplicates</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (seen[c]<span style="color:#666">++</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the character `s[i]` has already been added to the result subsequence. If it has, it skips the current iteration. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Remove Ineligible Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.back() <span style="color:#666">&gt;</span> c <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> in[stk.back()]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This while loop removes characters from the stack if they are lexicographically larger than the current character `c` and can still appear later in the string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Reset Seen for Popped Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            seen[stk.back()] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This resets the `seen` status for the character that is being removed from the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Pop Character from Stack</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop_back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This removes the character from the stack as it is no longer needed in the result subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Push Current Character</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.push_back(c);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The current character `c` is pushed onto the stack for inclusion in the subsequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Build Result Subsequence</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> stk.size(); i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates over the stack to build the result subsequence from the characters stored in the stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Construct Result String</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (<span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> stk[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each character in the stack, its corresponding character (using the index) is added to the result string `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The resulting subsequence `res` is returned as the output. </div>
                         </div>
                     
                 </div>
@@ -612,13 +761,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We only need to iterate through the string once, making the time complexity O(n), where n is the length of the string.</div>                                               
+                        <div class=""> <b>Description:</b> The algorithm processes each character of the string once, making the time complexity linear in terms of the length of the string.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) because we use a set to track the letters we&#39;ve seen, and the set&#39;s size can grow up to the size of the input string.</div>    
+                        <div class=""> <b>Worst Case:</b> O(26)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(26) because the maximum number of distinct characters is 26, corresponding to the lowercase English alphabet.</div>    
                     </div>
 
                 </div>

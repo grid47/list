@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -300,7 +300,7 @@
 
 
 
-<div class=""> You are participating in an online chess tournament where rounds start every 15 minutes, starting at 00:00. You are given two times: <code>loginTime</code> and <code>logoutTime</code>. Your task is to calculate the number of full rounds you have participated in during the period from <code>loginTime</code> to <code>logoutTime</code>. </div>
+<div class=""> You are tasked with simulating an exam room where students will choose seats based on a strategy that maximizes their distance from the closest person already seated. If multiple seats have the same distance, the student will choose the seat with the smallest index. Additionally, students can leave the room, freeing up their seats. </div>
 
 
 
@@ -351,51 +351,46 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> Two strings: `loginTime` and `logoutTime` representing the times when you log in and log out respectively.</div>
-                        <div class=""> <b>Example:</b> loginTime = &#34;08:25&#34;, logoutTime = &#34;09:05&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer n, which represents the number of seats in the exam room. The object should allow for two operations: seating a student and having a student leave a seat.</div>
+                        <div class=""> <b>Example:</b> Input: 
+[&#34;ExamRoom&#34;, &#34;seat&#34;, &#34;seat&#34;, &#34;seat&#34;, &#34;seat&#34;, &#34;leave&#34;, &#34;seat&#34;] 
+[[10], [], [], [], [], [4], []]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • loginTime and logoutTime are in the format hh:mm.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • 00 &lt;= hh &lt;= 23</div>
-                            
-                                <div style="margin-left: 20px;"> • 00 &lt;= mm &lt;= 59</div>
-                            
-                                <div style="margin-left: 20px;"> • loginTime and logoutTime are not equal.</div>
+                                <div style="margin-left: 20px;"> • At most 10^4 calls will be made to the &#39;seat&#39; and &#39;leave&#39; operations.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of full chess rounds you have participated in during the given time window.</div>
-                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Output:</b> For each &#39;seat&#39; operation, return the seat index where the student will sit. For the &#39;leave&#39; operation, there is no return value.</div>
+                        <div class=""> <b>Example:</b> Output: 
+[null, 0, 9, 4, 2, null, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The result is an integer representing the count of full rounds played.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Calculate the number of full chess rounds you have played between `loginTime` and `logoutTime`.</div>
+                        <div class=""> <b>Goal:</b> To implement the seating strategy such that students sit at the seat that maximizes the distance from the nearest student. If there are multiple options, choose the smallest seat index.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Convert `loginTime` and `logoutTime` to minutes from 00:00.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Implement a data structure to track the positions of students already seated.</div>
                             
-                                <div style="margin-left: 20px;"> • If `logoutTime` is earlier than `loginTime`, split the time into two parts: from `loginTime` to midnight, and from midnight to `logoutTime`.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each &#39;seat&#39; operation, calculate the maximum distance to the nearest student for each empty seat and choose the seat that maximizes this distance.</div>
                             
-                                <div style="margin-left: 20px;"> • Count the full rounds (each lasting 15 minutes) in both parts of the time window.</div>
+                                <div style="margin-left: 20px;"> • Step 3: For each &#39;leave&#39; operation, remove the seat from the list of occupied seats.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input times are valid and meet the specified constraints.</div>
+                        <div class=""> <b>Goal:</b> Ensure efficient handling of the seating strategy given that the number of seats n can be very large.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • loginTime and logoutTime are valid time strings in hh:mm format.</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= loginTime.length, logoutTime.length &lt;= 5</div>
+                                <div style="margin-left: 20px;"> • Seats are indexed from 0 to n-1, and each student occupies a unique seat at a time.</div>
                             
                         </div>
                     </div>        
@@ -403,15 +398,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input times are in the 24-hour format with no leading zeros in the time parts.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least one seat available when a student arrives.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: loginTime = &#34;22:50&#34;, logoutTime = &#34;01:30&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You played 1 full round from 22:50 to 23:00, and 5 full rounds from 00:00 to 01:30. Total = 6 full rounds.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: 
+[&#34;ExamRoom&#34;, &#34;seat&#34;, &#34;seat&#34;, &#34;seat&#34;, &#34;seat&#34;, &#34;leave&#34;, &#34;seat&#34;] 
+[[10], [], [], [], [], [4], []]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Initially, no student is seated. The first student sits at seat 0. The next student sits at the farthest available seat, seat 9. The next one sits at seat 4 (the middle of the remaining seats). The next student sits at seat 2. When the student at seat 4 leaves, the next student sits at seat 5 (the next best available seat).</div>                                
                                 <br/>
                             
                     </div>                         
@@ -435,16 +432,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We need to calculate the number of full rounds by breaking down the time window into multiple 15-minute intervals. We handle the case where the login and logout times span across midnight.</div>
+                        <div class=""> <b>Approach:</b> To efficiently manage seating and leaving operations, we maintain a list of occupied seats and calculate the optimal seat choice for each &#39;seat&#39; operation.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The rounds start every 15 minutes, so checking for full rounds involves dividing the time window into intervals of 15 minutes.</div>
+                                <div style="margin-left: 20px;"> • The problem requires balancing between finding the optimal seat and managing the students&#39; movements.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By converting the time to minutes and iterating through the intervals, we can efficiently count full rounds.</div>
+                                <div style="margin-left: 20px;"> • A list of occupied seats is essential to calculate the seat with the greatest distance to the nearest student.</div>
                             
                         </div>
                     </div>
@@ -452,11 +449,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Convert `loginTime` and `logoutTime` to minutes from 00:00.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Track occupied seats using a list or similar structure.</div>
                             
-                                <div style="margin-left: 20px;"> • If `logoutTime` is earlier than `loginTime`, calculate the rounds separately for the periods before and after midnight.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each new student, calculate the distance from each occupied seat and choose the seat that maximizes this distance.</div>
                             
-                                <div style="margin-left: 20px;"> • For each period, check for full 15-minute rounds and count them.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Update the list of occupied seats when a student leaves a seat.</div>
                             
                         </div>
                     </div>
@@ -465,22 +462,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input times cannot be empty, as the constraints ensure they are always valid strings.</div>
+                                <div style="margin-left: 20px;"> • N/A: The problem guarantees there is always at least one seat and one student.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle the maximum number of rounds, even if `loginTime` and `logoutTime` span across the entire day.</div>
+                                <div style="margin-left: 20px;"> • Efficient handling of operations is necessary when n is large, up to 10^9.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle the scenario where `logoutTime` is earlier than `loginTime` by splitting the time window across midnight.</div>
+                                <div style="margin-left: 20px;"> • If there is only one student and one seat, the student always sits at seat 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that input values are within the range 00:00 to 23:59.</div>
+                                <div style="margin-left: 20px;"> • There is a guarantee that no student will leave a seat that is unoccupied.</div>
                             
                         </div>                                                                        
                     </div>
@@ -497,27 +494,47 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Data Structures</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Login Time Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Access Modifiers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Logout Time Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loop (Overlapping Time Calculation)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditionals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Interval Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Action</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Value (Condition True)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 For Loop (Overlapping Time Calculation)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Distance Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Interval Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Value (Else Block)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Action</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Loop</button>
                     
                 </div>
 
@@ -526,140 +543,264 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfRounds</span>(string login, string logout) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> in <span style="color:#666">=</span> (((login[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((login[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> out <span style="color:#666">=</span> (((logout[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((logout[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// cout &lt;&lt; in &lt;&lt; &#34; &#34; &lt;&lt; out;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(in <span style="color:#666">&gt;</span> out) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">+</span> <span style="color:#666">15</span> <span style="color:#666">&lt;=</span> out <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> in) cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span><span style="display:flex;"><span>    }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> L;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>ExamRoom(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    N <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; &#34;\n&#34; &lt;&lt; i; 
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> in <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">+</span> <span style="color:#666">15</span>) <span style="color:#666">&lt;=</span> out) cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">seat</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        L.push_back(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span> 
 </span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> max(L[<span style="color:#666">0</span>], N <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L[L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) d <span style="color:#666">=</span> max(d, (L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i]) <span style="color:#666">/</span><span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L[<span style="color:#666">0</span>] <span style="color:#666">==</span> d) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        L.insert(L.begin(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> L[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i])<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">==</span> d) {
+</span></span><span style="display:flex;"><span>            L.insert(L.begin() <span style="color:#666">+</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>, (L[i] <span style="color:#666">+</span> L[i <span style="color:#666">+</span><span style="color:#666">1</span>])<span style="color:#666">/</span><span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> L[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>        L.push_back(N <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> N <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">leave</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size(); i<span style="color:#666">++</span>) <span style="color:#a2f;font-weight:bold">if</span>(L[i] <span style="color:#666">==</span> p) L.erase(L.begin() <span style="color:#666">+</span> i);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your ExamRoom object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * ExamRoom* obj = new ExamRoom(n);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;seat();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;leave(p);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Data Structures</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfRounds</span>(string login, string logout) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> L;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function definition starts here. It takes two string parameters `login` and `logout`, representing the login and logout times in HH:MM format. </div>
+                            <div class=""> Declares a vector `L` to store the positions of people in the room. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Login Time Calculation</b></div>
+                            <div class=""> <b>2 : Access Modifiers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> in <span style="color:#666">=</span> (((login[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((login[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (login[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the `in` time by converting the `login` string (HH:MM) to the number of minutes from midnight. </div>
+                            <div class=""> Indicates that the following methods are publicly accessible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Logout Time Calculation</b></div>
+                            <div class=""> <b>3 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> out <span style="color:#666">=</span> (((logout[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">1</span>]<span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>)) <span style="color:#666">*</span> <span style="color:#666">60</span>) <span style="color:#666">+</span> ((logout[<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (logout[<span style="color:#666">4</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ExamRoom(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the `out` time by converting the `logout` string (HH:MM) to the number of minutes from midnight. </div>
+                            <div class=""> Constructor of the `ExamRoom` class, initializing the room with a given size `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    N <span style="color:#666">=</span> n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes a counter `cnt` to 0, which will track the number of overlapping 15-minute intervals. </div>
+                            <div class=""> Initializes the variable `N` with the given size of the room `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Conditional Check</b></div>
+                            <div class=""> <b>5 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(in <span style="color:#666">&gt;</span> out) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">seat</span>() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition checks if the `in` time is greater than the `out` time, which could happen if the login time is after midnight, indicating a new day. </div>
+                            <div class=""> Defines the `seat()` method, which assigns a seat to a person based on available space. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : For Loop (Overlapping Time Calculation)</b></div>
+                            <div class=""> <b>6 : Conditionals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This for loop iterates through all possible 15-minute intervals in a day (from 0 to 1440 minutes). </div>
+                            <div class=""> Checks if the room is empty. If it is, it assigns the first seat at position 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Interval Check</b></div>
+                            <div class=""> <b>7 : Action</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">+</span> <span style="color:#666">15</span> <span style="color:#666">&lt;=</span> out <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> in) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        L.push_back(<span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the current 15-minute interval overlaps with the given time range, and increments the counter `cnt`. </div>
+                            <div class=""> Inserts the first person at position 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Value (Condition True)</b></div>
+                            <div class=""> <b>8 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the `in` time is greater than the `out` time, return the number of intervals counted so far. </div>
+                            <div class=""> Returns the position of the newly seated person (0). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : For Loop (Overlapping Time Calculation)</b></div>
+                            <div class=""> <b>9 : Distance Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">24</span> <span style="color:#666">*</span> <span style="color:#666">60</span>; i <span style="color:#666">+=</span> <span style="color:#666">15</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> max(L[<span style="color:#666">0</span>], N <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L[L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This for loop iterates through all possible 15-minute intervals in a day (from 0 to 1440 minutes). </div>
+                            <div class=""> Calculates the maximum distance between the first and last seats. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Interval Check</b></div>
+                            <div class=""> <b>10 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> in <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">+</span> <span style="color:#666">15</span>) <span style="color:#666">&lt;=</span> out) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) d <span style="color:#666">=</span> max(d, (L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i]) <span style="color:#666">/</span> <span style="color:#666">2</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the current 15-minute interval is fully within the `in` and `out` times and increments the counter `cnt`. </div>
+                            <div class=""> Calculates the maximum possible distance between two people in the room. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Value (Else Block)</b></div>
+                            <div class=""> <b>11 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(L[<span style="color:#666">0</span>] <span style="color:#666">==</span> d) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the `in` time is less than or equal to the `out` time, return the number of intervals counted so far. </div>
+                            <div class=""> Checks if the maximum distance is between the first seat and the available space. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        L.insert(L.begin(), <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Inserts a new person at the first seat. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> L[<span style="color:#666">0</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the position of the newly seated person (0). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a loop to find the best seat based on the maximum distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((L[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> L[i]) <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">==</span> d) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the gap between two adjacent seats is half of the maximum distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            L.insert(L.begin() <span style="color:#666">+</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>, (L[i] <span style="color:#666">+</span> L[i <span style="color:#666">+</span><span style="color:#666">1</span>]) <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Seats the person at the optimal position between two others. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> L[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the position where the person was seated. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Action</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        L.push_back(N <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Inserts a new person at the last seat. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> N <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the position of the newly seated person (last seat). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">leave</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the `leave(int p)` method, which removes a person from the room at position `p`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> L.size(); i<span style="color:#666">++</span>) <span style="color:#a2f;font-weight:bold">if</span>(L[i] <span style="color:#666">==</span> p) L.erase(L.begin() <span style="color:#666">+</span> i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Finds the person at position `p` and removes them from the list. </div>
                         </div>
                     
                 </div>
@@ -679,16 +820,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity depends on how many rounds are counted, which is proportional to the number of 15-minute intervals in a 24-hour period (96 intervals).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1) for a single seat when no one is in the room.</div>
+                        <div class=""> <b>Average Case:</b> O(n) for finding the best seat when a student is seated.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) per &#39;seat&#39; operation in the worst case, where the seating strategy requires checking multiple seats.</div> 
+                        <div class=""> <b>Description:</b> </div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, as we only use a few variables to store the start and end times and the count of rounds.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) when no students are in the room.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) for storing the list of occupied seats.</div> 
+                        <div class=""> <b>Description:</b> </div>    
                     </div>
 
                 </div>

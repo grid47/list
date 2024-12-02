@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a string <code>s</code> and a character <code>letter</code>. Your task is to determine the percentage of characters in <code>s</code> that are equal to <code>letter</code>, rounding down to the nearest whole percent. </div>
+<div class=""> In this problem, we have an array of integers representing stones. Each stone has a weight, and on each turn, we choose the two heaviest stones, smash them together, and apply the following rules: If the two stones have the same weight, both are destroyed. If they have different weights, the stone with the smaller weight is destroyed, and the stone with the larger weight gets reduced by the smaller stone&rsquo;s weight. The process continues until at most one stone remains. Your task is to return the weight of the last remaining stone. If no stones are left, return 0. </div>
 
 
 
@@ -358,43 +358,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a string `s` and a character `letter` where `s` consists of lowercase English letters and `letter` is a lowercase English letter.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#34;hello&#34;, letter = &#34;l&#34;</div>
+                        <div class=""> <b>Input:</b> You are given an array `stones`, where each element represents the weight of a stone.</div>
+                        <div class=""> <b>Example:</b> Input: stones = [5, 10, 2, 6]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones.length &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
-                            
-                                <div style="margin-left: 20px;"> • letter is a lowercase English letter.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones[i] &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the percentage of characters in `s` that are equal to `letter`, rounded down to the nearest whole percent.</div>
-                        <div class=""> <b>Example:</b> Output: 40</div>
+                        <div class=""> <b>Output:</b> Return the weight of the last remaining stone after applying the smash rules described above. If there are no stones left, return 0.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result will always fit within a 32-bit integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the percentage of occurrences of `letter` in the string `s` and return it as an integer.</div>
+                        <div class=""> <b>Goal:</b> The goal is to simulate the process of smashing stones and compute the weight of the last remaining stone.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count how many times `letter` appears in the string `s`.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a priority queue (max heap) to efficiently find and remove the two heaviest stones.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the percentage by dividing the count by the length of the string and multiplying by 100.</div>
+                                <div style="margin-left: 20px;"> • 2. Continue the process of smashing the two heaviest stones until one or no stones remain.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the integer part of the percentage.</div>
+                                <div style="margin-left: 20px;"> • 3. If there is one stone left, return its weight. If no stones remain, return 0.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must efficiently handle strings with lengths up to 100 characters.</div>
+                        <div class=""> <b>Goal:</b> The array contains at least one stone, and at most 30 stones are allowed. Stone weights range between 1 and 1000.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones.length &lt;= 30</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= stones[i] &lt;= 1000</div>
                             
                         </div>
                     </div>        
@@ -402,21 +406,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string `s` is not empty.</div>
+                                <div style="margin-left: 20px;"> • At least one stone will always be present.</div>
                             
-                                <div style="margin-left: 20px;"> • The character `letter` exists within the alphabet.</div>
+                                <div style="margin-left: 20px;"> • Stone weights will be positive integers.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;hello&#34;, letter = &#34;l&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the letter &#39;l&#39; appears 2 times out of 5 characters in the string &#39;hello&#39;. The percentage is 2 / 5 * 100 = 40%, so the output is 40.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stones = [5, 10, 2, 6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We start with the stones [5, 10, 2, 6]. First, we smash 10 and 6, resulting in 4 (10 - 6). The new array is [5, 2, 4]. Next, we smash 5 and 4, resulting in 1 (5 - 4). The new array is [2, 1]. Finally, we smash 2 and 1, resulting in 1. The last stone remaining is 1.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;abcabc&#34;, letter = &#34;a&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The letter &#39;a&#39; appears 2 times out of 6 characters in the string &#39;abcabc&#39;. The percentage is 2 / 6 * 100 = 33.33%. When rounded down, the result is 33.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stones = [3, 7, 9, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We start with the stones [3, 7, 9, 5]. First, we smash 9 and 7, resulting in 2 (9 - 7). The new array is [3, 5, 2]. Next, we smash 5 and 3, resulting in 2 (5 - 3). The new array is [2, 2]. Finally, we smash 2 and 2, resulting in 0. The last stone remaining is 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -440,18 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we will count how many times the letter appears in the string, calculate the percentage, and return the rounded down value.</div>
+                        <div class=""> <b>Approach:</b> The solution involves using a max heap (priority queue) to efficiently manage the largest stones and simulate the smashing process.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The percentage is calculated by dividing the count of the letter by the length of the string and multiplying by 100.</div>
-                            
-                                <div style="margin-left: 20px;"> • Rounding down is equivalent to using integer division in many programming languages.</div>
+                                <div style="margin-left: 20px;"> • The priority queue is a good data structure for this problem since it allows us to quickly retrieve the largest elements.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem is straightforward and involves basic counting and arithmetic operations.</div>
+                                <div style="margin-left: 20px;"> • We can use a max heap to always retrieve and remove the heaviest stones during each turn.</div>
                             
                         </div>
                     </div>
@@ -459,11 +461,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a counter to track how many times the letter appears in the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Push all stones into a priority queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Use the count method or a loop to count the occurrences of `letter` in the string `s`.</div>
+                                <div style="margin-left: 20px;"> • 2. While there are at least two stones, extract the two largest stones, calculate the result of smashing them, and push the remaining stone back into the queue if necessary.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the percentage and round it down by performing integer division.</div>
+                                <div style="margin-left: 20px;"> • 3. Continue the process until only one stone remains or the queue is empty.</div>
                             
                         </div>
                     </div>
@@ -472,22 +474,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs, as the length of the string is guaranteed to be at least 1.</div>
+                                <div style="margin-left: 20px;"> • The array will never be empty, as there will always be at least one stone.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work for strings with a length of up to 100 characters.</div>
+                                <div style="margin-left: 20px;"> • For the maximum input size of 30 stones, the algorithm will still perform efficiently due to the use of a priority queue.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the letter does not appear in the string, the percentage will be 0.</div>
+                                <div style="margin-left: 20px;"> • If all stones are the same, they will all be destroyed in pairs until no stones remain.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle up to 100 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • We are guaranteed that there will be at most 30 stones, so the priority queue approach will work efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,9 +506,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Stones</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Push to Priority Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 While Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Pop Maximum Stone</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Pop Maximum Stone</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Next Stone</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Next Stone</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Collision Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Push Result Back</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Push Result Back</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Final Result</button>
                     
                 </div>
 
@@ -515,8 +541,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">percentageLetter</span>(string s, <span style="color:#0b0;font-weight:bold">char</span> letter) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">100</span> <span style="color:#666">*</span> count(begin(s), end(s), letter) <span style="color:#666">/</span> s.size();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lastStoneWeight</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> stones) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: stones) {
+</span></span><span style="display:flex;"><span>        pq.push(x);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">return</span> x;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>         pq.pop();
+</span></span><span style="display:flex;"><span>         <span style="color:#a2f;font-weight:bold">if</span>(y <span style="color:#666">==</span> x) {}
+</span></span><span style="display:flex;"><span>         <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                pq.push(abs(y<span style="color:#666">-</span>x));
+</span></span><span style="display:flex;"><span>         }            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -524,23 +566,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">percentageLetter</span>(string s, <span style="color:#0b0;font-weight:bold">char</span> letter) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function header for `percentageLetter`, which takes a string `s` and a character `letter` as inputs. The function returns an integer representing the percentage of times `letter` appears in the string `s`. </div>
+                            <div class=""> Declare a priority queue &#39;pq&#39; to store the stones&#39; weights in a way that allows easy retrieval of the heaviest stones. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Return Statement</b></div>
+                            <div class=""> <b>2 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">100</span> <span style="color:#666">*</span> <span style="color:#00a000">count</span>(begin(s), end(s), letter) <span style="color:#666">/</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lastStoneWeight</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> stones) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function uses the `count` function to determine how many times `letter` appears in the string `s`. It then multiplies this count by 100 and divides it by the total size of the string `s` to calculate the percentage of the letter&#39;s occurrences in the string. </div>
+                            <div class=""> Define the function &#39;lastStoneWeight&#39; that accepts a vector of integers representing stone weights and returns the weight of the last stone or 0 if no stone is left. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Loop Through Stones</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: stones) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through the vector &#39;stones&#39;, where each stone&#39;s weight is stored in the variable &#39;x&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Push to Priority Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(x);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push each stone&#39;s weight &#39;x&#39; into the priority queue &#39;pq&#39; to maintain the stones in a max-heap order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : While Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a while loop that continues as long as there are stones remaining in the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Pop Maximum Stone</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> pq.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Retrieve the heaviest stone from the priority queue (the top element) and store it in the variable &#39;x&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Pop Maximum Stone</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the heaviest stone from the priority queue after it has been retrieved. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">return</span> x;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there are no stones left in the priority queue, return the weight of the last remaining stone &#39;x&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Pop Next Stone</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> pq.top();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Retrieve the next heaviest stone from the priority queue and store its weight in the variable &#39;y&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Pop Next Stone</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>         pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the second heaviest stone from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Collision Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>         <span style="color:#a2f;font-weight:bold">if</span>(y <span style="color:#666">==</span> x) {}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the two stones have equal weights, no action is needed as both are destroyed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Push Result Back</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>         <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the stones have different weights, compute the result of their collision. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Push Result Back</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                pq.push(abs(y<span style="color:#666">-</span>x));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the result of the collision (absolute difference between &#39;x&#39; and &#39;y&#39;) back into the priority queue to continue the process. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Final Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the while loop finishes without returning a result, return 0, indicating there are no stones left. </div>
                         </div>
                     
                 </div>
@@ -560,16 +722,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the string `s`, because we need to iterate through the string to count the occurrences of `letter`.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we perform n-1 operations, where each operation involves removing the two largest stones from the priority queue, which takes O(log n) time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) because we are using only a few variables to store the result.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required to store the priority queue with the stones.</div>    
                     </div>
 
                 </div>

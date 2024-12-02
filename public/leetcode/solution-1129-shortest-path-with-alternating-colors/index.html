@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 17, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given two positive integers, num1 and num2. Your task is to find a positive integer x such that: 1. x has the same number of set bits (1&rsquo;s in binary representation) as num2, and 2. The value of x XOR num1 is minimized. The XOR operation is performed bitwise. Your goal is to return the integer x. </div>
+<div class=""> You are given a directed graph with n nodes, where each node is labeled from 0 to n-1. The graph contains edges that can be either red or blue. You are provided with two lists of edges: redEdges and blueEdges, where redEdges[i] = [ai, bi] indicates a directed red edge from node ai to node bi, and blueEdges[j] = [uj, vj] indicates a directed blue edge from node uj to node vj. Your goal is to find the shortest alternating path from node 0 to each node x. Return an array answer where each answer[x] is the length of the shortest alternating path from node 0 to node x, or -1 if no such path exists. </div>
 
 
 
@@ -358,45 +358,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two positive integers num1 and num2.</div>
-                        <div class=""> <b>Example:</b> num1 = 4, num2 = 7</div>
+                        <div class=""> <b>Input:</b> You are given two arrays representing red and blue edges in a directed graph. Each array consists of pairs of integers denoting the start and end nodes of the respective colored edges.</div>
+                        <div class=""> <b>Example:</b> Input: n = 4, redEdges = [[0,1],[1,2]], blueEdges = [[2,3]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= num1, num2 &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= redEdges.length, blueEdges.length &lt;= 400</div>
+                            
+                                <div style="margin-left: 20px;"> • redEdges[i].length == blueEdges[j].length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi, uj, vj &lt; n</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the integer x that satisfies the given conditions.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> Return an array answer where answer[x] is the length of the shortest alternating path from node 0 to node x, or -1 if no such path exists.</div>
+                        <div class=""> <b>Example:</b> Output: [0, 1, 2, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be a unique solution.</div>
+                                <div style="margin-left: 20px;"> • The array should have length n.</div>
+                            
+                                <div style="margin-left: 20px;"> • The value of each element should be either the shortest path length or -1 if no path exists.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the integer x such that it has the same number of set bits as num2 and minimizes the value of x XOR num1.</div>
+                        <div class=""> <b>Goal:</b> The goal is to compute the shortest alternating paths from node 0 to all other nodes, alternating between red and blue edges.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Count the number of set bits (1&#39;s) in num2.</div>
+                                <div style="margin-left: 20px;"> • Initialize a graph representation with two colors (red and blue).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Try to set bits of x to match the set bits of num2 from the higher bits of num1, aiming to minimize the XOR result.</div>
+                                <div style="margin-left: 20px;"> • Use a BFS (Breadth-First Search) to explore the graph, alternating between red and blue edges.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If there are still set bits remaining, set them in the lowest possible positions.</div>
+                                <div style="margin-left: 20px;"> • Track the shortest path to each node for both edge colors and ensure the paths alternate.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must work within the provided constraints.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution works efficiently for the maximum constraint sizes.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of set bits in num2 determines how many bits must be set in the result.</div>
+                                <div style="margin-left: 20px;"> • The input graph will have up to 100 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • The range of input values is large (1 &lt;= num1, num2 &lt;= 10^9).</div>
+                                <div style="margin-left: 20px;"> • There can be up to 400 red and blue edges each.</div>
                             
                         </div>
                     </div>        
@@ -404,21 +412,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The inputs num1 and num2 are positive integers.</div>
+                                <div style="margin-left: 20px;"> • The graph may contain self-loops and parallel edges.</div>
                             
-                                <div style="margin-left: 20px;"> • There is always a unique solution.</div>
+                                <div style="margin-left: 20px;"> • The input will always be valid according to the given constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> num1 = 3, num2 = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, num1 is 3 (binary 0011) and num2 is 5 (binary 0101). We need to find a number with the same number of set bits as num2 and that minimizes the XOR with num1. The number 3 (binary 0011) is the answer, as it has the same number of set bits and gives the minimal XOR value (0).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 4, redEdges = [[0,1],[1,2]], blueEdges = [[2,3]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting from node 0, we first move to node 1 with a red edge, then to node 2 with a blue edge, and finally to node 3 with a red edge. This gives us the shortest alternating path to each node.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> num1 = 1, num2 = 12</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, num1 is 1 (binary 0001) and num2 is 12 (binary 1100). The integer 3 (binary 0011) satisfies the condition as it has the same number of set bits as 12 and gives the minimal XOR with num1, resulting in a value of 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 3, redEdges = [[0,1]], blueEdges = [[2,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting from node 0, we can reach node 1 with a red edge, but node 2 is not reachable with an alternating path, so the answer for node 2 is -1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to minimize the XOR value while matching the number of set bits in num2. By trying to match the set bits of num1 with num2 from the highest to the lowest positions, we can minimize the XOR value.</div>
+                        <div class=""> <b>Approach:</b> Use a BFS algorithm to explore the graph while alternating between red and blue edges, updating the shortest path lengths for each node.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of set bits in num2 is fixed, so the task is to match those set bits while minimizing the XOR result.</div>
+                                <div style="margin-left: 20px;"> • The problem is a shortest path problem with alternating edge colors, so a modified BFS is a suitable approach.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can attempt to build the number x by manipulating the bits of num1 and num2 from higher to lower positions.</div>
+                                <div style="margin-left: 20px;"> • We can use BFS to traverse the graph, but we&#39;ll need to alternate between the two edge colors during the traversal.</div>
                             
                         </div>
                     </div>
@@ -459,11 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Count the number of set bits in num2 using a bit-counting function.</div>
+                                <div style="margin-left: 20px;"> • Represent the graph using two separate adjacency lists for red and blue edges.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Start from the highest bit of num1 and check if a bit can be set in the result without violating the set bit count of num2.</div>
+                                <div style="margin-left: 20px;"> • Initialize the distance arrays for both red and blue edges with infinity, except for node 0 which is initialized to 0.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If not enough set bits are placed, fill the remaining positions with the lowest available bits to match the set bit count of num2.</div>
+                                <div style="margin-left: 20px;"> • Perform a BFS from node 0, alternating between red and blue edges, and update the distances as we traverse the graph.</div>
                             
                         </div>
                     </div>
@@ -472,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable as num1 and num2 are always positive integers.</div>
+                                <div style="margin-left: 20px;"> • If both redEdges and blueEdges are empty, the result should be [0] since no paths exist except the starting node.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm handles large inputs up to 10^9 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle large input sizes, up to 100 nodes and 400 edges.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider edge cases where num1 and num2 have very different binary representations, such as num1 = 1 and num2 = 1000000000.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where a node cannot be reached with an alternating path, returning -1 for such nodes.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle large numbers and respect the constraints.</div>
+                                <div style="margin-left: 20px;"> • Ensure the BFS algorithm runs within the time limits for the maximum constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,37 +512,57 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Grid Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Edge Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Edge Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Edge Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Edge Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Distance Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Starting Point Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Starting Point Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Queue Push</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Queue Push</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 BFS Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Pop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Queue Pop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Node and Color Extraction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Neighbor Traversal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Edge Relaxation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Distance Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Queue Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Result Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Path Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Path Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Edge Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Return Result</button>
                     
                 </div>
 
@@ -543,26 +571,44 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizeXor</span>(<span style="color:#0b0;font-weight:bold">int</span> num1, <span style="color:#0b0;font-weight:bold">int</span> num2) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> __builtin_popcount(num2);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">30</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(((num1 <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>                res <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> i);
-</span></span><span style="display:flex;"><span>                n<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> shortestAlternatingPaths(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>redEdges, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>greenEdges) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph(n);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> grid(<span style="color:#666">2</span>, gph);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> redEdges.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        grid[<span style="color:#666">0</span>][redEdges[i][<span style="color:#666">0</span>]].push_back(redEdges[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> greenEdges.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        grid[<span style="color:#666">1</span>][greenEdges[i][<span style="color:#666">0</span>]].push_back(greenEdges[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> len(<span style="color:#666">2</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">2</span> <span style="color:#666">*</span> n));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    len[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    len[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    q.push({<span style="color:#666">0</span>, <span style="color:#666">0</span>});
+</span></span><span style="display:flex;"><span>    q.push({<span style="color:#666">0</span>, <span style="color:#666">1</span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> node <span style="color:#666">=</span> it[<span style="color:#666">0</span>], color <span style="color:#666">=</span> it[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">nxt</span>: grid[<span style="color:#666">1</span> <span style="color:#666">-</span> color][node]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(len[<span style="color:#666">1</span> <span style="color:#666">-</span> color][nxt] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">*</span> n) {
+</span></span><span style="display:flex;"><span>                len[<span style="color:#666">1</span> <span style="color:#666">-</span> color][nxt] <span style="color:#666">=</span> len[color][node] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                q.push({nxt, <span style="color:#666">1</span> <span style="color:#666">-</span> color});
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(((res <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> i);
-</span></span><span style="display:flex;"><span>            n<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res[i] <span style="color:#666">=</span> min(len[<span style="color:#666">0</span>][i], len[<span style="color:#666">1</span>][i]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res[i] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">*</span> n) res[i] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
@@ -571,163 +617,263 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizeXor</span>(<span style="color:#0b0;font-weight:bold">int</span> num1, <span style="color:#0b0;font-weight:bold">int</span> num2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> shortestAlternatingPaths(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>redEdges, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>greenEdges) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;minimizeXor&#39; which takes two integer arguments and returns an integer. </div>
+                            <div class=""> This function initializes the parameters: the number of nodes `n`, and two sets of edges, `redEdges` and `greenEdges`, for the graph. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> __builtin_popcount(num2);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable &#39;n&#39; to store the count of 1-bits in &#39;num2&#39;. </div>
+                            <div class=""> This initializes a graph `gph`, represented as an adjacency list of size `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Grid Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> grid(<span style="color:#666">2</span>, gph);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes &#39;res&#39; to 0, which will store the result of the minimized XOR. </div>
+                            <div class=""> A 3D grid is initialized, where `grid[0]` holds the red edges and `grid[1]` holds the green edges. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Edge Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">30</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> redEdges.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop that iterates through all 32 bits (from 30 down to 0) of &#39;num1&#39;. </div>
+                            <div class=""> This loop iterates through the `redEdges` and populates the `grid[0]` with the red edges. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition</b></div>
+                            <div class=""> <b>5 : Edge Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(((num1 <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        grid[<span style="color:#666">0</span>][redEdges[i][<span style="color:#666">0</span>]].push_back(redEdges[i][<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the i-th bit of &#39;num1&#39; is 1. </div>
+                            <div class=""> This line inserts a red edge into the graph by pushing it into `grid[0]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition</b></div>
+                            <div class=""> <b>6 : Edge Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> greenEdges.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if there are still 1-bits remaining in &#39;num2&#39; to assign to &#39;res&#39;. </div>
+                            <div class=""> This loop iterates through the `greenEdges` and populates the `grid[1]` with the green edges. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Operation</b></div>
+                            <div class=""> <b>7 : Edge Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        grid[<span style="color:#666">1</span>][greenEdges[i][<span style="color:#666">0</span>]].push_back(greenEdges[i][<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the i-th bit of &#39;res&#39; to 1 by performing a bitwise OR operation. </div>
+                            <div class=""> This line inserts a green edge into the graph by pushing it into `grid[1]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update</b></div>
+                            <div class=""> <b>8 : Distance Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                n<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> len(<span style="color:#666">2</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">2</span> <span style="color:#666">*</span> n));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decreases the count of 1-bits in &#39;num2&#39;. </div>
+                            <div class=""> This initializes a `len` array to store the shortest path lengths for each color (red and green), initially set to a large value (2 * n). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Condition</b></div>
+                            <div class=""> <b>9 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the result if all 1-bits from &#39;num2&#39; have been assigned. </div>
+                            <div class=""> A queue `q` is initialized to perform BFS traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class=""> <b>10 : Starting Point Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    len[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes &#39;i&#39; for the while loop that will fill in remaining 1-bits in &#39;res&#39;. </div>
+                            <div class=""> This sets the starting point for the red edges (color 0) to have a distance of 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop</b></div>
+                            <div class=""> <b>11 : Starting Point Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    len[<span style="color:#666">1</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a while loop that continues until all 1-bits from &#39;num2&#39; are assigned. </div>
+                            <div class=""> This sets the starting point for the green edges (color 1) to have a distance of 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Condition</b></div>
+                            <div class=""> <b>12 : Queue Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(((res <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push({<span style="color:#666">0</span>, <span style="color:#666">0</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the i-th bit of &#39;res&#39; is 0. </div>
+                            <div class=""> Push the starting point with color 0 (red) into the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Operation</b></div>
+                            <div class=""> <b>13 : Queue Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push({<span style="color:#666">0</span>, <span style="color:#666">1</span>});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets the i-th bit of &#39;res&#39; to 1. </div>
+                            <div class=""> Push the starting point with color 1 (green) into the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Update</b></div>
+                            <div class=""> <b>14 : BFS Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            n<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decreases the count of remaining 1-bits to be assigned. </div>
+                            <div class=""> Start the BFS loop to explore the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Update</b></div>
+                            <div class=""> <b>15 : Queue Pop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments &#39;i&#39; to check the next bit of &#39;res&#39;. </div>
+                            <div class=""> Pop an element from the front of the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Return</b></div>
+                            <div class=""> <b>16 : Queue Pop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Remove the front element from the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Node and Color Extraction</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> node <span style="color:#666">=</span> it[<span style="color:#666">0</span>], color <span style="color:#666">=</span> it[<span style="color:#666">1</span>];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Extract the node and color information from the queue element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Neighbor Traversal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">nxt</span>: grid[<span style="color:#666">1</span> <span style="color:#666">-</span> color][node]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Traverse all the neighboring nodes in the opposite color (i.e., if the current node is reached by a red edge, now explore the green edges). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Edge Relaxation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(len[<span style="color:#666">1</span> <span style="color:#666">-</span> color][nxt] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">*</span> n) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the neighbor node has not been visited, relax the edge and update its distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Distance Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                len[<span style="color:#666">1</span> <span style="color:#666">-</span> color][nxt] <span style="color:#666">=</span> len[color][node] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the shortest path length for the neighbor node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Queue Push</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                q.push({nxt, <span style="color:#666">1</span> <span style="color:#666">-</span> color});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the neighboring node and its associated edge color into the queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Result Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize a result array to store the shortest alternating paths for each node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Path Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate over each node to calculate the shortest alternating path. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Path Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[i] <span style="color:#666">=</span> min(len[<span style="color:#666">0</span>][i], len[<span style="color:#666">1</span>][i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each node, select the minimum distance between red and green paths. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Edge Case Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res[i] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">*</span> n) res[i] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a node is unreachable, mark its result as -1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the result after all necessary bits have been assigned. </div>
+                            <div class=""> Return the result array with the shortest alternating paths for all nodes. </div>
                         </div>
                     
                 </div>
@@ -747,16 +893,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(log n) where n is the size of the integers because the algorithm processes the bits of num1 and num2.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n &#43; m), where n is the number of nodes and m is the number of edges. We process each edge and node once during the BFS traversal.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as the solution uses a constant amount of space to store intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n &#43; m) due to the storage required for the adjacency list and the BFS queue.</div>    
                     </div>
 
                 </div>

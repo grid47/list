@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 7, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -300,7 +300,7 @@
 
 
 
-<div class=""> Given a positive integer num, split it into two non-negative integers num1 and num2 such that the concatenation of num1 and num2 is a permutation of the digits of num. The goal is to minimize the sum of num1 and num2. </div>
+<div class=""> On an 8x8 chessboard, there are multiple black queens and one white king. You are given the positions of the black queens and the white king. Your task is to find all the black queens that can directly attack the white king. A queen can attack the king if they share the same row, column, or diagonal. </div>
 
 
 
@@ -351,45 +351,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a positive integer num.</div>
-                        <div class=""> <b>Example:</b> For example, num = 8657.</div>
+                        <div class=""> <b>Input:</b> You are given two inputs: a 2D array &#39;queens&#39; where each element represents the position of a black queen, and a 1D array &#39;king&#39; representing the position of the white king.</div>
+                        <div class=""> <b>Example:</b> queens = [[2, 3], [1, 1], [5, 2], [0, 7], [4, 6]], king = [2, 2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 10 &lt;= num &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= queens.length &lt; 64</div>
+                            
+                                <div style="margin-left: 20px;"> • queens[i].length == king.length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= xQueeni, yQueeni, xKing, yKing &lt; 8</div>
+                            
+                                <div style="margin-left: 20px;"> • All the given positions are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an integer, the minimum possible sum of num1 and num2 after splitting the digits of num.</div>
-                        <div class=""> <b>Example:</b> For num = 592, the output is 56.</div>
+                        <div class=""> <b>Output:</b> Return a list of coordinates of the black queens that can attack the king.</div>
+                        <div class=""> <b>Example:</b> [[2, 3], [5, 2], [1, 1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is an integer representing the minimal possible sum.</div>
+                                <div style="margin-left: 20px;"> • The output should include all the black queens that can attack the king, in any order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the minimum sum after splitting the digits of num into two valid numbers.</div>
+                        <div class=""> <b>Goal:</b> Find all queens that can attack the white king.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Extract the digits of num.</div>
+                                <div style="margin-left: 20px;"> • 1. Mark the positions of all black queens on the chessboard.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Sort the digits in ascending order to minimize the sum.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate over all possible directions from the king&#39;s position.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Distribute the digits alternatively between num1 and num2 to form two valid numbers.</div>
+                                <div style="margin-left: 20px;"> • 3. Check if there is a queen in each direction.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Compute and return the sum of num1 and num2.</div>
+                                <div style="margin-left: 20px;"> • 4. If a queen is found, add it to the result list and stop checking further in that direction.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input number num is guaranteed to be between 10 and 10^9.</div>
+                        <div class=""> <b>Goal:</b> You must work within the limits of the 8x8 chessboard and handle up to 63 black queens.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 10 &lt;= num &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The chessboard is fixed in size at 8x8.</div>
+                            
+                                <div style="margin-left: 20px;"> • There can be up to 63 queens on the board.</div>
                             
                         </div>
                     </div>        
@@ -397,15 +405,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The number num will always have at least two digits.</div>
+                                <div style="margin-left: 20px;"> • Each position is unique, meaning no two queens or the king can occupy the same square.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For num = 592, the output is 56.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We split 592 into num1 = 5 and num2 = 9. The sum of 5 and 9 is 56, which is the minimum possible sum.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: queens = [[2, 3], [1, 1], [5, 2], [0, 7], [4, 6]], king = [2, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The queens at positions (2, 3), (5, 2), and (1, 1) are in the same row, column, or diagonal as the king. Thus, they can directly attack the king.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -429,16 +437,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We approach this problem by first extracting and sorting the digits of num. Then, we distribute the digits between num1 and num2 in an alternating manner to ensure the minimal sum.</div>
+                        <div class=""> <b>Approach:</b> The approach to solving this problem is to simulate the chessboard and check the positions of the queens relative to the king, considering all 8 directions.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The digits need to be rearranged optimally to form the smallest possible sum.</div>
+                                <div style="margin-left: 20px;"> • A queen can attack in any of the 8 directions (up, down, left, right, and the four diagonals).</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Sorting the digits in ascending order and then distributing them alternately between num1 and num2 should give the minimal sum.</div>
+                                <div style="margin-left: 20px;"> • We can traverse each direction from the king and check for queens in the line of attack.</div>
                             
                         </div>
                     </div>
@@ -446,13 +454,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Convert num into an array of digits.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a chessboard with the queens&#39; positions marked.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Sort the array of digits.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through each direction from the king&#39;s position.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Distribute the digits into two numbers by alternating between num1 and num2.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the sum of num1 and num2.</div>
+                                <div style="margin-left: 20px;"> • 3. For each direction, move step-by-step and check if a queen is encountered. Stop if a queen is found or if the edge of the board is reached.</div>
                             
                         </div>
                     </div>
@@ -461,22 +467,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always be a valid integer with at least two digits.</div>
+                                <div style="margin-left: 20px;"> • There are no queens on the board.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs (up to 10^9), ensure the algorithm handles large integers efficiently.</div>
+                                <div style="margin-left: 20px;"> • There are 63 queens on the board, with the king in the center.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all digits in num are the same, num1 and num2 should be split equally to minimize the sum.</div>
+                                <div style="margin-left: 20px;"> • The king is at a corner or edge of the board.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the final sum is the minimal possible value.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees unique positions, so no two queens or the king will occupy the same space.</div>
                             
                         </div>                                                                        
                     </div>
@@ -493,41 +499,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Code Block</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Matrix Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Queen Position Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mark Queen on Board</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Direction Loop Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Direction Loop Inner</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Skip Center Position</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Calculate Adjacent Position</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Position Check Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queen Detection</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Add Attack Position</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Break Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Move to Next Position</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Action</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Move to Next Position (y)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Action</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Action</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Result</button>
                     
                 </div>
 
@@ -536,27 +538,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">splitNum</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> num1 <span style="color:#666">=</span> <span style="color:#666">0</span>, num2 <span style="color:#666">=</span> <span style="color:#666">0</span>, x <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(num){
-</span></span><span style="display:flex;"><span>        v.push_back(num<span style="color:#666">%</span><span style="color:#666">10</span>);
-</span></span><span style="display:flex;"><span>        num <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> queensAttacktheKing(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> queens, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> k) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> b(<span style="color:#666">8</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(<span style="color:#666">8</span>, <span style="color:#a2f">false</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">q</span>: queens)
+</span></span><span style="display:flex;"><span>    b[q[<span style="color:#666">0</span>]][q[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> ( i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> k[<span style="color:#666">0</span>] <span style="color:#666">+</span> i, y <span style="color:#666">=</span> k[<span style="color:#666">1</span>] <span style="color:#666">+</span> j;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(min(x, y) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> max(x, y) <span style="color:#666">&lt;</span> <span style="color:#666">8</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(b[x][y]) {
+</span></span><span style="display:flex;"><span>                    res.push_back({x, y});
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            x <span style="color:#666">+=</span> i;
+</span></span><span style="display:flex;"><span>            y <span style="color:#666">+=</span> j;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    sort(v.begin(),v.end());
-</span></span><span style="display:flex;"><span>    num <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">i</span>: v){
-</span></span><span style="display:flex;"><span>        num <span style="color:#666">*=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        num <span style="color:#666">+=</span> i;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(num){
-</span></span><span style="display:flex;"><span>        num1 <span style="color:#666">+=</span> x<span style="color:#666">*</span>(num<span style="color:#666">%</span><span style="color:#666">10</span>);
-</span></span><span style="display:flex;"><span>        num <span style="color:#666">/=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        num2 <span style="color:#666">+=</span> x<span style="color:#666">*</span>(num<span style="color:#666">%</span><span style="color:#666">10</span>);
-</span></span><span style="display:flex;"><span>        num <span style="color:#666">/=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        x <span style="color:#666">*=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> num1<span style="color:#666">+</span>num2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -564,183 +566,163 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Code Block</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">splitNum</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> queensAttacktheKing(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> queens, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Function declaration: Starts the splitNum function with an integer input. </div>
+                            <div class=""> This is the function definition. The function accepts a list of queen positions and the king&#39;s position as inputs. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Matrix Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> num1 <span style="color:#666">=</span> <span style="color:#666">0</span>, num2 <span style="color:#666">=</span> <span style="color:#666">0</span>, x <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> b(<span style="color:#666">8</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(<span style="color:#666">8</span>, <span style="color:#a2f">false</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes variables num1, num2 for storing results, and x for scaling the digits during the second loop. </div>
+                            <div class=""> Here, we initialize a 2D boolean vector `b` of size 8x8 representing the chessboard, where each position is initially set to `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Queen Position Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">q</span>: queens)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a vector &#39;v&#39; to store individual digits of the number. </div>
+                            <div class=""> This loop iterates through all queen positions to mark them as `true` on the chessboard `b`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Mark Queen on Board</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(num){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    b[q[<span style="color:#666">0</span>]][q[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop that continues as long as there are digits in the number. </div>
+                            <div class=""> This line marks the corresponding position on the chessboard as `true` for each queen. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Action</b></div>
+                            <div class=""> <b>5 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        v.push_back(num<span style="color:#666">%</span><span style="color:#666">10</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extracts the last digit of &#39;num&#39; and adds it to the vector &#39;v&#39;. </div>
+                            <div class=""> This initializes a vector `res` that will hold the positions of queens that can attack the king. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Action</b></div>
+                            <div class=""> <b>6 : Direction Loop Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        num <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Divides &#39;num&#39; by 10 to remove the last digit. </div>
+                            <div class=""> This loop will check all 8 possible directions (vertical, horizontal, and diagonal) around the king. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Action</b></div>
+                            <div class=""> <b>7 : Direction Loop Inner</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(v.begin(),v.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the vector &#39;v&#39; containing digits in ascending order. </div>
+                            <div class=""> This loop works in conjunction with the previous loop to examine each direction surrounding the king. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Variable Initialization</b></div>
+                            <div class=""> <b>8 : Skip Center Position</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    num <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> ( i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Resets &#39;num&#39; to 0 before processing the sorted digits. </div>
+                            <div class=""> This line ensures that the center position (the king&#39;s position) is skipped, as we want to check surrounding squares. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Loop</b></div>
+                            <div class=""> <b>9 : Calculate Adjacent Position</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">i</span>: v){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> k[<span style="color:#666">0</span>] <span style="color:#666">+</span> i, y <span style="color:#666">=</span> k[<span style="color:#666">1</span>] <span style="color:#666">+</span> j;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to process each digit in the sorted vector. </div>
+                            <div class=""> This calculates the adjacent position relative to the king&#39;s position by adding the offsets `i` and `j`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Action</b></div>
+                            <div class=""> <b>10 : Position Check Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        num <span style="color:#666">*=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(min(x, y) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> max(x, y) <span style="color:#666">&lt;</span> <span style="color:#666">8</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Multiplies &#39;num&#39; by 10 to shift left by one digit. </div>
+                            <div class=""> This while loop checks if the calculated position is within the bounds of the chessboard (8x8 grid). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Action</b></div>
+                            <div class=""> <b>11 : Queen Detection</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        num <span style="color:#666">+=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(b[x][y]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the current digit &#39;i&#39; from the sorted vector to &#39;num&#39;. </div>
+                            <div class=""> Here, we check if there is a queen at the calculated position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Loop</b></div>
+                            <div class=""> <b>12 : Add Attack Position</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(num){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res.push_back({x, y});
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to process the number with sorted digits. </div>
+                            <div class=""> If a queen is found, the position is added to the result list `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Action</b></div>
+                            <div class=""> <b>13 : Break Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        num1 <span style="color:#666">+=</span> x<span style="color:#666">*</span>(num<span style="color:#666">%</span><span style="color:#666">10</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extracts the last digit of &#39;num&#39; and adds it to &#39;num1&#39; scaled by &#39;x&#39;. </div>
+                            <div class=""> Once a queen is found in a given direction, the loop breaks to avoid further searching in that direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Action</b></div>
+                            <div class=""> <b>14 : Move to Next Position</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        num <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            x <span style="color:#666">+=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Divides &#39;num&#39; by 10 to remove the last digit. </div>
+                            <div class=""> This moves the check to the next position in the current direction by adding `i` to `x`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Action</b></div>
+                            <div class=""> <b>15 : Move to Next Position (y)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        num2 <span style="color:#666">+=</span> x<span style="color:#666">*</span>(num<span style="color:#666">%</span><span style="color:#666">10</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            y <span style="color:#666">+=</span> j;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extracts the last digit of &#39;num&#39; again and adds it to &#39;num2&#39; scaled by &#39;x&#39;. </div>
+                            <div class=""> Similarly, this moves the check to the next position in the current direction by adding `j` to `y`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Action</b></div>
+                            <div class=""> <b>16 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        num <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Divides &#39;num&#39; by 10 again to remove the last digit. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Action</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        x <span style="color:#666">*=</span> <span style="color:#666">10</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Multiplies &#39;x&#39; by 10 to scale the next digit in the next iteration. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> num1<span style="color:#666">+</span>num2;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the sum of &#39;num1&#39; and &#39;num2&#39; as the result of the function. </div>
+                            <div class=""> The function returns the list `res`, which contains the positions where queens can attack the king. </div>
                         </div>
                     
                 </div>
@@ -760,16 +742,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(d log d)</div>
-                        <div class=""> <b>Average Case:</b> O(d log d)</div>
-                        <div class=""> <b>Worst Case:</b> O(d log d)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, where d is the number of digits in num.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1) - If no queens are in line with the king.</div>
+                        <div class=""> <b>Average Case:</b> O(8) - Each direction will take at most 8 steps.</div>
+                        <div class=""> <b>Worst Case:</b> O(8) - In the worst case, we check all 8 directions.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is primarily dependent on the 8 possible directions from the king&#39;s position.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(d)</div>
-                        <div class=""> <b>Worst Case:</b> O(d)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(d) due to the storage of the digits of num.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1) - The board is fixed at 8x8, and we only store the positions of the queens and king.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because the chessboard size is fixed and we only need space for the queens and the king.</div>    
                     </div>
 
                 </div>

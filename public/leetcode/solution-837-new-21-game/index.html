@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an array of integers <code>nums</code>. The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty. For every subset of <code>nums</code>, calculate the XOR total and return the sum of all XOR totals. </div>
+<div class=""> Alice is playing a game where she starts with 0 points and randomly draws a number from the range [1, maxPts] each time. Alice continues drawing until her points reach or exceed a target value k. After each draw, she may stop if her total points reach or exceed k. The goal is to determine the probability that Alice has at most n points before reaching k points. </div>
 
 
 
@@ -360,47 +360,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is an array `nums` consisting of integers.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 3]</div>
+                        <div class=""> <b>Input:</b> The input consists of three integers: n, k, and maxPts. Here, n is the maximum number of points Alice can have without exceeding it, k is the target score Alice needs to reach or exceed to stop drawing, and maxPts is the maximum number of points Alice can draw in each round.</div>
+                        <div class=""> <b>Example:</b> Input: n = 15, k = 10, maxPts = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 12</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 20</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= maxPts &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an integer representing the sum of all XOR totals for every subset of the array `nums`.</div>
-                        <div class=""> <b>Example:</b> Output = 6</div>
+                        <div class=""> <b>Output:</b> Return the probability that Alice has at most n points when she stops drawing.</div>
+                        <div class=""> <b>Example:</b> Output: 0.80000</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is the sum of XOR totals for every subset of the array.</div>
+                                <div style="margin-left: 20px;"> • The probability should be accurate within a relative or absolute error of 10^-5.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the XOR total for every subset and return their sum.</div>
+                        <div class=""> <b>Goal:</b> To calculate the probability that Alice&#39;s points are at most n before she reaches the target k.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Generate all subsets of the array.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a dp array to store the probabilities of Alice having exactly i points.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each subset, calculate the XOR total by performing a bitwise XOR of all elements in the subset.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Start with the base case where Alice has 0 points (probability = 1).</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Add the XOR totals of all subsets and return the sum.</div>
+                                <div style="margin-left: 20px;"> • Step 3: For each possible score from 1 to n, calculate the probability of reaching that score by drawing a number from the range [1, maxPts].</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Use a sliding window to sum the probabilities efficiently to calculate the next values in the dp array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 5: If the points exceed or reach k, stop the process and sum the probabilities for the cases where the points are less than or equal to n.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure the array is small enough for generating all subsets and calculating XOR totals efficiently.</div>
+                        <div class=""> <b>Goal:</b> The values of n, k, and maxPts must satisfy the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array contains between 1 and 12 elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each integer in the array is between 1 and 20.</div>
+                                <div style="margin-left: 20px;"> • n, k, and maxPts should be valid as per the input ranges.</div>
                             
                         </div>
                     </div>        
@@ -408,19 +410,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array contains at least one element.</div>
+                                <div style="margin-left: 20px;"> • Alice draws random numbers independently and each draw has an equal probability of any number in the range [1, maxPts].</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [1, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are 4 subsets: the empty subset, [1], [3], and [1,3]. The XOR totals for each subset are 0, 1, 3, and 2, respectively. The sum of these totals is 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 15, k = 10, maxPts = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, Alice can draw numbers from 1 to 5, and she needs to stop when her points exceed or equal 10. We need to calculate the probability that she has 15 or fewer points before stopping.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [4, 1, 7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The eight subsets of [4, 1, 7] and their corresponding XOR totals are: 0, 4, 1, 7, 5, 3, 6, and 2. The sum of these totals is 35.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 10, k = 1, maxPts = 10</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice draws a single card and immediately stops when she reaches or exceeds the target k = 1. Therefore, the probability of having 10 or fewer points is 1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,16 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we generate all possible subsets of the array and compute the XOR total for each subset. Then, we sum all these XOR totals.</div>
+                        <div class=""> <b>Approach:</b> We need to calculate the probability of having n or fewer points, which involves dynamic programming and efficient sliding window sum computation.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires generating all subsets and computing XOR totals for each subset.</div>
+                                <div style="margin-left: 20px;"> • This is a probability problem where we need to accumulate probabilities over multiple draws.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can use dynamic programming to efficiently calculate the probability distribution of the total points after each draw.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Given that the number of elements in the array is small (at most 12), generating all subsets (2^n subsets) is feasible.</div>
+                                <div style="margin-left: 20px;"> • The key challenge is to compute the probability of having a specific number of points, while ensuring we don&#39;t exceed the target score k.</div>
                             
                         </div>
                     </div>
@@ -461,11 +465,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Loop through all numbers from 1 to 2^n - 1, where n is the size of the array. Each number represents a subset using its binary representation.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Initialize a dp array where dp[i] represents the probability of having exactly i points.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each subset, calculate the XOR total by checking which elements are included (using the binary number) and performing XOR.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Use a sliding window sum to keep track of the sum of probabilities from the previous few points that could lead to the current points.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Sum all the XOR totals and return the result.</div>
+                                <div style="margin-left: 20px;"> • Step 3: After processing all points, sum the probabilities for all cases where the points are less than or equal to n and return the result.</div>
                             
                         </div>
                     </div>
@@ -474,22 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array is never empty as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • Empty or invalid inputs should not be provided.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The maximum length of the array is 12, so generating subsets and calculating XOR totals will work efficiently within the time limits.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles large inputs efficiently, especially when n, k, or maxPts are close to the upper limits of 10^4.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where all elements are the same, which will result in subsets with identical XOR totals.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where n or k is 0, or maxPts is equal to 1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array contains between 1 and 12 elements, each between 1 and 20.</div>
+                                <div style="margin-left: 20px;"> • Make sure the values adhere to the constraints and do not exceed the bounds.</div>
                             
                         </div>                                                                        
                     </div>
@@ -508,21 +512,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop (Subset Generation)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization (Subset XOR)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Dynamic Programming Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop (Element Check)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Bitwise Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Subset XOR Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Main Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Probability Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Cumulative Probability Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Cumulative Probability Adjust</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
                     
                 </div>
 
@@ -531,14 +541,42 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">subsetXORSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> nums.size()); <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> total <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>j)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&amp;</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> j))
-</span></span><span style="display:flex;"><span>                total <span style="color:#666">^=</span> nums[j];
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> total;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">new21Game</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> w) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> n <span style="color:#666">&gt;=</span> k <span style="color:#666">+</span> w)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    You will get number x (1 to w) in a draw, with probablity 1 / w
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    if you need probablity of getting i points in a draw
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    we can do slecting (i - x) points with probablity dp[i - x] and
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    selecting x with probablity x
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    so doing it together dp[i - x] * 1 / w
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    and this to every x in [1, w] to get net prob of dp[i].
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    once the pionts has crossed a limit k, there will be no more selections.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    then we look for only the over flows from previous trials.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    why target probablity counted from k onward instead of dp[n].
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    */</span>        
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> dp(n<span style="color:#666">+</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> Wsum <span style="color:#666">=</span> <span style="color:#666">1.0</span>, res <span style="color:#666">=</span> <span style="color:#666">0.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> Wsum<span style="color:#666">/</span> w;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> k) Wsum <span style="color:#666">+=</span> dp[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> dp[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> w <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) Wsum <span style="color:#666">-=</span> dp[i <span style="color:#666">-</span> w];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
@@ -551,90 +589,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">subsetXORSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">new21Game</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `subsetXORSum`, which takes a reference to a vector `nums` containing integers and returns an integer. </div>
+                            <div class=""> Define a function to calculate the probability of winning a game given the parameters n (number of points), k (limit), and w (range of possible outcomes in a draw). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> n <span style="color:#666">&gt;=</span> k <span style="color:#666">+</span> w)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a variable `res` to store the cumulative XOR sum of all subsets. </div>
+                            <div class=""> Check if the game is over based on the values of k and n. If k is zero or n exceeds the limit plus range, return a probability of 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Outer Loop (Subset Generation)</b></div>
+                            <div class=""> <b>3 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> nums.size()); <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through all possible subsets of `nums` by generating numbers from 1 to `2^n - 1` using bitwise operations. </div>
+                            <div class=""> If the condition in the previous step is true, the game ends with a probability of 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization (Subset XOR)</b></div>
+                            <div class=""> <b>4 : Dynamic Programming Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> total <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> dp(n<span style="color:#666">+</span><span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a variable `total` to store the XOR of the current subset. </div>
+                            <div class=""> Initialize a vector dp to store probabilities for each score from 0 to n. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Inner Loop (Element Check)</b></div>
+                            <div class=""> <b>5 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>j)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through each element of the `nums` array to check if the current element belongs to the current subset. </div>
+                            <div class=""> Set the base case: the probability of getting 0 points is 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Bitwise Check</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&amp;</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> j))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> Wsum <span style="color:#666">=</span> <span style="color:#666">1.0</span>, res <span style="color:#666">=</span> <span style="color:#666">0.0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the `j`-th element is included in the current subset by using a bitwise AND operation. If the `j`-th bit of `i` is set, the element is included. </div>
+                            <div class=""> Initialize variables for cumulative probability (Wsum) and the result (res). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Subset XOR Calculation</b></div>
+                            <div class=""> <b>7 : Main Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                total <span style="color:#666">^=</span> nums[j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> XOR the value of the `j`-th element of `nums` with the current `total` to update the XOR for the current subset. </div>
+                            <div class=""> Loop through all possible scores from 1 to n to calculate the probabilities. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Result</b></div>
+                            <div class=""> <b>8 : Probability Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> total;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> Wsum <span style="color:#666">/</span> w;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the XOR result of the current subset (`total`) to the running total `res`. </div>
+                            <div class=""> Set the probability of reaching score i by dividing the cumulative probability by w. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Result</b></div>
+                            <div class=""> <b>9 : Cumulative Probability Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> k) Wsum <span style="color:#666">+=</span> dp[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the score is less than k, update the cumulative probability. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Result Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> dp[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the score exceeds k, add the probability to the result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Cumulative Probability Adjust</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> w <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) Wsum <span style="color:#666">-=</span> dp[i <span style="color:#666">-</span> w];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adjust the cumulative probability by subtracting the value that is no longer in the valid range. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final result `res`, which contains the sum of XORs of all subsets. </div>
+                            <div class=""> Return the computed result as the final probability of winning. </div>
                         </div>
                     
                 </div>
@@ -654,16 +722,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(2^n * n)</div>
-                        <div class=""> <b>Average Case:</b> O(2^n * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(2^n * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(2^n * n), where n is the length of the input array. There are 2^n subsets and for each subset, we need to compute the XOR total which takes O(n) time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear in terms of n, as we are iterating over the possible number of points and updating probabilities.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(2^n)</div>
-                        <div class=""> <b>Worst Case:</b> O(2^n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(2^n) due to the space needed for storing the subsets and the XOR totals.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the dp array for keeping track of probabilities.</div>    
                     </div>
 
                 </div>

@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> Given an array of intervals, where each interval is represented by a pair of integers [start, end], the goal is to determine the minimum number of intervals to remove to make the rest non-overlapping. Intervals that only touch at a point are considered non-overlapping. </div>
+<div class=""> You are given a 2D grid representing a map, where &lsquo;1&rsquo; represents land and &lsquo;0&rsquo; represents water. Your task is to count how many islands are formed by connecting adjacent lands horizontally or vertically. An island is a collection of &lsquo;1&rsquo;s connected either horizontally or vertically. </div>
 
 
 
@@ -373,49 +373,54 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an array of intervals, where each interval is represented as an array of two integers: [start, end].</div>
-                        <div class=""> <b>Example:</b> intervals = [[1, 2], [2, 3], [3, 4], [1, 3]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an m x n grid of &#39;1&#39;s (land) and &#39;0&#39;s (water). The grid is represented as a list of lists where each inner list corresponds to a row in the grid.</div>
+                        <div class=""> <b>Example:</b> grid = [
+  [&#39;1&#39;,&#39;1&#39;,&#39;1&#39;,&#39;1&#39;,&#39;0&#39;],
+  [&#39;1&#39;,&#39;1&#39;,&#39;0&#39;,&#39;1&#39;,&#39;0&#39;],
+  [&#39;1&#39;,&#39;1&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;],
+  [&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;]
+]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= intervals.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The grid will have between 1 and 300 rows and 1 and 300 columns.</div>
                             
-                                <div style="margin-left: 20px;"> • -5 * 10^4 &lt;= starti &lt; endi &lt;= 5 * 10^4</div>
+                                <div style="margin-left: 20px;"> • Each cell of the grid is either &#39;0&#39; or &#39;1&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of intervals to remove to make the remaining intervals non-overlapping.</div>
-                        <div class=""> <b>Example:</b> 1</div>
+                        <div class=""> <b>Output:</b> Return the number of islands formed in the given grid, where each island consists of connected &#39;1&#39;s.</div>
+                        <div class=""> <b>Example:</b> Output: 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all intervals are already non-overlapping, return 0.</div>
-                            
-                                <div style="margin-left: 20px;"> • If no intervals can be removed to make them non-overlapping, return -1.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer representing the number of islands.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the number of intervals that must be removed to ensure the rest are non-overlapping.</div>
+                        <div class=""> <b>Goal:</b> The goal is to count how many distinct islands are present in the grid by connecting adjacent &#39;1&#39;s.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the intervals by their start times.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each cell in the grid.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a greedy algorithm to keep the interval with the earliest end time, and remove intervals that overlap with it.</div>
+                                <div style="margin-left: 20px;"> • When a &#39;1&#39; is encountered, it means the start of a new island. Increment the island count.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the number of removed intervals and return that count.</div>
+                                <div style="margin-left: 20px;"> • Use Depth First Search (DFS) to mark all connected &#39;1&#39;s as visited by changing them to &#39;0&#39;. This ensures that the same island is not counted multiple times.</div>
+                            
+                                <div style="margin-left: 20px;"> • Continue until all cells have been processed.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should handle up to 10^5 intervals efficiently.</div>
+                        <div class=""> <b>Goal:</b> The grid will always contain at least one row and one column, and each element in the grid is either &#39;0&#39; or &#39;1&#39;.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of the intervals array is between 1 and 10^5.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • Each interval is a pair of integers where start &lt; end.</div>
+                                <div style="margin-left: 20px;"> • grid[i][j] is either &#39;0&#39; or &#39;1&#39;.</div>
                             
                         </div>
                     </div>        
@@ -423,25 +428,29 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Intervals are represented by pairs of integers, and each interval&#39;s start is less than its end.</div>
-                            
-                                <div style="margin-left: 20px;"> • The intervals array is not empty and contains at least one interval.</div>
+                                <div style="margin-left: 20px;"> • The grid is well-formed, with each row containing the same number of columns.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: intervals = [[1,2],[2,3],[3,4],[1,3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We remove the interval [1,3], and the remaining intervals are non-overlapping.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [
+  [&#39;1&#39;,&#39;1&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;],
+  [&#39;1&#39;,&#39;1&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;],
+  [&#39;0&#39;,&#39;0&#39;,&#39;1&#39;,&#39;0&#39;,&#39;0&#39;],
+  [&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;1&#39;,&#39;1&#39;]
+]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, there are three distinct islands. The first island consists of the first two rows of &#39;1&#39;s, the second island is formed by the &#39;1&#39; at position (2,2), and the third island is the &#39;1&#39; at position (3,3). The output is 3.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: intervals = [[1,2],[1,2],[1,2]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We need to remove two of the [1,2] intervals to make the rest non-overlapping.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: intervals = [[1,2],[2,3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The intervals are already non-overlapping, so no removal is necessary.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [
+  [&#39;1&#39;,&#39;1&#39;,&#39;1&#39;,&#39;1&#39;,&#39;0&#39;],
+  [&#39;1&#39;,&#39;1&#39;,&#39;0&#39;,&#39;1&#39;,&#39;0&#39;],
+  [&#39;1&#39;,&#39;1&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;],
+  [&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;,&#39;0&#39;]
+]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This grid forms a single island that spans multiple rows and columns. The entire set of &#39;1&#39;s is connected horizontally and vertically. The output is 1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -465,16 +474,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use a greedy algorithm to minimize the number of intervals removed. The idea is to always keep the interval with the smallest end time to reduce the chance of overlaps.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we can use Depth First Search (DFS) to explore the grid and mark all cells that belong to the same island. Each time we encounter a &#39;1&#39;, we initiate a DFS to mark all the connected &#39;1&#39;s as visited.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the intervals by their end times will help us efficiently select intervals that minimize overlaps.</div>
+                                <div style="margin-left: 20px;"> • DFS is an effective way to explore the grid and mark visited nodes. We can treat each &#39;1&#39; as the start of an island and use DFS to find all connected land cells.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By keeping intervals with the earliest end time, we can maximize the space available for future intervals, thereby minimizing the number of removed intervals.</div>
+                                <div style="margin-left: 20px;"> • DFS allows us to efficiently mark connected components, and once we&#39;ve visited all parts of an island, we can proceed to the next unvisited land.</div>
                             
                         </div>
                     </div>
@@ -482,13 +491,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the intervals based on their end times.</div>
+                                <div style="margin-left: 20px;"> • Initialize a counter for the number of islands.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Iterate through the sorted intervals and keep track of the last non-overlapping interval.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each cell in the grid.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each interval, if it overlaps with the last kept interval, increment the removal count.</div>
+                                <div style="margin-left: 20px;"> • If the current cell is &#39;1&#39;, increment the island count and perform DFS to mark all connected &#39;1&#39;s as visited.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the total number of removed intervals.</div>
+                                <div style="margin-left: 20px;"> • DFS will explore the grid by checking all adjacent cells (up, down, left, right). Mark each visited &#39;1&#39; as &#39;0&#39; to avoid revisiting.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the island count after processing all cells.</div>
                             
                         </div>
                     </div>
@@ -497,22 +508,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the intervals array is empty, return 0 as there are no intervals to remove.</div>
+                                <div style="margin-left: 20px;"> • If the grid is empty (m = 0 or n = 0), return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the intervals array contains a large number of intervals, ensure the algorithm handles it efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large grids (e.g., 300 x 300), the solution should efficiently handle the large size without running into time or space issues.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all intervals are already non-overlapping, return 0.</div>
+                                <div style="margin-left: 20px;"> • Handle grids with no land (&#39;1&#39;) or only land (&#39;1&#39;). In these cases, the output should be 0 or 1 respectively.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where all intervals are identical, or where no intervals overlap.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the DFS does not go out of bounds and handles edge cases like single-cell islands or fully connected grids.</div>
                             
                         </div>                                                                        
                     </div>
@@ -529,31 +540,41 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declarations And Calls</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Grid Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Length Of Collection</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loops</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Island Detection</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Checks</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Increment Island Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Increment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Checks</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 End of If Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Island Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 DFS Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 DFS Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return At End</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 End DFS if Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Mark Visited Cell</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 DFS Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 DFS Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 DFS Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 DFS Recursive Call</button>
                     
                 </div>
 
@@ -562,23 +583,25 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">eraseOverlapIntervals</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> ivl) {
-</span></span><span style="display:flex;"><span>    sort(ivl.begin(), ivl.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> ivl.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">1</span>; cur <span style="color:#666">&lt;</span> n; cur<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// [1, 5]. [3, 6]
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// [2, 8]. [3, 5]
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(ivl[cur][<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> ivl[prv][<span style="color:#666">1</span>]) {
-</span></span><span style="display:flex;"><span>            ans<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ivl[cur][<span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> ivl[prv][<span style="color:#666">1</span>])
-</span></span><span style="display:flex;"><span>                prv <span style="color:#666">=</span> cur;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            prv <span style="color:#666">=</span> cur;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numIslands</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            dfs(grid, i, j);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ;
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -586,133 +609,183 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declarations And Calls</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">eraseOverlapIntervals</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> ivl) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numIslands</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function to process a vector of intervals. </div>
+                            <div class=""> Define the function &#39;numIslands&#39; which takes a 2D grid of characters (representing water and land) and returns the number of islands. An island is surrounded by water and is formed by connecting adjacent land cells. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(ivl.begin(), ivl.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the intervals based on their start times to simplify processing. </div>
+                            <div class=""> Initialize a counter &#39;cnt&#39; to keep track of the number of islands found during the iteration through the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Grid Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a counter for tracking the number of intervals to remove. </div>
+                            <div class=""> Store the number of rows (m) and columns (n) of the grid to control the iteration bounds. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Length Of Collection</b></div>
+                            <div class=""> <b>4 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> ivl.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the size of the intervals vector for iteration. </div>
+                            <div class=""> Start the outer loop to iterate through each row of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Tracks the index of the last non-overlapping interval. </div>
+                            <div class=""> Start the inner loop to iterate through each column of the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : For Loops</b></div>
+                            <div class=""> <b>6 : Island Detection</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">1</span>; cur <span style="color:#666">&lt;</span> n; cur<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over the intervals starting from the second one. </div>
+                            <div class=""> Check if the current cell is land (&#39;1&#39;). If it is, it signifies the start of a new island. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Checks</b></div>
+                            <div class=""> <b>7 : Increment Island Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ivl[cur][<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> ivl[prv][<span style="color:#666">1</span>]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current interval overlaps with the previous one. </div>
+                            <div class=""> Increment the island count (cnt) when a new island is found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Increment</b></div>
+                            <div class=""> <b>8 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dfs(grid, i, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the removal counter for overlapping intervals. </div>
+                            <div class=""> Call the DFS function to mark all the connected land cells as visited, ensuring we don&#39;t count the same island multiple times. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Conditional Checks</b></div>
+                            <div class=""> <b>9 : End of If Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ivl[cur][<span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> ivl[prv][<span style="color:#666">1</span>])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the reference to the current interval if it ends earlier. </div>
+                            <div class=""> End the if statement that checks for a land cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Assignment</b></div>
+                            <div class=""> <b>10 : Return Island Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                prv <span style="color:#666">=</span> cur;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the current interval index as the reference. </div>
+                            <div class=""> Return the total count of islands found after iterating through the entire grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Else Condition</b></div>
+                            <div class=""> <b>11 : DFS Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Handles the case where intervals do not overlap. </div>
+                            <div class=""> Define the helper DFS function that will mark all connected land cells as visited by changing their value to &#39;0&#39;. This helps prevent counting the same island multiple times. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Assignment</b></div>
+                            <div class=""> <b>12 : DFS Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            prv <span style="color:#666">=</span> cur;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the reference to the current non-overlapping interval. </div>
+                            <div class=""> Check if the current position is out of bounds or if the cell is already visited (i.e., it is water or already marked as visited). If any of these conditions is true, stop the DFS. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Return At End</b></div>
+                            <div class=""> <b>13 : End DFS if Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the total number of intervals removed. </div>
+                            <div class=""> End the DFS function if the base case conditions are met. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Mark Visited Cell</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Mark the current cell as visited by changing its value from &#39;1&#39; (land) to &#39;0&#39; (water). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : DFS Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call DFS for the neighboring cell below the current cell (downward). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : DFS Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call DFS for the neighboring cell to the right of the current cell (rightward). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : DFS Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call DFS for the neighboring cell above the current cell (upward). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : DFS Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call DFS for the neighboring cell to the left of the current cell (leftward). </div>
                         </div>
                     
                 </div>
@@ -732,16 +805,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(N log N), where N is the number of intervals, due to the sorting step.</div>
-                        <div class=""> <b>Average Case:</b> O(N log N), due to the sorting step.</div>
-                        <div class=""> <b>Worst Case:</b> O(N log N), where N is the number of intervals, due to the sorting step.</div> 
-                        <div class=""> <b>Description:</b> The main time complexity comes from sorting the intervals, and the subsequent iteration is O(N).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Average Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we need to visit every cell in the grid, making the time complexity O(m * n), where m is the number of rows and n is the number of columns.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(N), for the space needed to store the intervals.</div>
-                        <div class=""> <b>Worst Case:</b> O(N), where N is the number of intervals, to store the sorted intervals.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(N) due to storing the intervals in memory and potentially the sorting operation.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, the DFS stack may hold all the cells in the grid, leading to a space complexity of O(m * n). For the best case (a single island), the space complexity is O(1).</div>    
                     </div>
 
                 </div>

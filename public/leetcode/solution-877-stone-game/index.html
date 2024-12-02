@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 11, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> Given an integer n, return true if n has exactly three distinct positive divisors. Otherwise, return false. A divisor of n is a positive integer that divides n without leaving a remainder. </div>
+<div class=""> Alice and Bob are playing a game with an array of piles of stones. Each pile contains a positive number of stones, and the game proceeds as follows: Alice and Bob take turns, with Alice starting first. On each turn, a player can choose the entire pile of stones either from the beginning or the end of the array. The player who ends up with the most stones wins. Given the piles array, return true if Alice wins the game, or false if Bob wins, assuming both players play optimally. </div>
 
 
 
@@ -360,43 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer n. Your task is to determine if n has exactly three positive divisors.</div>
-                        <div class=""> <b>Example:</b> n = 9</div>
+                        <div class=""> <b>Input:</b> You are given an array of integers representing piles of stones. The length of the array is even, and the sum of the stones in all piles is odd.</div>
+                        <div class=""> <b>Example:</b> Input: piles = [4, 6, 2, 8]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= piles.length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • piles.length is even.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= piles[i] &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • sum(piles[i]) is odd.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if n has exactly three divisors, otherwise return false.</div>
+                        <div class=""> <b>Output:</b> Return true if Alice wins, meaning she accumulates more stones than Bob. Otherwise, return false.</div>
                         <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean value indicating whether n has exactly three divisors.</div>
+                                <div style="margin-left: 20px;"> • The output is a boolean indicating if Alice wins the game.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to check if the given integer n has exactly three distinct divisors.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine if Alice, starting first, can win the game by optimally picking stones from the piles.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Find all divisors of n by iterating through integers from 1 to sqrt(n).</div>
+                                <div style="margin-left: 20px;"> • Use dynamic programming to simulate both players&#39; optimal moves.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Count the number of divisors.</div>
+                                <div style="margin-left: 20px;"> • Memoize the results to avoid recalculating the same state.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: If the count of divisors is exactly 3, return true; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • For each state, choose the pile from either the start or the end, and subtract the value of the opponent&#39;s optimal play.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The integer n should be between 1 and 10^4, inclusive.</div>
+                        <div class=""> <b>Goal:</b> The solution must account for optimal moves and the constraints on the length and values of the piles.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • The list of piles contains an even number of elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • The sum of the stones across all piles is odd.</div>
                             
                         </div>
                     </div>        
@@ -404,19 +412,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input integer n will always be a valid integer within the specified range.</div>
+                                <div style="margin-left: 20px;"> • Both Alice and Bob play optimally, meaning they always make the best possible move.</div>
+                            
+                                <div style="margin-left: 20px;"> • The game is played to completion with no interruptions.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 9</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The divisors of 9 are 1, 3, and 9, so it has exactly 3 divisors. Therefore, the output is true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [4, 6, 2, 8]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, Alice can start by taking the last pile (8), leaving Bob with the choice of taking 4 or 2. No matter what Bob does, Alice will win by selecting optimally.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 10</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The divisors of 10 are 1, 2, 5, and 10, so it has 4 divisors. Therefore, the output is false.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [3, 7, 2, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice can start by taking the first pile (3), and based on Bob&#39;s choices, Alice will be able to win by making optimal selections.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -440,16 +450,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to check the divisors of the given number n and verify if there are exactly three distinct divisors.</div>
+                        <div class=""> <b>Approach:</b> We use dynamic programming to solve this problem by simulating both Alice&#39;s and Bob&#39;s moves, taking into account all possible choices they can make. The solution involves recursion and memoization to optimize the state evaluations.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of divisors of n depends on its prime factorization. For n to have exactly three divisors, n must be a square of a prime number.</div>
+                                <div style="margin-left: 20px;"> • The optimal strategy for both players is to always choose the pile that maximizes their advantage, either from the start or the end.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • If n is a perfect square and its square root is prime, then n will have exactly three divisors: 1, the prime number, and n itself.</div>
+                                <div style="margin-left: 20px;"> • Using memoization will help avoid redundant calculations and improve efficiency, especially given the problem constraints.</div>
                             
                         </div>
                     </div>
@@ -457,11 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Check if n is a perfect square.</div>
+                                <div style="margin-left: 20px;"> • Define a recursive function with two indices, i and j, representing the current range of piles.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: If n is a perfect square, check if its square root is prime.</div>
+                                <div style="margin-left: 20px;"> • Memoize the results to store already computed subproblems.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: If the square root is prime, return true (n has exactly three divisors), otherwise return false.</div>
+                                <div style="margin-left: 20px;"> • For each subproblem, compute the optimal value by choosing the maximum stones between picking the first or the last pile.</div>
                             
                         </div>
                     </div>
@@ -470,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • n cannot be 0, as the problem constraints specify that 1 &lt;= n.</div>
+                                <div style="margin-left: 20px;"> • An empty input should not occur as the problem guarantees an even number of piles.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When n is large (up to 10^4), the approach should efficiently handle checking if n is a perfect square and if its square root is prime.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the upper limit of 500 piles.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For prime numbers, n will never have exactly three divisors, so the output should be false.</div>
+                                <div style="margin-left: 20px;"> • If the piles contain large numbers or small numbers, the solution should still be optimal, considering the memoization approach.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that n is checked within the valid range of 1 to 10^4.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works within the provided constraints, including the odd sum condition.</div>
                             
                         </div>                                                                        
                     </div>
@@ -502,15 +512,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop for Divisor Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Memoization Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Divisor Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Memoization Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Main Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
                 </div>
 
@@ -519,11 +541,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isThree</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> d <span style="color:#666">&lt;=</span> <span style="color:#666">3</span>; i <span style="color:#666">+=</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>    d <span style="color:#666">+=</span> n <span style="color:#666">%</span> i <span style="color:#666">==</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> d <span style="color:#666">==</span> <span style="color:#666">3</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">return</span> p[i];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo.count(i) <span style="color:#666">&amp;&amp;</span> memo[i].count(j)) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> max(p[i] <span style="color:#666">-</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), p[j] <span style="color:#666">-</span> dp(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>)) ;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGame</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>p <span style="color:#666">=</span> piles;
+</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> piles.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -531,53 +566,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isThree</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function is defined with a boolean return type, indicating it will return true if &#39;n&#39; has exactly three divisors, and false otherwise. </div>
+                            <div class=""> This initializes a vector `p` to store the piles of stones. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;d&#39; is initialized to 2, as we start by assuming that &#39;n&#39; has at least two divisors: 1 and &#39;n&#39; itself. </div>
+                            <div class=""> This initializes an integer `n` to store the number of piles. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop for Divisor Check</b></div>
+                            <div class=""> <b>3 : Memoization Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> d <span style="color:#666">&lt;=</span> <span style="color:#666">3</span>; i <span style="color:#666">+=</span> <span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop starts from 2 and iterates until &#39;n&#39; or until &#39;d&#39; exceeds 3. The loop checks if there are additional divisors of &#39;n&#39;. </div>
+                            <div class=""> This initializes a memoization map `memo` to store previously computed results for subproblems in the dynamic programming solution. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Divisor Check</b></div>
+                            <div class=""> <b>4 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    d <span style="color:#666">+=</span> n <span style="color:#666">%</span> i <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each iteration, the condition &#39;n % i == 0&#39; checks if &#39;i&#39; is a divisor of &#39;n&#39;. If it is, &#39;d&#39; is incremented by 1. </div>
+                            <div class=""> This defines the recursive `dp` function that computes the maximum score difference from the subarray of piles between indices `i` and `j`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Return Statement</b></div>
+                            <div class=""> <b>5 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> d <span style="color:#666">==</span> <span style="color:#666">3</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">return</span> p[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns true if &#39;d&#39; equals 3, meaning &#39;n&#39; has exactly three divisors. Otherwise, it returns false. </div>
+                            <div class=""> This is the base case of the recursion. If there is only one pile left (i.e., `i == j`), return the value of that pile. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Memoization Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo.count(i) <span style="color:#666">&amp;&amp;</span> memo[i].count(j)) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This checks if the result for the subarray between indices `i` and `j` has already been computed. If so, return the memoized result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Recursive Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> max(p[i] <span style="color:#666">-</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), p[j] <span style="color:#666">-</span> dp(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This calculates the result for the current subarray by recursively calling `dp` for the two possible choices: taking the first pile or taking the last pile, and storing the result in `memo[i][j]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Main Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGame</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This defines the main function `stoneGame` which initializes the vector `p` with the piles and calculates the number of piles `n`. It then calls the `dp` function to determine if the first player can win. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Variable Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>p <span style="color:#666">=</span> piles;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This assigns the input vector `piles` to the class member `p`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Variable Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> piles.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This assigns the size of the input vector `piles` to the integer `n`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This calls the `dp` function with the full range of the array (from 0 to `n - 1`) and returns whether the first player can win (i.e., the score difference is greater than or equal to 0). </div>
                         </div>
                     
                 </div>
@@ -597,16 +692,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(sqrt(n))</div>
-                        <div class=""> <b>Worst Case:</b> O(sqrt(n))</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(sqrt(n)) due to checking if n is a perfect square and verifying the primality of sqrt(n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n^2) due to the memoized recursive calls for each subproblem, where n is the number of piles.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as only a constant amount of space is required for storing intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the memoization table used to store the results of subproblems.</div>    
                     </div>
 
                 </div>

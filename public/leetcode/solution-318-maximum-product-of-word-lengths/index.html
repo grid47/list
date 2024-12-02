@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 6, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an array of integers representing asteroids in a row. Each asteroid has a size and a direction, with positive integers representing asteroids moving right and negative integers representing asteroids moving left. You need to determine the state of the asteroids after all collisions. </div>
+<div class=""> Given a list of words, return the maximum product of lengths of two words such that the two words do not share common letters. If no such pair exists, return 0. </div>
 
 
 
@@ -371,53 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is an array of integers, where each integer represents an asteroid. A positive value means the asteroid is moving to the right, and a negative value means it is moving to the left.</div>
-                        <div class=""> <b>Example:</b> asteroids = [10, 15, -10]</div>
+                        <div class=""> <b>Input:</b> The input is a list of words, where each word consists of lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> words = [&#34;abc&#34;, &#34;xyz&#34;, &#34;foo&#34;, &#34;bar&#34;, &#34;pqr&#34;, &#34;abcdef&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= asteroids.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= words.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • -1000 &lt;= asteroids[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • asteroids[i] != 0</div>
+                                <div style="margin-left: 20px;"> • words[i] consists of lowercase English letters</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the final state of the asteroids after all collisions, as an array of integers.</div>
-                        <div class=""> <b>Example:</b> For the input [10, 15, -10], the output should be [10, 15].</div>
+                        <div class=""> <b>Output:</b> Return the maximum product of lengths of two words that do not share common letters.</div>
+                        <div class=""> <b>Example:</b> 15</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • If no such pair exists, return 0.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine the final state of the asteroids after resolving all collisions.</div>
+                        <div class=""> <b>Goal:</b> To find the maximum product of lengths of two words where the words do not share any common letters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array of asteroids.</div>
+                                <div style="margin-left: 20px;"> • For each word, calculate its bitmask where each bit represents whether a letter is present in the word.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a stack to track the current state of the asteroids.</div>
+                                <div style="margin-left: 20px;"> • For each pair of words, check if the bitmasks do not overlap (i.e., they share no common letters).</div>
                             
-                                <div style="margin-left: 20px;"> • For each new asteroid, check if it will collide with the top of the stack (which represents the asteroid moving to the right).</div>
-                            
-                                <div style="margin-left: 20px;"> • If a collision occurs, resolve it by removing the smaller asteroid or both if they are of equal size.</div>
-                            
-                                <div style="margin-left: 20px;"> • If no collision occurs, push the asteroid onto the stack.</div>
+                                <div style="margin-left: 20px;"> • Calculate the product of the lengths of words that do not share any common letters, and track the maximum product.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The grid size and asteroid values are constrained to avoid overflow and ensure efficiency.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle a large number of words and word lengths efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of asteroids will be between 2 and 10^4.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each asteroid&#39;s value will be between -1000 and 1000.</div>
-                            
-                                <div style="margin-left: 20px;"> • The asteroid values are non-zero integers.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for strings up to 1000 characters and up to 1000 words.</div>
                             
                         </div>
                     </div>        
@@ -425,17 +419,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All asteroids move at the same speed.</div>
-                            
-                                <div style="margin-left: 20px;"> • Two asteroids moving in the same direction will not collide.</div>
+                                <div style="margin-left: 20px;"> • The words are non-empty and consist of lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Starting with asteroids [10, 15, -10], the asteroid 15 collides with -10, leaving 15 intact. The final state is [10, 15].</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The 15 asteroid moves to the right, while -10 moves to the left. Since 15 is larger than -10, it survives, and -10 explodes. The 10 and 15 do not collide, so they remain.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> words = [&#34;abc&#34;, &#34;xyz&#34;, &#34;foo&#34;, &#34;bar&#34;, &#34;pqr&#34;, &#34;abcdef&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The two words with no common letters are &#39;abc&#39; and &#39;xyz&#39;. The product of their lengths is 15, which is the maximum.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> words = [&#34;a&#34;, &#34;ab&#34;, &#34;ac&#34;, &#34;b&#34;, &#34;bc&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum product is 2, obtained by the words &#39;a&#39; and &#39;bc&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -459,16 +455,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a stack to simulate the movement and collision of the asteroids.</div>
+                        <div class=""> <b>Approach:</b> Use bitmasking to represent the letters in each word, and calculate the maximum product of lengths of words that do not share common letters.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each time an asteroid moves right, we need to check if it will collide with the one moving left.</div>
+                                <div style="margin-left: 20px;"> • Each word can be represented by a bitmask, where each bit represents a character.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can track the state of the asteroids with a stack, where we only need to check the top of the stack for potential collisions.</div>
+                                <div style="margin-left: 20px;"> • We can compare two words by checking if their bitmasks have no common bits set, indicating no common letters.</div>
                             
                         </div>
                     </div>
@@ -476,13 +472,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty stack.</div>
+                                <div style="margin-left: 20px;"> • For each word, compute the bitmask representing the presence of each letter.</div>
                             
-                                <div style="margin-left: 20px;"> • For each asteroid in the input array, check if it collides with the asteroid at the top of the stack.</div>
+                                <div style="margin-left: 20px;"> • Iterate through all pairs of words, comparing their bitmasks. If the bitmasks do not overlap, compute their length product.</div>
                             
-                                <div style="margin-left: 20px;"> • If a collision occurs, remove the top of the stack or both asteroids if they have equal size.</div>
-                            
-                                <div style="margin-left: 20px;"> • Otherwise, push the asteroid onto the stack.</div>
+                                <div style="margin-left: 20px;"> • Track the maximum length product found during the iteration.</div>
                             
                         </div>
                     </div>
@@ -491,22 +485,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty input arrays will be provided, as the minimum length of the array is 2.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees at least two words in the input.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle large inputs up to the maximum size (10^4 elements).</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle up to 1000 words, each with a length up to 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all asteroids are moving in the same direction, the result will be the same array as input.</div>
+                                <div style="margin-left: 20px;"> • If no words share no common letters, the answer should be 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be efficient to handle up to 10^4 elements.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution has a time complexity of O(n^2) or better to handle the problem&#39;s input size.</div>
                             
                         </div>                                                                        
                     </div>
@@ -523,35 +517,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Stack Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Flag Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Collision Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Collision Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Collision Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Looping</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Asteroid from Stack</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Bit Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Same Size Collision</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Matching Asteroid</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Bitwise Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Continue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Asteroid Push</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Stack Push</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return</button>
                     
                 </div>
 
@@ -560,39 +550,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> asteroidCollision(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ast) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProduct</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> ast.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> words.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mask(len, <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : ast) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> len; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        string word <span style="color:#666">=</span> words[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> word.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> sz; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        mask[i] <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (word[j] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> eq <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> 
-</span></span><span style="display:flex;"><span>                  (((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a) <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> 
-</span></span><span style="display:flex;"><span>                  (abs(stk.back()) <span style="color:#666">&lt;</span> abs(a))) {
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>       
-</span></span><span style="display:flex;"><span>                stk.pop_back();
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> (stk.back() <span style="color:#666">==</span> <span style="color:#666">-</span>a <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)) { 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#080;font-style:italic">// cout &lt;&lt; stk.back();                
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            
-</span></span><span style="display:flex;"><span>            stk.pop_back();                
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>; 
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((mask[i] <span style="color:#666">&amp;</span> mask[j]) <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, <span style="color:#0b0;font-weight:bold">int</span> (words[i].size() <span style="color:#666">*</span> words[j].size() ));
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (stk.empty() <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>))
-</span></span><span style="display:flex;"><span>            stk.push_back(a);
-</span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -600,153 +575,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Initialization</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> asteroidCollision(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ast) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProduct</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function that accepts an array of asteroids as input. </div>
+                            <div class=""> The function `maxProduct` accepts a vector of strings `words` as input and returns an integer representing the maximum product of lengths of two words that do not share common characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> ast.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> words.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize direction (`dir`) and get the size of the asteroid array (`n`). </div>
+                            <div class=""> This line initializes `len` to hold the number of words in the vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Stack Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mask(len, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare an empty stack (`stk`) to manage the asteroids during the collision simulation. </div>
+                            <div class=""> A vector `mask` of integers is initialized, where each element corresponds to a word in the input and will hold a bitmask of the characters in that word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : ast) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each asteroid in the input array. </div>
+                            <div class=""> The variable `res` is initialized to store the maximum product of lengths found during the iteration. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Flag Initialization</b></div>
+                            <div class=""> <b>5 : Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> eq <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> len; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a flag `eq` to track whether a collision has occurred for the current asteroid. </div>
+                            <div class=""> A loop is started to iterate over each word in the `words` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Collision Check</b></div>
+                            <div class=""> <b>6 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string word <span style="color:#666">=</span> words[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the stack is non-empty and if there is a potential for collision between the current asteroid and the last asteroid in the stack. </div>
+                            <div class=""> For each iteration, the word at index `i` is extracted and stored in the variable `word`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Collision Condition</b></div>
+                            <div class=""> <b>7 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                  (((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a) <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> word.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the last asteroid in the stack is moving to the right and the current one is moving to the left. </div>
+                            <div class=""> The variable `sz` stores the length of the current word to assist with looping over its characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Collision Condition</b></div>
+                            <div class=""> <b>8 : Looping</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                  (abs(stk.back()) <span style="color:#666">&lt;</span> abs(a))) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> sz; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Ensure the current asteroid is larger than the one in the stack (by comparing absolute values). </div>
+                            <div class=""> This inner loop iterates over each character of the current word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Pop Asteroid from Stack</b></div>
+                            <div class=""> <b>9 : Bit Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                stk.pop_back();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mask[i] <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (word[j] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the last asteroid from the stack, as it is destroyed by the current one. </div>
+                            <div class=""> For each character, the corresponding bit in the `mask[i]` is set to 1. This represents the characters present in the word using a bitmask. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Same Size Collision</b></div>
+                            <div class=""> <b>10 : Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> (stk.back() <span style="color:#666">==</span> <span style="color:#666">-</span>a <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current asteroid collides with an asteroid of the same size but moving in the opposite direction. </div>
+                            <div class=""> This loop compares the bitmask of the current word `i` with the words before it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Pop Matching Asteroid</b></div>
+                            <div class=""> <b>11 : Bitwise Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop_back();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((mask[i] <span style="color:#666">&amp;</span> mask[j]) <span style="color:#666">==</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Remove the matching asteroid from the stack, as both asteroids are destroyed in the collision. </div>
+                            <div class=""> This condition checks whether the two words `i` and `j` share any common characters using a bitwise AND operation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Continue</b></div>
+                            <div class=""> <b>12 : Max Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>; 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, <span style="color:#0b0;font-weight:bold">int</span> (words[i].size() <span style="color:#666">*</span> words[j].size() ));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skip the current asteroid as it has been destroyed in the collision. </div>
+                            <div class=""> If the words do not share any characters, the product of their lengths is calculated and stored in `res` if it is the maximum product found so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Asteroid Push</b></div>
+                            <div class=""> <b>13 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (stk.empty() <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If no collision occurs, or if the current asteroid moves in the opposite direction of the last asteroid in the stack, push it onto the stack. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Stack Push</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push_back(a);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the current asteroid onto the stack. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the stack, which contains the remaining asteroids after all collisions. </div>
+                            <div class=""> The function returns the maximum product of word lengths found. </div>
                         </div>
                     
                 </div>
@@ -766,16 +721,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of asteroids, when no collisions occur.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as each asteroid is processed once.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as in the worst case, all asteroids could potentially collide.</div> 
-                        <div class=""> <b>Description:</b> The algorithm runs in linear time because each asteroid is either pushed to or popped from the stack once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n^2) due to comparing each word with every other word.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), if there are no collisions and the stack remains empty.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of asteroids, as the stack may store all asteroids in the worst case.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the number of asteroids due to the stack storing the results.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the bitmasks of the words.</div>    
                     </div>
 
                 </div>

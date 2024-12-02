@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 16, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are a parent with several children and a set of cookies. Each child has a greed factor, which is the minimum size of a cookie they will be happy with. Each cookie also has a size. Your task is to distribute the cookies such that you maximize the number of content children. Each child can receive at most one cookie, and each cookie can only be given to one child. </div>
+<div class=""> You are tasked with creating a data structure that allows adding words and checking if a word matches any previously added word, with support for the wildcard &lsquo;.&rsquo; character. </div>
 
 
 
@@ -372,47 +372,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two arrays: one representing the greed factors of children and another representing the sizes of cookies.</div>
-                        <div class=""> <b>Example:</b> g = [1, 2, 3], s = [1, 1]</div>
+                        <div class=""> <b>Input:</b> The input consists of calls to the WordDictionary constructor, addWord method, and search method. Words can include lowercase letters and the wildcard &#39;.&#39; character.</div>
+                        <div class=""> <b>Example:</b> [[], [&#34;hello&#34;], [&#34;world&#34;], [&#34;hell&#34;], [&#34;hell&#34;], [&#34;hello&#34;], [&#34;h.ll&#34;], [&#34;wo.ld&#34;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= g.length &lt;= 3 * 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= word.length &lt;= 25</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= s.length &lt;= 3 * 10^4</div>
+                                <div style="margin-left: 20px;"> • Words consist of lowercase English letters in addWord and lowercase English letters or &#39;.&#39; in search.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= g[i], s[j] &lt;= 231 - 1</div>
+                                <div style="margin-left: 20px;"> • At most 10^4 calls to addWord and search.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum number of content children that can be satisfied by the cookies.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> For each search query, return true if a matching word exists, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> For input [&#34;search(&#39;hell&#39;)&#34;] after adding &#39;hello&#39; and &#39;hell&#39;, the output will be true.</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The result should be the number of content children that can be satisfied.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the maximum number of children that can be satisfied by distributing the cookies.</div>
+                        <div class=""> <b>Goal:</b> Implement a data structure that supports efficient addition and search of words, with the ability to match patterns using the &#39;.&#39; wildcard.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Sort both the greed factors and the sizes of cookies in ascending order.</div>
+                                <div style="margin-left: 20px;"> • Use a Trie (prefix tree) to store added words.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a two-pointer approach: one pointer for the children and one for the cookies.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. Iterate through the sorted arrays and try to match the smallest available cookie that can satisfy each child. If a match is found, move to the next child and the next cookie.</div>
+                                <div style="margin-left: 20px;"> • For search, use a backtracking approach to explore all possible matching words, considering &#39;.&#39; as a wildcard.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle large inputs efficiently.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the solution works efficiently within the problem constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The algorithm must handle arrays of size up to 30,000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should be able to handle up to 10^4 operations efficiently.</div>
                             
                         </div>
                     </div>        
@@ -420,21 +416,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each child and cookie has a non-negative greed factor and size respectively.</div>
+                                <div style="margin-left: 20px;"> • The input will contain lowercase letters and the wildcard &#39;.&#39; character only.</div>
                             
-                                <div style="margin-left: 20px;"> • Cookies may not be large enough to satisfy all children.</div>
+                                <div style="margin-left: 20px;"> • The system should efficiently handle large numbers of addWord and search calls.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> g = [1, 2, 3], s = [1, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, you can only satisfy one child, as both cookies are too small to satisfy the children with greed factors of 2 and 3.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> g = [1, 2], s = [1, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, both children can be satisfied because there are enough cookies of suitable size.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After adding &#39;hello&#39;, &#39;world&#39;, and &#39;hell&#39;, searching for &#39;hell&#39; returns true because &#39;hell&#39; is an exact match. Searching for &#39;h.ll&#39; also returns true because &#39;hello&#39; matches the pattern.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +450,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> This approach aims to maximize the number of children that can be satisfied by greedily assigning the smallest possible cookie that satisfies each child&#39;s greed.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using a Trie for storing words and backtracking for searching with patterns containing &#39;.&#39;</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the greed factors and cookie sizes will allow for an efficient greedy approach.</div>
+                                <div style="margin-left: 20px;"> • The Trie is an efficient data structure for storing words based on their prefixes.</div>
+                            
+                                <div style="margin-left: 20px;"> • Backtracking can be used for searching, especially with the wildcard &#39;.&#39; character.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a two-pointer technique ensures that we can match children to cookies in O(n log n) time.</div>
+                                <div style="margin-left: 20px;"> • We will need to recursively explore all possible matches when encountering a dot in the search string.</div>
                             
                         </div>
                     </div>
@@ -475,11 +469,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the greed factors of children and the sizes of the cookies in non-decreasing order.</div>
+                                <div style="margin-left: 20px;"> • Build a Trie to store words as nodes, where each node represents a character and points to other nodes for subsequent characters.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use two pointers: one pointing to the current child and one pointing to the current cookie.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. Check if the current cookie can satisfy the current child (i.e., the cookie size is greater than or equal to the child&#39;s greed factor). If yes, move to the next child. Always move to the next cookie.</div>
+                                <div style="margin-left: 20px;"> • For each search, use backtracking to traverse the Trie, replacing &#39;.&#39; with any possible character match.</div>
                             
                         </div>
                     </div>
@@ -488,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no cookies (s.length = 0), the result is 0.</div>
+                                <div style="margin-left: 20px;"> • If no words are added, any search will return false.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must be optimized to handle large inputs efficiently, ensuring time complexity remains manageable for large arrays.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle cases with large numbers of words and search queries efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all cookies are too small to satisfy any child, the result should be 0.</div>
+                                <div style="margin-left: 20px;"> • Search queries containing &#39;.&#39; should match any character in the corresponding position.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should run in O(n log n) time due to sorting.</div>
+                                <div style="margin-left: 20px;"> • Optimize for time complexity to handle up to 10^4 operations.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,23 +512,77 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Assignment Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Assignment Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Greedy Algorithm</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Greedy Algorithm</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Class Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Public Access Modifier</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Constructor</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Memory Allocation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Arithmetic Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Conditional Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Memory Allocation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Assignment Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Assignment Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Conditional Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Conditional Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Loop Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Conditional Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Logical Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="32"> 32 Block Termination</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="33"> 33 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="34"> 34 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="35"> 35 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="36"> 36 Return Statement</button>
                     
                 </div>
 
@@ -545,110 +591,439 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findContentChildren</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> g, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> s) {
-</span></span><span style="display:flex;"><span>    sort(g.begin(),g.end());
-</span></span><span style="display:flex;"><span>    sort(s.begin(),s.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j<span style="color:#666">=</span><span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">&lt;</span>g.size() <span style="color:#666">&amp;&amp;</span> j<span style="color:#666">&lt;</span>s.size()){
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[j]<span style="color:#666">&gt;=</span>g[i])
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>; <span style="color:#080;font-style:italic">// when the child get the cookie, foward child by 1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> isWord;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">char</span> val;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span> next;
+</span></span><span style="display:flex;"><span>Node(<span style="color:#0b0;font-weight:bold">char</span> val, <span style="color:#0b0;font-weight:bold">bool</span> isWord) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> val;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>isWord <span style="color:#666">=</span> isWord;
+</span></span><span style="display:flex;"><span>    next.resize(<span style="color:#666">26</span>, <span style="color:#a2f">NULL</span>);
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">WordDictionary</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> root;
+</span></span><span style="display:flex;"><span>WordDictionary() {
+</span></span><span style="display:flex;"><span>    root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(<span style="color:#b44">&#39; &#39;</span>, <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">addWord</span>(string word) {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>root;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> word.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> code <span style="color:#666">=</span> word[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>next[code] <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) {
+</span></span><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>next[code] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(word[i], <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        node <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>next[code];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    node<span style="color:#666">-&gt;</span>isWord <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">search</span>(string word) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> bt(word, <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>root, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">bt</span>(string word, Node<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(word[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;.&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">==</span> word.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>next[i] <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>                    res <span style="color:#666">|=</span> node<span style="color:#666">-&gt;</span>next[i]<span style="color:#666">-&gt;</span>isWord;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(res) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>next[i] <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>                    res <span style="color:#666">|=</span> bt(word, node<span style="color:#666">-&gt;</span>next[i], idx<span style="color:#666">+</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(res) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> code <span style="color:#666">=</span> word[idx] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>next[code] <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        node <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>next[code];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">==</span> word.size())
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> node<span style="color:#666">-&gt;</span>isWord;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> bt(word, node, idx <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your WordDictionary object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * WordDictionary* obj = new WordDictionary();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;addWord(word);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_2 = obj-&gt;search(word);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findContentChildren</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> g, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> isWord;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `findContentChildren` that takes two integer vectors `g` (greed factors of children) and `s` (sizes of cookies), and returns the maximum number of children that can be satisfied. </div>
+                            <div class=""> The &#39;isWord&#39; variable indicates if the current node represents the end of a word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sorting</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(g.begin(),g.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">char</span> val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the greed factors of the children in ascending order so that the child with the smallest greed factor gets the smallest available cookie. </div>
+                            <div class=""> The &#39;val&#39; variable stores the character that the node represents in the trie structure. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Sorting</b></div>
+                            <div class=""> <b>3 : Vector Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(s.begin(),s.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span> next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the sizes of the cookies in ascending order, ensuring that we start from the smallest available cookie to try to satisfy the children. </div>
+                            <div class=""> The &#39;next&#39; vector holds pointers to the next nodes in the trie, with each position corresponding to a character from &#39;a&#39; to &#39;z&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j<span style="color:#666">=</span><span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node(<span style="color:#0b0;font-weight:bold">char</span> val, <span style="color:#0b0;font-weight:bold">bool</span> isWord) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes two indices: `i` for the children array `g` and `j` for the cookies array `s`. Both indices start from 0. </div>
+                            <div class=""> Constructor for initializing a node with a character and a boolean value indicating if it&#39;s a valid word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop</b></div>
+                            <div class=""> <b>5 : Assignment Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">&lt;</span>g.size() <span style="color:#666">&amp;&amp;</span> j<span style="color:#666">&lt;</span>s.size()){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a while loop that continues as long as there are unprocessed children and cookies. </div>
+                            <div class=""> Assigns the character &#39;val&#39; to the node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition Check</b></div>
+                            <div class=""> <b>6 : Assignment Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[j]<span style="color:#666">&gt;=</span>g[i])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>isWord <span style="color:#666">=</span> isWord;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current cookie `s[j]` can satisfy the child `i` (i.e., if the size of the cookie is greater than or equal to the child&#39;s greed factor). </div>
+                            <div class=""> Sets the &#39;isWord&#39; flag to determine if this node represents a complete word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Greedy Algorithm</b></div>
+                            <div class=""> <b>7 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>; <span style="color:#080;font-style:italic">// when the child get the cookie, foward child by 1
-</span></span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    next.resize(<span style="color:#666">26</span>, <span style="color:#a2f">NULL</span>);
+</span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the cookie satisfies the child, increments `i` to move to the next child. </div>
+                            <div class=""> Initializes the &#39;next&#39; vector with 26 null pointers, one for each letter of the alphabet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Greedy Algorithm</b></div>
+                            <div class=""> <b>8 : Class Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">WordDictionary</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments `j` to check the next available cookie. </div>
+                            <div class=""> Declares the WordDictionary class, which will hold the root node of the trie and methods to add and search for words. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Public Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the value of `i`, which represents the number of children that were satisfied with cookies. </div>
+                            <div class=""> Access modifier that allows the methods and variables below to be accessed outside the class. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> root;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A pointer to the root node of the trie. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Constructor</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>WordDictionary() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Constructor for the WordDictionary class that initializes the root node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Memory Allocation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(<span style="color:#b44">&#39; &#39;</span>, <span style="color:#a2f">false</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Allocates memory for the root node with a space character and &#39;isWord&#39; set to false. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">addWord</span>(string word) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the addWord method, which inserts a word into the trie. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    Node<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>root;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a node pointer to the root node of the trie. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Loop Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> word.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates through each character in the word to add it to the trie. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Arithmetic Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> code <span style="color:#666">=</span> word[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Converts the character to an index in the &#39;next&#39; vector (0 for &#39;a&#39;, 1 for &#39;b&#39;, etc.). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Conditional Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>next[code] <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the node at the corresponding position in the trie is null. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Memory Allocation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>next[code] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(word[i], <span style="color:#a2f">false</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Allocates a new node at the position corresponding to the current character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Assignment Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        node <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>next[code];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Moves the pointer to the next node in the trie corresponding to the current character. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Assignment Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    node<span style="color:#666">-&gt;</span>isWord <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the node as the end of a valid word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">search</span>(string word) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the search method, which searches for a word in the trie. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">bt</span>(word, <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>root, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calls the helper function &#39;bt&#39; to perform a recursive search. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">bt</span>(string word, Node<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the recursive helper function &#39;bt&#39; used by the search method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Conditional Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(word[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;.&#39;</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current character in the word is a wildcard (&#39;.&#39;). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">==</span> word.size()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if we&#39;ve reached the end of the word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Conditional Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a variable &#39;res&#39; to keep track of the search result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Loop Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loops through each possible character in the trie. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Conditional Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>next[i] <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the node at position &#39;i&#39; is not null. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>29 : Logical Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    res <span style="color:#666">|=</span> node<span style="color:#666">-&gt;</span>next[i]<span style="color:#666">-&gt;</span>isWord;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if any of the next nodes leads to a valid word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>30 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(res) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a valid word is found, return true. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>31 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no valid word is found, return false. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>32 : Block Termination</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the conditional statement for checking the end of the word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>33 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current character is a wildcard, we recursively search for the rest of the word. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>34 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loops through all possible next nodes for the wildcard. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>35 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>next[i] <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>                    res <span style="color:#666">|=</span> bt(word, node<span style="color:#666">-&gt;</span>next[i], idx<span style="color:#666">+</span><span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively calls &#39;bt&#39; on each next node. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>36 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If no match is found, returns false. </div>
                         </div>
                     
                 </div>
@@ -668,16 +1043,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the sorting step.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m), where m is the length of the word being searched.</div>
+                        <div class=""> <b>Average Case:</b> O(m), assuming an average branching factor for the Trie.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * 26^k), where k is the number of &#39;.&#39; characters in the search query and 26 is the number of possible letters for each dot.</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we may need to explore all possible combinations for the dots in the query.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) to store the greed factors and cookie sizes.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), where n is the number of words, assuming each word has a constant length.</div>
+                        <div class=""> <b>Worst Case:</b> O(n * m), where n is the number of words and m is the average length of each word.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is mainly determined by the Trie structure, which stores all words and their corresponding characters.</div>    
                     </div>
 
                 </div>

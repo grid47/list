@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You are given a list of stock prices where each element represents the stock price on a specific day. The stock prices are given as pairs where the first element is the day number and the second element is the stock price for that day. A line chart can be drawn by plotting these prices on an XY-plane, where the X-axis represents the day and the Y-axis represents the price. Your task is to determine the minimum number of lines required to represent the stock prices as a continuous line chart. </div>
+<div class=""> You are given an array of words, where each word consists of lowercase English letters. A wordA is considered a predecessor of wordB if you can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB. A word chain is a sequence of words such that each word is a predecessor of the next one. Your task is to find the length of the longest word chain that can be formed from the given list of words. </div>
 
 
 
@@ -362,45 +362,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a 2D array `stockPrices` where each element `stockPrices[i] = [day_i, price_i]` represents the stock price on `day_i` with a price of `price_i`.</div>
-                        <div class=""> <b>Example:</b> Input: stockPrices = [[1, 10], [2, 15], [3, 12], [4, 18], [5, 20]]</div>
+                        <div class=""> <b>Input:</b> You are given an array of words, each consisting of lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> Input: words = [&#34;a&#34;, &#34;ab&#34;, &#34;abc&#34;, &#34;abcd&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= stockPrices.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • stockPrices[i].length == 2</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 16</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= day_i, price_i &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • All day_i are distinct.</div>
+                                <div style="margin-left: 20px;"> • words[i] only consists of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an integer representing the minimum number of lines needed to represent the stock price chart.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest possible word chain that can be formed from the list of words.</div>
+                        <div class=""> <b>Example:</b> Output: 4</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The answer will always be a positive integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the minimum number of straight lines that can connect all the stock prices by determining if the points lie on the same straight line.</div>
+                        <div class=""> <b>Goal:</b> The goal is to compute the longest word chain by checking if a word can be a predecessor of another.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the stock prices by the day.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the words based on their lengths.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the stock prices and check if each consecutive pair lies on the same line as the previous pair.</div>
+                                <div style="margin-left: 20px;"> • 2. Use dynamic programming to track the longest chain ending at each word.</div>
                             
-                                <div style="margin-left: 20px;"> • If a new line is required, increment the count.</div>
+                                <div style="margin-left: 20px;"> • 3. For each word, try to form a predecessor by removing one character at a time and check if the resulting word exists in the previous words of the list.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. The result is the maximum length of all possible word chains.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution needs to handle up to 100,000 stock prices efficiently.</div>
+                        <div class=""> <b>Goal:</b> You are guaranteed that the number of words is at most 1000, and each word has a length of at most 16 characters.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length &lt;= 16</div>
                             
                         </div>
                     </div>        
@@ -408,19 +414,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Stock prices will be provided in unsorted order, so sorting is required.</div>
+                                <div style="margin-left: 20px;"> • Each word consists of lowercase English letters only.</div>
+                            
+                                <div style="margin-left: 20px;"> • The words are provided in an array, and their lengths vary.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stockPrices = [[1, 7], [2, 6], [3, 5], [4, 4], [5, 4], [6, 3], [7, 2], [8, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The stock prices need 3 lines to be represented. The first line connects points (1, 7) to (4, 4). The second line connects (4, 4) to (5, 4), and the third line connects (5, 4) to (8, 1).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#34;a&#34;, &#34;ab&#34;, &#34;abc&#34;, &#34;abcd&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we can form the word chain [&#34;a&#34;, &#34;ab&#34;, &#34;abc&#34;, &#34;abcd&#34;]. Each word is a predecessor of the next, resulting in a chain length of 4.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: stockPrices = [[1, 3], [2, 5], [3, 7], [4, 9], [5, 11]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The stock prices form a single line where the price increases uniformly. Therefore, only one line is needed to represent the chart.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: words = [&#34;xbc&#34;, &#34;pcxbcf&#34;, &#34;xb&#34;, &#34;cxbc&#34;, &#34;pcxbc&#34;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, all words can be arranged into the word chain [&#34;xb&#34;, &#34;xbc&#34;, &#34;cxbc&#34;, &#34;pcxbc&#34;, &#34;pcxbcf&#34;], resulting in a chain length of 5.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,16 +452,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating over the stock prices and checking if consecutive points lie on the same straight line. A new line is needed whenever the slope between consecutive points changes.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem efficiently, we can use dynamic programming and sorting to form the longest word chain.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This problem can be solved efficiently by analyzing the slope between consecutive points and checking if they remain constant.</div>
+                                <div style="margin-left: 20px;"> • The problem involves finding the longest sequence of words where each word can be transformed into the next by adding one character.</div>
+                            
+                                <div style="margin-left: 20px;"> • Sorting the words by length allows us to progressively check possible predecessors for each word.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Sorting the stock prices will help simplify checking consecutive points. The main task is to check if each consecutive triplet of points lies on the same straight line.</div>
+                                <div style="margin-left: 20px;"> • A dynamic programming approach is well-suited to track the longest chain ending at each word.</div>
                             
                         </div>
                     </div>
@@ -461,11 +471,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the input array of stock prices by day.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the words based on their lengths.</div>
                             
-                                <div style="margin-left: 20px;"> • Start with one line, and check if consecutive points lie on the same line by comparing the slopes between them.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a map to store the longest chain length for each word.</div>
                             
-                                <div style="margin-left: 20px;"> • If the slope changes, start a new line and increment the line count.</div>
+                                <div style="margin-left: 20px;"> • 3. For each word, iterate through all possible predecessors by removing one character at a time.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Update the longest chain length for the current word based on its predecessors.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return the maximum length from the map.</div>
                             
                         </div>
                     </div>
@@ -474,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input is always non-empty since stockPrices.length is at least 1.</div>
+                                <div style="margin-left: 20px;"> • If there are no words, the longest word chain length is 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle up to 100,000 stock prices efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, the algorithm will efficiently compute the longest word chain due to the dynamic programming approach.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all prices are the same, only one line is required.</div>
+                                <div style="margin-left: 20px;"> • If all words are of the same length, no word can be a predecessor of another, and the longest chain length is 1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting is O(n log n), and the overall complexity should not exceed O(n log n).</div>
+                                <div style="margin-left: 20px;"> • The number of words is guaranteed to be at most 1000, and each word has a length of at most 16 characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -506,27 +520,31 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sort Points</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Comparison Logic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize Variables</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Early Exit</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Over Points</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Extract Points</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Extract Points (y-coordinates)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Through Words</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Calculate Slope Differences</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Assign Word</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Calculate Slope Differences (cont.)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Through Word Characters</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Check Slopes</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Create Substring</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update DP Map</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Maximum Chain Length</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Result</button>
                     
                 </div>
 
@@ -535,24 +553,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumLines</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> stk) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    sort(stk.begin(), stk.end());
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>, n <span style="color:#666">=</span> stk.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&lt;</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(string <span style="color:#666">&amp;</span>a, string <span style="color:#666">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> a.size() <span style="color:#666">&lt;</span> b.size();
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> x1 <span style="color:#666">=</span> stk[i][<span style="color:#666">0</span>], x2 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>], x3 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">2</span>][<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> y1 <span style="color:#666">=</span> stk[i][<span style="color:#666">1</span>], y2 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">1</span>], y3 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">2</span>][<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> diff1 <span style="color:#666">=</span> (y3 <span style="color:#666">-</span> y2) <span style="color:#666">*</span> (x2 <span style="color:#666">-</span> x1);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> diff2 <span style="color:#666">=</span> (y2 <span style="color:#666">-</span> y1) <span style="color:#666">*</span> (x3 <span style="color:#666">-</span> x2);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (diff1 <span style="color:#666">!=</span> diff2) res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestStrChain</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
+</span></span><span style="display:flex;"><span>    sort(words.begin(), words.end(), cmp);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> words.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        string w <span style="color:#666">=</span> words[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> w.size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            string w1 <span style="color:#666">=</span> w.substr(<span style="color:#666">0</span>, j) <span style="color:#666">+</span> w.substr(j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>            dp[w] <span style="color:#666">=</span> max(dp[w], dp.count(w1)<span style="color:#666">?</span> dp[w1] <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, dp[w]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -560,113 +582,133 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumLines</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> stk) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(string <span style="color:#666">&amp;</span>a, string <span style="color:#666">&amp;</span>b) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function header for `minimumLines` which takes a vector of vectors `stk` representing a list of points (each point is a pair of coordinates), and returns the minimum number of lines required to connect these points. </div>
+                            <div class=""> Define a static comparison function &#39;cmp&#39; that compares the size of two strings. This function is used for sorting the words in increasing order of their lengths. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Sort Points</b></div>
+                            <div class=""> <b>2 : Comparison Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(stk.begin(), stk.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> a.size() <span style="color:#666">&lt;</span> b.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line sorts the vector `stk` in ascending order of points, which is essential to efficiently compare consecutive points and check if they lie on the same line. </div>
+                            <div class=""> Return true if the size of string &#39;a&#39; is smaller than that of string &#39;b&#39;, otherwise return false. This is used to sort the words in ascending order of their lengths. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Initialize Variables</b></div>
+                            <div class=""> <b>3 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>, n <span style="color:#666">=</span> stk.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestStrChain</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, we initialize `res` to 1 (as at least one line is needed) and `n` to the number of points in `stk`. If there are fewer than 2 points, no line is needed, so the function would return 0. </div>
+                            <div class=""> Define the function &#39;longestStrChain&#39; which takes a vector of strings &#39;words&#39; and returns the length of the longest string chain. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Early Exit</b></div>
+                            <div class=""> <b>4 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&lt;</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(words.begin(), words.end(), cmp);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If there are fewer than two points, no lines can be drawn, so the function returns 0. </div>
+                            <div class=""> Sort the &#39;words&#39; vector in increasing order of word length using the comparison function &#39;cmp&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Over Points</b></div>
+                            <div class=""> <b>5 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This `for` loop starts from index 2 and iterates over the points to compare triplets of points to check if they lie on the same line. </div>
+                            <div class=""> Declare a map &#39;dp&#39; where each key is a word, and the value is the length of the longest chain ending with that word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Extract Points</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> x1 <span style="color:#666">=</span> stk[i][<span style="color:#666">0</span>], x2 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>], x3 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">2</span>][<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> These lines extract the x-coordinates of the current point (`x1`), the previous point (`x2`), and the point before that (`x3`) to check the slope between these points. </div>
+                            <div class=""> Initialize &#39;mx&#39; to 1, which will store the length of the longest string chain found so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Extract Points (y-coordinates)</b></div>
+                            <div class=""> <b>7 : Loop Through Words</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> y1 <span style="color:#666">=</span> stk[i][<span style="color:#666">1</span>], y2 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">1</span>], y3 <span style="color:#666">=</span> stk[i <span style="color:#666">-</span> <span style="color:#666">2</span>][<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> words.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Similarly, these lines extract the y-coordinates (`y1`, `y2`, and `y3`) of the current, previous, and second previous points. </div>
+                            <div class=""> Start a for loop that iterates through each word in the sorted &#39;words&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Calculate Slope Differences</b></div>
+                            <div class=""> <b>8 : Assign Word</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> diff1 <span style="color:#666">=</span> (y3 <span style="color:#666">-</span> y2) <span style="color:#666">*</span> (x2 <span style="color:#666">-</span> x1);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string w <span style="color:#666">=</span> words[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the first slope difference, which represents the difference in slopes between the last two points (`x1, y1` and `x2, y2`). </div>
+                            <div class=""> Assign the current word in the iteration to the variable &#39;w&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Calculate Slope Differences (cont.)</b></div>
+                            <div class=""> <b>9 : Loop Through Word Characters</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> diff2 <span style="color:#666">=</span> (y2 <span style="color:#666">-</span> y1) <span style="color:#666">*</span> (x3 <span style="color:#666">-</span> x2);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> w.size(); j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the second slope difference, representing the difference in slopes between the second and third points (`x2, y2` and `x3, y3`). </div>
+                            <div class=""> Start an inner loop that iterates through each character of the current word &#39;w&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Check Slopes</b></div>
+                            <div class=""> <b>10 : Create Substring</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (diff1 <span style="color:#666">!=</span> diff2) res<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string w1 <span style="color:#666">=</span> w.substr(<span style="color:#666">0</span>, j) <span style="color:#666">+</span> w.substr(j <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the two slope differences (`diff1` and `diff2`) are not equal, this means the three points do not lie on the same straight line, so the result counter `res` is incremented. </div>
+                            <div class=""> Create a new string &#39;w1&#39; by removing the character at index &#39;j&#39; from the string &#39;w&#39;. This helps in checking if the current word can form a chain with a previous word. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Update DP Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dp[w] <span style="color:#666">=</span> max(dp[w], dp.count(w1)<span style="color:#666">?</span> dp[w1] <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Finally, the function returns the number of lines required to connect the points. </div>
+                            <div class=""> Update the value of &#39;dp[w]&#39; by checking if a smaller word &#39;w1&#39; exists in the map &#39;dp&#39;. If it does, the chain length is increased by 1. Otherwise, it starts a new chain with length 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Update Maximum Chain Length</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, dp[w]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Update the maximum chain length &#39;mx&#39; by comparing it with the current chain length stored in &#39;dp[w]&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the value of &#39;mx&#39;, which is the length of the longest string chain. </div>
                         </div>
                     
                 </div>
@@ -687,15 +729,15 @@
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the sorting of the stock prices.</div>                                               
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we check all possible predecessors for each word, leading to a time complexity of O(n^2) where n is the number of words.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the sorted stock prices.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required to store the map of longest chain lengths.</div>    
                     </div>
 
                 </div>

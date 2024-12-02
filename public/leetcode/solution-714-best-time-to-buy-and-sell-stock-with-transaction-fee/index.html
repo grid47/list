@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an array of network towers, where each tower is represented by a list [xi, yi, qi] denoting its location (xi, yi) on the X-Y plane and its quality factor qi. You are also given a radius, and a tower is considered reachable if the distance between the tower and a coordinate is less than or equal to the radius. The signal quality of a tower at a coordinate (x, y) is calculated using the formula ⌊qi / (1 + d)⌋, where d is the Euclidean distance between the tower and the coordinate. The total network quality at a coordinate is the sum of the signal qualities from all the reachable towers. Your task is to find the coordinate with the maximum network quality. If multiple coordinates have the same network quality, return the lexicographically smallest coordinate. </div>
+<div class=""> You are given an array <code>prices</code> where <code>prices[i]</code> represents the price of a stock on the <code>i</code>-th day, and an integer <code>fee</code> that represents a transaction fee for each transaction. The task is to calculate the maximum profit you can achieve. You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction. </div>
 
 
 
@@ -371,57 +371,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of towers, where each tower is represented by [xi, yi, qi], and an integer radius.</div>
-                        <div class=""> <b>Example:</b> towers = [[3, 4, 5], [7, 8, 9], [2, 1, 10]], radius = 3</div>
+                        <div class=""> <b>Input:</b> The input consists of an array `prices` of integers representing the prices of the stock for each day and an integer `fee` representing the transaction fee.</div>
+                        <div class=""> <b>Example:</b> prices = [2, 6, 4, 7, 5, 9], fee = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= towers.length &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= prices.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • towers[i].length == 3</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= prices[i] &lt; 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= xi, yi, qi &lt;= 50</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= radius &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= fee &lt; 5 * 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the coordinate [cx, cy] with the highest network quality. If there are multiple such coordinates, return the lexicographically smallest one.</div>
-                        <div class=""> <b>Example:</b> For towers = [[3, 4, 5], [7, 8, 9], [2, 1, 10]] and radius = 3, the output would be [3, 4].</div>
+                        <div class=""> <b>Output:</b> Return the maximum profit that can be achieved after completing as many transactions as possible, where each transaction is subject to a transaction fee.</div>
+                        <div class=""> <b>Example:</b> 9</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a valid coordinate in the form of an array with two integers [cx, cy].</div>
+                                <div style="margin-left: 20px;"> • The result should be a non-negative integer representing the maximum profit.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Maximize the network quality by evaluating all possible coordinates within the range and checking the signal strength from reachable towers.</div>
+                        <div class=""> <b>Goal:</b> To compute the maximum profit by applying a dynamic programming approach.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each possible coordinate (cx, cy) within a bounded grid (0 &lt;= cx, cy &lt;= 50), calculate the network quality by summing the signal strengths from all reachable towers.</div>
+                                <div style="margin-left: 20px;"> • Use two arrays, `buy` and `sell`, where `buy[i]` stores the maximum profit at day `i` when buying the stock, and `sell[i]` stores the maximum profit at day `i` when selling the stock.</div>
                             
-                                <div style="margin-left: 20px;"> • A tower is reachable if its Euclidean distance to the coordinate is less than or equal to the given radius.</div>
+                                <div style="margin-left: 20px;"> • Initialize `buy[0]` as `-prices[0] - fee` since you can buy the stock on the first day with the fee applied.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the network quality for all coordinates and keep track of the maximum quality.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the `prices` array, and for each day, compute the maximum profit from either holding the stock or selling it (while considering the transaction fee).</div>
                             
-                                <div style="margin-left: 20px;"> • If multiple coordinates have the same quality, return the lexicographically smallest one.</div>
+                                <div style="margin-left: 20px;"> • Finally, the value in `sell[n-1]` will hold the maximum profit at the end of the array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input will consist of a set of towers and a specified radius, with constraints on the values for xi, yi, qi, and radius.</div>
+                        <div class=""> <b>Goal:</b> The solution should efficiently handle the constraints with large inputs up to `5 * 10^4` days.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= towers.length &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • The input array can have up to 50,000 elements.</div>
                             
-                                <div style="margin-left: 20px;"> • towers[i].length == 3</div>
+                                <div style="margin-left: 20px;"> • Each price in the array is between 1 and 50,000.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= xi, yi, qi &lt;= 50</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= radius &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • The transaction fee is a non-negative integer less than 50,000.</div>
                             
                         </div>
                     </div>        
@@ -429,25 +425,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Coordinates and tower data are provided within the given bounds.</div>
+                                <div style="margin-left: 20px;"> • The input array contains at least one price.</div>
                             
-                                <div style="margin-left: 20px;"> • Euclidean distance is used for determining the reachability of towers.</div>
+                                <div style="margin-left: 20px;"> • The transaction fee is applied once for every transaction (buying and selling).</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: towers = [[3, 4, 5], [7, 8, 9], [2, 1, 10]], radius = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> At coordinate (3, 4), the signal strengths from the reachable towers (those within the radius) are summed to give the network quality. This is compared with other coordinates to find the maximum network quality.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> prices = [2, 6, 4, 7, 5, 9], fee = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The best strategy is to buy on day 1, sell on day 2, buy again on day 3, and sell on day 4. Then, buy on day 5 and sell on day 6. The total profit is 9.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: towers = [[5, 7, 6], [1, 2, 8], [8, 3, 4]], radius = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The network quality is calculated for all possible coordinates within the given range, and the coordinate with the highest quality is selected.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: towers = [[1, 1, 5], [2, 2, 7], [3, 3, 9]], radius = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The signal strengths are evaluated at different coordinates, and the coordinate with the highest sum of signal qualities is returned.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> prices = [3, 2, 5, 1, 7], fee = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum profit can be obtained by buying at day 2 and selling at day 3, and then buying at day 4 and selling at day 5. The total profit is 6.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -471,16 +463,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating over all possible coordinates and calculating the total network quality by checking the reachability of each tower based on the Euclidean distance.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved using dynamic programming with a space optimization technique.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to calculate the signal quality for each reachable tower and sum them for all potential coordinates.</div>
+                                <div style="margin-left: 20px;"> • We need to track the profit for both holding and selling stocks for each day.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can brute-force all coordinates in the given range and evaluate the network quality for each, but care should be taken to handle the radius constraint efficiently.</div>
+                                <div style="margin-left: 20px;"> • By maintaining two variables (buy and sell), we can optimize space while computing the maximum profit.</div>
                             
                         </div>
                     </div>
@@ -488,11 +480,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate through all possible coordinates within the range [0, 50].</div>
+                                <div style="margin-left: 20px;"> • Initialize `buy` and `sell` arrays with values representing no transactions.</div>
                             
-                                <div style="margin-left: 20px;"> • For each coordinate, calculate the total network quality by checking which towers are reachable based on the Euclidean distance.</div>
+                                <div style="margin-left: 20px;"> • For each price, calculate the profit from either holding or selling based on the transaction fee.</div>
                             
-                                <div style="margin-left: 20px;"> • Track the highest network quality and update the result when a better coordinate is found.</div>
+                                <div style="margin-left: 20px;"> • Return the value from `sell[n-1]` after iterating through all the days.</div>
                             
                         </div>
                     </div>
@@ -501,22 +493,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If no towers are provided, the result should be a default coordinate, e.g., [0, 0].</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty, the result should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle up to 50 towers efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently for large inputs (up to 50,000 days).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The radius can be small (1), in which case only very nearby towers will contribute to the network quality.</div>
+                                <div style="margin-left: 20px;"> • If the fee is 0, no fee is deducted from transactions.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure to efficiently calculate the Euclidean distance to avoid excessive computation.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where all prices are either constant or decrease across the days.</div>
                             
                         </div>                                                                        
                     </div>
@@ -533,53 +525,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Edge Case Handling</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initial State Setup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 State Transition - Buy</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 State Transition - Sell</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Distance Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Score Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 End Conditional Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Score Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 End For Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Conditional Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Score Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Best Coordinate Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Conditional Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Best Coordinate Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 End Conditional Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Sorting</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
                     
                 </div>
 
@@ -588,35 +550,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bestCoordinate(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> tow, <span style="color:#0b0;font-weight:bold">int</span> rad) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> tow.size();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> INT_MIN;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">50</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">50</span>; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> n; k<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> tow[k][<span style="color:#666">0</span>], y <span style="color:#666">=</span> tow[k][<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">float</span> r <span style="color:#666">=</span> sqrt((x <span style="color:#666">-</span> i) <span style="color:#666">*</span> (x <span style="color:#666">-</span> i) <span style="color:#666">+</span> (y <span style="color:#666">-</span> j) <span style="color:#666">*</span> (y <span style="color:#666">-</span> j));
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> ss <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(r <span style="color:#666">&lt;=</span> rad) {
-</span></span><span style="display:flex;"><span>                ss <span style="color:#666">=</span> tow[k][<span style="color:#666">2</span>]<span style="color:#666">/</span>(<span style="color:#666">1</span> <span style="color:#666">+</span> r);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> ss;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mx <span style="color:#666">&lt;</span> sum) {
-</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> sum;
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> {{i, j}};
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(mx <span style="color:#666">==</span> sum) {
-</span></span><span style="display:flex;"><span>            res.push_back({i, j});
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProfit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices, <span style="color:#0b0;font-weight:bold">int</span> fee) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(prices.size() <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> days <span style="color:#666">=</span> prices.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> buy(days, <span style="color:#666">0</span>), sell(days, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    buy[<span style="color:#666">0</span>]<span style="color:#666">=</span> <span style="color:#666">-</span>prices[<span style="color:#666">0</span>]<span style="color:#666">-</span>fee;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> days; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        buy[i] <span style="color:#666">=</span> max(buy[i <span style="color:#666">-</span><span style="color:#666">1</span>], sell[i <span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">-</span>prices[i]<span style="color:#666">-</span>fee);
+</span></span><span style="display:flex;"><span>        sell[i] <span style="color:#666">=</span> max(sell[i <span style="color:#666">-</span><span style="color:#666">1</span>], buy[i <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">+</span>prices[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    sort(res.begin(), res.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sell[days <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -624,243 +567,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bestCoordinate(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> tow, <span style="color:#0b0;font-weight:bold">int</span> rad) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProfit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices, <span style="color:#0b0;font-weight:bold">int</span> fee) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `bestCoordinate` which takes a 2D vector of points `tow` and a radius `rad`. The function aims to return the best coordinate based on maximum weighted sum of nearby points within the radius. </div>
+                            <div class=""> Define the function &#39;maxProfit&#39; which takes a vector of integers &#39;prices&#39; representing stock prices and an integer &#39;fee&#39; representing the transaction fee. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Edge Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> tow.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(prices.size() <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variable `n` to hold the size of the `tow` array, representing the number of points in the input. </div>
+                            <div class=""> Handle the edge case where the number of prices is less than or equal to 1, meaning no profit can be made, thus return 0. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> INT_MIN;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> days <span style="color:#666">=</span> prices.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `mx` to hold the maximum score (initialized to the smallest integer value) to track the highest possible sum. </div>
+                            <div class=""> Initialize &#39;days&#39; to store the number of days (or prices), which is the size of the &#39;prices&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Vector Initialization</b></div>
+                            <div class=""> <b>4 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> buy(days, <span style="color:#666">0</span>), sell(days, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty 2D vector `res` to store the coordinates with the best score. </div>
+                            <div class=""> Initialize two vectors, &#39;buy&#39; and &#39;sell&#39;, each of size &#39;days&#39;, to keep track of the maximum profit for buying and selling on each day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : For Loop</b></div>
+                            <div class=""> <b>5 : Initial State Setup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">50</span>; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    buy[<span style="color:#666">0</span>]<span style="color:#666">=</span> <span style="color:#666">-</span>prices[<span style="color:#666">0</span>]<span style="color:#666">-</span>fee;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Outer loop iterating over possible x-coordinates (ranging from 0 to 50). </div>
+                            <div class=""> Set the initial &#39;buy&#39; state on the first day, where the first element represents the cost of buying the stock with the transaction fee deducted. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : For Loop</b></div>
+                            <div class=""> <b>6 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">50</span>; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> days; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inner loop iterating over possible y-coordinates (ranging from 0 to 50). </div>
+                            <div class=""> Start a loop from day 1 to the last day (index 1 to &#39;days-1&#39;) to calculate the maximum profit on each day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class=""> <b>7 : State Transition - Buy</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        buy[i] <span style="color:#666">=</span> max(buy[i <span style="color:#666">-</span><span style="color:#666">1</span>], sell[i <span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">-</span>prices[i]<span style="color:#666">-</span>fee);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable `sum` to store the cumulative score for the current coordinate (i, j). </div>
+                            <div class=""> Calculate the maximum profit for the &#39;buy&#39; state by considering either the previous day&#39;s &#39;buy&#39; state or the profit from selling the previous day&#39;s stock and buying on the current day (with the fee). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : For Loop</b></div>
+                            <div class=""> <b>8 : State Transition - Sell</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> n; k<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sell[i] <span style="color:#666">=</span> max(sell[i <span style="color:#666">-</span><span style="color:#666">1</span>], buy[i <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">+</span>prices[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through all points in the input `tow` array to calculate the contribution of each point to the score. </div>
+                            <div class=""> Calculate the maximum profit for the &#39;sell&#39; state by considering either the previous day&#39;s &#39;sell&#39; state or the profit from buying the previous day&#39;s stock and selling it on the current day. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Initialization</b></div>
+                            <div class=""> <b>9 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> tow[k][<span style="color:#666">0</span>], y <span style="color:#666">=</span> tow[k][<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> sell[days <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extract the x and y coordinates of the current point `k` from the `tow` array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Distance Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">float</span> r <span style="color:#666">=</span> sqrt((x <span style="color:#666">-</span> i) <span style="color:#666">*</span> (x <span style="color:#666">-</span> i) <span style="color:#666">+</span> (y <span style="color:#666">-</span> j) <span style="color:#666">*</span> (y <span style="color:#666">-</span> j));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculate the Euclidean distance `r` from the current point `(x, y)` to the current coordinate `(i, j)`. This distance determines how much contribution the point will have based on its proximity. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> ss <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize the variable `ss` to store the contribution of the current point to the score. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Conditional Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(r <span style="color:#666">&lt;=</span> rad) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the point is within the given radius `rad`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Score Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ss <span style="color:#666">=</span> tow[k][<span style="color:#666">2</span>]<span style="color:#666">/</span>(<span style="color:#666">1</span> <span style="color:#666">+</span> r);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the point is within radius, calculate its contribution to the score based on its value `tow[k][2]` divided by `(1 &#43; r)` where `r` is the distance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : End Conditional Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> End the if-statement checking if the point is within radius. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Score Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> ss;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Add the contribution `ss` to the total score `sum`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : End For Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> End the loop over all points. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Conditional Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mx <span style="color:#666">&lt;</span> sum) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the current total score `sum` is greater than the maximum score `mx`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Score Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> sum;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current score is higher, update the maximum score `mx`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Best Coordinate Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">=</span> {{i, j}};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the best coordinates `res` with the current coordinate `(i, j)`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Conditional Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(mx <span style="color:#666">==</span> sum) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current score equals the maximum score, add the current coordinate `(i, j)` to the list of best coordinates. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Best Coordinate Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back({i, j});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Add the current coordinate `(i, j)` to the `res` list of best coordinates. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : End Conditional Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> End the conditional check for the maximum score. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Sorting</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(res.begin(), res.end());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sort the list of best coordinates `res` in lexicographical order. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res[<span style="color:#666">0</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the first coordinate in the sorted list as the best coordinate. </div>
+                            <div class=""> Return the maximum profit at the last day, which is stored in the &#39;sell&#39; array for the final day. </div>
                         </div>
                     
                 </div>
@@ -880,16 +673,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * m^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n * m^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * m^2)</div> 
-                        <div class=""> <b>Description:</b> Here, n is the number of towers (up to 50), and m is the maximum size of the coordinate grid (51).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear since we process each price exactly once.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(m^2)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, the space complexity is O(m^2) for storing the network quality calculations for each coordinate.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant as we only need a few variables to store the maximum profit.</div>    
                     </div>
 
                 </div>

@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a string <code>s</code> containing only the characters <code>'('</code> and <code>')'</code>. A string is considered balanced if each <code>'('</code> has a matching pair of consecutive <code>'))'</code> and if they appear in the correct order. Your task is to return the minimum number of insertions needed to make the string balanced. </div>
+<div class=""> You are given a graph that started as a tree with n nodes. One additional edge has been added, creating a cycle. Your task is to find and return the redundant edge that, when removed, would turn the graph back into a tree. </div>
 
 
 
@@ -372,47 +372,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s` containing only `&#39;(&#39;` and `&#39;)&#39;.</div>
-                        <div class=""> <b>Example:</b> s = &#39;(()))&#39;</div>
+                        <div class=""> <b>Input:</b> The input is a list of edges in a graph, where each edge connects two nodes. The graph has one extra edge added, causing a cycle.</div>
+                        <div class=""> <b>Example:</b> [[1,2],[1,3],[2,3]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • s consists only of the characters &#39;(&#39; and &#39;)&#39;.</div>
+                                <div style="margin-left: 20px;"> • edges[i].length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= ai &lt; bi &lt;= edges.length</div>
+                            
+                                <div style="margin-left: 20px;"> • ai != bi</div>
+                            
+                                <div style="margin-left: 20px;"> • There are no repeated edges.</div>
+                            
+                                <div style="margin-left: 20px;"> • The graph is connected.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of insertions required to make the string balanced.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> The output should be the redundant edge that can be removed to make the graph a valid tree.</div>
+                        <div class=""> <b>Example:</b> [2, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string can be balanced by inserting characters anywhere in the string.</div>
+                                <div style="margin-left: 20px;"> • The output will be a pair of nodes representing the redundant edge.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine how many insertions are needed to balance the string.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the redundant edge that, when removed, removes the cycle and returns the graph to a tree structure.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse through the string and use a stack to keep track of unmatched parentheses.</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the list of edges.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For every closing parenthesis, try to match it with an opening parenthesis.</div>
+                                <div style="margin-left: 20px;"> • 2. For each edge, check if adding it forms a cycle.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If there is no match, determine how many insertions are required to balance the string.</div>
+                                <div style="margin-left: 20px;"> • 3. If a cycle is formed, return the current edge as the redundant one.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string length should be within the given range and consist only of `(` and `)` characters.</div>
+                        <div class=""> <b>Goal:</b> The problem has constraints that ensure the graph remains manageable.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The graph contains at least three nodes and at most 1000 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of &#39;(&#39; and &#39;)&#39;.</div>
+                                <div style="margin-left: 20px;"> • Each edge connects two distinct nodes, and there are no repeated edges.</div>
                             
                         </div>
                     </div>        
@@ -420,25 +428,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string is only composed of characters &#39;(&#39; and &#39;)&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • The string can be unbalanced and requires insertions to be fixed.</div>
+                                <div style="margin-left: 20px;"> • The graph is initially a tree, and only one extra edge is added to form a cycle.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;(()))&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The first &#39;(&#39; requires one more &#39;)&#39; to balance the string. We add one more &#39;)&#39; to get &#39;(())))&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1,2],[1,3],[2,3]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, adding the edge [2,3] forms a cycle, and removing this edge restores the graph to a tree.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;()))&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No insertions are needed because the string is already balanced.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;))())(&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We need to add one &#39;(&#39; to match the first two closing parentheses and one &#39;))&#39; to match the last &#39;(&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1,2],[2,3],[3,4],[1,4],[1,5]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the edge [1,4] is redundant because its addition creates a cycle between nodes 1, 2, 3, and 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,18 +464,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, we will traverse through the string and calculate the insertions needed to balance the parentheses.</div>
+                        <div class=""> <b>Approach:</b> We can use the Union-Find algorithm to detect cycles and identify the redundant edge.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A stack can help match opening and closing parentheses.</div>
-                            
-                                <div style="margin-left: 20px;"> • If there is an unmatched closing parenthesis, we need to add opening or closing parentheses.</div>
+                                <div style="margin-left: 20px;"> • We need to detect if adding an edge creates a cycle, which is the point at which we find the redundant edge.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to traverse the string and handle unmatched parentheses by tracking them in a stack.</div>
+                                <div style="margin-left: 20px;"> • The Union-Find algorithm helps efficiently determine if two nodes are already connected, which helps us find the redundant edge.</div>
                             
                         </div>
                     </div>
@@ -481,13 +481,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse through the string `s` character by character.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a Union-Find data structure to keep track of connected components.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a stack to handle opening parentheses.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through each edge, attempting to union the nodes it connects.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each closing parenthesis, check if it has a matching opening parenthesis in the stack.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If not, calculate how many insertions are needed to balance it.</div>
+                                <div style="margin-left: 20px;"> • 3. If the union operation fails (i.e., the nodes are already connected), this is the redundant edge.</div>
                             
                         </div>
                     </div>
@@ -496,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string should not be empty, as the length is guaranteed to be at least 1.</div>
+                                <div style="margin-left: 20px;"> • There will always be at least three nodes and one extra edge.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider strings with lengths up to 10^5 characters.</div>
+                                <div style="margin-left: 20px;"> • The algorithm needs to handle up to 1000 edges efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the string contains only the characters &#39;(&#39; and &#39;)&#39;.</div>
+                                <div style="margin-left: 20px;"> • A graph with the minimum number of nodes (3) will still have one extra edge causing a cycle.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string must be within the given length and contain only valid characters.</div>
+                                <div style="margin-left: 20px;"> • The Union-Find approach works efficiently under the given constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -528,37 +526,19 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 String Length Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Stack Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Stack Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Control Flow</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Stack Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Result Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Else Block</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Stack Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Result Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 </button>
                     
                 </div>
 
@@ -567,30 +547,14 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minInsertions</span>(string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
-</span></span><span style="display:flex;"><span>            stk.push(<span style="color:#b44">&#39;(&#39;</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findRedundantConnection(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> edges.size();
+</span></span><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>uf<span style="color:#666">-&gt;</span>uni(edges[i][<span style="color:#666">0</span>], edges[i][<span style="color:#666">1</span>])) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> edges[i];
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()) stk.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> res<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()) {stk.pop(); res<span style="color:#666">++</span>;}
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">+</span> stk.size() <span style="color:#666">*</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> edges[<span style="color:#666">0</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -598,163 +562,73 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minInsertions</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findRedundantConnection(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares the function `minInsertions` which takes a string `s` as input and returns an integer value representing the minimum insertions required. </div>
+                            <div class=""> Define the method &#39;findRedundantConnection&#39; that accepts a list of edges and returns the redundant edge that creates a cycle in the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> edges.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `res` is initialized to 0. This will keep track of the number of insertions needed. </div>
+                            <div class=""> Initialize the variable &#39;n&#39; with the size of the &#39;edges&#39; vector, representing the number of edges in the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : String Length Calculation</b></div>
+                            <div class=""> <b>3 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(n);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, the variable `n` is set to the size of the string `s`, which is the total number of characters in the string. </div>
+                            <div class=""> Create a new instance of the Union-Find data structure, initialized with &#39;n&#39; elements, to track the connected components in the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Stack Initialization</b></div>
+                            <div class=""> <b>4 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A stack `stk` is created to help keep track of unmatched opening parentheses as we process the string. </div>
+                            <div class=""> Start a loop that iterates through each edge in the graph. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop</b></div>
+                            <div class=""> <b>5 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>uf<span style="color:#666">-&gt;</span>uni(edges[i][<span style="color:#666">0</span>], edges[i][<span style="color:#666">1</span>])) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop begins to iterate through each character of the string `s`. </div>
+                            <div class=""> Check if the two nodes connected by the current edge are already in the same component using the &#39;uni&#39; method from the Union-Find class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Conditional Statement</b></div>
+                            <div class=""> <b>6 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> edges[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is an opening parenthesis, we proceed to push it onto the stack. </div>
+                            <div class=""> If the nodes are already connected (forming a cycle), return the current edge as the redundant edge. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Stack Operations</b></div>
+                            <div class=""> <b>7 : </b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(<span style="color:#b44">&#39;(&#39;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> edges[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the opening parenthesis onto the stack. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Control Flow</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Skip the rest of the loop and move to the next character if it&#39;s an opening parenthesis. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Conditional Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the current character is followed by a closing parenthesis. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Stack Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()) stk.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the stack is not empty, pop the top item (the matching opening parenthesis). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Result Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> res<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the stack is empty (no unmatched opening parenthesis), increment `res` by 1 as we need to insert a new opening parenthesis. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Skip the next character (closing parenthesis) since it was already processed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Else Block</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current character is not followed by a closing parenthesis, handle the unmatched parenthesis. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Stack Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()) {stk.pop(); res<span style="color:#666">++</span>;}
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If there&#39;s an unmatched opening parenthesis in the stack, pop it and increment the `res` counter by 1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Result Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the stack is empty, two insertions are needed—one opening parenthesis and one closing parenthesis. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">+</span> stk.size() <span style="color:#666">*</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the result, adding any remaining unmatched opening parentheses in the stack, each requiring two insertions. </div>
+                            <div class=""> If no redundant edge is found, return the first edge in the list by default. </div>
                         </div>
                     
                 </div>
@@ -777,13 +651,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We need to traverse the string once, which gives a time complexity of O(n).</div>                                               
+                        <div class=""> <b>Description:</b> The algorithm runs in O(n) time due to the efficient union-find operations.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We use a stack to store the unmatched parentheses, so the space complexity is O(n).</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the Union-Find data structure.</div>    
                     </div>
 
                 </div>

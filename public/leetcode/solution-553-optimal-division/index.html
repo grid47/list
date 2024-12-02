@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 12, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given two integers n and start, return a permutation of the integers from 0 to 2^n - 1 such that: p[0] = start, each pair of adjacent elements differ by exactly one bit in their binary representation, and p[0] and p[2^n - 1] also differ by exactly one bit. </div>
+<div class=""> Given an array of integers, you need to add parentheses in such a way that the division expression evaluates to the maximum possible value. The division must respect the adjacency of integers in the array. </div>
 
 
 
@@ -371,47 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two integers n and start.</div>
-                        <div class=""> <b>Example:</b> n = 2, start = 3</div>
+                        <div class=""> <b>Input:</b> The input is an array of integers &#39;nums&#39;. The adjacent integers will perform the division operation.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [200, 50, 10]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 16</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt; 2^n</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= nums[i] &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a permutation p of integers from 0 to 2^n - 1 such that the required conditions are satisfied.</div>
-                        <div class=""> <b>Example:</b> [3, 2, 0, 1]</div>
+                        <div class=""> <b>Output:</b> Return the corresponding expression with parentheses added optimally, resulting in the maximum evaluated value.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;200/(50/10)&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a permutation of length 2^n.</div>
+                                <div style="margin-left: 20px;"> • The returned expression should not have redundant parentheses.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Generate a valid permutation where adjacent numbers differ by one bit.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine the optimal arrangement of parentheses in the given division expression to maximize the evaluated result.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Loop through all possible numbers from 0 to 2^n - 1.</div>
+                                <div style="margin-left: 20px;"> • If the array has only one element, return the number as a string.</div>
                             
-                                <div style="margin-left: 20px;"> • For each number, calculate the corresponding Gray code using the formula.</div>
+                                <div style="margin-left: 20px;"> • If the array has two elements, return them with a &#39;/&#39; operator.</div>
                             
-                                <div style="margin-left: 20px;"> • Generate the permutation based on the Gray code while ensuring that adjacent numbers differ by exactly one bit.</div>
+                                <div style="margin-left: 20px;"> • For arrays with more than two elements, always add parentheses around all but the first element.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem guarantees that n is between 1 and 16, and start is between 0 and 2^n - 1.</div>
+                        <div class=""> <b>Goal:</b> The input list will have between 1 and 10 integers, and each integer is between 2 and 1000.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 16</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= start &lt; 2^n</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= nums[i] &lt;= 1000</div>
                             
                         </div>
                     </div>        
@@ -419,15 +419,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • It is assumed that the generated permutation will be in the correct format, starting at the given &#39;start&#39; value.</div>
+                                <div style="margin-left: 20px;"> • The input is valid, and there is always a unique optimal expression.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 3, start = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The binary representations of the permutation are (010, 110, 111, 101, 100, 000, 001, 011).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [200, 50, 10]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By adding parentheses around (50/10), the expression becomes &#39;200/(50/10)&#39;, which gives the maximum value of 40.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -451,16 +451,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can generate a circular permutation using Gray code, which ensures that adjacent elements differ by only one bit.</div>
+                        <div class=""> <b>Approach:</b> To maximize the result of a division expression, we need to add parentheses in a way that minimizes the divisors in the sequence. This can be done by wrapping the divisions between all but the first number in parentheses.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Gray code is a binary numeral system where two successive values differ in only one bit.</div>
+                                <div style="margin-left: 20px;"> • When dividing numbers, larger numbers should ideally divide smaller ones.</div>
+                            
+                                <div style="margin-left: 20px;"> • The expression with the maximum value will involve minimizing the number of divisors in the sequence by grouping all but the first numbers into parentheses.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This problem can be efficiently solved by generating the Gray code sequence for the range 0 to 2^n - 1.</div>
+                                <div style="margin-left: 20px;"> • By focusing the parentheses around the numbers that need to be divided first, we maximize the value of the expression.</div>
                             
                         </div>
                     </div>
@@ -468,11 +470,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start with the given start value.</div>
+                                <div style="margin-left: 20px;"> • If the array has one element, simply return that element as a string.</div>
                             
-                                <div style="margin-left: 20px;"> • Generate the Gray code for each integer from 0 to 2^n - 1.</div>
+                                <div style="margin-left: 20px;"> • If the array has two elements, return them with a division sign.</div>
                             
-                                <div style="margin-left: 20px;"> • Ensure that the sequence starts at the given start and ends in a valid manner, differing by exactly one bit from the first element.</div>
+                                <div style="margin-left: 20px;"> • For longer arrays, wrap all elements except the first one in parentheses.</div>
                             
                         </div>
                     </div>
@@ -481,22 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable since n and start are always defined.</div>
+                                <div style="margin-left: 20px;"> • There are no edge cases with empty inputs, as the array will always have at least one number.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The largest possible value for n is 16, resulting in a permutation of length 65536.</div>
+                                <div style="margin-left: 20px;"> • The solution should work efficiently for arrays of size up to 10.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When start is 0 or 2^n - 1, ensure that the permutation starts and ends with valid elements differing by one bit.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the parentheses are placed optimally, without redundant brackets that do not affect the order of operations.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Time and space complexities must be optimized for the upper bound of n.</div>
+                                <div style="margin-left: 20px;"> • The input size is small, and the solution should handle this easily.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,13 +517,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 String Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Edge Case Handling (Single Element)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Gray Code Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Edge Case Handling (Two Elements)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Main Loop (Array Traversal)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 String Building</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition (First Element)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Parentheses Addition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Parentheses Closure</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
                 </div>
 
@@ -530,11 +542,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> circularPermutation(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> start) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        res.push_back(start <span style="color:#666">^</span> i <span style="color:#666">^</span> i <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">optimalDivision</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> to_string(nums[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> to_string(nums[<span style="color:#666">0</span>]) <span style="color:#666">+</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">+</span> to_string(nums[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        s <span style="color:#666">+=</span> to_string(nums[i]) <span style="color:#666">+</span> <span style="color:#b44">&#34;/&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>            s <span style="color:#666">+=</span> <span style="color:#b44">&#34;(&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    s[s.size() <span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#b44">&#39;)&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -545,50 +564,100 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> circularPermutation(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> start) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">optimalDivision</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `circularPermutation` is defined to generate a circular permutation of `n` elements starting from the number `start`. </div>
+                            <div class=""> Defines the function `optimalDivision`, which takes a vector of integers `nums` and returns the optimal division string for them. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Result Initialization</b></div>
+                            <div class=""> <b>2 : String Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A vector `res` is initialized to store the resulting circular permutation. </div>
+                            <div class=""> Initializes an empty string `s` to build the division result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Setup</b></div>
+                            <div class=""> <b>3 : Edge Case Handling (Single Element)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> to_string(nums[<span style="color:#666">0</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is set up to iterate over all possible values for the permutation. The loop runs from `0` to `2^n - 1` (i.e., `1 &lt;&lt; n`). </div>
+                            <div class=""> Checks if the input vector contains only one element. If true, converts the element to a string and returns it as the result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Gray Code Calculation</b></div>
+                            <div class=""> <b>4 : Edge Case Handling (Two Elements)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(start <span style="color:#666">^</span> i <span style="color:#666">^</span> i <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums.size() <span style="color:#666">==</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> to_string(nums[<span style="color:#666">0</span>]) <span style="color:#666">+</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">+</span> to_string(nums[<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The Gray code formula `start ^ i ^ (i &gt;&gt; 1)` is used to generate the next number in the circular permutation, and it is added to the result vector `res`. </div>
+                            <div class=""> Handles the case where the input vector contains exactly two elements. Returns a string representing the division of the two elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Return Result</b></div>
+                            <div class=""> <b>5 : Main Loop (Array Traversal)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the vector `res`, which contains the generated circular permutation. </div>
+                            <div class=""> Starts a loop to traverse the `nums` array and build the division string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : String Building</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s <span style="color:#666">+=</span> to_string(nums[i]) <span style="color:#666">+</span> <span style="color:#b44">&#34;/&#34;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Appends each number in `nums` followed by a division sign (&#39;/&#39;) to the string `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Condition (First Element)</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current index is the first element in the array. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Parentheses Addition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s <span style="color:#666">+=</span> <span style="color:#b44">&#34;(&#34;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current index is 0 (first element), appends an opening parenthesis to the string `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Parentheses Closure</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s[s.size() <span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#b44">&#39;)&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Replaces the last division sign with a closing parenthesis to properly close the division string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the formatted division string `s`. </div>
                         </div>
                     
                 </div>
@@ -608,16 +677,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(2^n)</div>
-                        <div class=""> <b>Average Case:</b> O(2^n)</div>
-                        <div class=""> <b>Worst Case:</b> O(2^n)</div> 
-                        <div class=""> <b>Description:</b> The solution requires generating all 2^n elements in the permutation, each of which is processed once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Since we are processing the elements in a linear fashion, the time complexity is O(n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(2^n)</div>
-                        <div class=""> <b>Worst Case:</b> O(2^n)</div> 
-                        <div class=""> <b>Description:</b> Space is required to store the output permutation of length 2^n.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the resulting expression as a string.</div>    
                     </div>
 
                 </div>

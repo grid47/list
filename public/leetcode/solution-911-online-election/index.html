@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an integer array nums of size n. Your task is to find the maximum difference between two elements in the array such that the element on the right is strictly greater than the element on the left. Specifically, you need to find the largest difference between nums[j] - nums[i] where 0 &lt;= i &lt; j &lt; n and nums[i] &lt; nums[j]. If no such valid pair exists, return -1. </div>
+<div class=""> You are given two integer arrays: <code>persons</code> and <code>times</code>. The <code>i</code>-th vote was cast for <code>persons[i]</code> at time <code>times[i]</code>. For each query at a given time <code>t</code>, you need to return the person who was leading the election at time <code>t</code>. If there is a tie between candidates, the most recent vote wins. </div>
 
 
 
@@ -360,49 +360,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a single integer array nums of size n, where each element is an integer.</div>
-                        <div class=""> <b>Example:</b> [8, 1, 6, 3]</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array `persons` and an integer array `times`.</div>
+                        <div class=""> <b>Example:</b> Input: persons = [0, 1, 1, 0, 0, 1, 0], times = [0, 5, 10, 15, 20, 25, 30]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= persons.length &lt;= 5000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • times.length == persons.length</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= persons[i] &lt; persons.length</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= times[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • times is sorted in strictly increasing order</div>
+                            
+                                <div style="margin-left: 20px;"> • times[0] &lt;= t &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 10^4 queries will be made</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum difference between nums[j] - nums[i] where 0 &lt;= i &lt; j &lt; n and nums[i] &lt; nums[j]. If no such pair exists, return -1.</div>
-                        <div class=""> <b>Example:</b> 5</div>
+                        <div class=""> <b>Output:</b> For each query at time `t`, return the person who was leading the election at that time, based on the most recent vote or tie-breaking rules.</div>
+                        <div class=""> <b>Example:</b> Output: [null, 0, 1, 1, 0, 0, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be an integer representing the maximum difference, or -1 if no valid pair exists.</div>
+                                <div style="margin-left: 20px;"> • The output should be the person leading the election at the specified query time.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to traverse through the array while keeping track of the minimum value seen so far. For each new element, calculate the difference with the minimum value and update the result if this difference is larger. If no valid difference is found, return -1.</div>
+                        <div class=""> <b>Goal:</b> The goal is to track the current leader after each vote and quickly determine the leader at any given query time `t`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to keep track of the minimum value seen so far.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the `persons` array to record the vote counts for each person, and track the leader at each time point.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, and for each element, compute the difference with the minimum value.</div>
-                            
-                                <div style="margin-left: 20px;"> • Keep track of the largest difference found during the iteration.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the largest difference if found, otherwise return -1.</div>
+                                <div style="margin-left: 20px;"> • For each query, find the most recent time that is less than or equal to the query time `t` and return the person who was leading at that time.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array length n is between 2 and 1000, and the values of nums[i] are between 1 and 10^9.</div>
+                        <div class=""> <b>Goal:</b> The input arrays have size constraints, and the times are guaranteed to be sorted.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The array lengths will be at most 5000, and there will be no more than 10^4 queries.</div>
                             
                         </div>
                     </div>        
@@ -410,25 +414,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array will always have at least two elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • The solution should handle arrays of varying sizes and values.</div>
+                                <div style="margin-left: 20px;"> • The times array is strictly increasing, meaning that each query time will be greater than or equal to the previous query time.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [8, 1, 6, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum difference occurs between 1 (at index 1) and 6 (at index 2), resulting in a difference of 5. No other valid pairs provide a larger difference.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [7, 6, 5, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No valid pair exists where nums[i] &lt; nums[j], so the result is -1.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [1, 3, 2, 7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum difference occurs between 1 (at index 0) and 7 (at index 3), giving a difference of 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: persons = [0, 1, 1, 0, 0, 1, 0], times = [0, 5, 10, 15, 20, 25, 30]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> At time 0, person 0 is leading. At time 5, person 1 takes the lead. At time 10, person 1 is still leading. At time 15, person 0 takes the lead again. At time 20, person 0 is leading. At time 25, person 1 is leading. At time 30, person 1 is still leading.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,16 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through the array while keeping track of the minimum element encountered so far. For each new element, we compute the difference with the minimum element and update the result if necessary.</div>
+                        <div class=""> <b>Approach:</b> The solution involves recording the votes at each time and tracking the leader as the votes are cast. For each query, we need to efficiently find the leader at the queried time.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires us to find the maximum difference between elements, but only if the element on the right is strictly greater.</div>
+                                <div style="margin-left: 20px;"> • Each vote is associated with a specific time, and as time progresses, the leader may change.</div>
+                            
+                                <div style="margin-left: 20px;"> • We need to efficiently answer multiple queries about the leader at different times.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can maintain a variable for the minimum element seen so far and compute the difference with each subsequent element.</div>
+                                <div style="margin-left: 20px;"> • We can maintain a record of the leader for each vote time, so that each query can be answered in constant time by looking up the most recent time less than or equal to the query.</div>
                             
                         </div>
                     </div>
@@ -469,13 +465,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to store the minimum value.</div>
+                                <div style="margin-left: 20px;"> • First, iterate over the `persons` and `times` arrays to maintain a record of the leader at each time.</div>
                             
-                                <div style="margin-left: 20px;"> • Traverse the array while calculating the difference with the current minimum value.</div>
-                            
-                                <div style="margin-left: 20px;"> • Keep updating the result if the new difference is larger.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the result after the traversal.</div>
+                                <div style="margin-left: 20px;"> • For each query, use a binary search or a map lookup to find the most recent leader based on the queried time.</div>
                             
                         </div>
                     </div>
@@ -484,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will never be empty, as n is guaranteed to be at least 2.</div>
+                                <div style="margin-left: 20px;"> • The arrays will never be empty based on the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle up to 1000 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution needs to handle up to 5000 persons and 10^4 queries efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array contains only decreasing values, return -1.</div>
+                                <div style="margin-left: 20px;"> • If a query time corresponds to the exact time a vote was cast, the most recent vote will determine the leader.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must run within time limits for arrays of size up to 1000.</div>
+                                <div style="margin-left: 20px;"> • The times array is sorted, so the binary search approach is feasible for efficient queries.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,17 +508,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Code Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Vote Counting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Update Minimum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Vote Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Lead Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Mapping Vote Times</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Query Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Query Logic</button>
                     
                 </div>
 
@@ -535,77 +533,119 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], res <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, nums[i] <span style="color:#666">-</span> mn);
-</span></span><span style="display:flex;"><span>        mn <span style="color:#666">=</span> min(mn, nums[i]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>TopVotedCandidate(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> persons, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> times) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> persons.size(), lead <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        lead <span style="color:#666">=</span> <span style="color:#666">++</span>cnt[persons[i]] <span style="color:#666">&gt;=</span> cnt[lead]<span style="color:#666">?</span> persons[i] <span style="color:#666">:</span> lead;
+</span></span><span style="display:flex;"><span>        mp[times[i]] <span style="color:#666">=</span> lead;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> res;
+</span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">q</span>(<span style="color:#0b0;font-weight:bold">int</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (<span style="color:#666">--</span>mp.upper_bound(t))<span style="color:#666">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your TopVotedCandidate object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * TopVotedCandidate* obj = new TopVotedCandidate(persons, times);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;q(t);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Code Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximumDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `maximumDifference` that takes a reference to a vector of integers `nums` and returns the maximum difference between any two elements in the array, where the larger element comes after the smaller one. </div>
+                            <div class=""> Declare a map `mp` to store the mapping between times and the leading candidate at those times. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], res <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TopVotedCandidate(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> persons, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> times) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes two variables: `mn` is set to the first element of the array (used to track the minimum element encountered so far), and `res` is initialized to -1 to store the maximum difference. </div>
+                            <div class=""> Constructor for the TopVotedCandidate class, which initializes the votes and times arrays. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Initialization</b></div>
+                            <div class=""> <b>3 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> persons.size(), lead <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initiates a loop that starts from the second element of the `nums` vector (index 1) and iterates over the remaining elements. </div>
+                            <div class=""> Initialize the number of persons `n` and a variable `lead` to track the current leading candidate, initialized to -1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Calculation</b></div>
+                            <div class=""> <b>4 : Vote Counting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, nums[i] <span style="color:#666">-</span> mn);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line updates the variable `res` with the maximum difference found so far, comparing the current element `nums[i]` with the smallest element `mn` encountered up to that point. </div>
+                            <div class=""> Declare an unordered map `cnt` to store the count of votes for each candidate. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Update Minimum</b></div>
+                            <div class=""> <b>5 : Vote Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mn <span style="color:#666">=</span> min(mn, nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This updates the variable `mn` to the smaller of the current `mn` and the current element `nums[i]`. This ensures that `mn` always holds the smallest value encountered up to that point. </div>
+                            <div class=""> Iterate over each vote and update the leading candidate. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Lead Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lead <span style="color:#666">=</span> <span style="color:#666">++</span>cnt[persons[i]] <span style="color:#666">&gt;=</span> cnt[lead]<span style="color:#666">?</span> persons[i] <span style="color:#666">:</span> lead;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the maximum difference stored in `res`. If no valid difference was found (i.e., `res` is still 0), it returns -1. </div>
+                            <div class=""> Update the `lead` based on the current vote count of the person at index `i`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Mapping Vote Times</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[times[i]] <span style="color:#666">=</span> lead;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Map the current time `times[i]` to the leading candidate at that time. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Query Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">q</span>(<span style="color:#0b0;font-weight:bold">int</span> t) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the query function `q` that returns the leading candidate at a specific time `t`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Query Logic</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (<span style="color:#666">--</span>mp.upper_bound(t))<span style="color:#666">-&gt;</span>second;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Use the `upper_bound` method to find the first entry in the map where the time is greater than `t`, and return the corresponding leading candidate. </div>
                         </div>
                     
                 </div>
@@ -625,16 +665,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We only need to iterate through the array once, making the time complexity O(n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n) for each query due to binary search</div>
+                        <div class=""> <b>Average Case:</b> O(log n) for each query</div>
+                        <div class=""> <b>Worst Case:</b> O(log n) for each query</div> 
+                        <div class=""> <b>Description:</b> The time complexity per query is O(log n) due to the binary search on the times array, where n is the number of votes.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we only use a few variables to store the result and minimum element.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the leader for each vote time.</div>    
                     </div>
 
                 </div>

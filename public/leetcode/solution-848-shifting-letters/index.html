@@ -300,7 +300,7 @@
 
 
 
-<div class=""> Given an integer array nums, the task is to perform operations until all elements in the array are the same. In each operation, identify the largest element in the array, find the next largest value strictly smaller than the current largest, and reduce the largest element to that value. The goal is to count how many operations are required to make all elements in the array equal. </div>
+<div class=""> You are given a string <code>s</code> of lowercase English letters and an array <code>shifts</code>, where <code>shifts[i]</code> represents the number of times to shift the first <code>i + 1</code> characters of <code>s</code>. The shift operation for a letter means moving to the next letter in the alphabet, and if the letter is &lsquo;z&rsquo;, it wraps around to &lsquo;a&rsquo;. After applying all the shifts, return the final string. </div>
 
 
 
@@ -351,47 +351,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a list of integers nums, where each element nums[i] represents a value in the array.</div>
-                        <div class=""> <b>Example:</b> For example, given nums = [4, 1, 2]</div>
+                        <div class=""> <b>Input:</b> You are given a string `s` consisting of lowercase English letters and an integer array `shifts` of the same length. Each element of `shifts[i]` represents how many times you need to shift the first `i &#43; 1` letters of `s`.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#39;abc&#39;, shifts = [3, 5, 9]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The length of nums is between 1 and 50,000, inclusive.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • Each element nums[i] is between 1 and 50,000, inclusive.</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • shifts.length == s.length</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= shifts[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of operations required to make all elements in the array equal.</div>
-                        <div class=""> <b>Example:</b> For nums = [4, 1, 2], the output will be 3.</div>
+                        <div class=""> <b>Output:</b> Return the final string after applying all the shifts to `s` as specified by the array `shifts`.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;rpl&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is an integer representing the number of operations.</div>
+                                <div style="margin-left: 20px;"> • The final string is derived by applying the shifts progressively to the characters of `s`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine the minimum number of operations required to make all elements in the array equal by reducing the largest elements in the array progressively.</div>
+                        <div class=""> <b>Goal:</b> The goal is to compute the final string after applying all the shifts to the string `s`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the array in ascending order.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Process the shifts array by calculating cumulative shifts from the end of the string towards the beginning.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the sorted array and reduce the largest element to the next smaller element.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each character in `s`, apply the shift operation by moving the character forward in the alphabet by the corresponding number of shifts (considering the wrap-around).</div>
                             
-                                <div style="margin-left: 20px;"> • Count the number of such operations until all elements become equal.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return the resulting string after all shifts have been applied.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array has at least 1 element and at most 50,000 elements. Each element of the array is a positive integer not exceeding 50,000.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the solution handles the problem constraints efficiently, especially with large input sizes.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 50,000</div>
+                                <div style="margin-left: 20px;"> • The array `shifts` and the string `s` will always have the same length.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 50,000</div>
+                                <div style="margin-left: 20px;"> • The shifts array will contain values between 0 and 10^9, so operations must handle large values efficiently.</div>
                             
                         </div>
                     </div>        
@@ -399,30 +403,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array is non-empty, and the values are positive integers.</div>
+                                <div style="margin-left: 20px;"> • The string `s` contains only lowercase English letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • The length of the string `s` and the array `shifts` will always match.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4, 1, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It takes 3 operations to make all elements equal: 
-1. largest = 4, nextLargest = 2, reduce nums[0] to 2, nums = [2, 1, 2]. 
-2. largest = 2, nextLargest = 1, reduce nums[0] to 1, nums = [1, 1, 2]. 
-3. largest = 2, nextLargest = 1, reduce nums[2] to 1, nums = [1, 1, 1].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;abc&#39;, shifts = [3, 5, 9]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Initially, the string is &#39;abc&#39;. After shifting the first 1 letter by 3, it becomes &#39;dbc&#39;. Then, shifting the first 2 letters by 5 results in &#39;igc&#39;. Finally, shifting the first 3 letters by 9 gives &#39;rpl&#39;. Hence, the final result is &#39;rpl&#39;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 1, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> All elements are already equal, so no operations are needed. The output is 0.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [3, 3, 2, 2, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It takes 4 operations to make all elements equal: 
-1. largest = 5, nextLargest = 3, reduce nums[4] to 3, nums = [3, 3, 2, 2, 3]. 
-2. largest = 3, nextLargest = 2, reduce nums[0] to 2, nums = [2, 3, 2, 2, 3]. 
-3. largest = 3, nextLargest = 2, reduce nums[1] to 2, nums = [2, 2, 2, 2, 3]. 
-4. largest = 3, nextLargest = 2, reduce nums[4] to 2, nums = [2, 2, 2, 2, 2].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;aaa&#39;, shifts = [1, 2, 3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string starts as &#39;aaa&#39;. After shifting the first 1 letter by 1, it becomes &#39;b&#39;. Then, shifting the first 2 letters by 2 gives &#39;d&#39;. Finally, shifting the first 3 letters by 3 results in &#39;gfd&#39;. Thus, the final result is &#39;gfd&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,16 +441,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves sorting the array and performing operations to reduce the largest element until all elements are equal.</div>
+                        <div class=""> <b>Approach:</b> To solve the problem efficiently, we process the shifts in reverse order and apply cumulative shifts progressively to each character in the string.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sorting the array ensures that we always have easy access to the largest and next largest values.</div>
+                                <div style="margin-left: 20px;"> • The shifts for each character depend on the sum of shifts from the previous positions.</div>
+                            
+                                <div style="margin-left: 20px;"> • Instead of repeatedly applying shifts from the start, we can accumulate shifts from the last character and apply them once in one pass.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By iterating from the largest values downward, we can minimize the number of operations needed to make all elements the same.</div>
+                                <div style="margin-left: 20px;"> • By calculating cumulative shifts backwards, we avoid redundant calculations and reduce the complexity of applying shifts.</div>
                             
                         </div>
                     </div>
@@ -463,11 +460,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the nums array in ascending order.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Reverse process the shifts array to calculate cumulative shifts.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array in reverse order and perform operations to reduce the largest element to the next smaller element.</div>
+                                <div style="margin-left: 20px;"> • Step 2: For each character in `s`, update it using the cumulative shift and apply the modulo operation for wrapping around the alphabet.</div>
                             
-                                <div style="margin-left: 20px;"> • Count the operations until all elements in the array are equal.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return the updated string after all shifts have been applied.</div>
                             
                         </div>
                     </div>
@@ -476,22 +473,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array cannot be empty, as the problem guarantees at least one element.</div>
+                                <div style="margin-left: 20px;"> • The input string `s` will not be empty as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For larger inputs (e.g., nums.length = 50,000), the solution should handle them efficiently with O(n log n) time complexity.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution can handle the upper constraint where the length of `s` is 10^5 and shift values can be as large as 10^9.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array could contain repeated values or be already equal, in which case no operations would be required.</div>
+                                <div style="margin-left: 20px;"> • If the shift value is 0 for any index, the corresponding character will not be altered.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works within the time and space limits for larger arrays.</div>
+                                <div style="margin-left: 20px;"> • The solution should be optimized to handle large shift values efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,17 +507,17 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Get Vector Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Backward Cumulative Shifts</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Cumulative Shift Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Iterate Through String</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Operation Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Apply Shift to Character</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Result</button>
                     
                 </div>
 
@@ -529,18 +526,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">reductionOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">shiftingLetters</span>(string s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> shifts) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ops <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">==</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>]) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        ops <span style="color:#666">+=</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> i);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ops;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> shifts.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>    shifts[i] <span style="color:#666">=</span> (shifts[i] <span style="color:#666">+</span> shifts[i <span style="color:#666">+</span> <span style="color:#666">1</span>] ) <span style="color:#666">%</span> <span style="color:#666">26</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    s[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> ((s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span><span style="color:#666">+</span> shifts[i]) <span style="color:#666">%</span> <span style="color:#666">26</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -551,70 +546,70 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">reductionOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">shiftingLetters</span>(string s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> shifts) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Function declaration, takes a vector of integers as input. </div>
+                            <div class=""> The function `shiftingLetters` takes a string `s` and a vector `shifts` that specifies how much to shift each letter in `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Get Vector Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ops <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> shifts.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables: &#39;ops&#39; for counting operations, &#39;n&#39; for the size of the vector. </div>
+                            <div class=""> The size of the `shifts` vector is stored in `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Sorting</b></div>
+                            <div class=""> <b>3 : Backward Cumulative Shifts</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sort the input vector &#39;nums&#39; in ascending order. </div>
+                            <div class=""> Iterate backward through the `shifts` vector, from second-to-last element to the first. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop</b></div>
+                            <div class=""> <b>4 : Cumulative Shift Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    shifts[i] <span style="color:#666">=</span> (shifts[i] <span style="color:#666">+</span> shifts[i <span style="color:#666">+</span> <span style="color:#666">1</span>] ) <span style="color:#666">%</span> <span style="color:#666">26</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through the sorted vector from the second-to-last element to the first. </div>
+                            <div class=""> Update each shift to include the shift of the next letter, making it cumulative. The modulo 26 ensures the shift stays within the bounds of the alphabet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Comparison</b></div>
+                            <div class=""> <b>5 : Iterate Through String</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">==</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>]) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skip duplicates by checking if the current element is equal to the next element. </div>
+                            <div class=""> Loop through each character in the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Operation Counting</b></div>
+                            <div class=""> <b>6 : Apply Shift to Character</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ops <span style="color:#666">+=</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> ((s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span><span style="color:#666">+</span> shifts[i]) <span style="color:#666">%</span> <span style="color:#666">26</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Count the operations needed to reduce the current element. </div>
+                            <div class=""> Shift each character in `s` by the corresponding value in the `shifts` vector, ensuring it wraps around the alphabet using modulo 26. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ops;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the total number of operations. </div>
+                            <div class=""> Return the shifted string `s`. </div>
                         </div>
                     
                 </div>
@@ -634,16 +629,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The primary time complexity arises from sorting the array, which takes O(n log n), followed by a linear scan to count the operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) as we only need to process the string once and calculate the shifts in one pass.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required for sorting the array. The space complexity can be reduced if in-place sorting is used.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the shifts array and the modified string `s`.</div>    
                     </div>
 
                 </div>

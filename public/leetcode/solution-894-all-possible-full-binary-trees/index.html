@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 9, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are given an array of strings nums, where each string represents a non-negative integer. You need to find the kth largest integer in the array. Note that duplicates should be considered distinctly. For example, if the array is [&lsquo;1&rsquo;, &lsquo;2&rsquo;, &lsquo;2&rsquo;], the first largest integer is &lsquo;2&rsquo;, the second largest is also &lsquo;2&rsquo;, and the third largest is &lsquo;1&rsquo;. </div>
+<div class=""> Given an integer n, return all possible full binary trees with exactly n nodes. Each node of the tree must have the value 0. A full binary tree is defined as a binary tree where each node has either 0 or 2 children. </div>
 
 
 
@@ -361,51 +361,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array of strings nums, where each string represents an integer, and an integer k that represents the kth largest number to return.</div>
-                        <div class=""> <b>Example:</b> nums = [&#39;5&#39;, &#39;12&#39;, &#39;15&#39;, &#39;9&#39;], k = 2</div>
+                        <div class=""> <b>Input:</b> You are given a single integer n which represents the number of nodes in the full binary trees. n will always be an odd integer.</div>
+                        <div class=""> <b>Example:</b> Input: n = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 20</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i].length &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • nums[i] consists of only digits</div>
-                            
-                                <div style="margin-left: 20px;"> • nums[i] will not have any leading zeros</div>
+                                <div style="margin-left: 20px;"> • n is always an odd integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the string that represents the kth largest integer from the input array.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;12&#39;</div>
+                        <div class=""> <b>Output:</b> Return a list of all possible full binary trees with n nodes. Each tree in the list should be represented by its root node, where each node has the value 0. The trees can be returned in any order.</div>
+                        <div class=""> <b>Example:</b> Output: [[0,0,0,null,null,0,0],[0,0,0,0,0,0,0]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be the kth largest number, as a string.</div>
+                                <div style="margin-left: 20px;"> • The output should contain all unique full binary trees with n nodes.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the kth largest integer in the list, where duplicates are counted distinctly.</div>
+                        <div class=""> <b>Goal:</b> The goal is to generate all unique full binary trees for a given number of nodes n.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a priority queue (min-heap) to maintain the top k largest numbers.</div>
+                                <div style="margin-left: 20px;"> • 1. Use dynamic programming (DP) to generate all possible full binary trees with n nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • For each number in the array, insert it into the priority queue.</div>
+                                <div style="margin-left: 20px;"> • 2. For each odd number of nodes i (1, 3, 5, ..., n), split the nodes into two subtrees by considering all possible left and right subtree sizes.</div>
                             
-                                <div style="margin-left: 20px;"> • If the size of the heap exceeds k, remove the smallest element.</div>
+                                <div style="margin-left: 20px;"> • 3. Recursively generate full binary trees for smaller subproblems and combine them into larger trees.</div>
                             
-                                <div style="margin-left: 20px;"> • After processing all numbers, the root of the heap will be the kth largest number.</div>
+                                <div style="margin-left: 20px;"> • 4. Store the root node of each tree and ensure the trees are unique.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array can be large, so the algorithm should be efficient in both time and space.</div>
+                        <div class=""> <b>Goal:</b> The problem ensures that the number of nodes will be small enough (1 &lt;= n &lt;= 20) that dynamic programming can be applied efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should work for arrays with up to 10,000 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The value of n is always an odd integer.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 20.</div>
                             
                         </div>
                     </div>        
@@ -413,19 +411,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array is non-empty and contains valid numbers as strings.</div>
+                                <div style="margin-left: 20px;"> • The value of n will always be odd.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [&#39;5&#39;, &#39;12&#39;, &#39;15&#39;, &#39;9&#39;], k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting the array in non-decreasing order, we get [&#39;5&#39;, &#39;9&#39;, &#39;12&#39;, &#39;15&#39;]. The 2nd largest number is &#39;12&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, there are two possible full binary trees with 5 nodes. The trees are constructed by considering all possible ways to split the nodes into left and right subtrees.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [&#39;2&#39;, &#39;1&#39;, &#39;2&#39;], k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sorted array is [&#39;1&#39;, &#39;2&#39;, &#39;2&#39;]. The 3rd largest number is &#39;1&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 7</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For n = 7, there are several possible full binary trees. Each tree has 3 nodes in the left and right subtrees, with a root node connecting them.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,16 +447,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use a priority queue (min-heap) to efficiently track the kth largest element as we process each element in the array.</div>
+                        <div class=""> <b>Approach:</b> The approach uses dynamic programming (DP) to build all possible full binary trees for n nodes. For each odd number n, recursively generate the left and right subtrees and combine them into full binary trees.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can maintain a heap of size k to efficiently keep track of the largest numbers seen so far.</div>
+                                <div style="margin-left: 20px;"> • Each tree must have an odd number of nodes, as each non-leaf node must have exactly two children.</div>
+                            
+                                <div style="margin-left: 20px;"> • Dynamic programming can be used to efficiently generate all possible full binary trees for smaller values of n and combine them.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a heap will allow us to remove the smallest number efficiently when the heap size exceeds k, ensuring the heap always holds the k largest numbers.</div>
+                                <div style="margin-left: 20px;"> • We can use a bottom-up approach, starting with small values of n and incrementally constructing larger trees.</div>
                             
                         </div>
                     </div>
@@ -466,13 +466,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a min-heap to store the top k largest numbers.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a DP array where dp[i] contains all possible full binary trees with i nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, adding each number to the heap.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize dp[1] with a single node tree (the base case).</div>
                             
-                                <div style="margin-left: 20px;"> • If the heap exceeds size k, remove the smallest element.</div>
+                                <div style="margin-left: 20px;"> • 3. For each odd number i from 3 to n, generate full binary trees by combining smaller trees stored in dp.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the root of the heap as the kth largest number.</div>
+                                <div style="margin-left: 20px;"> • 4. Return dp[n] as the list of all possible full binary trees with n nodes.</div>
                             
                         </div>
                     </div>
@@ -481,22 +481,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array will always contain at least one number, so this case doesn&#39;t need to be handled explicitly.</div>
+                                <div style="margin-left: 20px;"> • If n = 1, the only possible tree is a single node.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large arrays, ensure that the priority queue is implemented efficiently to handle up to 10,000 numbers.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle values of n up to 20.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If k equals the length of the array, the kth largest number is the smallest element in the array.</div>
+                                <div style="margin-left: 20px;"> • Since n is always an odd number, the solution can be designed to only process odd numbers.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should operate within O(n log k) time complexity, where n is the length of the array.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle n up to 20 without performance issues.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,17 +515,39 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Priority Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Empty Line</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Dynamic Programming Table Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Queue Size Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop (Iterating over odd numbers)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop (Iterating over left subtree sizes)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Comment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Through Left Subtree Trees</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Through Right Subtree Trees</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 TreeNode Creation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Assign Left Subtree</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Assign Right Subtree</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Store Created Tree</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 End Inner Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 End Left Subtree Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 End Outer Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 End Function</button>
                     
                 </div>
 
@@ -534,19 +556,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">kthLargestNumber</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span>, cmp<span style="color:#666">&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        pq.push(nums[i]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(pq.size() <span style="color:#666">&gt;</span> k) {
-</span></span><span style="display:flex;"><span>            pq.pop();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> allPossibleFBT(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> pq.top();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>].push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>; l <span style="color:#666">&lt;</span> i; l <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; l;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: dp[l])
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it2</span>: dp[i <span style="color:#666">-</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>                node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> it;
+</span></span><span style="display:flex;"><span>                node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> it2;
+</span></span><span style="display:flex;"><span>                dp[i].push_back(node);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];        
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -557,70 +584,180 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">kthLargestNumber</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> allPossibleFBT(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `kthLargestNumber` which takes a vector of strings `nums` and an integer `k` to find the k-th largest number. </div>
+                            <div class=""> Define the function `allPossibleFBT`, which takes an integer `n` as input and returns a vector of pointers to TreeNode, representing all possible full binary trees with `n` nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Priority Queue Initialization</b></div>
+                            <div class=""> <b>2 : Empty Line</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span>, cmp<span style="color:#666">&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a priority queue `pq` that will store strings in descending order based on the custom comparator `cmp`. </div>
+                            <div class=""> This line is empty and used for formatting purposes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Looping</b></div>
+                            <div class=""> <b>3 : Dynamic Programming Table Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop that iterates through each element in the vector `nums`. </div>
+                            <div class=""> Initialize a 2D vector `dp` where `dp[i]` will store all possible full binary trees with `i` nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Queue Operation</b></div>
+                            <div class=""> <b>4 : Base Case Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">1</span>].push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the current string from `nums` into the priority queue. </div>
+                            <div class=""> For the base case, initialize `dp[1]` with a single node tree. This is the only full binary tree with 1 node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Queue Size Check</b></div>
+                            <div class=""> <b>5 : Outer Loop (Iterating over odd numbers)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(pq.size() <span style="color:#666">&gt;</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the size of the priority queue exceeds `k`, and if so, removes the smallest element. </div>
+                            <div class=""> Start a loop from `i = 3` to `n`, incrementing by 2. This ensures that only odd values of `i` are considered, as full binary trees can only have an odd number of nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Queue Operation</b></div>
+                            <div class=""> <b>6 : Inner Loop (Iterating over left subtree sizes)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>; l <span style="color:#666">&lt;</span> i; l <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the smallest element from the priority queue to maintain only the top `k` largest elements. </div>
+                            <div class=""> Start a loop to iterate over possible sizes of the left subtree, where `l` is the size of the left subtree, and it must be odd. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Statement</b></div>
+                            <div class=""> <b>7 : Comment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> pq.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; l;
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line is a commented-out debug statement that would print the current size of the left subtree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop Through Left Subtree Trees</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: dp[l])
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the top element of the priority queue, which will be the k-th largest number. </div>
+                            <div class=""> Iterate over all trees in `dp[l]`, which represent possible left subtrees for a tree with `i` nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Loop Through Right Subtree Trees</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it2</span>: dp[i <span style="color:#666">-</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate over all trees in `dp[i - l - 1]`, which represent possible right subtrees for a tree with `i` nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : TreeNode Creation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create a new tree node to serve as the root of the current full binary tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Assign Left Subtree</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> it;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the left child of the current node to be one of the trees from `dp[l]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Assign Right Subtree</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> it2;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Assign the right child of the current node to be one of the trees from `dp[i - l - 1]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Store Created Tree</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i].push_back(node);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the newly created full binary tree to `dp[i]`, which stores all possible full binary trees with `i` nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : End Inner Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the loop that iterates over possible right subtree trees. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : End Left Subtree Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the loop that iterates over possible left subtree sizes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : End Outer Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the loop that iterates over all possible tree sizes `i`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the vector `dp[n]`, which contains all possible full binary trees with `n` nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : End Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the function definition. </div>
                         </div>
                     
                 </div>
@@ -640,16 +777,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log k)</div>
-                        <div class=""> <b>Average Case:</b> O(n log k)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log k)</div> 
-                        <div class=""> <b>Description:</b> We insert each element into the heap, which takes O(log k) time. The total time complexity is O(n log k), where n is the number of elements.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^3)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^3)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n^3) in the worst case, where n is the number of nodes. The dynamic programming approach generates and combines trees for each odd value of n.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k)</div>
-                        <div class=""> <b>Worst Case:</b> O(k)</div> 
-                        <div class=""> <b>Description:</b> We use a heap of size k, so the space complexity is O(k).</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n^2) in the worst case, where n is the number of nodes. This is due to the storage required for the DP array and the binary trees generated.</div>    
                     </div>
 
                 </div>

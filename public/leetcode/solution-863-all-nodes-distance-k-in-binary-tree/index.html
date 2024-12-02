@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 12, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class=""> Given a zero-based permutation nums (0-indexed), build a new array ans of the same length where for each i, ans[i] = nums[nums[i]]. Return the array ans. A zero-based permutation means that the array consists of distinct integers from 0 to nums.length - 1 (inclusive). </div>
+<div class=""> Given a binary tree, a target node within the tree, and a non-negative integer k, determine all the nodes that are exactly k edges away from the target node. Return these node values as a list in any order. </div>
 
 
 
@@ -361,47 +361,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array nums, which is a zero-based permutation of distinct integers from 0 to nums.length - 1.</div>
-                        <div class=""> <b>Example:</b> nums = [2, 0, 1, 4, 3]</div>
+                        <div class=""> <b>Input:</b> The input includes the root of a binary tree, a target node within the tree, and an integer k.</div>
+                        <div class=""> <b>Example:</b> root = [1,2,3,4,5,null,6], target = 2, k = 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The binary tree has between 1 and 500 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt; nums.length</div>
+                                <div style="margin-left: 20px;"> • All node values are unique and in the range [0, 500].</div>
                             
-                                <div style="margin-left: 20px;"> • The elements in nums are distinct.</div>
+                                <div style="margin-left: 20px;"> • The target node is guaranteed to exist in the tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 1000.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the array ans, where each element is nums[nums[i]].</div>
-                        <div class=""> <b>Example:</b> [1, 2, 0, 3, 4]</div>
+                        <div class=""> <b>Output:</b> Return a list of all node values that are k edges away from the target node.</div>
+                        <div class=""> <b>Example:</b> Output: [4, 5, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Output can be in any order.</div>
+                            
+                                <div style="margin-left: 20px;"> • If no nodes are at distance k, return an empty list.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> For each index i in the array nums, compute nums[nums[i]] and store it in the result array ans.</div>
+                        <div class=""> <b>Goal:</b> Identify all nodes exactly k edges away from the given target node in the binary tree.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the array nums.</div>
+                                <div style="margin-left: 20px;"> • Store parent-child relationships of all nodes using a map.</div>
                             
-                                <div style="margin-left: 20px;"> • For each index i, compute ans[i] = nums[nums[i]].</div>
+                                <div style="margin-left: 20px;"> • Perform a breadth-first search (BFS) or depth-first search (DFS) starting from the target node.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the resulting array ans.</div>
+                                <div style="margin-left: 20px;"> • Track visited nodes to avoid revisiting and looping.</div>
+                            
+                                <div style="margin-left: 20px;"> • Stop the search when the depth equals k and collect the values of nodes at this depth.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the algorithm handles arrays with lengths up to 1000.</div>
+                        <div class=""> <b>Goal:</b> Ensure all constraints of the input and expected output are satisfied.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array length is at least 1.</div>
+                                <div style="margin-left: 20px;"> • The tree must be well-formed with no duplicate node values.</div>
                             
-                                <div style="margin-left: 20px;"> • The elements are distinct and fall within the range 0 to nums.length - 1.</div>
+                                <div style="margin-left: 20px;"> • The target node must exist within the tree.</div>
+                            
+                                <div style="margin-left: 20px;"> • The value of k must be within the specified range.</div>
                             
                         </div>
                     </div>        
@@ -409,17 +419,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array is a valid zero-based permutation of integers.</div>
+                                <div style="margin-left: 20px;"> • The binary tree is finite with no cyclic references.</div>
                             
-                                <div style="margin-left: 20px;"> • The length of the array will not exceed 1000.</div>
+                                <div style="margin-left: 20px;"> • Node values are distinct.</div>
+                            
+                                <div style="margin-left: 20px;"> • The tree includes the specified target node.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [2, 0, 1, 4, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In the array nums = [2, 0, 1, 4, 3], the new array ans is computed as follows: ans[0] = nums[nums[0]] = nums[2] = 1, ans[1] = nums[nums[1]] = nums[0] = 2, ans[2] = nums[nums[2]] = nums[1] = 0, ans[3] = nums[nums[3]] = nums[4] = 3, ans[4] = nums[nums[4]] = nums[3] = 4. Thus, the final ans is [1, 2, 0, 3, 4].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1,2,3,4,5,null,6], target = 2, k = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Nodes at distance 1 from target node 2 are nodes 4, 5, and 1. Output: [4, 5, 1].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [7], target = 7, k = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The tree contains only one node, so no nodes are at distance 3. Output: [].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -443,18 +459,20 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can simply iterate over the input array nums and use the given formula to compute the result for each index i.</div>
+                        <div class=""> <b>Approach:</b> Use a combination of DFS to track parent-child relationships and BFS to find nodes at a specified distance.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem asks us to compute the value nums[nums[i]] for each index i.</div>
+                                <div style="margin-left: 20px;"> • The problem requires traversing the tree in both directions: parent-to-child and child-to-parent.</div>
                             
-                                <div style="margin-left: 20px;"> • Since the array elements are distinct and within a specific range, we don&#39;t need additional data structures.</div>
+                                <div style="margin-left: 20px;"> • Using BFS will efficiently find nodes at a specific distance.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This approach is straightforward and requires just one iteration through the array.</div>
+                                <div style="margin-left: 20px;"> • Start by mapping parent relationships for all nodes.</div>
+                            
+                                <div style="margin-left: 20px;"> • Perform a level-order traversal (BFS) from the target node to collect nodes at the required depth.</div>
                             
                         </div>
                     </div>
@@ -462,11 +480,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty result array ans of the same length as nums.</div>
+                                <div style="margin-left: 20px;"> • Create a map to store parent relationships for each node in the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • Loop through the indices of nums and set ans[i] = nums[nums[i]].</div>
+                                <div style="margin-left: 20px;"> • Perform a DFS on the tree to populate this map.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the result array ans.</div>
+                                <div style="margin-left: 20px;"> • Start BFS traversal from the target node, tracking visited nodes.</div>
+                            
+                                <div style="margin-left: 20px;"> • Collect nodes when the depth equals k and return them as the result.</div>
                             
                         </div>
                     </div>
@@ -475,22 +495,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will never be empty as per problem constraints.</div>
+                                <div style="margin-left: 20px;"> • Tree is empty (should not occur per constraints).</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution efficiently handles inputs with the maximum size, i.e., nums.length = 1000.</div>
+                                <div style="margin-left: 20px;"> • Tree contains the maximum number of nodes, k is very large (e.g., k &gt; tree height).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For the smallest array length (nums.length = 1), the result will be [nums[nums[0]]], which is just nums[0].</div>
+                                <div style="margin-left: 20px;"> • Tree has only one node, k &gt; 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will always contain distinct integers from 0 to nums.length - 1.</div>
+                                <div style="margin-left: 20px;"> • Ensure k = 0 returns the value of the target node.</div>
                             
                         </div>                                                                        
                     </div>
@@ -507,17 +527,61 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Array Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Map Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Public Method</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Base Case Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Helper Method Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 DFS Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Set Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Set Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Base Case Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Action on Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Closing Brace</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Recursive DFS Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Recursive DFS Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Recursive DFS Call</button>
                     
                 </div>
 
@@ -526,13 +590,44 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> buildArray(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>nums.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>        ans[i]<span style="color:#666">=</span>nums[nums[i]];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, TreeNode<span style="color:#666">*&gt;</span> mp;
+</span></span><span style="display:flex;"><span>set<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> st;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">parents</span>(TreeNode<span style="color:#666">*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) {
+</span></span><span style="display:flex;"><span>        mp[node<span style="color:#666">-&gt;</span>left] <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>        parents(node<span style="color:#666">-&gt;</span>left);
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) {
+</span></span><span style="display:flex;"><span>        mp[node<span style="color:#666">-&gt;</span>right] <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>        parents(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> distanceK(TreeNode<span style="color:#666">*</span> root, TreeNode<span style="color:#666">*</span> target, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> {};
+</span></span><span style="display:flex;"><span>    parents(root);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    dfs(target, k);
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(st.count(node)) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    st.insert(node);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        ans.push_back(node<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) dfs(node<span style="color:#666">-&gt;</span>left, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) dfs(node<span style="color:#666">-&gt;</span>right, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[node]) dfs(mp[node], k <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -540,63 +635,283 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> buildArray(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;buildArray&#39; which takes a vector of integers &#39;nums&#39; and returns a new vector where each element is replaced by another element indexed by its own value. </div>
+                            <div class=""> Define the class &#39;Solution&#39; to solve the problem of finding nodes at a distance &#39;k&#39; from a target node in a binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, TreeNode<span style="color:#666">*&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable &#39;n&#39; to store the size of the input vector &#39;nums&#39;. </div>
+                            <div class=""> Declare a map &#39;mp&#39; to store each node&#39;s parent node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> st;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a vector &#39;ans&#39; of size &#39;n&#39; to store the result. </div>
+                            <div class=""> Declare a set &#39;st&#39; to track the visited nodes to avoid cycles. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Start</b></div>
+                            <div class=""> <b>4 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n;i<span style="color:#666">++</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop that iterates over each index of the input vector &#39;nums&#39;. </div>
+                            <div class=""> Declare a vector &#39;ans&#39; to store the values of nodes that are at a distance &#39;k&#39; from the target. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Array Assignment</b></div>
+                            <div class=""> <b>5 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i]<span style="color:#666">=</span>nums[nums[i]];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">parents</span>(TreeNode<span style="color:#666">*</span> node) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each index &#39;i&#39;, assigns the value at &#39;nums[nums[i]]&#39; to &#39;ans[i]&#39;, effectively building the new array by accessing the element indexed by &#39;nums[i]&#39;. </div>
+                            <div class=""> Define a helper method to traverse the tree and record each node&#39;s parent in the &#39;mp&#39; map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current node is null. If so, return to prevent further traversal. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current node has a left child. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Map Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[node<span style="color:#666">-&gt;</span>left] <span style="color:#666">=</span> node;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the left child and its parent in the &#39;mp&#39; map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        parents(node<span style="color:#666">-&gt;</span>left);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call the &#39;parents&#39; method on the left child. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Conditional Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current node has a right child. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Map Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[node<span style="color:#666">-&gt;</span>right] <span style="color:#666">=</span> node;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the right child and its parent in the &#39;mp&#39; map. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        parents(node<span style="color:#666">-&gt;</span>right);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call the &#39;parents&#39; method on the right child. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Public Method</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare the following methods as public members of the class. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> distanceK(TreeNode<span style="color:#666">*</span> root, TreeNode<span style="color:#666">*</span> target, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the main method &#39;distanceK&#39; that returns the values of nodes at a distance &#39;k&#39; from the target. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Base Case Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> {};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the root node is null, and if so, return an empty vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Helper Method Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    parents(root);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the &#39;parents&#39; method to record the parent-child relationships. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : DFS Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(target, k);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the &#39;dfs&#39; method to perform depth-first search and find all nodes at distance &#39;k&#39; from the target. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return Statement</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the newly constructed vector &#39;ans&#39; that contains the elements at the indices specified by &#39;nums&#39;. </div>
+                            <div class=""> Return the &#39;ans&#39; vector containing the values of nodes at the specified distance. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the &#39;dfs&#39; method to perform a depth-first search on the tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Set Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(st.count(node)) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the node has already been visited by checking the &#39;st&#39; set. If yes, return to avoid processing it again. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Set Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    st.insert(node);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the node to the &#39;st&#39; set to mark it as visited. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Base Case Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current depth &#39;k&#39; is zero. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Action on Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(node<span style="color:#666">-&gt;</span>val);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If &#39;k&#39; is zero, add the node&#39;s value to the &#39;ans&#39; vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return to exit the current function call once the node&#39;s value is added to &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Closing Brace</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End the block for the base case check. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Recursive DFS Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) dfs(node<span style="color:#666">-&gt;</span>left, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the node has a left child, recursively call &#39;dfs&#39; on the left child with a reduced value of &#39;k&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Recursive DFS Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) dfs(node<span style="color:#666">-&gt;</span>right, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the node has a right child, recursively call &#39;dfs&#39; on the right child with a reduced value of &#39;k&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Recursive DFS Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[node]) dfs(mp[node], k <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If a parent node exists in the &#39;mp&#39; map, recursively call &#39;dfs&#39; on the parent with a reduced value of &#39;k&#39;. </div>
                         </div>
                     
                 </div>
@@ -616,16 +931,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution iterates over the array exactly once, which results in a time complexity of O(n), where n is the length of the input array.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(N), where N is the number of nodes in the tree.</div>
+                        <div class=""> <b>Average Case:</b> O(N), since each node and edge is visited once.</div>
+                        <div class=""> <b>Worst Case:</b> O(N), if k equals the tree height or the tree is skewed.</div> 
+                        <div class=""> <b>Description:</b> The complexity is dominated by traversing the tree and performing BFS.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We use an additional array of size n to store the result, so the space complexity is O(n).</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if only the target node exists.</div>
+                        <div class=""> <b>Worst Case:</b> O(N), due to the parent map and BFS queue.</div> 
+                        <div class=""> <b>Description:</b> Space usage depends on the map for parent references and BFS queue.</div>    
                     </div>
 
                 </div>

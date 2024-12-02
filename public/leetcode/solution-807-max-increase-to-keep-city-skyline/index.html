@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1316s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1314s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/807.webp" 
            alt="A skyline of buildings with the maximum increase calculated, glowing softly as each increase is added." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given a string <code>s</code> containing several bracket pairs with non-empty keys. You are also provided a 2D array <code>knowledge</code> where each element is a key-value pair. Your task is to evaluate the string by replacing the keys inside the bracket pairs with their corresponding values. If a key is unknown, replace it with a question mark <code>?</code>. </div>
+<div class=""> In a city grid, buildings are represented by an n x n matrix where each element corresponds to the height of a building at a specific location. You can increase the height of any building in the city grid, but the increased height should not alter the skyline of the city when viewed from any of the four cardinal directions (north, south, east, and west). Your task is to calculate the maximum sum of the heights that can be added to the buildings without changing the skyline. </div>
 
 
 
@@ -371,55 +371,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string `s` and a 2D array `knowledge` containing key-value pairs.</div>
-                        <div class=""> <b>Example:</b> s = &#34;(user)likes(cats)&#34;, knowledge = [[&#34;user&#34;,&#34;Alice&#34;], [&#34;cats&#34;,&#34;dogs&#34;]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an n x n grid where each grid[i][j] represents the height of a building at row i and column j.</div>
+                        <div class=""> <b>Example:</b> Input: grid = [[1, 3, 2],[4, 1, 5],[6, 3, 4]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • n == grid.length</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= knowledge.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • n == grid[r].length</div>
                             
-                                <div style="margin-left: 20px;"> • knowledge[i].length == 2</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 50</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= keyi.length, valuei.length &lt;= 10</div>
-                            
-                                <div style="margin-left: 20px;"> • The string `s` contains lowercase English letters and round brackets `(` and `)`.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= grid[r][c] &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the resulting string after evaluating all the bracket pairs in `s`.</div>
-                        <div class=""> <b>Example:</b> Output: &#34;Alicelikesdogs&#34;</div>
+                        <div class=""> <b>Output:</b> Return the maximum sum that the heights of the buildings can be increased by without affecting the skyline.</div>
+                        <div class=""> <b>Example:</b> Output: 10</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a string where each key in a bracket pair is replaced by its corresponding value or `?` if unknown.</div>
+                                <div style="margin-left: 20px;"> • The sum must be calculated based on the heights of the buildings without affecting the skyline from any direction.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To evaluate all bracket pairs in the string and replace keys with their corresponding values or `?` if unknown.</div>
+                        <div class=""> <b>Goal:</b> To maximize the height of buildings without altering the skyline, we need to calculate the maximum possible height increase for each building by comparing it to the skyline views from each direction.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a map to store the key-value pairs from `knowledge`.</div>
+                                <div style="margin-left: 20px;"> • Find the maximum building heights for each row and column (north-south and west-east).</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the string `s` and whenever a bracket pair is encountered, extract the key.</div>
+                                <div style="margin-left: 20px;"> • For each building, calculate the maximum height it can reach based on the minimum of the corresponding row and column maximums.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the key is in the map, and replace it with its corresponding value or `?` if not found.</div>
-                            
-                                <div style="margin-left: 20px;"> • Continue processing the string and append the modified parts to the result string.</div>
+                                <div style="margin-left: 20px;"> • Sum up the differences between the calculated maximum heights and the original building heights to get the total increase in height.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string `s` is at most 100,000 characters long and contains bracket pairs. The array `knowledge` contains unique key-value pairs.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the grid meets the problem constraints for the grid size and values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should handle both small and large inputs efficiently.</div>
+                                <div style="margin-left: 20px;"> • n is between 2 and 50.</div>
                             
-                                <div style="margin-left: 20px;"> • The output string should be constructed with respect to the input size constraints.</div>
+                                <div style="margin-left: 20px;"> • Each building height is between 0 and 100.</div>
                             
                         </div>
                     </div>        
@@ -427,21 +423,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string `s` will always contain valid bracket pairs.</div>
-                            
-                                <div style="margin-left: 20px;"> • All keys in `knowledge` are unique.</div>
+                                <div style="margin-left: 20px;"> • The height of any building can be increased, but the changes must respect the skyline constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;(user)likes(cats)&#34;, knowledge = [[&#34;user&#34;,&#34;Alice&#34;], [&#34;cats&#34;,&#34;dogs&#34;]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The key &#34;user&#34; has a value of &#34;Alice&#34; and &#34;cats&#34; has a value of &#34;dogs&#34;, so the final output is &#34;Alicelikesdogs&#34;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;hello(name)&#34;, knowledge = [[&#34;name&#34;,&#34;Bob&#34;]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The key &#34;name&#34; has a value of &#34;Bob&#34;, so replace the bracket pair with the value and the result is &#34;hellobob&#34;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: grid = [[1, 3, 2],[4, 1, 5],[6, 3, 4]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this grid, the maximum sum that the heights of buildings can be increased by is 10. The calculated skyline views from all four directions (north, south, east, and west) are taken into account to ensure that increasing the height of any building does not alter the skyline.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -465,16 +455,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can iterate over the string `s` and for each bracket pair, we check if the key exists in the `knowledge` map. If it does, replace it with the value; otherwise, replace it with a question mark.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we will compute the maximum possible height for each building that maintains the city&#39;s skyline from all four cardinal directions. This involves finding the maximum building heights for each row and column, then using these to determine the permissible increase for each building.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string `s` can be large, so we need an efficient solution to process the input in linear time.</div>
+                                <div style="margin-left: 20px;"> • We can maintain the skyline by respecting the maximum height from each direction.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a map to store the key-value pairs from `knowledge` ensures that lookups for the keys are efficient (O(1) time complexity).</div>
+                                <div style="margin-left: 20px;"> • The problem requires iterating over the rows and columns to calculate the maximum heights from each direction and then determining the feasible height increase for each building.</div>
                             
                         </div>
                     </div>
@@ -482,15 +472,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a map to store key-value pairs from `knowledge`.</div>
+                                <div style="margin-left: 20px;"> • Compute the maximum height in each row and each column.</div>
                             
-                                <div style="margin-left: 20px;"> • Initialize a result string `res`.</div>
+                                <div style="margin-left: 20px;"> • For each building, compute the maximum height it can reach by taking the minimum of the maximum row height and column height for that building.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each character of `s`. When encountering a &#39;(&#39;, start extracting the key until encountering a &#39;)&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • Check if the extracted key exists in the map and replace the bracket pair with the corresponding value or &#39;?&#39; if the key is unknown.</div>
-                            
-                                <div style="margin-left: 20px;"> • Append all characters to the result string and return it once the iteration is complete.</div>
+                                <div style="margin-left: 20px;"> • Sum the difference between the new maximum height and the current height of each building to get the total possible height increase.</div>
                             
                         </div>
                     </div>
@@ -499,22 +485,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `knowledge` is empty, all bracket pairs will be replaced by &#39;?&#39; in the output.</div>
+                                <div style="margin-left: 20px;"> • If the grid has no buildings (n=0), the result will be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large values of `s` and `knowledge`, the solution must handle the input efficiently within the time and space limits.</div>
+                                <div style="margin-left: 20px;"> • For large grids (n=50), ensure that the solution efficiently handles the size and performs within time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider edge cases like when the string `s` has no brackets or when all keys are unknown.</div>
+                                <div style="margin-left: 20px;"> • If all buildings are at the maximum possible height, no increase can be made.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution processes the string and map efficiently in O(n) time.</div>
+                                <div style="margin-left: 20px;"> • The solution must account for the constraints of grid size and building heights.</div>
                             
                         </div>                                                                        
                     </div>
@@ -533,43 +519,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Map Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop - Rows</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop - Columns</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Index Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Row Maximum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 While Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Column Maximum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Parenthesis Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Increment i</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Nested Loop for Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Key Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Inner Loop for Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Extract Key</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Grid Height Increase Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Add Character to Key</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Increment i (Key Extraction)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 End of Key Extraction</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Check if Key Exists in Map</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Add Value to Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Add &#39;?&#39; for Missing Key</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Increment i (End of Parentheses)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Handle Non-Parenthesized Characters</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Final Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
                     
                 </div>
 
@@ -578,28 +548,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">evaluate</span>(string s, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> knowledge) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">e</span>: knowledge)
-</span></span><span style="display:flex;"><span>    mp[e[<span style="color:#666">0</span>]] <span style="color:#666">=</span> e[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            string key <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(s[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;)&#39;</span>) {
-</span></span><span style="display:flex;"><span>                key <span style="color:#666">+=</span> s[i];
-</span></span><span style="display:flex;"><span>                i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp.count(key)) {
-</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> mp[key];
-</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// mp.erase(key);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> <span style="color:#b44">&#39;?&#39;</span>;
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> s[i<span style="color:#666">++</span>];
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxIncreaseKeepingSkyline</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(n, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            row[i] <span style="color:#666">=</span> max(row[i], grid[i][j]);
+</span></span><span style="display:flex;"><span>            col[j] <span style="color:#666">=</span> max(col[j], grid[i][j]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> min(row[i], col[j]) <span style="color:#666">-</span> grid[i][j];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
@@ -612,200 +573,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">evaluate</span>(string s, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;&amp;</span> knowledge) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxIncreaseKeepingSkyline</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the `evaluate` function which takes a string `s` and a reference to a vector of vector of strings `knowledge`. </div>
+                            <div class=""> This defines the function `maxIncreaseKeepingSkyline` which takes a 2D vector `grid` as input and returns an integer. The function aims to calculate the maximum increase in grid height while keeping the skyline unchanged. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Map Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, a map `mp` is declared, where each key-value pair will represent a mapping between a key (string) and its corresponding value (string) from the `knowledge` vector. </div>
+                            <div class=""> Here, we initialize the variable `n` which stores the size of the grid (i.e., the number of rows or columns, assuming the grid is square). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Map Population</b></div>
+                            <div class=""> <b>3 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">e</span>: knowledge)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> row(n, <span style="color:#666">0</span>), col(n, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each element `e` in the `knowledge` vector. </div>
+                            <div class=""> We create two vectors `row` and `col`, both of size `n`, initialized to 0. These will store the maximum values for each row and column in the grid, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Map Assignment</b></div>
+                            <div class=""> <b>4 : Outer Loop - Rows</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[e[<span style="color:#666">0</span>]] <span style="color:#666">=</span> e[<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each element `e` in `knowledge` is a pair where `e[0]` is the key and `e[1]` is the value. This line adds them to the map `mp`. </div>
+                            <div class=""> We start an outer loop that iterates over each row of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Result Initialization</b></div>
+                            <div class=""> <b>5 : Inner Loop - Columns</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A string `res` is initialized as an empty string to store the result of the evaluation. </div>
+                            <div class=""> This inner loop iterates over each column in the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Index Initialization</b></div>
+                            <div class=""> <b>6 : Row Maximum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            row[i] <span style="color:#666">=</span> max(row[i], grid[i][j]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An integer variable `i` is initialized to 0, which will be used to iterate through the string `s`. </div>
+                            <div class=""> This line updates the maximum value for the current row `i` by comparing the current element `grid[i][j]` with the existing value stored in `row[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : While Loop</b></div>
+                            <div class=""> <b>7 : Column Maximum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            col[j] <span style="color:#666">=</span> max(col[j], grid[i][j]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This while loop continues until `i` reaches the size of string `s`. </div>
+                            <div class=""> Similarly, this line updates the maximum value for the current column `j` by comparing the current element `grid[i][j]` with the existing value stored in `col[j]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Parenthesis Check</b></div>
+                            <div class=""> <b>8 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the character at position `i` in the string `s` is an opening parenthesis, we enter this block of code to handle the placeholder. </div>
+                            <div class=""> We initialize a variable `res` to store the result, which will accumulate the total increase in height for the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Increment i</b></div>
+                            <div class=""> <b>9 : Nested Loop for Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Move to the next character in the string after the opening parenthesis. </div>
+                            <div class=""> We start a loop to iterate over each row again to calculate the increase for each element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Key Initialization</b></div>
+                            <div class=""> <b>10 : Inner Loop for Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string key <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A string `key` is initialized to an empty string. It will be used to store the key found inside the parentheses. </div>
+                            <div class=""> An inner loop is used to process each element in the grid for a given row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Extract Key</b></div>
+                            <div class=""> <b>11 : Grid Height Increase Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(s[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;)&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> min(row[i], col[j]) <span style="color:#666">-</span> grid[i][j];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This inner while loop continues extracting characters from the string until the closing parenthesis is encountered. </div>
+                            <div class=""> For each element in the grid, we compute the maximum possible increase in height by subtracting the current value from the minimum of the maximum row and column heights. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Add Character to Key</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                key <span style="color:#666">+=</span> s[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each character encountered inside the parentheses is appended to the `key` string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Increment i (Key Extraction)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                i<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Move to the next character in the string during key extraction. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : End of Key Extraction</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> End of the while loop that extracts the key inside the parentheses. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Check if Key Exists in Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp.count(key)) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the `key` exists in the map `mp`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Add Value to Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">+=</span> mp[key];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the key exists in the map, append the corresponding value from the map to the result string `res`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Add &#39;?&#39; for Missing Key</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> <span style="color:#b44">&#39;?&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the key is not found in the map, append `?` to the result string `res`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Increment i (End of Parentheses)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Move past the closing parenthesis after processing the key. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Handle Non-Parenthesized Characters</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> res <span style="color:#666">+=</span> s[i<span style="color:#666">++</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the character is not an opening parenthesis, simply append the character to the result string `res`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Return Final Result</b></div>
+                            <div class=""> <b>12 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final result string `res` after all the placeholders are processed. </div>
+                            <div class=""> Return the total calculated increase in grid heights. </div>
                         </div>
                     
                 </div>
@@ -825,16 +706,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution involves iterating through the string `s` and performing constant-time lookups for each key, leading to O(n) time complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2), where n is the size of the grid.</div>
+                        <div class=""> <b>Average Case:</b> O(n^2), as each building must be processed individually.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2), since the grid size is bounded by n = 50, leading to a manageable number of operations.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is quadratic in the size of the grid due to the need to process both rows and columns.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
-                        <div class=""> <b>Description:</b> The space complexity arises from storing the string `s` and the map of `knowledge`, where n is the length of the string and m is the number of key-value pairs in `knowledge`.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), since we only need additional space for row and column maximums.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as space is needed to store the row and column maximums.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear with respect to the grid size, as we only need to store the row and column maximum heights.</div>    
                     </div>
 
                 </div>

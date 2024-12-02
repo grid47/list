@@ -312,7 +312,7 @@
 
 
 
-<div class=""> Given the root of a binary tree, return the smallest subtree that contains all the nodes with the maximum depth in the tree. A node is considered the deepest if it has the greatest distance to the root among all nodes. The subtree of a node consists of the node itself and all its descendants. </div>
+<div class=""> In a file system where both directories and files are stored, we are given a string representation of the system. The string includes the directory structure, with tab characters (&rsquo;\t&rsquo;) representing subdirectories and newline characters (&rsquo;\n&rsquo;) representing file and directory boundaries. Each directory and file has a unique absolute path. Compute the length of the longest absolute path to a file. If no file exists, return 0. </div>
 
 
 
@@ -363,49 +363,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is the root of a binary tree, represented as an array with level-order traversal.</div>
-                        <div class=""> <b>Example:</b> root = [4,3,5,null,7,6]</div>
+                        <div class=""> <b>Input:</b> The input is a string representing the file system&#39;s directory and file structure, with directories and files separated by newline (&#39;\n&#39;) characters, and subdirectories indicated by tab (&#39;\t&#39;) characters.</div>
+                        <div class=""> <b>Example:</b> input = &#34;root\n\tsubfolder1\n\tsubfolder2\n\t\tfile1.txt&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The binary tree contains between 1 and 500 nodes.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= input.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • Each node in the tree has a unique value in the range [0, 500].</div>
+                                <div style="margin-left: 20px;"> • The input may contain lowercase and uppercase English letters, newline (&#39;\n&#39;) and tab (&#39;\t&#39;) characters, a dot (&#39;.&#39;), space (&#39; &#39;), and digits.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the smallest subtree that includes all the deepest nodes in the tree, represented by the root of that subtree.</div>
-                        <div class=""> <b>Example:</b> Output: [7]</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest absolute path to a file. If no file exists, return 0.</div>
+                        <div class=""> <b>Example:</b> Output: 21</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The subtree&#39;s root must include all nodes at the maximum depth.</div>
+                                <div style="margin-left: 20px;"> • The path length should include the full path to the file, including directory names separated by &#39;/&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Identify the smallest subtree containing all the deepest nodes in the binary tree.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the absolute path length of the longest file in the system.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Traverse the tree to find the maximum depth.</div>
+                                <div style="margin-left: 20px;"> • Parse the string input to identify directory levels and files.</div>
                             
-                                <div style="margin-left: 20px;"> • For each node, recursively determine if its left and right subtrees contain nodes at the maximum depth.</div>
+                                <div style="margin-left: 20px;"> • Track the current directory level using a stack-like structure.</div>
                             
-                                <div style="margin-left: 20px;"> • If both subtrees contain the deepest nodes, return the current node as the root of the subtree.</div>
-                            
-                                <div style="margin-left: 20px;"> • If only one subtree contains the deepest nodes, propagate that subtree&#39;s root upwards.</div>
+                                <div style="margin-left: 20px;"> • Calculate the absolute path for each file and track the longest path found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the input and output adhere to the problem&#39;s requirements.</div>
+                        <div class=""> <b>Goal:</b> The algorithm should handle large input efficiently and return the correct result even for deeply nested directories.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The binary tree is finite and non-cyclic.</div>
-                            
-                                <div style="margin-left: 20px;"> • Node values are unique and within the specified range.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently for input sizes up to 10,000 characters.</div>
                             
                         </div>
                     </div>        
@@ -413,23 +409,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree is non-empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • The input is well-formed and represents a valid binary tree.</div>
-                            
-                                <div style="margin-left: 20px;"> • All nodes have unique values.</div>
+                                <div style="margin-left: 20px;"> • The input represents a valid file system structure with no file or directory names having length 0.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [4,3,5,null,7,6], Output: [7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The deepest node is 7. It is the only node at the maximum depth, so it forms the smallest subtree.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [2,4,8,null,null,6,10], Output: [8,6,10]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The deepest nodes are 6 and 10. The smallest subtree containing both of them is rooted at node 8.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: &#34;root\n\tsubfolder1\n\tsubfolder2\n\t\tfile1.txt&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest file path is &#39;root/subfolder2/file1.txt&#39;, which has a length of 21.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,18 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a recursive approach to calculate the depth of each node and find the lowest common ancestor of the deepest nodes.</div>
+                        <div class=""> <b>Approach:</b> We will use a stack to track the length of the current path as we process each directory or file. When we encounter a file, we calculate its total path length and check if it is the longest file path encountered so far.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem reduces to finding the lowest common ancestor of the deepest nodes.</div>
-                            
-                                <div style="margin-left: 20px;"> • Using a recursive depth-first search (DFS), we can propagate depth information upwards.</div>
+                                <div style="margin-left: 20px;"> • We need to differentiate between directories and files, which can be done by checking for a dot (&#39;.&#39;) in the name.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The depth information for the left and right children can determine the smallest subtree containing all deepest nodes.</div>
+                                <div style="margin-left: 20px;"> • We can iterate through the string, updating the current path length as we encounter new levels of directories and calculating the file&#39;s path length when we find a file.</div>
                             
                         </div>
                     </div>
@@ -472,15 +458,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a helper function to recursively determine the depth and lowest common ancestor.</div>
+                                <div style="margin-left: 20px;"> • Initialize a stack to track the length of the current path at each directory level.</div>
                             
-                                <div style="margin-left: 20px;"> • At each node, compare the depth of the left and right subtrees.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the input string character by character.</div>
                             
-                                <div style="margin-left: 20px;"> • If both subtrees have equal depth, the current node is the lowest common ancestor.</div>
+                                <div style="margin-left: 20px;"> • If a tab is encountered, increase the level of the current directory.</div>
                             
-                                <div style="margin-left: 20px;"> • If one subtree has a greater depth, propagate its root upwards.</div>
+                                <div style="margin-left: 20px;"> • If a newline is encountered, process the current level and reset the current directory&#39;s length.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the root of the smallest subtree containing all the deepest nodes.</div>
+                                <div style="margin-left: 20px;"> • When a file is encountered, calculate the total length of the path and update the maximum length if necessary.</div>
                             
                         </div>
                     </div>
@@ -489,24 +475,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable, since the tree is guaranteed to have at least one node.</div>
+                                <div style="margin-left: 20px;"> • Empty input will not be provided as per the problem statement.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Tree with the maximum allowed nodes (500).</div>
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm handles inputs with the maximum allowed length efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All nodes are at the same depth.</div>
-                            
-                                <div style="margin-left: 20px;"> • The tree is a single path (linked list).</div>
+                                <div style="margin-left: 20px;"> • The input may consist only of directories, in which case the result should be 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the tree structure is correctly formed and all nodes are unique.</div>
+                                <div style="margin-left: 20px;"> • Ensure the algorithm handles deeply nested structures and large numbers of files.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,25 +509,43 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Helper Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Left Subtree Recursion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Right Subtree Recursion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Depth Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Right Subtree</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Switch Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Else Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Case Handling</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Left Subtree</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reset Variables</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Equal Depths Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Level Increase</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Case Handling</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 File Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Default Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Path Length Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Path Length Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 File Path Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Max Path Length Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Statement</button>
                     
                 </div>
 
@@ -552,20 +554,33 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">subtreeWithAllDeepest</span>(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> lcadn(root).first;
-</span></span><span style="display:flex;"><span>}
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lengthLongestPath</span>(string ipt) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> levels(<span style="color:#666">300</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> level <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isFile <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> lcadn(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#a2f">NULL</span>, <span style="color:#666">0</span>};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> lft <span style="color:#666">=</span> lcadn(root<span style="color:#666">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> rht <span style="color:#666">=</span> lcadn(root<span style="color:#666">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(lft.second <span style="color:#666">&lt;</span> rht.second) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {rht.first, rht.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (lft.second <span style="color:#666">&gt;</span> rht.second) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {lft.first, lft.second <span style="color:#666">+</span> <span style="color:#666">1</span>};            
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: ipt) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">switch</span>(c) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;\n&#39;</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>                level <span style="color:#666">=</span> <span style="color:#666">0</span>, isFile <span style="color:#666">=</span> <span style="color:#a2f">false</span>, len <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;\t&#39;</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>                level<span style="color:#666">++</span>; <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;.&#39;</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>                isFile <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">default</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>                len<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                levels[level] <span style="color:#666">=</span> len;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(isFile) {
+</span></span><span style="display:flex;"><span>                    ans <span style="color:#666">=</span> max(ans, accumulate(levels.begin(), levels.begin() <span style="color:#666">+</span> level <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>) <span style="color:#666">+</span> level); 
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {root, lft.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -576,110 +591,200 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">subtreeWithAllDeepest</span>(TreeNode<span style="color:#666">*</span> root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">lengthLongestPath</span>(string ipt) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function signature of `subtreeWithAllDeepest`, which takes the root of a binary tree as input and returns the subtree containing all the deepest nodes. </div>
+                            <div class=""> Define the function &#39;lengthLongestPath&#39; that takes a string &#39;ipt&#39; representing a directory structure and returns the length of the longest path to a file. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Return Statement</b></div>
+                            <div class=""> <b>2 : Data Structure</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">lcadn</span>(root).first;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> levels(<span style="color:#666">300</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function calls `lcadn`, a helper function, on the root node and returns the first element of the pair, which is the subtree containing the deepest nodes. </div>
+                            <div class=""> Declare a vector &#39;levels&#39; to store the length of the current path at each level (up to 300 levels). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Helper Function Definition</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> lcadn(TreeNode<span style="color:#666">*</span> root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> level <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function signature of `lcadn`, which is a helper function that returns a pair containing the deepest node and its depth. </div>
+                            <div class=""> Initialize &#39;level&#39; to keep track of the current level in the directory structure. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#a2f">NULL</span>, <span style="color:#666">0</span>};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isFile <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the base case where if the current node is `NULL`, it returns a pair with `NULL` for the node and `0` for the depth. </div>
+                            <div class=""> Initialize &#39;isFile&#39; to check if the current string represents a file. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Left Subtree Recursion</b></div>
+                            <div class=""> <b>5 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> lft <span style="color:#666">=</span> lcadn(root<span style="color:#666">-&gt;</span>left);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line recursively calls `lcadn` on the left child of the current node and stores the result in the variable `lft`. </div>
+                            <div class=""> Initialize &#39;ans&#39; to store the length of the longest file path. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Right Subtree Recursion</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> rht <span style="color:#666">=</span> lcadn(root<span style="color:#666">-&gt;</span>right);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line recursively calls `lcadn` on the right child of the current node and stores the result in the variable `rht`. </div>
+                            <div class=""> Initialize &#39;len&#39; to store the current length of the path being processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Depth Comparison</b></div>
+                            <div class=""> <b>7 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(lft.second <span style="color:#666">&lt;</span> rht.second) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: ipt) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the depth of the left subtree (`lft.second`) is less than the depth of the right subtree (`rht.second`). </div>
+                            <div class=""> Start a loop to iterate through each character in the input string &#39;ipt&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Right Subtree</b></div>
+                            <div class=""> <b>8 : Switch Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {rht.first, rht.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">switch</span>(c) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the right subtree is deeper, return the right subtree (`rht.first`) with its depth incremented by 1. </div>
+                            <div class=""> Use a switch-case statement to handle different types of characters (newlines, tabs, periods, and others). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Else Condition</b></div>
+                            <div class=""> <b>9 : Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (lft.second <span style="color:#666">&gt;</span> rht.second) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;\n&#39;</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the depth of the left subtree (`lft.second`) is greater than the depth of the right subtree (`rht.second`). </div>
+                            <div class=""> Handle the case when a newline character is encountered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Left Subtree</b></div>
+                            <div class=""> <b>10 : Reset Variables</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {lft.first, lft.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                level <span style="color:#666">=</span> <span style="color:#666">0</span>, isFile <span style="color:#666">=</span> <span style="color:#a2f">false</span>, len <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the left subtree is deeper, return the left subtree (`lft.first`) with its depth incremented by 1. </div>
+                            <div class=""> Reset the variables &#39;level&#39;, &#39;isFile&#39;, and &#39;len&#39; when encountering a newline character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Equal Depths Return</b></div>
+                            <div class=""> <b>11 : Case Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {root, lft.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;\t&#39;</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If both subtrees are of equal depth, return the current node (`root`) as the subtree containing all the deepest nodes, with its depth incremented by 1. </div>
+                            <div class=""> Handle the case when a tab character is encountered. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Level Increase</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                level<span style="color:#666">++</span>; <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increase the &#39;level&#39; when a tab character is encountered (indicating a deeper directory level). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Case Handling</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;.&#39;</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handle the case when a period character is encountered (indicating a file). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : File Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                isFile <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Set &#39;isFile&#39; to true when a period character is encountered, indicating that the current string is a file. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Default Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">default</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Handle the default case for non-special characters (normal directory or file name characters). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Path Length Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                len<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the &#39;len&#39; for each character that is part of a directory or file name. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Path Length Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                levels[level] <span style="color:#666">=</span> len;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the current path length at the given &#39;level&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : File Path Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(isFile) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current string is a file. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Max Path Length Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    ans <span style="color:#666">=</span> max(ans, accumulate(levels.begin(), levels.begin() <span style="color:#666">+</span> level <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>) <span style="color:#666">+</span> level); 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If it&#39;s a file, calculate the path length by summing up the path lengths at each level and update &#39;ans&#39; if it&#39;s the longest path. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the longest file path length stored in &#39;ans&#39;. </div>
                         </div>
                     
                 </div>
@@ -699,16 +804,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(N), where N is the number of nodes in the tree.</div>
-                        <div class=""> <b>Average Case:</b> O(N), since each node is visited once.</div>
-                        <div class=""> <b>Worst Case:</b> O(N), if the tree is skewed or has maximum depth.</div> 
-                        <div class=""> <b>Description:</b> Each node is visited once during the DFS traversal.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the input string.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), if the tree height is minimal (single node).</div>
-                        <div class=""> <b>Worst Case:</b> O(H), where H is the height of the tree (due to recursive stack).</div> 
-                        <div class=""> <b>Description:</b> Space complexity depends on the recursion depth, which is equal to the tree height.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we store the path lengths for each directory level in a stack.</div>    
                     </div>
 
                 </div>

@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 21, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -300,7 +300,7 @@
 
 
 
-<div class=""> You are given a binary string s of length n, where each character represents a ball: &lsquo;1&rsquo; for black and &lsquo;0&rsquo; for white. The goal is to arrange the balls such that all the white balls are on the left side and all the black balls are on the right side, by swapping two adjacent balls in each step. You need to find the minimum number of adjacent swaps required to achieve this arrangement. </div>
+<div class=""> The task is to find the kth integer in the range [lo, hi] sorted by the number of steps required to reach 1 using the Collatz conjecture rules. The power of a number is the number of steps needed to reach 1, following the rules: if the number is even, divide it by 2, and if it&rsquo;s odd, multiply it by 3 and add 1. </div>
 
 
 
@@ -351,43 +351,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a binary string s of length n where each character is either &#39;1&#39; or &#39;0&#39;.</div>
-                        <div class=""> <b>Example:</b> s = &#39;110&#39;</div>
+                        <div class=""> <b>Input:</b> You are given three integers lo, hi, and k. The integers lo and hi represent the range of numbers to check, and k is the position of the number to return after sorting by power value.</div>
+                        <div class=""> <b>Example:</b> For lo = 10, hi = 15, and k = 2, the second number in the sorted list of powers is 11.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= lo &lt;= hi &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • s[i] is either &#39;0&#39; or &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= hi - lo &#43; 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of adjacent swaps required to group all black balls to the right and all white balls to the left.</div>
-                        <div class=""> <b>Example:</b> For s = &#39;110&#39;, the output is 1.</div>
+                        <div class=""> <b>Output:</b> Return the kth integer from the sorted list of integers based on their power values.</div>
+                        <div class=""> <b>Example:</b> For lo = 10, hi = 15, and k = 2, the output is 11.</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result will always be a valid integer within the specified range.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine the minimum number of adjacent swaps required to sort all black balls to the right and all white balls to the left.</div>
+                        <div class=""> <b>Goal:</b> The goal is to calculate the number of steps (power) for each integer in the range and return the kth integer after sorting them by their power values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string while counting the number of white balls (&#39;0&#39;) encountered.</div>
+                                <div style="margin-left: 20px;"> • 1. Compute the power of each number in the range [lo, hi].</div>
                             
-                                <div style="margin-left: 20px;"> • For each black ball (&#39;1&#39;), count how many white balls are to the left of it, as this indicates how many swaps are needed to move the black ball to its correct position.</div>
+                                <div style="margin-left: 20px;"> • 2. Sort the numbers based on their power values. If two numbers have the same power, sort them by their value.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Return the kth number from the sorted list.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string must contain at least one ball and no more than 100,000 balls.</div>
+                        <div class=""> <b>Goal:</b> The function must efficiently handle ranges within the specified constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The range [lo, hi] can have at most 1000 elements.</div>
                             
-                                <div style="margin-left: 20px;"> • Each character in s is either &#39;0&#39; or &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • k is guaranteed to be within the range of numbers [lo, hi].</div>
                             
                         </div>
                     </div>        
@@ -395,23 +399,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string contains at least one ball, and no more than 100,000 balls.</div>
+                                <div style="margin-left: 20px;"> • All integers in the range [lo, hi] will eventually transform into 1.</div>
+                            
+                                <div style="margin-left: 20px;"> • The power values of all integers will fit within a 32-bit signed integer.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;110&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> One swap is needed to move the black ball at position 1 to the right.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;01010&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Four swaps are needed to move all black balls to the right.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;000111&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No swaps are needed because all black balls are already grouped to the right.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For lo = 5, hi = 9, k = 3, the sorted list of powers is [8, 6, 5, 7, 9], so the third number is 5.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The power of each integer in the range [5, 9] is calculated. The numbers are then sorted by their power values, and the kth number is returned.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -435,16 +433,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to iterate through the string, counting how many swaps are needed to move each black ball to its correct position by counting the number of white balls before it.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we will compute the power for each integer in the range [lo, hi], sort them by their power values, and return the kth element.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem is about calculating the number of swaps needed to order the black and white balls correctly.</div>
+                                <div style="margin-left: 20px;"> • We need to calculate the Collatz steps for each number efficiently.</div>
+                            
+                                <div style="margin-left: 20px;"> • Memoization can be used to store intermediate results to avoid redundant calculations.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can keep a running count of the number of white balls encountered so far, and for each black ball, we add this count to the total number of swaps.</div>
+                                <div style="margin-left: 20px;"> • A recursive approach with memoization can be applied to compute the power values for each integer.</div>
                             
                         </div>
                     </div>
@@ -452,11 +452,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to keep track of the total number of swaps.</div>
+                                <div style="margin-left: 20px;"> • 1. Define a recursive function to calculate the power of a number using the Collatz conjecture.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the string, counting how many white balls have been encountered before each black ball.</div>
+                                <div style="margin-left: 20px;"> • 2. Memoize the results to optimize repeated calculations.</div>
                             
-                                <div style="margin-left: 20px;"> • Sum the number of swaps needed for each black ball.</div>
+                                <div style="margin-left: 20px;"> • 3. Create a list of tuples containing the power value and the integer.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Sort the list based on power values, and if necessary, by integer value.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return the kth element from the sorted list.</div>
                             
                         </div>
                     </div>
@@ -465,22 +469,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input string is empty, return 0 as no swaps are needed.</div>
+                                <div style="margin-left: 20px;"> • The input range [lo, hi] will always have at least one integer.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must efficiently handle strings with lengths up to 100,000.</div>
+                                <div style="margin-left: 20px;"> • The function needs to efficiently compute the power for numbers in the range up to 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string is already in the desired arrangement (all white balls on the left and black balls on the right), return 0.</div>
+                                <div style="margin-left: 20px;"> • Edge cases where lo and hi are the same value should be handled properly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string will not be empty.</div>
+                                <div style="margin-left: 20px;"> • The function must work efficiently within the provided input constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -497,21 +501,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Data Structures</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Result Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Check for &#39;1&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Memoization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Increment Count of &#39;1&#39;s</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Check for &#39;0&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Add Steps for &#39;0&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Data Structures</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Data Structures</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -520,15 +536,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minimumSteps</span>(string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#666">++</span>cnt;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> cnt;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> memo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dig</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo.count(num)) <span style="color:#a2f;font-weight:bold">return</span> memo[num];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[num] <span style="color:#666">=</span> dig(num <span style="color:#666">/</span> <span style="color:#666">2</span>) <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[num] <span style="color:#666">=</span> dig(<span style="color:#666">3</span> <span style="color:#666">*</span> num <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> <span style="color:#666">1</span>;        
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getKth</span>(<span style="color:#0b0;font-weight:bold">int</span> lo, <span style="color:#0b0;font-weight:bold">int</span> hi, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> lo; i <span style="color:#666">&lt;=</span> hi; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> dig(i);
+</span></span><span style="display:flex;"><span>        ans.push_back({tmp, i});
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
+</span></span><span style="display:flex;"><span>    sort(ans.begin(), ans.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans[k <span style="color:#666">-</span> <span style="color:#666">1</span>].second;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -536,83 +561,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Data Structures</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minimumSteps</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> memo;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;minimumSteps&#39; which takes a binary string &#39;s&#39; as input and returns the minimum number of steps required to transform it based on the logic described. </div>
+                            <div class=""> Declare a memoization map `memo` to store previously computed results for the &#39;dig&#39; function, optimizing repeated calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Result Initialization</b></div>
+                            <div class=""> <b>2 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dig</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a variable &#39;res&#39; to zero, which will store the total number of steps (sum of &#39;1&#39;s encountered before each &#39;0&#39;). </div>
+                            <div class=""> Define the recursive function `dig` that calculates the number of steps to reduce a number to 1 using the 3x &#43; 1 problem&#39;s rules. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Setup</b></div>
+                            <div class=""> <b>3 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets up a loop to iterate through the characters of the string &#39;s&#39;. The variable &#39;cnt&#39; tracks the number of &#39;1&#39;s encountered during the iteration. </div>
+                            <div class=""> If the number is 1, return 0 since no steps are needed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Check for &#39;1&#39;</b></div>
+                            <div class=""> <b>4 : Memoization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo.count(num)) <span style="color:#a2f;font-weight:bold">return</span> memo[num];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current character is a &#39;1&#39;. If true, it increments the &#39;cnt&#39; variable. </div>
+                            <div class=""> Check if the result for the current number has been computed before and return it from the memoization map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Increment Count of &#39;1&#39;s</b></div>
+                            <div class=""> <b>5 : Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#666">++</span>cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the &#39;cnt&#39; variable by 1, tracking the number of &#39;1&#39;s encountered so far. </div>
+                            <div class=""> If the number is even, apply the rule `num / 2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Check for &#39;0&#39;</b></div>
+                            <div class=""> <b>6 : Recursion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[num] <span style="color:#666">=</span> dig(num <span style="color:#666">/</span> <span style="color:#666">2</span>) <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is not &#39;1&#39;, meaning it&#39;s a &#39;0&#39;, the code inside this block is executed. </div>
+                            <div class=""> Recursively call `dig(num / 2)` and store the result in `memo[num]`, adding 1 to account for the step. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Add Steps for &#39;0&#39;</b></div>
+                            <div class=""> <b>7 : Recursion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[num] <span style="color:#666">=</span> dig(<span style="color:#666">3</span> <span style="color:#666">*</span> num <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> <span style="color:#666">1</span>;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the value of &#39;cnt&#39; to &#39;res&#39;, indicating that each &#39;1&#39; encountered before the &#39;0&#39; adds to the total steps. </div>
+                            <div class=""> If the number is odd, apply the rule `3 * num &#43; 1`, recursively call `dig(3 * num &#43; 1)`, and store the result in `memo[num]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class=""> <b>8 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getKth</span>(<span style="color:#0b0;font-weight:bold">int</span> lo, <span style="color:#0b0;font-weight:bold">int</span> hi, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the total number of steps stored in &#39;res&#39;. This is the final result after iterating through the entire string. </div>
+                            <div class=""> Define the function `getKth` to find the kth number in the range [lo, hi] based on the number of steps from `dig`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Data Structures</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Declare a vector `ans` of pairs to store the computed step counts and the corresponding numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> lo; i <span style="color:#666">&lt;=</span> hi; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through all numbers in the range [lo, hi]. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> dig(i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the `dig` function to get the number of steps required to reduce the current number `i` to 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Data Structures</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back({tmp, i});
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the result (step count `tmp` and number `i`) as a pair in the vector `ans`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(ans.begin(), ans.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sort the vector `ans` based on the step count in ascending order, ensuring that the number with the fewest steps comes first. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans[k <span style="color:#666">-</span> <span style="color:#666">1</span>].second;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the second element (the number) of the kth pair in the sorted vector `ans`. </div>
                         </div>
                     
                 </div>
@@ -632,16 +717,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution requires a single pass over the string, which is O(n) in all cases.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n), where n is the number of integers in the range [lo, hi].</div>
+                        <div class=""> <b>Average Case:</b> O(n log n), considering sorting of the numbers based on power values.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n), where n is the number of integers in the range and log n is the complexity of sorting.</div> 
+                        <div class=""> <b>Description:</b> The primary time complexity is due to sorting the numbers by their power values.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since only a few variables are used to track the count of white balls and the swaps.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), for storing the memoized results and the list of integers.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of integers in the range [lo, hi], for storing the power values and the sorted list.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is determined by the storage of the memoized results and the list of integers.</div>    
                     </div>
 
                 </div>

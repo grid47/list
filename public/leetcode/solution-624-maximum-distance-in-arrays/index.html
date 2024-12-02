@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 5, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given three integers, a, b, and c, representing the maximum occurrences of &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo; that can appear in a string. Your task is to return the longest string that can be formed using these letters such that it does not contain the substrings &lsquo;aaa&rsquo;, &lsquo;bbb&rsquo;, or &lsquo;ccc&rsquo;. The string should contain at most a occurrences of &lsquo;a&rsquo;, at most b occurrences of &lsquo;b&rsquo;, and at most c occurrences of &lsquo;c&rsquo;. </div>
+<div class=""> You are given m sorted arrays. Your task is to pick two integers, each from a different array, and calculate the maximum distance between them, where the distance is defined as the absolute difference of the two numbers. </div>
 
 
 
@@ -370,49 +370,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of three integers: a, b, and c.</div>
-                        <div class=""> <b>Example:</b> a = 2, b = 2, c = 5</div>
+                        <div class=""> <b>Input:</b> You are given m sorted arrays, each with an integer value.</div>
+                        <div class=""> <b>Example:</b> arrays = [[3,6,9], [1,4,7], [8,10,15]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= a, b, c &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • m == arrays.length</div>
                             
-                                <div style="margin-left: 20px;"> • a &#43; b &#43; c &gt; 0</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= m &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= arrays[i].length &lt;= 500</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^4 &lt;= arrays[i][j] &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • arrays[i] is sorted in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • There will be at most 10^5 integers in all the arrays.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the longest possible happy string that satisfies the given conditions, or an empty string if no such string exists.</div>
-                        <div class=""> <b>Example:</b> &#34;ccbccbcc&#34;</div>
+                        <div class=""> <b>Output:</b> Return the maximum distance that can be achieved by selecting one integer from each of two different arrays.</div>
+                        <div class=""> <b>Example:</b> 14</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string should contain at most a occurrences of &#39;a&#39;, b occurrences of &#39;b&#39;, and c occurrences of &#39;c&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • The string should not contain &#39;aaa&#39;, &#39;bbb&#39;, or &#39;ccc&#39; as substrings.</div>
+                                <div style="margin-left: 20px;"> • Return a single integer representing the maximum distance.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to construct the longest string possible with the given constraints on the occurrences of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
+                        <div class=""> <b>Goal:</b> Find the maximum distance by comparing the largest and smallest elements across arrays.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Use a priority queue to manage the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39; in decreasing order.</div>
+                                <div style="margin-left: 20px;"> • Initialize variables to track the minimum and maximum values across the arrays.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Add characters to the result string, ensuring that no character appears more than twice consecutively.</div>
+                                <div style="margin-left: 20px;"> • For each array, calculate the potential maximum distance using the largest value from the current array and the smallest value from the previous array, as well as vice versa.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. After each addition, update the counts and push the characters back into the priority queue if their counts are still non-zero.</div>
+                                <div style="margin-left: 20px;"> • Update the result with the maximum distance found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input integers a, b, and c represent the maximum number of occurrences of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39; respectively. The total sum of a &#43; b &#43; c must be greater than 0.</div>
+                        <div class=""> <b>Goal:</b> Handle arrays of varying sizes efficiently while ensuring the maximum distance is computed correctly.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • a, b, and c are non-negative integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • a &#43; b &#43; c must be greater than 0.</div>
+                                <div style="margin-left: 20px;"> • The time complexity of the solution should be optimal for large inputs, as there may be up to 10^5 arrays.</div>
                             
                         </div>
                     </div>        
@@ -420,19 +424,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • It is assumed that at least one of a, b, or c is greater than zero.</div>
+                                <div style="margin-left: 20px;"> • The input arrays are correctly sorted in ascending order.</div>
+                            
+                                <div style="margin-left: 20px;"> • Arrays may vary in size, and elements can be negative or positive.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 2, b = 2, c = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> &#34;ccbccbcc&#34; is a valid string because it respects the maximum occurrences for &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, and does not contain &#39;aaa&#39;, &#39;bbb&#39;, or &#39;ccc&#39;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 3, b = 3, c = 0</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> &#34;ababab&#34; is the only valid string because there are no &#39;c&#39; characters allowed, and it doesn&#39;t contain any invalid substrings.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> arrays = [[3,6,9], [1,4,7], [8,10,15]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the maximum distance is obtained by selecting the smallest value from the second array (1) and the largest value from the third array (15), resulting in a distance of 14.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +458,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can use a greedy algorithm combined with a priority queue to keep track of the remaining counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, ensuring we always add the most frequent character while adhering to the constraints.</div>
+                        <div class=""> <b>Approach:</b> The approach involves tracking the minimum and maximum values across arrays and calculating the potential distances for each pair of arrays.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires managing character counts while adhering to a restriction on consecutive occurrences.</div>
+                                <div style="margin-left: 20px;"> • We need an efficient way to calculate the maximum distance between two different arrays.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A greedy approach using a priority queue allows us to always select the character with the highest remaining count.</div>
+                                <div style="margin-left: 20px;"> • By keeping track of the smallest and largest values across the arrays, we can calculate the maximum distance in linear time.</div>
                             
                         </div>
                     </div>
@@ -473,13 +475,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a priority queue (max-heap) to manage the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize variables to track the minimum and maximum values seen so far.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Pop the most frequent character and append it to the result string.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through the arrays to compute the maximum possible distance.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the character was added twice, ensure the next character is different to avoid violating the rule.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Repeat the process until all characters are used or no valid string can be formed.</div>
+                                <div style="margin-left: 20px;"> • 3. Update the result with the largest distance found.</div>
                             
                         </div>
                     </div>
@@ -488,22 +488,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always have at least one non-zero count for a, b, or c.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that there will always be at least two arrays, so empty inputs do not need to be handled.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm efficiently handles the case where a, b, and c are large, up to 100.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently even for the maximum constraint of 10^5 arrays.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider the case where one of a, b, or c is zero, and how the algorithm should handle this.</div>
+                                <div style="margin-left: 20px;"> • Handle arrays containing negative and positive numbers.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be efficient even when a, b, and c are at their maximum values.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays of different sizes and values, including edge cases like arrays with only one element.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,49 +520,17 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Priority Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Condition Check for &#39;a&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Arrays</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Push &#39;a&#39; to Priority Queue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Calculate Maximum Distance for Each Sub-array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition Check for &#39;b&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Update Min and Max Values</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push &#39;b&#39; to Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check for &#39;c&#39;</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Push &#39;c&#39; to Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 String Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Main Loop Start</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop from Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Pop from Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Add Characters to Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Decrease Count of Character</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Break if Empty</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Pop Second Character</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Pop Second Character</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Add Second Character to Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Decrease Second Character Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Push Back Characters to Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Push Back Characters to Priority Queue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Result</button>
                     
                 </div>
 
@@ -571,35 +539,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">longestDiverseString</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>    pq.push({a, <span style="color:#b44">&#39;a&#39;</span>});
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>    pq.push({b, <span style="color:#b44">&#39;b&#39;</span>});
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>    pq.push({c, <span style="color:#b44">&#39;c&#39;</span>});
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>        pq.pop();
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(<span style="color:#666">2</span>, it.first), it.second);
-</span></span><span style="display:flex;"><span>        it.first <span style="color:#666">-=</span> min(<span style="color:#666">2</span>, it.first);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>        pq.pop();
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first), it2.second);
-</span></span><span style="display:flex;"><span>        it2.first <span style="color:#666">-=</span> min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it2.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it2);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> arrays) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mn <span style="color:#666">=</span> <span style="color:#666">10000</span>, mx <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">10000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span> : arrays) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, max(a.back()<span style="color:#666">-</span>mn, mx<span style="color:#666">-</span>a.front()));
+</span></span><span style="display:flex;"><span>        mn <span style="color:#666">=</span> min(mn, a.front()), mx <span style="color:#666">=</span> max(mx, a.back());
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -607,223 +553,63 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">longestDiverseString</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> arrays) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the method `longestDiverseString`, which takes three integers representing the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;, and returns the longest string possible with no more than two consecutive characters being the same. </div>
+                            <div class=""> This line declares the function `maxDistance`, which takes a reference to a 2D vector `arrays` and returns an integer representing the maximum distance between the first and last elements of the arrays. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Priority Queue Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mn <span style="color:#666">=</span> <span style="color:#666">10000</span>, mx <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">10000</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a max heap (priority queue) to store characters with their respective counts, ensuring the character with the highest count is always at the top. </div>
+                            <div class=""> Three integer variables are initialized: `res` to store the result, `mn` to track the minimum value encountered, and `mx` to track the maximum value encountered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Condition Check for &#39;a&#39;</b></div>
+                            <div class=""> <b>3 : Loop Through Arrays</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span> : arrays) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the count of &#39;a&#39; is greater than 0. If so, &#39;a&#39; is pushed into the priority queue. </div>
+                            <div class=""> A `for` loop iterates through each sub-array `a` in the 2D vector `arrays`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Push &#39;a&#39; to Priority Queue</b></div>
+                            <div class=""> <b>4 : Calculate Maximum Distance for Each Sub-array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({a, <span style="color:#b44">&#39;a&#39;</span>});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, max(a.back()<span style="color:#666">-</span>mn, mx<span style="color:#666">-</span>a.front()));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the pair containing the count of &#39;a&#39; and the character &#39;a&#39; into the priority queue. </div>
+                            <div class=""> For each sub-array, the function calculates the distance between the current minimum value (`mn`) and the last element of the sub-array (`a.back()`), and the distance between the current maximum value (`mx`) and the first element of the sub-array (`a.front()`). The result is updated with the maximum of these values. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Condition Check for &#39;b&#39;</b></div>
+                            <div class=""> <b>5 : Update Min and Max Values</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mn <span style="color:#666">=</span> min(mn, a.front()), mx <span style="color:#666">=</span> max(mx, a.back());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the count of &#39;b&#39; is greater than 0. If so, &#39;b&#39; is pushed into the priority queue. </div>
+                            <div class=""> The function updates `mn` to the minimum of the current `mn` and the first element of the sub-array (`a.front()`), and `mx` to the maximum of the current `mx` and the last element of the sub-array (`a.back()`), ensuring that the minimum and maximum values are kept up to date. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Push &#39;b&#39; to Priority Queue</b></div>
+                            <div class=""> <b>6 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({b, <span style="color:#b44">&#39;b&#39;</span>});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;        
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the pair containing the count of &#39;b&#39; and the character &#39;b&#39; into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Condition Check for &#39;c&#39;</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the count of &#39;c&#39; is greater than 0. If so, &#39;c&#39; is pushed into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Push &#39;c&#39; to Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pq.push({c, <span style="color:#b44">&#39;c&#39;</span>});
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pushes the pair containing the count of &#39;c&#39; and the character &#39;c&#39; into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : String Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initializes the result string `res`, which will be built by appending characters from the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Main Loop Start</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Starts a `while` loop that continues as long as there are elements in the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Pop from Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Retrieves the top element from the priority queue, which is the character with the highest remaining count. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Pop from Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes the top element from the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Add Characters to Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(<span style="color:#666">2</span>, it.first), it.second);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds up to two characters of the top character to the result string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Decrease Count of Character</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it.first <span style="color:#666">-=</span> min(<span style="color:#666">2</span>, it.first);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Decreases the count of the character after adding it to the result string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Break if Empty</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the priority queue is empty. If so, the loop breaks. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Pop Second Character</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> pq.top();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Retrieves the second character (with the next highest count) from the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Pop Second Character</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes the second element from the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Add Second Character to Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> string(min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first), it2.second);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds one or two characters of the second character to the result string, based on its remaining count. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Decrease Second Character Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        it2.first <span style="color:#666">-=</span> min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Decreases the count of the second character after adding it to the result string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Push Back Characters to Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the first character still has a count greater than 0, it is pushed back into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Push Back Characters to Priority Queue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(it2.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it2);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the second character still has a count greater than 0, it is pushed back into the priority queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the resulting string that follows the constraints. </div>
+                            <div class=""> The function returns the value of `res`, which contains the maximum distance found between the first and last elements of any sub-array. </div>
                         </div>
                     
                 </div>
@@ -843,16 +629,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the total sum of a, b, and c, as we process each character only once.</div>
-                        <div class=""> <b>Average Case:</b> O(n log 3), since the priority queue operations involve logarithmic time complexity for each insertion or extraction.</div>
-                        <div class=""> <b>Worst Case:</b> O(n log 3), since the priority queue is accessed a maximum of n times.</div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(m)</div>
+                        <div class=""> <b>Average Case:</b> O(m)</div>
+                        <div class=""> <b>Worst Case:</b> O(m)</div> 
+                        <div class=""> <b>Description:</b> The solution iterates over the arrays once, so the time complexity is linear with respect to the number of arrays.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as we do not need additional space beyond the priority queue.</div>
-                        <div class=""> <b>Worst Case:</b> O(3), since we only store a small number of values in the priority queue (3 values at most).</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we only need to store the counts of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant as we only use a few variables to track the minimum and maximum values.</div>    
                     </div>
 
                 </div>

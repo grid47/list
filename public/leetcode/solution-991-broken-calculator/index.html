@@ -307,7 +307,7 @@
 
 
 
-<div class=""> Given an integer <code>finalSum</code>, split it into a sum of as many unique positive even integers as possible. If such a split is not possible, return an empty array. </div>
+<div class=""> You are given a broken calculator that displays an integer &lsquo;startValue&rsquo;. In each operation, you can either multiply the number by 2 or subtract 1. Your task is to determine the minimum number of operations needed to transform &lsquo;startValue&rsquo; into &rsquo;target&rsquo;. </div>
 
 
 
@@ -358,43 +358,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a single integer `finalSum`.</div>
-                        <div class=""> <b>Example:</b> 18</div>
+                        <div class=""> <b>Input:</b> The input consists of two integers, &#39;startValue&#39; and &#39;target&#39;.</div>
+                        <div class=""> <b>Example:</b> startValue = 2, target = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= finalSum &lt;= 10^10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= startValue, target &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a list of unique even integers that sum up to `finalSum`. If no valid split is possible, return an empty array.</div>
-                        <div class=""> <b>Example:</b> [2, 4, 6, 8]</div>
+                        <div class=""> <b>Output:</b> The output should be an integer representing the minimum number of operations required to convert &#39;startValue&#39; to &#39;target&#39;.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The integers must be positive, even, and unique.</div>
+                                <div style="margin-left: 20px;"> • The result will always be a positive integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the maximum number of unique positive even integers that sum up to `finalSum`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to minimize the number of operations by strategically choosing whether to subtract or multiply by 2 based on the relationship between &#39;startValue&#39; and &#39;target&#39;.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Check if `finalSum` is even. If it is not, return an empty array.</div>
+                                <div style="margin-left: 20px;"> • If the startValue is greater than or equal to target, the only operation is to repeatedly subtract 1.</div>
                             
-                                <div style="margin-left: 20px;"> • Start with the smallest even integer (2), and keep adding the next even integers (4, 6, 8, ...) until the sum exceeds `finalSum`.</div>
+                                <div style="margin-left: 20px;"> • If the target is even, it&#39;s optimal to divide the target by 2 to minimize the number of operations.</div>
                             
-                                <div style="margin-left: 20px;"> • If there is any remaining sum, adjust the last integer in the list to make the total sum equal to `finalSum`.</div>
+                                <div style="margin-left: 20px;"> • If the target is odd, incrementing or decrementing by 1 helps make it even for the next step.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input `finalSum` should be within the given bounds.</div>
+                        <div class=""> <b>Goal:</b> You need to handle large values of startValue and target efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= finalSum &lt;= 10^10</div>
+                                <div style="margin-left: 20px;"> • startValue and target are both between 1 and 10^9.</div>
                             
                         </div>
                     </div>        
@@ -402,15 +402,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The integer `finalSum` is positive.</div>
+                                <div style="margin-left: 20px;"> • The operations always aim to reach the target from the startValue with minimal steps.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> 18</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number 18 can be expressed as the sum of four unique even integers: 2 &#43; 4 &#43; 6 &#43; 8.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> startValue = 2, target = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Starting at 2, we can subtract twice (2 -&gt; 1 -&gt; 0) and then multiply by 2 to reach 5.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -434,16 +434,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves adding consecutive even integers until the sum reaches or exceeds `finalSum`, and then adjusting the last integer if necessary.</div>
+                        <div class=""> <b>Approach:</b> The approach is to recursively or iteratively determine the minimal steps to reach target from startValue. If the target is larger, try halving it, if smaller, increment or decrement until the value matches.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sum of unique positive even integers grows quickly, so we can stop once we reach or exceed `finalSum`.</div>
+                                <div style="margin-left: 20px;"> • The problem is about reducing the difference between startValue and target using the minimum number of operations.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Start from the smallest even integer and continue adding consecutive even integers until the sum is close to `finalSum`.</div>
+                                <div style="margin-left: 20px;"> • We can approach this by checking if the target is greater than or less than startValue, and apply the operations accordingly.</div>
                             
                         </div>
                     </div>
@@ -451,11 +451,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check if `finalSum` is even.</div>
+                                <div style="margin-left: 20px;"> • Step 1: If startValue is greater than or equal to target, simply subtract 1 repeatedly.</div>
                             
-                                <div style="margin-left: 20px;"> • Add consecutive even integers to the result list.</div>
+                                <div style="margin-left: 20px;"> • Step 2: If target is even, divide it by 2 to minimize the number of operations.</div>
                             
-                                <div style="margin-left: 20px;"> • If the sum exceeds `finalSum`, adjust the last integer to make the total sum equal to `finalSum`.</div>
+                                <div style="margin-left: 20px;"> • Step 3: If target is odd, add or subtract 1 to make it even, then proceed.</div>
                             
                         </div>
                     </div>
@@ -464,22 +464,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `finalSum` is an odd number, return an empty list.</div>
+                                <div style="margin-left: 20px;"> • This problem does not involve empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently for large inputs, up to 10^10.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles cases where startValue and target are both large (up to 10^9).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For very small values like `finalSum = 1`, the result should be an empty list since no even numbers can sum to 1.</div>
+                                <div style="margin-left: 20px;"> • Consider edge cases where startValue is equal to target or where startValue is much larger than target.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles large values of `finalSum` efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle large values efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -496,27 +496,13 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case - Subtraction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Recursive Case - Halving</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Vector Modification</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Sum</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Variable</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Final Adjustment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Recursive Case - Incrementing</button>
                     
                 </div>
 
@@ -525,20 +511,12 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> ans;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> maximumEvenSplit(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> tmp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">brokenCalc</span>(<span style="color:#0b0;font-weight:bold">int</span> startValue, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(startValue <span style="color:#666">&gt;=</span> target) <span style="color:#a2f;font-weight:bold">return</span> startValue <span style="color:#666">-</span> target;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(sum <span style="color:#666">&gt;=</span> cur) {
-</span></span><span style="display:flex;"><span>        ans.push_back(cur);
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> cur;
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) ans[ans.size() <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> sum;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> brokenCalc(startValue, target <span style="color:#666">/</span> <span style="color:#666">2</span>);
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> brokenCalc(startValue, target <span style="color:#666">+</span><span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -546,113 +524,43 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">brokenCalc</span>(<span style="color:#0b0;font-weight:bold">int</span> startValue, <span style="color:#0b0;font-weight:bold">int</span> target) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty vector `ans` to store the result. </div>
+                            <div class=""> Defines the `brokenCalc` function, which takes two integer inputs: `startValue` (the starting value) and `target` (the target value to reach). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class=""> <b>2 : Base Case - Subtraction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> maximumEvenSplit(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(startValue <span style="color:#666">&gt;=</span> target) <span style="color:#a2f;font-weight:bold">return</span> startValue <span style="color:#666">-</span> target;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `maximumEvenSplit` that takes a long long integer `sum` and returns a vector of long long integers. </div>
+                            <div class=""> Checks if the starting value is greater than or equal to the target value. If true, returns the difference between `startValue` and `target`, which represents the minimal number of operations needed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Recursive Case - Halving</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> tmp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> brokenCalc(startValue, target <span style="color:#666">/</span> <span style="color:#666">2</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare an unused vector `tmp`. This line doesn&#39;t impact the algorithm and could be removed. </div>
+                            <div class=""> Checks if the target is even. If true, recursively calls `brokenCalc` with the target halved, and adds 1 to account for the halving operation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Condition Check</b></div>
+                            <div class=""> <b>4 : Recursive Case - Incrementing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> brokenCalc(startValue, target <span style="color:#666">+</span><span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if `sum` is odd. If true, return the empty vector `ans`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize the variable `cur` to 2, which will be used to split the sum into even numbers. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(sum <span style="color:#666">&gt;=</span> cur) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Start a while loop that continues as long as `sum` is greater than or equal to `cur`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Vector Modification</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(cur);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the current value of `cur` into the `ans` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Update Sum</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">-=</span> cur;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Reduce `sum` by the value of `cur`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Update Variable</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increase `cur` by 2 to maintain the even sequence (2, 4, 6, 8, ...). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Final Adjustment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) ans[ans.size() <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> sum;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If there&#39;s any remaining `sum` (less than the next even number), add it to the last element of the `ans` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the `ans` vector, which contains the even splits of `sum`. </div>
+                            <div class=""> If the target is odd, the function increments the target by 1 and recursively calls `brokenCalc` with the new target, adding 1 to the operation count. </div>
                         </div>
                     
                 </div>
@@ -672,16 +580,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the number of integers required to reach `finalSum`.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log(target)) - when halving the target</div>
+                        <div class=""> <b>Average Case:</b> O(log(target))</div>
+                        <div class=""> <b>Worst Case:</b> O(log(target))</div> 
+                        <div class=""> <b>Description:</b> The time complexity is logarithmic because the target is halved at each step when it&#39;s even.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear because we store the list of even integers.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1) - The space complexity is constant, as we only need a few variables to keep track of the target and startValue.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant as no extra data structures are used.</div>    
                     </div>
 
                 </div>

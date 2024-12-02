@@ -319,7 +319,7 @@
 
 
 
-<div class=""> Given an m x n matrix, return all the elements of the matrix in spiral order. </div>
+<div class=""> Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order. The same number can be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different. </div>
 
 
 
@@ -370,51 +370,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a 2D matrix with m rows and n columns.</div>
-                        <div class=""> <b>Example:</b> [&#34;matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]&#34;]</div>
+                        <div class=""> <b>Input:</b> You are given an array of distinct integers candidates and a target integer target.</div>
+                        <div class=""> <b>Example:</b> Input: candidates = [1, 2, 3], target = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= candidates.length &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • -100 &lt;= matrix[i][j] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= candidates[i] &lt;= 40</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements of candidates are distinct.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 40</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list of integers that represents the elements of the matrix in spiral order.</div>
-                        <div class=""> <b>Example:</b> [&#34;[1, 2, 3, 6, 9, 8, 7, 4, 5]&#34;]</div>
+                        <div class=""> <b>Output:</b> Return a list of all unique combinations of candidates where the chosen numbers sum to the target.</div>
+                        <div class=""> <b>Example:</b> Output: [[1, 1, 2], [1, 3], [2, 2]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a list containing all the elements in spiral order.</div>
+                                <div style="margin-left: 20px;"> • The output should be a list of lists containing valid combinations.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To traverse the matrix in a spiral order and collect the elements.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find all possible combinations where the numbers sum to the target, allowing repeated numbers.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize variables to track the boundaries of the matrix: top, bottom, left, and right.</div>
+                                <div style="margin-left: 20px;"> • Sort the candidates array (optional for optimization).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a while loop to traverse in the spiral order until all boundaries are processed.</div>
+                                <div style="margin-left: 20px;"> • Use backtracking to explore all possible combinations of candidates that sum up to the target.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Traverse from left to right along the top row, then top to bottom along the right column.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Traverse from right to left along the bottom row, then bottom to top along the left column.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Continue adjusting the boundaries inward and repeat the traversal until all elements are collected.</div>
+                                <div style="margin-left: 20px;"> • During the backtracking process, allow repetition of numbers but avoid using the same combination multiple times.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The matrix will have a defined size with constraints on m and n.</div>
+                        <div class=""> <b>Goal:</b> The constraints are manageable, ensuring that there will be fewer than 150 unique combinations for the given input.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= candidates.length &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • -100 &lt;= matrix[i][j] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= candidates[i] &lt;= 40</div>
+                            
+                                <div style="margin-left: 20px;"> • All elements of candidates are distinct.</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 40</div>
                             
                         </div>
                     </div>        
@@ -422,19 +426,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix is guaranteed to have at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • The input will always be valid, with distinct integers in candidates and a target value of at least 1.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [&#34;matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]&#34;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The elements are traversed in a spiral order, starting from the top-left corner and moving right, down, left, and up, until all elements are visited.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: candidates = [1, 2, 3], target = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the target is 4, and we can form the following unique combinations: [1, 1, 2], [1, 3], and [2, 2].</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [&#34;matrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]&#34;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The elements are collected in a spiral order: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: candidates = [5, 7, 10], target = 15</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this example, the unique combinations that sum to 15 are: [5, 5, 5], [7, 7], and [5, 10].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,18 +462,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach uses a systematic way to traverse the matrix in a spiral order by adjusting boundaries after processing each row and column.</div>
+                        <div class=""> <b>Approach:</b> We can use backtracking to explore all possible combinations, while ensuring we don’t use the same combination more than once.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to handle four directions: left to right, top to bottom, right to left, and bottom to top.</div>
-                            
-                                <div style="margin-left: 20px;"> • As we traverse the matrix, the boundaries (top, bottom, left, right) will be reduced progressively.</div>
+                                <div style="margin-left: 20px;"> • We can use recursion to explore all combinations, adding numbers to a temporary list and checking if we’ve reached the target sum.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This problem can be solved in linear time by maintaining and updating boundaries during the traversal.</div>
+                                <div style="margin-left: 20px;"> • Using backtracking will allow us to explore all possible combinations and backtrack if the sum exceeds the target.</div>
                             
                         </div>
                     </div>
@@ -477,13 +479,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize variables to track the current boundaries (top, bottom, left, right).</div>
+                                <div style="margin-left: 20px;"> • Sort the input array of candidates.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Loop until the entire matrix is processed: traverse the matrix in four steps: left to right, top to bottom, right to left, and bottom to top.</div>
+                                <div style="margin-left: 20px;"> • Use a recursive function to explore combinations of numbers that sum to the target.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. After each traversal, adjust the boundary by incrementing or decrementing the respective row or column.</div>
+                                <div style="margin-left: 20px;"> • At each step, either include the current candidate in the combination or move on to the next one.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the list of elements after the entire matrix is traversed.</div>
+                                <div style="margin-left: 20px;"> • If a combination matches the target, add it to the result.</div>
                             
                         </div>
                     </div>
@@ -492,22 +494,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that the matrix will have at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty, return an empty result since no combinations can be formed.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle the maximum matrix size (10x10) efficiently.</div>
+                                <div style="margin-left: 20px;"> • Even with the upper limit of input size (candidates.length &lt;= 30), the problem ensures fewer than 150 unique combinations, so performance should be manageable.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the matrix contains negative values or zeros, the traversal should still proceed in the same spiral order.</div>
+                                <div style="margin-left: 20px;"> • If the target is smaller than the smallest candidate, return an empty list.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be efficient in terms of time and space complexity.</div>
+                                <div style="margin-left: 20px;"> • Ensure no duplicate combinations are added to the result.</div>
                             
                         </div>                                                                        
                     </div>
@@ -526,35 +528,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Boundary Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Result Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Spiral Traversal Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Traverse Right</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Top Boundary</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Base Case and Result Addition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Traverse Down</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pruning</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Right Boundary</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Include the Current Candidate</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Traverse Left (Conditional)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Call (Include)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Traverse Left</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Backtrack</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Bottom Boundary</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Traverse Up (Conditional)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Traverse Up</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Update Left Boundary</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call (Exclude)</button>
                     
                 </div>
 
@@ -563,42 +557,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> spiralOrder(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> matrix) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> rows <span style="color:#666">=</span> matrix.size(), cols <span style="color:#666">=</span> matrix[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> <span style="color:#666">0</span>, bottom <span style="color:#666">=</span> rows <span style="color:#666">-</span> <span style="color:#666">1</span>, left <span style="color:#666">=</span> <span style="color:#666">0</span>, right <span style="color:#666">=</span> cols <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> result;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (top <span style="color:#666">&lt;=</span> bottom <span style="color:#666">&amp;&amp;</span> left <span style="color:#666">&lt;=</span> right) {
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Traverse Right
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> left; i <span style="color:#666">&lt;=</span> right; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            result.push_back(matrix[top][i]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        top<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> combinationSum(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cand, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    bt(ans, tmp, <span style="color:#666">0</span>, target, cand);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Traverse Down
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> top; i <span style="color:#666">&lt;=</span> bottom; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            result.push_back(matrix[i][right]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        right<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Traverse Left
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (top <span style="color:#666">&lt;=</span> bottom) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> right; i <span style="color:#666">&gt;=</span> left; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>                result.push_back(matrix[bottom][i]);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            bottom<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Traverse Up
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (left <span style="color:#666">&lt;=</span> right) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> bottom; i <span style="color:#666">&gt;=</span> top; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>                result.push_back(matrix[i][left]);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            left<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, <span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>cand) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> cand.size() <span style="color:#666">||</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">==</span> <span style="color:#666">0</span>) ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    tmp.push_back(cand[idx]);
+</span></span><span style="display:flex;"><span>    bt(ans, tmp, idx, sum <span style="color:#666">-</span> cand[idx], cand);
+</span></span><span style="display:flex;"><span>    tmp.pop_back();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    bt(ans, tmp, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum, cand);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -609,168 +585,123 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> spiralOrder(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> matrix) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> combinationSum(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cand, <span style="color:#0b0;font-weight:bold">int</span> target) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a function named `spiralOrder` that takes a 2D vector `matrix` as input and returns a vector containing the elements in spiral order. </div>
+                            <div class=""> This line declares a function named `combinationSum` that takes a vector of candidate numbers `cand` and a target number `target` as input and returns a vector of vectors representing all possible combinations of numbers from `cand` that add up to `target`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> rows <span style="color:#666">=</span> matrix.size(), cols <span style="color:#666">=</span> matrix[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes variables `rows` and `cols` to store the number of rows and columns in the matrix, respectively. </div>
+                            <div class=""> This line initializes an empty 2D vector `ans` to store the resulting combinations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Boundary Initialization</b></div>
+                            <div class=""> <b>3 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> <span style="color:#666">0</span>, bottom <span style="color:#666">=</span> rows <span style="color:#666">-</span> <span style="color:#666">1</span>, left <span style="color:#666">=</span> <span style="color:#666">0</span>, right <span style="color:#666">=</span> cols <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes variables to track the boundaries of the current spiral traversal: `top`, `bottom`, `left`, and `right`. </div>
+                            <div class=""> This line initializes an empty vector `tmp` to store a temporary combination during the backtracking process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Result Vector Initialization</b></div>
+                            <div class=""> <b>4 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> result;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(ans, tmp, <span style="color:#666">0</span>, target, cand);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes an empty vector `result` to store the spiral order elements. </div>
+                            <div class=""> This line calls the helper function `bt` to perform the backtracking process. The `ans`, `tmp`, `0`, `target`, and `cand` are passed as arguments. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Spiral Traversal Loop</b></div>
+                            <div class=""> <b>5 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (top <span style="color:#666">&lt;=</span> bottom <span style="color:#666">&amp;&amp;</span> left <span style="color:#666">&lt;=</span> right) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop continues as long as there are elements to be traversed in the spiral. </div>
+                            <div class=""> This line returns the `ans` vector containing all the valid combinations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Traverse Right</b></div>
+                            <div class=""> <b>6 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> left; i <span style="color:#666">&lt;=</span> right; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            result.push_back(matrix[top][i]);
-</span></span><span style="display:flex;"><span>        }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, <span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>cand) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop traverses the top row from left to right, adding elements to the `result` vector. </div>
+                            <div class=""> This line declares a recursive backtracking function `bt` that takes the following parameters: `ans` to store the result, `tmp` to store the current combination, `idx` to track the current index in the `cand` vector, `sum` representing the remaining target sum, and `cand` the vector of candidate numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update Top Boundary</b></div>
+                            <div class=""> <b>7 : Base Case and Result Addition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        top<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> cand.size() <span style="color:#666">||</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">==</span> <span style="color:#666">0</span>) ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After traversing the top row, the `top` boundary is incremented to exclude the processed row. </div>
+                            <div class=""> This block checks the base cases: 1. If the index `idx` reaches the end of the `cand` vector or the `sum` becomes 0, it means we&#39;ve reached a valid combination. If `sum` is 0, the current `tmp` combination is added to the `ans` vector. 2. In either case, the function returns to the previous recursive call. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Traverse Down</b></div>
+                            <div class=""> <b>8 : Pruning</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> top; i <span style="color:#666">&lt;=</span> bottom; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            result.push_back(matrix[i][right]);
-</span></span><span style="display:flex;"><span>        }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop traverses the rightmost column from top to bottom, adding elements to the `result` vector. </div>
+                            <div class=""> This line prunes the search space by checking if the `sum` becomes negative. If so, it means the current path cannot lead to a valid combination, so the function returns early. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Update Right Boundary</b></div>
+                            <div class=""> <b>9 : Include the Current Candidate</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        right<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    tmp.push_back(cand[idx]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After traversing the right column, the `right` boundary is decremented to exclude the processed column. </div>
+                            <div class=""> This line adds the current candidate number `cand[idx]` to the `tmp` combination. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Traverse Left (Conditional)</b></div>
+                            <div class=""> <b>10 : Recursive Call (Include)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (top <span style="color:#666">&lt;=</span> bottom) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(ans, tmp, idx, sum <span style="color:#666">-</span> cand[idx], cand);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This conditional check ensures that there&#39;s still a row to traverse from right to left. </div>
+                            <div class=""> This line recursively calls the `bt` function with the updated `sum` (reduced by the current candidate) to explore the possibility of including the current candidate in the combination. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Traverse Left</b></div>
+                            <div class=""> <b>11 : Backtrack</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> right; i <span style="color:#666">&gt;=</span> left; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>                result.push_back(matrix[bottom][i]);
-</span></span><span style="display:flex;"><span>            }
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    tmp.pop_back();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop traverses the bottom row from right to left, adding elements to the `result` vector. </div>
+                            <div class=""> This line removes the last added candidate from the `tmp` combination to backtrack to the previous state. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Update Bottom Boundary</b></div>
+                            <div class=""> <b>12 : Recursive Call (Exclude)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bottom<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(ans, tmp, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum, cand);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After traversing the bottom row, the `bottom` boundary is decremented to exclude the processed row. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Traverse Up (Conditional)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (left <span style="color:#666">&lt;=</span> right) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This conditional check ensures that there&#39;s still a column to traverse from bottom to top. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Traverse Up</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> bottom; i <span style="color:#666">&gt;=</span> top; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>                result.push_back(matrix[i][left]);
-</span></span><span style="display:flex;"><span>            }
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop traverses the leftmost column from bottom to top, adding elements to the `result` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Update Left Boundary</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            left<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> After traversing the left column, the `left` boundary is incremented to exclude the processed column. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the `result` vector containing the elements in spiral order. </div>
+                            <div class=""> This line recursively calls the `bt` function with the same `sum` but the next index `idx &#43; 1` to explore the possibility of excluding the current candidate from the combination. </div>
                         </div>
                     
                 </div>
@@ -790,16 +721,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The algorithm processes every element of the matrix exactly once, so the time complexity is O(m * n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(N^2)</div>
+                        <div class=""> <b>Average Case:</b> O(N^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(2^N)</div> 
+                        <div class=""> <b>Description:</b> The worst case complexity arises from the backtracking approach, where each number is considered in each recursive step.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n) for storing the result, but the in-place traversal itself requires O(1) space.</div>    
+                        <div class=""> <b>Worst Case:</b> O(N)</div> 
+                        <div class=""> <b>Description:</b> Space complexity depends on the depth of the recursion tree and the size of the temporary storage used for combinations.</div>    
                     </div>
 
                 </div>

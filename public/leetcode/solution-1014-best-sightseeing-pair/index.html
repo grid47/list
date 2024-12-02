@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array <code>nums</code>, where each element is a digit between 0 and 9. The triangular sum of <code>nums</code> is computed by repeatedly reducing the array by replacing each element with the sum of two consecutive elements, modulo 10. This process continues until only one element remains, which is the triangular sum. Your task is to return the triangular sum of the array. </div>
+<div class=""> You are given an array where each element represents the value of a sightseeing spot. The distance between two sightseeing spots is the difference in their indices. The score of a pair of sightseeing spots i and j (where i &lt; j) is calculated as values[i] + values[j] + (i - j), which includes the values of both spots and subtracts the distance between them. Your task is to find the maximum score of any pair of sightseeing spots. </div>
 
 
 
@@ -350,47 +350,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `nums`, where each element is a digit between 0 and 9.</div>
-                        <div class=""> <b>Example:</b> nums = [3, 7, 4, 9, 1]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers, where each integer represents the value of a sightseeing spot.</div>
+                        <div class=""> <b>Example:</b> values = [5, 3, 6, 2, 4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= values.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= values[i] &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the triangular sum of the array `nums`.</div>
-                        <div class=""> <b>Example:</b> Output: 5</div>
+                        <div class=""> <b>Output:</b> The output should be a single integer representing the maximum score of any pair of sightseeing spots.</div>
+                        <div class=""> <b>Example:</b> Output: 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array will always have at least one element.</div>
+                                <div style="margin-left: 20px;"> • The result should be an integer representing the maximum score.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to compute the triangular sum of the array `nums` by applying the given process until one element remains.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the pair of sightseeing spots that maximizes the score, which involves considering both the values and the distance between the spots.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Start with the input array `nums`.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array and for each spot, compute the score with all previous spots while keeping track of the maximum score.</div>
                             
-                                <div style="margin-left: 20px;"> • While the array has more than one element, create a new array by replacing each element with the sum of two consecutive elements, modulo 10.</div>
-                            
-                                <div style="margin-left: 20px;"> • Repeat the process until only one element remains, which will be the triangular sum.</div>
+                                <div style="margin-left: 20px;"> • Maintain a running value for the maximum score by subtracting the distance between the spots.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array `nums` can have up to 1000 elements, and each element is a digit between 0 and 9.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution is efficient enough to handle the input size within the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The number of sightseeing spots can be up to 50,000, so the solution must be optimized for time complexity.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 9</div>
+                                <div style="margin-left: 20px;"> • Each value in the array is between 1 and 1000.</div>
                             
                         </div>
                     </div>        
@@ -398,19 +396,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array will always contain at least one element.</div>
+                                <div style="margin-left: 20px;"> • The input will always have at least two sightseeing spots.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3, 7, 4, 9, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The triangular sum is computed as follows: First, compute the sums of consecutive elements modulo 10: [3&#43;7, 7&#43;4, 4&#43;9, 9&#43;1] = [0, 1, 3, 0]. Then compute the sums of consecutive elements in this new array: [0&#43;1, 1&#43;3, 3&#43;0] = [1, 4, 3]. Finally, compute the sum of the remaining elements: [1&#43;4] = [5]. Hence, the triangular sum is 5.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: values = [5, 3, 6, 2, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the maximum score occurs between the first and third spots: 5 &#43; 6 &#43; (0 - 2) = 8.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since there is only one element in the array, the triangular sum is the value of that element itself, which is 5.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: values = [1, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this example, the score is 1 &#43; 2 &#43; (0 - 1) = 2, which is the maximum score.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -434,18 +432,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves repeatedly reducing the array `nums` by applying the modulo 10 sum of consecutive elements until only one element remains, which is the triangular sum.</div>
+                        <div class=""> <b>Approach:</b> The optimal approach is to iterate through the array, maintaining a running maximum score based on the current spot and the previous ones. This can be done efficiently using a greedy approach.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each reduction step generates a new array that is shorter by one element.</div>
-                            
-                                <div style="margin-left: 20px;"> • Modulo 10 operation ensures that the values remain within the range of a single digit.</div>
+                                <div style="margin-left: 20px;"> • We need to maximize the score, which involves both the values of the sightseeing spots and the distance between them.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This is a straightforward problem that can be solved with a loop that continuously reduces the array until only one element is left.</div>
+                                <div style="margin-left: 20px;"> • By iterating through the array while keeping track of the maximum score at each step, we can find the solution in linear time.</div>
                             
                         </div>
                     </div>
@@ -453,11 +449,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize the array `nums`.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a variable to store the maximum score (res).</div>
                             
-                                <div style="margin-left: 20px;"> • While the length of the array is greater than 1, iterate through the array and compute the sum of consecutive elements modulo 10, storing the result in a new array.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize a variable (cur) to keep track of the best score calculated so far as we iterate through the list.</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat this process until only one element remains in the array, which will be the triangular sum.</div>
+                                <div style="margin-left: 20px;"> • 3. Iterate through the array, updating res with the maximum score at each step.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Update cur with the best possible score for the next iteration by considering the value at the current spot and subtracting the distance from the previous spot.</div>
                             
                         </div>
                     </div>
@@ -466,22 +464,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There will always be at least one element in the input array, so there are no empty arrays to consider.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that the input will always have at least two values.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays with up to 1000 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle up to 50,000 spots in linear time.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array has only one element, the triangular sum is the element itself.</div>
+                                <div style="margin-left: 20px;"> • If all values are the same, the solution should still correctly calculate the maximum score based on the distances.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem must handle arrays with elements ranging from 0 to 9.</div>
+                                <div style="margin-left: 20px;"> • The number of spots is at least 2, ensuring there is always a valid pair.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,23 +498,15 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Values</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Index Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Update Current Score</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Element Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Empty Line</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Vector</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Final Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
                 </div>
 
@@ -525,18 +515,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">triangularSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr(n, <span style="color:#666">0</span>);        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n; i <span style="color:#666">&gt;</span> <span style="color:#666">1</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>; j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; j<span style="color:#666">--</span>)
-</span></span><span style="display:flex;"><span>            arr[j] <span style="color:#666">=</span> (nums[j] <span style="color:#666">%</span> <span style="color:#666">10</span> <span style="color:#666">+</span> nums[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">%</span> <span style="color:#666">10</span>) <span style="color:#666">%</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        nums <span style="color:#666">=</span> arr;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxScoreSightseeingPair</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> val) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : val) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, cur <span style="color:#666">+</span> x);
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> max(cur, x) <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -547,100 +535,60 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">triangularSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxScoreSightseeingPair</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> val) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function declaration for `triangularSum`, which takes a vector of integers `nums` and returns an integer representing the final triangular sum. </div>
+                            <div class=""> Declares the function `maxScoreSightseeingPair` which takes a vector of integers `val` representing the values of sightseeing spots, and returns an integer representing the maximum score of a sightseeing pair. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The size of the input vector `nums` is stored in the variable `n`, which represents the number of elements in the array. </div>
+                            <div class=""> Sets `res` to 0, as initially no score has been calculated, and `cur` to 0, which will hold the current potential score during the iteration. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Initialization</b></div>
+                            <div class=""> <b>3 : Loop Through Values</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : val) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A new vector `arr` of size `n` is created and initialized with zeros. This vector will hold intermediate results during the iteration. </div>
+                            <div class=""> Iterates over each value `x` in the `val` vector representing the value of a sightseeing spot. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Outer Loop</b></div>
+                            <div class=""> <b>4 : Update Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n; i <span style="color:#666">&gt;</span> <span style="color:#666">1</span>; i<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, cur <span style="color:#666">+</span> x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An outer loop is used to iterate through the array, reducing the size of the array in each step. The loop runs as long as the size of the array is greater than 1. </div>
+                            <div class=""> Updates the maximum score `res` by comparing the current score `cur &#43; x` (the sum of the current potential score and the current value) with the previous maximum score. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Index Calculation</b></div>
+                            <div class=""> <b>5 : Update Current Score</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">=</span> max(cur, x) <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `k` is used to store the current index for the inner loop, which will process elements up to the `i-1` position. </div>
+                            <div class=""> Updates the current potential score `cur` by comparing it with the value `x`. The current score is reduced by 1 as part of the problem&#39;s condition (since the second point must be after the first). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inner Loop</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>; j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; j<span style="color:#666">--</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An inner loop is used to iterate through the array and calculate the new values for `arr[j]` by summing adjacent elements from the original `nums` array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Element Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            arr[j] <span style="color:#666">=</span> (nums[j] <span style="color:#666">%</span> <span style="color:#666">10</span> <span style="color:#666">+</span> nums[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">%</span> <span style="color:#666">10</span>) <span style="color:#666">%</span> <span style="color:#666">10</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> In this step, the adjacent elements `nums[j]` and `nums[j &#43; 1]` are summed modulo 10 and stored in `arr[j]` to create the new triangular sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Empty Line</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> An empty line used for separation of code logic. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Update Vector</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nums <span style="color:#666">=</span> arr;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The updated vector `arr` is assigned to `nums` so that it will be used in the next iteration of the outer loop. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Return Final Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the final value from the `nums` array, which represents the triangular sum after all iterations. </div>
+                            <div class=""> Returns the maximum score of a sightseeing pair, which is the result of evaluating all possible pairs. </div>
                         </div>
                     
                 </div>
@@ -660,16 +608,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the input array, as each reduction step involves iterating through the array.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as each reduction step takes linear time.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2), as the number of iterations grows with the length of the array.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in the number of elements in the array, but the process repeats for multiple iterations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The solution iterates through the array once, leading to a time complexity of O(n), where n is the number of sightseeing spots.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), as we always need to store the array at each step.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as a new array is created in each iteration, requiring O(n) space.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the length of the input array, as we need to store intermediate arrays.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since the solution only uses a few variables to track the maximum score and the current best score.</div>    
                     </div>
 
                 </div>

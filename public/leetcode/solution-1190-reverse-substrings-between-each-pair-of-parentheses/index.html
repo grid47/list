@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a list of integers <code>nums</code> and an integer <code>k</code>. In each operation, you choose an index <code>i</code>, increase your score by <code>nums[i]</code>, and replace <code>nums[i]</code> with <code>ceil(nums[i] / 3)</code>. Apply exactly <code>k</code> operations and return the maximum score you can achieve. </div>
+<div class=""> Given a string containing lowercase English letters and balanced parentheses, reverse the substrings enclosed within each pair of parentheses, starting from the innermost ones. After processing, return the resulting string without any parentheses. </div>
 
 
 
@@ -358,47 +358,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `nums` of integers and an integer `k`.</div>
-                        <div class=""> <b>Example:</b> [10, 10, 10, 10, 10], 5</div>
+                        <div class=""> <b>Input:</b> A single string `s` containing lowercase English letters and parentheses. Parentheses in the string are guaranteed to be balanced.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;(xy(z))&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length, k &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • s only contains lowercase English characters and parentheses.</div>
+                            
+                                <div style="margin-left: 20px;"> • All parentheses are guaranteed to be balanced.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a single integer representing the maximum score after applying exactly `k` operations.</div>
-                        <div class=""> <b>Example:</b> 50</div>
+                        <div class=""> <b>Output:</b> A string representing the final processed version of `s` after reversing all substrings enclosed in parentheses and removing the parentheses.</div>
+                        <div class=""> <b>Example:</b> Output: &#34;zyx&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output will be an integer representing the maximum score achievable.</div>
+                                <div style="margin-left: 20px;"> • The output string must not contain any parentheses.</div>
+                            
+                                <div style="margin-left: 20px;"> • The order of characters must be correct after processing.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to maximize the score by carefully selecting the index `i` at each operation.</div>
+                        <div class=""> <b>Goal:</b> To reverse substrings enclosed within matching parentheses from the innermost to the outermost and return the processed string without parentheses.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a max-heap (priority queue) with all elements of `nums`.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string and process characters.</div>
                             
-                                <div style="margin-left: 20px;"> • For each of the `k` operations, extract the maximum element, increase the score by this value, and replace it with `ceil(nums[i] / 3)`.</div>
+                                <div style="margin-left: 20px;"> • Push the indices of opening parentheses onto a stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat the operation for exactly `k` times and return the final score.</div>
+                                <div style="margin-left: 20px;"> • When encountering a closing parenthesis, reverse the substring from the last opening parenthesis to the current position.</div>
+                            
+                                <div style="margin-left: 20px;"> • Remove parentheses and construct the final string.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The length of `nums` and `k` are at most 100,000, and each element of `nums` can be as large as 10^9.</div>
+                        <div class=""> <b>Goal:</b> The problem has a well-defined input size and structure, ensuring efficient processing.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length, k &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The input string can be up to 2000 characters long.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • All parentheses in the input string are balanced.</div>
                             
                         </div>
                     </div>        
@@ -406,25 +412,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • You must apply exactly `k` operations.</div>
+                                <div style="margin-left: 20px;"> • The input string always contains balanced parentheses.</div>
                             
-                                <div style="margin-left: 20px;"> • The `nums` array is modified after each operation.</div>
+                                <div style="margin-left: 20px;"> • The output string should not contain any parentheses.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [15, 10, 20, 5, 30], 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after applying the operation to each element, the final score is 15 &#43; 20 &#43; 30 &#43; 5 &#43; 10 = 80.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;(ab(cd))&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Reverse the substring &#34;cd&#34; to get &#34;dc&#34;. Then reverse the entire substring &#34;abdc&#34; to get &#34;dcba&#34;. Remove the parentheses to produce the result &#34;dcba&#34;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [10, 20, 15, 10], 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal sequence of operations results in a final score of 45.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;a(b(cd)e)f&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Reverse &#34;cd&#34; to get &#34;dc&#34;. Then reverse &#34;b(dce)&#34; to get &#34;ecd&#34;. Combine with the rest of the string to get &#34;aecdfe&#34;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [1, 1, 1, 1, 1], 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, after 3 operations, the score is simply 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;a(b)c&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Reverse the substring &#34;b&#34; to get &#34;b&#34;. Remove parentheses to produce the result &#34;abc&#34;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,16 +454,22 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To maximize the score, always choose the largest element for each operation, ensuring the most valuable elements are reduced in value last.</div>
+                        <div class=""> <b>Approach:</b> Use a stack-based approach to handle parentheses and efficiently reverse substrings enclosed within them.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Using a max-heap (priority queue) helps efficiently find the largest element for each operation.</div>
+                                <div style="margin-left: 20px;"> • Parentheses define a hierarchy of substrings.</div>
+                            
+                                <div style="margin-left: 20px;"> • The innermost substrings should be reversed first.</div>
+                            
+                                <div style="margin-left: 20px;"> • The string processing can be done iteratively using a stack.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The solution needs to be efficient, as `nums.length` and `k` can be as large as 100,000.</div>
+                                <div style="margin-left: 20px;"> • A stack can track the start positions of parentheses.</div>
+                            
+                                <div style="margin-left: 20px;"> • The reverse operation can be performed in-place.</div>
                             
                         </div>
                     </div>
@@ -465,11 +477,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a max-heap with the elements of `nums`.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty stack and a string to build the result.</div>
                             
-                                <div style="margin-left: 20px;"> • Perform exactly `k` operations: extract the max element, add it to the score, and push `ceil(nums[i] / 3)` back into the heap.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string, pushing indices of opening parentheses onto the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the final score after `k` operations.</div>
+                                <div style="margin-left: 20px;"> • When encountering a closing parenthesis, use the top of the stack to determine the substring to reverse.</div>
+                            
+                                <div style="margin-left: 20px;"> • Reverse the identified substring and continue processing.</div>
+                            
+                                <div style="margin-left: 20px;"> • Remove all parentheses to construct the final string.</div>
                             
                         </div>
                     </div>
@@ -478,22 +494,28 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array `nums` is always non-empty, as the length is at least 1.</div>
+                                <div style="margin-left: 20px;"> • Input: s = &#34;&#34;</div>
+                            
+                                <div style="margin-left: 20px;"> • Output: &#34;&#34;</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently for large inputs (up to 100,000 elements and operations).</div>
+                                <div style="margin-left: 20px;"> • Input: s = &#34;a&#34; &#43; &#34;(&#34; &#43; &#34;b&#34;*999 &#43; &#34;)&#34;</div>
+                            
+                                <div style="margin-left: 20px;"> • Output: The reversed result with efficient processing.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where elements are small, such as 1, which will always be replaced by 1 after an operation.</div>
+                                <div style="margin-left: 20px;"> • Input: s = &#34;a()b&#34;</div>
+                            
+                                <div style="margin-left: 20px;"> • Output: &#34;ab&#34; (Empty parentheses are ignored).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires an efficient approach, such as using a max-heap to handle up to 100,000 operations efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure processing time is linear relative to the string length.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,27 +532,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Stack Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 String Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Opening Parenthesis Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push Index</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Closing Parenthesis Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Accumulate Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Top Index Retrieval</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Queue Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Stack</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Queue Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reverse Substring</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Append Character</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
                     
                 </div>
 
@@ -539,21 +563,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">maxKelements</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        pq.push(nums[i]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">reverseParentheses</span>(string s) {
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    string res;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) 
+</span></span><span style="display:flex;"><span>            stk.push(res.size());
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> stk.top();
+</span></span><span style="display:flex;"><span>            stk.pop();
+</span></span><span style="display:flex;"><span>            reverse(res.begin() <span style="color:#666">+</span> j, res.end());
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> res.push_back(s[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>        cout <span style="color:#666">&lt;&lt;</span> tmp <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34; &#34;</span>;
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> tmp;
-</span></span><span style="display:flex;"><span>        pq.pop();
-</span></span><span style="display:flex;"><span>        pq.push(ceil(tmp<span style="color:#666">/</span><span style="color:#666">3.0</span>));
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -561,113 +585,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">maxKelements</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">reverseParentheses</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function definition for &#39;maxKelements&#39;, which accepts a vector of integers &#39;nums&#39; and an integer &#39;k&#39;, returning a long long value. </div>
+                            <div class=""> Defines the function `reverseParentheses` that takes a string `s` as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Stack Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A priority queue &#39;pq&#39; is declared to store integers. This will be used to efficiently access the largest element at any time. </div>
+                            <div class=""> Initializes a stack to store the indices of opening parentheses. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : String Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A for loop is initiated to iterate over the vector &#39;nums&#39; and push each element into the priority queue. </div>
+                            <div class=""> Initializes the result string to build the final output. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Queue Operation</b></div>
+                            <div class=""> <b>4 : Loop Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each element from the &#39;nums&#39; vector is pushed into the priority queue &#39;pq&#39;, which will automatically arrange the elements in descending order. </div>
+                            <div class=""> Iterates through each character in the input string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Opening Parenthesis Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A variable &#39;ans&#39; is initialized to 0 to store the cumulative sum of the largest elements selected from the queue. </div>
+                            <div class=""> Checks if the current character is an opening parenthesis. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Push Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(res.size());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A while loop runs &#39;k&#39; times to extract the largest element, update it, and accumulate the result. </div>
+                            <div class=""> Pushes the current size of the result string to the stack, marking the start of a substring. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Queue Operation</b></div>
+                            <div class=""> <b>7 : Closing Parenthesis Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> pq.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(s[i] <span style="color:#666">==</span> <span style="">&#39;</span>)<span style="">&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The top element of the priority queue (the largest element) is stored in the variable &#39;tmp&#39;. </div>
+                            <div class=""> Checks if the current character is a closing parenthesis. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Accumulate Sum</b></div>
+                            <div class=""> <b>8 : Top Index Retrieval</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> tmp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> stk.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The value of &#39;tmp&#39; is added to the cumulative sum &#39;ans&#39;. </div>
+                            <div class=""> Retrieves the index of the matching opening parenthesis from the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Queue Operation</b></div>
+                            <div class=""> <b>9 : Pop Stack</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The top element (which has already been used) is removed from the priority queue. </div>
+                            <div class=""> Removes the top element from the stack as it has been processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Queue Operation</b></div>
+                            <div class=""> <b>10 : Reverse Substring</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(ceil(tmp<span style="color:#666">/</span><span style="color:#666">3.0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            reverse(res.begin() <span style="color:#666">+</span> j, res.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The value &#39;tmp&#39; is divided by 3 and rounded up, then pushed back into the priority queue to be used in subsequent iterations. </div>
+                            <div class=""> Reverses the substring in the result string between the matching parentheses. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Append Character</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> res.push_back(s[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The final accumulated sum &#39;ans&#39; is returned as the result of the function. </div>
+                            <div class=""> Appends non-parenthesis characters to the result string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the final modified result string after processing. </div>
                         </div>
                     
                 </div>
@@ -687,16 +721,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k log n)</div>
-                        <div class=""> <b>Average Case:</b> O(k log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(k log n)</div> 
-                        <div class=""> <b>Description:</b> Each heap operation (extract and insert) takes O(log n) time, and we perform `k` operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> Each character in the string is processed at most twice (once during the initial traversal and once during the reverse operation).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Best Case:</b> O(1) (excluding input and output storage)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the heap, where `n` is the length of the `nums` array.</div>    
+                        <div class=""> <b>Description:</b> The stack can grow up to O(n) in the worst case due to nested parentheses.</div>    
                     </div>
 
                 </div>

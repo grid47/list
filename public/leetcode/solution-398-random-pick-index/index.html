@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> Alice and Bob are playing a game with an array of piles of stones. Each pile contains a positive number of stones, and the game proceeds as follows: Alice and Bob take turns, with Alice starting first. On each turn, a player can choose the entire pile of stones either from the beginning or the end of the array. The player who ends up with the most stones wins. Given the piles array, return true if Alice wins the game, or false if Bob wins, assuming both players play optimally. </div>
+<div class=""> Given an integer array <code>nums</code> with potential duplicates, you need to randomly select an index <code>i</code> where <code>nums[i] == target</code>. If there are multiple indices with the same value, the selection should be made with equal probability for each valid index. </div>
 
 
 
@@ -372,51 +372,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an array of integers representing piles of stones. The length of the array is even, and the sum of the stones in all piles is odd.</div>
-                        <div class=""> <b>Example:</b> Input: piles = [4, 6, 2, 8]</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of integers `nums` and a target integer. The target integer is guaranteed to exist in the array.</div>
+                        <div class=""> <b>Example:</b> Input: [4, 3, 2, 3, 5], target: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= piles.length &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • piles.length is even.</div>
+                                <div style="margin-left: 20px;"> • -2^31 &lt;= nums[i] &lt;= 2^31 - 1</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= piles[i] &lt;= 500</div>
-                            
-                                <div style="margin-left: 20px;"> • sum(piles[i]) is odd.</div>
+                                <div style="margin-left: 20px;"> • At most 10^4 calls will be made to `pick`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if Alice wins, meaning she accumulates more stones than Bob. Otherwise, return false.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output is an integer representing the randomly selected index where `nums[i] == target`. If there are multiple indices with the same value, the selection should be random.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a boolean indicating if Alice wins the game.</div>
+                                <div style="margin-left: 20px;"> • The function must return an index where `nums[i] == target`.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine if Alice, starting first, can win the game by optimally picking stones from the piles.</div>
+                        <div class=""> <b>Goal:</b> The goal is to select a random index where the value matches the target. If there are multiple valid indices, ensure equal probability for all of them.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use dynamic programming to simulate both players&#39; optimal moves.</div>
+                                <div style="margin-left: 20px;"> • Store the indices of all occurrences of each number in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Memoize the results to avoid recalculating the same state.</div>
-                            
-                                <div style="margin-left: 20px;"> • For each state, choose the pile from either the start or the end, and subtract the value of the opponent&#39;s optimal play.</div>
+                                <div style="margin-left: 20px;"> • When `pick(target)` is called, randomly select an index from the stored list of indices for that number.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must account for optimal moves and the constraints on the length and values of the piles.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle the array sizes and multiple calls efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The list of piles contains an even number of elements.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle input arrays of length up to 2 * 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • The sum of the stones across all piles is odd.</div>
+                                <div style="margin-left: 20px;"> • There will be at most 10^4 calls to the `pick` method.</div>
                             
                         </div>
                     </div>        
@@ -424,21 +420,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both Alice and Bob play optimally, meaning they always make the best possible move.</div>
-                            
-                                <div style="margin-left: 20px;"> • The game is played to completion with no interruptions.</div>
+                                <div style="margin-left: 20px;"> • The array `nums` will contain at least one occurrence of the target number when `pick(target)` is called.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [4, 6, 2, 8]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, Alice can start by taking the last pile (8), leaving Bob with the choice of taking 4 or 2. No matter what Bob does, Alice will win by selecting optimally.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [4, 3, 2, 3, 5], target: 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, there are two occurrences of the number 3 (at indices 1 and 3), and the function `pick(3)` can randomly return either 1 or 3 with equal probability.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [3, 7, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Alice can start by taking the first pile (3), and based on Bob&#39;s choices, Alice will be able to win by making optimal selections.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [1, 1, 2, 2, 3, 3], target: 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are two occurrences of the number 2 (at indices 2 and 3), and the function `pick(2)` can randomly return either 2 or 3 with equal probability.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -462,16 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We use dynamic programming to solve this problem by simulating both Alice&#39;s and Bob&#39;s moves, taking into account all possible choices they can make. The solution involves recursion and memoization to optimize the state evaluations.</div>
+                        <div class=""> <b>Approach:</b> The approach involves creating a map that stores the indices of each number in the array. When `pick(target)` is called, the list of indices for the target number is accessed and a random index is selected from the list.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The optimal strategy for both players is to always choose the pile that maximizes their advantage, either from the start or the end.</div>
+                                <div style="margin-left: 20px;"> • The key challenge is to ensure that all indices of the target number are selected with equal probability.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using memoization will help avoid redundant calculations and improve efficiency, especially given the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • Using a hash map to store the indices of each number will allow for efficient lookup and random selection.</div>
                             
                         </div>
                     </div>
@@ -479,11 +473,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a recursive function with two indices, i and j, representing the current range of piles.</div>
+                                <div style="margin-left: 20px;"> • Create a hash map where each key is a number in `nums` and each value is a list of indices where that number occurs.</div>
                             
-                                <div style="margin-left: 20px;"> • Memoize the results to store already computed subproblems.</div>
-                            
-                                <div style="margin-left: 20px;"> • For each subproblem, compute the optimal value by choosing the maximum stones between picking the first or the last pile.</div>
+                                <div style="margin-left: 20px;"> • When `pick(target)` is called, retrieve the list of indices for the target number and randomly select one index.</div>
                             
                         </div>
                     </div>
@@ -492,22 +484,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty input should not occur as the problem guarantees an even number of piles.</div>
+                                <div style="margin-left: 20px;"> • An empty array is not possible since the problem guarantees that `target` exists in `nums`.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle the upper limit of 500 piles.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles arrays with up to 20,000 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the piles contain large numbers or small numbers, the solution should still be optimal, considering the memoization approach.</div>
+                                <div style="margin-left: 20px;"> • Handle arrays where all elements are the same number, as the function should still select a random index from the array.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution works within the provided constraints, including the odd sum condition.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the random selection of indices is efficient and can handle up to 10^4 calls to `pick`.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,27 +516,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Memoization Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Map Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Main Function</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pick Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Random Index Selection</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Random Index</button>
                     
                 </div>
 
@@ -553,138 +545,139 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">return</span> p[i];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo.count(i) <span style="color:#666">&amp;&amp;</span> memo[i].count(j)) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> max(p[i] <span style="color:#666">-</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), p[j] <span style="color:#666">-</span> dp(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>)) ;
-</span></span><span style="display:flex;"><span>    
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>Solution(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    mp[nums[i]].push_back(i);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGame</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>p <span style="color:#666">=</span> piles;
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> piles.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pick</span>(<span style="color:#0b0;font-weight:bold">int</span> target) { 
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> mp[target].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> mp[target][rand()<span style="color:#666">%</span>sz];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Solution object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Solution* obj = new Solution(nums);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;pick(target);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a vector `p` to store the piles of stones. </div>
+                            <div class=""> The class `Solution` is defined to solve the problem of randomly picking an index for a target number from a given list of numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Data Structure Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes an integer `n` to store the number of piles. </div>
+                            <div class=""> An unordered map `mp` is declared, where the key is an integer (the target number) and the value is a vector of indices where the target appears in the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Memoization Map</b></div>
+                            <div class=""> <b>3 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes a memoization map `memo` to store previously computed results for subproblems in the dynamic programming solution. </div>
+                            <div class=""> The `public` access modifier is used to allow public access to the methods of the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the recursive `dp` function that computes the maximum score difference from the subarray of piles between indices `i` and `j`. </div>
+                            <div class=""> The constructor `Solution` initializes the object by accepting a vector of integers `nums` and populating the map `mp` with the indices of each number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Base Case</b></div>
+                            <div class=""> <b>5 : Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">return</span> p[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the base case of the recursion. If there is only one pile left (i.e., `i == j`), return the value of that pile. </div>
+                            <div class=""> The size of the input vector `nums` is stored in the variable `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Memoization Check</b></div>
+                            <div class=""> <b>6 : Map Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo.count(i) <span style="color:#666">&amp;&amp;</span> memo[i].count(j)) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the result for the subarray between indices `i` and `j` has already been computed. If so, return the memoized result. </div>
+                            <div class=""> A loop is run to iterate over each element in the vector `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Recursive Calculation</b></div>
+                            <div class=""> <b>7 : Map Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> max(p[i] <span style="color:#666">-</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), p[j] <span style="color:#666">-</span> dp(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[nums[i]].push_back(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calculates the result for the current subarray by recursively calling `dp` for the two possible choices: taking the first pile or taking the last pile, and storing the result in `memo[i][j]`. </div>
+                            <div class=""> For each number in `nums`, its index `i` is pushed into the vector corresponding to the number in the unordered map `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Main Function</b></div>
+                            <div class=""> <b>8 : Pick Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGame</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pick</span>(<span style="color:#0b0;font-weight:bold">int</span> target) { 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the main function `stoneGame` which initializes the vector `p` with the piles and calculates the number of piles `n`. It then calls the `dp` function to determine if the first player can win. </div>
+                            <div class=""> The `pick` method is defined to randomly select an index from the vector of indices corresponding to the `target` number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Assignment</b></div>
+                            <div class=""> <b>9 : Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>p <span style="color:#666">=</span> piles;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> mp[target].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This assigns the input vector `piles` to the class member `p`. </div>
+                            <div class=""> The size of the vector corresponding to the `target` in the map `mp` is calculated and stored in the variable `sz`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Assignment</b></div>
+                            <div class=""> <b>10 : Random Index Selection</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> piles.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> mp[target][rand()<span style="color:#666">%</span>sz];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This assigns the size of the input vector `piles` to the integer `n`. </div>
+                            <div class=""> A random index from the vector `mp[target]` is selected using the `rand()` function. The modulo operation ensures the index is within bounds of the vector size. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Return Random Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This calls the `dp` function with the full range of the array (from 0 to `n - 1`) and returns whether the first player can win (i.e., the score difference is greater than or equal to 0). </div>
+                            <div class=""> The randomly selected index `res` is returned. </div>
                         </div>
                     
                 </div>
@@ -704,16 +697,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n^2) due to the memoized recursive calls for each subproblem, where n is the number of piles.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> Both the initialization of the map and the `pick(target)` method have constant time complexity.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the memoization table used to store the results of subproblems.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear, as we store a list of indices for each unique number in the array.</div>    
                     </div>
 
                 </div>

@@ -301,7 +301,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array <code>nums</code> of length <code>n</code> and an integer <code>k</code>. You can perform an operation where you pick an index <code>i</code> in the range <code>[0, n - 1]</code> and increment <code>nums[i]</code> by 1. You can perform this operation any number of times (including zero). A subarray is considered beautiful if, for every subarray of size 3 or more, the maximum element in that subarray is greater than or equal to <code>k</code>. Your task is to return the minimum number of increment operations needed to make the array beautiful. </div>
+<div class=""> You are given two binary trees: an original tree and a cloned tree. The cloned tree is a copy of the original tree, and you are given a reference to a node in the original tree. Your task is to return the reference to the corresponding node in the cloned tree. </div>
 
 
 
@@ -352,49 +352,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 0-indexed integer array `nums` and an integer `k`.</div>
-                        <div class=""> <b>Example:</b> nums = [4, 1, 0, 3, 0], k = 6</div>
+                        <div class=""> <b>Input:</b> The input consists of two binary trees: the original tree and its clone, and a target node from the original tree.</div>
+                        <div class=""> <b>Example:</b> original_tree = [5,3,8,1,4,7,10], target = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= n == nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is between 1 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The values of the nodes are unique.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The target node is a node from the original tree and is not null.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of increment operations needed to make the array beautiful.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> The output should be a reference to the corresponding node in the cloned tree.</div>
+                        <div class=""> <b>Example:</b> 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must be an integer.</div>
+                                <div style="margin-left: 20px;"> • The node in the cloned tree that corresponds to the target node in the original tree should be returned.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> We need to increment values in the array such that for every subarray of size 3 or more, the maximum value is greater than or equal to `k`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to return a reference to the same node in the cloned tree as the target node in the original tree.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • For each element in the array, check how many increments are needed to make it greater than or equal to `k`.</div>
+                                <div style="margin-left: 20px;"> • Traverse the cloned tree in parallel with the original tree.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element, determine the minimum number of operations required to ensure all subarrays with size 3 or more satisfy the condition.</div>
+                                <div style="margin-left: 20px;"> • When the target node in the original tree is found, return the corresponding node from the cloned tree.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints are based on the lengths of the arrays and the values of the elements.</div>
+                        <div class=""> <b>Goal:</b> The problem needs to handle large trees efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= nums.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • The tree structure is valid and the values are unique in both the original and cloned trees.</div>
                             
                         </div>
                     </div>        
@@ -402,17 +398,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array has at least three elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • The value of `k` is non-negative.</div>
+                                <div style="margin-left: 20px;"> • The cloned tree is an exact copy of the original tree, including structure and values.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [4, 1, 0, 3, 0], k = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We perform the minimum number of increment operations to ensure that all subarrays of size 3 or more have a maximum value of at least 6. The answer is 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> original_tree = [5,3,8,1,4,7,10], target = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The target node is `4` in the original tree, and its corresponding node in the cloned tree should be returned.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -436,16 +430,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved by iterating over the array and counting the minimum number of operations required to ensure that every subarray of size 3 or more has a maximum value that meets or exceeds `k`.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved by using a depth-first search (DFS) or breadth-first search (BFS) traversal to find the target node in the original tree and return the corresponding node from the cloned tree.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution needs to minimize the number of operations while ensuring the condition is met for every subarray of size 3 or more.</div>
+                                <div style="margin-left: 20px;"> • The original and cloned trees have the same structure and values.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can achieve this by iterating over the array and performing the minimum number of increments necessary to make every element greater than or equal to `k` where required.</div>
+                                <div style="margin-left: 20px;"> • A depth-first search can be used to find the target node in the original tree, and the corresponding node in the cloned tree can be returned.</div>
                             
                         </div>
                     </div>
@@ -453,11 +447,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate over the array `nums`.</div>
+                                <div style="margin-left: 20px;"> • Start at the root of the original tree and cloned tree.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element, if it&#39;s smaller than `k`, calculate how many increments are required to make it greater than or equal to `k`.</div>
+                                <div style="margin-left: 20px;"> • Traverse both trees simultaneously using DFS.</div>
                             
-                                <div style="margin-left: 20px;"> • Keep track of the total number of increments needed.</div>
+                                <div style="margin-left: 20px;"> • If the target node is found in the original tree, return the corresponding node from the cloned tree.</div>
                             
                         </div>
                     </div>
@@ -466,22 +460,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will always contain at least three elements.</div>
+                                <div style="margin-left: 20px;"> • If there is only one node in the tree, return that node.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be optimized to handle up to 10^5 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works for large trees with up to 10^4 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When `k` is 0, no increments are needed if all elements are already non-negative.</div>
+                                <div style="margin-left: 20px;"> • If the target is the root of the tree, return the root from the cloned tree.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We assume that the constraints are satisfied as given.</div>
+                                <div style="margin-left: 20px;"> • The tree must have a valid structure with unique values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -498,21 +492,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Over Array</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Dynamic Programming Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 State Transition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Target Node Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 State Transition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Assign Found Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 State Transition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Call (Left Subtree)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call (Right Subtree)</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
                     
                 </div>
 
@@ -521,15 +517,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minIncrementOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> dp1 <span style="color:#666">=</span> <span style="color:#666">0</span>, dp2 <span style="color:#666">=</span> <span style="color:#666">0</span>, dp3 <span style="color:#666">=</span> <span style="color:#666">0</span>, dp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span>: A) {
-</span></span><span style="display:flex;"><span>        dp <span style="color:#666">=</span> min(dp1, min(dp2, dp3)) <span style="color:#666">+</span> max(k <span style="color:#666">-</span> a, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        dp1 <span style="color:#666">=</span> dp2;
-</span></span><span style="display:flex;"><span>        dp2 <span style="color:#666">=</span> dp3;
-</span></span><span style="display:flex;"><span>        dp3 <span style="color:#666">=</span> dp;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> min(dp1, min(dp2, dp3));
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> ans;
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">getTargetCopy</span>(TreeNode<span style="color:#666">*</span> original, TreeNode<span style="color:#666">*</span> cloned, TreeNode<span style="color:#666">*</span> target) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (cloned <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cloned;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (cloned<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> target<span style="color:#666">-&gt;</span>val) <span style="color:#080;font-style:italic">// If target node found in cloned tree save it into a variable.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        ans <span style="color:#666">=</span> cloned;
+</span></span><span style="display:flex;"><span>    getTargetCopy(original, cloned<span style="color:#666">-&gt;</span>left, target);
+</span></span><span style="display:flex;"><span>    getTargetCopy(original, cloned<span style="color:#666">-&gt;</span>right, target);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -537,83 +534,93 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">minIncrementOperations</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;minIncrementOperations&#39; which takes an array &#39;A&#39; and an integer &#39;k&#39;, returning the minimum number of operations to make each element of the array greater than or equal to &#39;k&#39;. </div>
+                            <div class=""> We declare a pointer `ans` of type `TreeNode*` that will hold the reference to the corresponding node in the cloned tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> dp1 <span style="color:#666">=</span> <span style="color:#666">0</span>, dp2 <span style="color:#666">=</span> <span style="color:#666">0</span>, dp3 <span style="color:#666">=</span> <span style="color:#666">0</span>, dp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> getTargetCopy(TreeNode<span style="color:#666">*</span> original, TreeNode<span style="color:#666">*</span> cloned, TreeNode<span style="color:#666">*</span> target) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes four long long variables: dp1, dp2, dp3 for dynamic programming state storage and dp for the current operation calculation. </div>
+                            <div class=""> We define the function `getTargetCopy` that takes in three arguments: the original tree, the cloned tree, and the target node. It returns the corresponding node in the cloned tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Over Array</b></div>
+                            <div class=""> <b>3 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span>: A) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (cloned <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through the array &#39;A&#39;, using reference to modify each element if necessary. </div>
+                            <div class=""> We check if the current node in the cloned tree is `NULL`, which indicates we have reached a leaf or an empty subtree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>4 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp <span style="color:#666">=</span> min(dp1, min(dp2, dp3)) <span style="color:#666">+</span> max(k <span style="color:#666">-</span> a, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cloned;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the minimum number of operations needed by considering the previous dynamic programming states (dp1, dp2, dp3) and the difference between &#39;k&#39; and the current element &#39;a&#39;. </div>
+                            <div class=""> If the current node is `NULL`, we return `NULL` because there are no further nodes to check in this branch. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : State Transition</b></div>
+                            <div class=""> <b>5 : Target Node Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp1 <span style="color:#666">=</span> dp2;
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (cloned<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> target<span style="color:#666">-&gt;</span>val) <span style="color:#080;font-style:italic">// If target node found in cloned tree save it into a variable.
+</span></span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates dp1 to the value of dp2 for the next iteration, preparing for the dynamic programming transition. </div>
+                            <div class=""> We check if the value of the current node in the cloned tree matches the target node&#39;s value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : State Transition</b></div>
+                            <div class=""> <b>6 : Assign Found Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp2 <span style="color:#666">=</span> dp3;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> cloned;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates dp2 to the value of dp3 for the next iteration, continuing the dynamic programming state transition. </div>
+                            <div class=""> If the values match, we assign the current node in the cloned tree to `ans` since it corresponds to the target node. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : State Transition</b></div>
+                            <div class=""> <b>7 : Recursive Call (Left Subtree)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp3 <span style="color:#666">=</span> dp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    getTargetCopy(original, cloned<span style="color:#666">-&gt;</span>left, target);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets dp3 to the current value of dp, completing the state transition for dynamic programming. </div>
+                            <div class=""> We make a recursive call to `getTargetCopy` to search the left subtree of the cloned tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Result</b></div>
+                            <div class=""> <b>8 : Recursive Call (Right Subtree)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">min</span>(dp1, min(dp2, dp3));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    getTargetCopy(original, cloned<span style="color:#666">-&gt;</span>right, target);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the minimum value among dp1, dp2, and dp3, which represents the minimum number of operations needed to make each element of &#39;A&#39; greater than or equal to &#39;k&#39;. </div>
+                            <div class=""> We make a recursive call to `getTargetCopy` to search the right subtree of the cloned tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Once both subtrees have been searched, we return the `ans` variable, which contains the reference to the corresponding node in the cloned tree. </div>
                         </div>
                     
                 </div>
@@ -633,16 +640,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the array.</div>
+                        <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We iterate over the array once, performing constant-time operations for each element.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the number of nodes in the tree, since we need to traverse all nodes to find the target.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1), since no extra space is used beyond a few variables.</div> 
-                        <div class=""> <b>Description:</b> The solution uses constant space.</div>    
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h) where h is the height of the tree, due to the recursion stack used during the DFS traversal.</div>    
                     </div>
 
                 </div>

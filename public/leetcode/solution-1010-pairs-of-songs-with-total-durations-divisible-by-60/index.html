@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given two integer arrays, nums1 and nums2. Your task is to return a list of two arrays. The first array should contain all distinct integers that are in nums1 but not in nums2. The second array should contain all distinct integers that are in nums2 but not in nums1. </div>
+<div class=""> You are given an array where each element represents the duration of a song in seconds. Your task is to count how many pairs of songs have a total duration that is divisible by 60. Specifically, you need to count how many pairs of songs, indexed as i and j (with i &lt; j), satisfy the condition (time[i] + time[j]) % 60 == 0. </div>
 
 
 
@@ -359,49 +359,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two integer arrays nums1 and nums2.</div>
-                        <div class=""> <b>Example:</b> nums1 = [5, 8, 3, 5], nums2 = [1, 3, 8, 8]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers where each integer represents the duration of a song in seconds.</div>
+                        <div class=""> <b>Example:</b> time = [10, 50, 120, 80, 40]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length, nums2.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= time.length &lt;= 6 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • -1000 &lt;= nums1[i], nums2[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= time[i] &lt;= 500</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list with two sublists. The first sublist contains integers from nums1 that are not in nums2, and the second sublist contains integers from nums2 that are not in nums1.</div>
-                        <div class=""> <b>Example:</b> [[5], [1]]</div>
+                        <div class=""> <b>Output:</b> The output should be the total number of valid pairs where the sum of the song durations is divisible by 60.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The integers in the lists may be returned in any order.</div>
+                                <div style="margin-left: 20px;"> • The result should be an integer representing the number of valid pairs.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the distinct integers in each array that are not present in the other.</div>
+                        <div class=""> <b>Goal:</b> The goal is to efficiently count the pairs of songs whose combined durations are divisible by 60.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Convert both arrays into sets to eliminate duplicates.</div>
+                                <div style="margin-left: 20px;"> • For each song, find the remainder when the song&#39;s duration is divided by 60.</div>
                             
-                                <div style="margin-left: 20px;"> • Check for integers that are in nums1 but not in nums2.</div>
+                                <div style="margin-left: 20px;"> • Count how many other songs, when paired with the current song, have a remainder that completes the sum to be divisible by 60.</div>
                             
-                                <div style="margin-left: 20px;"> • Check for integers that are in nums2 but not in nums1.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the result as a list of two sublists.</div>
+                                <div style="margin-left: 20px;"> • Maintain a count of song durations modulo 60 to avoid recalculating the remainder each time.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that both arrays are handled correctly according to the given constraints.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the solution can handle large inputs efficiently and correctly.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length, nums2.length &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • -1000 &lt;= nums1[i], nums2[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The input list can contain up to 6 * 10^4 song durations, so the solution should have an optimized time complexity.</div>
                             
                         </div>
                     </div>        
@@ -409,17 +405,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The arrays may contain negative values.</div>
-                            
-                                <div style="margin-left: 20px;"> • Arrays may have duplicates that need to be ignored in the result.</div>
+                                <div style="margin-left: 20px;"> • Each song duration is unique, and all are between 1 and 500 seconds.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums1 = [5, 8, 3, 5], nums2 = [1, 3, 8, 8]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For nums1, the distinct numbers are 5 and 3, but 8 is common in nums2. So, the first sublist in the result will be [5]. For nums2, the distinct number is 1, which is not in nums1, so the second sublist will be [1].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: time = [10, 50, 120, 80, 40]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, two pairs of songs have durations that add up to a multiple of 60: (time[0] = 10, time[1] = 50) and (time[2] = 120, time[4] = 40). These pairs add up to 60 and 160, respectively, both of which are divisible by 60.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: time = [60, 60, 60]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this input, all three pairs (time[0] = 60, time[1] = 60), (time[0] = 60, time[2] = 60), and (time[1] = 60, time[2] = 60) add up to 120, which is divisible by 60. Therefore, the output is 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -443,16 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will use sets to identify the distinct elements and easily check for differences between the two arrays.</div>
+                        <div class=""> <b>Approach:</b> The strategy involves using modular arithmetic to find complementary pairs of song durations that sum to a multiple of 60. We use a hash map or array to track the number of song durations with specific remainders when divided by 60.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sets automatically remove duplicates, so we don&#39;t need to handle duplicates manually.</div>
+                                <div style="margin-left: 20px;"> • We need to track the remainder of each song&#39;s duration modulo 60 to find pairs that add up to multiples of 60.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can efficiently compute the difference between two sets using set operations like difference.</div>
+                                <div style="margin-left: 20px;"> • A hash map or a fixed-size array can be used to efficiently count how many song durations correspond to each remainder modulo 60.</div>
                             
                         </div>
                     </div>
@@ -460,11 +458,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Convert nums1 and nums2 into sets.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize an array of size 60 to store the count of each remainder (0 to 59).</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the difference between the sets to find elements unique to each array.</div>
+                                <div style="margin-left: 20px;"> • 2. For each song, compute its remainder when divided by 60 and find how many previous songs have the complementary remainder that makes the sum divisible by 60.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the two differences as a list of sublists.</div>
+                                <div style="margin-left: 20px;"> • 3. Update the remainder count for the current song&#39;s duration.</div>
                             
                         </div>
                     </div>
@@ -473,22 +471,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If either nums1 or nums2 is empty, the result should be the other array as a distinct set.</div>
+                                <div style="margin-left: 20px;"> • The input will never be empty as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the arrays are large, ensure the solution works efficiently within the given time limits.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle large inputs (up to 60,000 elements).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Arrays with all common elements or all unique elements should still return the correct results.</div>
+                                <div style="margin-left: 20px;"> • If all songs have durations that are multiples of 60, every pair will be valid.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure to handle negative numbers and large arrays efficiently.</div>
+                                <div style="margin-left: 20px;"> • The input array size and the song duration values should be within the specified constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -507,31 +505,17 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Array Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Set Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Pair Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Frequency Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Set Insertion</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 For Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Set Insertion</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 For Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Set Insertion</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Statement</button>
                     
                 </div>
 
@@ -540,24 +524,14 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findDifference(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans(<span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s1, s2;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums1.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        s1.insert(nums1[i]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numPairsDivisibleBy60</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> time) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c(<span style="color:#666">60</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">t</span>: time) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> c[(<span style="color:#666">600</span> <span style="color:#666">-</span> t)<span style="color:#666">%</span><span style="color:#666">60</span>];
+</span></span><span style="display:flex;"><span>        c[t<span style="color:#666">%</span><span style="color:#666">60</span>] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums2.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        s2.insert(nums2[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: s1) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>s2.count(x))
-</span></span><span style="display:flex;"><span>            ans[<span style="color:#666">0</span>].push_back(x);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: s2) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>s1.count(x))
-</span></span><span style="display:flex;"><span>            ans[<span style="color:#666">1</span>].push_back(x);
-</span></span><span style="display:flex;"><span>    }        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -568,140 +542,70 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findDifference(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numPairsDivisibleBy60</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> time) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function declaration for `findDifference`. It takes two vectors of integers, `nums1` and `nums2`, and returns a 2D vector containing the unique elements of each array. </div>
+                            <div class=""> Declares the function `numPairsDivisibleBy60` which takes a vector of integers `time` representing the time intervals, and returns the number of valid pairs whose sum is divisible by 60. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans(<span style="color:#666">2</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c(<span style="color:#666">60</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `ans` is initialized as a 2D vector with two rows to store the differences from `nums1` and `nums2`. </div>
+                            <div class=""> Initializes a vector `c` of size 60 to count the occurrences of remainders when each time value is divided by 60. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s1, s2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two sets, `s1` and `s2`, are initialized to store the unique elements of `nums1` and `nums2` respectively. </div>
+                            <div class=""> Initializes the result variable `res` to 0, which will store the number of valid pairs found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop</b></div>
+                            <div class=""> <b>4 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums1.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">t</span>: time) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over the elements of `nums1`. </div>
+                            <div class=""> Starts a loop that iterates through each element `t` in the input `time` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Set Insertion</b></div>
+                            <div class=""> <b>5 : Pair Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s1.insert(nums1[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> c[(<span style="color:#666">600</span> <span style="color:#666">-</span> t)<span style="color:#666">%</span><span style="color:#666">60</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each element of `nums1` is inserted into the set `s1` to ensure uniqueness. </div>
+                            <div class=""> For each time value `t`, adds to `res` the count of previously seen time values that form a valid pair with `t` (i.e., their sum is divisible by 60). This is done using the frequency array `c`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : For Loop</b></div>
+                            <div class=""> <b>6 : Frequency Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums2.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        c[t<span style="color:#666">%</span><span style="color:#666">60</span>] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over the elements of `nums2`. </div>
+                            <div class=""> Increments the count of occurrences for the current remainder `t%60` in the frequency array `c`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Set Insertion</b></div>
+                            <div class=""> <b>7 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s2.insert(nums2[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each element of `nums2` is inserted into the set `s2` to ensure uniqueness. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : For Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: s1) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop iterates over the elements in set `s1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>s2.count(x))
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This checks if the element `x` from `s1` does not exist in `s2`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Set Insertion</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[<span style="color:#666">0</span>].push_back(x);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the element `x` from `s1` is not found in `s2`, it is added to the first row of `ans`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : For Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: s2) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop iterates over the elements in set `s2`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>s1.count(x))
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This checks if the element `x` from `s2` does not exist in `s1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Set Insertion</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans[<span style="color:#666">1</span>].push_back(x);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the element `x` from `s2` is not found in `s1`, it is added to the second row of `ans`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the 2D vector `ans`, which contains the elements found in `nums1` but not in `nums2` (first row) and the elements found in `nums2` but not in `nums1` (second row). </div>
+                            <div class=""> Returns the total number of valid pairs found. </div>
                         </div>
                     
                 </div>
@@ -721,16 +625,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m) where n and m are the lengths of nums1 and nums2 respectively.</div>
-                        <div class=""> <b>Average Case:</b> O(n &#43; m) where n and m are the lengths of nums1 and nums2 respectively.</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m) where n and m are the lengths of nums1 and nums2 respectively.</div> 
-                        <div class=""> <b>Description:</b> We iterate through each array once to convert them to sets and then compute the differences.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the list of songs once, and each operation (remainder calculation and count update) takes constant time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m) for the sets created from nums1 and nums2.</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m) for the sets created from nums1 and nums2.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is dependent on the size of the input arrays.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because we use a fixed-size array of length 60 to store remainder counts.</div>    
                     </div>
 
                 </div>

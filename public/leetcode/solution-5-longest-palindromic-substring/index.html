@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given a string, write it in a zigzag pattern on a specified number of rows and then read the rows line by line to create the final string. Return this transformed string. </div>
+<div class=""> Given a string, find and return the longest palindromic substring in it. A palindrome is a word that reads the same forward and backward. The substring must be contiguous within the original string. </div>
 
 
 
@@ -371,53 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string and an integer specifying the number of rows for the zigzag pattern.</div>
-                        <div class=""> <b>Example:</b> Input: s = &#39;HELLOZIGZAG&#39;, numRows = 3</div>
+                        <div class=""> <b>Input:</b> The input is a string &#39;s&#39;.</div>
+                        <div class=""> <b>Example:</b> s = &#34;racecar&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                                 <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of English letters (lower-case and upper-case), &#39;,&#39; and &#39;.&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= numRows &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • s consists of only digits and English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the string after converting it into the zigzag pattern and reading it row by row.</div>
-                        <div class=""> <b>Example:</b> Output: &#39;HLZGELOIZALG&#39;</div>
+                        <div class=""> <b>Output:</b> The output should be the longest palindromic substring from the input string.</div>
+                        <div class=""> <b>Example:</b> &#34;aceca&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output must be a single string.</div>
+                                <div style="margin-left: 20px;"> • The returned substring must be the longest palindromic substring found.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Transform the string into the zigzag pattern and read row by row to form the final output.</div>
+                        <div class=""> <b>Goal:</b> To efficiently find the longest substring that is a palindrome.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an array of strings to represent each row in the zigzag pattern.</div>
+                                <div style="margin-left: 20px;"> • Iterate over each character in the string as the center of the potential palindrome.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the input string and append characters to appropriate rows in a zigzag manner.</div>
+                                <div style="margin-left: 20px;"> • Expand outwards from the center for both odd and even length palindromes.</div>
                             
-                                <div style="margin-left: 20px;"> • Switch direction (downwards or upwards) when the top or bottom row is reached.</div>
-                            
-                                <div style="margin-left: 20px;"> • Concatenate the strings from all rows to create the final result.</div>
+                                <div style="margin-left: 20px;"> • Keep track of the longest palindrome found during this process.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure the input string and the number of rows are within valid ranges.</div>
+                        <div class=""> <b>Goal:</b> The function must handle strings of varying lengths up to 1000 characters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
-                            
-                                <div style="margin-left: 20px;"> • s consists of English letters (lower-case and upper-case), &#39;,&#39; and &#39;.&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= numRows &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The string must contain only printable characters, including letters and digits.</div>
                             
                         </div>
                     </div>        
@@ -425,21 +417,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of rows will always be less than or equal to the length of the string.</div>
+                                <div style="margin-left: 20px;"> • The input string is valid and contains at least one character.</div>
                             
-                                <div style="margin-left: 20px;"> • If numRows is 1, the result is the same as the input string.</div>
+                                <div style="margin-left: 20px;"> • The palindrome may be a single character if no longer palindromes are found.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;HELLOZIGZAG&#39;, numRows = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The zigzag pattern for 3 rows creates the final string &#39;HLZGELOIZALG&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;bananas&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest palindromic substring is &#34;anana&#34; with a length of 5.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;DSACODE&#39;, numRows = 4</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The zigzag pattern for 4 rows creates the final string &#39;DCOESADE&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;civic&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The entire string &#34;civic&#34; is a palindrome, and it is the longest one.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#34;hello&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest palindromic substring is &#34;e&#34; with a length of 1.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -463,18 +459,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution uses a simulation approach to mimic the zigzag traversal and builds each row incrementally.</div>
+                        <div class=""> <b>Approach:</b> A center-expansion approach can be used to identify palindromes around each character in the string.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The zigzag traversal alternates direction (downwards or upwards) when boundaries are reached.</div>
+                                <div style="margin-left: 20px;"> • We can treat each character as a potential center for a palindrome.</div>
                             
-                                <div style="margin-left: 20px;"> • Using an array of strings for each row simplifies the logic for appending characters.</div>
+                                <div style="margin-left: 20px;"> • Palindromes can either have odd or even lengths, so we must check both possibilities.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can iterate through the string once while maintaining a direction flag and row index.</div>
+                                <div style="margin-left: 20px;"> • Instead of checking all possible substrings, we can expand from the center, which reduces the number of comparisons needed.</div>
                             
                         </div>
                     </div>
@@ -482,15 +478,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check if numRows is 1; if true, return the input string as is.</div>
+                                <div style="margin-left: 20px;"> • For each character in the string, treat it as the center of a potential palindrome.</div>
                             
-                                <div style="margin-left: 20px;"> • Initialize an array of strings, one for each row.</div>
+                                <div style="margin-left: 20px;"> • Expand outwards while checking for palindromes in both directions (odd and even length).</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the string while keeping track of the current row and direction.</div>
-                            
-                                <div style="margin-left: 20px;"> • Append the current character to the appropriate row and adjust the direction if needed.</div>
-                            
-                                <div style="margin-left: 20px;"> • Finally, concatenate all rows to form the final string.</div>
+                                <div style="margin-left: 20px;"> • Track the longest palindrome found during the expansion process.</div>
                             
                         </div>
                     </div>
@@ -499,22 +491,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty inputs due to constraints.</div>
+                                <div style="margin-left: 20px;"> • If the string is empty, return an empty string.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should handle strings of length 1000 and up to 1000 rows efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle strings up to the length of 1000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If numRows is 1, the output is the same as the input string.</div>
+                                <div style="margin-left: 20px;"> • Strings with no palindrome longer than 1 character should return a single character.</div>
+                            
+                                <div style="margin-left: 20px;"> • Strings that are themselves palindromes should return the entire string.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure memory and time usage are optimized for large input sizes.</div>
+                                <div style="margin-left: 20px;"> • The string only contains printable characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -531,37 +525,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Conditional Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 String Manipulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Index Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Loop Iteration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 String Manipulation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Assignment</button>
                     
                 </div>
 
@@ -570,30 +560,26 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">convert</span>(string str, <span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> str.size();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> lo, len;
+</span></span><span style="display:flex;"><span>string <span style="color:#00a000">longestPalindrome</span>(string s) {
+</span></span><span style="display:flex;"><span>    len <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> str;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s(n, <span style="color:#b44">&#34;&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> down <span style="color:#666">=</span> <span style="color:#a2f">true</span>; <span style="color:#0b0;font-weight:bold">int</span> ridx <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> len; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        s[ridx <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> str[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (down) ridx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>      ridx<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> ( (ridx <span style="color:#666">==</span> n) <span style="color:#666">||</span> 
-</span></span><span style="display:flex;"><span>             (ridx <span style="color:#666">==</span> <span style="color:#666">1</span>) ) 
-</span></span><span style="display:flex;"><span>            down <span style="color:#666">=</span> <span style="color:#666">!</span>down;
-</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        pal(s, i, i);
+</span></span><span style="display:flex;"><span>        pal(s, i, i <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> s[i];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s.substr(lo, len);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">pal</span>(string <span style="color:#666">&amp;</span>s, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;=</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">==</span> s[j]) {
+</span></span><span style="display:flex;"><span>        i<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(len <span style="color:#666">&lt;</span> j <span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>        lo <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        len <span style="color:#666">=</span> j <span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -601,163 +587,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">convert</span>(string str, <span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> lo, len;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare the `convert` function, which takes a string `str` and an integer `n` as input and returns a string. </div>
+                            <div class=""> Declare and initialize variables `lo` and `len` to store the starting index and length of the longest palindrome found so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> str.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">longestPalindrome</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the length of the input string `str` and store it in the `len` variable. </div>
+                            <div class=""> Declare the `longestPalindrome` function, which takes a string `s` as input and returns the longest palindromic substring. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Conditional Return</b></div>
+                            <div class=""> <b>3 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> str;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    len <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `n` is 1, return the input string `str` as it is. </div>
+                            <div class=""> Initialize `len` to 0, as we haven&#39;t found a palindrome yet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Array Initialization</b></div>
+                            <div class=""> <b>4 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> s(n, <span style="color:#b44">&#34;&#34;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector `s` of size `n` to store the characters of each row. Each element is initially an empty string. </div>
+                            <div class=""> Iterate over each character in the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> down <span style="color:#666">=</span> <span style="color:#a2f">true</span>; <span style="color:#0b0;font-weight:bold">int</span> ridx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pal(s, i, i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `down` to `true` to indicate the direction of zigzagging, and `ridx` to 1 to track the current row index. </div>
+                            <div class=""> Call the `pal` function to check for odd-length palindromes centered at index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop Iteration</b></div>
+                            <div class=""> <b>6 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> len; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pal(s, i, i <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over each character in the input string. </div>
+                            <div class=""> Call the `pal` function to check for even-length palindromes centered between indices `i` and `i&#43;1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : String Manipulation</b></div>
+                            <div class=""> <b>7 : Return Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s[ridx <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+=</span> str[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s.substr(lo, len);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Append the current character `str[i]` to the string at index `ridx - 1` in the `s` vector. </div>
+                            <div class=""> Return the longest palindrome substring found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Conditional Update</b></div>
+                            <div class=""> <b>8 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (down) ridx<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">pal</span>(string <span style="color:#666">&amp;</span>s, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `down` is true, increment `ridx` to move to the next row. </div>
+                            <div class=""> Declare the `pal` function to check for palindromes around a given center. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Conditional Update</b></div>
+                            <div class=""> <b>9 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>      ridx<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&lt;=</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">==</span> s[j]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `down` is false, decrement `ridx` to move to the previous row. </div>
+                            <div class=""> Expand the palindrome as long as the characters at indices `i` and `j` match. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Conditional Update</b></div>
+                            <div class=""> <b>10 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> ( (ridx <span style="color:#666">==</span> n) <span style="color:#666">||</span> 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if we&#39;ve reached the bottom row. </div>
+                            <div class=""> Decrement `i` to move to the previous character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Conditional Update</b></div>
+                            <div class=""> <b>11 : Index Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>             (ridx <span style="color:#666">==</span> <span style="color:#666">1</span>) ) 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if we&#39;ve reached the top row. </div>
+                            <div class=""> Increment `j` to move to the next character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Conditional Update</b></div>
+                            <div class=""> <b>12 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            down <span style="color:#666">=</span> <span style="color:#666">!</span>down;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(len <span style="color:#666">&lt;</span> j <span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Toggle the `down` flag to change the direction of zigzagging. </div>
+                            <div class=""> Check if the current palindrome is longer than the previously found longest palindrome. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Variable Initialization</b></div>
+                            <div class=""> <b>13 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lo <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an empty string `res` to store the final result. </div>
+                            <div class=""> Update `lo` to store the starting index of the new longest palindrome. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Loop Iteration</b></div>
+                            <div class=""> <b>14 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        len <span style="color:#666">=</span> j <span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over each row in the `s` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : String Manipulation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> s[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Append the current row `s[i]` to the `res` string. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Return Value</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the final zigzagged string `res`. </div>
+                            <div class=""> Update `len` to store the length of the new longest palindrome. </div>
                         </div>
                     
                 </div>
@@ -777,16 +743,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(s.length)</div>
-                        <div class=""> <b>Average Case:</b> O(s.length)</div>
-                        <div class=""> <b>Worst Case:</b> O(s.length)</div> 
-                        <div class=""> <b>Description:</b> Each character in the string is processed exactly once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we may need to expand around each character in the string, which results in a time complexity of O(n^2).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(s.length)</div>
-                        <div class=""> <b>Worst Case:</b> O(s.length)</div> 
-                        <div class=""> <b>Description:</b> Space is used for storing the strings for each row.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because we only need a constant amount of extra space for variables like the longest palindrome&#39;s start position and length.</div>    
                     </div>
 
                 </div>

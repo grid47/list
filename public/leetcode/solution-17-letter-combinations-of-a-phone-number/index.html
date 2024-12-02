@@ -320,12 +320,7 @@
 
 
 
-<div class=""> <p>You are given a string containing characters representing various types of brackets: &lsquo;(&rsquo;, &lsquo;)&rsquo;, &lsquo;{&rsquo;, &lsquo;}&rsquo;, &lsquo;[&rsquo; and &lsquo;]&rsquo;. Your task is to determine if the input string is valid. A string is considered valid if:</p>
-<ol>
-<li>Open brackets must be closed by the same type of brackets.</li>
-<li>Open brackets must be closed in the correct order.</li>
-<li>Every close bracket has a corresponding open bracket of the same type.</li>
-</ol> </div>
+<div class=""> Given a string of digits, return all possible letter combinations that the digits could represent based on the phone&rsquo;s number-to-letter mapping. </div>
 
 
 
@@ -376,51 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string s containing only the characters &#39;(&#39;, &#39;)&#39;, &#39;{&#39;, &#39;}&#39;, &#39;[&#39; and &#39;]&#39;.</div>
-                        <div class=""> <b>Example:</b> s = &#39;({[]})&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a string `digits` containing digits between 2 and 9.</div>
+                        <div class=""> <b>Example:</b> digits = &#34;45&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= digits.length &lt;= 4</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of parentheses only &#39;()[]{}&#39;.</div>
+                                <div style="margin-left: 20px;"> • digits[i] is a digit from the range [&#39;2&#39;, &#39;9&#39;]</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is a boolean value: true if the string is valid, otherwise false.</div>
-                        <div class=""> <b>Example:</b> true</div>
+                        <div class=""> <b>Output:</b> Return a list of strings where each string represents a letter combination corresponding to the given digits.</div>
+                        <div class=""> <b>Example:</b> Output: [&#34;gj&#34;, &#34;gk&#34;, &#34;gl&#34;, &#34;hj&#34;, &#34;hk&#34;, &#34;hl&#34;, &#34;ij&#34;, &#34;ik&#34;, &#34;il&#34;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a boolean indicating whether the input string is valid.</div>
+                                <div style="margin-left: 20px;"> • The output is a list of letter combinations.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To check whether the string contains valid parentheses by ensuring each open bracket has a corresponding and correctly ordered closing bracket.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find all possible letter combinations corresponding to the given digits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty stack to keep track of open brackets.</div>
+                                <div style="margin-left: 20px;"> • Use a map to associate each digit with its corresponding letters.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each character in the string.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the character is an open bracket (&#39;(&#39;, &#39;{&#39;, or &#39;[&#39;), push it onto the stack.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the character is a closing bracket (&#39;)&#39;, &#39;}&#39;, or &#39;]&#39;), check if the stack is not empty and if the top of the stack matches the corresponding open bracket.</div>
-                            
-                                <div style="margin-left: 20px;"> • If there&#39;s a match, pop the stack, else return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • After iterating through the string, if the stack is empty, return true (valid). Otherwise, return false (invalid).</div>
+                                <div style="margin-left: 20px;"> • Iterate over the digits and for each digit, expand the existing combinations by appending each letter mapped to that digit.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Conditions that the input string will always meet.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the length of the input string is manageable and the digits are within the specified range.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string will only contain characters from &#39;(&#39;, &#39;)&#39;, &#39;{&#39;, &#39;}&#39;, &#39;[&#39; and &#39;].</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= digits.length &lt;= 4</div>
+                            
+                                <div style="margin-left: 20px;"> • digits[i] is a digit in the range [&#39;2&#39;, &#39;9&#39;]</div>
                             
                         </div>
                     </div>        
@@ -428,25 +417,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string is always non-empty.</div>
+                                <div style="margin-left: 20px;"> • Each digit corresponds to a set of characters as per the old mobile keypad mappings.</div>
                             
-                                <div style="margin-left: 20px;"> • The input string contains only valid characters.</div>
+                                <div style="margin-left: 20px;"> • The input string could be empty, in which case the output should be an empty list.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;({[]})&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This string contains balanced brackets: each opening bracket has a corresponding closing bracket in the correct order. Thus, the output is true.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;({[})&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This string contains mismatched brackets. The order is incorrect, and the closing bracket doesn&#39;t match the last opening bracket, so the output is false.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;([])&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This string contains balanced brackets: each opening bracket has a corresponding closing bracket in the correct order. Thus, the output is true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> digits = &#34;45&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The digit 4 maps to &#39;g&#39;, &#39;h&#39;, &#39;i&#39; and the digit 5 maps to &#39;j&#39;, &#39;k&#39;, &#39;l&#39;. The output combinations are formed by combining each letter from the first digit with each letter from the second digit.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -470,18 +451,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach to solve this problem is by using a stack to ensure that each open bracket has a corresponding closing bracket in the correct order.</div>
+                        <div class=""> <b>Approach:</b> The approach uses a map to represent the letter mappings for each digit, and iteratively constructs combinations using a loop or recursive function.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Using a stack data structure helps ensure the correct order of opening and closing brackets.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each closing bracket should match the most recent open bracket.</div>
+                                <div style="margin-left: 20px;"> • The problem is about generating combinations, which can be done using a backtracking approach or an iterative approach.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By pushing open brackets onto the stack and popping them when encountering matching closing brackets, we can validate the string efficiently.</div>
+                                <div style="margin-left: 20px;"> • We can initialize the result with the letters corresponding to the first digit and progressively build the combinations for each subsequent digit.</div>
                             
                         </div>
                     </div>
@@ -489,15 +468,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty stack to keep track of open brackets.</div>
+                                <div style="margin-left: 20px;"> • Initialize a map that associates each digit (2-9) with its corresponding letters.</div>
                             
-                                <div style="margin-left: 20px;"> • Traverse the string from left to right.</div>
+                                <div style="margin-left: 20px;"> • Start with the combinations corresponding to the first digit.</div>
                             
-                                <div style="margin-left: 20px;"> • For each character, if it&#39;s an open bracket, push it onto the stack.</div>
-                            
-                                <div style="margin-left: 20px;"> • If it&#39;s a closing bracket, check if the stack is not empty and if the top of the stack matches the corresponding open bracket. If so, pop the stack, otherwise return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • Finally, after processing all characters, return true if the stack is empty, indicating all brackets were properly matched.</div>
+                                <div style="margin-left: 20px;"> • Iteratively expand the combinations by appending each letter of the next digit to the existing combinations.</div>
                             
                         </div>
                     </div>
@@ -506,22 +481,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string will never be empty. There will always be at least one bracket.</div>
+                                <div style="margin-left: 20px;"> • An empty string should return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution handles strings of length up to 10^4 efficiently.</div>
+                                <div style="margin-left: 20px;"> • Input strings of length 4 are the largest possible, and the solution should handle that case efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handles cases with a single pair of brackets as well as very large balanced or unbalanced sequences.</div>
+                                <div style="margin-left: 20px;"> • Digits corresponding to the same set of letters (e.g., &#39;2&#39; or &#39;3&#39;) should be handled as usual.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must work for all strings of valid length and with valid bracket characters.</div>
+                                <div style="margin-left: 20px;"> • The input length is constrained to 0 to 4 digits, ensuring the problem can be solved efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -540,25 +515,41 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Stack Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Stack Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Stack Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Stack Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Stack Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Array Access</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Assignment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Nested Loops</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Nested Loops</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 String Manipulation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Value</button>
                     
                 </div>
 
@@ -567,19 +558,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isValid</span>(string s) {
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {
-</span></span><span style="display:flex;"><span>            stk.push(x);
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) stk.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;}&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span>) stk.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) stk.pop();                
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> letterCombinations(string digits) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;2&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;a&#34;</span>, <span style="color:#b44">&#34;b&#34;</span>, <span style="color:#b44">&#34;c&#34;</span> };
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;3&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;d&#34;</span>, <span style="color:#b44">&#34;e&#34;</span>, <span style="color:#b44">&#34;f&#34;</span> };
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;4&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;g&#34;</span>, <span style="color:#b44">&#34;h&#34;</span>, <span style="color:#b44">&#34;i&#34;</span> };
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;5&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;j&#34;</span>, <span style="color:#b44">&#34;k&#34;</span>, <span style="color:#b44">&#34;l&#34;</span> };
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;6&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;m&#34;</span>, <span style="color:#b44">&#34;n&#34;</span>, <span style="color:#b44">&#34;o&#34;</span> };
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;7&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;p&#34;</span>, <span style="color:#b44">&#34;q&#34;</span>, <span style="color:#b44">&#34;r&#34;</span>, <span style="color:#b44">&#34;s&#34;</span> };
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;8&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;t&#34;</span>, <span style="color:#b44">&#34;u&#34;</span>, <span style="color:#b44">&#34;v&#34;</span> };
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;9&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;w&#34;</span>, <span style="color:#b44">&#34;x&#34;</span>, <span style="color:#b44">&#34;y&#34;</span>, <span style="color:#b44">&#34;z&#34;</span> };
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans, tmp;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> mp[digits[<span style="color:#666">0</span>]];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> digits.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> {};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> mp[digits[i]].size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> tmp.size(); k<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                ans.push_back(tmp[k] <span style="color:#666">+</span> mp[digits[i]][j]);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -590,110 +591,190 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isValid</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> letterCombinations(string digits) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a function named &#39;isValid&#39; that takes a string &#39;s&#39; as input and returns a boolean value indicating whether the string is valid. </div>
+                            <div class=""> Declare the `letterCombinations` function, which takes a string of digits `digits` as input and returns a vector of strings representing all possible letter combinations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Stack Initialization</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes an empty stack of characters to store opening brackets. </div>
+                            <div class=""> Initialize a map `mp` to store the mapping of digits to their corresponding letters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Iteration</b></div>
+                            <div class=""> <b>3 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;2&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;a&#34;</span>, <span style="color:#b44">&#34;b&#34;</span>, <span style="color:#b44">&#34;c&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line starts a loop to iterate over each character &#39;x&#39; in the input string &#39;s&#39;. </div>
+                            <div class=""> Map the digit &#39;2&#39; to the letters &#39;a&#39;, &#39;b&#39;, and &#39;c&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Condition Check</b></div>
+                            <div class=""> <b>4 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;3&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;d&#34;</span>, <span style="color:#b44">&#34;e&#34;</span>, <span style="color:#b44">&#34;f&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line checks if the current character &#39;x&#39; is an opening bracket (&#39;(&#39;, &#39;{&#39;, or &#39;[&#39;). </div>
+                            <div class=""> Map the digit &#39;3&#39; to the letters &#39;d&#39;, &#39;e&#39;, and &#39;f&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Stack Operation</b></div>
+                            <div class=""> <b>5 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(x);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;4&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;g&#34;</span>, <span style="color:#b44">&#34;h&#34;</span>, <span style="color:#b44">&#34;i&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;x&#39; is an opening bracket, it is pushed onto the stack. </div>
+                            <div class=""> Map the digit &#39;4&#39; to the letters &#39;g&#39;, &#39;h&#39;, and &#39;i&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Conditional Check</b></div>
+                            <div class=""> <b>6 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;5&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;j&#34;</span>, <span style="color:#b44">&#34;k&#34;</span>, <span style="color:#b44">&#34;l&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line handles the case where &#39;x&#39; is not an opening bracket. </div>
+                            <div class=""> Map the digit &#39;5&#39; to the letters &#39;j&#39;, &#39;k&#39;, and &#39;l&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Stack Operation</b></div>
+                            <div class=""> <b>7 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) stk.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;6&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;m&#34;</span>, <span style="color:#b44">&#34;n&#34;</span>, <span style="color:#b44">&#34;o&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;x&#39; is a closing bracket &#39;)&#39; and the stack is not empty and the top element of the stack is an opening bracket &#39;(&#39;, then the top element is popped from the stack. </div>
+                            <div class=""> Map the digit &#39;6&#39; to the letters &#39;m&#39;, &#39;n&#39;, and &#39;o&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Stack Operation</b></div>
+                            <div class=""> <b>8 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;}&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="">&#39;</span>{<span style="">&#39;</span>) stk.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;7&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;p&#34;</span>, <span style="color:#b44">&#34;q&#34;</span>, <span style="color:#b44">&#34;r&#34;</span>, <span style="color:#b44">&#34;s&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;x&#39; is a closing bracket &#39;}&#39; and the stack is not empty and the top element of the stack is an opening bracket &#39;{&#39;, then the top element is popped from the stack. </div>
+                            <div class=""> Map the digit &#39;7&#39; to the letters &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, and &#39;s&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Stack Operation</b></div>
+                            <div class=""> <b>9 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) stk.pop();                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;8&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;t&#34;</span>, <span style="color:#b44">&#34;u&#34;</span>, <span style="color:#b44">&#34;v&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;x&#39; is a closing bracket &#39;]&#39; and the stack is not empty and the top element of the stack is an opening bracket &#39;[&#39;, then the top element is popped from the stack. </div>
+                            <div class=""> Map the digit &#39;8&#39; to the letters &#39;t&#39;, &#39;u&#39;, and &#39;v&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return</b></div>
+                            <div class=""> <b>10 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#b44">&#39;9&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;w&#34;</span>, <span style="color:#b44">&#34;x&#34;</span>, <span style="color:#b44">&#34;y&#34;</span>, <span style="color:#b44">&#34;z&#34;</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If none of the above conditions are met, it means there&#39;s an unmatched closing bracket, and the function returns false. </div>
+                            <div class=""> Map the digit &#39;9&#39; to the letters &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, and &#39;z&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return</b></div>
+                            <div class=""> <b>11 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans, tmp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the loop completes without returning false, it means all brackets are matched. The function returns true if the stack is empty, indicating that all brackets have been paired. </div>
+                            <div class=""> Initialize two empty vectors `ans` and `tmp` to store the letter combinations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Array Access</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans <span style="color:#666">=</span> mp[digits[<span style="color:#666">0</span>]];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize `ans` with the letter combinations for the first digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Loop Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> digits.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start a loop to iterate through the digits from the second digit to the last digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Variable Assignment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp <span style="color:#666">=</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Copy the current letter combinations in `ans` to `tmp`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> {};
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Clear the `ans` vector to store the new combinations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Nested Loops</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> mp[digits[i]].size(); j<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate through the letters corresponding to the current digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Nested Loops</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> tmp.size(); k<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate through the existing letter combinations in `tmp`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : String Manipulation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ans.push_back(tmp[k] <span style="color:#666">+</span> mp[digits[i]][j]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Append the current letter from `mp[digits[i]]` to each combination in `tmp` and add the new combination to `ans`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Return Value</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the final vector `ans` containing all possible letter combinations. </div>
                         </div>
                     
                 </div>
@@ -713,16 +794,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> We iterate through the string once, performing constant time operations for each character.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(3^n)</div>
+                        <div class=""> <b>Worst Case:</b> O(4^n)</div> 
+                        <div class=""> <b>Description:</b> In the worst case, for 4 digits, we need to compute up to 4^4 combinations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) in the worst case when all characters are opening brackets.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(4^n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is determined by the number of combinations generated.</div>    
                     </div>
 
                 </div>

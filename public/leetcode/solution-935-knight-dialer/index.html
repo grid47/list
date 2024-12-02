@@ -279,7 +279,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 5, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -306,7 +306,7 @@
 
 
 
-<div class=""> You are given a string word consisting of lowercase English letters. Your task is to return the total sum of the number of vowels (&lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, and &lsquo;u&rsquo;) present in every possible substring of word. A substring is any contiguous sequence of characters in the word. </div>
+<div class=""> A knight is on a phone pad, and it can move to adjacent numeric cells according to its unique movement pattern (an L-shape: two squares vertically and one square horizontally, or two squares horizontally and one square vertically). Given an integer n, you need to calculate how many distinct phone numbers of length n the knight can dial, starting from any numeric cell on the pad and performing n-1 valid knight jumps. </div>
 
 
 
@@ -357,47 +357,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given the following input:</div>
-                        <div class=""> <b>Example:</b> Input: word = &#34;abcabc&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer n, representing the length of the phone number to dial.</div>
+                        <div class=""> <b>Example:</b> Input: n = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= word.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • word consists of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 5000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer representing the sum of vowels in every substring of the given string word.</div>
-                        <div class=""> <b>Example:</b> Output: 9</div>
+                        <div class=""> <b>Output:</b> Return the number of distinct phone numbers of length n that can be dialed by the knight, modulo 10^9 &#43; 7.</div>
+                        <div class=""> <b>Example:</b> Output: 30</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result may be a large integer.</div>
+                                <div style="margin-left: 20px;"> • The result should be returned modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the sum of vowels in all substrings of the string word efficiently, considering that the string may be very large.</div>
+                        <div class=""> <b>Goal:</b> Calculate the number of valid knight paths of length n starting from each numeric cell on the phone pad. Use dynamic programming to compute the total count efficiently by caching intermediate results.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through each character of the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Use dynamic programming to store the number of valid ways to reach each cell on the pad for each number of moves.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each vowel encountered, calculate how many substrings it is part of.</div>
+                                <div style="margin-left: 20px;"> • 2. For each cell, recursively calculate the number of ways to reach it by performing valid knight moves.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Add the contribution of each vowel to the total sum.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the result.</div>
+                                <div style="margin-left: 20px;"> • 3. Sum up the results for all starting cells, ensuring the answer is taken modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input string can be large, so an efficient approach is necessary.</div>
+                        <div class=""> <b>Goal:</b> The input size n can go up to 5000, so the solution needs to be optimized to handle large inputs efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should work within the given time limits for strings with length up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 5000</div>
+                            
+                                <div style="margin-left: 20px;"> • The result must be returned modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>        
@@ -405,25 +403,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The word consists of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The knight always starts on one of the numeric cells on the phone pad.</div>
                             
-                                <div style="margin-left: 20px;"> • The length of the word is at least 1.</div>
+                                <div style="margin-left: 20px;"> • Each jump must follow the valid knight&#39;s move pattern, as described.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word = &#34;aba&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The possible substrings are: &#39;a&#39;, &#39;ab&#39;, &#39;aba&#39;, &#39;b&#39;, &#39;ba&#39;, &#39;a&#39;. The vowels are found in substrings &#39;a&#39;, &#39;ab&#39;, &#39;ba&#39;, &#39;a&#39;, &#39;aba&#39;, and contribute 6 vowels in total.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For a phone number of length 1, any of the 10 numeric cells on the pad can be the starting point. Thus, there are 10 possible phone numbers.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word = &#34;abc&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The possible substrings are: &#39;a&#39;, &#39;ab&#39;, &#39;abc&#39;, &#39;b&#39;, &#39;bc&#39;, and &#39;c&#39;. Only &#39;a&#39;, &#39;ab&#39;, and &#39;abc&#39; contain vowels, contributing 3 vowels in total.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word = &#34;ltcd&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are no vowels in the string &#39;ltcd&#39;, so the total sum of vowels is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For a phone number of length 2, we count all valid knight moves from each numeric cell. This gives a total of 20 possible valid phone numbers.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -447,18 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved efficiently by calculating the contribution of each vowel to all substrings it appears in. The key observation is that a vowel at position i contributes to all substrings starting from indices 0 to i and ending from i to the end of the string.</div>
+                        <div class=""> <b>Approach:</b> The solution uses dynamic programming to compute the number of valid knight moves for each phone number length n. We maintain a table to store the results of all knight moves and use memoization to optimize the solution.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each vowel appears in multiple substrings, and the number of such substrings can be calculated directly.</div>
-                            
-                                <div style="margin-left: 20px;"> • A brute force approach of generating all substrings would be too slow for large strings.</div>
+                                <div style="margin-left: 20px;"> • The knight has a restricted set of moves, so the problem can be tackled using dynamic programming.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The efficient approach avoids generating substrings and directly computes the contribution of each vowel in the string.</div>
+                                <div style="margin-left: 20px;"> • Using dynamic programming and memoization helps avoid recalculating the number of valid moves for the same cell multiple times.</div>
                             
                         </div>
                     </div>
@@ -466,13 +458,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Initialize a variable to track the total number of vowels.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a memoization table to store the number of ways to reach each cell for each move count.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Iterate through each character of the string.</div>
+                                <div style="margin-left: 20px;"> • 2. Recursively calculate the number of valid knight moves for each numeric cell on the pad for all lengths from 1 to n.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: For each vowel, calculate how many substrings it is part of and add its contribution to the total.</div>
+                                <div style="margin-left: 20px;"> • 3. For each cell, calculate the sum of all valid moves from other cells and store the result.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 4: Return the total sum of vowels.</div>
+                                <div style="margin-left: 20px;"> • 4. Finally, sum the results for all starting cells, taking the result modulo 10^9 &#43; 7.</div>
                             
                         </div>
                     </div>
@@ -481,22 +473,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no empty inputs since the length of the string is guaranteed to be at least 1.</div>
+                                <div style="margin-left: 20px;"> • The input will always contain a valid n, as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs (strings up to length 10^5), ensure the algorithm runs in linear time.</div>
+                                <div style="margin-left: 20px;"> • The solution needs to efficiently handle large values of n, up to 5000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the word contains no vowels, the result should be 0.</div>
+                                <div style="margin-left: 20px;"> • The smallest value of n is 1, which means the knight just needs to pick a starting point.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles edge cases such as very short or very long strings efficiently.</div>
+                                <div style="margin-left: 20px;"> • The result must be returned modulo 10^9 &#43; 7.</div>
                             
                         </div>                                                                        
                     </div>
@@ -513,17 +505,45 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Conditional Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Main Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mathematical Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Grid Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Memoization Table</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Outer Loop Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Inner Loop Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Path Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Path Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Base Case Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Invalid Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Memoization Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Base Case for n == 1</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Recursive Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Recursive Calls Continue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Final Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Result</button>
                     
                 </div>
 
@@ -532,12 +552,40 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">countVowels</span>(string word) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> word.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(string(<span style="color:#b44">&#34;aeiou&#34;</span>).find(word[i]) <span style="color:#666">!=</span> string<span style="color:#666">::</span>npos)
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (n <span style="color:#666">-</span> i);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> knightDialer(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;</span> arr(<span style="color:#666">4</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span>(<span style="color:#666">3</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;&gt;</span> mem(n <span style="color:#666">+</span> <span style="color:#666">1</span>, arr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> <span style="color:#666">3</span>; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">+</span> path(i, j, n, mem))<span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">path</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j, <span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;&gt;</span> <span style="color:#666">&amp;</span>mem) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span><span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> <span style="color:#666">4</span> <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">3</span> <span style="color:#666">||</span> (i<span style="color:#666">==</span><span style="color:#666">3</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">!=</span><span style="color:#666">1</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[n][i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[n][i][j] <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mem[n][i][j] <span style="color:#666">=</span> path(i <span style="color:#666">-</span><span style="color:#666">1</span> , j <span style="color:#666">-</span><span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>              path(i <span style="color:#666">-</span><span style="color:#666">1</span> , j <span style="color:#666">+</span><span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>              path(i <span style="color:#666">-</span><span style="color:#666">2</span> , j <span style="color:#666">-</span><span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>              path(i <span style="color:#666">-</span><span style="color:#666">2</span> , j <span style="color:#666">+</span><span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>              path(i <span style="color:#666">+</span><span style="color:#666">1</span> , j <span style="color:#666">-</span><span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>              path(i <span style="color:#666">+</span><span style="color:#666">1</span> , j <span style="color:#666">+</span><span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>              path(i <span style="color:#666">+</span><span style="color:#666">2</span> , j <span style="color:#666">-</span><span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>              path(i <span style="color:#666">+</span><span style="color:#666">2</span> , j <span style="color:#666">+</span><span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[n][i][j];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -545,63 +593,203 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Class Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">countVowels</span>(string word) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;countVowels&#39; which takes a string &#39;word&#39; as input and returns the total count of substrings containing vowels. </div>
+                            <div class=""> Define the Solution class, which encapsulates the entire problem-solving process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> word.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;res&#39; to 0, which will hold the result, and &#39;n&#39; to the length of the input string &#39;word&#39;. </div>
+                            <div class=""> Declare the modulus value used for handling large numbers and to avoid overflow. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Looping</b></div>
+                            <div class=""> <b>3 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop that iterates over each character in the string &#39;word&#39;. </div>
+                            <div class=""> Indicates that the following methods and variables are publicly accessible. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Conditional Logic</b></div>
+                            <div class=""> <b>4 : Main Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(string(<span style="color:#b44">&#34;aeiou&#34;</span>).find(word[i]) <span style="color:#666">!=</span> string<span style="color:#666">::</span>npos)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">knightDialer</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current character &#39;word[i]&#39; is a vowel by looking for it in the string &#39;aeiou&#39;. If found, the character is a vowel. </div>
+                            <div class=""> Define the knightDialer function, which calculates the total number of distinct phone numbers the knight can dial. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Mathematical Operation</b></div>
+                            <div class=""> <b>5 : Result Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">+=</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (n <span style="color:#666">-</span> i);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the character is a vowel, add to &#39;res&#39; the product of the number of possible substrings starting with the current vowel position. </div>
+                            <div class=""> Initialize the result variable to 0. This will accumulate the total number of distinct dialed numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Grid Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;</span> arr(<span style="color:#666">4</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span>(<span style="color:#666">3</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize the 4x3 grid, representing the phone&#39;s keypad, with all values set to -1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Memoization Table</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;&gt;</span> mem(n <span style="color:#666">+</span> <span style="color:#666">1</span>, arr);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Create a memoization table to store intermediate results for subproblems, where mem[n][i][j] stores the result for n moves starting from position (i, j). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Outer Loop Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start the loop iterating over all rows of the phone&#39;s keypad grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Inner Loop Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> <span style="color:#666">3</span>; j<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Start the loop iterating over all columns of the phone&#39;s keypad grid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Path Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">+</span> path(i, j, n, mem))<span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the path function for each (i, j) position, adding the result to the total. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the accumulated result &#39;res&#39; which contains the total count of substrings with vowels. </div>
+                            <div class=""> Return the accumulated result, representing the total number of distinct phone numbers the knight can dial. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Path Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">path</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j, <span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;&gt;</span> <span style="color:#666">&amp;</span>mem) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the path function, which recursively calculates the number of valid knight moves from position (i, j). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Base Case Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> <span style="color:#666">4</span> <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">3</span> <span style="color:#666">||</span> (i<span style="color:#666">==</span><span style="color:#666">3</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">!=</span><span style="color:#666">1</span>))
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current position is out of bounds or invalid (e.g., the knight cannot land on the bottom-right corner). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Invalid Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return 0 if the knight&#39;s current position is invalid. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Memoization Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[n][i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[n][i][j] <span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the result for the current position and move count is already computed. If so, return the stored result. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Base Case for n == 1</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the remaining number of moves is 1, return 1 as the knight can make a valid move. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Recursive Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mem[n][i][j] <span style="color:#666">=</span> path(i <span style="color:#666">-</span><span style="color:#666">1</span> , j <span style="color:#666">-</span><span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively calculate the number of valid moves from the current position by exploring all 8 possible knight moves. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Recursive Calls Continue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>              path(i <span style="color:#666">-</span><span style="color:#666">1</span> , j <span style="color:#666">+</span><span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Continue recursive calls for the other knight moves. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Final Recursive Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>              path(i <span style="color:#666">+</span><span style="color:#666">2</span> , j <span style="color:#666">+</span><span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Final recursive call in the sequence, returning the total number of valid moves. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[n][i][j];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the calculated result, which is the total number of valid knight moves from position (i, j). </div>
                         </div>
                     
                 </div>
@@ -621,16 +809,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the word, because we only need to iterate through the string once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n * 10)</div>
+                        <div class=""> <b>Average Case:</b> O(n * 10)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * 10)</div> 
+                        <div class=""> <b>Description:</b> Each cell has at most 8 valid moves, and we compute the result for all moves up to n. The total time complexity is proportional to n times the number of cells (10).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1), as the solution only requires a constant amount of extra space.</div>    
+                        <div class=""> <b>Best Case:</b> O(n * 10)</div>
+                        <div class=""> <b>Worst Case:</b> O(n * 10)</div> 
+                        <div class=""> <b>Description:</b> We store results for all cells at each step of the knight&#39;s movement, leading to space complexity proportional to n times the number of cells.</div>    
                     </div>
 
                 </div>

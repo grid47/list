@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> A truck has two fuel tanks, one main tank and one additional tank. The truck&rsquo;s mileage is 10 km per liter, and fuel from the additional tank can be injected into the main tank after every 5 liters of fuel consumed. Your task is to calculate the maximum distance the truck can travel, considering both the main tank and the additional tank. </div>
+<div class=""> You are given a matrix of integers and a threshold. Your goal is to find the maximum side length of a square where the sum of the elements inside the square is less than or equal to the threshold. </div>
 
 
 
@@ -360,45 +360,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two integers: `mainTank` and `additionalTank`, representing the fuel available in the main tank and the additional tank in liters.</div>
-                        <div class=""> <b>Example:</b> mainTank = 8, additionalTank = 12</div>
+                        <div class=""> <b>Input:</b> The input consists of a matrix mat of size m x n, and an integer threshold.</div>
+                        <div class=""> <b>Example:</b> Input: [[1,1,3,2,4,3,2], [1,1,3,2,4,3,2], [1,1,3,2,4,3,2]], threshold = 4</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= mainTank &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 300</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= additionalTank &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= mat[i][j] &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= threshold &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum distance the truck can travel.</div>
-                        <div class=""> <b>Example:</b> Output: 80</div>
+                        <div class=""> <b>Output:</b> The function should return the maximum side length of a square where the sum of the elements inside is less than or equal to the threshold, or 0 if no such square exists.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The matrix has dimensions m x n.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Calculate the total distance the truck can travel by consuming fuel from the main tank and transferring fuel from the additional tank when necessary.</div>
+                        <div class=""> <b>Goal:</b> Find the maximum side length of a square where the sum of elements inside is less than or equal to the threshold.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • While there is fuel in the main tank, calculate the distance that can be traveled with the current fuel.</div>
+                                <div style="margin-left: 20px;"> • Create a prefix sum matrix to efficiently calculate the sum of any submatrix.</div>
                             
-                                <div style="margin-left: 20px;"> • For every 5 liters consumed, transfer 1 liter from the additional tank to the main tank if possible.</div>
+                                <div style="margin-left: 20px;"> • Iterate through all possible side lengths from largest to smallest.</div>
                             
-                                <div style="margin-left: 20px;"> • Repeat until the main tank is empty.</div>
+                                <div style="margin-left: 20px;"> • For each side length, check if there exists a square with that side length whose sum is less than or equal to the threshold.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the largest side length where the condition holds true.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem guarantees that both `mainTank` and `additionalTank` will contain at least 1 liter of fuel and no more than 100 liters.</div>
+                        <div class=""> <b>Goal:</b> The matrix can have up to 300 rows and columns, and the elements can be as large as 10^4.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= mainTank &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The matrix is of size m x n where 1 &lt;= m, n &lt;= 300.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= additionalTank &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • Each element in the matrix is between 0 and 10^4.</div>
+                            
+                                <div style="margin-left: 20px;"> • The threshold is between 0 and 10^5.</div>
                             
                         </div>
                     </div>        
@@ -406,21 +414,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Fuel injection only happens after 5 liters are consumed from the main tank.</div>
+                                <div style="margin-left: 20px;"> • The matrix is non-empty.</div>
                             
-                                <div style="margin-left: 20px;"> • The truck’s mileage is always 10 km per liter of fuel.</div>
+                                <div style="margin-left: 20px;"> • Threshold is non-negative.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> mainTank = 8, additionalTank = 12</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Initially, the truck starts with 8 liters in the main tank, allowing it to travel 80 km. After consuming 5 liters, the additional tank injects 1 liter into the main tank. This continues until the main tank is empty.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> mainTank = 3, additionalTank = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The truck starts with 3 liters in the main tank, which allows it to travel 30 km. No fuel is injected from the additional tank because fuel transfer only happens after consuming 5 liters.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [[1,1,3,2,4,3,2], [1,1,3,2,4,3,2], [1,1,3,2,4,3,2]], threshold = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The maximum side length of a square with a sum of elements less than or equal to 4 is 2, as seen by the top-left 2x2 square.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,18 +448,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to simulate the process of consuming fuel from the main tank and transferring fuel from the additional tank at the appropriate intervals.</div>
+                        <div class=""> <b>Approach:</b> The solution involves using a prefix sum matrix to efficiently compute the sum of any submatrix and checking all possible square sizes.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The additional tank only injects fuel after every 5 liters consumed from the main tank.</div>
-                            
-                                <div style="margin-left: 20px;"> • The total distance is calculated by considering the fuel available in the main tank and the injections from the additional tank.</div>
+                                <div style="margin-left: 20px;"> • Brute force approach would involve checking all possible squares which can be slow. A prefix sum matrix optimizes the sum calculation for submatrices.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The process is a repetitive calculation until the main tank is empty.</div>
+                                <div style="margin-left: 20px;"> • We can optimize by first constructing the prefix sum matrix, which will allow us to compute the sum of any submatrix in constant time.</div>
                             
                         </div>
                     </div>
@@ -463,13 +465,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to track the total distance.</div>
+                                <div style="margin-left: 20px;"> • Build a prefix sum matrix where each entry stores the sum of elements from the top-left corner to the current position.</div>
                             
-                                <div style="margin-left: 20px;"> • While there is fuel in the main tank, consume 5 liters or less and add to the distance.</div>
+                                <div style="margin-left: 20px;"> • Start with the largest possible square and check if its sum is within the threshold.</div>
                             
-                                <div style="margin-left: 20px;"> • If 5 liters are consumed and the additional tank has fuel, transfer 1 liter to the main tank.</div>
-                            
-                                <div style="margin-left: 20px;"> • Repeat the process until the main tank is empty.</div>
+                                <div style="margin-left: 20px;"> • If a square is valid, return its side length. If not, reduce the size of the square and check again.</div>
                             
                         </div>
                     </div>
@@ -478,22 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Both tanks are empty at the start (not valid in this problem).</div>
+                                <div style="margin-left: 20px;"> • The input matrix is never empty according to the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Maximum values for both tanks (100 liters each).</div>
+                                <div style="margin-left: 20px;"> • The solution should be optimized to handle matrices as large as 300x300.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the main tank has less than 5 liters initially, no injection occurs.</div>
+                                <div style="margin-left: 20px;"> • If the threshold is 0, no square will have a positive sum unless the matrix contains all zeros.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure fuel injection happens only after 5 liters are consumed.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle the largest possible matrix and the maximum element values efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,21 +514,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop - Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Matrix Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Distance Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Prefix Sum Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Result</button>
                     
                 </div>
 
@@ -537,20 +537,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">distanceTraveled</span>(<span style="color:#0b0;font-weight:bold">int</span> mt, <span style="color:#0b0;font-weight:bold">int</span> at) {        
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSideLength</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> hit) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, len <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> sum(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> (n <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(mt <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> red <span style="color:#666">=</span> min(<span style="color:#666">5</span>, mt);
-</span></span><span style="display:flex;"><span>        mt <span style="color:#666">-=</span> red;
-</span></span><span style="display:flex;"><span>        net <span style="color:#666">+=</span> red <span style="color:#666">*</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(red <span style="color:#666">==</span> <span style="color:#666">5</span> <span style="color:#666">&amp;&amp;</span> at <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            mt <span style="color:#666">+=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            at<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> m; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            sum[i][j] <span style="color:#666">=</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> sum[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> mat[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> len <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> len <span style="color:#666">&amp;&amp;</span> sum[i][j] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> len][j] <span style="color:#666">-</span> sum[i][j <span style="color:#666">-</span> len] <span style="color:#666">+</span> sum[i <span style="color:#666">-</span> len][j <span style="color:#666">-</span> len] <span style="color:#666">&lt;=</span> hit)
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">=</span> len<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> net;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -561,100 +561,100 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">distanceTraveled</span>(<span style="color:#0b0;font-weight:bold">int</span> mt, <span style="color:#0b0;font-weight:bold">int</span> at) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSideLength</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> hit) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `distanceTraveled` is defined with parameters `mt` (the remaining distance to travel) and `at` (the available time buffer). It returns an integer representing the total distance traveled. </div>
+                            <div class=""> Defines a function to compute the largest side length of a square matrix with sum constraints. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> net <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `net` is initialized to zero to keep track of the total distance traveled. </div>
+                            <div class=""> Initializes the dimensions of the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop - Condition</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(mt <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, len <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A `while` loop starts, which will continue as long as there is remaining distance (`mt &gt; 0`). </div>
+                            <div class=""> Initializes the result variable and the starting square side length. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Calculation</b></div>
+                            <div class=""> <b>4 : Matrix Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> red <span style="color:#666">=</span> min(<span style="color:#666">5</span>, mt);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> sum(m <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> (n <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `red` is assigned the minimum value between 5 and the remaining distance `mt`, representing the distance that can be covered in the current iteration. </div>
+                            <div class=""> Creates a prefix sum matrix with one extra row and column for easier computation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Update</b></div>
+                            <div class=""> <b>5 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mt <span style="color:#666">-=</span> red;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> m; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The remaining distance `mt` is decreased by the value of `red`. </div>
+                            <div class=""> Iterates through each row of the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Distance Calculation</b></div>
+                            <div class=""> <b>6 : Inner Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        net <span style="color:#666">+=</span> red <span style="color:#666">*</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The total distance traveled (`net`) is updated by adding the distance covered in this iteration, multiplied by 10 (penalty factor). </div>
+                            <div class=""> Iterates through each column of the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Check</b></div>
+                            <div class=""> <b>7 : Prefix Sum Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(red <span style="color:#666">==</span> <span style="color:#666">5</span> <span style="color:#666">&amp;&amp;</span> at <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum[i][j] <span style="color:#666">=</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">+</span> sum[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> mat[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A condition checks if exactly 5 units were covered (`red == 5`) and if there is any available time buffer (`at &gt; 0`). </div>
+                            <div class=""> Updates the prefix sum for the current cell in the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Variable Update</b></div>
+                            <div class=""> <b>8 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mt <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> len <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> len <span style="color:#666">&amp;&amp;</span> sum[i][j] <span style="color:#666">-</span> sum[i <span style="color:#666">-</span> len][j] <span style="color:#666">-</span> sum[i][j <span style="color:#666">-</span> len] <span style="color:#666">+</span> sum[i <span style="color:#666">-</span> len][j <span style="color:#666">-</span> len] <span style="color:#666">&lt;=</span> hit)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition is true, 1 unit is added back to `mt` (this represents a penalty for the time buffer). </div>
+                            <div class=""> Checks if the current square&#39;s sum is within the allowed threshold. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Update</b></div>
+                            <div class=""> <b>9 : Update Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            at<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                res <span style="color:#666">=</span> len<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The available time buffer `at` is decremented by 1. </div>
+                            <div class=""> Updates the result to the current square side length and increments the length. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> net;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the total distance traveled (`net`), which has been accumulated during the `while` loop. </div>
+                            <div class=""> Returns the maximum side length of the square that satisfies the conditions. </div>
                         </div>
                     
                 </div>
@@ -674,16 +674,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(n) where n is the amount of fuel in the main tank.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) since the process continues until the main tank is empty.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear as we process each fuel consumption step.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n) - The best case occurs when the prefix sum matrix is constructed in linear time.</div>
+                        <div class=""> <b>Average Case:</b> O(m * n) - The average case remains O(m * n) as the algorithm involves iterating through the matrix.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n) - The worst case involves checking all possible submatrices and square sizes.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the construction of the prefix sum matrix and the iteration through all possible square sizes.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) since no extra space is needed.</div>
-                        <div class=""> <b>Worst Case:</b> O(1) as we only use a constant amount of space.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant because we only need variables to track the fuel amounts.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n) - The space complexity is the same in the best case as the matrix needs to be stored.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n) - The space complexity comes from storing the prefix sum matrix.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the storage of the prefix sum matrix.</div>    
                     </div>
 
                 </div>

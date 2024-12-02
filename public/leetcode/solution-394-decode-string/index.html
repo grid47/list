@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given two binary trees, determine if their leaf value sequences are identical. A binary tree&rsquo;s leaf value sequence is the sequence of values of its leaves, from left to right, following the in-order traversal. Two trees are considered leaf-similar if the leaf values in both trees appear in the same order. </div>
+<div class=""> You are given a string that is encoded using the pattern k[encoded_string], where the substring inside the square brackets is repeated exactly k times. Your task is to decode the string by expanding it according to the given encoding rule. </div>
 
 
 
@@ -371,45 +371,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two binary trees represented by their root nodes, `root1` and `root2`.</div>
-                        <div class=""> <b>Example:</b> Input: root1 = [1, 3, 4, null, null, 5, 6], root2 = [1, 2, 3, null, 4, 6, 5]</div>
+                        <div class=""> <b>Input:</b> The input is a string encoded using the pattern k[encoded_string], where the encoded_string inside the square brackets is repeated exactly k times.</div>
+                        <div class=""> <b>Example:</b> Input: 2[ab]3[c]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of nodes in each tree is between 1 and 200.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • The values of the nodes are between 0 and 200.</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase English letters, digits, and square brackets &#39;[]&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • All integers in s are in the range [1, 300].</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return `true` if the two trees have identical leaf value sequences, otherwise return `false`.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output is a string representing the decoded version of the input encoded string.</div>
+                        <div class=""> <b>Example:</b> Output: ababc</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a boolean indicating whether the trees&#39; leaf value sequences are identical.</div>
+                                <div style="margin-left: 20px;"> • The decoded string must follow the encoding rule exactly.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to traverse both trees and compare their leaf sequences.</div>
+                        <div class=""> <b>Goal:</b> The goal is to decode the given string by expanding the encoded substrings based on the provided encoding pattern.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Perform a depth-first search (DFS) on both trees to collect the leaf values.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the input string character by character.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the leaf value sequences of both trees. If they are identical, return `true`; otherwise, return `false`.</div>
+                                <div style="margin-left: 20px;"> • When encountering a digit, parse the full number to determine how many times to repeat the enclosed substring.</div>
+                            
+                                <div style="margin-left: 20px;"> • Recursively process the substring inside the brackets, and concatenate it according to the repetition count.</div>
+                            
+                                <div style="margin-left: 20px;"> • Repeat the process until the entire string has been decoded.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should be optimized to handle trees with a maximum of 200 nodes.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle decoding efficiently within the given input size and constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= number of nodes &lt;= 200</div>
-                            
-                                <div style="margin-left: 20px;"> • Each node&#39;s value is between 0 and 200.</div>
+                                <div style="margin-left: 20px;"> • The solution must work for input strings with lengths up to 30 characters.</div>
                             
                         </div>
                     </div>        
@@ -417,21 +421,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input trees are binary trees.</div>
-                            
-                                <div style="margin-left: 20px;"> • The leaf nodes are the nodes without any children.</div>
+                                <div style="margin-left: 20px;"> • The input string is always valid and well-formed.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root1 = [1, 3, 4, null, null, 5, 6], root2 = [1, 2, 3, null, 4, 6, 5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Both trees have the same leaf value sequence [5, 6], so the output is `true`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: 2[ab]3[c]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The pattern &#39;2[ab]&#39; means &#39;ab&#39; is repeated 2 times to form &#39;abab&#39;, and &#39;3[c]&#39; means &#39;c&#39; is repeated 3 times to form &#39;ccc&#39;. Combining these gives the final output &#39;ababccc&#39;.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root1 = [1, 2, 3], root2 = [1, 3, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The leaf value sequences for root1 are [2, 3] and for root2 are [3, 2], which are not identical, so the output is `false`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: 2[a2[b]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> First, decode &#39;a2[b]&#39; where &#39;b&#39; is repeated 2 times to form &#39;bb&#39;, so &#39;a2[b]&#39; becomes &#39;abb&#39;. Repeating this 2 times gives &#39;abbabb&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -455,18 +457,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by performing a DFS traversal on both trees to extract their leaf values and then compare the sequences.</div>
+                        <div class=""> <b>Approach:</b> The approach involves iterating over the string, decoding the substrings inside brackets, and repeating them according to the specified number of repetitions.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The leaf value sequence of a tree can be obtained through a depth-first search (DFS).</div>
-                            
-                                <div style="margin-left: 20px;"> • Both trees need to be traversed in the same way to ensure the sequences are compared correctly.</div>
+                                <div style="margin-left: 20px;"> • The problem involves parsing numbers and substrings, so a stack-based or recursive approach would be effective.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A DFS approach is efficient for this problem since it allows us to directly extract the leaf values in order.</div>
+                                <div style="margin-left: 20px;"> • A recursive approach can work well, where we decode each substring and repeat it according to the number.</div>
                             
                         </div>
                     </div>
@@ -474,11 +474,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Perform DFS on `root1` to collect its leaf values in order.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string, identifying numbers (which represent the repetition count) and brackets (which define the boundaries of the encoded substrings).</div>
                             
-                                <div style="margin-left: 20px;"> • Perform DFS on `root2` to collect its leaf values in order.</div>
+                                <div style="margin-left: 20px;"> • When encountering a number, extract the full integer value and identify the corresponding substring inside the brackets.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the two sequences. If they match, return `true`; otherwise, return `false`.</div>
+                                <div style="margin-left: 20px;"> • Use recursion to decode the substring and repeat it the appropriate number of times.</div>
+                            
+                                <div style="margin-left: 20px;"> • Concatenate the decoded result and continue until the entire string is processed.</div>
                             
                         </div>
                     </div>
@@ -487,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If either tree is empty, the result should be `false` since leaf sequences can&#39;t match.</div>
+                                <div style="margin-left: 20px;"> • The input string is guaranteed to have a length of at least 1, so no need to handle empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs (trees with 200 nodes), the algorithm should efficiently handle the traversal and comparison.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle strings up to 30 characters long.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If both trees have only one node each, the result depends on whether the nodes are leaves and have the same value.</div>
+                                <div style="margin-left: 20px;"> • Ensure correct handling of nested brackets and repeated substrings.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle trees with a maximum of 200 nodes and node values within the specified range.</div>
+                                <div style="margin-left: 20px;"> • The solution must be designed to handle all edge cases, including nested brackets and large numbers for repetitions.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,27 +523,37 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Stack Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Push Roots</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Leaf Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Comparison Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 DFS Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Character Handling</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Infinite Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Character Addition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Node</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Else Block for Number Processing</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Push Child Nodes</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Push Right Child</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 While Loop for Number Extraction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Leaf Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Number Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Skip Bracket</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Recursive Call for Substring</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Skip Closing Bracket</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Repeat and Append</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Statement</button>
                     
                 </div>
 
@@ -550,21 +562,34 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">leafSimilar</span>(TreeNode<span style="color:#666">*</span> root1, TreeNode<span style="color:#666">*</span> root2) {
-</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> s1, s2;
-</span></span><span style="display:flex;"><span>    s1.push(root1), s2.push(root2);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>s2.empty())
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dfs(s1) <span style="color:#666">!=</span> dfs(s2)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s1.empty() <span style="color:#666">&amp;&amp;</span> s2.empty();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">decodeString</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> decode(s, i);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> <span style="color:#666">&amp;</span>stk) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#a2f">true</span>) {
-</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> stk.top(); stk.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) stk.push(node<span style="color:#666">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) stk.push(node<span style="color:#666">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>left <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>right) <span style="color:#a2f;font-weight:bold">return</span> node<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>string <span style="color:#00a000">decode</span>(string <span style="color:#666">&amp;</span>s, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>i) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;]&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>isdigit(s[i]))
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> s[i<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> isdigit(s[i]))
+</span></span><span style="display:flex;"><span>                n <span style="color:#666">=</span> n <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            string t <span style="color:#666">=</span> decode(s, i);
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(n<span style="color:#666">--&gt;</span> <span style="color:#666">0</span>) res <span style="color:#666">+=</span> t;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -575,120 +600,170 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">leafSimilar</span>(TreeNode<span style="color:#666">*</span> root1, TreeNode<span style="color:#666">*</span> root2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">decodeString</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `leafSimilar` that compares the leaf nodes of two binary trees for similarity. </div>
+                            <div class=""> Define the main function `decodeString` that takes a string `s` and returns the decoded string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Stack Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> s1, s2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes two stacks, `s1` and `s2`, to hold nodes for depth-first traversal of `root1` and `root2`. </div>
+                            <div class=""> Initialize an integer variable `i` to track the current position in the string `s` during decoding. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Push Roots</b></div>
+                            <div class=""> <b>3 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s1.push(root1), s2.push(root2);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">decode</span>(s, i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the root nodes of both `root1` and `root2` onto their respective stacks. </div>
+                            <div class=""> Call the helper function `decode`, passing the string `s` and the current position `i` as arguments, and return the result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Setup</b></div>
+                            <div class=""> <b>4 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>s2.empty())
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">decode</span>(string <span style="color:#666">&amp;</span>s, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>i) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to traverse both trees as long as neither stack is empty. </div>
+                            <div class=""> Define the helper function `decode`, which is responsible for decoding the string recursively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Leaf Comparison</b></div>
+                            <div class=""> <b>5 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dfs(s1) <span style="color:#666">!=</span> dfs(s2)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Compares the leaf nodes of both trees by calling the `dfs` function on each stack. If the leaf values don&#39;t match, it returns `false`. </div>
+                            <div class=""> Initialize an empty string `res` to accumulate the decoded characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Comparison Result</b></div>
+                            <div class=""> <b>6 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s1.empty() <span style="color:#666">&amp;&amp;</span> s2.empty();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;]&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns `true` if both stacks are empty, indicating that both trees had the same leaf sequence. </div>
+                            <div class=""> Start a `while` loop that processes the string until a closing bracket `]` is encountered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : DFS Function Definition</b></div>
+                            <div class=""> <b>7 : Character Handling</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> <span style="color:#666">&amp;</span>stk) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>isdigit(s[i]))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `dfs` function that performs depth-first search on the tree using a stack and returns the value of the leaf node. </div>
+                            <div class=""> Check if the current character is not a digit (i.e., a literal character that should be added to the result). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Infinite Loop</b></div>
+                            <div class=""> <b>8 : Character Addition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#a2f">true</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> s[i<span style="color:#666">++</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts an infinite loop to keep processing nodes from the stack. </div>
+                            <div class=""> Add the current character to the result string `res` and increment the position `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Pop Node</b></div>
+                            <div class=""> <b>9 : Else Block for Number Processing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> stk.top(); stk.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops the top node from the stack for processing. </div>
+                            <div class=""> If the current character is a digit, it indicates the start of a repeat count, so enter the processing block for numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Push Child Nodes</b></div>
+                            <div class=""> <b>10 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) stk.push(node<span style="color:#666">-&gt;</span>left);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the left child of the current node onto the stack if it exists. </div>
+                            <div class=""> Initialize an integer `n` to store the repeat count extracted from the digits in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Push Right Child</b></div>
+                            <div class=""> <b>11 : While Loop for Number Extraction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) stk.push(node<span style="color:#666">-&gt;</span>right);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> isdigit(s[i]))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the right child of the current node onto the stack if it exists. </div>
+                            <div class=""> Start a loop to process digits and construct the repeat count `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Leaf Value</b></div>
+                            <div class=""> <b>12 : Number Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>left <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>right) <span style="color:#a2f;font-weight:bold">return</span> node<span style="color:#666">-&gt;</span>val;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                n <span style="color:#666">=</span> n <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current node is a leaf (both left and right children are null), return its value. </div>
+                            <div class=""> Update the repeat count `n` by processing each digit one by one and adjusting the current value of `n`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Skip Bracket</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment `i` to skip the opening bracket `[` after extracting the repeat count. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Recursive Call for Substring</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            string t <span style="color:#666">=</span> decode(s, i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call `decode` to process the substring enclosed in the brackets and get the decoded substring `t`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Skip Closing Bracket</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment `i` to skip the closing bracket `]` after processing the substring. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Repeat and Append</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(n<span style="color:#666">--&gt;</span> <span style="color:#666">0</span>) res <span style="color:#666">+=</span> t;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Repeat the decoded substring `t`, `n` times and append it to the result string `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the fully decoded string `res` after all characters and substrings have been processed. </div>
                         </div>
                     
                 </div>
@@ -711,13 +786,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of nodes, as each tree is traversed once to collect the leaf values.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) as each character is processed once during the decoding.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> Space is required for storing the leaf values during the DFS traversal, resulting in O(n) space complexity.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) in the worst case due to recursion and string concatenation.</div>    
                     </div>
 
                 </div>

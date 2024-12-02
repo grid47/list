@@ -288,7 +288,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1262s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1263s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/712.webp" 
            alt="Two strings where the minimum ASCII sum for deletion is calculated, with each deleted character softly glowing." 
@@ -311,7 +311,7 @@
 
 
 
-<div class=""> You are given a network of cities, where some cities are directly connected by bidirectional roads. The network rank between two cities is defined as the total number of roads connected to either of the cities. If a road connects both cities, it is only counted once. The task is to find the maximal network rank for any pair of distinct cities in the infrastructure. </div>
+<div class=""> Given two strings s1 and s2, return the lowest ASCII sum of deleted characters to make the two strings equal. </div>
 
 
 
@@ -362,57 +362,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer n representing the number of cities and an array roads, where each element in roads[i] = [ai, bi] represents a bidirectional road between cities ai and bi.</div>
-                        <div class=""> <b>Example:</b> n = 4, roads = [[0, 1], [0, 3], [1, 2], [1, 3]]</div>
+                        <div class=""> <b>Input:</b> You are given two strings s1 and s2.</div>
+                        <div class=""> <b>Example:</b> s1 = &#39;hello&#39;, s2 = &#39;goodbye&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s1.length, s2.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= roads.length &lt;= n * (n - 1) / 2</div>
-                            
-                                <div style="margin-left: 20px;"> • roads[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= ai, bi &lt;= n-1</div>
-                            
-                                <div style="margin-left: 20px;"> • ai != bi</div>
-                            
-                                <div style="margin-left: 20px;"> • Each pair of cities has at most one road connecting them.</div>
+                                <div style="margin-left: 20px;"> • s1 and s2 consist of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximal network rank, which is the highest network rank among all pairs of different cities.</div>
-                        <div class=""> <b>Example:</b> For n = 4 and roads = [[0, 1], [0, 3], [1, 2], [1, 3]], the output would be 4.</div>
+                        <div class=""> <b>Output:</b> Return the minimum sum of ASCII values of deleted characters from both strings to make them equal.</div>
+                        <div class=""> <b>Example:</b> If s1 = &#39;hello&#39; and s2 = &#39;goodbye&#39;, return 732.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a single integer representing the maximal network rank.</div>
+                                <div style="margin-left: 20px;"> • The returned value will be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the maximal network rank, iterate through all pairs of cities and calculate their network rank by considering the number of directly connected roads to either city, ensuring duplicate counting is avoided.</div>
+                        <div class=""> <b>Goal:</b> To calculate the minimum ASCII sum of deleted characters that need to be removed from both strings to make them equal.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • First, calculate the number of roads connected to each city.</div>
+                                <div style="margin-left: 20px;"> • Use dynamic programming (DP) to calculate the minimum deletion sum.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a map to store connections between cities to avoid double counting the same road.</div>
+                                <div style="margin-left: 20px;"> • Iterate through both strings and compare characters.</div>
                             
-                                <div style="margin-left: 20px;"> • For each pair of cities, calculate their combined network rank and update the maximum rank found.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the highest network rank after checking all pairs of cities.</div>
+                                <div style="margin-left: 20px;"> • For each mismatch, calculate the cost of deleting characters from both strings and update the DP table.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem has constraints on the number of cities and the number of roads, ensuring that the solution should efficiently handle the input size.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the strings are processed within the given limits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of cities n is between 2 and 100.</div>
+                                <div style="margin-left: 20px;"> • Both strings will not exceed 1000 characters.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of roads is at most n * (n - 1) / 2, meaning there can be at most a complete graph of roads.</div>
+                                <div style="margin-left: 20px;"> • Strings consist only of lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -420,21 +410,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The cities are numbered from 0 to n-1, and roads are bidirectional.</div>
+                                <div style="margin-left: 20px;"> • Both strings will contain only lowercase English letters.</div>
                             
-                                <div style="margin-left: 20px;"> • Each pair of cities can have at most one direct road between them.</div>
+                                <div style="margin-left: 20px;"> • Both strings are non-empty and have at least one character.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 4, roads = [[0, 1], [0, 3], [1, 2], [1, 3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, cities 0 and 1 have 4 roads connected (0-1, 0-3, 1-2, 1-3). The maximal network rank is 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: s1 = &#39;hello&#39;, s2 = &#39;goodbye&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we calculate the sum of deleted characters from both strings to make them equal. The deletions lead to a sum of 732.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5, roads = [[0, 1], [0, 3], [1, 2], [1, 3], [2, 3], [2, 4]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For cities 1 and 2, the network rank is 5, as they are connected by 5 roads in total.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: s1 = &#39;dog&#39;, s2 = &#39;god&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, no deletions are needed as both strings are already equal, leading to a sum of 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +448,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by calculating the network rank for every pair of cities and selecting the maximum value.</div>
+                        <div class=""> <b>Approach:</b> We use dynamic programming to efficiently calculate the minimum ASCII sum of deleted characters.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to iterate through each pair of cities and calculate their network rank.</div>
+                                <div style="margin-left: 20px;"> • The problem can be reduced to finding the longest common subsequence (LCS).</div>
+                            
+                                <div style="margin-left: 20px;"> • Once we find the LCS, the characters that are not part of it need to be deleted.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The network rank for any pair of cities can be computed by summing the direct connections and subtracting any common connections.</div>
+                                <div style="margin-left: 20px;"> • The solution involves calculating the sum of ASCII values for characters that are not in the LCS.</div>
                             
                         </div>
                     </div>
@@ -475,13 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create an array to track the number of connections for each city.</div>
+                                <div style="margin-left: 20px;"> • Initialize a DP table to store the minimum ASCII sum of deleted characters.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a map or set to store connections between cities to avoid counting any common road twice.</div>
+                                <div style="margin-left: 20px;"> • Iterate over both strings and fill the DP table based on character comparisons.</div>
                             
-                                <div style="margin-left: 20px;"> • Loop through all pairs of cities and calculate the network rank for each pair.</div>
-                            
-                                <div style="margin-left: 20px;"> • Keep track of the highest network rank found during the iteration.</div>
+                                <div style="margin-left: 20px;"> • Return the calculated minimum sum by subtracting twice the LCS sum from the total sum of ASCII values of both strings.</div>
                             
                         </div>
                     </div>
@@ -490,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no roads, the network rank is 0, as no cities are connected.</div>
+                                <div style="margin-left: 20px;"> • If one or both strings are empty, the sum will be the sum of ASCII values of the non-empty string.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For a large number of cities, the solution must be efficient to handle the upper limit of n = 100.</div>
+                                <div style="margin-left: 20px;"> • If the strings are large, ensure that the solution handles them within time limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are only two cities with one road, the network rank is simply 2.</div>
+                                <div style="margin-left: 20px;"> • If the strings are already equal, the minimum sum will be 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must handle cases where the number of roads is minimal or maximal.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the DP solution does not exceed time and space limits for large inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -522,35 +512,45 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Data Structure Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inward Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Inward Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Graph Construction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Call with Match</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Graph Construction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Memoized Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Max Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 End of Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Max Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Sum Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Sum Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Vector Resize</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Return Result</button>
                     
                 </div>
 
@@ -559,26 +559,37 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximalNetworkRank</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> roads) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> inward(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: roads) {
-</span></span><span style="display:flex;"><span>        inward[it[<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        inward[it[<span style="color:#666">1</span>]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        mp[it[<span style="color:#666">0</span>]].insert(it[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        mp[it[<span style="color:#666">1</span>]].insert(it[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s1, s2;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mem;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, inward[i] <span style="color:#666">+</span> inward[j] <span style="color:#666">-</span> (mp.count(i) <span style="color:#666">&amp;&amp;</span> mp[i].count(j)<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">0</span>));
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> s1.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> s2.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][j];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> max(dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), dp(i, j <span style="color:#666">+</span> <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1[i] <span style="color:#666">==</span> s2[j]) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> s1[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[i][j] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumDeleteSum</span>(string s1, string s2) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s1 <span style="color:#666">=</span> s1;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s2 <span style="color:#666">=</span> s2;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s1.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> s1[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s2.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> s2[i];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    mem.resize(s1.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(s2.size(), <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -586,153 +597,203 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maximalNetworkRank</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> roads) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s1, s2;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `maximalNetworkRank` that takes the number of cities `n` and a list of roads as input. </div>
+                            <div class=""> Initialize two strings &#39;s1&#39; and &#39;s2&#39; to hold the input strings. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mem;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Prepare for variable initialization. </div>
+                            <div class=""> Create a 2D vector &#39;mem&#39; to store the memoized results of the dynamic programming approach. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> inward(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a vector `inward` of size `n` with all values set to 0 to keep track of the number of roads connected to each city. </div>
+                            <div class=""> Define the recursive function &#39;dp&#39; to compute the minimum delete sum between two strings from index i and j. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Data Structure Initialization</b></div>
+                            <div class=""> <b>4 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> s1.size() <span style="color:#666">||</span> j <span style="color:#666">==</span> s2.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a map `mp` to store the cities and their respective connected cities using sets. </div>
+                            <div class=""> If either string has been fully traversed, return 0 as the base case. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop</b></div>
+                            <div class=""> <b>5 : Memoization Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: roads) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][j];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each road in the `roads` list. </div>
+                            <div class=""> Check if the result has already been computed for the current indices i and j. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inward Counting</b></div>
+                            <div class=""> <b>6 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        inward[it[<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> max(dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), dp(i, j <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increase the count for the first city in the current road. </div>
+                            <div class=""> Recursively calculate the maximum result by either skipping a character from s1 or s2. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Inward Counting</b></div>
+                            <div class=""> <b>7 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        inward[it[<span style="color:#666">1</span>]]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s1[i] <span style="color:#666">==</span> s2[j]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increase the count for the second city in the current road. </div>
+                            <div class=""> If the characters at the current indices of s1 and s2 are the same, consider them in the result. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Graph Construction</b></div>
+                            <div class=""> <b>8 : Recursive Call with Match</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[it[<span style="color:#666">0</span>]].insert(it[<span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> s1[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the second city to the set of connected cities for the first city. </div>
+                            <div class=""> If characters match, include the character value in the result and recursively call the function for the next indices. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Graph Construction</b></div>
+                            <div class=""> <b>9 : Return Memoized Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[it[<span style="color:#666">1</span>]].insert(it[<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[i][j] <span style="color:#666">=</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the first city to the set of connected cities for the second city. </div>
+                            <div class=""> Memoize the result for the current indices i and j to avoid redundant calculations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Max Calculation</b></div>
+                            <div class=""> <b>10 : End of Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable `mx` to store the maximum network rank. </div>
+                            <div class=""> End of the &#39;dp&#39; recursive function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop</b></div>
+                            <div class=""> <b>11 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumDeleteSum</span>(string s1, string s2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop through each city in the graph. </div>
+                            <div class=""> Define the function &#39;minimumDeleteSum&#39; to compute the result for the two input strings. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Loop</b></div>
+                            <div class=""> <b>12 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s1 <span style="color:#666">=</span> s1;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a nested loop to compare every pair of cities. </div>
+                            <div class=""> Assign the input string &#39;s1&#39; to the class member &#39;s1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Condition</b></div>
+                            <div class=""> <b>13 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>s2 <span style="color:#666">=</span> s2;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skip if the two cities are the same. </div>
+                            <div class=""> Assign the input string &#39;s2&#39; to the class member &#39;s2&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Max Calculation</b></div>
+                            <div class=""> <b>14 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, inward[i] <span style="color:#666">+</span> inward[j] <span style="color:#666">-</span> (mp.count(i) <span style="color:#666">&amp;&amp;</span> mp[i].count(j)<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the network rank for the current pair of cities and update `mx` if a higher value is found. </div>
+                            <div class=""> Initialize a variable &#39;ans&#39; to accumulate the sum of ASCII values of characters in both strings. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Return</b></div>
+                            <div class=""> <b>15 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s1.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the maximum network rank found. </div>
+                            <div class=""> Loop through each character in the first string &#39;s1&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Sum Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> s1[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the ASCII value of the character in s1 to &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s2.size(); i<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Loop through each character in the second string &#39;s2&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Sum Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">+=</span> s2[i];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Add the ASCII value of the character in s2 to &#39;ans&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Vector Resize</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mem.resize(s1.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(s2.size(), <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Resize the &#39;mem&#39; vector to the required size to store the memoization results. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">-</span> <span style="color:#666">2</span> <span style="color:#666">*</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the minimum delete sum by subtracting twice the result of &#39;dp(0, 0)&#39; from the sum of all ASCII values. </div>
                         </div>
                     
                 </div>
@@ -752,16 +813,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, we calculate the network rank for all pairs of cities, which results in O(n^2) time complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m &#43; n), where m and n are the lengths of the strings.</div>
+                        <div class=""> <b>Average Case:</b> O(m * n), where m and n are the lengths of the strings.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n), where m and n are the lengths of the strings.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is proportional to the product of the lengths of the two strings.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to storing the connections between cities, and O(n) in the best case if the roads are sparse.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n), where m and n are the lengths of the strings.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n), where m and n are the lengths of the strings.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is proportional to the size of the DP table, which stores the results for all pairs of indices.</div>    
                     </div>
 
                 </div>

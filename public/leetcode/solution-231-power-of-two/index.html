@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 14, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given a binary grid of size m x n, where each cell is initially set to 0. The task is to design an algorithm that can randomly pick a cell that is still 0, flip it to 1, and ensure that all available cells are equally likely to be selected. </div>
+<div class=""> Given an integer n, determine if it is a power of two. An integer n is considered a power of two if there exists an integer x such that n == 2^x. </div>
 
 
 
@@ -371,53 +371,37 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a pair of integers m and n representing the size of the grid, followed by a sequence of operations.</div>
-                        <div class=""> <b>Example:</b> [3, 1], [], [], [], []</div>
+                        <div class=""> <b>Input:</b> The input consists of a single integer n (−2^31 &lt;= n &lt;= 2^31 − 1).</div>
+                        <div class=""> <b>Example:</b> Input: n = 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • There will always be at least one cell with value 0 for every flip operation.</div>
-                            
-                                <div style="margin-left: 20px;"> • No more than 1000 flip and reset operations will be performed.</div>
+                                <div style="margin-left: 20px;"> • -2^31 &lt;= n &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be an array representing the randomly selected index [i, j] for the flip operation, and null for other operations.</div>
-                        <div class=""> <b>Example:</b> [null, [1, 0], [2, 0], [0, 0], null, [2, 0]]</div>
+                        <div class=""> <b>Output:</b> Return true if n is a power of two, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The flip operation should return the index of a randomly selected cell that is still 0 and flips it to 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To randomly select an index where the value is 0, flip it to 1, and ensure equal likelihood for all available indices.</div>
+                        <div class=""> <b>Goal:</b> The goal is to verify whether the number n is a power of two using bit manipulation.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Maintain a list or map to track available cells with value 0.</div>
+                                <div style="margin-left: 20px;"> • Check if n is less than or equal to zero, in which case it is not a power of two.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each flip, randomly pick an index from the list of available cells.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. After picking, flip the cell to 1 and update the list accordingly.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Reset the grid when the reset operation is called, restoring all values to 0.</div>
+                                <div style="margin-left: 20px;"> • Perform a bitwise AND operation between n and (n - 1). If the result is zero, then n is a power of two.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints for the input and output of the problem.</div>
+                        <div class=""> <b>Goal:</b> The input integer n must lie within the range of a 32-bit signed integer.</div>
                         <div class=""> <b>Steps:</b>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • At least one free cell will be available for each flip call.</div>
-                            
-                                <div style="margin-left: 20px;"> • No more than 1000 flip and reset operations.</div>
                             
                         </div>
                     </div>        
@@ -425,17 +409,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid is initially filled with 0s.</div>
+                                <div style="margin-left: 20px;"> • The input will be a valid integer within the specified range.</div>
                             
-                                <div style="margin-left: 20px;"> • Each flip picks a valid available index and updates the grid.</div>
+                                <div style="margin-left: 20px;"> • n may be negative or zero, but only positive values can be a power of two.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [3, 1], [], [], [], []</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> A grid of size 3x1 is initialized with all zeros. Each flip returns a random index of a free cell, and after resetting, the grid is restored to its initial state.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 8</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since 8 can be written as 2^3, it is a power of two. Thus, the output is true.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 5 cannot be written as 2^x for any integer x, so the output is false.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -459,18 +447,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves maintaining a list or map of available cells and efficiently selecting a random index while minimizing calls to the random function.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using bit manipulation to determine if n is a power of two.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can maintain a map or list that keeps track of the available cells to pick from.</div>
-                            
-                                <div style="margin-left: 20px;"> • When selecting a cell, it should be done efficiently to minimize random function calls.</div>
+                                <div style="margin-left: 20px;"> • A number n is a power of two if it has exactly one bit set in its binary representation.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The reset operation should restore the grid efficiently.</div>
+                                <div style="margin-left: 20px;"> • Using the bitwise AND operation (n &amp; (n - 1)), we can quickly check if a number is a power of two. This operation will return zero only for numbers that are powers of two.</div>
                             
                         </div>
                     </div>
@@ -478,13 +464,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize the grid and maintain a list of available cells (cells with value 0).</div>
+                                <div style="margin-left: 20px;"> • Check if n is greater than zero.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. When a flip occurs, randomly select an index from the list of available cells.</div>
+                                <div style="margin-left: 20px;"> • Perform the operation n &amp; (n - 1). If the result is 0, then n is a power of two.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. After each flip, update the grid and the list of available cells.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. The reset operation restores the grid to its initial state and updates the available cells list.</div>
+                                <div style="margin-left: 20px;"> • Return true if the result is zero, otherwise return false.</div>
                             
                         </div>
                     </div>
@@ -493,22 +477,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the grid is of size 1x1, there is only one cell to flip.</div>
+                                <div style="margin-left: 20px;"> • No empty inputs are possible since the input is an integer.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must handle large grid sizes up to 10^4 efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large values of n, ensure the solution works within the given integer range.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The grid should handle reset and flip operations correctly when all cells are flipped to 1 and then reset.</div>
+                                <div style="margin-left: 20px;"> • If n is 0 or negative, it cannot be a power of two.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that no flip operation is called when there are no available cells.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works efficiently within the given constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,39 +509,11 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Members</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Data Members</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Constructor</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Constructor Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Constructor Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Constructor Method Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Method Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Randomization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Limit</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mapping Logic</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Mapping Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Method Definition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Reset Logic</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Reset Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Bitwise Operation</button>
                     
                 </div>
 
@@ -566,208 +522,43 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> row, col, lmt;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>Solution(<span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    row <span style="color:#666">=</span> m;
-</span></span><span style="display:flex;"><span>    col <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>    reset();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPowerOfTwo</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>(n <span style="color:#666">&amp;</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> flip() {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> rand()<span style="color:#666">%</span>lmt;
-</span></span><span style="display:flex;"><span>    lmt<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> mp.count(idx)<span style="color:#666">?</span> mp[idx] <span style="color:#666">:</span> idx;
-</span></span><span style="display:flex;"><span>    mp[idx] <span style="color:#666">=</span> mp.count(lmt)<span style="color:#666">?</span> mp[lmt]<span style="color:#666">:</span> lmt;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{x<span style="color:#666">/</span>col, x<span style="color:#666">%</span>col};
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">reset</span>() {
-</span></span><span style="display:flex;"><span>    mp.clear();
-</span></span><span style="display:flex;"><span>    lmt <span style="color:#666">=</span> row<span style="color:#666">*</span>col;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Solution object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Solution* obj = new Solution(m, n);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * vector&lt;int&gt; param_1 = obj-&gt;flip();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;reset();
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Class Definition</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPowerOfTwo</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the `Solution` class, which will contain methods for flipping and resetting the matrix simulation. </div>
+                            <div class=""> Defines the function `isPowerOfTwo` that takes an integer `n` as input and returns a boolean value indicating whether `n` is a power of two. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Data Members</b></div>
+                            <div class=""> <b>2 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is a map `mp` used to store the indices of flipped cells, mapping the index to a new location. </div>
+                            <div class=""> Checks if `n` is less than or equal to 0, in which case it cannot be a power of two. If true, returns `false`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Data Members</b></div>
+                            <div class=""> <b>3 : Bitwise Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> row, col, lmt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>(n <span style="color:#666">&amp;</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> These integer variables represent the number of rows (`row`), columns (`col`), and the limit (`lmt`) for random index generation. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>4 : Constructor</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This marks the start of the public section of the class where constructors and methods will be defined. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : Constructor</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution(<span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Constructor for the `Solution` class that takes the number of rows `m` and columns `n` as parameters and initializes the object. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Constructor Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    row <span style="color:#666">=</span> m;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the value of `m` to the `row` data member. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Constructor Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    col <span style="color:#666">=</span> n;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assign the value of `n` to the `col` data member. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Constructor Method Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    reset();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Call the `reset()` method to initialize or reset the state of the object. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Method Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> flip() {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This method `flip` returns a random 2D index (row and column) based on a random number and the current state. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Randomization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> rand()<span style="color:#666">%</span>lmt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Generate a random index `idx` between 0 and `lmt-1`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Update Limit</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    lmt<span style="color:#666">--</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Decrease the limit `lmt` after every flip to reduce the number of possible indices. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Mapping Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> mp.count(idx)<span style="color:#666">?</span> mp[idx] <span style="color:#666">:</span> idx;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the random index `idx` is already mapped; if yes, use the mapped value, otherwise, use the index itself. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Mapping Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[idx] <span style="color:#666">=</span> mp.count(lmt)<span style="color:#666">?</span> mp[lmt]<span style="color:#666">:</span> lmt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Map the current `idx` to the new limit `lmt`. This operation swaps the locations of the random index and the last available index. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{x<span style="color:#666">/</span>col, x<span style="color:#666">%</span>col};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the row and column of the flipped index as a vector, where `x/col` is the row and `x%col` is the column. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Method Definition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">reset</span>() {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This method `reset` is used to clear the map `mp` and reset the limit `lmt` to the total number of cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Reset Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp.clear();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Clear the map `mp` to reset all the flipped cell mappings. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Reset Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    lmt <span style="color:#666">=</span> row<span style="color:#666">*</span>col;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Reset the limit `lmt` to the total number of cells (rows * columns). </div>
+                            <div class=""> Uses a bitwise AND operation between `n` and `n-1` to check if only one bit is set in `n`. If true, the number is a power of two, and it returns `true`; otherwise, it returns `false`. </div>
                         </div>
                     
                 </div>
@@ -787,16 +578,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) for reset operation.</div>
-                        <div class=""> <b>Average Case:</b> O(1) for flip operation when using optimized data structures.</div>
-                        <div class=""> <b>Worst Case:</b> O(1) for both flip and reset operations.</div> 
-                        <div class=""> <b>Description:</b> Both flip and reset operations are optimized to O(1) time using efficient data structures.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is constant, O(1), because we are performing only one bitwise operation to check if the number is a power of two.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) when grid is empty (only when grid is reset).</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n) to store the grid and available cells.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the need to track the available cells in the grid.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, O(1), because we are using only a few variables and no additional data structures.</div>    
                     </div>
 
                 </div>

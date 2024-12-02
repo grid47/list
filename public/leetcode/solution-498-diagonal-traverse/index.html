@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an m x n binary matrix. You can choose any number of columns in the matrix and flip every cell in that column (i.e., change the value of the cell from 0 to 1 or vice versa). Your task is to find the maximum number of rows that can be made equal after performing a number of column flips. </div>
+<div class=""> You are given an m x n matrix. The task is to return an array that contains all the elements of the matrix in diagonal order, starting from the top-left and moving diagonally towards the bottom-right. The diagonal order alternates between upward and downward diagonals. </div>
 
 
 
@@ -371,49 +371,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a binary matrix with m rows and n columns, where each element is either 0 or 1.</div>
-                        <div class=""> <b>Example:</b> Input: matrix = [[1,0],[0,0]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an m x n matrix where each element is an integer.</div>
+                        <div class=""> <b>Example:</b> [[1,2,3],[4,5,6],[7,8,9]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 300</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • matrix[i][j] is either 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m * n &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^5 &lt;= mat[i][j] &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is an integer, which represents the maximum number of rows that can be made equal after performing some number of column flips.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> The output is an array of integers, which represents all the elements of the matrix in diagonal order.</div>
+                        <div class=""> <b>Example:</b> [1, 2, 4, 7, 5, 3, 6, 8, 9]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be an integer value representing the maximum number of rows with identical values after flips.</div>
+                                <div style="margin-left: 20px;"> • The output array contains all the elements from the matrix in diagonal order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the maximum number of rows that can be made identical after flipping columns in the matrix.</div>
+                        <div class=""> <b>Goal:</b> The goal is to traverse the matrix in diagonal order, alternating between upward and downward diagonals.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through each row in the matrix.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate over all diagonals, starting from the top-left corner.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each row, convert it into a binary string where flipped columns are taken into account.</div>
+                                <div style="margin-left: 20px;"> • 2. For each diagonal, alternate the direction of traversal (upward or downward).</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track how many times each unique row pattern appears using a hashmap.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. The answer will be the maximum frequency of any row pattern.</div>
+                                <div style="margin-left: 20px;"> • 3. Add elements to the result array in the correct diagonal order.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The matrix has a manageable size, so the problem can be solved efficiently using hashing to track row patterns.</div>
+                        <div class=""> <b>Goal:</b> The problem has the following constraints:</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 300</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • matrix[i][j] is either 0 or 1.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m * n &lt;= 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^5 &lt;= mat[i][j] &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -421,25 +423,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input matrix is valid and contains only binary values.</div>
+                                <div style="margin-left: 20px;"> • The matrix will always have valid integer values.</div>
                             
-                                <div style="margin-left: 20px;"> • The matrix dimensions are within the specified constraints.</div>
+                                <div style="margin-left: 20px;"> • The matrix will have at least one element.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[0, 1], [1, 1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, no column flips are needed, as only one row has identical values. The output is 1.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[0, 1], [1, 0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Flipping the first column will make both rows identical. The output is 2.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[0, 0, 0], [0, 0, 1], [1, 1, 0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Flipping the first two columns will make the second and third rows identical. The output is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1,2,3],[4,5,6],[7,8,9]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the elements are traversed diagonally starting from the top-left and moving towards the bottom-right, alternating between upward and downward diagonals.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -463,18 +457,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by tracking the frequency of row patterns. By flipping columns, we can create row patterns that can be stored in a hashmap to count their occurrences. The result is the maximum count of any identical row pattern.</div>
+                        <div class=""> <b>Approach:</b> The solution involves iterating over all diagonals and alternating the direction of traversal. Each element is added to the result array in the correct order.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each row can either stay the same or change after flipping columns.</div>
+                                <div style="margin-left: 20px;"> • The traversal alternates between upward and downward diagonals.</div>
                             
-                                <div style="margin-left: 20px;"> • The key observation is that rows that are already identical after column flips should be counted together.</div>
+                                <div style="margin-left: 20px;"> • We need to handle each diagonal separately and ensure the correct order of traversal.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need a way to count how often each unique row pattern appears after flipping columns, and the maximum count will be our answer.</div>
+                                <div style="margin-left: 20px;"> • We can efficiently handle the diagonals by iterating over each one and managing the direction of traversal.</div>
                             
                         </div>
                     </div>
@@ -482,13 +476,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a hashmap to store row patterns and their frequencies.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a loop to iterate through diagonals, from the first element to the last.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each row in the matrix, create a binary string based on the current state of the row (considering flipped columns).</div>
+                                <div style="margin-left: 20px;"> • 2. For each diagonal, alternate the direction of traversal based on the diagonal&#39;s index.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Track the frequency of each unique binary string.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the maximum frequency from the hashmap as the result.</div>
+                                <div style="margin-left: 20px;"> • 3. Collect the elements from each diagonal in the result array.</div>
                             
                         </div>
                     </div>
@@ -497,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem does not expect an empty matrix, as there must be at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • The matrix will always contain at least one element.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution is efficient enough to handle matrices with up to 300 rows and columns.</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient enough to handle large matrices (up to 10^4 elements).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all elements in the matrix are already the same, no flips are needed, and the result is the number of rows.</div>
+                                <div style="margin-left: 20px;"> • The matrix may contain negative and large values, but they should not affect the solution.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must operate efficiently within the given input constraints.</div>
+                                <div style="margin-left: 20px;"> • Ensure the algorithm is optimized for large matrices, especially when m * n approaches 10^4.</div>
                             
                         </div>                                                                        
                     </div>
@@ -529,31 +521,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 HashMap Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Matrix Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 String Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Structure</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Top Element Extraction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Structure</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Row Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Row Normalization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Row Normalization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Map Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Boundary Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Map Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Result Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
                 </div>
 
@@ -562,20 +550,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxEqualRowsAfterFlips</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: mtx) {
-</span></span><span style="display:flex;"><span>        string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> x[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x[i] <span style="color:#666">==</span> top) s <span style="color:#666">+=</span> <span style="color:#b44">&#39;1&#39;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">+=</span> <span style="color:#b44">&#39;0&#39;</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findDiagonalOrder(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>; s <span style="color:#666">&lt;=</span> m <span style="color:#666">+</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; s<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">0</span>; x <span style="color:#666">&lt;=</span> s; x<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> s <span style="color:#666">-</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) swap(i, j);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> n) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            res.push_back(mat[i][j]);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        mp[s]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [k, v]<span style="color:#666">:</span> mp)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, v);
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
@@ -584,133 +570,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxEqualRowsAfterFlips</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findDiagonalOrder(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `maxEqualRowsAfterFlips`, which takes a 2D vector `mtx` (a binary matrix) and returns the maximum number of rows that can be made equal by flipping some of them. </div>
+                            <div class=""> Defines the method `findDiagonalOrder` which takes a 2D matrix `mat` and returns a vector of integers representing the diagonal order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : HashMap Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes an unordered map `mp`, where the keys will be string representations of rows, and the values will be their frequencies (the number of times each row pattern appears). </div>
+                            <div class=""> Initializes variables `m` and `n` to store the number of rows and columns in the matrix `mat`, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Matrix Loop</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: mtx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over each row `x` in the matrix `mtx`. </div>
+                            <div class=""> Declares a vector `res` that will store the result of the diagonal order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : String Initialization</b></div>
+                            <div class=""> <b>4 : Loop Structure</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>; s <span style="color:#666">&lt;=</span> m <span style="color:#666">+</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; s<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes an empty string `s`, which will be used to store the binary string representation of the current row. </div>
+                            <div class=""> Outer loop iterating over the sum `s` of the row and column indices. This loop will control the traversal of diagonals in the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Top Element Extraction</b></div>
+                            <div class=""> <b>5 : Loop Structure</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> top <span style="color:#666">=</span> x[<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">0</span>; x <span style="color:#666">&lt;=</span> s; x<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line stores the first element of the row `x` in the variable `top`. This will be used to normalize the row by flipping the row to make its first element the same for all rows. </div>
+                            <div class=""> Inner loop iterating over values `x` which represent the row index in the diagonal. It ensures all elements in the current diagonal are processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Row Loop</b></div>
+                            <div class=""> <b>6 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each element of the row `x`. </div>
+                            <div class=""> Assigns the value of `x` to `i`, representing the row index of the current element in the diagonal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Row Normalization</b></div>
+                            <div class=""> <b>7 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x[i] <span style="color:#666">==</span> top) s <span style="color:#666">+=</span> <span style="color:#b44">&#39;1&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> s <span style="color:#666">-</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line adds &#39;1&#39; to the string `s` if the current element `x[i]` is equal to `top`. </div>
+                            <div class=""> Calculates the column index `j` as `s - i`, ensuring that the sum of `i` and `j` is equal to `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Row Normalization</b></div>
+                            <div class=""> <b>8 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> s <span style="color:#666">+=</span> <span style="color:#b44">&#39;0&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) swap(i, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line adds &#39;0&#39; to the string `s` if the current element `x[i]` is not equal to `top`. </div>
+                            <div class=""> Checks if the sum `s` is even. If so, it swaps `i` and `j` to alternate the diagonal traversal direction. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Map Update</b></div>
+                            <div class=""> <b>9 : Boundary Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[s]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> n) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line updates the map `mp`, incrementing the count of the binary string `s`, which represents the current normalized row. </div>
+                            <div class=""> Checks if the row index `i` or column index `j` is out of bounds of the matrix. If either is out of bounds, it skips the current iteration. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Result Initialization</b></div>
+                            <div class=""> <b>10 : Result Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(mat[i][j]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes the variable `res`, which will store the maximum frequency of any row pattern in the matrix. </div>
+                            <div class=""> Adds the matrix element at position `[i][j]` to the result vector `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Map Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [k, v]<span style="color:#666">:</span> mp)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop iterates over the map `mp`, where `k` is the key (row pattern) and `v` is the frequency of that row pattern. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Result Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, v);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This line updates the result `res` with the maximum value between the current value of `res` and the frequency `v` of the current row pattern `k`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Return Statement</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line returns the value of `res`, which is the maximum frequency of any row pattern in the matrix. </div>
+                            <div class=""> Returns the result vector `res` containing the elements in diagonal order. </div>
                         </div>
                     
                 </div>
@@ -733,13 +699,13 @@
                         <div class=""> <b>Best Case:</b> O(m * n)</div>
                         <div class=""> <b>Average Case:</b> O(m * n)</div>
                         <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m * n) due to processing each element in the matrix and hashing the row patterns.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) as we visit each element of the matrix once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m)</div>
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
                         <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n) for storing the row patterns, where m is the number of rows and n is the number of columns in the matrix.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(m * n) for storing the result array.</div>    
                     </div>
 
                 </div>

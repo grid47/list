@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array nums and a positive integer k. You can repeatedly select a contiguous subarray of size k and decrease all its elements by 1. Determine if it is possible to make all elements in nums equal to 0 using this operation. </div>
+<div class=""> You are given an array of positive integers <code>arr</code> and an array of queries. For each query <code>[lefti, righti]</code>, calculate the XOR of elements from index <code>lefti</code> to <code>righti</code> (inclusive). Return an array <code>answer</code> where each element corresponds to the XOR result of the respective query. </div>
 
 
 
@@ -359,51 +359,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A 0-indexed integer array nums and an integer k.</div>
-                        <div class=""> <b>Example:</b> nums = [3,3,2,1,0], k = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of positive integers and an array of queries, where each query contains two integers representing a range in the array.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [2, 5, 7, 10], queries = [[0,2],[1,3],[2,3],[0,1]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length &lt;= 100,000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length, queries.length &lt;= 3 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1,000,000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • queries[i].length == 2</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= lefti &lt;= righti &lt; arr.length</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a boolean value: true if all elements can be made 0, and false otherwise.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output is an array of integers where each element is the XOR result of the corresponding query.</div>
+                        <div class=""> <b>Example:</b> Output: [4, 5, 13, 7]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Output is either true or false.</div>
+                                <div style="margin-left: 20px;"> • Each element of the output corresponds to the XOR result for the respective query.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Check if all elements in the array can be reduced to 0 using the specified operation.</div>
+                        <div class=""> <b>Goal:</b> Calculate the XOR of elements between indices `lefti` and `righti` for each query efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array while keeping track of the cumulative decrease required to meet the operation conditions.</div>
+                                <div style="margin-left: 20px;"> • Use prefix XOR array to precompute XOR values for the array.</div>
                             
-                                <div style="margin-left: 20px;"> • At each index, ensure the required decrease does not exceed the current element.</div>
-                            
-                                <div style="margin-left: 20px;"> • Adjust the cumulative decrease using a sliding window technique to manage subarrays of size k.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return true if all elements can be made 0; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • For each query, calculate the XOR from the prefix array using the formula: `prefix[righti &#43; 1] ^ prefix[lefti]`.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Limits and conditions for input and output validity.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle up to 30,000 queries and array elements efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array nums has at least 1 element and at most 100,000 elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • k is a positive integer no greater than the length of nums.</div>
-                            
-                                <div style="margin-left: 20px;"> • Elements of nums are non-negative integers.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm runs in optimal time for the input size constraints.</div>
                             
                         </div>
                     </div>        
@@ -411,21 +407,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The operation can be performed any number of times.</div>
-                            
-                                <div style="margin-left: 20px;"> • The array elements are non-negative.</div>
+                                <div style="margin-left: 20px;"> • The array and queries are well-formed and follow the given constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [3,2,1,0], k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Select the subarray [3,2] to reduce it by 1. Repeat until all elements are 0. The output is true.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1,3,1,1], k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is not possible to reduce all elements to 0. The output is false.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [2, 5, 7, 10], queries = [[0,2],[1,3],[2,3],[0,1]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The XOR values for queries are computed by applying the XOR operation on the array elements between indices `lefti` and `righti`.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,18 +439,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a greedy algorithm combined with a sliding window to manage the operations efficiently.</div>
+                        <div class=""> <b>Approach:</b> We can solve the problem efficiently by using a prefix XOR array, which allows us to compute the XOR for any range in constant time.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • At each step, only subarrays of size k can be reduced.</div>
-                            
-                                <div style="margin-left: 20px;"> • The operation is cumulative and impacts the next elements.</div>
+                                <div style="margin-left: 20px;"> • The XOR of a range of elements can be derived from a prefix XOR array.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Keep track of the cumulative decrease to efficiently determine if the operation is valid for each index.</div>
+                                <div style="margin-left: 20px;"> • Precompute the XOR for all elements up to index `i` in a prefix array. Then, for each query, the result can be derived in constant time.</div>
                             
                         </div>
                     </div>
@@ -468,15 +456,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to track the cumulative decrease.</div>
+                                <div style="margin-left: 20px;"> • Initialize a prefix XOR array where `prefix[i]` stores the XOR of elements from index 0 to `i-1`.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array, applying the cumulative decrease to each element.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the cumulative decrease exceeds the current element, return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • Use a sliding window approach to remove the cumulative impact of elements outside the current subarray of size k.</div>
-                            
-                                <div style="margin-left: 20px;"> • After processing all elements, verify if the cumulative decrease has reached 0.</div>
+                                <div style="margin-left: 20px;"> • For each query, use the formula `prefix[righti &#43; 1] ^ prefix[lefti]` to compute the XOR for the range.</div>
                             
                         </div>
                     </div>
@@ -485,22 +467,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty array is invalid as per constraints.</div>
+                                <div style="margin-left: 20px;"> • If the array is empty, there are no queries to process.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Test arrays with the maximum size (100,000) and values to ensure efficiency.</div>
+                                <div style="margin-left: 20px;"> • For large arrays and queries, ensure that the solution handles up to 30,000 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Test arrays with all elements as 0, which should immediately return true.</div>
+                                <div style="margin-left: 20px;"> • If the elements in the array are all the same, the XOR result for any range may be predictable.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure k is less than or equal to the array size.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays with up to 30,000 elements and queries efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -517,23 +499,23 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Conditional Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Control</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 XOR Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Manipulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Manipulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Loop Control</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Function Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Query Processing</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Manipulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 XOR Operation</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
@@ -544,17 +526,17 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkArray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> A.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cur <span style="color:#666">&gt;</span> A[i])
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        A[i] <span style="color:#666">-=</span> cur;
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> A[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>            cur <span style="color:#666">-=</span> A[i <span style="color:#666">-</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cur <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> xorQueries(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> xr(n <span style="color:#666">+</span><span style="color:#666">1</span>,<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        xr[i] <span style="color:#666">=</span> xr[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">^</span> arr[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>v <span style="color:#666">=</span> q[i];
+</span></span><span style="display:flex;"><span>        res.push_back(xr[v[<span style="color:#666">1</span>]<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">^</span> xr[v[<span style="color:#666">0</span>]]);
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -562,103 +544,103 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkArray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> xorQueries(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares the function `checkArray` that accepts a reference to an integer vector `A` and an integer `k`, which represents the size of the subarrays we are considering. </div>
+                            <div class=""> The function &#39;xorQueries&#39; is defined with two parameters: a vector &#39;arr&#39; which contains the array elements and a 2D vector &#39;q&#39; which holds the queries. Each query specifies a range for which the XOR is computed. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> A.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `cur` is initialized to 0, which will be used to keep track of the sum of the elements in the sliding window. `n` stores the size of the array `A`. </div>
+                            <div class=""> The variable &#39;n&#39; is initialized to the size of the input array &#39;arr&#39;. This value is used to manage array bounds during the processing of queries. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Looping</b></div>
+                            <div class=""> <b>3 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> xr(n <span style="color:#666">+</span><span style="color:#666">1</span>,<span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is initiated to iterate through the elements of the array `A` from index `0` to `n-1`. </div>
+                            <div class=""> A vector &#39;xr&#39; is initialized with size &#39;n&#43;1&#39; to store the cumulative XOR values. The extra space is to handle the prefix sum logic efficiently. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Conditional Function Call</b></div>
+                            <div class=""> <b>4 : Loop Control</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cur <span style="color:#666">&gt;</span> A[i])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition checks if the current value `cur` exceeds the current element `A[i]`. If true, it means the transformation is not possible, so the function returns `false`. </div>
+                            <div class=""> This for loop starts from index 1 and iterates through the array to compute the cumulative XOR for each element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Return Statement</b></div>
+                            <div class=""> <b>5 : XOR Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        xr[i] <span style="color:#666">=</span> xr[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">^</span> arr[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition `cur &gt; A[i]` is met, the function immediately returns `false`, indicating that the desired transformation is not possible. </div>
+                            <div class=""> In each iteration, the cumulative XOR at index &#39;i&#39; is calculated by XORing the previous cumulative value with the current element of the array. This builds a prefix XOR array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Manipulation</b></div>
+                            <div class=""> <b>6 : Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        A[i] <span style="color:#666">-=</span> cur;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The current element `A[i]` is adjusted by subtracting the value of `cur`, essentially modifying the array during the iteration. </div>
+                            <div class=""> An empty vector &#39;res&#39; is initialized to store the results of each query. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Manipulation</b></div>
+                            <div class=""> <b>7 : Loop Control</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> A[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The modified value of `A[i]` is added to `cur`, updating the sum of the current window. </div>
+                            <div class=""> This loop iterates through each query in the 2D vector &#39;q&#39;. Each query specifies a range of indices for which the XOR operation needs to be performed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Conditional Function Call</b></div>
+                            <div class=""> <b>8 : Query Processing</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>v <span style="color:#666">=</span> q[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition checks if the index `i` has reached or exceeded `k - 1`, which marks the point where we begin reducing the window size. </div>
+                            <div class=""> The current query is extracted by referencing the query vector &#39;v&#39;, which contains two indices representing the range for XOR computation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Manipulation</b></div>
+                            <div class=""> <b>9 : XOR Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">-=</span> A[i <span style="color:#666">-</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(xr[v[<span style="color:#666">1</span>]<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">^</span> xr[v[<span style="color:#666">0</span>]]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> When the condition `i &gt;= k - 1` is true, the value at `A[i - k &#43; 1]` is subtracted from `cur` to shrink the sliding window by removing the effect of the element that has moved out of the window. </div>
+                            <div class=""> The XOR for the range specified by the query is calculated using the prefix XOR array &#39;xr&#39;. The result is pushed to the &#39;res&#39; vector. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>10 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cur <span style="color:#666">==</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After completing the loop, the function returns `true` if `cur` is equal to 0, indicating that the transformation is possible, otherwise `false`. </div>
+                            <div class=""> The function returns the &#39;res&#39; vector, which contains the results of all the XOR queries. </div>
                         </div>
                     
                 </div>
@@ -678,16 +660,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution involves a single pass through the array, with constant-time operations per index.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n) - The best case occurs when all queries are processed after building the prefix XOR array.</div>
+                        <div class=""> <b>Average Case:</b> O(n &#43; m) - Where n is the length of the array and m is the number of queries.</div>
+                        <div class=""> <b>Worst Case:</b> O(n &#43; m) - The worst case involves processing all queries with the prefix XOR array.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n &#43; m), where n is the length of the array and m is the number of queries.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The solution uses a constant amount of extra space.</div>    
+                        <div class=""> <b>Best Case:</b> O(n) - The best case still requires space for the prefix XOR array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) - The space complexity is O(n) due to the storage of the prefix XOR array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the length of the array.</div>    
                     </div>
 
                 </div>

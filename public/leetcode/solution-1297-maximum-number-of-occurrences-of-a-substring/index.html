@@ -273,7 +273,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 30, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -300,7 +300,7 @@
 
 
 
-<div class=""> Given a list of server requests and multiple queries specifying time intervals, determine the number of servers that did not receive any requests during each query&rsquo;s time interval. </div>
+<div class=""> Given a string <code>s</code>, return the maximum number of occurrences of any substring that satisfies the following conditions: The number of unique characters in the substring must be less than or equal to <code>maxLetters</code>, and the substring length must be between <code>minSize</code> and <code>maxSize</code> inclusive. </div>
 
 
 
@@ -351,63 +351,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of the number of servers n, a 2D list of logs where each log contains the server id and time of request, an integer x for the time window, and a list of queries.</div>
-                        <div class=""> <b>Example:</b> n = 3, logs = [[1,3],[2,6],[1,5]], x = 5, queries = [10,11]</div>
+                        <div class=""> <b>Input:</b> The input consists of a string `s` and three integers: `maxLetters`, `minSize`, and `maxSize`.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;abcabcabc&#34;, maxLetters = 2, minSize = 2, maxSize = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= logs.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= maxLetters &lt;= 26</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= queries.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • logs[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= logs[i][0] &lt;= n</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= logs[i][1] &lt;= 10^6</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= x &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • x &lt; queries[i] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= minSize &lt;= maxSize &lt;= min(26, s.length)</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list of integers where each element represents the number of servers that did not receive any requests in the specified time interval for each query.</div>
-                        <div class=""> <b>Example:</b> [1, 2]</div>
+                        <div class=""> <b>Output:</b> Return the maximum number of occurrences of any substring that satisfies the given conditions.</div>
+                        <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The length of the result array should match the length of the queries array.</div>
+                                <div style="margin-left: 20px;"> • Return an integer representing the maximum number of occurrences of a valid substring.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to compute the number of servers that did not receive any requests during the specified time intervals in each query.</div>
+                        <div class=""> <b>Goal:</b> Find the maximum number of occurrences of a valid substring.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sort the logs based on the request time.</div>
+                                <div style="margin-left: 20px;"> • Generate all substrings of length between `minSize` and `maxSize`.</div>
                             
-                                <div style="margin-left: 20px;"> • For each query, calculate the relevant time interval and count how many servers did not receive requests during that time.</div>
+                                <div style="margin-left: 20px;"> • For each substring, check if it has unique characters less than or equal to `maxLetters`.</div>
                             
-                                <div style="margin-left: 20px;"> • Efficiently track which servers are active during each time window using a set and a map.</div>
+                                <div style="margin-left: 20px;"> • Count the occurrences of valid substrings and track the maximum count.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints guide the limits on input sizes to ensure the solution is efficient.</div>
+                        <div class=""> <b>Goal:</b> The algorithm must handle large input sizes efficiently and adhere to the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= logs.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= maxLetters &lt;= 26</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= queries.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= logs[i][1] &lt;= 10^6</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= minSize &lt;= maxSize &lt;= min(26, s.length)</div>
                             
                         </div>
                     </div>        
@@ -415,17 +403,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each server can receive multiple requests.</div>
+                                <div style="margin-left: 20px;"> • The string `s` consists of lowercase English letters only.</div>
                             
-                                <div style="margin-left: 20px;"> • The logs are sorted by the request time.</div>
+                                <div style="margin-left: 20px;"> • The input is valid, and constraints are adhered to.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [3, [1, 3], [2, 6], [1, 5]], x = 5, queries = [10,11]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This example explains how we can count servers that did not receive requests in the given time interval.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;abcabcabc&#34;, maxLetters = 2, minSize = 2, maxSize = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substring &#39;ab&#39; appears twice in the string and satisfies the condition of having 2 unique letters and a size of 2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;xxxyyy&#34;, maxLetters = 1, minSize = 2, maxSize = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substring &#39;xx&#39; appears twice and satisfies the condition of having 1 unique letter and a size of 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,16 +441,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> This problem requires sorting the logs and efficiently managing which servers are active in a time window for each query.</div>
+                        <div class=""> <b>Approach:</b> The problem can be solved by generating all possible substrings of valid lengths and counting their occurrences. We need to ensure that only valid substrings are considered.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem involves calculating active servers in a dynamic time window.</div>
+                                <div style="margin-left: 20px;"> • We need to generate substrings of different lengths between `minSize` and `maxSize`.</div>
+                            
+                                <div style="margin-left: 20px;"> • The number of unique characters in each substring must be tracked to check if it is valid.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a set to track active servers and a map to count requests is a good approach for managing the active servers.</div>
+                                <div style="margin-left: 20px;"> • A sliding window approach or hashing can be used to efficiently count occurrences of substrings while ensuring they meet the conditions.</div>
                             
                         </div>
                     </div>
@@ -466,11 +460,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the logs based on request time.</div>
+                                <div style="margin-left: 20px;"> • Iterate through all possible substring lengths from `minSize` to `maxSize`.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the queries to process them in chronological order.</div>
+                                <div style="margin-left: 20px;"> • For each substring, track the unique characters using a set or hash map.</div>
                             
-                                <div style="margin-left: 20px;"> • For each query, check the requests in the time window and count how many servers were not active.</div>
+                                <div style="margin-left: 20px;"> • If the number of unique characters is less than or equal to `maxLetters`, update the count for that substring.</div>
+                            
+                                <div style="margin-left: 20px;"> • After processing all substrings, return the maximum count of any valid substring.</div>
                             
                         </div>
                     </div>
@@ -479,22 +475,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • What if the logs or queries are empty?</div>
+                                <div style="margin-left: 20px;"> • The string is non-empty, as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle scenarios where the number of servers or queries is large, up to the maximum constraint.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle strings up to length 10^5.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where all servers receive requests or no servers receive requests.</div>
+                                <div style="margin-left: 20px;"> • If `maxLetters` is larger than the number of unique letters in the string, all substrings are valid.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure efficient handling of large inputs.</div>
+                                <div style="margin-left: 20px;"> • The solution should be optimized to run within time limits for large input sizes.</div>
                             
                         </div>                                                                        
                     </div>
@@ -513,47 +509,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Length</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Element Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Iterate Through Numbers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Update Frequency Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Frequency Map Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Iterate Through Frequency Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Get Frequency of Current Number</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Sorting Logs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Frequency Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Log Sorting Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop for Consecutive Numbers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition for Group Formation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Main Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Check for Sufficient Frequency</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Inner While Loop 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Update Frequency for Used Numbers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Set Insertion</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Map Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Increment Index</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Inner While Loop 2</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Map Update for Removal</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Erase from Map</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Set Erase</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Result Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -562,36 +542,25 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> countServers(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> logs, <span style="color:#0b0;font-weight:bold">int</span> x, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> queries) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> qs;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>queries.size();i<span style="color:#666">++</span>){      <span style="color:#080;font-style:italic">// sorting and also storing the index to create an anwer at the end
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        qs.push_back({queries[i],i});   <span style="color:#080;font-style:italic">// at their appropiate place
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>    sort(qs.begin(),qs.end());
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> result(queries.size());
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPossibleDivide</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> s;       <span style="color:#080;font-style:italic">// for storing {time,id}
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> count;         <span style="color:#080;font-style:italic">// for storing the number of ids in the current window
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    sort(logs.begin(),logs.end(),[<span style="color:#666">&amp;</span>](<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>a,<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>b){  <span style="color:#080;font-style:italic">// sorting the logs based on their time
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>]<span style="color:#666">&lt;</span>b[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    });         
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums)
+</span></span><span style="display:flex;"><span>        cnt[num]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : cnt) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> frq <span style="color:#666">=</span> it.second;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(frq <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>[q,index]<span style="color:#666">:</span>qs){
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">&lt;</span>logs.size() <span style="color:#666">&amp;&amp;</span> logs[i][<span style="color:#666">1</span>]<span style="color:#666">&lt;=</span>q){          <span style="color:#080;font-style:italic">// adding all the servers that have time &lt;= q
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            s.insert({logs[i][<span style="color:#666">1</span>],logs[i][<span style="color:#666">0</span>]});          
-</span></span><span style="display:flex;"><span>            count[logs[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>              <span style="color:#a2f;font-weight:bold">if</span>(cnt[it.first <span style="color:#666">+</span> i] <span style="color:#666">&lt;</span> frq) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> cnt[it.first <span style="color:#666">+</span> i] <span style="color:#666">-=</span> frq;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s.empty() <span style="color:#666">&amp;&amp;</span> s.begin()<span style="color:#666">-&gt;</span>first<span style="color:#666">&lt;</span>q<span style="color:#666">-</span>x){      <span style="color:#080;font-style:italic">// removing all the elements that are out of the current 
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            count[s.begin()<span style="color:#666">-&gt;</span>second]<span style="color:#666">--</span>;                 <span style="color:#080;font-style:italic">// window i.e. &lt; q-x
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(count[s.begin()<span style="color:#666">-&gt;</span>second]<span style="color:#666">==</span><span style="color:#666">0</span>) count.erase(s.begin()<span style="color:#666">-&gt;</span>second);
-</span></span><span style="display:flex;"><span>            s.erase(s.begin());
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        result[index] <span style="color:#666">=</span> n <span style="color:#666">-</span> count.size();
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -602,220 +571,138 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> countServers(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> logs, <span style="color:#0b0;font-weight:bold">int</span> x, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> queries) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPossibleDivide</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `countServers` which takes the total number of servers `n`, a log of server events `logs`, a time window `x`, and a list of queries `queries`. </div>
+                            <div class=""> This is the function header, where the function is defined with two parameters: &#39;nums&#39; (a vector of integers) and &#39;k&#39; (the size of each group). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> qs;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a vector `qs` to store the queries along with their original indices, so that the results can be placed in the correct order. </div>
+                            <div class=""> This creates a map to store the frequency of each integer in the input array &#39;nums&#39;. The key is the integer, and the value is its frequency. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Initialization</b></div>
+                            <div class=""> <b>3 : Array Length</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>queries.size();i<span style="color:#666">++</span>){      <span style="color:#080;font-style:italic">// sorting and also storing the index to create an anwer at the end
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterates over each query to store the query values along with their indices in the vector `qs`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>4 : Element Insertion</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        qs.push_back({queries[i],i});   <span style="color:#080;font-style:italic">// at their appropiate place
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Inserts each query value along with its original index into the `qs` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : Sorting</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(qs.begin(),qs.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sorts the queries in ascending order to process them in the correct time order. </div>
+                            <div class=""> This stores the size of the input array &#39;nums&#39; in the variable &#39;n&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Vector Initialization</b></div>
+                            <div class=""> <b>4 : Iterate Through Numbers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> result(queries.size());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a vector `result` to store the result for each query, initialized with the size of the `queries` vector. </div>
+                            <div class=""> This loop iterates through each integer in the input array &#39;nums&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Set Initialization</b></div>
+                            <div class=""> <b>5 : Update Frequency Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> s;       <span style="color:#080;font-style:italic">// for storing {time,id}
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Declares a set `s` to store pairs of time and server id, ensuring each server appears only once. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Map Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> count;         <span style="color:#080;font-style:italic">// for storing the number of ids in the current window
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Declares a map `count` to store the count of server IDs currently in the time window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Sorting Logs</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(logs.begin(),logs.end(),[<span style="color:#666">&amp;</span>](<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>a,<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>b){  <span style="color:#080;font-style:italic">// sorting the logs based on their time
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sorts the `logs` vector based on the second element (time) in each log entry. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Log Sorting Logic</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>]<span style="color:#666">&lt;</span>b[<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt[num]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the sorting condition for the logs to sort them by time. </div>
+                            <div class=""> This increments the frequency of the current number in the map &#39;cnt&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Loop Initialization</b></div>
+                            <div class=""> <b>6 : Frequency Map Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                            </div>
+                            <div class=""> Now, we begin iterating through the frequency map to check if it is possible to form groups. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Iterate Through Frequency Map</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : cnt) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an index `i` to iterate through the `logs` vector. </div>
+                            <div class=""> This loop iterates through each key-value pair in the frequency map, where &#39;it.first&#39; is the number and &#39;it.second&#39; is its frequency. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Main Loop</b></div>
+                            <div class=""> <b>8 : Get Frequency of Current Number</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>[q,index]<span style="color:#666">:</span>qs){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> frq <span style="color:#666">=</span> it.second;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each query in `qs`, where `q` is the query time and `index` is the original index of the query. </div>
+                            <div class=""> Extracts the frequency of the current number from the map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Inner While Loop 1</b></div>
+                            <div class=""> <b>9 : Frequency Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">&lt;</span>logs.size() <span style="color:#666">&amp;&amp;</span> logs[i][<span style="color:#666">1</span>]<span style="color:#666">&lt;=</span>q){          <span style="color:#080;font-style:italic">// adding all the servers that have time &lt;= q
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adds all logs with times less than or equal to the current query time `q` to the set `s`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Set Insertion</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s.insert({logs[i][<span style="color:#666">1</span>],logs[i][<span style="color:#666">0</span>]});          
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(frq <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Inserts the current log entry (time, server id) into the set `s`. </div>
+                            <div class=""> Checks if the current frequency is greater than 0 before attempting to form a group. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Map Update</b></div>
+                            <div class=""> <b>10 : Loop for Consecutive Numbers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            count[logs[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the count for the server ID in the `count` map. </div>
+                            <div class=""> This inner loop iterates over the next &#39;k&#39; consecutive numbers starting from the current number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Increment Index</b></div>
+                            <div class=""> <b>11 : Condition for Group Formation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"></code></pre></div>                                
+                            </div>
+                            <div class=""> Here, we check if the group of consecutive numbers can be formed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Check for Sufficient Frequency</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>              <span style="color:#a2f;font-weight:bold">if</span>(cnt[it.first <span style="color:#666">+</span> i] <span style="color:#666">&lt;</span> frq) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the index `i` to process the next log entry. </div>
+                            <div class=""> If the frequency of any of the consecutive numbers is less than the required frequency, it returns false as the group cannot be formed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Inner While Loop 2</b></div>
+                            <div class=""> <b>13 : Update Frequency for Used Numbers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s.empty() <span style="color:#666">&amp;&amp;</span> s.begin()<span style="color:#666">-&gt;</span>first<span style="color:#666">&lt;</span>q<span style="color:#666">-</span>x){      <span style="color:#080;font-style:italic">// removing all the elements that are out of the current 
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Removes any server logs from the set `s` that are outside of the current time window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Map Update for Removal</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            count[s.begin()<span style="color:#666">-&gt;</span>second]<span style="color:#666">--</span>;                 <span style="color:#080;font-style:italic">// window i.e. &lt; q-x
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Decrements the count for the server ID being removed from the time window. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Erase from Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(count[s.begin()<span style="color:#666">-&gt;</span>second]<span style="color:#666">==</span><span style="color:#666">0</span>) count.erase(s.begin()<span style="color:#666">-&gt;</span>second);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> cnt[it.first <span style="color:#666">+</span> i] <span style="color:#666">-=</span> frq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the server ID from the `count` map if its count reaches zero. </div>
+                            <div class=""> If the consecutive number can be used, its frequency is decreased by &#39;frq&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>20 : Set Erase</b></div>
+                            <div class=""> <b>14 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s.erase(s.begin());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the log entry from the set `s`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Result Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        result[index] <span style="color:#666">=</span> n <span style="color:#666">-</span> count.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Assigns the result for the current query by subtracting the number of servers in the time window from the total number of servers `n`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the `result` vector containing the answers for each query. </div>
+                            <div class=""> If the loop completes without returning false, it means it&#39;s possible to divide the array into consecutive groups of size &#39;k&#39;, so we return true. </div>
                         </div>
                     
                 </div>
@@ -835,16 +722,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n &#43; m log m)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n &#43; m log m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n &#43; m log m)</div> 
-                        <div class=""> <b>Description:</b> The sorting of logs and queries dominates the complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n) - In the best case, no substrings need to be checked or all substrings are valid.</div>
+                        <div class=""> <b>Average Case:</b> O(n^2) - Substring generation and uniqueness checks dominate the complexity.</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2) - In the worst case, we need to check all possible substrings for validity.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n^2) due to the need to generate and check all substrings.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n &#43; m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n &#43; m)</div> 
-                        <div class=""> <b>Description:</b> The space complexity arises from storing logs and queries, along with the set and map for tracking active servers.</div>    
+                        <div class=""> <b>Best Case:</b> O(n) - Space complexity remains O(n) even in the best case.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) - Space complexity is O(n) due to storage of substring counts and temporary sets.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the temporary storage of unique substrings.</div>    
                     </div>
 
                 </div>

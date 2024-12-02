@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 19, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are standing at a starting position <code>startPos</code> on an infinite number line, and you need to reach a destination <code>endPos</code> in exactly <code>k</code> steps. In each step, you can move either one position to the left or one position to the right. Your task is to find the number of different ways to reach <code>endPos</code> from <code>startPos</code> in exactly <code>k</code> steps. Since the number of ways can be very large, return the result modulo 10^9 + 7. </div>
+<div class=""> Given the root of a binary tree, and a list of values to delete, your task is to remove the nodes with the given values. The resulting tree will become a forest, where each tree is a disjoint set of nodes. Return the roots of the trees in the remaining forest. </div>
 
 
 
@@ -361,41 +361,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given the integers `startPos`, `endPos`, and `k`. These represent the starting position, the destination, and the number of steps respectively.</div>
-                        <div class=""> <b>Example:</b> startPos = 3, endPos = 5, k = 4</div>
+                        <div class=""> <b>Input:</b> You are given the root of a binary tree and a list `to_delete` containing the values of the nodes to be removed. The tree is a binary tree with distinct node values.</div>
+                        <div class=""> <b>Example:</b> Input: root = [1,2,3,4,5,6,7], to_delete = [3,5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= startPos, endPos, k &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is at most 1000.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each node has a distinct value between 1 and 1000.</div>
+                            
+                                <div style="margin-left: 20px;"> • The `to_delete` array contains distinct values between 1 and 1000.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of ways to reach `endPos` from `startPos` in exactly `k` steps, modulo 10^9 &#43; 7.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> Return a list of trees in the forest (represented by their roots). The trees are in the remaining forest after deleting the specified nodes.</div>
+                        <div class=""> <b>Example:</b> Output: [[1,2,null,4],[6],[7]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result should be the list of roots of the disjoint trees formed after deletion.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the number of valid ways to move from `startPos` to `endPos` in exactly `k` steps, adhering to the movement rules (left or right in each step).</div>
+                        <div class=""> <b>Goal:</b> The goal is to remove nodes from the tree and form multiple disjoint trees. These disjoint trees should be collected and returned as a list of roots.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the absolute difference `d` between `startPos` and `endPos`.</div>
+                                <div style="margin-left: 20px;"> • Create a set from the `to_delete` list for efficient lookups.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use dynamic programming or recursion with memoization to count the number of ways to reach the target by moving either left or right.</div>
+                                <div style="margin-left: 20px;"> • Traverse the tree and delete the nodes found in `to_delete`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Return the count modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • For each node that is a root of a new tree, add it to the result list.</div>
+                            
+                                <div style="margin-left: 20px;"> • During traversal, ensure that after deletion, the children of deleted nodes are properly handled as roots of new trees.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem constraints ensure that the input values are within a manageable range, making it feasible to solve using dynamic programming or recursion with memoization.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle the upper limits of input sizes efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of `startPos`, `endPos`, and `k` is limited to 1000, which ensures that brute force solutions are not feasible and dynamic programming is necessary.</div>
+                                <div style="margin-left: 20px;"> • The tree is guaranteed to have at most 1000 nodes.</div>
+                            
+                                <div style="margin-left: 20px;"> • The `to_delete` array will contain distinct integers within the range of node values.</div>
                             
                         </div>
                     </div>        
@@ -403,21 +413,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input values are valid and within the specified range.</div>
+                                <div style="margin-left: 20px;"> • Nodes to be deleted will always exist in the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • The number of ways can be very large, so modulo operation must be used.</div>
+                                <div style="margin-left: 20px;"> • After deletion, the remaining trees are disjoint and valid.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> startPos = 1, endPos = 2, k = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We can reach position 2 from 1 in exactly 3 steps in three distinct ways: 1 -&gt; 2 -&gt; 3 -&gt; 2, 1 -&gt; 2 -&gt; 1 -&gt; 2, and 1 -&gt; 0 -&gt; 1 -&gt; 2. Therefore, the output is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1,2,3,4,5,6,7], to_delete = [3,5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the nodes with values 3 and 5 will be removed from the tree. This results in three disjoint trees: one with root 1, another with root 6, and another with root 7.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> startPos = 2, endPos = 5, k = 10</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is impossible to reach position 5 from position 2 in exactly 10 steps. Hence, the output is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [1,2,4,null,3], to_delete = [3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, node 3 is deleted, and the resulting tree will have a single tree rooted at 1 with child 2 and 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -441,16 +451,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves using a dynamic programming technique or recursion with memoization to count the number of valid ways to move from `startPos` to `endPos` in `k` steps.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we use a recursive depth-first traversal. During the traversal, we will delete the specified nodes and reassign the children of deleted nodes to be roots of new trees if necessary.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be reduced to finding paths with exactly `k` steps on a number line, which can be modeled as a dynamic programming problem.</div>
+                                <div style="margin-left: 20px;"> • We need to traverse the tree and check if the current node is in the `to_delete` list. If it is, we remove it and its children become new trees.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to calculate the number of paths efficiently, considering both left and right moves at each step.</div>
+                                <div style="margin-left: 20px;"> • A depth-first search (DFS) approach can be used to handle the tree traversal and deletion of nodes efficiently.</div>
                             
                         </div>
                     </div>
@@ -458,11 +468,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Define a recursive function `dfs(k, d)` where `k` is the remaining number of steps and `d` is the current distance from `startPos` to `endPos`.</div>
+                                <div style="margin-left: 20px;"> • Create a set `to_del` from the `to_delete` array for fast lookups.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Implement memoization to store results of subproblems and avoid redundant calculations.</div>
+                                <div style="margin-left: 20px;"> • Implement a recursive DFS function that processes each node. If the node is to be deleted, make its children the roots of new trees.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Return the number of ways modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • For each node that is not deleted, recursively process its left and right children.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the node is a root (not deleted), add it to the result list.</div>
                             
                         </div>
                     </div>
@@ -471,22 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This problem does not have an empty input case since the input size is guaranteed to be within the range 1 to 1000.</div>
+                                <div style="margin-left: 20px;"> • If the input tree is empty, the result should also be empty.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large values of `k`, the recursive approach should be optimized using dynamic programming or memoization to avoid recalculating results for the same subproblems.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle trees with up to 1000 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `startPos` and `endPos` are the same, we must ensure that we move in such a way that we still perform exactly `k` steps.</div>
+                                <div style="margin-left: 20px;"> • If the tree contains only the nodes that are to be deleted, the result should be an empty list.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Dynamic programming or memoization should be used to efficiently handle inputs close to the upper limit.</div>
+                                <div style="margin-left: 20px;"> • The solution should process the tree in O(n) time where n is the number of nodes in the tree.</div>
                             
                         </div>                                                                        
                     </div>
@@ -503,19 +515,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Helper Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursion and Memoization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inserting to Set</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Node Deletion Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Adding Root to Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Recursive Call for Left Child</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Recursive Call for Right Child</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
                     
                 </div>
 
@@ -524,17 +552,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfWays</span>(<span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dfs(k, abs(start <span style="color:#666">-</span> end));
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> ans;
+</span></span><span style="display:flex;"><span>set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> to_del;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> delNodes(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> to_delete) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span>: to_delete) to_del.insert(i);
+</span></span><span style="display:flex;"><span>    helper(root, <span style="color:#a2f">true</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> d) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (d <span style="color:#666">&gt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> d <span style="color:#666">==</span> k;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(dp[k][d] <span style="color:#666">==</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>        dp[k][d] <span style="color:#666">=</span> (<span style="color:#666">1</span> <span style="color:#666">+</span> dfs(k<span style="color:#666">-</span><span style="color:#666">1</span>, d <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> dfs(k <span style="color:#666">-</span><span style="color:#666">1</span>, abs(d <span style="color:#666">-</span><span style="color:#666">1</span>))) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[k][d] <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">helper</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">bool</span> is_root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> del <span style="color:#666">=</span> to_del.find(root<span style="color:#666">-&gt;</span>val) <span style="color:#666">!=</span> to_del.end();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(is_root <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>del) ans.push_back(root);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>left, del);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>right, del);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> del<span style="color:#666">?</span> <span style="color:#a2f">NULL</span> <span style="color:#666">:</span> root;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -542,73 +576,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Class Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfWays</span>(<span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `numberOfWays` which takes three parameters: `start`, `end`, and `k`. The function will return the number of ways to reach from `start` to `end` with `k` steps. </div>
+                            <div class=""> The class `Solution` is defined, which contains methods for solving the problem of deleting nodes from a binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Recursive Call</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(k, abs(start <span style="color:#666">-</span> end));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calls the helper function `dfs`, passing `k` and the absolute difference between `start` and `end` as arguments. </div>
+                            <div class=""> A vector `ans` is declared to store the remaining nodes in the tree after the specified nodes are deleted. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Helper Function Definition</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> d) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> to_del;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the helper function `dfs`, which takes two parameters: `k` (number of steps remaining) and `d` (the current distance to cover). It will return the number of ways to complete the journey recursively. </div>
+                            <div class=""> A set `to_del` is declared to hold the values of the nodes that need to be deleted, ensuring efficient look-up times. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case Check</b></div>
+                            <div class=""> <b>4 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (d <span style="color:#666">&gt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> d <span style="color:#666">==</span> k;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the distance `d` is greater than or equal to `k`. If it is, it checks if `d` is exactly equal to `k` and returns 1 if true (base case), otherwise returns 0. </div>
+                            <div class=""> The `public` access modifier is used to expose the methods of the class to be accessible from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Memoization Check</b></div>
+                            <div class=""> <b>5 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(dp[k][d] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> delNodes(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> to_delete) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the value of `dp[k][d]` has been previously computed. If it hasn&#39;t been computed (i.e., it is 0), the code proceeds to calculate it. </div>
+                            <div class=""> The method `delNodes` is declared, which accepts the root of the binary tree and a list of node values to delete. It returns a vector containing the remaining trees after deletions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursion and Memoization</b></div>
+                            <div class=""> <b>6 : Inserting to Set</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[k][d] <span style="color:#666">=</span> (<span style="color:#666">1</span> <span style="color:#666">+</span> dfs(k<span style="color:#666">-</span><span style="color:#666">1</span>, d <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">+</span> dfs(k <span style="color:#666">-</span><span style="color:#666">1</span>, abs(d <span style="color:#666">-</span><span style="color:#666">1</span>))) <span style="color:#666">%</span> mod;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span>: to_delete) to_del.insert(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the number of ways recursively by making two recursive calls to `dfs`: one where the distance increases by 1 (`d &#43; 1`) and another where the distance decreases by 1 (`abs(d - 1)`). The result is stored in `dp[k][d]` and taken modulo `mod`. </div>
+                            <div class=""> A loop iterates through the list `to_delete`, inserting each node value into the `to_del` set, marking the nodes that need to be deleted. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Return Value</b></div>
+                            <div class=""> <b>7 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[k][d] <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    helper(root, <span style="color:#a2f">true</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the computed result from the `dp` array, decrementing it by 1 (to account for the last unnecessary computation step). </div>
+                            <div class=""> The helper function is called with the root node and a `true` flag, indicating that the root of the tree is initially considered a potential root of a new tree after deletion. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The method returns the `ans` vector, which contains the roots of the remaining trees after the deletions have been processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">helper</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">bool</span> is_root) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The helper function is declared. It takes a node `root` and a boolean `is_root` to determine if the current node is the root of a new tree. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The base case of the recursion checks if the current node is `NULL`. If it is, the function returns `NULL` to stop further recursion. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Node Deletion Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> del <span style="color:#666">=</span> to_del.find(root<span style="color:#666">-&gt;</span>val) <span style="color:#666">!=</span> to_del.end();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A boolean variable `del` is set to `true` if the current node&#39;s value is in the `to_del` set, indicating that the node should be deleted. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Adding Root to Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(is_root <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>del) ans.push_back(root);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node is a root and not marked for deletion, it is added to the `ans` vector, representing a new tree root. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Recursive Call for Left Child</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>left, del);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The helper function is called recursively for the left child of the current node. The `del` flag is passed to indicate whether the node should be deleted. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Recursive Call for Right Child</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>right, del);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The helper function is called recursively for the right child of the current node with the `del` flag. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> del<span style="color:#666">?</span> <span style="color:#a2f">NULL</span> <span style="color:#666">:</span> root;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the current node is marked for deletion, `NULL` is returned to remove it; otherwise, the current node is returned to link the tree structure. </div>
                         </div>
                     
                 </div>
@@ -628,16 +742,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k), where k is the number of steps. This is when the number of recursive calls is minimized due to memoization.</div>
-                        <div class=""> <b>Average Case:</b> O(k * d), where d is the distance between `startPos` and `endPos`. This depends on the recursive branching.</div>
-                        <div class=""> <b>Worst Case:</b> O(k * d), where d is the maximum possible distance. Memoization ensures that redundant calculations are avoided.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is determined by the number of recursive calls and the distance between `startPos` and `endPos`.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the number of nodes in the tree. We traverse the tree once, visiting each node.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), if no memoization is used and the problem is solved directly.</div>
-                        <div class=""> <b>Worst Case:</b> O(k * d), where d is the distance between `startPos` and `endPos`. This is the space used by the memoization table.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is primarily determined by the size of the memoization table.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the recursive stack and the storage of the result list, where n is the number of nodes.</div>    
                     </div>
 
                 </div>

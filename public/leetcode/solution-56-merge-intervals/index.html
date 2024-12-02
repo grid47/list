@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Nov 1, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -296,7 +296,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1198s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1202s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/56.webp" 
            alt="Multiple flowing light intervals coming together and merging in perfect harmony." 
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are given an integer array <code>nums</code> containing unique elements. Find all possible subsets (the power set) of the array <code>nums</code>. The solution set should not contain duplicate subsets, and the result can be returned in any order. </div>
+<div class=""> You are given an array of intervals where each interval is represented by a pair [start, end]. Merge all overlapping intervals and return a list of non-overlapping intervals that cover all the input intervals. </div>
 
 
 
@@ -370,51 +370,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array `nums` with unique elements.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 2, 3]</div>
+                        <div class=""> <b>Input:</b> The input is an array of intervals, where each interval is a pair [start, end].</div>
+                        <div class=""> <b>Example:</b> [[1,3],[2,6],[8,10],[15,18]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= intervals.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • -10 &lt;= nums[i] &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • intervals[i].length == 2</div>
                             
-                                <div style="margin-left: 20px;"> • All elements of nums are unique.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= starti &lt;= endi &lt;= 10^4</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return all possible subsets (the power set) of the array `nums`, ensuring no duplicate subsets are included. The order of the subsets does not matter.</div>
-                        <div class=""> <b>Example:</b> [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]</div>
+                        <div class=""> <b>Output:</b> Return an array of intervals where each interval represents a non-overlapping range that covers all intervals in the input.</div>
+                        <div class=""> <b>Example:</b> [[1, 6], [8, 10], [15, 18]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be a list of subsets where each subset is a list of integers.</div>
+                                <div style="margin-left: 20px;"> • The output should contain only non-overlapping intervals.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Generate all possible subsets (the power set) of the given array `nums` using a backtracking approach.</div>
+                        <div class=""> <b>Goal:</b> The goal is to merge any overlapping intervals and return the merged intervals as the result.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Start with an empty subset and recursively explore both options: including the current element or excluding it.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the intervals by their starting value.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element in the array, make a choice whether to add it to the current subset or skip it.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize a variable to store the merged intervals.</div>
                             
-                                <div style="margin-left: 20px;"> • Each time an element is included or excluded, recursively call the function to build all possible subsets.</div>
+                                <div style="margin-left: 20px;"> • 3. Traverse through the sorted intervals, and for each interval, check if it overlaps with the last merged interval.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If they overlap, merge the intervals by updating the end of the last merged interval. Otherwise, add the current interval to the result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem constraints ensure the input size and the uniqueness of elements in the input array.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution works for large inputs efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= intervals.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • -10 &lt;= nums[i] &lt;= 10</div>
-                            
-                                <div style="margin-left: 20px;"> • All elements in nums are unique.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= starti &lt;= endi &lt;= 10^4</div>
                             
                         </div>
                     </div>        
@@ -422,21 +422,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array `nums` contains unique integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The solution set should include all possible subsets without duplicates.</div>
+                                <div style="margin-left: 20px;"> • The intervals are represented as pairs of integers, where each pair follows the rule: starti &lt;= endi.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 2, 3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The output includes all subsets, ranging from the empty subset to the full set itself.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 3], [2, 6], [8, 10], [15, 18]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The intervals [1, 3] and [2, 6] overlap, so they are merged into [1, 6]. The intervals [8, 10] and [15, 18] do not overlap and are returned as is.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are two subsets: the empty subset `[]` and the subset `[4]`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[1, 4], [4, 5]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The intervals [1, 4] and [4, 5] overlap at index 4, so they are merged into [1, 5].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,16 +458,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves using backtracking to explore both possibilities for each element (include or exclude it) and build all possible subsets.</div>
+                        <div class=""> <b>Approach:</b> The approach involves sorting the intervals and then merging the overlapping ones iteratively.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can generate all subsets by recursively exploring both inclusion and exclusion of elements in the array.</div>
+                                <div style="margin-left: 20px;"> • Sorting the intervals is essential to efficiently merge overlapping ones.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Backtracking works well for generating subsets, as it allows for efficiently exploring all combinations by making decisions at each step.</div>
+                                <div style="margin-left: 20px;"> • This problem can be solved using a greedy approach by merging overlapping intervals in a single pass after sorting.</div>
                             
                         </div>
                     </div>
@@ -477,11 +475,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a helper function to generate subsets recursively.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the intervals by the starting value of each interval.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element, explore both options: include the element in the subset or exclude it.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize a result array with the first interval.</div>
                             
-                                <div style="margin-left: 20px;"> • Add the current subset to the result when all elements are considered.</div>
+                                <div style="margin-left: 20px;"> • 3. For each subsequent interval, check if it overlaps with the last interval in the result array.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If overlapping, merge the intervals by updating the end of the last interval in the result array. If not, append the current interval to the result.</div>
                             
                         </div>
                     </div>
@@ -490,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` is an empty array, the only subset is the empty subset `[]`.</div>
+                                <div style="margin-left: 20px;"> • If the input is an empty list, return an empty list.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For larger arrays, ensure the solution handles the exponential number of subsets efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle large inputs (up to 10^4 intervals).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` contains just one element, the output will be two subsets: the empty subset `[]` and the subset with the single element.</div>
+                                <div style="margin-left: 20px;"> • Intervals that touch at the boundary (e.g., [1, 4] and [4, 5]) should be merged.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The function should efficiently handle arrays up to the maximum size of 10 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution must run in O(n log n) time due to the sorting step.</div>
                             
                         </div>                                                                        
                     </div>
@@ -524,19 +524,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Result Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Initialize First Interval</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Iterate Over Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Vector Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Check for Overlap</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Vector Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Merge Overlapping Intervals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Add Non-Overlapping Interval</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Add Current Interval to Merged List</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Merged Intervals</button>
                     
                 </div>
 
@@ -545,16 +549,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> subsets(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> result <span style="color:#666">=</span> {{}};
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> result.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>            result.push_back(result[i]);
-</span></span><span style="display:flex;"><span>            result.back().push_back(num);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> merge(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> intervals) {
+</span></span><span style="display:flex;"><span>    sort(intervals.begin(), intervals.end());
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> merged; <span style="color:#080;font-style:italic">// To store the merged intervals
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    merged.push_back(intervals[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> intervals.size(); <span style="color:#666">++</span>i) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (merged.back()[<span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> intervals[i][<span style="color:#666">0</span>]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// Overlapping intervals, merge them
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            merged.back()[<span style="color:#666">1</span>] <span style="color:#666">=</span> max(merged.back()[<span style="color:#666">1</span>], intervals[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// Non-overlapping interval, add it to the merged list
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            merged.push_back(intervals[i]);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> merged;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -565,80 +575,100 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> subsets(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> merge(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> intervals) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a function `subsets` that takes a vector of integers `nums` as input and returns a vector of vectors representing all possible subsets. </div>
+                            <div class=""> This line declares a function named `merge` that takes a vector of intervals `intervals` as input and returns a vector of merged intervals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Sorting Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> result <span style="color:#666">=</span> {{}};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(intervals.begin(), intervals.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a vector `result` to store the generated subsets, starting with an empty set. </div>
+                            <div class=""> This line sorts the input intervals based on their starting points in ascending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Iteration</b></div>
+                            <div class=""> <b>3 : Result Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> merged;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over each number `num` in the input vector `nums`. </div>
+                            <div class=""> This line initializes an empty vector `merged` to store the merged intervals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Initialize First Interval</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> result.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    merged.push_back(intervals[<span style="color:#666">0</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the current size of the `result` vector in `n`. </div>
+                            <div class=""> This line adds the first interval from the input to the `merged` vector as a starting point. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop Iteration</b></div>
+                            <div class=""> <b>5 : Iterate Over Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> intervals.size(); <span style="color:#666">++</span>i) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over the existing subsets in the `result` vector. </div>
+                            <div class=""> This loop iterates over the intervals starting from the second interval. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Vector Operation</b></div>
+                            <div class=""> <b>6 : Check for Overlap</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            result.push_back(result[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (merged.back()[<span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> intervals[i][<span style="color:#666">0</span>]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a new subset by copying the current subset `result[i]` and adds it to the `result` vector. </div>
+                            <div class=""> This condition checks if the current interval overlaps with the last interval in the `merged` vector. Overlap occurs if the end of the last interval is greater than or equal to the start of the current interval. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Vector Operation</b></div>
+                            <div class=""> <b>7 : Merge Overlapping Intervals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            result.back().push_back(num);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            merged.back()[<span style="color:#666">1</span>] <span style="color:#666">=</span> max(merged.back()[<span style="color:#666">1</span>], intervals[i][<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the current number `num` to the newly created subset. </div>
+                            <div class=""> If there&#39;s an overlap, the end point of the last interval in `merged` is updated to the maximum of its current end point and the end point of the current interval. This effectively merges the two overlapping intervals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return</b></div>
+                            <div class=""> <b>8 : Add Non-Overlapping Interval</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the `result` vector containing all the generated subsets. </div>
+                            <div class=""> If there&#39;s no overlap, the current interval is added to the `merged` vector as a new, non-overlapping interval. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Add Current Interval to Merged List</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            merged.push_back(intervals[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The current interval is added to the `merged` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Return Merged Intervals</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> merged;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the `merged` vector containing the merged intervals. </div>
                         </div>
                     
                 </div>
@@ -658,16 +688,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(2^n)</div>
-                        <div class=""> <b>Average Case:</b> O(2^n)</div>
-                        <div class=""> <b>Worst Case:</b> O(2^n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(2^n) because there are 2^n subsets of a set with n elements.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n)</div>
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n), where n is the number of intervals, due to the sorting step.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the recursive call stack and storage for the current subset being built.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the number of intervals, since we store the result in a separate array.</div>    
                     </div>
 
                 </div>

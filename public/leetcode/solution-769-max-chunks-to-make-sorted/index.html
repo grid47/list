@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 22, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1293s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1291s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/769.webp" 
            alt="A sequence where chunks are sorted, with each sorted chunk glowing softly as the process completes." 
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> You are given an array <code>encoded</code> of length <code>n - 1</code>, which represents the XOR of consecutive elements of a permutation of the first <code>n</code> integers. Your task is to decode the <code>encoded</code> array and return the original permutation <code>perm</code> of size <code>n</code>. </div>
+<div class=""> You are given an integer array arr of length n, where the array is a permutation of integers in the range [0, n - 1]. Your task is to split this array into as many chunks (or partitions) as possible, where each chunk can be individually sorted. After sorting each chunk, when concatenated, the result should be the same as the fully sorted array. Return the largest number of chunks that you can create to achieve the sorted array. </div>
 
 
 
@@ -373,51 +373,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a single integer array `encoded` of length `n - 1`, where `encoded[i] = perm[i] XOR perm[i &#43; 1]`. The permutation `perm` is a permutation of integers from `1` to `n` and `n` is odd.</div>
-                        <div class=""> <b>Example:</b> Input: encoded = [4, 3, 7]</div>
+                        <div class=""> <b>Input:</b> The input consists of a single array arr, which represents a permutation of integers in the range [0, n - 1].</div>
+                        <div class=""> <b>Example:</b> Input: arr = [5, 3, 2, 1, 4]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= n &lt; 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10</div>
                             
-                                <div style="margin-left: 20px;"> • n is odd</div>
-                            
-                                <div style="margin-left: 20px;"> • encoded.length == n - 1</div>
+                                <div style="margin-left: 20px;"> • arr is a permutation of integers in the range [0, arr.length - 1].</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the decoded permutation array `perm` of size `n`.</div>
-                        <div class=""> <b>Example:</b> Output: [2, 4, 1, 5, 3]</div>
+                        <div class=""> <b>Output:</b> Return the largest number of chunks that can be created such that after sorting each chunk individually, the resulting concatenated array is sorted.</div>
+                        <div class=""> <b>Example:</b> Output: 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is a list of integers representing the decoded permutation of the integers from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • The array should be partitioned in such a way that the sorted chunks, when concatenated, form the fully sorted array.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to decode the encoded array and reconstruct the original permutation by finding a way to use XOR operations efficiently.</div>
+                        <div class=""> <b>Goal:</b> The goal is to partition the array into the maximum number of chunks such that after sorting each chunk, the concatenated result is sorted.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Compute the XOR of all integers from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array and track the maximum value encountered so far.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. XOR every second element of the `encoded` array with the computed XOR to obtain the first element of the permutation.</div>
+                                <div style="margin-left: 20px;"> • At each index, if the maximum value is equal to the current index, increment the chunk count.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Use the XOR relationship between consecutive elements of the permutation to find the entire permutation array.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the reconstructed permutation array.</div>
+                                <div style="margin-left: 20px;"> • Return the total number of chunks.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The given array `encoded` satisfies the following constraints:</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure the array is a permutation of integers from 0 to n-1 and the size of the array is manageable (n &lt;= 10).</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The length of `encoded` is `n - 1` where n is an odd integer.</div>
+                                <div style="margin-left: 20px;"> • The array is a permutation of integers in the range [0, n - 1].</div>
                             
-                                <div style="margin-left: 20px;"> • The elements in `encoded` are derived using XOR operations from consecutive elements of the permutation array.</div>
+                                <div style="margin-left: 20px;"> • The size of the array is at most 10.</div>
                             
                         </div>
                     </div>        
@@ -425,21 +421,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The encoded array always provides a valid and unique solution for the permutation.</div>
-                            
-                                <div style="margin-left: 20px;"> • The permutation consists of the integers from 1 to n, and each integer appears exactly once.</div>
+                                <div style="margin-left: 20px;"> • The input array will always be a valid permutation of integers from 0 to n-1.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: encoded = [4, 3, 7]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The XOR of all integers from 1 to 5 is 7. XORing every second element of `encoded` with 7 gives the first element of the permutation, which is 2. Then we can use the XOR of consecutive elements to find the rest of the permutation.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: arr = [5, 3, 2, 1, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the array is not easily separable into smaller chunks that would result in the sorted array, so the maximum number of chunks is 1.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: encoded = [3, 1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> If perm = [1, 2, 3], then `encoded = [1 XOR 2, 2 XOR 3] = [3, 1]`. Therefore, the decoded permutation is [1, 2, 3].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: arr = [1, 0, 2, 3, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the array can be split into 4 chunks: [1, 0], [2], [3], [4], all of which are sorted when processed separately.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -463,16 +457,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we leverage the XOR properties to decode the given array and reconstruct the permutation.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we can iterate through the array while keeping track of the maximum value encountered so far. When the maximum value equals the current index, it indicates a valid chunk boundary. We can increment the chunk count and continue.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The XOR operation has properties that can be used to decode the encoded array efficiently.</div>
+                                <div style="margin-left: 20px;"> • We need to partition the array into chunks where each chunk can be sorted independently and when combined, it forms the fully sorted array.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can compute the XOR of all integers from 1 to n to use in decoding the array.</div>
+                                <div style="margin-left: 20px;"> • Tracking the maximum value up to each index helps in determining the correct chunk boundaries.</div>
                             
                         </div>
                     </div>
@@ -480,13 +474,9 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Compute the XOR of all integers from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the array while maintaining the maximum value encountered so far.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use this result to XOR every second element of the `encoded` array, starting from the first, to get the first element of the permutation.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. Using the XOR relationship, compute the rest of the permutation array.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the decoded permutation.</div>
+                                <div style="margin-left: 20px;"> • Each time the maximum value is equal to the current index, it marks a valid chunk boundary, and we increment the chunk count.</div>
                             
                         </div>
                     </div>
@@ -495,22 +485,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array `encoded` cannot be empty because n &gt;= 3.</div>
+                                <div style="margin-left: 20px;"> • The array will always have at least one element, as n &gt;= 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large values of n, the solution should efficiently handle up to n &lt; 10^5 elements.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles the maximum constraint, where the array size is 10.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Since n is always odd, the total number of elements in `encoded` will always be even.</div>
+                                <div style="margin-left: 20px;"> • If the array is already sorted, each element can be its own chunk.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The XOR operation is commutative and associative, which allows for efficient decoding.</div>
+                                <div style="margin-left: 20px;"> • The array is a permutation of integers from 0 to n-1.</div>
                             
                         </div>                                                                        
                     </div>
@@ -527,29 +517,19 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Max Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Bitwise Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Result Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Bitwise Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Bitwise Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Return Value</button>
                     
                 </div>
 
@@ -558,22 +538,20 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> decode(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> enc) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> enc.size() <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxChunksToSorted</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        x <span style="color:#666">^=</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, arr[i]);
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (mx <span style="color:#666">==</span> i);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    ans[<span style="color:#666">0</span>] <span style="color:#666">=</span> x;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> enc.size(); i <span style="color:#666">+=</span> <span style="color:#666">2</span>)
-</span></span><span style="display:flex;"><span>        ans[<span style="color:#666">0</span>] <span style="color:#666">^=</span> enc[i];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> ans[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">^</span> enc[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -581,123 +559,73 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> decode(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> enc) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxChunksToSorted</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `decode` is defined, which takes a reference to a vector of integers `enc` (encoded values) and returns a vector of integers (decoded values). </div>
+                            <div class=""> Define the function that takes a vector of integers as input. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> enc.size() <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The size of the original decoded array `n` is determined by adding 1 to the size of the encoded array `enc`. </div>
+                            <div class=""> Initialize the variable &#39;n&#39; to store the size of the input array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Array Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A new vector `ans` of size `n` is initialized with all elements set to 0, which will hold the decoded values. </div>
+                            <div class=""> Initialize &#39;res&#39; (the result variable) to 0 and &#39;mx&#39; (the maximum value seen so far) to the first element of the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `x` is initialized to 0. This will be used for XOR operations to decode the values. </div>
+                            <div class=""> Start iterating through the array from the first element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop</b></div>
+                            <div class=""> <b>5 : Max Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(mx, arr[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is initiated from 1 to `n`, used to XOR the values for decoding. </div>
+                            <div class=""> Update the maximum value &#39;mx&#39; by comparing it with the current element &#39;arr[i]&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Bitwise Operation</b></div>
+                            <div class=""> <b>6 : Result Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        x <span style="color:#666">^=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (mx <span style="color:#666">==</span> i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `x` is XOR&#39;d with the current value of `i`, effectively encoding the range of numbers. </div>
+                            <div class=""> Increment &#39;res&#39; by 1 if the maximum value matches the current index &#39;i&#39;. This checks if the current subarray can be sorted independently. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Assignment</b></div>
+                            <div class=""> <b>7 : Return Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ans[<span style="color:#666">0</span>] <span style="color:#666">=</span> x;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The first element of the `ans` array is assigned the value of `x` after the XOR operations in the previous loop. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> enc.size(); i <span style="color:#666">+=</span> <span style="color:#666">2</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A loop iterates over the encoded array `enc`, starting from index 1 and incrementing by 2, ensuring only the elements at odd indices are processed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Bitwise Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[<span style="color:#666">0</span>] <span style="color:#666">^=</span> enc[i];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The first element of the `ans` array is XOR&#39;d with the value from the encoded array `enc` at the current index `i`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A second loop starts from index 1 to `n - 1`, used to calculate the remaining values in the `ans` array. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Bitwise Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> ans[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">^</span> enc[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each element of the `ans` array is calculated by XOR&#39;ing the previous element in `ans` with the corresponding element in the encoded array `enc`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The function returns the decoded `ans` array, which now contains the original sequence of numbers. </div>
+                            <div class=""> Return the final result, which is the number of chunks. </div>
                         </div>
                     
                 </div>
@@ -717,16 +645,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of elements in the permutation.</div>
-                        <div class=""> <b>Average Case:</b> O(n), as we need to process each element in the array once.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), since the algorithm processes all elements in linear time.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear, O(n), since we need to process each element of the encoded array and compute the XOR operations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n), since we iterate over the array once.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as we only perform one pass through the array.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we only iterate through the array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), as we need space to store the decoded permutation array.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of elements in the permutation.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) because we need to store the decoded permutation array, which has size n.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since we only need constant space to track the maximum value and chunk count.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as no additional space is required except for the variables used in the logic.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we only use a few variables for tracking.</div>    
                     </div>
 
                 </div>

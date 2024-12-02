@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
 
 
-<div class=""> You are given an array nums. The alternating sum of a sequence is calculated as the sum of elements at even indices minus the sum of elements at odd indices. Your task is to find the maximum alternating sum of any subsequence formed by deleting some elements from the array without changing the relative order of the remaining elements. </div>
+<div class=""> You are given two strings, s and goal, consisting of lowercase letters. Your task is to determine whether you can swap exactly two characters in s so that the resulting string matches goal. If this is possible, return true, otherwise return false. The swap is defined as selecting two different indices i and j, and swapping the characters at those positions in s. </div>
 
 
 
@@ -350,41 +350,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array nums, where each element is a positive integer.</div>
-                        <div class=""> <b>Example:</b> nums = [4,2,5,3]</div>
+                        <div class=""> <b>Input:</b> You are given two strings, s and goal, both consisting of lowercase letters.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;cd&#34;, goal = &#34;dc&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length, goal.length &lt;= 2 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • s and goal consist of lowercase letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum alternating sum that can be achieved from any subsequence of nums.</div>
-                        <div class=""> <b>Example:</b> 7</div>
+                        <div class=""> <b>Output:</b> Return true if it is possible to swap two characters in s such that the string becomes equal to goal. Otherwise, return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To calculate the maximum alternating sum of any subsequence of nums.</div>
+                        <div class=""> <b>Goal:</b> The goal is to determine if a valid swap exists such that s becomes goal.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use dynamic programming to track the maximum alternating sum at each index, considering both including and excluding the current element.</div>
+                                <div style="margin-left: 20px;"> • Step 1: If the lengths of s and goal are different, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 2: Count how many positions differ between s and goal. If more than two positions differ, return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 3: If there are exactly two positions where s and goal differ, check if swapping these two characters will make the strings equal.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If the strings are already identical, check if any character repeats in s, as swapping identical characters will not change the string.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the solution handles the constraints efficiently for large inputs.</div>
+                        <div class=""> <b>Goal:</b> The strings s and goal are guaranteed to follow the input constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • nums has at least 1 element and at most 10^5 elements.</div>
+                                <div style="margin-left: 20px;"> • The lengths of s and goal are between 1 and 2 * 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • Each element in nums is between 1 and 10^5.</div>
+                                <div style="margin-left: 20px;"> • The strings s and goal consist only of lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -392,15 +398,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The elements of the array are positive integers.</div>
+                                <div style="margin-left: 20px;"> • The input strings s and goal will always contain lowercase English letters.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input strings will always be of valid lengths and contain only alphabetic characters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [4,2,5,3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal subsequence to pick is [4, 2, 5], resulting in an alternating sum of (4 &#43; 5) - 2 = 7.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;xy&#34;, goal = &#34;yx&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, we can swap the characters at indices 0 and 1 in s to get &#39;yx&#39;, which matches goal.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;xy&#34;, goal = &#34;xy&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, s is already equal to goal, so the answer is false because no swap is necessary.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -424,16 +436,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be approached using dynamic programming where we maintain two variables: one for the maximum sum when considering the current element and another for the sum when excluding it.</div>
+                        <div class=""> <b>Approach:</b> To determine if a valid swap is possible, we first compare the two strings and check the number of differing positions. Based on the result, we either check for a swap possibility or determine that a swap is not possible.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The alternating sum involves switching between adding and subtracting elements.</div>
+                                <div style="margin-left: 20px;"> • If the strings are already identical, no swap can be made to make them equal.</div>
+                            
+                                <div style="margin-left: 20px;"> • If there are more than two differences, it&#39;s impossible to match the strings with just one swap.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a greedy dynamic approach to decide at each step whether to include or exclude the current element.</div>
+                                <div style="margin-left: 20px;"> • The solution involves counting the differing positions between s and goal, then checking if those positions can be swapped to match the two strings.</div>
                             
                         </div>
                     </div>
@@ -441,11 +455,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize two variables: odd and even, where &#39;odd&#39; stores the max sum considering the current element as part of the odd index, and &#39;even&#39; stores the max sum considering it as part of the even index.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Compare the lengths of s and goal. If they are not equal, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array nums and update the variables accordingly.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Loop through the characters of s and goal and count how many positions differ. If more than two positions differ, return false.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the value stored in the &#39;even&#39; variable as it will represent the maximum alternating sum.</div>
+                                <div style="margin-left: 20px;"> • Step 3: If exactly two positions differ, check if swapping these characters in s will result in goal.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: If no differences exist, check if there is a duplicate character in s, as a swap of identical characters is allowed.</div>
                             
                         </div>
                     </div>
@@ -454,22 +470,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If nums is empty, handle gracefully by returning 0.</div>
+                                <div style="margin-left: 20px;"> • N/A: The inputs will always be valid strings of at least length 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works efficiently with arrays of size up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle strings of length up to 2 * 10^4.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where all elements are the same, as well as where all elements are very large or small.</div>
+                                <div style="margin-left: 20px;"> • If the strings are already identical, no swap is needed, so return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • If there are more than two differences between s and goal, return false.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the constraints efficiently.</div>
+                                <div style="margin-left: 20px;"> • The lengths of s and goal are guaranteed to be within the given range, so large inputs will be handled efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -488,15 +506,33 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Length Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Dynamic Programming Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Over Strings</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Odd Sum Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Mismatch Detection</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Increment Mismatch Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Track Mismatched Indices</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Track Second Mismatch</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Frequency Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Frequency</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Mismatch Count Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Duplicate Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return False</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 End Mismatch Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Swap Condition Check</button>
                     
                 </div>
 
@@ -505,16 +541,25 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">maxAlternatingSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> odd <span style="color:#666">=</span> <span style="color:#666">0</span>, even <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
-</span></span><span style="display:flex;"><span>        even <span style="color:#666">=</span> max(even, odd <span style="color:#666">+</span> num);
-</span></span><span style="display:flex;"><span>        odd <span style="color:#666">=</span> even <span style="color:#666">-</span> num;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">buddyStrings</span>(string s, string goal) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.size() <span style="color:#666">!=</span> goal.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, fst <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, scd <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, cl <span style="color:#666">=</span> <span style="color:#666">0</span>, fg <span style="color:#666">=</span> <span style="color:#666">0</span>, t <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">!=</span> goal[i]) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(fst <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) fst <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(scd <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) scd <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((fg <span style="color:#666">&gt;&gt;</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>)) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) t <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        fg <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> even;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (cnt <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">&amp;&amp;</span> (s[fst] <span style="color:#666">==</span> goal[scd]) <span style="color:#666">&amp;&amp;</span> (s[scd] <span style="color:#666">==</span> goal[fst]));
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -525,60 +570,150 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">maxAlternatingSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">buddyStrings</span>(string s, string goal) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;maxAlternatingSum&#39; which takes a reference to a vector of integers &#39;nums&#39;. The function will return a long long value representing the maximum alternating sum. </div>
+                            <div class=""> This line defines the function `buddyStrings`, which takes two strings `s` and `goal` and returns a boolean indicating whether they can be made equal by swapping exactly two characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Length Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> odd <span style="color:#666">=</span> <span style="color:#666">0</span>, even <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.size() <span style="color:#666">!=</span> goal.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two variables &#39;odd&#39; and &#39;even&#39; to store the maximum alternating sums for odd and even indices in the sequence, respectively. </div>
+                            <div class=""> The function checks if the lengths of the two strings are equal. If they are not, the function returns `false` because they cannot be buddy strings. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop Setup</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, fst <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, scd <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>, cl <span style="color:#666">=</span> <span style="color:#666">0</span>, fg <span style="color:#666">=</span> <span style="color:#666">0</span>, t <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to iterate through each element &#39;num&#39; in the vector &#39;nums&#39;. </div>
+                            <div class=""> Several variables are initialized: `cnt` counts mismatches, `fst` and `scd` store the indices of the first and second mismatched characters, `cl` is unused, `fg` tracks character frequencies, and `t` is a flag for duplicate characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Dynamic Programming Update</b></div>
+                            <div class=""> <b>4 : Loop Over Strings</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        even <span style="color:#666">=</span> max(even, odd <span style="color:#666">+</span> num);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the &#39;even&#39; sum by considering the maximum of the previous &#39;even&#39; value and the sum of &#39;odd&#39; plus the current &#39;num&#39;. This ensures we alternate between adding and subtracting the elements. </div>
+                            <div class=""> A loop starts to iterate over each character in the strings `s` and `goal`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Odd Sum Update</b></div>
+                            <div class=""> <b>5 : Mismatch Detection</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        odd <span style="color:#666">=</span> even <span style="color:#666">-</span> num;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">!=</span> goal[i]) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the &#39;odd&#39; sum by subtracting the current &#39;num&#39; from &#39;even&#39;, following the alternating sum pattern. </div>
+                            <div class=""> This condition checks if the characters at the current index `i` in `s` and `goal` are different. If they are, it counts as a mismatch. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Increment Mismatch Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> even;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the &#39;even&#39; value as the result, representing the maximum alternating sum after considering all numbers. </div>
+                            <div class=""> The `cnt` variable is incremented to keep track of the number of mismatched characters between `s` and `goal`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Track Mismatched Indices</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(fst <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) fst <span style="color:#666">=</span> i;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the first mismatch is found (`fst == -1`), the index is stored in `fst`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Track Second Mismatch</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(scd <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) scd <span style="color:#666">=</span> i;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the second mismatch is found, its index is stored in `scd`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Frequency Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((fg <span style="color:#666">&gt;&gt;</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>)) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) t <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This condition checks if the character `s[i]` has already appeared in the string using bitwise operations. If it has, the flag `t` is set to 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Update Frequency</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        fg <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The bitwise operation updates the `fg` variable to record the occurrence of the character `s[i]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Mismatch Count Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function checks if there are no mismatches (`cnt == 0`). If there are no mismatches, it checks for duplicate characters. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Duplicate Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there are duplicate characters (indicated by `t`), the function returns `true` because the strings are already identical and can be considered buddy strings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return False</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there are no duplicates, the function returns `false` because the strings cannot be buddy strings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : End Mismatch Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the mismatch count check block. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Swap Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (cnt <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">&amp;&amp;</span> (s[fst] <span style="color:#666">==</span> goal[scd]) <span style="color:#666">&amp;&amp;</span> (s[scd] <span style="color:#666">==</span> goal[fst]));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function checks if exactly two mismatches were found (`cnt == 2`), and if swapping the characters at the mismatched indices in `s` makes it equal to `goal`. If so, it returns `true`. </div>
                         </div>
                     
                 </div>
@@ -598,16 +733,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear because we are iterating through the array once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the strings. This is the time required to compare the strings and check the number of differing positions.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as the comparison of strings takes linear time.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the strings.</div> 
+                        <div class=""> <b>Description:</b> </div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we are only using a few extra variables for tracking the sums.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since the space used does not depend on the size of the input strings.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as no extra space is required other than a few variables for comparison.</div> 
+                        <div class=""> <b>Description:</b> </div>    
                     </div>
 
                 </div>

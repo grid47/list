@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 4, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an integer array &rsquo;nums&rsquo; and an integer &lsquo;k&rsquo;. You need to find a subsequence of &rsquo;nums&rsquo; of length &lsquo;k&rsquo; such that the sum of its elements is maximized. A subsequence is a sequence that can be derived from another array by deleting some or no elements without changing the order of the remaining elements. Return any subsequence with the largest sum. </div>
+<div class=""> You are given an array of integers, where each integer represents a unique card in a deck. The deck can be shuffled into any order, and the goal is to reorder it such that the cards are revealed in increasing order. To do this, you repeatedly reveal the top card and move the next card to the bottom of the deck until all cards are revealed. The problem is to return the order of cards that would reveal them in increasing order. </div>
 
 
 
@@ -360,49 +360,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of the array &#39;nums&#39; and an integer &#39;k&#39; representing the desired subsequence length.</div>
-                        <div class=""> <b>Example:</b> nums = [4, 1, 3, 2], k = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers representing the deck of cards.</div>
+                        <div class=""> <b>Example:</b> Input: deck = [20, 15, 10, 5, 25]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The deck contains between 1 and 1000 cards.</div>
                             
-                                <div style="margin-left: 20px;"> • -10^5 &lt;= nums[i] &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length</div>
+                                <div style="margin-left: 20px;"> • Each card value is a unique integer between 1 and 10^6.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a subsequence of length &#39;k&#39; with the largest sum.</div>
-                        <div class=""> <b>Example:</b> Output: [3, 4]</div>
+                        <div class=""> <b>Output:</b> The output should be an array representing the deck of cards after revealing them in increasing order.</div>
+                        <div class=""> <b>Example:</b> Output: [5, 15, 10, 20, 25]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output must be an array of integers representing the cards in the required order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find a subsequence of length &#39;k&#39; that has the largest possible sum of elements.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the order of cards such that revealing them one by one follows the increasing order of their values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Identify the &#39;k&#39; largest elements in &#39;nums&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the deck in increasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • Keep their relative order from the original array.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a queue to simulate the process of revealing the cards and moving the next one to the bottom.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the subsequence formed by these elements.</div>
+                                <div style="margin-left: 20px;"> • 3. Place each card in the result based on the queue’s order.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints ensure the solution handles up to 1000 elements efficiently and handles large or small integer values.</div>
+                        <div class=""> <b>Goal:</b> The solution must handle arrays of varying sizes efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The input array will always contain between 1 and 1000 cards.</div>
                             
-                                <div style="margin-left: 20px;"> • -10^5 &lt;= nums[i] &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= nums.length</div>
+                                <div style="margin-left: 20px;"> • All values in the deck are unique integers.</div>
                             
                         </div>
                     </div>        
@@ -410,21 +408,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input list is not empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • The value of &#39;k&#39; is valid (1 &lt;= k &lt;= nums.length).</div>
+                                <div style="margin-left: 20px;"> • The deck is shuffled initially, but the goal is to determine the order in which cards should be revealed.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: nums = [4, 1, 3, 2], k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subsequence of length 2 with the largest sum is [3, 4], as it has the sum of 7.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: deck = [5, 10, 20, 15]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting, the deck becomes [5, 10, 15, 20]. We simulate revealing the cards as follows: 5 is revealed, 10 moves to the bottom, 15 is revealed, 20 moves to the bottom, 10 is revealed, and finally 20 is revealed.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: nums = [2, -1, 5, 3], k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subsequence with the largest sum is [5, 3], as it gives the highest sum of 8.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: deck = [1, 2, 3, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting, the deck becomes [1, 2, 3, 4]. We simulate revealing them in order: 1, 2, 3, and 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,16 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach to solve the problem involves selecting the largest &#39;k&#39; elements and maintaining their order in the original array.</div>
+                        <div class=""> <b>Approach:</b> The approach involves sorting the deck and using a queue to simulate the process of revealing and moving cards in the deck.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to ensure that we select the largest elements while maintaining the order of the original array.</div>
+                                <div style="margin-left: 20px;"> • Sorting the deck is the key to ensuring that the cards are revealed in increasing order.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A simple solution would involve sorting, but we need to track the indices of the selected elements to maintain their original order.</div>
+                                <div style="margin-left: 20px;"> • The main challenge is to implement the correct simulation of the card reveal and move-to-bottom steps.</div>
                             
                         </div>
                     </div>
@@ -465,11 +461,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Sort the array to identify the largest &#39;k&#39; elements.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the deck in ascending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Track the indices of these elements in the original array.</div>
+                                <div style="margin-left: 20px;"> • 2. Initialize a queue with indices of the deck.</div>
                             
-                                <div style="margin-left: 20px;"> • Construct the subsequence by selecting the elements in the order of their indices.</div>
+                                <div style="margin-left: 20px;"> • 3. For each card in the sorted deck, place it in the result based on the current position in the queue.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. After placing a card, move the next card in the queue to the bottom, repeating the process until all cards are placed in the result.</div>
                             
                         </div>
                     </div>
@@ -478,22 +476,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • There are no edge cases for empty inputs as the problem guarantees that nums has at least &#39;k&#39; elements.</div>
+                                <div style="margin-left: 20px;"> • If the input deck is empty, the output should be an empty array.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle arrays of length up to 1000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • If the deck contains a large number of cards (e.g., 1000), the solution must efficiently handle the size.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where all elements are negative or where the largest values are repeated.</div>
+                                <div style="margin-left: 20px;"> • If the deck contains only one card, the output is simply that card.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The values of &#39;k&#39; and the elements in &#39;nums&#39; are guaranteed to be within the specified constraints.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must be efficient enough to handle up to 1000 cards.</div>
                             
                         </div>                                                                        
                     </div>
@@ -510,25 +508,33 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting Deck</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Get Deck Size</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Subsequence Construction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Iterating Over Elements</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Population</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check 1</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Push Indices to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check 2</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Start Rearranging</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Subsequence Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Place Card in Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Remove Card from Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Rearrange Cards in Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Move Front to Back</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Pop Card from Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Result</button>
                     
                 </div>
 
@@ -537,16 +543,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> maxSubsequence(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    nth_element(v.begin(), v.begin() <span style="color:#666">+</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>, v.end(), greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> count(v.begin(), v.begin() <span style="color:#666">+</span> k, v[k <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> deckRevealedIncreasing(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> deck) {
+</span></span><span style="display:flex;"><span>    sort(deck.begin(), deck.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> deck.size();
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        q.push(i);
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((nums[i] <span style="color:#666">&gt;</span> v[k <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">||</span>
-</span></span><span style="display:flex;"><span>           (nums[i] <span style="color:#666">==</span> v[k <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> (cnt<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)))
-</span></span><span style="display:flex;"><span>            res.push_back(nums[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res[q.front()] <span style="color:#666">=</span> deck[i];
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            q.push(q.front());
+</span></span><span style="display:flex;"><span>            q.pop();                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
@@ -556,103 +568,143 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> maxSubsequence(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> deckRevealedIncreasing(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> deck) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function signature for the maxSubsequence function, which takes an array &#39;nums&#39; and an integer &#39;k&#39; as parameters and returns a vector of integers. </div>
+                            <div class=""> The function `deckRevealedIncreasing` takes a vector of integers (representing a deck of cards) and returns a vector representing the deck after rearrangement. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Initialization</b></div>
+                            <div class=""> <b>2 : Sorting Deck</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v(nums.begin(), nums.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(deck.begin(), deck.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates a copy of the &#39;nums&#39; vector to allow manipulation without affecting the original array. </div>
+                            <div class=""> Sort the deck in increasing order to prepare for the rearrangement process, ensuring that the smallest cards are placed at the front. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Sorting</b></div>
+                            <div class=""> <b>3 : Get Deck Size</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    nth_element(v.begin(), v.begin() <span style="color:#666">+</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>, v.end(), greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> deck.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Rearranges the elements in &#39;v&#39; such that the element at position &#39;k-1&#39; is the largest element, ensuring the top k elements are correctly ordered. </div>
+                            <div class=""> Store the size of the deck (number of cards) in the variable `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Counting</b></div>
+                            <div class=""> <b>4 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> count(v.begin(), v.begin() <span style="color:#666">+</span> k, v[k <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Counts how many times the k-th largest element appears in the first k elements of the vector &#39;v&#39;. This count helps in handling ties during subsequence selection. </div>
+                            <div class=""> Initialize a queue `q` that will be used to manage the positions of cards in the deck during the rearrangement process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Subsequence Construction</b></div>
+                            <div class=""> <b>5 : Result Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes an empty vector &#39;res&#39; to store the final subsequence. </div>
+                            <div class=""> Initialize a result vector `res` of size `n` with all elements set to 0. This vector will hold the final rearranged deck. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Iterating Over Elements</b></div>
+                            <div class=""> <b>6 : Queue Population</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through all elements in the original &#39;nums&#39; array to determine which elements belong in the subsequence. </div>
+                            <div class=""> Loop through the deck to populate the queue with the indices of the cards. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Condition Check 1</b></div>
+                            <div class=""> <b>7 : Push Indices to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((nums[i] <span style="color:#666">&gt;</span> v[k <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#666">||</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.push(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current element in &#39;nums&#39; is greater than the k-th largest element from &#39;v&#39;, ensuring the largest elements are selected. </div>
+                            <div class=""> Push the index `i` of each card into the queue, so the queue holds the indices of all cards in the deck. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Condition Check 2</b></div>
+                            <div class=""> <b>8 : Start Rearranging</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>           (nums[i] <span style="color:#666">==</span> v[k <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> (cnt<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Handles cases where the current element equals the k-th largest element, ensuring that only the necessary number of such elements are selected. </div>
+                            <div class=""> Start another loop to rearrange the deck based on the queue and the sorted cards. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Subsequence Update</b></div>
+                            <div class=""> <b>9 : Place Card in Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res[q.front()] <span style="color:#666">=</span> deck[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the current element to the subsequence if it meets the selection criteria. </div>
+                            <div class=""> Place the current card from the sorted deck at the position specified by the front of the queue in the result vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Remove Card from Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the front element from the queue, which represents the index of the card that has just been placed in the result vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Rearrange Cards in Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there are still cards in the queue, proceed to rearrange them. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Move Front to Back</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(q.front());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Push the front element of the queue to the back, effectively moving the next card to the back of the deck. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Pop Card from Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the front element again after moving it to the back. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Result</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the resulting subsequence as the output of the function. </div>
+                            <div class=""> Return the rearranged deck stored in the result vector `res`. </div>
                         </div>
                     
                 </div>
@@ -675,13 +727,13 @@
                         <div class=""> <b>Best Case:</b> O(n log n)</div>
                         <div class=""> <b>Average Case:</b> O(n log n)</div>
                         <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting step, which takes O(n log n).</div>                                               
+                        <div class=""> <b>Description:</b> The sorting step dominates the time complexity, which is O(n log n) where n is the size of the deck.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(k)</div>
+                        <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to storing the indices of the elements and the subsequence.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the use of a queue and the result array.</div>    
                     </div>
 
                 </div>

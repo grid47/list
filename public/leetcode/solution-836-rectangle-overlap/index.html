@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Aug 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given an m x n matrix of characters <code>box</code>, where each cell is a stone (<code>#</code>), a stationary obstacle (<code>*</code>), or an empty space (<code>.</code>). After rotating the box 90 degrees clockwise, gravity will cause stones to fall down until they land on an obstacle, another stone, or the bottom. Return the updated matrix after the stones have fallen. </div>
+<div class=""> You are given two axis-aligned rectangles represented by two lists, rec1 and rec2. Each list contains four integers: [x1, y1, x2, y2], where (x1, y1) represents the bottom-left corner and (x2, y2) represents the top-right corner of the rectangle. You need to determine if the two rectangles overlap. Two rectangles overlap if their intersection area is positive. Rectangles that only touch at the edges or corners do not count as overlapping. </div>
 
 
 
@@ -358,47 +358,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is an m x n matrix of characters where each cell can either be a stone (`#`), a stationary obstacle (`*`), or an empty space (`.`).</div>
-                        <div class=""> <b>Example:</b> box = [[# , ., *], [#, *, #]]</div>
+                        <div class=""> <b>Input:</b> The input consists of two lists representing two axis-aligned rectangles. Each list contains four integers: [x1, y1, x2, y2].</div>
+                        <div class=""> <b>Example:</b> Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 500</div>
+                                <div style="margin-left: 20px;"> • rec1.length == 4</div>
                             
-                                <div style="margin-left: 20px;"> • Each box[i][j] is either &#39;#&#39;, &#39;*&#39;, or &#39;.&#39;</div>
+                                <div style="margin-left: 20px;"> • rec2.length == 4</div>
+                            
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= rec1[i], rec2[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • Both rec1 and rec2 represent valid rectangles with a non-zero area.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the updated matrix representing the box after the stones have fallen due to gravity, while obstacles remain stationary.</div>
-                        <div class=""> <b>Example:</b> Output = [[#, .], [#, #], [*, *], [., .]]</div>
+                        <div class=""> <b>Output:</b> Return true if the two rectangles overlap, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is an m x n matrix of characters, representing the new arrangement after the stones have fallen.</div>
+                                <div style="margin-left: 20px;"> • The output should be a boolean value indicating whether the rectangles overlap.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Simulate the rotation and gravity effect to correctly place the stones.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if there is a positive intersection area between the two given rectangles.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Reverse the rows of the matrix to simulate a 90-degree clockwise rotation.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Compare the horizontal and vertical ranges of both rectangles.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Iterate over each column, from bottom to top, and move the stones downwards, stopping at obstacles or other stones.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Check if there is no overlap by ensuring the rectangles do not meet in either direction (horizontal or vertical).</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Rebuild the matrix by placing stones at the bottom, obstacles where they are, and empty spaces above the stones.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return true if there is an overlap, otherwise return false.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints are simple, ensuring that the input matrix is not too large and consists only of the allowed characters.</div>
+                        <div class=""> <b>Goal:</b> Ensure that both rectangles are valid and the area is non-zero.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix dimensions are between 1 and 500 for both rows and columns.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each character in the matrix is one of &#39;#&#39;, &#39;*&#39;, or &#39;.&#39;</div>
+                                <div style="margin-left: 20px;"> • Ensure the rectangles are axis-aligned and the coordinates form a valid rectangle.</div>
                             
                         </div>
                     </div>        
@@ -406,21 +408,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix is guaranteed to contain at least one row and one column.</div>
-                            
-                                <div style="margin-left: 20px;"> • The stones are already placed in a valid position, meaning they will rest on an obstacle, another stone, or the bottom of the box.</div>
+                                <div style="margin-left: 20px;"> • Both rec1 and rec2 represent valid axis-aligned rectangles.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [[., ., #]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After rotating the box 90 degrees and applying gravity, the stone falls to the bottom.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> These two rectangles overlap because their intersection has a positive area.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [[., *, ., #], [., #, *, #]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The stones fall to the bottom after rotation, and the obstacles remain in place, causing the stones to settle above them.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: rec1 = [0,0,1,1], rec2 = [1,0,2,1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> These rectangles do not overlap because they only touch at the edges, not overlapping in area.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,16 +444,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves simulating the 90-degree rotation of the matrix and applying gravity to the stones. We will reverse the rows of the matrix and then process each column to move stones down while respecting obstacles and other stones.</div>
+                        <div class=""> <b>Approach:</b> The approach is to compare the boundaries of both rectangles and check for any overlap. If one rectangle is entirely to the left, right, above, or below the other, then they do not overlap.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This is a simulation problem where we need to handle gravity and rotation.</div>
+                                <div style="margin-left: 20px;"> • The rectangles will overlap if and only if their projections on both the x and y axes intersect.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Reversing the matrix rows will simulate the rotation. Then, we need to handle gravity by checking each column from bottom to top.</div>
+                                <div style="margin-left: 20px;"> • If either the horizontal or vertical projections do not overlap, the rectangles do not overlap.</div>
                             
                         </div>
                     </div>
@@ -461,11 +461,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Reverse the matrix to simulate the 90-degree clockwise rotation.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Extract the coordinates of the bottom-left and top-right corners of both rectangles.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each column, simulate the effect of gravity by pushing the stones down towards the bottom of the matrix.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Check if the rectangles do not overlap based on the horizontal and vertical ranges.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Rebuild the matrix with the stones, obstacles, and empty spaces in their new positions.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Return true if there is an overlap, otherwise return false.</div>
                             
                         </div>
                     </div>
@@ -474,22 +474,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix cannot be empty, as it is guaranteed to have at least one stone or obstacle.</div>
+                                <div style="margin-left: 20px;"> • Empty rectangles (with zero area) should not be considered valid inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should be efficient enough to handle matrices with the maximum size of 500x500.</div>
+                                <div style="margin-left: 20px;"> • Ensure that large input values (up to 10^9) are handled efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where there are no stones in a column or when all stones are already at the bottom.</div>
+                                <div style="margin-left: 20px;"> • Consider edge cases where the rectangles touch at the edges or corners but do not overlap.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix is guaranteed to have at least one row and one column.</div>
+                                <div style="margin-left: 20px;"> • Check that both rectangles are valid and the coordinates form a non-zero area.</div>
                             
                         </div>                                                                        
                     </div>
@@ -508,39 +508,29 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Reverse Grid</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Matrix Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop (Rows)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Inner Loop (Columns)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Transposition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop through Transposed Grid</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Initialize k</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Inner Loop (Process Elements)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 If Condition (Non-empty Cell)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Move Cell Down (Empty)</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Move Cell Down (Non-empty)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Update k</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Else If Condition (Obstacle)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Update k (Obstacle)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Else If Condition (Empty Cell)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Statement</button>
                     
                 </div>
 
@@ -549,31 +539,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> rotateTheBox(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> box) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    reverse(box.begin(), box.end());
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> box.size(), n <span style="color:#666">=</span> box[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> tmp(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>(m));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        tmp[j][i] <span style="color:#666">=</span> box[i][j];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; j<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp[j][i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>) {
-</span></span><span style="display:flex;"><span>                tmp[j][i] <span style="color:#666">=</span> <span style="color:#b44">&#39;.&#39;</span>; <span style="color:#080;font-style:italic">// o
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                tmp[k][i] <span style="color:#666">=</span> <span style="color:#b44">&#39;#&#39;</span>; <span style="color:#080;font-style:italic">// order is important
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                k<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(tmp[j][i] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>) {
-</span></span><span style="display:flex;"><span>                k <span style="color:#666">=</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(tmp[j][i] <span style="color:#666">==</span> <span style="color:#b44">&#39;.&#39;</span>) {
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tmp; 
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isRectangleOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rect1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rect2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fx1<span style="color:#666">=</span>rect1[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fx2<span style="color:#666">=</span>rect1[<span style="color:#666">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fy1<span style="color:#666">=</span>rect1[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fy2<span style="color:#666">=</span>rect1[<span style="color:#666">3</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sx1<span style="color:#666">=</span>rect2[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sx2<span style="color:#666">=</span>rect2[<span style="color:#666">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sy1<span style="color:#666">=</span>rect2[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sy2<span style="color:#666">=</span>rect2[<span style="color:#666">3</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>((sy1<span style="color:#666">&gt;=</span>fy2) <span style="color:#666">||</span>
+</span></span><span style="display:flex;"><span>           (fy1<span style="color:#666">&gt;=</span>sy2) <span style="color:#666">||</span>
+</span></span><span style="display:flex;"><span>           (fx1<span style="color:#666">&gt;=</span>sx2) <span style="color:#666">||</span>
+</span></span><span style="display:flex;"><span>           (fx2<span style="color:#666">&lt;=</span>sx1));
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -584,180 +564,130 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> rotateTheBox(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> box) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isRectangleOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rect1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rect2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `rotateTheBox`, which takes a reference to a 2D vector `box` representing a grid. </div>
+                            <div class=""> This line defines the function &#39;isRectangleOverlap&#39; which takes two vectors representing the coordinates of two rectangles. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Reverse Grid</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    reverse(box.begin(), box.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fx1<span style="color:#666">=</span>rect1[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Reverse the rows of the grid to simulate a vertical flip of the box. </div>
+                            <div class=""> This line extracts the x-coordinate of the bottom-left corner of the first rectangle (rect1). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> box.size(), n <span style="color:#666">=</span> box[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fx2<span style="color:#666">=</span>rect1[<span style="color:#666">2</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the dimensions of the grid: `m` for the number of rows and `n` for the number of columns. </div>
+                            <div class=""> This line extracts the x-coordinate of the top-right corner of the first rectangle (rect1). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Matrix Initialization</b></div>
+                            <div class=""> <b>4 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> tmp(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>(m));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fy1<span style="color:#666">=</span>rect1[<span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Create a new grid `tmp` with dimensions transposed from the original grid (`n` rows and `m` columns). </div>
+                            <div class=""> This line extracts the y-coordinate of the bottom-left corner of the first rectangle (rect1). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Outer Loop (Rows)</b></div>
+                            <div class=""> <b>5 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fy2<span style="color:#666">=</span>rect1[<span style="color:#666">3</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an outer loop to iterate over the rows of the original grid. </div>
+                            <div class=""> This line extracts the y-coordinate of the top-right corner of the first rectangle (rect1). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Inner Loop (Columns)</b></div>
+                            <div class=""> <b>6 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sx1<span style="color:#666">=</span>rect2[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an inner loop to iterate over the columns of the original grid. </div>
+                            <div class=""> This line extracts the x-coordinate of the bottom-left corner of the second rectangle (rect2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Transposition</b></div>
+                            <div class=""> <b>7 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        tmp[j][i] <span style="color:#666">=</span> box[i][j];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sx2<span style="color:#666">=</span>rect2[<span style="color:#666">2</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Transpose the grid, storing the element at `box[i][j]` into the transposed grid `tmp[j][i]`. </div>
+                            <div class=""> This line extracts the x-coordinate of the top-right corner of the second rectangle (rect2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Loop through Transposed Grid</b></div>
+                            <div class=""> <b>8 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sy1<span style="color:#666">=</span>rect2[<span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop to process each column of the transposed grid. </div>
+                            <div class=""> This line extracts the y-coordinate of the bottom-left corner of the second rectangle (rect2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Initialize k</b></div>
+                            <div class=""> <b>9 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sy2<span style="color:#666">=</span>rect2[<span style="color:#666">3</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `k` to point to the last row in the current column of the transposed grid. </div>
+                            <div class=""> This line extracts the y-coordinate of the top-right corner of the second rectangle (rect2). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Inner Loop (Process Elements)</b></div>
+                            <div class=""> <b>10 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; j<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>((sy1<span style="color:#666">&gt;=</span>fy2) <span style="color:#666">||</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start an inner loop to process each element of the column, from bottom to top. </div>
+                            <div class=""> This checks if the second rectangle is to the left, right, above, or below the first rectangle. If any of these conditions are true, there is no overlap. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : If Condition (Non-empty Cell)</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(tmp[j][i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>           (fy1<span style="color:#666">&gt;=</span>sy2) <span style="color:#666">||</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current cell contains a non-empty element (`#`). </div>
+                            <div class=""> This checks if the second rectangle is entirely below the first rectangle. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Move Cell Down (Empty)</b></div>
+                            <div class=""> <b>12 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                tmp[j][i] <span style="color:#666">=</span> <span style="color:#b44">&#39;.&#39;</span>; <span style="color:#080;font-style:italic">// o
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Set the current cell to empty (`.`) to simulate the removal of the non-empty element. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Move Cell Down (Non-empty)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                tmp[k][i] <span style="color:#666">=</span> <span style="color:#b44">&#39;#&#39;</span>; <span style="color:#080;font-style:italic">// order is important
-</span></span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Place the non-empty element (`#`) into the first available position (at `k`) in the column. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Update k</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                k<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>           (fx1<span style="color:#666">&gt;=</span>sx2) <span style="color:#666">||</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrease `k` to move to the next available position for the next non-empty element. </div>
+                            <div class=""> This checks if the second rectangle is entirely to the right of the first rectangle. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Else If Condition (Obstacle)</b></div>
+                            <div class=""> <b>13 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(tmp[j][i] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>           (fx2<span style="color:#666">&lt;=</span>sx1));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current cell contains an obstacle (`*`). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Update k (Obstacle)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                k <span style="color:#666">=</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the current cell is an obstacle, update `k` to the row before the obstacle. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Else If Condition (Empty Cell)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(tmp[j][i] <span style="color:#666">==</span> <span style="color:#b44">&#39;.&#39;</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the current cell is empty (`.`). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tmp; 
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the rotated grid `tmp` after performing all the necessary operations. </div>
+                            <div class=""> This checks if the second rectangle is entirely to the left of the first rectangle. </div>
                         </div>
                     
                 </div>
@@ -777,16 +707,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix. We process each element once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1), the solution involves constant time checks.</div>
+                        <div class=""> <b>Average Case:</b> O(1), the solution requires only constant time comparisons.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), only a fixed number of comparisons are made.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is constant, as we are only performing a few comparisons.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to the new matrix used to store the updated box state.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), the space complexity remains constant.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), the space complexity is constant as we only store the rectangle coordinates.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant since only a fixed amount of data is needed to perform the checks.</div>    
                     </div>
 
                 </div>

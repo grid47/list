@@ -320,7 +320,7 @@
 
 
 
-<div class=""> You are given an array <code>nums</code> where each element represents the number of balls in a bag. You can perform up to <code>maxOperations</code> operations, where each operation consists of splitting one bag of balls into two smaller bags. Each new bag must contain a positive number of balls. The goal is to minimize the maximum number of balls in any bag after performing the operations. </div>
+<div class=""> Given a string s, you can transform every letter individually to either lowercase or uppercase. Digits remain unchanged. Your task is to generate a list of all possible strings that can be created by changing the case of the letters in the string. </div>
 
 
 
@@ -371,49 +371,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array `nums`, representing the number of balls in each bag, and an integer `maxOperations`, which is the maximum number of operations you can perform.</div>
-                        <div class=""> <b>Example:</b> Input: nums = [7, 10], maxOperations = 3</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s that contains lowercase English letters, uppercase English letters, and digits.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#39;xYz1&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 12</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= maxOperations, nums[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase English letters, uppercase English letters, and digits.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum possible maximum number of balls in any bag after performing the operations, modulo 10^9 &#43; 7.</div>
-                        <div class=""> <b>Example:</b> Output: 4</div>
+                        <div class=""> <b>Output:</b> Return a list of all possible strings that can be created by changing the case of the letters in the input string.</div>
+                        <div class=""> <b>Example:</b> Output: [&#39;xYz1&#39;, &#39;xYz1&#39;, &#39;XyZ1&#39;, &#39;XyZ1&#39;, &#39;xYZ1&#39;, &#39;xYZ1&#39;, &#39;XYz1&#39;, &#39;XYz1&#39;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • The output list contains all the possible case variations of the letters in the input string.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the maximum number of balls in any bag after performing the allowed number of operations.</div>
+                        <div class=""> <b>Goal:</b> The goal is to generate all possible case combinations for each letter in the input string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Perform a binary search over the possible maximum number of balls in a bag, starting from 1 to the maximum value in the `nums` array.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the string s and for each character, generate both the lowercase and uppercase versions if it is a letter.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each candidate maximum, count the number of operations needed to achieve this maximum for all bags.</div>
+                                <div style="margin-left: 20px;"> • For digits, keep them unchanged.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the number of operations required is less than or equal to `maxOperations`, it is possible to achieve this maximum, so continue searching for a smaller maximum.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the minimum maximum number of balls that can be achieved.</div>
+                                <div style="margin-left: 20px;"> • Use backtracking or recursive techniques to explore all possible combinations.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution handles large inputs and works efficiently for arrays of length up to 10^5.</div>
+                        <div class=""> <b>Goal:</b> The input string will contain up to 12 characters, and each character is either a letter or a digit.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution must handle arrays of length up to 10^5 efficiently.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 12</div>
                             
-                                <div style="margin-left: 20px;"> • The solution should perform binary search to minimize the maximum number of balls.</div>
+                                <div style="margin-left: 20px;"> • The string contains only lowercase letters, uppercase letters, or digits.</div>
                             
                         </div>
                     </div>        
@@ -421,21 +419,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All elements in the `nums` array are positive integers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The number of operations `maxOperations` is positive and within bounds.</div>
+                                <div style="margin-left: 20px;"> • The input string will not be empty and will contain at least one character.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [7, 10], maxOperations = 3</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You can divide the bag with 10 balls into two bags with 5 and 5 balls. The maximum number of balls in any bag is 5. With one more operation, you can divide a bag of 7 balls into two bags with 4 and 3 balls. The final maximum number of balls in a bag is 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: s = &#39;xYz1&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string contains both uppercase and lowercase letters. We can change each letter to either uppercase or lowercase, generating all the possible combinations of these case changes.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, 3, 5], maxOperations = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You can divide the bag with 5 balls into two bags with 3 and 2 balls, and then divide the bag with 3 balls into two bags with 2 and 1 balls. The maximum number of balls in any bag is 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: Input: s = &#39;9aB&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, digits remain unchanged, while the letters &#39;a&#39; and &#39;B&#39; can be transformed to &#39;A&#39; and &#39;b&#39; or &#39;a&#39; and &#39;B&#39;, respectively. Therefore, we generate all combinations of the letter cases.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -459,18 +455,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves binary search over the possible maximum number of balls, using a helper function to count how many operations are needed to ensure no bag exceeds this maximum.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we will explore each character of the input string, and for each character, we will consider both the lowercase and uppercase options if it is a letter. If it&#39;s a digit, we will leave it unchanged. We will generate all combinations recursively.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem is about minimizing the maximum value in a list of bags by splitting them into smaller bags.</div>
+                                <div style="margin-left: 20px;"> • The problem is based on string manipulation and involves case transformations.</div>
                             
-                                <div style="margin-left: 20px;"> • Binary search is an ideal approach to efficiently find the minimum possible maximum number of balls.</div>
+                                <div style="margin-left: 20px;"> • Each letter in the string can be in one of two cases, so there are 2^n combinations for a string of length n.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can try various maximum values and check how many operations are required to achieve that value. The smallest possible maximum that requires no more than `maxOperations` is our answer.</div>
+                                <div style="margin-left: 20px;"> • We can use a backtracking approach to recursively generate all combinations by considering each character&#39;s case options.</div>
                             
                         </div>
                     </div>
@@ -478,15 +474,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a binary search range from 1 to the largest number in the `nums` array.</div>
+                                <div style="margin-left: 20px;"> • Initialize a list to store all possible combinations.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each middle value in the binary search, count how many operations are needed to ensure no bag exceeds that value.</div>
+                                <div style="margin-left: 20px;"> • Iterate over the string and for each character, recursively explore both lowercase and uppercase options if the character is a letter.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the number of operations is less than or equal to `maxOperations`, search for smaller maximum values.</div>
+                                <div style="margin-left: 20px;"> • For digits, simply append the digit to the current combination.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. If not, search for larger maximum values.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the result modulo 10^9 &#43; 7.</div>
+                                <div style="margin-left: 20px;"> • Once we reach the end of the string, add the current combination to the result list.</div>
                             
                         </div>
                     </div>
@@ -495,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` is empty, return 0 since there are no bags.</div>
+                                <div style="margin-left: 20px;"> • The string will always contain at least one character.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the binary search and the operation counting function work efficiently for large arrays.</div>
+                                <div style="margin-left: 20px;"> • If the string length is large (up to 12 characters), we will handle it by limiting the maximum number of recursive calls.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all bags contain the same number of balls, no operations are needed, and the penalty is the number of balls in any bag.</div>
+                                <div style="margin-left: 20px;"> • If the string contains only digits, the result is simply the original string, as no case transformation is needed.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be efficient for arrays of length up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • The input string&#39;s length is constrained to a maximum of 12 characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -527,29 +521,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Binary Search Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Backtracking Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mid Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Helper Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Operation Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Add Permutation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 End Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Range Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Else Block</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Toggle Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Range Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Toggle Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call After Toggle</button>
                     
                 </div>
 
@@ -558,22 +552,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumSize</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> mxOps) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// int total_bags = n + 2 * mxOps - 1;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span>: nums)
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> (a <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> mid;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&lt;=</span> mxOps)
-</span></span><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
-</span></span><span style="display:flex;"><span>            l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> letterCasePermutation(string s) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    bt(ans, s, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>ans, string <span style="color:#666">&amp;</span>s, <span style="color:#0b0;font-weight:bold">int</span> i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i<span style="color:#666">==</span> s.size()) {
+</span></span><span style="display:flex;"><span>        ans.push_back(s);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    bt(ans, s, i <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isalpha(s[i])) {
+</span></span><span style="display:flex;"><span>        s[i] <span style="color:#666">^=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">5</span>;
+</span></span><span style="display:flex;"><span>        bt(ans, s, i<span style="color:#666">+</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -581,123 +577,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumSize</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> mxOps) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> letterCasePermutation(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a function to minimize the largest bag size given a maximum number of operations. </div>
+                            <div class=""> Defines the function `letterCasePermutation`, which takes a string `s` and returns a vector of all possible case permutations of the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(nums.begin(), nums.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the binary search range with `l` as the smallest possible size and `r` as the maximum number in the array. </div>
+                            <div class=""> Initializes a vector `ans` to store the resulting letter case permutations. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Binary Search Loop</b></div>
+                            <div class=""> <b>3 : Backtracking Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> r) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(ans, s, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a binary search loop to find the minimum maximum bag size. </div>
+                            <div class=""> Calls the helper function `bt` to start the backtracking process from the first character of the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Mid Calculation</b></div>
+                            <div class=""> <b>4 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the middle point to test as the potential maximum bag size. </div>
+                            <div class=""> Returns the vector `ans` containing all the letter case permutations of the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Helper Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>ans, string <span style="color:#666">&amp;</span>s, <span style="color:#0b0;font-weight:bold">int</span> i) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the operation counter to track the total number of splits required. </div>
+                            <div class=""> Defines the helper function `bt` (backtracking), which recursively generates letter case permutations by modifying the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : For Loop</b></div>
+                            <div class=""> <b>6 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span>: nums)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i<span style="color:#666">==</span> s.size()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates through each element in the array to calculate the operations required for the current `mid` size. </div>
+                            <div class=""> Checks if the current index `i` has reached the end of the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Operation Calculation</b></div>
+                            <div class=""> <b>7 : Add Permutation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> (a <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> mid;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(s);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the number of operations needed to reduce the current element to the `mid` size or smaller. </div>
+                            <div class=""> Adds the current permutation of the string `s` to the result vector `ans`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Condition Check</b></div>
+                            <div class=""> <b>8 : End Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&lt;=</span> mxOps)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the total operations required is within the allowed limit. </div>
+                            <div class=""> Returns from the recursive call, ending the current branch of backtracking. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Range Update</b></div>
+                            <div class=""> <b>9 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    bt(ans, s, i <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Narrows the search range by setting the upper bound to `mid` when the condition is met. </div>
+                            <div class=""> Recursively calls the `bt` function with the next index `i &#43; 1`, exploring the next character in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Else Block</b></div>
+                            <div class=""> <b>10 : Toggle Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isalpha(s[i])) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Handles the case where the current `mid` size is too small to meet the operation limit. </div>
+                            <div class=""> Checks if the current character `s[i]` is an alphabetic letter. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Range Update</b></div>
+                            <div class=""> <b>11 : Toggle Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s[i] <span style="color:#666">^=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">5</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Narrows the search range by increasing the lower bound when the condition is not met. </div>
+                            <div class=""> Toggles the case of the character `s[i]` using bitwise XOR. This flips between lowercase and uppercase. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Recursive Call After Toggle</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        bt(ans, s, i<span style="color:#666">+</span><span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the smallest possible maximum bag size after applying the allowed operations. </div>
+                            <div class=""> Recursively calls the `bt` function again with the case-toggled character at position `i`, exploring both case options. </div>
                         </div>
                     
                 </div>
@@ -717,16 +713,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log(max(nums)))</div>
-                        <div class=""> <b>Average Case:</b> O(n log(max(nums)))</div>
-                        <div class=""> <b>Worst Case:</b> O(n log(max(nums)))</div> 
-                        <div class=""> <b>Description:</b> The time complexity is driven by the binary search and the operation counting function, resulting in O(n log(max(nums))) where `n` is the length of the array and `max(nums)` is the maximum number of balls in any bag.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(2^n), where n is the length of the input string, because each letter can either be in lowercase or uppercase, generating 2^n combinations.</div>
+                        <div class=""> <b>Average Case:</b> O(2^n), as we need to process each possible combination of letter cases.</div>
+                        <div class=""> <b>Worst Case:</b> O(2^n), as the worst case also involves generating all possible combinations of letter case transformations.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is exponential in the size of the string due to the 2^n combinations for n letters.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, O(1), since we only need a few variables to track the current state.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if the string has no letters and only digits.</div>
+                        <div class=""> <b>Worst Case:</b> O(2^n), where n is the length of the input string, since we need to store all possible combinations.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is exponential due to the storage required for all possible combinations.</div>    
                     </div>
 
                 </div>

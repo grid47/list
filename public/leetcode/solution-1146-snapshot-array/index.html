@@ -274,7 +274,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -301,7 +301,7 @@
 
 
 
-<div class=""> Given a positive integer n and a target sum, the task is to find the smallest non-negative integer x such that the sum of the digits of n + x is less than or equal to the given target. The solution is guaranteed to always be possible for the given constraints. </div>
+<div class=""> You need to implement a data structure that captures snapshots of an array and allows retrieving the value at any given index at a specific snapshot. </div>
 
 
 
@@ -352,43 +352,60 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given two integers, n and target, where n is a positive integer and target is the maximum allowed sum of the digits of n &#43; x.</div>
-                        <div class=""> <b>Example:</b> n = 25, target = 10</div>
+                        <div class=""> <b>Input:</b> The input consists of several commands that invoke methods on the SnapshotArray class. The array is initialized with a given length and the following methods are used: &#39;set&#39;, &#39;snap&#39;, and &#39;get&#39;.</div>
+                        <div class=""> <b>Example:</b> [&#34;SnapshotArray&#34;, &#34;set&#34;, &#34;snap&#34;, &#34;get&#34;]
+[[4], [2, 10], [], [2, 0]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 10^12</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 150</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= index &lt; length</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= val &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= snap_id &lt; (the total number of times we call snap())</div>
+                            
+                                <div style="margin-left: 20px;"> • At most 5 * 10^4 calls will be made to set, snap, and get.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum non-negative integer x such that the sum of the digits of n &#43; x is less than or equal to target. The result should be a single integer.</div>
-                        <div class=""> <b>Example:</b> For n = 25 and target = 10, the output will be 5.</div>
+                        <div class=""> <b>Output:</b> For each command, the output is specified in the order of the commands: &#39;null&#39; for methods that do not return anything and the result of &#39;snap&#39; and &#39;get&#39; for the respective method calls.</div>
+                        <div class=""> <b>Example:</b> [null, null, 0, 10]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output corresponds to the results of the respective methods called in the input.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the smallest integer x such that the sum of the digits of n &#43; x is less than or equal to the target.</div>
+                        <div class=""> <b>Goal:</b> Implement the SnapshotArray class with methods set, snap, and get to manipulate an array and capture its state over time.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the sum of digits of n.</div>
+                                <div style="margin-left: 20px;"> • Initialize the array with zeros.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If the sum of digits of n is already less than or equal to target, return 0.</div>
+                                <div style="margin-left: 20px;"> • Implement set to store the current value at the specified index for the current snapshot.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Otherwise, find the smallest x by incrementing n in such a way that the sum of the digits becomes less than or equal to target.</div>
+                                <div style="margin-left: 20px;"> • Implement snap to take a snapshot and return the current snap_id.</div>
+                            
+                                <div style="margin-left: 20px;"> • Implement get to retrieve the value at the specified index at the time of the given snap_id.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should work efficiently even for large values of n (up to 10^12).</div>
+                        <div class=""> <b>Goal:</b> The array length will be at least 1 and at most 50,000. The operations on set, snap, and get are limited to a maximum of 50,000 calls.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The problem is guaranteed to have a solution.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= length &lt;= 5 * 10^4</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= index &lt; length</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= val &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= snap_id &lt; (the total number of times we call snap())</div>
                             
                         </div>
                     </div>        
@@ -396,19 +413,18 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • It is always possible to find a non-negative x such that n &#43; x becomes beautiful.</div>
+                                <div style="margin-left: 20px;"> • All elements in the array are initially set to 0.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each snap_id is unique and increments each time snap() is called.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 25, target = 10</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Initially, the sum of the digits of n (25) is 2 &#43; 5 = 7, which is less than target. After adding 5 to n, we get 30, and the sum of digits becomes 3 &#43; 0 = 3, which is still less than target.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> n = 467, target = 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum of digits of n (467) is 4 &#43; 6 &#43; 7 = 17, which is greater than target. After adding 33, n becomes 500, and the sum of digits is 5 &#43; 0 &#43; 0 = 5, which satisfies the target.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [&#34;SnapshotArray&#34;, &#34;set&#34;, &#34;snap&#34;, &#34;set&#34;, &#34;get&#34;]
+[[3], [0, 5], [], [0, 6], [0, 0]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This example initializes a SnapshotArray with length 3, performs a set operation, takes a snapshot, performs another set operation, and finally retrieves the value of index 0 at snap_id 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -432,16 +448,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will increment the integer n in such a way that the sum of its digits becomes less than or equal to the target. The approach works by checking the sum of digits of n and gradually adjusting it by incrementing the number until the sum meets the target condition.</div>
+                        <div class=""> <b>Approach:</b> The solution involves using a map to track the history of changes for each index in the array, while maintaining the current snapshot ID.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to find a way to manipulate the digits of n to make their sum less than or equal to the target.</div>
+                                <div style="margin-left: 20px;"> • The array needs to store historical changes for each index to support the snapshot functionality.</div>
+                            
+                                <div style="margin-left: 20px;"> • Using a map of maps can help track changes at each snap_id.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a loop to increment n and calculate the sum of digits until the condition is met.</div>
+                                <div style="margin-left: 20px;"> • To optimize get operations, it&#39;s essential to maintain a way to efficiently fetch the value at any given snap_id for an index.</div>
                             
                         </div>
                     </div>
@@ -449,11 +467,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the sum of the digits of n.</div>
+                                <div style="margin-left: 20px;"> • Use a map of maps to store the values at each snap_id for each index.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. If the sum is already less than or equal to the target, return 0.</div>
+                                <div style="margin-left: 20px;"> • Each time set is called, update the value for the current snap_id.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Otherwise, use a loop to increment n by adding the smallest necessary x to make the sum of its digits less than or equal to the target.</div>
+                                <div style="margin-left: 20px;"> • For snap(), increment the snap_id counter and return the previous value.</div>
+                            
+                                <div style="margin-left: 20px;"> • For get(), find the most recent value at the specified snap_id using binary search.</div>
                             
                         </div>
                     </div>
@@ -462,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem ensures that n is always a positive integer, so there are no empty inputs.</div>
+                                <div style="margin-left: 20px;"> • Handle the case where no set or snap operations are called.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution can handle n up to 10^12 efficiently.</div>
+                                <div style="margin-left: 20px;"> • Efficiently handle cases where the length of the array is large, up to 50,000.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the sum of digits of n is already less than or equal to target, x will be 0.</div>
+                                <div style="margin-left: 20px;"> • Handle large values of val up to 10^9.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle large inputs and large numbers efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution must ensure that all operations are performed within the provided time limits.</div>
                             
                         </div>                                                                        
                     </div>
@@ -494,29 +514,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Digits</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Digit Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Looping &amp; Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Digit Removal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Default Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Storing Snapshots</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Snapshot Storage</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Value Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Scaling</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Snap Id Increment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Snapshot Id</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Finding Snapshot</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Decrement Iterator</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Value</button>
                     
                 </div>
 
@@ -525,146 +553,202 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sum</span>(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        n <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> snaps;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> snap_id <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SnapshotArray(<span style="color:#0b0;font-weight:bold">int</span> length) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> length; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        snaps[i] <span style="color:#666">=</span> mp;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">makeIntegerBeautiful</span>(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n, <span style="color:#0b0;font-weight:bold">int</span> target) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n0 <span style="color:#666">=</span> n, base <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(sum(n) <span style="color:#666">&gt;</span> target) {
-</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        base <span style="color:#666">*=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">*</span> base <span style="color:#666">-</span> n0;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">set</span>(<span style="color:#0b0;font-weight:bold">int</span> index, <span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    snaps[index][snap_id] <span style="color:#666">=</span> val;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">snap</span>() {
+</span></span><span style="display:flex;"><span>    snap_id<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> snap_id <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">get</span>(<span style="color:#0b0;font-weight:bold">int</span> index, <span style="color:#0b0;font-weight:bold">int</span> snid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> snaps[index].upper_bound(snid);
+</span></span><span style="display:flex;"><span>    it<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> it<span style="color:#666">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your SnapshotArray object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * SnapshotArray* obj = new SnapshotArray(length);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;set(index,val);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_2 = obj-&gt;snap();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_3 = obj-&gt;get(index,snap_id);
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sum</span>(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> snaps;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines a helper function to calculate the sum of the digits of a number. </div>
+                            <div class=""> A map to store the snapshots, with the key being the index of the array and the value being another map storing the snapshot ids and their corresponding values. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> snap_id <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `res` to store the cumulative digit sum. </div>
+                            <div class=""> A counter to track the number of snapshots taken. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through Digits</b></div>
+                            <div class=""> <b>3 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>SnapshotArray(<span style="color:#0b0;font-weight:bold">int</span> length) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each digit of the number while `n` is greater than 0. </div>
+                            <div class=""> Constructor definition to initialize a SnapshotArray object. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Digit Calculation</b></div>
+                            <div class=""> <b>4 : Looping &amp; Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> length; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Adds the last digit of `n` to the result `res`. </div>
+                            <div class=""> Loop through each index in the array to initialize the map for each. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Digit Removal</b></div>
+                            <div class=""> <b>5 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the last digit of `n` by performing integer division by 10. </div>
+                            <div class=""> Initialize a map to store the snapshot values for the current index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Default Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the cumulative sum of the digits. </div>
+                            <div class=""> Set the default snapshot value to 0 for the initial snapshot. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Function Definition</b></div>
+                            <div class=""> <b>7 : Storing Snapshots</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">makeIntegerBeautiful</span>(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n, <span style="color:#0b0;font-weight:bold">int</span> target) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        snaps[i] <span style="color:#666">=</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the main function to modify the number `n` such that its digit sum is less than or equal to the target. </div>
+                            <div class=""> Store the initialized map of snapshots for the current index in the main snapshot map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Variable Initialization</b></div>
+                            <div class=""> <b>8 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n0 <span style="color:#666">=</span> n, base <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">set</span>(<span style="color:#0b0;font-weight:bold">int</span> index, <span style="color:#0b0;font-weight:bold">int</span> val) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the original value of `n` in `n0` and initializes a scaling factor `base` to 1. </div>
+                            <div class=""> Define the `set` method, which allows setting the value at a specific index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Condition Loop</b></div>
+                            <div class=""> <b>9 : Snapshot Storage</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(sum(n) <span style="color:#666">&gt;</span> target) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    snaps[index][snap_id] <span style="color:#666">=</span> val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops while the digit sum of `n` is greater than the target. </div>
+                            <div class=""> Store the value at the given index under the current snapshot id. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Value Update</b></div>
+                            <div class=""> <b>10 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">snap</span>() {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Reduces `n` by removing the last digit, increments it, and prepares it for scaling. </div>
+                            <div class=""> Define the `snap` method, which increments the snapshot id and returns the previous one. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Scaling</b></div>
+                            <div class=""> <b>11 : Snap Id Increment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        base <span style="color:#666">*=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    snap_id<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increases the scaling factor by a factor of 10 with each iteration. </div>
+                            <div class=""> Increment the snapshot id counter. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class=""> <b>12 : Return Snapshot Id</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">*</span> base <span style="color:#666">-</span> n0;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> snap_id <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the scaled and modified value of `n` minus the original value `n0`. </div>
+                            <div class=""> Return the snapshot id before the increment. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">get</span>(<span style="color:#0b0;font-weight:bold">int</span> index, <span style="color:#0b0;font-weight:bold">int</span> snid) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the `get` method, which returns the value for a given index at a specific snapshot. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Finding Snapshot</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> snaps[index].upper_bound(snid);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Find the snapshot at the given snapshot id using upper bound. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Decrement Iterator</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    it<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrement the iterator to get the correct snapshot value. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Value</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> it<span style="color:#666">-&gt;</span>second;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the value corresponding to the found snapshot. </div>
                         </div>
                     
                 </div>
@@ -684,16 +768,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity depends on the number of digits in n, which is O(log n), and we perform operations on these digits.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1) for snap and set operations.</div>
+                        <div class=""> <b>Average Case:</b> O(log k) for get operations, where k is the number of snapshots.</div>
+                        <div class=""> <b>Worst Case:</b> O(log k) for get operations, where k is the number of snapshots.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is optimal due to the use of binary search on maps.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant as we only store a few variables during the calculation.</div>    
+                        <div class=""> <b>Best Case:</b> O(n) where no snapshots are taken.</div>
+                        <div class=""> <b>Worst Case:</b> O(n * k) where n is the number of array elements and k is the number of snapshots.</div> 
+                        <div class=""> <b>Description:</b> The space complexity depends on the number of elements in the array and the number of snapshots taken.</div>    
                     </div>
 
                 </div>

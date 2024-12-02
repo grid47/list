@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1176s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1175s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/523.webp" 
            alt="An array where the sum of a continuous subarray is highlighted with glowing elements." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> Alice and Bob are playing a game with piles of stones. Each pile contains a positive integer number of stones. On each player&rsquo;s turn, they can take stones from the first X remaining piles, where 1 &lt;= X &lt;= 2M. The goal is to maximize the number of stones Alice can collect assuming both play optimally. </div>
+<div class=""> Given an integer array nums and an integer k, return true if there exists a good subarray, otherwise return false. A good subarray is defined as a subarray whose length is at least 2 and the sum of its elements is a multiple of k. </div>
 
 
 
@@ -372,47 +372,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a list `piles`, where each element `piles[i]` represents the number of stones in the ith pile.</div>
-                        <div class=""> <b>Example:</b> Input: piles = [3, 5, 8, 7, 6]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers nums and an integer k.</div>
+                        <div class=""> <b>Example:</b> nums = [15, 5, 10, 20], k = 10</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= piles.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= piles[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum number of stones Alice can collect if both players play optimally.</div>
-                        <div class=""> <b>Example:</b> Output: 14</div>
+                        <div class=""> <b>Output:</b> Return true if there exists a good subarray, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> true, false</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result will be an integer representing the maximum number of stones Alice can collect.</div>
+                                <div style="margin-left: 20px;"> • The output is a boolean value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the optimal strategy for Alice to collect the maximum number of stones, while simulating the game with Bob&#39;s optimal strategy.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if there exists a subarray of length at least 2 whose sum is a multiple of k.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Calculate the cumulative sum of the piles in reverse order (postfix sum).</div>
+                                <div style="margin-left: 20px;"> • 1. Use a running sum of elements while iterating through the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use dynamic programming (DP) to store the optimal results for different states (index and M).</div>
+                                <div style="margin-left: 20px;"> • 2. Compute the modulo of the sum with k at each step.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Recursively calculate the maximum number of stones Alice can collect given the current state and optimal plays of both players.</div>
+                                <div style="margin-left: 20px;"> • 3. If the same modulo is encountered at a later index, the sum of the subarray between those two indices is a multiple of k.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Ensure that the length of the subarray is at least 2 before confirming it as a valid subarray.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem must handle the maximum constraints efficiently.</div>
+                        <div class=""> <b>Goal:</b> The input constraints define the limits on the size and values of the array and k.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= piles.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= piles[i] &lt;= 10^4</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^9</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 2^31 - 1</div>
                             
                         </div>
                     </div>        
@@ -420,21 +426,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The players take turns and Alice always plays first.</div>
-                            
-                                <div style="margin-left: 20px;"> • Both players play optimally, i.e., they maximize their score while minimizing the opponent&#39;s score.</div>
+                                <div style="margin-left: 20px;"> • The input will always consist of valid integers and the array length will be within the given bounds.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [3, 5, 8, 7, 6]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, Alice starts by taking 1 pile. Then Bob takes 2 piles, Alice takes 2 more piles, and Bob takes the remaining piles. Alice&#39;s total is 3 &#43; 7 &#43; 6 = 14.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [15, 5, 10, 20], k = 10</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarray [5, 10] has a sum of 15, which is a multiple of 10.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [1, 2, 3, 4, 6, 80]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, Alice can maximize her score by taking the first pile, Bob takes 2 piles, Alice then takes 2 piles, and Bob takes the remaining stones. Alice collects 1 &#43; 4 &#43; 6 &#43; 80 = 84.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [5, 8, 3, 7], k = 7</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No subarray has a sum that is a multiple of 7.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [10, 5, 15, 10], k = 10</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The subarray [10, 5, 15, 10] has a sum of 40, which is a multiple of 10.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +466,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved using dynamic programming to simulate the optimal play of both Alice and Bob.</div>
+                        <div class=""> <b>Approach:</b> The approach uses a running sum with modulo to track possible subarrays. By using a map to store previous sums and their corresponding indices, we can efficiently check if a valid subarray exists.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Dynamic programming is needed to handle the optimal play decisions and recursive choices for both players.</div>
+                                <div style="margin-left: 20px;"> • Using the modulo operation allows us to easily check if the sum of elements in a subarray is a multiple of k.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • I need to consider the remaining stones after each move and calculate the possible outcomes for Alice based on Bob&#39;s optimal response.</div>
+                                <div style="margin-left: 20px;"> • The solution can be optimized by keeping track of previous sums modulo k to avoid checking every possible subarray.</div>
                             
                         </div>
                     </div>
@@ -475,11 +483,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Precompute the cumulative sum of the piles from the end to the start for easy calculation of the sum of any subset of piles.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a map to store the remainder of the sum modulo k.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a DP function to compute the maximum number of stones Alice can collect at each state (starting index and max piles she can take).</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through the array, maintaining a running sum and checking if the modulo has been encountered before.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. At each step, simulate both Alice&#39;s and Bob&#39;s moves, updating M as the game progresses.</div>
+                                <div style="margin-left: 20px;"> • 3. If the modulo is found and the subarray length is at least 2, return true.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If no valid subarray is found after checking all elements, return false.</div>
                             
                         </div>
                     </div>
@@ -488,22 +498,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty input will not occur as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty or contains only one element, return false.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle cases where the length of the piles is large (up to 100).</div>
+                                <div style="margin-left: 20px;"> • The algorithm should be optimized for large inputs, with a time complexity of O(n).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The case where all piles have the same number of stones or where one player can take all the stones at the beginning should be considered.</div>
+                                <div style="margin-left: 20px;"> • The value of k should be handled for large integers, especially when k is 1 or very large.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm handles the upper constraint where the number of stones in each pile can be as large as 10,000.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle up to 10^5 elements in the array efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,43 +530,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Edge Case Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Outer Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Memoization Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Cumulative Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Modulo Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Lookup</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Loop for Possible Choices</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Subarray Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Calculate Stones Left</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return True</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Recursion for Next Step</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Map Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Memoization Store</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Main Function</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Initialization in Main</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Initialization in Main</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Memoization Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Prefix Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Prefix Sum Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Final Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return False</button>
                     
                 </div>
 
@@ -565,38 +561,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">Taking postfix sum to count pile is new concept - residual count
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">Thinking like, I had taken this much and pick what you
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">require out of remaining, from how much ever you picked
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">the rest is mine
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">each call is others turn
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">*/</span>
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> piles;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> m) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">+</span> <span style="color:#666">2</span><span style="color:#666">*</span> m <span style="color:#666">&gt;=</span> piles.size()) <span style="color:#a2f;font-weight:bold">return</span> piles[idx];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][m] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m];
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> m; x<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> piles[idx] <span style="color:#666">-</span> piles[idx <span style="color:#666">+</span> x];
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, tmp <span style="color:#666">+</span> piles[idx <span style="color:#666">+</span> x] <span style="color:#666">-</span> dp(idx <span style="color:#666">+</span> x, max(m, x)) );
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkSubarraySum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">%=</span> k;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (mp.count(sum))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">-</span> mp[sum] <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) 
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> mp[sum] <span style="color:#666">=</span> i;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m] <span style="color:#666">=</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">stoneGameII</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p) {
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> p.size();
-</span></span><span style="display:flex;"><span>    piles <span style="color:#666">=</span> p;
-</span></span><span style="display:flex;"><span>    memo.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> p.size() <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
-</span></span><span style="display:flex;"><span>        piles[i] <span style="color:#666">+=</span> piles[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -604,193 +583,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> piles;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkSubarraySum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a vector `piles` to store the number of stones in each pile. </div>
+                            <div class=""> Defines the function `checkSubarraySum`, which takes an array `nums` and an integer `k` as inputs and returns a boolean indicating if a subarray sum is divisible by `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a 2D vector `memo` to store the results of subproblems, which will be used for memoization to avoid redundant calculations. </div>
+                            <div class=""> Initializes a map `mp` to store the cumulative sum modulo `k` and the corresponding index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Declaration</b></div>
+                            <div class=""> <b>3 : Edge Case Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares an integer variable `n` to store the number of piles. </div>
+                            <div class=""> Adds a base case to the map, setting the value `-1` for the key `0` to handle edge cases where the subarray starts at index 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> m) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the recursive function `dp`, which calculates the maximum stones that can be taken starting from index `idx` with a maximum number of piles `m` to be taken. </div>
+                            <div class=""> Initializes the variable `sum` to 0, which will keep track of the cumulative sum of the elements in `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Base Case</b></div>
+                            <div class=""> <b>5 : Outer Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">+</span> <span style="color:#666">2</span><span style="color:#666">*</span> m <span style="color:#666">&gt;=</span> piles.size()) <span style="color:#a2f;font-weight:bold">return</span> piles[idx];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the base case where if the current index `idx` plus `2 * m` exceeds or equals the total number of piles, it returns the remaining stones in the current pile. </div>
+                            <div class=""> Starts a loop to iterate through each element of the array `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Memoization Check</b></div>
+                            <div class=""> <b>6 : Cumulative Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][m] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the result for the current subproblem has already been computed and stored in `memo`. If so, it returns the cached result. </div>
+                            <div class=""> Adds the current element `nums[i]` to the cumulative sum `sum`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Initialization</b></div>
+                            <div class=""> <b>7 : Modulo Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">%=</span> k;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes the variable `ans` to store the result for the current subproblem. </div>
+                            <div class=""> Takes the modulo of the cumulative sum with `k`, ensuring the sum remains within the bounds of `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Initialization</b></div>
+                            <div class=""> <b>8 : Map Lookup</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (mp.count(sum))
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes the variable `tmp` to store intermediate results during the calculations. </div>
+                            <div class=""> Checks if the cumulative sum modulo `k` has been seen before by looking it up in the map `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Loop for Possible Choices</b></div>
+                            <div class=""> <b>9 : Subarray Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> m; x<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">-</span> mp[sum] <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over all possible choices of stones that can be picked, from 1 to `2 * m` stones. </div>
+                            <div class=""> Checks if the difference between the current index `i` and the index stored in `mp[sum]` is greater than 1, which ensures there is a valid subarray. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Calculate Stones Left</b></div>
+                            <div class=""> <b>10 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> piles[idx] <span style="color:#666">-</span> piles[idx <span style="color:#666">+</span> x];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line calculates the stones left after picking `x` stones from the current pile. </div>
+                            <div class=""> If a valid subarray is found, return `true` indicating the presence of a subarray whose sum is divisible by `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Recursion for Next Step</b></div>
+                            <div class=""> <b>11 : Map Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, tmp <span style="color:#666">+</span> piles[idx <span style="color:#666">+</span> x] <span style="color:#666">-</span> dp(idx <span style="color:#666">+</span> x, max(m, x)) );
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> mp[sum] <span style="color:#666">=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line recursively calculates the maximum stones that can be taken by the current player, updating the result `ans` accordingly. </div>
+                            <div class=""> If the cumulative sum modulo `k` is not found in the map, insert it along with the current index `i` into `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Memoization Store</b></div>
+                            <div class=""> <b>12 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m] <span style="color:#666">=</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This stores the result of the current subproblem in `memo` to avoid redundant calculations in future calls. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Main Function</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">stoneGameII</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This defines the main function `stoneGameII`, which initializes the problem and calls the `dp` function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Initialization in Main</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> p.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This initializes the variable `n` with the size of the input vector `p`, representing the number of piles. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Initialization in Main</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    piles <span style="color:#666">=</span> p;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This assigns the input vector `p` to the `piles` vector, which will be used for calculation. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Memoization Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memo.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This resizes the `memo` vector to store the results for all subproblems, initializing all values to -1, indicating that they haven&#39;t been computed yet. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Prefix Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> p.size() <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop calculates the prefix sum of the piles in reverse order, storing the cumulative sum in the `piles` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Prefix Sum Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        piles[i] <span style="color:#666">+=</span> piles[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This adds the stones in the next pile to the current pile to build the prefix sum. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Return Final Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, <span style="color:#666">1</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This calls the `dp` function starting from index 0 with a maximum pile count of 1, and returns the result. </div>
+                            <div class=""> Returns `false` if no subarray whose sum is divisible by `k` is found. </div>
                         </div>
                     
                 </div>
@@ -810,16 +719,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n^2) because we are using dynamic programming with two nested loops to calculate the optimal solution.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the array.</div>
+                        <div class=""> <b>Average Case:</b> O(n), where n is the length of the array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the array.</div> 
+                        <div class=""> <b>Description:</b> In the worst case, we check each element once, resulting in linear time complexity.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n^2) due to the memoization table that stores results for each state (index and max piles Alice can take).</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if no valid subarray exists and no map entries are used.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of elements in the array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear with respect to the number of elements, due to the map storing intermediate sums.</div>    
                     </div>
 
                 </div>

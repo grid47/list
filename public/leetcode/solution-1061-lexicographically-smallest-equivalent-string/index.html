@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 23, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a string s, where every two consecutive vertical bars &lsquo;|&rsquo; form a pair. Count the number of &lsquo;<em>&rsquo; in s, excluding the &lsquo;</em>&rsquo; between each pair of &lsquo;|&rsquo;. </div>
+<div class=""> You are given two strings, s1 and s2, which contain the same length, and a third string baseStr. Each pair of corresponding characters from s1 and s2 represent equivalent characters. Your task is to return the lexicographically smallest equivalent string for baseStr, where each character is replaced with its lexicographically smallest equivalent based on the equivalency information from s1 and s2. </div>
 
 
 
@@ -358,49 +358,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string s which contains lowercase English letters, vertical bars &#39;|&#39;, and asterisks &#39;*&#39;.</div>
-                        <div class=""> <b>Example:</b> s = &#39;|*a|*b*|c*|&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of two strings s1 and s2 of the same length, and a string baseStr. The strings s1 and s2 represent equivalency information where corresponding characters in the two strings are considered equivalent. The baseStr is the string that needs to be transformed according to these equivalencies.</div>
+                        <div class=""> <b>Example:</b> Input: s1 = &#34;abc&#34;, s2 = &#34;xyz&#34;, baseStr = &#34;def&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s1.length, s2.length, baseStr &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only lowercase English letters, &#39;|&#39;, and &#39;*&#39; characters.</div>
+                                <div style="margin-left: 20px;"> • s1.length == s2.length</div>
                             
-                                <div style="margin-left: 20px;"> • s contains an even number of vertical bars &#39;|&#39;.</div>
+                                <div style="margin-left: 20px;"> • s1, s2, and baseStr consist of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of &#39;*&#39; characters in the string, excluding those between the vertical bars &#39;|&#39;.</div>
-                        <div class=""> <b>Example:</b> For s = &#39;|*a|*b*|c*|&#39;, the output is 2.</div>
+                        <div class=""> <b>Output:</b> The output is the lexicographically smallest equivalent string derived from baseStr, with each character transformed according to the equivalency information provided by s1 and s2.</div>
+                        <div class=""> <b>Example:</b> Output: &#34;dff&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Only &#39;*&#39; characters outside of the &#39;|&#39; pairs should be counted.</div>
+                                <div style="margin-left: 20px;"> • The output string must be a valid transformation of baseStr, following the equivalency rules from s1 and s2.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to iterate through the string and count the asterisks &#39;*&#39; outside the pairs of vertical bars &#39;|&#39;.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the lexicographically smallest string by transforming baseStr, using the equivalency relationships defined by s1 and s2.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse the string and track when you encounter a vertical bar &#39;|&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1. Create a union-find (disjoint set) data structure to track equivalencies between characters.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. When a vertical bar is encountered, skip counting asterisks that appear between this bar and the next one.</div>
+                                <div style="margin-left: 20px;"> • 2. Process each pair of characters from s1 and s2, linking them in the union-find structure to establish equivalency.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count the asterisks that are outside these pairs.</div>
+                                <div style="margin-left: 20px;"> • 3. For each character in baseStr, find its equivalent character from the union-find structure and replace it with the lexicographically smallest option.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem constraints ensure that the string is manageable in size and only contains lowercase letters, vertical bars, and asterisks.</div>
+                        <div class=""> <b>Goal:</b> The input strings are lowercase English letters and are of manageable length, ensuring the problem can be solved efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The string will always contain an even number of vertical bars.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s1.length, s2.length, baseStr &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • Each vertical bar will belong to a pair.</div>
+                                <div style="margin-left: 20px;"> • s1.length == s2.length</div>
+                            
+                                <div style="margin-left: 20px;"> • s1, s2, and baseStr consist of lowercase English letters.</div>
                             
                         </div>
                     </div>        
@@ -408,15 +410,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string contains at least one vertical bar and may contain other characters, including asterisks.</div>
+                                <div style="margin-left: 20px;"> • The input strings s1, s2, and baseStr are all valid and follow the specified constraints.</div>
+                            
+                                <div style="margin-left: 20px;"> • The equivalency relations form an equivalence relation (reflexive, symmetric, and transitive).</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;|*a|*b*|c*|&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, asterisks inside the vertical bars are excluded. The valid asterisks are those outside the bars, which are counted to give a result of 2.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s1 = &#34;parker&#34;, s2 = &#34;morris&#34;, baseStr = &#34;parser&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The equivalency groups are [m, p], [a, o], [k, r, s], and [e, i]. The smallest lexicographically equivalent string is &#39;makkek&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s1 = &#34;hello&#34;, s2 = &#34;world&#34;, baseStr = &#34;hold&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The equivalency groups are [h, w], [d, e, o], and [l, r]. The transformed base string is &#39;hdld&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -440,16 +448,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves traversing the string and counting the asterisks that are outside the paired vertical bars &#39;|&#39;.</div>
+                        <div class=""> <b>Approach:</b> We solve this problem by modeling equivalencies using a union-find data structure. This helps efficiently group equivalent characters and ensures that we can replace each character in baseStr with its lexicographically smallest equivalent.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to iterate over the string and keep track of whether we are inside a pair of vertical bars &#39;|&#39;.</div>
+                                <div style="margin-left: 20px;"> • Each pair of corresponding characters in s1 and s2 represents an equivalency relation.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can use a union-find data structure to group equivalent characters efficiently.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Each time we encounter a &#39;|&#39;, we flip the sign to track whether we are inside a pair of bars, and count the asterisks outside.</div>
+                                <div style="margin-left: 20px;"> • The problem is essentially about finding equivalence classes of characters, and then replacing characters in baseStr with their lexicographically smallest representatives.</div>
                             
                         </div>
                     </div>
@@ -457,13 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize a result variable to store the count of valid asterisks.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a union-find data structure to track character equivalences.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a sign variable to track whether we are inside a pair of vertical bars.</div>
+                                <div style="margin-left: 20px;"> • 2. For each character pair (s1[i], s2[i]), union the corresponding characters to signify they are equivalent.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Iterate through the string. For each character, if it is an asterisk and we are not inside a vertical bar pair, increment the result.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the final count of valid asterisks.</div>
+                                <div style="margin-left: 20px;"> • 3. For each character in baseStr, find its equivalent character using the union-find structure and replace it with the smallest lexicographical representative.</div>
                             
                         </div>
                     </div>
@@ -472,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string will not be empty as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • The problem does not expect empty inputs, as the length of strings is at least 1.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle strings up to 1000 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution must be efficient enough to handle inputs of up to 1000 characters.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider strings where there are no asterisks or where all asterisks are inside vertical bars.</div>
+                                <div style="margin-left: 20px;"> • In cases where all characters in baseStr are already equivalent, the baseStr remains unchanged.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string will always contain an even number of vertical bars.</div>
+                                <div style="margin-left: 20px;"> • The solution must adhere to the time and space complexity constraints to handle inputs efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -504,17 +512,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Character Conversion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 If Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 String Length Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Increment Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Union-Find Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Union Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Symmetric Union Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 String Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Base String Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Character Conversion &amp; Find</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
                 </div>
 
@@ -523,11 +543,25 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countAsterisks</span>(string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, sign <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">c</span> : s)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> ((sign <span style="color:#666">^=</span> c <span style="color:#666">==</span> <span style="color:#b44">&#39;|&#39;</span>) <span style="color:#666">&amp;&amp;</span> c <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>)
-</span></span><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">cnv</span>(<span style="color:#0b0;font-weight:bold">char</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>string <span style="color:#00a000">smallestEquivalentString</span>(string s1, string s2, string base) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
+</span></span><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s1[i]), cnv(s2[i]));
+</span></span><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s2[i]), cnv(s1[i]));            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> base.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> uf<span style="color:#666">-&gt;</span>find(cnv(base[i])) <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
@@ -536,63 +570,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countAsterisks</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">cnv</span>(<span style="color:#0b0;font-weight:bold">char</span> x) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `countAsterisks` which takes a string `s` and returns an integer representing the number of asterisks &#39;*&#39; in the string that are outside of vertical bars &#39;|&#39;. </div>
+                            <div class=""> This function `cnv` converts a character `x` to an integer corresponding to its position in the alphabet (0 for &#39;a&#39;, 1 for &#39;b&#39;, etc.). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Character Conversion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, sign <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize two variables: `res` to store the count of asterisks and `sign` to track whether we are inside or outside a vertical bar. The `sign` is toggled each time a &#39;|&#39; character is encountered. </div>
+                            <div class=""> The `cnv` function subtracts the ASCII value of &#39;a&#39; from the character `x`, effectively mapping &#39;a&#39; to 0, &#39;b&#39; to 1, and so on. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop</b></div>
+                            <div class=""> <b>3 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">c</span> : s)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">smallestEquivalentString</span>(string s1, string s2, string base) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each character `c` in the string `s` using a range-based for loop. </div>
+                            <div class=""> This line defines the function `smallestEquivalentString`, which takes two strings `s1`, `s2`, and a `base` string, and returns the smallest equivalent string according to the character relationships defined in `s1` and `s2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : If Condition Check</b></div>
+                            <div class=""> <b>4 : String Length Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> ((sign <span style="color:#666">^=</span> c <span style="color:#666">==</span> <span style="color:#b44">&#39;|&#39;</span>) <span style="color:#666">&amp;&amp;</span> c <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s1.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current character is an asterisk &#39;*&#39; and if the `sign` is toggled by encountering a &#39;|&#39; character. The XOR operation toggles `sign` whenever a &#39;|&#39; is found. If the character is &#39;*&#39; and `sign` is correctly positioned, the asterisk is counted. </div>
+                            <div class=""> This line calculates the length of the string `s1` (which is the same as `s2`) and stores it in `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Increment Count</b></div>
+                            <div class=""> <b>5 : Union-Find Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the condition is met (the character is &#39;*&#39; and not inside &#39;|&#39;), increment the `res` counter by 1. </div>
+                            <div class=""> An instance of the Union-Find (disjoint-set) data structure is created. It is initialized to handle 26 elements, one for each letter of the alphabet. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class=""> <b>6 : Loop Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates through each pair of characters from `s1` and `s2`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Union Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s1[i]), cnv(s2[i]));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each character pair from `s1` and `s2`, the `uni` function is called to unify the corresponding sets of the two characters. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Symmetric Union Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(cnv(s2[i]), cnv(s1[i]));
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line ensures that the relationship is symmetric by also unifying the sets of `s2[i]` and `s1[i]`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : String Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The result string `res` is initialized as an empty string, which will store the smallest equivalent string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Base String Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> base.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates over each character in the base string `base`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Character Conversion &amp; Find</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> uf<span style="color:#666">-&gt;</span>find(cnv(base[i])) <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> For each character in `base`, the function `find` is used to find the representative of the character&#39;s set, and the result is converted back to a character. This character is then appended to the result string `res`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Statement</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the total count of asterisks outside the vertical bars, stored in the `res` variable. </div>
+                            <div class=""> The function returns the result string `res`, which contains the smallest equivalent string. </div>
                         </div>
                     
                 </div>
@@ -613,15 +707,15 @@
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the string, as we iterate through the string once.</div>                                               
+                        <div class=""> <b>Average Case:</b> O(n log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to the union-find operations and character transformations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1), as we use a constant amount of extra space for tracking the result and sign.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the union-find structure and baseStr.</div>    
                     </div>
 
                 </div>

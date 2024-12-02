@@ -1,3 +1,4 @@
+{{ $page := index .Site.Data.net.net (sub (.Params.index | default 1) 1)}}
 <!-- begin post -->
 <div class="col-lg-4 col-md-6 mb-30px card-group">
     <div class="card h-100">
@@ -11,7 +12,14 @@
         </div>
         <div class="card-body">
             <h2 class="card-title"><a class="text-dark" href="{{ .Permalink }}">{{ .Title }}</a></h2>
-            <h4 class="card-text">{{ .Summary }}</h4>            
+            <h4 class="card-text">
+                <div style="position: relative; width:560px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+                    <img src="{{ .Params.img_src }}" 
+                         alt="" 
+                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                  </div>                
+                {{ $page.problem.problem_statement.description | markdownify }}
+            </h4>            
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">

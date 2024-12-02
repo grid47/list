@@ -271,7 +271,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 18, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    9 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,7 +298,7 @@
 
 
 
-<div class=""> You are given two arrays: &lsquo;players&rsquo; and &rsquo;trainers&rsquo;. The array &lsquo;players&rsquo; represents the abilities of different players, and the array &rsquo;trainers&rsquo; represents the training capacities of various trainers. A player can be matched with a trainer if the player&rsquo;s ability is less than or equal to the trainer&rsquo;s capacity. The goal is to find the maximum number of valid matchings between players and trainers such that each player is matched with at most one trainer and vice versa. </div>
+<div class=""> You are given an instance of the class <code>ZeroEvenOdd</code>, which contains three functions: <code>zero</code>, <code>even</code>, and <code>odd</code>. The same instance of <code>ZeroEvenOdd</code> is passed to three different threads. Thread A calls <code>zero()</code> to print zeros, thread B calls <code>even()</code> to print even numbers, and thread C calls <code>odd()</code> to print odd numbers. The goal is to output a sequence of numbers in the order: 0, 1, 2, 3, &hellip;, 2n, where n is the given number, and the length of the sequence is <code>2n</code>. The threads should execute asynchronously, ensuring that the sequence is printed correctly. </div>
 
 
 
@@ -349,45 +349,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two integer arrays: &#39;players&#39; and &#39;trainers&#39;.</div>
-                        <div class=""> <b>Example:</b> players = [5, 6, 8], trainers = [7, 2, 6, 8]</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer `n`, which represents the length of the series to be printed. The total number of elements in the output series will be `2n`.</div>
+                        <div class=""> <b>Example:</b> Input: n = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= players.length, trainers.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= players[i], trainers[j] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return an integer that represents the maximum number of valid matchings between players and trainers.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> The output should be a string that represents the sequence starting with &#39;0&#39;, followed by odd and even numbers alternating, up to `2n`.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;010203&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output must contain the numbers in the correct order, alternating between 0, odd, and even numbers, starting with 0.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to maximize the number of valid pairings by comparing the abilities of players with the training capacities of trainers.</div>
+                        <div class=""> <b>Goal:</b> The goal is to ensure that the threads execute in the correct order, printing the sequence: &#39;0&#39;, odd, even, and so on until `2n`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Sort both the players and trainers arrays.</div>
+                                <div style="margin-left: 20px;"> • Use mutexes to control the execution order of the threads. Each thread should print its number in the sequence.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use two pointers to try matching the smallest available player with the smallest available trainer that can accommodate them.</div>
-                            
-                                <div style="margin-left: 20px;"> • 3. Move through both lists and count the valid pairings, ensuring each player and trainer is matched at most once.</div>
+                                <div style="margin-left: 20px;"> • Thread A prints 0, then thread C prints the first odd number, and thread B prints the first even number, alternating until the sequence is completed.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should efficiently handle the input size up to the upper limits of the constraints.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the threads execute asynchronously and print the sequence in the correct order without missing any number.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Sorting both arrays will take O(n log n) time, where n is the size of the arrays.</div>
+                                <div style="margin-left: 20px;"> • The threads should alternate correctly between printing 0, odd, and even numbers.</div>
                             
-                                <div style="margin-left: 20px;"> • Space complexity should be O(1) beyond the input arrays.</div>
+                                <div style="margin-left: 20px;"> • The sequence must be printed exactly in the correct order for `2n` numbers.</div>
                             
                         </div>
                     </div>        
@@ -395,21 +393,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Players can only be matched with a trainer if their ability is less than or equal to the trainer&#39;s capacity.</div>
-                            
-                                <div style="margin-left: 20px;"> • Each player and trainer can be matched at most once.</div>
+                                <div style="margin-left: 20px;"> • Threads will be executed asynchronously, and we need to control the execution order using synchronization mechanisms.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> players = [5, 6, 8], trainers = [7, 2, 6, 8]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After sorting the arrays, players = [5, 6, 8] and trainers = [2, 6, 7, 8]. We can match player 5 with trainer 6, player 6 with trainer 7, and player 8 with trainer 8. Thus, the answer is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 1</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the output sequence is &#39;010&#39;, where thread A prints 0, thread C prints the first odd number 1, and thread B prints the first even number 2.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> players = [1, 1, 1], trainers = [10]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, all players have the same ability (1), and there is only one trainer with capacity 10. The trainer can be matched with any of the three players, so the maximum number of matches is 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The output should be &#39;0102&#39;, as thread A prints 0, thread C prints the first odd number 1, and thread B prints the second even number 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -433,18 +429,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution uses sorting and a greedy approach to maximize the number of valid matchings between players and trainers.</div>
+                        <div class=""> <b>Approach:</b> The approach uses three threads and mutexes to ensure that the numbers are printed in the correct order. Thread A prints 0, thread C prints odd numbers, and thread B prints even numbers, following the specified order.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be efficiently solved by sorting both the players and trainers arrays.</div>
-                            
-                                <div style="margin-left: 20px;"> • By matching players from the smallest to the largest with the trainers, we can maximize the number of valid pairings.</div>
+                                <div style="margin-left: 20px;"> • The problem requires synchronization to control the order of execution for the threads.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • After sorting, we can use a two-pointer technique to find the optimal pairings.</div>
+                                <div style="margin-left: 20px;"> • By using mutexes, we can ensure that each thread waits for the appropriate signal to print its number in the correct sequence.</div>
                             
                         </div>
                     </div>
@@ -452,15 +446,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Sort the &#39;players&#39; and &#39;trainers&#39; arrays in ascending order.</div>
+                                <div style="margin-left: 20px;"> • Initialize three mutexes to control the order of execution for each thread.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use two pointers: one to iterate through the &#39;players&#39; array and one to iterate through the &#39;trainers&#39; array.</div>
+                                <div style="margin-left: 20px;"> • Thread A locks the first mutex, prints 0, and unlocks the second mutex for thread C to print the first odd number.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If the current player can be matched with the current trainer, increment both pointers and count the match.</div>
+                                <div style="margin-left: 20px;"> • Thread C locks the second mutex, prints the odd number, and unlocks the third mutex for thread B to print the first even number.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. If the player cannot be matched, move to the next trainer.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the total number of matches.</div>
+                                <div style="margin-left: 20px;"> • Thread B locks the third mutex, prints the even number, and unlocks the first mutex for thread A to print the next 0.</div>
                             
                         </div>
                     </div>
@@ -469,24 +461,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input arrays will not be empty as per the problem constraints.</div>
+                                <div style="margin-left: 20px;"> • The minimum value for `n` is 1, so there will always be at least one number in the output sequence.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs, the solution needs to efficiently handle the sorting and matching process.</div>
+                                <div style="margin-left: 20px;"> • For large values of `n`, the program should efficiently handle multiple threads without causing delays or errors.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all players have the same ability, the solution should still handle the maximum number of matches correctly.</div>
-                            
-                                <div style="margin-left: 20px;"> • If all trainers have much higher capacity than players, then the number of matches will be limited by the number of players.</div>
+                                <div style="margin-left: 20px;"> • When `n` is 1, the output should be &#39;010&#39;.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work within the given constraints of the problem.</div>
+                                <div style="margin-left: 20px;"> • The solution should be able to handle values of `n` up to 1000 without performance issues.</div>
                             
                         </div>                                                                        
                     </div>
@@ -503,37 +493,87 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Mutex Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Control</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop - Players</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Queue Push - Players</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Locking</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loop - Trainers</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Locking</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Push - Trainers</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Counter Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Constructor End</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 While Loop - Main Matching</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 While Loop - Trainer Skill Comparison</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Queue Pop - Trainer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Loop Control</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 If Statement - Valid Match</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mutex Lock</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Counter Increment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Print Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Queue Pop - Player</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Pop - Trainer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Flag Change</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mutex Unlock</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Else Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Flag Reset</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Mutex Unlock</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Loop End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Function End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Function End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Loop Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Mutex Lock</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="28"> 28 Print Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="29"> 29 Mutex Unlock</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="30"> 30 Increment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="31"> 31 Loop End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="32"> 32 Function End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="33"> 33 Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="34"> 34 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="35"> 35 Loop Control</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="36"> 36 Mutex Lock</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="37"> 37 Print Function</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="38"> 38 Mutex Unlock</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="39"> 39 Increment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="40"> 40 Loop End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="41"> 41 Function End</button>
                     
                 </div>
 
@@ -542,30 +582,51 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">matchPlayersAndTrainers</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> man, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> master) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq, qq;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> man.size(), n <span style="color:#666">=</span> master.size();
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        pq.push(man[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        qq.push(master[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>qq.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>qq.empty() <span style="color:#666">&amp;&amp;</span> pq.top() <span style="color:#666">&gt;</span> qq.top())
-</span></span><span style="display:flex;"><span>            qq.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>qq.empty()) {
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            qq.pop();
-</span></span><span style="display:flex;"><span>            pq.pop();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>mutex mtx1, mtx2, mtx;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>ZeroEvenOdd(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    mtx1.lock();
+</span></span><span style="display:flex;"><span>    mtx2.lock();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// printNumber(x) outputs &#34;x&#34;, where x is an integer.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">zero</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; j &lt;&lt; &#34; &#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        mtx.lock();
+</span></span><span style="display:flex;"><span>        printNumber(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            mtx1.unlock();         
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            mtx2.unlock();            
+</span></span><span style="display:flex;"><span>        }            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">even</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>        mtx2.lock();
+</span></span><span style="display:flex;"><span>        printNumber(i);
+</span></span><span style="display:flex;"><span>        mtx.unlock();
+</span></span><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">odd</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>        mtx1.lock();
+</span></span><span style="display:flex;"><span>        printNumber(i);        
+</span></span><span style="display:flex;"><span>        mtx.unlock();
+</span></span><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -573,163 +634,413 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">matchPlayersAndTrainers</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> man, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> master) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares the function `matchPlayersAndTrainers` that takes two vectors representing players and trainers&#39; skills. </div>
+                            <div class=""> Declares an integer variable `n` which holds the value for the range of numbers to be printed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Queue Initialization</b></div>
+                            <div class=""> <b>2 : Mutex Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq, qq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex mtx1, mtx2, mtx;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates two priority queues (`pq` for players and `qq` for trainers) to store their skills in ascending order. </div>
+                            <div class=""> Declares three mutex objects: `mtx1`, `mtx2`, and `mtx`, used for controlling access to shared resources between the threads. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Size Calculation</b></div>
+                            <div class=""> <b>3 : Access Control</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> man.size(), n <span style="color:#666">=</span> master.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the size of the `man` and `master` vectors to determine the number of players and trainers. </div>
+                            <div class=""> Defines the access specifier for the methods and constructor, allowing them to be accessed publicly. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : For Loop - Players</b></div>
+                            <div class=""> <b>4 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ZeroEvenOdd(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop to iterate through the players and push their skills into the `pq` priority queue. </div>
+                            <div class=""> Constructor that initializes the value of `n` and locks `mtx1` and `mtx2` to ensure proper synchronization. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Queue Push - Players</b></div>
+                            <div class=""> <b>5 : Locking</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push(man[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mtx1.lock();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the skill of the current player into the `pq` queue. </div>
+                            <div class=""> Locks the mutex `mtx1` to prevent other threads from accessing the shared resource until the lock is released. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : For Loop - Trainers</b></div>
+                            <div class=""> <b>6 : Locking</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mtx2.lock();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop to iterate through the trainers and push their skills into the `qq` priority queue. </div>
+                            <div class=""> Locks the mutex `mtx2`, ensuring synchronization between the threads for printing even and odd numbers. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Queue Push - Trainers</b></div>
+                            <div class=""> <b>7 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        qq.push(master[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the skill of the current trainer into the `qq` queue. </div>
+                            <div class=""> Assigns the parameter value `n` to the class&#39;s `n` variable, defining the range of numbers to be printed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Counter Initialization</b></div>
+                            <div class=""> <b>8 : Constructor End</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a counter variable `cnt` to keep track of the valid player-trainer pairings. </div>
+                            <div class=""> Marks the end of the constructor method. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : While Loop - Main Matching</b></div>
+                            <div class=""> <b>9 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>qq.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">zero</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a while loop that runs as long as there are players and trainers in their respective queues. </div>
+                            <div class=""> Defines the `zero` function, which prints zero followed by odd and even numbers in alternating sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : While Loop - Trainer Skill Comparison</b></div>
+                            <div class=""> <b>10 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>qq.empty() <span style="color:#666">&amp;&amp;</span> pq.top() <span style="color:#666">&gt;</span> qq.top())
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This inner while loop ensures that trainers with lesser skills than the current player are removed from the queue. </div>
+                            <div class=""> Initializes a flag variable `t` that helps control whether `mtx1` or `mtx2` is unlocked. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Queue Pop - Trainer</b></div>
+                            <div class=""> <b>11 : Loop Control</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            qq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops a trainer from the `qq` queue if their skill is less than the player&#39;s skill. </div>
+                            <div class=""> Loops through the range from 0 to `n`, controlling the printing sequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : If Statement - Valid Match</b></div>
+                            <div class=""> <b>12 : Mutex Lock</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>qq.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx.lock();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if there are still trainers left after removing those with insufficient skill to match the current player. </div>
+                            <div class=""> Locks the main mutex `mtx` to ensure exclusive access to the shared resource (printing). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Counter Increment</b></div>
+                            <div class=""> <b>13 : Print Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        printNumber(<span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the counter `cnt` when a valid player-trainer match is found. </div>
+                            <div class=""> Prints the number 0 using the provided `printNumber` function. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Queue Pop - Player</b></div>
+                            <div class=""> <b>14 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            qq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(t <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops a trainer from the `qq` queue after a match is made. </div>
+                            <div class=""> Checks if the flag `t` is 0, which determines whether to unlock `mtx1` or `mtx2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Queue Pop - Trainer</b></div>
+                            <div class=""> <b>15 : Flag Change</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops a player from the `pq` queue after a match is made. </div>
+                            <div class=""> Changes the flag `t` to 1 to indicate that the next step will unlock `mtx1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Return Statement</b></div>
+                            <div class=""> <b>16 : Mutex Unlock</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mtx1.unlock();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the final count of valid player-trainer matches. </div>
+                            <div class=""> Unlocks `mtx1` to allow the next thread (even or odd) to proceed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Else Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the first condition block for controlling the unlocking of `mtx1`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If `t` was 1, this else block executes to unlock `mtx2`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Flag Reset</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            t <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Resets the flag `t` to 0 to switch back to unlocking `mtx1`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Mutex Unlock</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mtx2.unlock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Unlocks `mtx2` to allow the next thread to print its number. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Loop End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the `if-else` block for controlling which mutex to unlock. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Function End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the end of the `for` loop in the `zero` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Function End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the end of the `zero` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">even</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the `even` function, which prints the even numbers in the sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the variable `i` to 2, representing the first even number to be printed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Loop Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Continues the loop until `i` exceeds `n`, printing all even numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Mutex Lock</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx2.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Locks the `mtx2` mutex to synchronize access to the shared resource while printing even numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>28 : Print Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        printNumber(i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Prints the even number `i` using the provided `printNumber` function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>29 : Mutex Unlock</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx.unlock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Unlocks the main mutex `mtx`, allowing the next thread (odd) to proceed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>30 : Increment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments `i` by 2 to move to the next even number. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>31 : Loop End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the `while` loop in the `even` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>32 : Function End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the end of the `even` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>33 : Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">odd</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the `odd` function, which prints the odd numbers in the sequence. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>34 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes the variable `i` to 1, representing the first odd number to be printed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>35 : Loop Control</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Continues the loop until `i` exceeds `n`, printing all odd numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>36 : Mutex Lock</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx1.lock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Locks the `mtx1` mutex to synchronize access to the shared resource while printing odd numbers. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>37 : Print Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        printNumber(i);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Prints the odd number `i` using the provided `printNumber` function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>38 : Mutex Unlock</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mtx.unlock();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Unlocks the main mutex `mtx`, allowing the next thread (even) to proceed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>39 : Increment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments `i` by 2 to move to the next odd number. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>40 : Loop End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ends the `while` loop in the `odd` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>41 : Function End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Marks the end of the `odd` method. </div>
                         </div>
                     
                 </div>
@@ -749,16 +1060,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n), where n is the size of the larger of the two arrays (players or trainers).</div>
-                        <div class=""> <b>Average Case:</b> O(n log n), as the sorting step dominates the complexity.</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n), since we are always sorting both arrays.</div> 
-                        <div class=""> <b>Description:</b> The solution involves sorting both arrays, which takes O(n log n) time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) since each thread executes a fixed number of times based on `n`, and there are no nested iterations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), as no extra space is needed beyond the input arrays.</div>
-                        <div class=""> <b>Worst Case:</b> O(1), as we only use a few additional variables to track the pointers and match counts.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant, as no additional data structures are used beyond the input arrays.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because only a few variables are needed for synchronization, and no additional space is required.</div>    
                     </div>
 
                 </div>

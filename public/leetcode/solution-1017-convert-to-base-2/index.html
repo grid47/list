@@ -271,7 +271,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    4 min read
                                 </span>					
                             </div>
                         </div>			
@@ -298,13 +298,7 @@
 
 
 
-<div class=""> <p>You are given an array <code>matches</code> where each element <code>matches[i] = [winneri, loseri]</code> indicates that player <code>winneri</code> defeated player <code>loseri</code> in a match. Your task is to return a list <code>answer</code> of size 2 where:</p>
-<ul>
-<li><code>answer[0]</code> contains the list of players who have never lost a match.</li>
-<li><code>answer[1]</code> contains the list of players who have lost exactly one match.</li>
-</ul>
-<p>The players in both lists should be sorted in increasing order.</p>
- </div>
+<div class=""> Given a non-negative integer n, return its binary representation in base -2. The binary string should not have leading zeros unless the result is zero. </div>
 
 
 
@@ -355,53 +349,43 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a list of pairs `matches[i]` where each pair represents a match result. Each pair consists of two integers: the winner and the loser of the match.</div>
-                        <div class=""> <b>Example:</b> matches = [[1, 3], [2, 3], [3, 6], [5, 6], [5, 7], [4, 5], [4, 8], [4, 9], [10, 4], [10, 9]]</div>
+                        <div class=""> <b>Input:</b> You are given a non-negative integer n.</div>
+                        <div class=""> <b>Example:</b> n = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= matches.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • matches[i].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= winneri, loseri &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • winneri != loseri</div>
-                            
-                                <div style="margin-left: 20px;"> • All matches[i] are unique.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= n &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a list `answer` with two elements: the first element is a list of players who have never lost a match, and the second element is a list of players who have lost exactly one match. Both lists should be sorted in increasing order.</div>
-                        <div class=""> <b>Example:</b> Output: [[1, 2, 10], [4, 5, 7, 8]]</div>
+                        <div class=""> <b>Output:</b> Return the binary representation of n in base -2 as a string.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;1101&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Both the lists `answer[0]` and `answer[1]` should be sorted in increasing order.</div>
+                                <div style="margin-left: 20px;"> • The output should be a binary string with no leading zeros unless the result is &#39;0&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine the players who have lost no matches and exactly one match by tracking match results and counting losses for each player.</div>
+                        <div class=""> <b>Goal:</b> The goal is to convert the integer n into a binary representation in base -2.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create a set of all players who have participated in at least one match.</div>
+                                <div style="margin-left: 20px;"> • While n is non-zero, repeatedly divide n by -2 and record the remainders.</div>
                             
-                                <div style="margin-left: 20px;"> • Create a map to count the number of losses for each player.</div>
+                                <div style="margin-left: 20px;"> • At each step, append the remainder (0 or 1) to the result string.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the set of players and check how many times each player has lost. Players with no losses go into the first list, and players with exactly one loss go into the second list.</div>
+                                <div style="margin-left: 20px;"> • For negative n, adjust the division to ensure the remainder is correctly calculated.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem guarantees that no two matches will have the same outcome and that the input will be well-formed.</div>
+                        <div class=""> <b>Goal:</b> Consider the constraints of n, as the number can be as large as 10^9.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • You only need to consider players who have participated in at least one match.</div>
-                            
-                                <div style="margin-left: 20px;"> • The lists `answer[0]` and `answer[1]` should be returned in sorted order.</div>
+                                <div style="margin-left: 20px;"> • n is a non-negative integer, where 0 &lt;= n &lt;= 10^9.</div>
                             
                         </div>
                     </div>        
@@ -409,19 +393,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • There will be no players with both zero and exactly one loss.</div>
+                                <div style="margin-left: 20px;"> • The input value n is guaranteed to be a valid non-negative integer.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matches = [[1, 3], [2, 3], [3, 6], [5, 6], [5, 7], [4, 5], [4, 8], [4, 9], [10, 4], [10, 9]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Players 1, 2, and 10 have never lost a match. Players 4, 5, 7, and 8 each lost exactly one match. Players 3, 6, and 9 have lost more than one match.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In base -2, 2 is represented as &#39;110&#39;, since (-2)^2 &#43; (-2)^1 = 2.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matches = [[2, 3], [1, 3], [5, 4], [6, 4]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Players 1, 2, 5, and 6 have never lost a match, while no player has lost exactly one match.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In base -2, 3 is represented as &#39;111&#39;, since (-2)^2 &#43; (-2)^1 &#43; (-2)^0 = 3.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In base -2, 4 is represented as &#39;100&#39;, since (-2)^2 = 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +433,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through the `matches` array and tracking the number of losses for each player. Players who have no losses are added to the first list, while those with exactly one loss are added to the second list.</div>
+                        <div class=""> <b>Approach:</b> The solution uses repeated division by -2, adjusting for negative remainders, and constructs the binary representation step by step.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to process the match results efficiently to track losses for each player.</div>
+                                <div style="margin-left: 20px;"> • We need to handle negative bases while ensuring that the binary representation is valid.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using a map to count losses for each player should allow us to solve the problem in linear time.</div>
+                                <div style="margin-left: 20px;"> • The key challenge is ensuring that the remainder during division is correctly computed for base -2, especially for negative n.</div>
                             
                         </div>
                     </div>
@@ -462,11 +450,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate through the `matches` array and update the set of players.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize an empty string to store the result.</div>
                             
-                                <div style="margin-left: 20px;"> • For each player who loses a match, increment their loss count in a map.</div>
+                                <div style="margin-left: 20px;"> • 2. While n is non-zero, perform the following steps:</div>
                             
-                                <div style="margin-left: 20px;"> • After processing the matches, iterate through the set of players to classify them based on their loss count.</div>
+                                <div style="margin-left: 20px;"> •    a. Compute the remainder when n is divided by -2.</div>
+                            
+                                <div style="margin-left: 20px;"> •    b. Append the remainder (either 0 or 1) to the result string.</div>
+                            
+                                <div style="margin-left: 20px;"> •    c. Adjust n for the next iteration using integer division by -2.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. If the result string is empty, return &#39;0&#39;. Otherwise, return the result string.</div>
                             
                         </div>
                     </div>
@@ -475,22 +469,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Empty matches arrays are not allowed, as the constraints specify that `matches.length &gt;= 1`.</div>
+                                <div style="margin-left: 20px;"> • When n is 0, the output should be &#39;0&#39;.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle up to 100,000 matches efficiently.</div>
+                                <div style="margin-left: 20px;"> • When n is very large (e.g., 10^9), the solution should still work efficiently without exceeding time or space limits.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If a player has never lost any match, they should be included in the first list, and if a player lost exactly one match, they should be included in the second list.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the result does not contain leading zeros unless the value of n is 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The results must be sorted in increasing order.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle n up to 10^9 without performance issues.</div>
                             
                         </div>                                                                        
                     </div>
@@ -509,33 +503,15 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 While Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Binary Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Shift and Negate</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Insert Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Insert Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Vector Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Sort Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Sort Operation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
                 </div>
 
@@ -544,23 +520,15 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findWinners(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> matches) {
-</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> u;
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ff;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> matches.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        u.insert(matches[i][<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>        u.insert(matches[i][<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        ff[matches[i][<span style="color:#666">1</span>]]<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">baseNeg2</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> to_string(n<span style="color:#666">&amp;</span><span style="color:#666">1</span>) <span style="color:#666">+</span> res;
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> <span style="color:#666">-</span>(n <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> arr(<span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> u.begin(); it <span style="color:#666">!=</span> u.end(); it<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>ff.count(<span style="color:#666">*</span>it)) arr[<span style="color:#666">0</span>].push_back(<span style="color:#666">*</span>it);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(ff[<span style="color:#666">*</span>it] <span style="color:#666">==</span> <span style="color:#666">1</span>) arr[<span style="color:#666">1</span>].push_back(<span style="color:#666">*</span>it);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    sort(arr[<span style="color:#666">0</span>].begin(), arr[<span style="color:#666">0</span>].end());
-</span></span><span style="display:flex;"><span>    sort(arr[<span style="color:#666">1</span>].begin(), arr[<span style="color:#666">1</span>].end());
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> arr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span><span style="color:#666">?</span> <span style="color:#b44">&#34;0&#34;</span><span style="color:#666">:</span>res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -571,150 +539,60 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findWinners(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> matches) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">baseNeg2</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `findWinners` function is declared, which takes a vector of match results and returns a 2D vector containing winners and players with only one loss. </div>
+                            <div class=""> Declares the function `baseNeg2` that takes an integer `n` as input and returns a string representing the base -2 representation of `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> u;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> An unordered set `u` is declared to store all unique players who participated in the matches. </div>
+                            <div class=""> Initializes an empty string `res` to store the result of the base -2 conversion. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Declaration</b></div>
+                            <div class=""> <b>3 : While Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ff;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A map `ff` is declared to count the number of losses for each player. </div>
+                            <div class=""> Starts a while loop that continues until `n` becomes 0. The loop will calculate the binary digits of `n` in base -2. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Binary Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> matches.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> to_string(n<span style="color:#666">&amp;</span><span style="color:#666">1</span>) <span style="color:#666">+</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `n` is initialized to the size of the `matches` vector, representing the number of matches. </div>
+                            <div class=""> Calculates the least significant bit (LSB) of `n` by performing a bitwise AND with 1 (`n &amp; 1`), converts it to a string, and appends it to the front of `res`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop</b></div>
+                            <div class=""> <b>5 : Shift and Negate</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">=</span> <span style="color:#666">-</span>(n <span style="color:#666">&gt;&gt;</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is started to iterate over each match in the `matches` vector. </div>
+                            <div class=""> Performs a right shift on `n` by 1 bit (`n &gt;&gt; 1`) to prepare for the next iteration. The result is negated (`-`) because the number is in base -2. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Insert Operation</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        u.insert(matches[i][<span style="color:#666">0</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span><span style="color:#666">?</span> <span style="color:#b44">&#34;0&#34;</span><span style="color:#666">:</span>res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The first player of each match is inserted into the set `u` to ensure they are tracked as participants. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Insert Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        u.insert(matches[i][<span style="color:#666">1</span>]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The second player of each match is inserted into the set `u` to ensure they are also tracked as participants. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Map Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ff[matches[i][<span style="color:#666">1</span>]]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The number of losses for the second player of the match is incremented in the map `ff`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Vector Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> arr(<span style="color:#666">2</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A 2D vector `arr` is initialized with two empty vectors to store the winners and players with exactly one loss. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> u.begin(); it <span style="color:#666">!=</span> u.end(); it<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A loop is started to iterate over each player in the set `u`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>ff.count(<span style="color:#666">*</span>it)) arr[<span style="color:#666">0</span>].push_back(<span style="color:#666">*</span>it);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the player has no losses (i.e., not in the `ff` map), they are added to the first subvector `arr[0]`, which tracks the winners. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(ff[<span style="color:#666">*</span>it] <span style="color:#666">==</span> <span style="color:#666">1</span>) arr[<span style="color:#666">1</span>].push_back(<span style="color:#666">*</span>it);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the player has exactly one loss, they are added to the second subvector `arr[1]`, which tracks the players with one loss. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Sort Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(arr[<span style="color:#666">0</span>].begin(), arr[<span style="color:#666">0</span>].end());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The first subvector of winners is sorted in ascending order. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Sort Operation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(arr[<span style="color:#666">1</span>].begin(), arr[<span style="color:#666">1</span>].end());
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The second subvector of players with exactly one loss is sorted in ascending order. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> arr;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The 2D vector `arr` containing the winners and players with exactly one loss is returned. </div>
+                            <div class=""> Checks if the result string `res` is empty (which means the input was 0) and returns &#34;0&#34;. Otherwise, it returns the constructed base -2 representation stored in `res`. </div>
                         </div>
                     
                 </div>
@@ -734,16 +612,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of matches.</div>
-                        <div class=""> <b>Average Case:</b> O(n), since we process each match and player in linear time.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as the input size can go up to 100,000 matches.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of matches.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Average Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(log n) since the number of divisions required is proportional to the logarithm of n.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), since we need space for the players and their loss counts.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of players in the worst case.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear in terms of the number of players, which is proportional to the number of matches.</div>    
+                        <div class=""> <b>Best Case:</b> O(log n)</div>
+                        <div class=""> <b>Worst Case:</b> O(log n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(log n) due to the space needed for storing the binary representation of n.</div>    
                     </div>
 
                 </div>

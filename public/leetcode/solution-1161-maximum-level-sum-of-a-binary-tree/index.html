@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 13, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given a string representing the log of a shop&rsquo;s customer visits over a series of hours. Each character in the string is either &lsquo;Y&rsquo; (customer visits) or &lsquo;N&rsquo; (no customer visits). The shop can close at any given hour, and the penalty is determined by two factors: when the shop is open but no customers visit, and when the shop is closed but customers still arrive. You need to determine the earliest hour at which the shop should close to minimize the penalty. </div>
+<div class=""> Given the root of a binary tree, find the smallest level x (1-indexed) such that the sum of the values of nodes at level x is maximal. Each level of the tree corresponds to the distance from the root, with the root being level 1. </div>
 
 
 
@@ -360,47 +360,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A string customers of length n, consisting of characters &#39;Y&#39; and &#39;N&#39;, representing customer visits during each hour.</div>
-                        <div class=""> <b>Example:</b> customers = &#34;YYNY&#34;</div>
+                        <div class=""> <b>Input:</b> The binary tree is represented as an array using level-order traversal. Each element corresponds to a node&#39;s value, and null indicates missing children.</div>
+                        <div class=""> <b>Example:</b> Input: root = [5, 3, 8, -1, 4, null, 2]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= customers.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [1, 10^4].</div>
                             
-                                <div style="margin-left: 20px;"> • customers consists only of characters &#39;Y&#39; and &#39;N&#39;.</div>
+                                <div style="margin-left: 20px;"> • -10^5 &lt;= Node.val &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The earliest hour at which the shop should close to incur the minimum penalty.</div>
+                        <div class=""> <b>Output:</b> Return the smallest level x (1-indexed) with the maximal sum of node values.</div>
                         <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The returned value will be an integer between 0 and the length of the customers string.</div>
+                                <div style="margin-left: 20px;"> • If there are multiple levels with the same maximal sum, return the smallest level x.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the earliest hour to close the shop such that the penalty is minimized.</div>
+                        <div class=""> <b>Goal:</b> Find the level in a binary tree with the maximum sum of node values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count the number of &#39;N&#39; characters (hours with no customers) and &#39;Y&#39; characters (hours with customers).</div>
+                                <div style="margin-left: 20px;"> • Perform a level-order traversal of the binary tree using a queue.</div>
                             
-                                <div style="margin-left: 20px;"> • Calculate the penalty for closing the shop at each hour, considering both the hours open without customers and the hours closed with customers.</div>
+                                <div style="margin-left: 20px;"> • For each level, calculate the sum of node values.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the earliest hour that results in the least penalty.</div>
+                                <div style="margin-left: 20px;"> • Keep track of the level with the highest sum.</div>
+                            
+                                <div style="margin-left: 20px;"> • Return the smallest level x with the maximum sum.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The length of the customers string is at most 10^5, so an efficient solution is required.</div>
+                        <div class=""> <b>Goal:</b> The problem involves analyzing levels in a binary tree with a range of constraints on the number of nodes and node values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= customers.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The binary tree contains at least one node.</div>
                             
-                                <div style="margin-left: 20px;"> • customers consists only of characters &#39;Y&#39; and &#39;N&#39;.</div>
+                                <div style="margin-left: 20px;"> • The node values may be negative or positive integers.</div>
                             
                         </div>
                     </div>        
@@ -408,23 +410,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The penalty is computed by considering both the shop&#39;s open and closed hours relative to customer visits.</div>
+                                <div style="margin-left: 20px;"> • The input binary tree is valid.</div>
+                            
+                                <div style="margin-left: 20px;"> • Levels are 1-indexed, starting from the root.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> customers = &#34;YYNY&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> When closing the shop at hour 0, the penalty is 3 (1 hour of no customers while open, 1 hour of customers while closed). Closing at hour 2 results in the lowest penalty of 1, which is the optimal time to close.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [5, 3, 8, -1, 4, null, 2]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Level 1 sum = 5, Level 2 sum = 3 &#43; 8 = 11, Level 3 sum = -1 &#43; 4 &#43; 2 = 5. The level with the maximum sum is 2, so the output is 2.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> customers = &#34;NNNNN&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Since no customers visit, the best time to close is immediately at hour 0 to avoid any penalties.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> customers = &#34;YYYY&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the best time to close the shop is at hour 4, since there are customers at every hour.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [10, 2, 10, 20, -5, null, 15]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Level 1 sum = 10, Level 2 sum = 2 &#43; 10 = 12, Level 3 sum = 20 &#43; -5 &#43; 15 = 30. The level with the maximum sum is 3, so the output is 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -448,16 +448,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we can simulate the shop closing at each possible hour and calculate the penalty for each case. We can then return the earliest hour with the least penalty.</div>
+                        <div class=""> <b>Approach:</b> Perform a level-order traversal using a queue and calculate the sum of node values at each level. Track the maximum sum and corresponding level.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to consider both customers arriving while the shop is closed and the shop being open without customers.</div>
+                                <div style="margin-left: 20px;"> • Level-order traversal naturally groups nodes by levels.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can calculate sums during the traversal without additional structure.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using cumulative sums can help us efficiently calculate penalties without recalculating from scratch for each possible closing time.</div>
+                                <div style="margin-left: 20px;"> • Use a queue to manage nodes and calculate sums level by level.</div>
                             
                         </div>
                     </div>
@@ -465,13 +467,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create arrays to store the cumulative number of customers and non-customers for each hour.</div>
+                                <div style="margin-left: 20px;"> • Initialize a queue with the root node.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Traverse the input string to fill the arrays with the number of &#39;Y&#39; and &#39;N&#39; characters encountered so far.</div>
+                                <div style="margin-left: 20px;"> • Track the current level and sum of node values.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Calculate the penalty for each possible closing time using these arrays.</div>
+                                <div style="margin-left: 20px;"> • Compare the current level&#39;s sum with the maximum and update if necessary.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the earliest hour with the minimum penalty.</div>
+                                <div style="margin-left: 20px;"> • Repeat until all nodes are processed.</div>
                             
                         </div>
                     </div>
@@ -480,22 +482,24 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty string of customers is invalid based on the constraints.</div>
+                                <div style="margin-left: 20px;"> • Not applicable as the input always contains at least one node.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large inputs (up to 10^5 characters), the solution must efficiently handle the penalty calculations in linear time.</div>
+                                <div style="margin-left: 20px;"> • A tree with 10,000 nodes and varying values.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all characters are &#39;Y&#39; or all characters are &#39;N&#39;, the penalty calculation should still work as expected.</div>
+                                <div style="margin-left: 20px;"> • Node values are all negative.</div>
+                            
+                                <div style="margin-left: 20px;"> • The tree is skewed (all nodes are either left or right children).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution is optimized for large inputs.</div>
+                                <div style="margin-left: 20px;"> • Tree height could be significant, affecting traversal time.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,47 +516,43 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Queue Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Push Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Push Root to Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Push Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Level Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Queue Processing Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Forward Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Level Size Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Count &#39;N&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Sum Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Store &#39;N&#39; Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Process Nodes at Current Level</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Reset Counter</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Process Each Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Reverse Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Remove Node from Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Count &#39;Y&#39;</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Accumulate Node Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Store &#39;Y&#39; Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Push Left Child</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Reverse &#39;Y&#39; Vector</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Push Right Child</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Initialize Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Update Maximum Level</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Find Minimum Closing Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Set Answer to Current Level</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Calculate Time Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Update Maximum Sum</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Update Best Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Increment Level Counter</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Store Best Time</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Store Index</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Result</button>
                     
                 </div>
 
@@ -561,32 +561,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bestClosingTime</span>(string a) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> a.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> y,n;
-</span></span><span style="display:flex;"><span>    y.push_back(<span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    n.push_back(<span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;N&#39;</span>) cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        n.push_back(cnt);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> s <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;Y&#39;</span>) cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        y.push_back(cnt);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    reverse (y.begin(), y.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX, ind <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s <span style="color:#666">+</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> n[i] <span style="color:#666">+</span> y[i];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(h<span style="color:#666">&lt;</span>ans) {
-</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> h;
-</span></span><span style="display:flex;"><span>            ind <span style="color:#666">=</span> i;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxLevelSum</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>, mx<span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lvl <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> n <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> n<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">-&gt;</span>left) q.push(n<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">-&gt;</span>right) q.push(n<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> mx) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> lvl;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> sum;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        lvl<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ind;        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -594,213 +591,193 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">bestClosingTime</span>(string a) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxLevelSum</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `bestClosingTime`, which takes a string `a` as input representing the sequence of operations and returns an integer representing the best closing time. </div>
+                            <div class=""> Define the function `maxLevelSum` that takes the root of a binary tree and returns the level with the maximum sum of node values. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> a.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>, mx<span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The size of the string `a` is stored in the variable `s`, which represents the number of operations. </div>
+                            <div class=""> Initialize `ans` to 1 to represent the level with the maximum sum, and `mx` to the value of the root node as the initial maximum sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Vector Initialization</b></div>
+                            <div class=""> <b>3 : Queue Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> y,n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two vectors, `y` and `n`, are initialized to store the counts of &#39;Y&#39; and &#39;N&#39; at each position in the string. </div>
+                            <div class=""> Declare a queue to perform level order traversal of the binary tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Push Initialization</b></div>
+                            <div class=""> <b>4 : Push Root to Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    y.push_back(<span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    q.push(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the `y` vector by adding 0 to represent the starting count of &#39;Y&#39; operations. </div>
+                            <div class=""> Push the root node into the queue to start the level order traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Push Initialization</b></div>
+                            <div class=""> <b>5 : Level Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n.push_back(<span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lvl <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the `n` vector by adding 0 to represent the starting count of &#39;N&#39; operations. </div>
+                            <div class=""> Initialize the level counter `lvl` to 1, as the root is at level 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop Setup</b></div>
+                            <div class=""> <b>6 : Queue Processing Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a counter variable `cnt` to keep track of the number of &#39;N&#39; operations encountered so far. </div>
+                            <div class=""> While the queue is not empty, continue processing each level of the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Forward Loop</b></div>
+                            <div class=""> <b>7 : Level Size Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop from the beginning of the string to count the &#39;N&#39; operations. </div>
+                            <div class=""> Get the number of nodes at the current level by measuring the size of the queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Count &#39;N&#39;</b></div>
+                            <div class=""> <b>8 : Sum Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;N&#39;</span>) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is &#39;N&#39;, increment the counter `cnt`. </div>
+                            <div class=""> Initialize `sum` to 0 for calculating the sum of node values at the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Store &#39;N&#39; Count</b></div>
+                            <div class=""> <b>9 : Process Nodes at Current Level</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n.push_back(cnt);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the current count of &#39;N&#39; operations in the `n` vector at the corresponding index. </div>
+                            <div class=""> Loop through all nodes at the current level, decrementing the level size counter `sz`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Reset Counter</b></div>
+                            <div class=""> <b>10 : Process Each Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> n <span style="color:#666">=</span> q.front();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Reset the counter `cnt` to 0 for the reverse traversal of the string to count &#39;Y&#39; operations. </div>
+                            <div class=""> Get the front node from the queue (i.e., the first node in the current level). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Reverse Loop</b></div>
+                            <div class=""> <b>11 : Remove Node from Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> s <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop from the end of the string to count the &#39;Y&#39; operations. </div>
+                            <div class=""> Remove the front node from the queue as it has been processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Count &#39;Y&#39;</b></div>
+                            <div class=""> <b>12 : Accumulate Node Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;Y&#39;</span>) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> n<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is &#39;Y&#39;, increment the counter `cnt`. </div>
+                            <div class=""> Add the value of the current node to the `sum` for the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Store &#39;Y&#39; Count</b></div>
+                            <div class=""> <b>13 : Push Left Child</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        y.push_back(cnt);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">-&gt;</span>left) q.push(n<span style="color:#666">-&gt;</span>left);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the current count of &#39;Y&#39; operations in the `y` vector at the corresponding index. </div>
+                            <div class=""> If the current node has a left child, push it to the queue for processing in the next level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Reverse &#39;Y&#39; Vector</b></div>
+                            <div class=""> <b>14 : Push Right Child</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    reverse (y.begin(), y.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n<span style="color:#666">-&gt;</span>right) q.push(n<span style="color:#666">-&gt;</span>right);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Reverse the `y` vector to align the counts with the positions of the string. </div>
+                            <div class=""> If the current node has a right child, push it to the queue for processing in the next level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Initialize Answer</b></div>
+                            <div class=""> <b>15 : Update Maximum Level</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX, ind <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> mx) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize `ans` to the maximum possible integer value and `ind` to 0. These will store the best closing time and its index. </div>
+                            <div class=""> If the sum of values at the current level is greater than the previous maximum sum (`mx`), update `mx` and set the current level as the answer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Find Minimum Closing Time</b></div>
+                            <div class=""> <b>16 : Set Answer to Current Level</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s <span style="color:#666">+</span><span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> lvl;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through all possible closing times to find the one that minimizes the sum of &#39;N&#39; before and &#39;Y&#39; after. </div>
+                            <div class=""> Set `ans` to the current level (`lvl`) since this level has the maximum sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Calculate Time Sum</b></div>
+                            <div class=""> <b>17 : Update Maximum Sum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> n[i] <span style="color:#666">+</span> y[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> sum;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the sum `h` of &#39;N&#39; operations before and &#39;Y&#39; operations after the current time. </div>
+                            <div class=""> Update `mx` to the new maximum sum for the current level. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Update Best Time</b></div>
+                            <div class=""> <b>18 : Increment Level Counter</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(h<span style="color:#666">&lt;</span>ans) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        lvl<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the calculated sum `h` is smaller than the current best answer `ans`, update `ans` and the index `ind`. </div>
+                            <div class=""> Increment the level counter to move to the next level of the tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Store Best Time</b></div>
+                            <div class=""> <b>19 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> h;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the new best sum `h` as the answer. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Store Index</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ind <span style="color:#666">=</span> i;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Store the index of the current best time. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ind;        
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the index `ind` of the best closing time. </div>
+                            <div class=""> Return the level with the maximum sum of node values. </div>
                         </div>
                     
                 </div>
@@ -823,13 +800,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution involves a single pass through the input string and another pass to calculate penalties, resulting in a linear time complexity.</div>                                               
+                        <div class=""> <b>Description:</b> Each node is visited once, and sum calculation is O(1) per node.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is linear due to the additional arrays used to store cumulative sums of &#39;Y&#39; and &#39;N&#39; counts.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(w)</div> 
+                        <div class=""> <b>Description:</b> The queue stores nodes level by level, with maximum width w.</div>    
                     </div>
 
                 </div>

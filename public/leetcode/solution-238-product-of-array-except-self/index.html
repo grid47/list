@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 14, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,7 @@
 
 
 
-<div class=""> You are playing the game Minesweeper. Given an m x n grid, you must reveal the square corresponding to the next click and update the grid according to Minesweeper&rsquo;s rules. The grid can contain mines (&lsquo;M&rsquo;), empty squares (&lsquo;E&rsquo;), or revealed squares with adjacent mine counts. </div>
+<div class=""> Given an integer array, your task is to return an array where each element at index &lsquo;i&rsquo; is the product of all the elements of the original array except the element at index &lsquo;i&rsquo;. You are not allowed to use division in your solution, and the algorithm must run in O(n) time. </div>
 
 
 
@@ -370,53 +370,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a 2D list representing the board and an array of two integers representing the click position.</div>
-                        <div class=""> <b>Example:</b> Input: board = [[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;M&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;]], click = [2,2]</div>
+                        <div class=""> <b>Input:</b> You are given an integer array &#39;nums&#39;. The array will contain at least two elements.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [2,3,4,5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= board[i][j] &lt;= 105</div>
+                                <div style="margin-left: 20px;"> • -30 &lt;= nums[i] &lt;= 30</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= clickr &lt; m</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= clickc &lt; n</div>
+                                <div style="margin-left: 20px;"> • The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the updated board after revealing the square at the click position and applying the Minesweeper rules.</div>
-                        <div class=""> <b>Example:</b> Output: [[&#39;B&#39;,&#39;1&#39;,&#39;E&#39;],[&#39;B&#39;,&#39;1&#39;,&#39;M&#39;],[&#39;B&#39;,&#39;B&#39;,&#39;B&#39;]]</div>
+                        <div class=""> <b>Output:</b> Return an array where each element is the product of all the numbers in the array except the one at that index.</div>
+                        <div class=""> <b>Example:</b> Output: [60, 40, 30, 24]</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The board must be updated after revealing the click square.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Update the board based on Minesweeper rules after a click.</div>
+                        <div class=""> <b>Goal:</b> The goal is to compute the product of all the elements except the current element at each index.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • If the clicked square is a mine, change it to &#39;X&#39;.</div>
+                                <div style="margin-left: 20px;"> • Create an array to store the product of all elements except the current element.</div>
                             
-                                <div style="margin-left: 20px;"> • If the clicked square is empty and has no adjacent mines, reveal it as &#39;B&#39; and recursively reveal adjacent squares.</div>
+                                <div style="margin-left: 20px;"> • First, iterate through the array to calculate the prefix products (product of elements before the current element).</div>
                             
-                                <div style="margin-left: 20px;"> • If the clicked square is empty and has adjacent mines, change it to the number of adjacent mines.</div>
+                                <div style="margin-left: 20px;"> • Then, iterate from the end of the array to calculate the suffix products (product of elements after the current element).</div>
+                            
+                                <div style="margin-left: 20px;"> • Multiply the prefix and suffix values for each index to get the desired result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints for this problem ensure the grid is within valid bounds and the click position is correct.</div>
+                        <div class=""> <b>Goal:</b> The array will have at least two elements, and the product values will fit within a 32-bit integer.</div>
                         <div class=""> <b>Steps:</b>
-                            
-                                <div style="margin-left: 20px;"> • board[i][j] is either &#39;M&#39;, &#39;E&#39;, &#39;B&#39;, or a digit from &#39;1&#39; to &#39;8&#39;.</div>
-                            
-                                <div style="margin-left: 20px;"> • click.length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • board[clickr][clickc] is either &#39;M&#39; or &#39;E&#39;.</div>
                             
                         </div>
                     </div>        
@@ -424,17 +416,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input board is valid and well-formed.</div>
+                                <div style="margin-left: 20px;"> • The input array will always contain at least two elements.</div>
                             
-                                <div style="margin-left: 20px;"> • The click position is a valid position within the board.</div>
+                                <div style="margin-left: 20px;"> • There will be no division operations used in the solution.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: board = [[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;M&#39;,&#39;E&#39;],[&#39;E&#39;,&#39;E&#39;,&#39;E&#39;]], click = [2,2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, clicking on an empty square with adjacent mines will reveal the number of adjacent mines or recursively reveal surrounding squares if there are no adjacent mines.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2,3,4,5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this example, the product of all elements except the current one would be: [60, 40, 30, 24]. The output array is constructed by calculating the product of all numbers except the current one for each index.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1,0,3,4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, the output array will be: [0, 0, 0, 0]. This is because the product for each index excludes the element at that index, and the array contains zeros.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +454,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to recursively reveal squares based on the Minesweeper rules.</div>
+                        <div class=""> <b>Approach:</b> The optimal approach is to compute the result in two passes: one for the prefix products and one for the suffix products, and multiply the two results for each element.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The game is based on revealing squares and updating the board recursively.</div>
+                                <div style="margin-left: 20px;"> • We cannot use division to simplify the problem.</div>
+                            
+                                <div style="margin-left: 20px;"> • To avoid using extra space for the prefix and suffix arrays, we can modify the result array in place.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We will need to check adjacent squares and recursively reveal empty squares without adjacent mines.</div>
+                                <div style="margin-left: 20px;"> • The result can be built in two phases: one for the prefix products and another for the suffix products.</div>
                             
                         </div>
                     </div>
@@ -475,11 +473,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check if the clicked square is a mine. If it is, set it to &#39;X&#39;.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Create a result array initialized to 1.</div>
                             
-                                <div style="margin-left: 20px;"> • If the clicked square is empty, count adjacent mines. If there are any, set the square to the count of adjacent mines.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Calculate the prefix product by iterating from left to right.</div>
                             
-                                <div style="margin-left: 20px;"> • If no adjacent mines are found, change the square to &#39;B&#39; and recursively reveal adjacent squares.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Update the result array by multiplying it with the suffix product, iterating from right to left.</div>
                             
                         </div>
                     </div>
@@ -488,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The clicked square is already revealed.</div>
+                                <div style="margin-left: 20px;"> • The list is guaranteed to have at least two elements, so no empty list cases.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The board size is at the maximum allowed.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle large arrays with up to 100,000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The click lands on a corner or edge of the board.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the array contains zeroes. The result array should correctly reflect the multiplication of other elements.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure no out-of-bounds errors when revealing adjacent squares.</div>
+                                <div style="margin-left: 20px;"> • Make sure the output array fits within a 32-bit integer range.</div>
                             
                         </div>                                                                        
                     </div>
@@ -522,55 +520,29 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Matrix Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Size of Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Initialize Prefix and Suffix Arrays</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Set First Prefix Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Board Update for Mine</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Set Last Suffix Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Else Block</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Prefix Product Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Counter Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Prefix Product</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Suffix Product Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Update Suffix Product</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Skip Center Cell</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Initialize Answer Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Neighbor Coordinates</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Compute Final Results</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Boundary Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Calculate Product for Each Index</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Mine Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Update Cell with Mine Count</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Open Else Block</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Update for Blank Cell</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Recursive Exploration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Recursive Exploration</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Skip Center Cell Again</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Neighbor Coordinates Again</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Boundary Check Again</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Push Neighbor to Array</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Store Coordinates</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Store Coordinates</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Recursive Call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Return Updated Board</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Final Result</button>
                     
                 </div>
 
@@ -579,37 +551,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> updateBoard(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> click) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> row <span style="color:#666">=</span> click[<span style="color:#666">0</span>], col <span style="color:#666">=</span> click[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(board[row][col] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span>) {
-</span></span><span style="display:flex;"><span>        board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;X&#39;</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span> <span style="color:#666">||</span> board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;X&#39;</span>) cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> cnt;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;B&#39;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>                vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr;
-</span></span><span style="display:flex;"><span>                arr.push_back(x);
-</span></span><span style="display:flex;"><span>                arr.push_back(y);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;E&#39;</span>) updateBoard(board, arr);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> board;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> productExceptSelf(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pre(n, <span style="color:#666">1</span>), suf(n, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    pre[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    suf[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        pre[i] <span style="color:#666">=</span> pre[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">*</span> nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>        suf[i] <span style="color:#666">=</span> suf[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">*</span> nums[i];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> (i <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> pre[i <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">:</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span><span style="color:#666">?</span> suf[i <span style="color:#666">+</span> <span style="color:#666">1</span>]<span style="color:#666">:</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -620,260 +576,130 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> updateBoard(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> click) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> productExceptSelf(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `updateBoard` function that takes a board and a click position to update the board based on Minesweeper rules. </div>
+                            <div class=""> Defines the function `productExceptSelf`, which takes a reference to a vector of integers (`nums`) and returns a vector of integers where each element is the product of all other elements except for the current one. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Matrix Initialization</b></div>
+                            <div class=""> <b>2 : Size of Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `m` and `n` to hold the dimensions of the board, representing the number of rows and columns, respectively. </div>
+                            <div class=""> Stores the size of the input array `nums` in variable `n`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Initialize Prefix and Suffix Arrays</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> row <span style="color:#666">=</span> click[<span style="color:#666">0</span>], col <span style="color:#666">=</span> click[<span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pre(n, <span style="color:#666">1</span>), suf(n, <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Extracts the row and column values from the `click` vector to identify the clicked cell. </div>
+                            <div class=""> Initializes two auxiliary arrays, `pre` and `suf`, both of size `n`. `pre[i]` will store the product of all elements to the left of index `i`, and `suf[i]` will store the product of all elements to the right of index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case Check</b></div>
+                            <div class=""> <b>4 : Set First Prefix Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(board[row][col] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pre[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the clicked cell is a mine. If it is, the cell is marked as &#39;X&#39; to signify that the player hit a mine. </div>
+                            <div class=""> Sets the first element of the `pre` array to be equal to the first element of the `nums` array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Board Update for Mine</b></div>
+                            <div class=""> <b>5 : Set Last Suffix Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;X&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    suf[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the clicked cell as &#39;X&#39; to represent a mine hit. </div>
+                            <div class=""> Sets the last element of the `suf` array to be equal to the last element of the `nums` array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Else Block</b></div>
+                            <div class=""> <b>6 : Prefix Product Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Handles the case when the clicked cell is not a mine. </div>
+                            <div class=""> Starts a loop from the second element (`i = 1`) to the last element of the array, calculating the prefix product for each index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Counter Initialization</b></div>
+                            <div class=""> <b>7 : Update Prefix Product</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pre[i] <span style="color:#666">=</span> pre[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">*</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a counter `cnt` to keep track of the number of adjacent mines around the clicked cell. </div>
+                            <div class=""> Updates the `pre[i]` array by multiplying the previous element&#39;s prefix product (`pre[i - 1]`) by the current element (`nums[i]`). This ensures that `pre[i]` holds the product of all elements to the left of index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Outer Loop</b></div>
+                            <div class=""> <b>8 : Suffix Product Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over the rows of the neighboring cells, including the current cell itself. </div>
+                            <div class=""> Starts a loop from the second-to-last element (`i = n - 2`) down to the first element, calculating the suffix product for each index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Inner Loop</b></div>
+                            <div class=""> <b>9 : Update Suffix Product</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        suf[i] <span style="color:#666">=</span> suf[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">*</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over the columns of the neighboring cells, ensuring all 8 surrounding cells are checked. </div>
+                            <div class=""> Updates the `suf[i]` array by multiplying the next element&#39;s suffix product (`suf[i &#43; 1]`) by the current element (`nums[i]`). This ensures that `suf[i]` holds the product of all elements to the right of index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Skip Center Cell</b></div>
+                            <div class=""> <b>10 : Initialize Answer Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Skips the center cell (the clicked cell itself) and only checks the surrounding cells. </div>
+                            <div class=""> Initializes the result array `ans` of size `n` with all elements set to 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Neighbor Coordinates</b></div>
+                            <div class=""> <b>11 : Compute Final Results</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the coordinates of each neighboring cell based on the offsets `i` and `j`. </div>
+                            <div class=""> Starts a loop to calculate the final result for each index `i` in the `ans` array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Boundary Check</b></div>
+                            <div class=""> <b>12 : Calculate Product for Each Index</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> (i <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> pre[i <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">:</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span><span style="color:#666">?</span> suf[i <span style="color:#666">+</span> <span style="color:#666">1</span>]<span style="color:#666">:</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the neighboring cell is within the bounds of the board. If out of bounds, the iteration continues with the next neighbor. </div>
+                            <div class=""> For each index `i`, the result is calculated by multiplying the prefix product (`pre[i - 1]`) and the suffix product (`suf[i &#43; 1]`). If `i` is the first or last index, the appropriate product (prefix or suffix) is taken as 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Mine Check</b></div>
+                            <div class=""> <b>13 : Return Final Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;M&#39;</span> <span style="color:#666">||</span> board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;X&#39;</span>) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the neighboring cell contains a mine (&#39;M&#39;) or has already been revealed as a mine (&#39;X&#39;). If so, increments the counter `cnt`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Update Cell with Mine Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the counter `cnt` is greater than 0, updates the clicked cell with the count of adjacent mines. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Open Else Block</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Handles the case when no adjacent mines are found. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Update for Blank Cell</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            board[row][col] <span style="color:#666">=</span> <span style="color:#b44">&#39;B&#39;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Marks the clicked cell as &#39;B&#39; to indicate it is a blank space with no adjacent mines. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Recursive Exploration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Starts a recursive process to explore all adjacent cells if the clicked cell is blank. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Recursive Exploration</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Iterates over the surrounding cells to explore them recursively. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Skip Center Cell Again</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Skips the current cell when exploring adjacent cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Neighbor Coordinates Again</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> row <span style="color:#666">+</span> i, y <span style="color:#666">=</span> col <span style="color:#666">+</span> j;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculates the coordinates of the neighboring cells during recursion. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Boundary Check Again</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> m <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> n)    <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Ensures the neighboring cells are within the board boundaries. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Push Neighbor to Array</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Creates a new vector `arr` to hold the coordinates of a neighboring cell. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Store Coordinates</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                arr.push_back(x);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pushes the x-coordinate of the neighboring cell into the `arr` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Store Coordinates</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                arr.push_back(y);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Pushes the y-coordinate of the neighboring cell into the `arr` vector. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>25 : Recursive Call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(board[x][y] <span style="color:#666">==</span> <span style="color:#b44">&#39;E&#39;</span>) updateBoard(board, arr);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the neighboring cell is an empty space (&#39;E&#39;), the function is called recursively to update it. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>26 : Return Updated Board</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> board;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the updated board after processing the click. </div>
+                            <div class=""> Returns the result array `ans`, which contains the product of all elements in the input array `nums` except for the current element. </div>
                         </div>
                     
                 </div>
@@ -893,16 +719,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> In the worst case, all squares need to be revealed.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate through the list twice.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> Space complexity depends on the recursion depth and the board size.</div>    
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> We use only constant extra space as we update the result array in place.</div>    
                     </div>
 
                 </div>

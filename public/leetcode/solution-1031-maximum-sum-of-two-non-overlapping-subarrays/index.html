@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> Given a list of strings <code>words</code> and a target string <code>s</code>, count how many strings in <code>words</code> are prefixes of <code>s</code>. A prefix is defined as a substring starting from the beginning of a string and extending up to a given length. Note that duplicate strings in <code>words</code> should be counted separately. </div>
+<div class=""> You are given an array of integers <code>nums</code> and two integers <code>firstLen</code> and <code>secondLen</code>. Your task is to find the maximum sum of elements from two non-overlapping subarrays of lengths <code>firstLen</code> and <code>secondLen</code>. The subarrays can appear in any order, but they must not overlap. </div>
 
 
 
@@ -359,51 +359,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a string array `words` and a single string `s`.</div>
-                        <div class=""> <b>Example:</b> words = [&#34;cat&#34;, &#34;ca&#34;, &#34;dog&#34;, &#34;c&#34;], s = &#34;catapult&#34;</div>
+                        <div class=""> <b>Input:</b> You are given an integer array `nums` and two integers `firstLen` and `secondLen`, representing the lengths of the two subarrays.</div>
+                        <div class=""> <b>Example:</b> nums = [1, 2, 9, 5, 6, 3, 8, 7], firstLen = 2, secondLen = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= words.length &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= firstLen, secondLen &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= words[i].length, s.length &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= firstLen &#43; secondLen &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • All strings in `words` and `s` consist of lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • firstLen &#43; secondLen &lt;= nums.length &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the count of strings in `words` that are prefixes of the string `s`.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> Return the maximum sum of the elements of the two non-overlapping subarrays.</div>
+                        <div class=""> <b>Example:</b> Output: 30</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The sum of the elements from the two non-overlapping subarrays must be maximized.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine how many strings in `words` match the prefix of `s` up to their length.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find two non-overlapping subarrays whose sum is as large as possible.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each string in `words`.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a sliding window to calculate the sum of every subarray of length `firstLen` and `secondLen`.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the length of the current string is less than or equal to `s`.</div>
+                                <div style="margin-left: 20px;"> • 2. Track the maximum sum of subarrays of length `firstLen` up to each index.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare each character of the string with the corresponding character in `s`.</div>
+                                <div style="margin-left: 20px;"> • 3. Track the maximum sum of subarrays of length `secondLen` starting from each index.</div>
                             
-                                <div style="margin-left: 20px;"> • If all characters match, increment the count.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the total count of matches.</div>
+                                <div style="margin-left: 20px;"> • 4. Combine the results to maximize the sum of the two non-overlapping subarrays.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that only valid prefixes of `s` are counted.</div>
+                        <div class=""> <b>Goal:</b> You must implement a solution that handles the constraints efficiently, especially for large inputs.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Strings in `words` can be shorter than `s`, but not longer.</div>
-                            
-                                <div style="margin-left: 20px;"> • The comparison must stop as soon as a mismatch is found.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle arrays of up to 1000 elements.</div>
                             
                         </div>
                     </div>        
@@ -411,21 +411,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Strings in `words` and `s` are non-empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • Duplicate strings in `words` contribute to the count separately.</div>
+                                <div style="margin-left: 20px;"> • The input array always has enough elements for both subarrays.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> words = [&#34;car&#34;, &#34;ca&#34;, &#34;dog&#34;, &#34;c&#34;], s = &#34;caravan&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The strings in `words` which are prefixes of `s` are &#34;car&#34;, &#34;ca&#34;, and &#34;c&#34;. Thus, the result is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [1, 2, 9, 5, 6, 3, 8, 7], firstLen = 2, secondLen = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal choice is to take the subarray [9, 5] with length 2 and [6, 3, 8] with length 3. The sum is 9 &#43; 5 &#43; 6 &#43; 3 &#43; 8 = 30.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> words = [&#34;x&#34;, &#34;xy&#34;, &#34;xyz&#34;], s = &#34;abcdef&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> None of the strings in `words` are prefixes of `s`. Thus, the result is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [3, 8, 1, 5, 2, 9], firstLen = 2, secondLen = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> One optimal choice is the subarray [8, 1] with length 2 and [5, 2] with length 2. The sum is 8 &#43; 1 &#43; 5 &#43; 2 = 16.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,18 +447,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Iteratively compare each string in `words` with the prefix of `s` up to its length, ensuring efficient substring matching.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem using dynamic programming or sliding windows. The idea is to maintain a rolling sum of the two subarrays and track the best possible combination of the two sums.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Prefix checking can be done by comparing the substring of `s` with the current word.</div>
-                            
-                                <div style="margin-left: 20px;"> • The lengths of the words in `words` are relatively small, so the operations are manageable.</div>
+                                <div style="margin-left: 20px;"> • This problem is a typical example of maximizing the sum of non-overlapping subarrays.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A simple comparison using substring or a character-by-character match is sufficient for this problem.</div>
+                                <div style="margin-left: 20px;"> • We need to efficiently calculate the sum of different subarrays using sliding windows and then combine them to find the maximum sum.</div>
                             
                         </div>
                     </div>
@@ -468,17 +464,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a counter to store the number of prefix matches.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a sliding window to calculate the sum of all subarrays of length `firstLen` and store them in an array `leftSum`.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through each string in `words`.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a sliding window to calculate the sum of all subarrays of length `secondLen` and store them in an array `rightSum`.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the current string is shorter than or equal to `s`.</div>
+                                <div style="margin-left: 20px;"> • 3. For each possible split of the array, calculate the sum of the two subarrays and track the maximum sum.</div>
                             
-                                <div style="margin-left: 20px;"> • Compare the string with the substring of `s` of the same length.</div>
-                            
-                                <div style="margin-left: 20px;"> • If the strings match, increment the counter.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the final count.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the maximum sum found.</div>
                             
                         </div>
                     </div>
@@ -487,22 +479,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `words` is empty, return 0.</div>
+                                <div style="margin-left: 20px;"> • The input array will always have at least two subarrays, so empty arrays are not possible.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle up to 1000 strings in `words` with maximum length 10 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm must efficiently handle arrays with a size of up to 1000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all strings in `words` are equal and match the prefix of `s`, count them all.</div>
+                                <div style="margin-left: 20px;"> • If all elements are zero, the result will be zero.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that partial matches beyond the prefix length are not counted.</div>
+                                <div style="margin-left: 20px;"> • The length of both subarrays will be less than or equal to the total length of the array.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,25 +513,29 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Vectors</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Through Words</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Iterate Over Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Skip Long Words</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Prefix Sums</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Flag Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Store Maximum Prefix</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop Through Characters</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Store Maximum Suffix</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Check Prefix Match</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Adjust Window L</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Flag Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Adjust Window M</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Break Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Calculate Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Increment Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Helper Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Main Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Call Helper Function</button>
                     
                 </div>
 
@@ -548,20 +544,29 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countPrefixes</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words, string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">x</span>: words) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x.size() <span style="color:#666">&gt;</span> s.size()) <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x[i] <span style="color:#666">!=</span> s[i]) {
-</span></span><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(flag) cnt<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> L, <span style="color:#0b0;font-weight:bold">int</span> M, <span style="color:#0b0;font-weight:bold">int</span> sz, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left(sz<span style="color:#666">+</span><span style="color:#666">1</span>), right(sz<span style="color:#666">+</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> sz <span style="color:#666">-</span> <span style="color:#666">1</span>, s_r <span style="color:#666">=</span> <span style="color:#666">0</span>, s_l <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; <span style="color:#666">++</span>i, <span style="color:#666">--</span>j) {
+</span></span><span style="display:flex;"><span>        s_l <span style="color:#666">+=</span> A[i], s_r <span style="color:#666">+=</span> A[j];
+</span></span><span style="display:flex;"><span>        left[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> max(left[i], s_l);
+</span></span><span style="display:flex;"><span>        right[j] <span style="color:#666">=</span> max(right[j <span style="color:#666">+</span> <span style="color:#666">1</span>], s_r);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> L) s_l <span style="color:#666">-=</span> A[i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> M) s_r <span style="color:#666">-=</span> A[j <span style="color:#666">+</span> M <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>i) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, left[i] <span style="color:#666">+</span> right[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> firstLen, <span style="color:#0b0;font-weight:bold">int</span> secondLen) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(maxTwoNoOverlap(nums, firstLen, secondLen, nums.size()),
+</span></span><span style="display:flex;"><span>               maxTwoNoOverlap(nums, secondLen, firstLen, nums.size()));
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -572,110 +577,130 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countPrefixes</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words, string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> L, <span style="color:#0b0;font-weight:bold">int</span> M, <span style="color:#0b0;font-weight:bold">int</span> sz, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the &#39;countPrefixes&#39; function that takes a list of words and a string &#39;s&#39;, and returns the number of words in &#39;words&#39; that are prefixes of &#39;s&#39;. </div>
+                            <div class=""> Define the helper function `maxTwoNoOverlap` that calculates the maximum sum of two non-overlapping subarrays of lengths L and M. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Initialize Vectors</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left(sz<span style="color:#666">+</span><span style="color:#666">1</span>), right(sz<span style="color:#666">+</span><span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, &#39;cnt&#39; is initialized to zero, and it will store the number of words that are prefixes of the string &#39;s&#39;. </div>
+                            <div class=""> Initialize two vectors `left` and `right` to store maximum prefix sums from left to right and right to left. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Through Words</b></div>
+                            <div class=""> <b>3 : Iterate Over Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">x</span>: words) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> sz <span style="color:#666">-</span> <span style="color:#666">1</span>, s_r <span style="color:#666">=</span> <span style="color:#666">0</span>, s_l <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; <span style="color:#666">++</span>i, <span style="color:#666">--</span>j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over each word &#39;x&#39; in the &#39;words&#39; vector to check if it is a prefix of the string &#39;s&#39;. </div>
+                            <div class=""> Iterate over the array from both ends to calculate prefix sums for the left and right vectors. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Skip Long Words</b></div>
+                            <div class=""> <b>4 : Update Prefix Sums</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x.size() <span style="color:#666">&gt;</span> s.size()) <span style="color:#a2f;font-weight:bold">continue</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        s_l <span style="color:#666">+=</span> A[i], s_r <span style="color:#666">+=</span> A[j];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition skips words that are longer than the string &#39;s&#39;, as they cannot be prefixes of &#39;s&#39;. </div>
+                            <div class=""> Update the running sums for the left-to-right and right-to-left prefix sums. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Flag Initialization</b></div>
+                            <div class=""> <b>5 : Store Maximum Prefix</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        left[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> max(left[i], s_l);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A boolean flag &#39;flag&#39; is initialized to true. This flag will track whether the word &#39;x&#39; is a valid prefix of &#39;s&#39;. </div>
+                            <div class=""> Store the maximum prefix sum for the left-to-right traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop Through Characters</b></div>
+                            <div class=""> <b>6 : Store Maximum Suffix</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        right[j] <span style="color:#666">=</span> max(right[j <span style="color:#666">+</span> <span style="color:#666">1</span>], s_r);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This inner loop iterates through the characters of the word &#39;x&#39; to compare each character with the corresponding character of the string &#39;s&#39;. </div>
+                            <div class=""> Store the maximum prefix sum for the right-to-left traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Check Prefix Match</b></div>
+                            <div class=""> <b>7 : Adjust Window L</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x[i] <span style="color:#666">!=</span> s[i]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> L) s_l <span style="color:#666">-=</span> A[i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">-</span> L];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This condition checks if the character at position &#39;i&#39; of the word &#39;x&#39; matches the corresponding character in &#39;s&#39;. If they don&#39;t match, &#39;flag&#39; will be set to false. </div>
+                            <div class=""> Adjust the left-to-right window by subtracting the element that moves out of the L-sized window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Flag Update</b></div>
+                            <div class=""> <b>8 : Adjust Window M</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;=</span> M) s_r <span style="color:#666">-=</span> A[j <span style="color:#666">+</span> M <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the characters don&#39;t match, &#39;flag&#39; is set to false, indicating that &#39;x&#39; is not a prefix of &#39;s&#39;. </div>
+                            <div class=""> Adjust the right-to-left window by subtracting the element that moves out of the M-sized window. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Break Loop</b></div>
+                            <div class=""> <b>9 : Calculate Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>i) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a mismatch is found, the inner loop breaks early, as further checks are unnecessary for this word. </div>
+                            <div class=""> Iterate through the array to calculate the maximum sum of two non-overlapping subarrays. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Increment Count</b></div>
+                            <div class=""> <b>10 : Update Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(flag) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, left[i] <span style="color:#666">+</span> right[i]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;flag&#39; remains true, meaning the word &#39;x&#39; is a prefix of &#39;s&#39;, the count &#39;cnt&#39; is incremented. </div>
+                            <div class=""> Update the result with the maximum sum of the two non-overlapping subarrays at each point. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Result</b></div>
+                            <div class=""> <b>11 : Return Helper Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the final count &#39;cnt&#39;, which represents the number of words in &#39;words&#39; that are prefixes of the string &#39;s&#39;. </div>
+                            <div class=""> Return the calculated result for the helper function `maxTwoNoOverlap`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Main Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxSumTwoNoOverlap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> firstLen, <span style="color:#0b0;font-weight:bold">int</span> secondLen) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the main function `maxSumTwoNoOverlap` that computes the maximum sum using the helper function. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Call Helper Function</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(maxTwoNoOverlap(nums, firstLen, secondLen, nums.size()),
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the helper function with both possible orderings of the subarray lengths and return the maximum. </div>
                         </div>
                     
                 </div>
@@ -696,15 +721,15 @@
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n * l)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * l)</div> 
-                        <div class=""> <b>Description:</b> n = number of strings in `words`, l = average length of strings in `words`.</div>                                               
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only iterate through the array a few times.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> No additional space is used apart from the counter.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) for storing the sliding window sums.</div>    
                     </div>
 
                 </div>

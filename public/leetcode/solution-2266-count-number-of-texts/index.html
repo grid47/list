@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Mar 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    1 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class="">  </div>
+<div class=""> Alice is texting Bob using her phone&rsquo;s keypad. Each digit from &lsquo;2&rsquo; to &lsquo;9&rsquo; maps to multiple letters, and Alice has to press a key several times to type each letter. However, due to a transmission error, Bob receives a string of digits corresponding to the number of key presses rather than the message itself. Your task is to determine how many possible messages Alice could have sent, given the sequence of digits Bob received. The answer should be returned modulo 1e9 + 7. </div>
 
 
 
@@ -319,72 +319,84 @@
     <div class="problem-guide-tags">
 
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Problem" 
+             onclick="switchProblemGuideContent(this, 'Problem')">
+             Problem             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Approach" 
+             onclick="switchProblemGuideContent(this, 'Approach')">
+             Approach             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Steps" 
+             onclick="switchProblemGuideContent(this, 'Steps')">
+             Steps             
         </div>
         <div class="problem-guide-tag" 
-             data-target="" 
-             onclick="switchProblemGuideContent(this, '')">
-                          
+             data-target="Complexity" 
+             onclick="switchProblemGuideContent(this, 'Complexity')">
+             Complexity             
         </div> 
     </div>
 
     
     <div class="problem-guide-content">
 
-        <div id="" 
+        <div id="Problem" 
             class="problem-guide-topic-content" 
             style="display: block;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="4"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="5"></button>                
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="0">Input Representations</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="1">Output Specifications</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="2">Core Logics</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="3">Constraints</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="4">Problem Assumptions</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Problem" data-slide="5">Examples</button>                
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
+                        <div class=""> <b>Input:</b> You are given a string `pressedKeys`, which contains digits from &#39;2&#39; to &#39;9&#39; representing the sequence of key presses Bob received.</div>
+                        <div class=""> <b>Example:</b> pressedKeys = &#39;33322&#39;</div>
+                        <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= pressedKeys.length &lt;= 10^5</div>
+                            
+                                <div style="margin-left: 20px;"> • pressedKeys only contains digits from &#39;2&#39; to &#39;9&#39;.</div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="step-slide">
+                        <div class=""> <b>Output:</b> Return the number of possible messages that Alice could have sent, modulo 1e9 &#43; 7.</div>
+                        <div class=""> <b>Example:</b> Output: 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> </div>
-                        <div class=""> <b>Example:</b> </div>
-                        <div class=""> <b>Constraints:</b>                        
-                            
-                        </div>
-                    </div>
-
-                    <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> We need to determine the number of valid text messages that Alice could have sent based on the received sequence of key presses. The key insight is that consecutive identical digits represent the pressing of multiple letters corresponding to the digit&#39;s position on the keypad.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • Use dynamic programming to keep track of the number of possible ways to decode the sequence of key presses.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each digit, check how many ways the preceding sequence could be decoded given the number of times the current digit is pressed.</div>
+                            
+                                <div style="margin-left: 20px;"> • If multiple consecutive digits are the same, consider all possible letter combinations that could have been typed using those key presses.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> </div>
+                        <div class=""> <b>Goal:</b> The solution should work efficiently for large inputs with up to 10^5 key presses.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • The solution must handle edge cases where a sequence of digits repeats multiple times.</div>
                             
                         </div>
                     </div>        
@@ -392,10 +404,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
+                                <div style="margin-left: 20px;"> • The input string will only contain digits from &#39;2&#39; to &#39;9&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • The number of possible messages must be computed modulo 1e9 &#43; 7.</div>
+                            
                         </div>
                     </div>     
                     
                     <div class="step-slide">
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> pressedKeys = &#39;33322&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The possible text messages Alice could have sent are: &#39;caa&#39;, &#39;cab&#39;, &#39;cbc&#39;, &#39;dda&#39;, &#39;ddb&#39;, &#39;dbc&#39;. So the result is 6.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> pressedKeys = &#39;555555&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The possible text messages Alice could have sent are: &#39;kk&#39;, &#39;kl&#39;, &#39;lm&#39;, &#39;ln&#39;. So the result is 4.</div>                                
+                                <br/>
                             
                     </div>                         
                     
@@ -403,33 +427,45 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Approach" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="2"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="3"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="0">Approach</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="1">Initial Thoughts</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="2">Solution Designs</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Approach" data-slide="3">Edge Cases</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> </div>
+                        <div class=""> <b>Approach:</b> We can use dynamic programming to solve this problem efficiently. We define a dp array where dp[i] represents the number of possible messages for the substring of the first i characters of pressedKeys.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
+                                <div style="margin-left: 20px;"> • The problem can be broken down into considering how many possible combinations we can generate from consecutive key presses of the same digit.</div>
+                            
+                            
+                                <div style="margin-left: 20px;"> • By using dynamic programming, we can avoid recalculating subproblems multiple times and efficiently solve the problem in linear time.</div>
                             
                         </div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • Initialize a dp array where dp[0] = 1 (since there&#39;s one way to decode an empty string).</div>
+                            
+                                <div style="margin-left: 20px;"> • Iterate through the string of pressed keys, and for each character, check how many valid sequences can be generated by considering the current and previous digits.</div>
+                            
+                                <div style="margin-left: 20px;"> • For each sequence of repeated digits, consider all possible combinations of letters that could have been typed.</div>
+                            
+                                <div style="margin-left: 20px;"> • Finally, return the value of dp[n] where n is the length of pressedKeys.</div>
                             
                         </div>
                     </div>
@@ -438,14 +474,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • There will always be at least one digit in pressedKeys.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution must be optimized to handle inputs of size up to 10^5 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
+                                <div style="margin-left: 20px;"> • Consider edge cases where digits repeat many times, such as &#39;2222&#39; or &#39;7777777&#39;.</div>
+                            
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The solution must work within the constraints and return the result modulo 1e9 &#43; 7.</div>
                             
                         </div>                                                                        
                     </div>
@@ -454,54 +498,267 @@
             </div>
         </div> 
 
-        <div id="" 
+        <div id="Steps" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"> Code </button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Declaration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Dynamic Programming Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Base Case Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Loop Start</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Dynamic Programming Transition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check for Adjacent Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Dynamic Programming Transition for Two Consecutive Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition Check for Three Consecutive Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Dynamic Programming Transition for Three Consecutive Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Check for Special Case with &#39;7&#39; or &#39;9&#39;</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Dynamic Programming Transition for Four Consecutive Characters</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
                     
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Steps">
 
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">%!</span>s(<span style="color:#666">&lt;</span>nil<span style="color:#666">&gt;</span>)
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> countTexts(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> s[i <span style="color:#666">-</span> <span style="color:#666">2</span>]) {
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#666">=</span> (dp[i] <span style="color:#666">+</span> dp[i <span style="color:#666">-</span> <span style="color:#666">2</span>]) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">2</span> <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> s[i <span style="color:#666">-</span> <span style="color:#666">3</span>]) {
+</span></span><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> (dp[i] <span style="color:#666">+</span> dp[i <span style="color:#666">-</span> <span style="color:#666">3</span>]) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">3</span> <span style="color:#666">&amp;&amp;</span> (s[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">==</span><span style="color:#b44">&#39;7&#39;</span> <span style="color:#666">||</span> s[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">==</span><span style="color:#b44">&#39;9&#39;</span>) <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> s[i <span style="color:#666">-</span> <span style="color:#666">4</span>]) {
+</span></span><span style="display:flex;"><span>                    dp[i] <span style="color:#666">=</span> (dp[i] <span style="color:#666">+</span> dp[i <span style="color:#666">-</span> <span style="color:#666">4</span>]) <span style="color:#666">%</span> mod;                        
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
                     </div>
 
                     
+                        <div class="step-slide">
+                            <div class=""> <b>1 : Class Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines a class called `Solution` that contains the solution to the problem. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a constant `mod` to the value 10^9 &#43; 7, which will be used to avoid overflow by taking the result modulo this value. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Access Modifier</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Specifies the access level for the subsequent members, indicating that they are publicly accessible. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Function Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countTexts</span>(string s) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the function `countTexts` which takes a string `s` as input and returns an integer representing the number of ways the string can be formed based on keypress patterns. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Variable Declaration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the size of the string `s` and stores it in the variable `n`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Dynamic Programming Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes a dynamic programming array `dp` of size `n&#43;1` to store the number of valid ways to form sequences up to each position in the string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Base Case Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sets the base case of the dynamic programming array, as there is one way to form an empty string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Loop Start</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Begins a loop over the string from index 1 to `n` to calculate the number of ways to form valid sequences. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Dynamic Programming Transition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> At each step, updates the number of ways to form a valid sequence by considering the previous value and applying modulo `mod` to prevent overflow. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Condition Check for Adjacent Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> s[i <span style="color:#666">-</span> <span style="color:#666">2</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current character is the same as the previous one, which allows for additional ways to form sequences. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Dynamic Programming Transition for Two Consecutive Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dp[i] <span style="color:#666">=</span> (dp[i] <span style="color:#666">+</span> dp[i <span style="color:#666">-</span> <span style="color:#666">2</span>]) <span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the last two characters are the same, adds the number of ways to form sequences considering the previous two characters. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Condition Check for Three Consecutive Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">2</span> <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> s[i <span style="color:#666">-</span> <span style="color:#666">3</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if the current character is the same as the character two positions back, allowing for additional sequence combinations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Dynamic Programming Transition for Three Consecutive Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i] <span style="color:#666">=</span> (dp[i] <span style="color:#666">+</span> dp[i <span style="color:#666">-</span> <span style="color:#666">3</span>]) <span style="color:#666">%</span> mod;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the last three characters are the same, updates the sequence count by adding the possibilities from the previous three characters. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Condition Check for Special Case with &#39;7&#39; or &#39;9&#39;</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">3</span> <span style="color:#666">&amp;&amp;</span> (s[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">==</span><span style="color:#b44">&#39;7&#39;</span> <span style="color:#666">||</span> s[i<span style="color:#666">-</span><span style="color:#666">1</span>]<span style="color:#666">==</span><span style="color:#b44">&#39;9&#39;</span>) <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> s[i <span style="color:#666">-</span> <span style="color:#666">4</span>]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks for a special case where the current character is either &#39;7&#39; or &#39;9&#39; and the same as the fourth character back, enabling further sequence combinations. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Dynamic Programming Transition for Four Consecutive Characters</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    dp[i] <span style="color:#666">=</span> (dp[i] <span style="color:#666">+</span> dp[i <span style="color:#666">-</span> <span style="color:#666">4</span>]) <span style="color:#666">%</span> mod;                        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds the number of ways to form sequences considering the last four characters if they meet the special conditions. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the final result, which is the number of valid sequences for the entire input string `s`. </div>
+                        </div>
+                    
                 </div>
             </div>
         </div> 
         
-        <div id="" 
+        <div id="Complexity" 
             class="problem-guide-topic-content" 
             style="display: none;">
 
             <div class="steps-container">
                 <div class="step-problem-guide-tags" id="stepButtons">
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="0"></button>
-                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-" data-slide="1"></button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="0">Time Complexities</button>
+                    <button class="step-problem-guide-tag" id="step-problem-guide-tag-Complexity" data-slide="1">Space Complexities</button>
                 </div>
 
-                <div class="steps-slides" id="stepsSlides-">
+                <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Average Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) since we process each character of the input string once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> </div>
-                        <div class=""> <b>Worst Case:</b> </div> 
-                        <div class=""> <b>Description:</b> </div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the dp array used to store the number of possible messages for each substring.</div>    
                     </div>
 
                 </div>
@@ -576,8 +833,8 @@
         }        
 
         function buttons() {
-            const slides = document.getElementById('stepsSlides-');
-            const buttons = document.querySelectorAll('#step-problem-guide-tag-');
+            const slides = document.getElementById('stepsSlides-Problem');
+            const buttons = document.querySelectorAll('#step-problem-guide-tag-Problem');
             let currentIndex = 0;
             let startX = 0;
             let isDragging = false;
@@ -619,7 +876,7 @@
 
             updateSlides(currentIndex);
 
-            const initialTag = document.querySelector(`.problem-guide-tag[data-target=""]`);
+            const initialTag = document.querySelector(`.problem-guide-tag[data-target="Problem"]`);
             if (initialTag) {
                 initialTag.classList.add('problem-guide-tag-active');
             }

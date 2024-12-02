@@ -275,7 +275,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 14, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -314,7 +314,7 @@
 
 
 
-<div class=""> Given a square grid of size n x n containing only 0s (water) and 1s (land), find the water cell that is farthest from any land cell based on Manhattan distance, and return that distance. If the grid has no water or no land, return -1. </div>
+<div class=""> Given an array of integers nums and an integer k, return the number of unique k-diff pairs in the array. A k-diff pair is a pair of integers (nums[i], nums[j]) where the absolute difference between the values of the pair is k, and i != j. </div>
 
 
 
@@ -365,53 +365,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A 2D grid of size n x n where each cell contains either 0 (water) or 1 (land).</div>
-                        <div class=""> <b>Example:</b> grid = [[1,0,1],[0,0,0],[1,0,1]]</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers nums and an integer k. The array can have up to 10^4 elements, and k is a non-negative integer.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [5, 1, 6, 1, 8], k = 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • n == grid.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • n == grid[i].length</div>
+                                <div style="margin-left: 20px;"> • -10^7 &lt;= nums[i] &lt;= 10^7</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • grid[i][j] is either 0 or 1</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^7</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> An integer representing the maximum Manhattan distance from a water cell to the nearest land cell. Return -1 if no valid configuration exists.</div>
+                        <div class=""> <b>Output:</b> Return the number of unique k-diff pairs in the array.</div>
                         <div class=""> <b>Example:</b> Output: 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
+                                <div style="margin-left: 20px;"> • The output should be the number of unique pairs with the specified absolute difference.</div>
+                            
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Calculate the maximum Manhattan distance of a water cell to the nearest land cell.</div>
+                        <div class=""> <b>Goal:</b> To find all unique pairs (i, j) such that the absolute difference between nums[i] and nums[j] equals k.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a queue to store land cells&#39; coordinates.</div>
+                                <div style="margin-left: 20px;"> • Count the occurrences of each number in the array using a hashmap.</div>
                             
-                                <div style="margin-left: 20px;"> • Mark water cells with -1 to differentiate unvisited cells.</div>
+                                <div style="margin-left: 20px;"> • For each number in the hashmap, check if a pair exists that satisfies the absolute difference of k.</div>
                             
-                                <div style="margin-left: 20px;"> • Perform a breadth-first search (BFS) starting from all land cells simultaneously.</div>
+                                <div style="margin-left: 20px;"> • If k is greater than 0, check if nums[i] - k exists in the map.</div>
                             
-                                <div style="margin-left: 20px;"> • Update water cells with their distance to the nearest land cell.</div>
-                            
-                                <div style="margin-left: 20px;"> • Keep track of the maximum distance during the BFS.</div>
+                                <div style="margin-left: 20px;"> • If k is equal to 0, check if a number appears more than once in the map.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure efficient computation for grids up to size 100x100.</div>
+                        <div class=""> <b>Goal:</b> The problem has constraints that ensure the array is not empty and the values are within the specified ranges.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Handle edge cases such as grids with no water or no land.</div>
+                                <div style="margin-left: 20px;"> • The number of elements in the array will be between 1 and 10^4.</div>
                             
-                                <div style="margin-left: 20px;"> • Avoid out-of-bounds access during BFS.</div>
+                                <div style="margin-left: 20px;"> • Each element of the array will be in the range [-10^7, 10^7].</div>
+                            
+                                <div style="margin-left: 20px;"> • The integer k will be in the range [0, 10^7].</div>
                             
                         </div>
                     </div>        
@@ -419,21 +419,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Grid dimensions are always square.</div>
+                                <div style="margin-left: 20px;"> • The array contains at least one number.</div>
                             
-                                <div style="margin-left: 20px;"> • Input grid contains at least one water or one land cell.</div>
+                                <div style="margin-left: 20px;"> • The input value k is a valid non-negative integer.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[1,0,0],[0,0,0],[0,0,0]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The cell (2, 2) is the farthest from all land cells with a distance of 4.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> grid = [[1,1,1],[1,1,1],[1,1,1]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No water exists, so the output is -1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [5, 1, 6, 1, 8], k = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are two pairs with a difference of 3: (1, 4) and (5, 8). Since the pairs are unique, the output is 2.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -457,20 +453,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use BFS starting from all land cells to calculate the nearest distance for water cells.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we will use a hashmap to store the frequency of each element in the array and check for the existence of the required pairs.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each water cell&#39;s distance depends on its proximity to land cells.</div>
-                            
-                                <div style="margin-left: 20px;"> • Simultaneous BFS from all land cells ensures optimal computation.</div>
+                                <div style="margin-left: 20px;"> • Using a hashmap to count occurrences of numbers allows for efficient lookups when checking for pairs.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Iterate through the grid to initialize BFS queue with all land cells.</div>
-                            
-                                <div style="margin-left: 20px;"> • Use BFS to propagate distances to water cells.</div>
+                                <div style="margin-left: 20px;"> • If k is 0, we need to check for duplicates, while for k &gt; 0, we need to find numbers that differ by k.</div>
                             
                         </div>
                     </div>
@@ -478,11 +470,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Traverse the grid to collect all land cells&#39; coordinates.</div>
+                                <div style="margin-left: 20px;"> • Create a hashmap to store the frequency of each number in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • Use BFS to process the grid from these coordinates.</div>
+                                <div style="margin-left: 20px;"> • For each element in the hashmap, check if a valid pair exists based on the value of k.</div>
                             
-                                <div style="margin-left: 20px;"> • Update distances for water cells and track the maximum distance.</div>
+                                <div style="margin-left: 20px;"> • If k &gt; 0, check if nums[i] - k exists in the map. If k == 0, ensure the frequency of the number is greater than 1.</div>
                             
                         </div>
                     </div>
@@ -491,24 +483,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • grid = [] -&gt; Return -1</div>
+                                <div style="margin-left: 20px;"> • If the input array is empty, return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • grid = [[0]*100 for _ in range(100)] -&gt; Ensure no timeouts.</div>
+                                <div style="margin-left: 20px;"> • Handle cases with the maximum number of elements efficiently using a hashmap.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • grid with all 1s -&gt; Return -1</div>
-                            
-                                <div style="margin-left: 20px;"> • grid with all 0s -&gt; Return -1</div>
+                                <div style="margin-left: 20px;"> • Consider the case when k = 0, where the only valid pairs are those that have duplicates.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure BFS handles edge cells correctly.</div>
+                                <div style="margin-left: 20px;"> • Ensure that pairs are counted uniquely and that duplicates are handled correctly.</div>
                             
                         </div>                                                                        
                     </div>
@@ -525,53 +515,25 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition, Hash Map Usage</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Queue Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop, Array Traversal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Grid Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Count Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Grid Traversal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Initialize Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Land Cell Identification</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Iterate over Map</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Queue Enqueue</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition for k &gt; 0</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Grid Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition for k == 0</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Water Cell Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Increment Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Empty Queue Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Direction Array Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Distance Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 BFS Traversal</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Queue Dequeue</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Queue Pop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Direction Loop</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Neighbor Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Boundary Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Skip Invalid Cell</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Distance Output</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Grid Update (Distance Increment)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Queue Enqueue (Neighbor)</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Max Distance Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Result</button>
                     
                 </div>
 
@@ -580,34 +542,16 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>            q.push(make_pair(i, j));
-</span></span><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> grid[i][j] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(q.empty() <span style="color:#666">||</span> q.size() <span style="color:#666">==</span> n <span style="color:#666">*</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>        q.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> tmp.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> tmp.second <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> n <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> grid[tmp.first][tmp.second] <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34; &#34;</span>;
-</span></span><span style="display:flex;"><span>            grid[x][y] <span style="color:#666">=</span> grid[tmp.first][tmp.second] <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            q.push(make_pair(x, y));
-</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, grid[x][y]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findPairs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : nums)
+</span></span><span style="display:flex;"><span>        mp[i]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>[i, j] <span style="color:#666">:</span> mp)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((k <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> mp.count(i <span style="color:#666">-</span> k)) <span style="color:#666">||</span>
+</span></span><span style="display:flex;"><span>          (k <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (j <span style="color:#666">&gt;</span> <span style="color:#666">1</span>)) )
+</span></span><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -615,243 +559,103 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Definition, Hash Map Usage</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findPairs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function maxDistance that takes a 2D grid as input, where 1 represents land and 0 represents water. </div>
+                            <div class=""> Defines the `findPairs` function, which takes an integer array `nums` and an integer `k` as input and returns the number of unique pairs with the absolute difference equal to `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> grid.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the variable n to store the size of the grid, i.e., the number of rows (and columns, since the grid is square). </div>
+                            <div class=""> Initializes a hash map `mp` where the keys are the elements of the array `nums`, and the values are the frequency of those elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Queue Initialization</b></div>
+                            <div class=""> <b>3 : Loop, Array Traversal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a queue of pairs to perform BFS. Each pair will represent a cell in the grid (row and column indices). </div>
+                            <div class=""> Iterates through each element `i` in the array `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Grid Initialization</b></div>
+                            <div class=""> <b>4 : Count Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[i]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each row of the grid. </div>
+                            <div class=""> Increments the count of the current element `i` in the map `mp`. This stores the frequency of each element in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Grid Traversal</b></div>
+                            <div class=""> <b>5 : Initialize Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each column of the grid. </div>
+                            <div class=""> Initializes the variable `res` to store the result, i.e., the number of pairs with the required absolute difference. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Land Cell Identification</b></div>
+                            <div class=""> <b>6 : Iterate over Map</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>[i, j] <span style="color:#666">:</span> mp)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current cell is land (represented by 1). </div>
+                            <div class=""> Iterates through the map `mp`, where `i` is the key (the element of the array) and `j` is the value (the frequency of that element). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Queue Enqueue</b></div>
+                            <div class=""> <b>7 : Condition for k &gt; 0</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(make_pair(i, j));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((k <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> mp.count(i <span style="color:#666">-</span> k)) <span style="color:#666">||</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Push the coordinates of the land cell onto the queue for BFS. </div>
+                            <div class=""> Checks if `k &gt; 0` and if the map contains an element `i - k` (the complement of the current element `i` that would form a pair with the absolute difference `k`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Grid Update</b></div>
+                            <div class=""> <b>8 : Condition for k == 0</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[i][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>          (k <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (j <span style="color:#666">&gt;</span> <span style="color:#666">1</span>)) )
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set the land cell to 0, marking it as visited. </div>
+                            <div class=""> Checks if `k == 0` and the frequency of the current element `i` is greater than 1, indicating that there is at least one duplicate, forming a valid pair. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Water Cell Initialization</b></div>
+                            <div class=""> <b>9 : Increment Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> grid[i][j] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Set all water cells (represented by 0) to -1, indicating they are unvisited. </div>
+                            <div class=""> Increments the result `res` if the conditions for a valid pair are met. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Empty Queue Check</b></div>
+                            <div class=""> <b>10 : Return Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(q.empty() <span style="color:#666">||</span> q.size() <span style="color:#666">==</span> n <span style="color:#666">*</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the queue is empty or if the grid is already fully land (no water cells), return -1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Direction Array Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize an array representing the four possible directions (right, down, left, up) for BFS traversal. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Max Distance Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialize a variable mx to store the maximum distance encountered during BFS. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : BFS Traversal</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Begin a while loop that continues until the queue is empty, representing the BFS process. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Queue Dequeue</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> q.front();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Dequeue the front element of the queue to start the BFS from the current land cell. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Queue Pop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        q.pop();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Remove the processed cell from the queue. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Direction Loop</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Loop over the four possible directions (up, down, left, right) to explore neighboring cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Neighbor Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> tmp.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> tmp.second <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculate the new coordinates (x, y) by adding the respective direction offsets. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Boundary Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> n <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if the new coordinates are out of bounds or if the neighboring cell is already visited or not water. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Skip Invalid Cell</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">continue</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Skip the current neighbor if it&#39;s out of bounds or already processed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Distance Output</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cout <span style="color:#666">&lt;&lt;</span> grid[tmp.first][tmp.second] <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34; &#34;</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Output the distance of the current cell (for debugging or visualization purposes). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Grid Update (Distance Increment)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[x][y] <span style="color:#666">=</span> grid[tmp.first][tmp.second] <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the neighboring cell&#39;s distance to be the current cell&#39;s distance &#43; 1. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Queue Enqueue (Neighbor)</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            q.push(make_pair(x, y));
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Push the updated neighboring cell to the queue for further processing. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>23 : Max Distance Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, grid[x][y]);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Update the maximum distance encountered so far. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>24 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mx;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the maximum distance found from any land cell to the nearest water cell. </div>
+                            <div class=""> Returns the final count of valid pairs. </div>
                         </div>
                     
                 </div>
@@ -871,16 +675,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2) when grid contains mixed cells.</div>
-                        <div class=""> <b>Average Case:</b> O(n^2) due to full traversal during BFS.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2) for fully mixed grids.</div> 
-                        <div class=""> <b>Description:</b> Each cell is visited once during BFS.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the number of elements in the input array. This is due to the hashmap creation and lookups.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) for grids with uniform values.</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2) for BFS queue.</div> 
-                        <div class=""> <b>Description:</b> Queue size depends on the number of cells in the grid.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n), as we use a hashmap to store the frequency of each element in the array.</div>    
                     </div>
 
                 </div>

@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Nov 5, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -319,7 +319,12 @@
 
 
 
-<div class=""> You are given the head of a singly linked list. Your task is to swap every two adjacent nodes in the list and return its head. The nodes themselves should be swapped, not just the values. </div>
+<div class=""> <p>You are given a string containing characters representing various types of brackets: &lsquo;(&rsquo;, &lsquo;)&rsquo;, &lsquo;{&rsquo;, &lsquo;}&rsquo;, &lsquo;[&rsquo; and &lsquo;]&rsquo;. Your task is to determine if the input string is valid. A string is considered valid if:</p>
+<ol>
+<li>Open brackets must be closed by the same type of brackets.</li>
+<li>Open brackets must be closed in the correct order.</li>
+<li>Every close bracket has a corresponding open bracket of the same type.</li>
+</ol> </div>
 
 
 
@@ -370,43 +375,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of the head of a singly linked list, where each node has a `val` representing its value.</div>
-                        <div class=""> <b>Example:</b> Input: head = [1, 2, 3, 4]</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s containing only the characters &#39;(&#39;, &#39;)&#39;, &#39;{&#39;, &#39;}&#39;, &#39;[&#39; and &#39;]&#39;.</div>
+                        <div class=""> <b>Example:</b> s = &#39;({[]})&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • The number of nodes in the list is between 0 and 100.</div>
+                                <div style="margin-left: 20px;"> • s consists of parentheses only &#39;()[]{}&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the head of the modified linked list where every two adjacent nodes have been swapped.</div>
-                        <div class=""> <b>Example:</b> Output: [2, 1, 4, 3]</div>
+                        <div class=""> <b>Output:</b> The output is a boolean value: true if the string is valid, otherwise false.</div>
+                        <div class=""> <b>Example:</b> true</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result should be a boolean indicating whether the input string is valid.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to swap every two adjacent nodes while maintaining the rest of the list unchanged.</div>
+                        <div class=""> <b>Goal:</b> To check whether the string contains valid parentheses by ensuring each open bracket has a corresponding and correctly ordered closing bracket.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse the list with two pointers.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty stack to keep track of open brackets.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each pair of adjacent nodes, swap their positions.</div>
+                                <div style="margin-left: 20px;"> • Iterate through each character in the string.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Ensure the swapped pairs maintain the linkage to the rest of the list.</div>
+                                <div style="margin-left: 20px;"> • If the character is an open bracket (&#39;(&#39;, &#39;{&#39;, or &#39;[&#39;), push it onto the stack.</div>
+                            
+                                <div style="margin-left: 20px;"> • If the character is a closing bracket (&#39;)&#39;, &#39;}&#39;, or &#39;]&#39;), check if the stack is not empty and if the top of the stack matches the corresponding open bracket.</div>
+                            
+                                <div style="margin-left: 20px;"> • If there&#39;s a match, pop the stack, else return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • After iterating through the string, if the stack is empty, return true (valid). Otherwise, return false (invalid).</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The algorithm should efficiently handle up to 100 nodes and should not modify the values of the nodes, only the structure of the list.</div>
+                        <div class=""> <b>Goal:</b> Conditions that the input string will always meet.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The list may be empty or contain only one node.</div>
+                                <div style="margin-left: 20px;"> • The input string will only contain characters from &#39;(&#39;, &#39;)&#39;, &#39;{&#39;, &#39;}&#39;, &#39;[&#39; and &#39;].</div>
                             
                         </div>
                     </div>        
@@ -414,23 +427,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input list will always have at least zero nodes.</div>
+                                <div style="margin-left: 20px;"> • The input string is always non-empty.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input string contains only valid characters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [1, 2, 3, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after swapping every two adjacent nodes, the list becomes [2, 1, 4, 3]. The first two nodes are swapped and the next pair is also swapped.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;({[]})&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This string contains balanced brackets: each opening bracket has a corresponding closing bracket in the correct order. Thus, the output is true.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, there is only one node, so no swap is possible. The output will be the same single node list: [1].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;({[})&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This string contains mismatched brackets. The order is incorrect, and the closing bracket doesn&#39;t match the last opening bracket, so the output is false.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = []</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> If the input list is empty, the output should also be empty.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;([])&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This string contains balanced brackets: each opening bracket has a corresponding closing bracket in the correct order. Thus, the output is true.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -454,16 +469,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to traverse the list and swap every two adjacent nodes while ensuring the list structure is preserved.</div>
+                        <div class=""> <b>Approach:</b> The approach to solve this problem is by using a stack to ensure that each open bracket has a corresponding closing bracket in the correct order.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • This problem requires adjusting the pointers of adjacent nodes without changing their values.</div>
+                                <div style="margin-left: 20px;"> • Using a stack data structure helps ensure the correct order of opening and closing brackets.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each closing bracket should match the most recent open bracket.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can perform this in one pass over the list while keeping track of the previous and next nodes to ensure the linkage is correct after each swap.</div>
+                                <div style="margin-left: 20px;"> • By pushing open brackets onto the stack and popping them when encountering matching closing brackets, we can validate the string efficiently.</div>
                             
                         </div>
                     </div>
@@ -471,13 +488,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Check if the list is empty or has only one node. If true, return the list as is.</div>
+                                <div style="margin-left: 20px;"> • Initialize an empty stack to keep track of open brackets.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Initialize pointers for the previous, current, and next nodes.</div>
+                                <div style="margin-left: 20px;"> • Traverse the string from left to right.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Swap each adjacent pair of nodes.</div>
+                                <div style="margin-left: 20px;"> • For each character, if it&#39;s an open bracket, push it onto the stack.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Ensure proper linkage after each swap and continue until the end of the list.</div>
+                                <div style="margin-left: 20px;"> • If it&#39;s a closing bracket, check if the stack is not empty and if the top of the stack matches the corresponding open bracket. If so, pop the stack, otherwise return false.</div>
+                            
+                                <div style="margin-left: 20px;"> • Finally, after processing all characters, return true if the stack is empty, indicating all brackets were properly matched.</div>
                             
                         </div>
                     </div>
@@ -486,22 +505,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the input is an empty list, return an empty list.</div>
+                                <div style="margin-left: 20px;"> • The input string will never be empty. There will always be at least one bracket.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work efficiently for lists with up to 100 nodes.</div>
+                                <div style="margin-left: 20px;"> • The solution handles strings of length up to 10^4 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the list contains only one node, no swap is needed and the same list should be returned.</div>
+                                <div style="margin-left: 20px;"> • Handles cases with a single pair of brackets as well as very large balanced or unbalanced sequences.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must preserve the list&#39;s structure and ensure no values are modified.</div>
+                                <div style="margin-left: 20px;"> • The solution must work for all strings of valid length and with valid bracket characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,23 +539,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Stack Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Conditional Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Node Manipulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Node Manipulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pointer Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return</button>
                     
@@ -547,21 +566,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">swapPairs</span>(ListNode<span style="color:#666">*</span> head) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(head <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">||</span> head<span style="color:#666">-&gt;</span>next <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> head;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> cur <span style="color:#666">=</span> head, <span style="color:#666">*</span>nxt <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next, <span style="color:#666">*</span>ret <span style="color:#666">=</span> nxt, <span style="color:#666">*</span>prv <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(cur <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> nxt <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(prv <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) prv<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> nxt;
-</span></span><span style="display:flex;"><span>        prv <span style="color:#666">=</span> cur;            
-</span></span><span style="display:flex;"><span>        cur<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> nxt<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>        nxt<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> cur;
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) nxt <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isValid</span>(string s) {
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {
+</span></span><span style="display:flex;"><span>            stk.push(x);
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) stk.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;}&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span>) stk.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) stk.pop();                
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -572,110 +589,110 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> <span style="color:#00a000">swapPairs</span>(ListNode<span style="color:#666">*</span> head) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isValid</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a function named &#39;swapPairs&#39; that takes a pointer to the head of a linked list as input and returns a pointer to the head of the modified linked list. </div>
+                            <div class=""> This line declares a function named &#39;isValid&#39; that takes a string &#39;s&#39; as input and returns a boolean value indicating whether the string is valid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Base Case</b></div>
+                            <div class=""> <b>2 : Stack Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(head <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">||</span> head<span style="color:#666">-&gt;</span>next <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> head;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line checks if the list is empty or has only one node. In these cases, no swapping is needed, and the original head is returned. </div>
+                            <div class=""> This line initializes an empty stack of characters to store opening brackets. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> cur <span style="color:#666">=</span> head, <span style="color:#666">*</span>nxt <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next, <span style="color:#666">*</span>ret <span style="color:#666">=</span> nxt, <span style="color:#666">*</span>prv <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line initializes four pointers: &#39;cur&#39; to the current node, &#39;nxt&#39; to the next node, &#39;ret&#39; to the new head (which will be the second node), and &#39;prv&#39; to the previous node (initially NULL). </div>
+                            <div class=""> This line starts a loop to iterate over each character &#39;x&#39; in the input string &#39;s&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop Iteration</b></div>
+                            <div class=""> <b>4 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(cur <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> nxt <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line starts a loop that continues as long as both &#39;cur&#39; and &#39;nxt&#39; are not NULL. </div>
+                            <div class=""> This line checks if the current character &#39;x&#39; is an opening bracket (&#39;(&#39;, &#39;{&#39;, or &#39;[&#39;). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Conditional Update</b></div>
+                            <div class=""> <b>5 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(prv <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) prv<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> nxt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(x);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If there&#39;s a previous node &#39;prv&#39;, its &#39;next&#39; pointer is updated to point to the current &#39;nxt&#39; node. </div>
+                            <div class=""> If &#39;x&#39; is an opening bracket, it is pushed onto the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Pointer Update</b></div>
+                            <div class=""> <b>6 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        prv <span style="color:#666">=</span> cur;            
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The &#39;prv&#39; pointer is updated to point to the current &#39;cur&#39; node. </div>
+                            <div class=""> This line handles the case where &#39;x&#39; is not an opening bracket. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Node Manipulation</b></div>
+                            <div class=""> <b>7 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> nxt<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                 <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The &#39;next&#39; pointer of the current node &#39;cur&#39; is updated to point to the node after &#39;nxt&#39;. </div>
+                            <div class=""> If &#39;x&#39; is a closing bracket &#39;)&#39; and the stack is not empty and the top element of the stack is an opening bracket &#39;(&#39;, then the top element is popped from the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Node Manipulation</b></div>
+                            <div class=""> <b>8 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nxt<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> cur;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;}&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="">&#39;</span>{<span style="">&#39;</span>) stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The &#39;next&#39; pointer of the &#39;nxt&#39; node is updated to point to the current &#39;cur&#39; node, effectively swapping the two nodes. </div>
+                            <div class=""> If &#39;x&#39; is a closing bracket &#39;}&#39; and the stack is not empty and the top element of the stack is an opening bracket &#39;{&#39;, then the top element is popped from the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Pointer Update</b></div>
+                            <div class=""> <b>9 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) stk.pop();                
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The &#39;cur&#39; pointer is moved to the next node, which is the original &#39;nxt&#39; node after the swap. </div>
+                            <div class=""> If &#39;x&#39; is a closing bracket &#39;]&#39; and the stack is not empty and the top element of the stack is an opening bracket &#39;[&#39;, then the top element is popped from the stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pointer Update</b></div>
+                            <div class=""> <b>10 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) nxt <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If &#39;cur&#39; is not NULL, the &#39;nxt&#39; pointer is updated to point to the next node after &#39;cur&#39;. </div>
+                            <div class=""> If none of the above conditions are met, it means there&#39;s an unmatched closing bracket, and the function returns false. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>11 : Return</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ret;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> After the loop, the function returns the new head of the linked list, which is stored in the &#39;ret&#39; pointer. </div>
+                            <div class=""> If the loop completes without returning false, it means all brackets are matched. The function returns true if the stack is empty, indicating that all brackets have been paired. </div>
                         </div>
                     
                 </div>
@@ -698,13 +715,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> Since we process each node once, the time complexity is linear, where n is the number of nodes in the list.</div>                                               
+                        <div class=""> <b>Description:</b> We iterate through the string once, performing constant time operations for each character.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is constant since we are only using a few extra pointers for traversal and swapping.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) in the worst case when all characters are opening brackets.</div>    
                     </div>
 
                 </div>

@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given an integer array &lsquo;prices&rsquo;, where &lsquo;prices[i]&rsquo; represents the price of a stock on the i-th day. You are allowed to complete as many transactions as you like, with the restriction that after selling a stock, you cannot buy again the next day (cooldown). The goal is to calculate the maximum profit you can achieve by making any number of transactions while respecting the cooldown period. </div>
+<div class=""> You are given the head of a singly linked list. The goal is to reorder the list such that the nodes are arranged as follows: L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → &hellip;, without modifying the values of the nodes. Only the structure of the list can be changed. </div>
 
 
 
@@ -372,45 +372,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array, &#39;prices&#39;, where each element represents the price of a stock on a specific day.</div>
-                        <div class=""> <b>Example:</b> prices = [1, 2, 3, 0, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of a singly linked list with integer values. The linked list is given by its head node.</div>
+                        <div class=""> <b>Example:</b> Input: head = [10, 20, 30, 40]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= prices.length &lt;= 5000</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the list is in the range [1, 5 * 10^4].</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= prices[i] &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= Node.val &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output is the maximum profit achievable by making transactions while respecting the cooldown period.</div>
-                        <div class=""> <b>Example:</b> For prices = [1, 2, 3, 0, 2], the output is 3.</div>
+                        <div class=""> <b>Output:</b> The output should be the reordered linked list where nodes are arranged as L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → ...</div>
+                        <div class=""> <b>Example:</b> Output: [10, 40, 20, 30]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be a singly linked list with the nodes rearranged as described.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the maximum profit achievable by completing multiple stock transactions while adhering to the cooldown constraint.</div>
+                        <div class=""> <b>Goal:</b> The goal is to reorder the linked list as per the given structure without modifying the node values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use dynamic programming to track the states: whether we are holding a stock or not, and whether we&#39;re in a cooldown period.</div>
+                                <div style="margin-left: 20px;"> • 1. Find the middle of the list using the slow and fast pointer approach.</div>
                             
-                                <div style="margin-left: 20px;"> • For each day, decide whether to buy, sell, or cooldown based on the previous decisions.</div>
+                                <div style="margin-left: 20px;"> • 2. Reverse the second half of the list.</div>
                             
-                                <div style="margin-left: 20px;"> • Memoize the results to avoid redundant calculations and improve efficiency.</div>
+                                <div style="margin-left: 20px;"> • 3. Merge the first half and the reversed second half by alternating nodes from each half.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution needs to handle large inputs efficiently within the given constraints.</div>
+                        <div class=""> <b>Goal:</b> The solution must operate within the given constraints and reorder the list in linear time.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The array can have up to 5000 elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • The price of the stock can be between 0 and 1000.</div>
+                                <div style="margin-left: 20px;"> • The list must be reordered in O(n) time and O(1) extra space.</div>
                             
                         </div>
                     </div>        
@@ -418,23 +418,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The solution should handle edge cases like no profit or small arrays.</div>
+                                <div style="margin-left: 20px;"> • The input list is non-empty and contains valid integers.</div>
+                            
+                                <div style="margin-left: 20px;"> • The list is not cyclic.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> prices = [1, 2, 3, 0, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal transaction sequence is to buy on day 1 and sell on day 2, then cooldown on day 3, then buy on day 4 and sell on day 5. The total profit is 3.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> prices = [5, 1, 3, 6, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The optimal sequence is to buy on day 2, sell on day 3, buy on day 4, and sell on day 5. The total profit is 7.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> prices = [1]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> With only one price, no transaction is possible, and the maximum profit is 0.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: head = [10, 20, 30, 40]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the list is reordered as [10, 40, 20, 30], where the first node is followed by the last node, then the second node, followed by the second last node, and so on.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -458,16 +452,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> A dynamic programming approach can be used to track different states of the stock transaction, such as holding a stock, not holding a stock, or being in a cooldown state.</div>
+                        <div class=""> <b>Approach:</b> The solution involves three main steps: finding the middle of the list, reversing the second half, and merging the two halves.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to track whether we are holding a stock, not holding a stock, or in a cooldown state.</div>
+                                <div style="margin-left: 20px;"> • The problem requires rearranging nodes without modifying their values.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We will use a 3D DP array to store the maximum profit for each state: holding a stock, not holding a stock, or in a cooldown state.</div>
+                                <div style="margin-left: 20px;"> • A two-pointer approach can help find the middle of the list. After that, reversing the second half allows us to merge both halves in the required order.</div>
                             
                         </div>
                     </div>
@@ -475,11 +469,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define a 3D DP array to track states for each day.</div>
+                                <div style="margin-left: 20px;"> • 1. Use two pointers (slow and fast) to find the middle of the list.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and calculate the best decision at each point (buy, sell, or cooldown).</div>
+                                <div style="margin-left: 20px;"> • 2. Reverse the second half of the list starting from the node after the middle.</div>
                             
-                                <div style="margin-left: 20px;"> • Memoize intermediate results to avoid recomputing them.</div>
+                                <div style="margin-left: 20px;"> • 3. Merge the two halves by alternately linking nodes from each half.</div>
                             
                         </div>
                     </div>
@@ -488,22 +482,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, no transactions can be made, and the profit is 0.</div>
+                                <div style="margin-left: 20px;"> • If the input list contains only one node, the list remains unchanged.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must efficiently handle large arrays of up to 5000 elements.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle lists with up to 50,000 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If all prices are the same, the maximum profit is 0 as no profit can be made.</div>
+                                <div style="margin-left: 20px;"> • The list may contain nodes with varying values, but the algorithm should not modify their values, only their positions.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution runs within the time limits for large inputs.</div>
+                                <div style="margin-left: 20px;"> • The solution must use linear time and constant space.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,35 +514,47 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Vector Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Pointer Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Recursive Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Find Middle</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Move Slow Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Memoization Lookup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Move Fast Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Case 1 - No Transaction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Middle Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Case 2 - Buy Stock</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Break First Half</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Recursive Case 3 - Make Purchase</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pointer Initialization for Reversal</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Case 4 - Sell Stock</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Reverse Second Half</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Case 5 - Make Sale</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Save Next Node</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Memoization Storage</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Reverse Link</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Main Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Previous Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Memoization Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Move Mid Pointer</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Store Prices</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Pointer Initialization for Merging</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Final Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Merge Two Halves</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Save Next Node in First Half</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Connect First Half to Second Half</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Save Next Node in Second Half</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Connect Second Half to First Half</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Move to Next Nodes</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Move to Next Nodes</button>
                     
                 </div>
 
@@ -557,25 +563,30 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">5001</span>][<span style="color:#666">2</span>][<span style="color:#666">2</span>];
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">bool</span> buy, <span style="color:#0b0;font-weight:bold">bool</span> cool) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][buy][cool] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][buy][cool];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, buy, <span style="color:#a2f">false</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(buy <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>cool) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>, <span style="color:#a2f">false</span>) <span style="color:#666">-</span> nums[idx]);
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>buy) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">true</span>) <span style="color:#666">+</span> nums[idx]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">reorderList</span>(ListNode<span style="color:#666">*</span> head) {
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> fast <span style="color:#666">=</span> head, <span style="color:#666">*</span>slow <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(fast<span style="color:#666">-&gt;</span>next <span style="color:#666">&amp;&amp;</span> fast<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>        slow <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        fast <span style="color:#666">=</span> fast<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][buy][cool] <span style="color:#666">=</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProfit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices) {
-</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> prices;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> mid <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    slow<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> next, <span style="color:#666">*</span>prev <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(mid) {
+</span></span><span style="display:flex;"><span>        next <span style="color:#666">=</span> mid<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        mid<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> prev;
+</span></span><span style="display:flex;"><span>        prev <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>        mid <span style="color:#666">=</span> next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> l1 <span style="color:#666">=</span> head, <span style="color:#666">*</span>l2 <span style="color:#666">=</span> prev;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l1 <span style="color:#666">&amp;&amp;</span> l2) {
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> tmp1 <span style="color:#666">=</span> l1<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        l1<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> l2;
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> tmp2 <span style="color:#666">=</span> l2<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        l2<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> tmp1;
+</span></span><span style="display:flex;"><span>        l1 <span style="color:#666">=</span> tmp1;
+</span></span><span style="display:flex;"><span>        l2 <span style="color:#666">=</span> tmp2;
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -583,153 +594,213 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Array Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">5001</span>][<span style="color:#666">2</span>][<span style="color:#666">2</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">reorderList</span>(ListNode<span style="color:#666">*</span> head) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes a memoization table `memo` to store the results of subproblems. The table has dimensions `[5001][2][2]` to store results for each index, the buy status, and the cooldown status. </div>
+                            <div class=""> This defines the `reorderList` function, which reorders the nodes of a linked list in a specific pattern by modifying the list in-place. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Vector Declaration</b></div>
+                            <div class=""> <b>2 : Pointer Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> fast <span style="color:#666">=</span> head, <span style="color:#666">*</span>slow <span style="color:#666">=</span> head;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a vector `nums` to store the stock prices for each day. </div>
+                            <div class=""> Two pointers, `fast` and `slow`, are initialized at the head of the list. `fast` moves two steps at a time, and `slow` moves one step at a time. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Recursive Function Definition</b></div>
+                            <div class=""> <b>3 : Find Middle</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">bool</span> buy, <span style="color:#0b0;font-weight:bold">bool</span> cool) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(fast<span style="color:#666">-&gt;</span>next <span style="color:#666">&amp;&amp;</span> fast<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the recursive function `dp`, which computes the maximum profit for a given index `idx`, whether we can buy (`buy`), and whether we are in a cooldown period (`cool`). </div>
+                            <div class=""> This loop runs until the `fast` pointer reaches the end of the list. It helps in finding the middle of the linked list using the slow and fast pointer technique. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Base Case</b></div>
+                            <div class=""> <b>4 : Move Slow Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        slow <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case: If the current index is equal to the size of the `nums` vector, return 0, meaning no more transactions are possible. </div>
+                            <div class=""> The `slow` pointer moves one step at a time toward the middle of the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Memoization Lookup</b></div>
+                            <div class=""> <b>5 : Move Fast Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][buy][cool] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][buy][cool];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        fast <span style="color:#666">=</span> fast<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks the `memo` table to see if the result for the current state (`idx`, `buy`, `cool`) has already been computed. If so, return the stored result. </div>
+                            <div class=""> The `fast` pointer moves two steps at a time, so when it reaches the end, the `slow` pointer will be at the middle of the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursive Case 1 - No Transaction</b></div>
+                            <div class=""> <b>6 : Middle Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, buy, <span style="color:#a2f">false</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> mid <span style="color:#666">=</span> slow<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively calls `dp` for the next index (`idx &#43; 1`), with the same buy status and setting `cool` to `false` to simulate not making a transaction on the current day. </div>
+                            <div class=""> After finding the middle of the list, the `mid` pointer is initialized to the node right after the `slow` pointer. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Recursive Case 2 - Buy Stock</b></div>
+                            <div class=""> <b>7 : Break First Half</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(buy <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>cool) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    slow<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if we are allowed to buy stock (`buy` is `true` and `cool` is `false`). </div>
+                            <div class=""> Breaks the list into two halves by setting `slow-&gt;next` to `NULL`, thus isolating the first half of the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Recursive Case 3 - Make Purchase</b></div>
+                            <div class=""> <b>8 : Pointer Initialization for Reversal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>, <span style="color:#a2f">false</span>) <span style="color:#666">-</span> nums[idx]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> next, <span style="color:#666">*</span>prev <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a purchase is made, recursively calls `dp` for the next day (`idx &#43; 1`), setting `buy` to `false` and `cool` to `false`, while subtracting the current stock price from `res` (representing the cost of buying the stock). </div>
+                            <div class=""> Two pointers, `prev` and `next`, are initialized. `prev` is used for reversing the second half of the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Recursive Case 4 - Sell Stock</b></div>
+                            <div class=""> <b>9 : Reverse Second Half</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(<span style="color:#666">!</span>buy) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(mid) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if we are allowed to sell stock (`buy` is `false`). </div>
+                            <div class=""> This loop reverses the second half of the list by iterating over the nodes starting from `mid`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Recursive Case 5 - Make Sale</b></div>
+                            <div class=""> <b>10 : Save Next Node</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">true</span>) <span style="color:#666">+</span> nums[idx]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        next <span style="color:#666">=</span> mid<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a sale is made, recursively calls `dp` for the next day (`idx &#43; 1`), setting `buy` to `true` and `cool` to `true`, while adding the current stock price to `res` (representing the profit from selling the stock). </div>
+                            <div class=""> Saves the next node in the `next` pointer to avoid losing the reference during the reversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Memoization Storage</b></div>
+                            <div class=""> <b>11 : Reverse Link</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][buy][cool] <span style="color:#666">=</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mid<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> prev;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the result of the current state (`idx`, `buy`, `cool`) in the `memo` table to avoid recalculating it in future calls. </div>
+                            <div class=""> Reverses the `mid` node&#39;s `next` pointer to point to the previous node, effectively reversing the list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Main Function Definition</b></div>
+                            <div class=""> <b>12 : Update Previous Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProfit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        prev <span style="color:#666">=</span> mid;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `maxProfit` function, which computes the maximum profit that can be achieved given the array of stock prices `prices`. </div>
+                            <div class=""> Moves the `prev` pointer one step forward to the current node (`mid`), preparing it for the next iteration. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Memoization Initialization</b></div>
+                            <div class=""> <b>13 : Move Mid Pointer</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mid <span style="color:#666">=</span> next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the `memo` table to `-1` for all states, indicating that no subproblem has been solved yet. </div>
+                            <div class=""> Moves the `mid` pointer to the next node in the original list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Store Prices</b></div>
+                            <div class=""> <b>14 : Pointer Initialization for Merging</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> prices;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> l1 <span style="color:#666">=</span> head, <span style="color:#666">*</span>l2 <span style="color:#666">=</span> prev;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Stores the input vector `prices` in the `nums` variable to be used in the `dp` function. </div>
+                            <div class=""> Initializes two pointers, `l1` pointing to the head of the first half, and `l2` pointing to the head of the reversed second half. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Return Final Result</b></div>
+                            <div class=""> <b>15 : Merge Two Halves</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">false</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l1 <span style="color:#666">&amp;&amp;</span> l2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calls the `dp` function starting from index `0`, with the ability to buy stock and no cooldown period, and returns the result (maximum profit). </div>
+                            <div class=""> This loop merges the two halves by alternating nodes from `l1` and `l2`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Save Next Node in First Half</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> tmp1 <span style="color:#666">=</span> l1<span style="color:#666">-&gt;</span>next;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Saves the next node of `l1` in `tmp1` to prevent losing the reference during the merge. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Connect First Half to Second Half</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        l1<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> l2;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Connects the current node of the first half (`l1`) to the current node of the second half (`l2`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Save Next Node in Second Half</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> tmp2 <span style="color:#666">=</span> l2<span style="color:#666">-&gt;</span>next;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Saves the next node of `l2` in `tmp2` to ensure the merge can continue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Connect Second Half to First Half</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        l2<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> tmp1;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Connects the current node of the second half (`l2`) to the next node of the first half (`tmp1`). </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Move to Next Nodes</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        l1 <span style="color:#666">=</span> tmp1;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Moves the `l1` pointer to the next node in the first half. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Move to Next Nodes</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        l2 <span style="color:#666">=</span> tmp2;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Moves the `l2` pointer to the next node in the second half. </div>
                         </div>
                     
                 </div>
@@ -749,16 +820,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) because we only iterate through the array once, with each state transition taking constant time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), when the list is reordered by following the standard procedure.</div>
+                        <div class=""> <b>Average Case:</b> O(n), the list will always require a full traversal for reordering.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), the solution works in linear time in all cases.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we traverse the list multiple times, but each traversal is linear.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the DP array used to store the results for each day.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), the space complexity remains constant.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), since only a few pointers are used.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because no extra space is used apart from a few pointers.</div>    
                     </div>
 
                 </div>

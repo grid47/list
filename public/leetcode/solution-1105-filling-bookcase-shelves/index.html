@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given an array of strings <code>garbage</code> where each string represents the garbage collected at a specific house. The characters &lsquo;M&rsquo;, &lsquo;P&rsquo;, and &lsquo;G&rsquo; represent metal, paper, and glass garbage, respectively. The time to collect one unit of garbage is 1 minute. You are also given an array <code>travel</code> where each element represents the time required to travel between two consecutive houses. Three trucks are responsible for picking up different types of garbage and can only travel sequentially from house 0 to the end. Each truck only collects one type of garbage and each truck can only be used one at a time. Return the minimum time required to pick up all the garbage. </div>
+<div class=""> You are given an array of books where each book is represented by a pair of integers [thickness, height]. Additionally, you have a shelf with a fixed width. Your goal is to arrange the books on the shelves such that each shelf&rsquo;s total thickness is less than or equal to the shelf width, and the height of each shelf is determined by the tallest book placed on it. The books must be placed in the same order as they appear in the input array. The objective is to minimize the total height of the bookshelf. </div>
 
 
 
@@ -358,49 +358,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two arrays: `garbage` and `travel`. `garbage[i]` represents the garbage at house `i` and consists of the characters &#39;M&#39;, &#39;P&#39;, and &#39;G&#39;. `travel[i]` is the time it takes to travel between house `i` and house `i &#43; 1`.</div>
-                        <div class=""> <b>Example:</b> garbage = [&#39;G&#39;,&#39;P&#39;,&#39;GP&#39;,&#39;GG&#39;], travel = [2,4,3]</div>
+                        <div class=""> <b>Input:</b> You are given an array `books` where each element is a pair `[thickness, height]` indicating the thickness and height of a book. You are also given an integer `shelfWidth`, which represents the width of the shelf.</div>
+                        <div class=""> <b>Example:</b> books = [[1, 2], [3, 5], [2, 2], [1, 3]], shelfWidth = 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= garbage.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= books.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • garbage[i] consists of the characters &#39;M&#39;, &#39;P&#39;, &#39;G&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= thicknessi &lt;= shelfWidth &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= garbage[i].length &lt;= 10</div>
-                            
-                                <div style="margin-left: 20px;"> • travel.length == garbage.length - 1</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= travel[i] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= heighti &lt;= 1000</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the total minimum time needed to collect all the garbage. This includes both the time to pick up the garbage and the time spent traveling.</div>
-                        <div class=""> <b>Example:</b> Output: 21</div>
+                        <div class=""> <b>Output:</b> The output is a single integer representing the minimum possible height of the bookshelf after placing all the books on the shelves.</div>
+                        <div class=""> <b>Example:</b> Output: 8</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The books must be placed in the same order as they appear in the input array.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to minimize the total time by collecting the garbage for each truck and considering the travel time for each truck&#39;s route.</div>
+                        <div class=""> <b>Goal:</b> The goal is to minimize the total height of the bookshelf by optimally placing books onto the shelves.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through each house and for each type of garbage, track the last house where it appears.</div>
+                                <div style="margin-left: 20px;"> • Start with an empty bookshelf and iterate over the books.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Calculate the time required to collect all the garbage of each type.</div>
+                                <div style="margin-left: 20px;"> • For each book, check if it can be placed on the current shelf without exceeding the shelf width. If yes, place it on the shelf.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Add the travel time for each garbage truck based on the last house where its garbage is located.</div>
+                                <div style="margin-left: 20px;"> • If the book cannot fit, start a new shelf, keeping track of the height of the tallest book on each shelf.</div>
+                            
+                                <div style="margin-left: 20px;"> • At each step, keep track of the total height of the bookshelf.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input sizes are large and the problem must be solved efficiently.</div>
+                        <div class=""> <b>Goal:</b> The problem is to efficiently arrange the books on shelves while minimizing the total height of the bookshelf.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles up to 100,000 houses efficiently.</div>
+                                <div style="margin-left: 20px;"> • Each shelf has a maximum width limit defined by `shelfWidth`.</div>
+                            
+                                <div style="margin-left: 20px;"> • The total height of a shelf is determined by the tallest book on it.</div>
+                            
+                                <div style="margin-left: 20px;"> • Books must be placed in the order they are given.</div>
                             
                         </div>
                     </div>        
@@ -408,21 +412,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each truck must pick up all the garbage of its type.</div>
+                                <div style="margin-left: 20px;"> • All input values are within the defined constraints.</div>
                             
-                                <div style="margin-left: 20px;"> • There are always at least one type of garbage to collect.</div>
+                                <div style="margin-left: 20px;"> • The books must be placed on the shelf in the order given.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> garbage = [&#39;G&#39;,&#39;P&#39;,&#39;GP&#39;,&#39;GG&#39;], travel = [2,4,3]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The metal truck collects no garbage, so we ignore it. The paper truck collects garbage at house 1 and 2, traveling a total of 6 minutes. The glass truck collects garbage from houses 0, 2, and 3, traveling a total of 13 minutes. The total time is 6 &#43; 13 = 21 minutes.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> garbage = [&#39;MMM&#39;,&#39;PGM&#39;,&#39;GP&#39;], travel = [3,10]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The metal truck collects garbage from houses 0, 1, and 2, traveling a total of 7 minutes. The paper truck collects garbage from houses 0, 1, and 2, traveling 15 minutes. The glass truck collects garbage from houses 0, 1, and 2, also traveling 15 minutes. The total time is 7 &#43; 15 &#43; 15 = 37 minutes.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: books = [[1, 2], [3, 5], [2, 2], [1, 3]], shelfWidth = 6</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the first shelf can hold books [1, 2] and [3, 5] because their combined thickness is 4, which is less than the shelfWidth of 6. The second shelf holds books [2, 2] and [1, 3] with a combined thickness of 3. The final height is 8 (2 from the first shelf, and 5 from the second shelf).</div>                                
                                 <br/>
                             
                     </div>                         
@@ -446,16 +446,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We need to simulate the garbage collection by considering both the time spent picking up garbage and the travel times. This involves finding the last occurrence of each type of garbage and calculating the total time accordingly.</div>
+                        <div class=""> <b>Approach:</b> To minimize the total height of the bookshelf, we need to dynamically compute the best way to arrange the books while respecting the width constraints of the shelf.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each truck only needs to collect its respective garbage, and the trucks travel in order.</div>
+                                <div style="margin-left: 20px;"> • We need to calculate the height of the bookshelf after arranging all the books.</div>
+                            
+                                <div style="margin-left: 20px;"> • This is a dynamic programming problem where we keep track of the height of the bookshelf at each step.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can start by calculating the total garbage collected for each type and then consider the travel time from house 0 to the last house with that type of garbage.</div>
+                                <div style="margin-left: 20px;"> • Start with the first book and place books on the shelf until you cannot fit another book. Once the shelf is full, move to the next shelf and repeat the process.</div>
                             
                         </div>
                     </div>
@@ -463,13 +465,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Traverse through the `garbage` array and track the last occurrence of each garbage type.</div>
+                                <div style="margin-left: 20px;"> • Create a dynamic programming array `dp` where `dp[i]` represents the minimum height required to arrange the first `i` books.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Sum up the total garbage units collected for each type (M, P, G).</div>
+                                <div style="margin-left: 20px;"> • For each book, calculate the possible shelf heights by considering all valid previous book placements, ensuring the total thickness on the shelf does not exceed `shelfWidth`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Add the travel time for each garbage truck based on the last house where the truck collects garbage.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Return the total time, which is the sum of the garbage collection time and travel time for each truck.</div>
+                                <div style="margin-left: 20px;"> • Update the `dp` array accordingly and track the minimum height for the bookshelf.</div>
                             
                         </div>
                     </div>
@@ -478,22 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the `garbage` array is empty, the total time should be zero.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees at least one book, so no need to handle empty inputs.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution can handle arrays with lengths close to 100,000 efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle large inputs, such as arrays with 1000 books.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle cases where only one type of garbage is present in the entire city.</div>
+                                <div style="margin-left: 20px;"> • If there is only one book, it will occupy a single shelf, and the height will be the book&#39;s height.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure the solution works within the time limits for large inputs.</div>
+                                <div style="margin-left: 20px;"> • The total thickness of the books should not exceed the `shelfWidth` at any point on a shelf.</div>
                             
                         </div>                                                                        
                     </div>
@@ -512,27 +512,31 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Dynamic Programming Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Accumulating Garbage Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Tracking Garbage Type</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Last Occurrence</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Initial Height Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Travel Time Accumulation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Sum and Height Variables</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Cumulative Travel Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Inner Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Garbage Collection for Each Type</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Width Accumulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Check Last Occurrence</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Width Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Add Travel Time</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Height Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Max Height Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Dynamic Programming Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Return Statement</button>
                     
                 </div>
 
@@ -541,21 +545,24 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">garbageCollection</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> garbage, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> travel) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> last[<span style="color:#666">128</span>] <span style="color:#666">=</span> {}, res <span style="color:#666">=</span> <span style="color:#666">0</span>;        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> garbage.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> garbage[i].size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : garbage[i])
-</span></span><span style="display:flex;"><span>            last[c] <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>    }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minHeightShelves</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> books, <span style="color:#0b0;font-weight:bold">int</span> shelfWidth) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> books.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> travel.size(); j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        travel[j] <span style="color:#666">+=</span> travel[j <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">c</span> : <span style="color:#b44">&#34;PGM&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(last[c])
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> travel[last[c] <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i] <span style="color:#666">+</span> books[i][<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, height <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> i; j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; j<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> books[j][<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> shelfWidth) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                height <span style="color:#666">=</span> max(height, books[j][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>                dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> min(dp[j] <span style="color:#666">+</span> height, dp[i<span style="color:#666">+</span><span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];        
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -566,120 +573,140 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">garbageCollection</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> garbage, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> travel) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minHeightShelves</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> books, <span style="color:#0b0;font-weight:bold">int</span> shelfWidth) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function `garbageCollection` takes two arguments: a vector `garbage` that represents the amount of garbage for each type and a vector `travel` representing the travel times between stops. </div>
+                            <div class=""> The function `minHeightShelves` takes a 2D vector `books`, where each element contains the width and height of a book, and an integer `shelfWidth` that specifies the maximum width of a shelf. It returns the minimum total height required to arrange all books. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> last[<span style="color:#666">128</span>] <span style="color:#666">=</span> {}, res <span style="color:#666">=</span> <span style="color:#666">0</span>;        
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> books.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an array `last` to store the last index for each garbage type and an integer `res` to store the total garbage collection time. </div>
+                            <div class=""> The variable `n` is initialized to the number of books, representing the total number of elements in the `books` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Dynamic Programming Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> garbage.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the `garbage` vector to calculate the total amount of garbage and update the `last` array for each garbage type. </div>
+                            <div class=""> The dynamic programming array `dp` is initialized to store the minimum height required to arrange books from 0 to `i`. It has a size of `n &#43; 1` to handle the base case. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Accumulating Garbage Size</b></div>
+                            <div class=""> <b>4 : Base Case Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> garbage[i].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the size of each garbage collection string to the total `res`, representing the total amount of garbage to be collected. </div>
+                            <div class=""> The base case is initialized by setting `dp[0] = 0`, indicating that if no books are placed on shelves, the height is 0. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Tracking Garbage Type</b></div>
+                            <div class=""> <b>5 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : garbage[i])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character in the string representing a garbage collection, update the `last` array to store the last occurrence of each garbage type. </div>
+                            <div class=""> A loop starts from `i = 0` and iterates over each book in the `books` vector to calculate the minimum height required to arrange books from the start up to book `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Update Last Occurrence</b></div>
+                            <div class=""> <b>6 : Initial Height Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            last[c] <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i] <span style="color:#666">+</span> books[i][<span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the `last` array to set the current index `i` as the last occurrence of the garbage type represented by character `c`. </div>
+                            <div class=""> Initially, the height required for placing book `i` on a new shelf is set to the height of the previous shelf (`dp[i]`) plus the height of the current book. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Travel Time Accumulation</b></div>
+                            <div class=""> <b>7 : Sum and Height Variables</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> travel.size(); j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, height <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the `travel` vector starting from the second element to accumulate the total travel time at each stop. </div>
+                            <div class=""> Two variables are initialized: `sum` to track the total width of books placed on the current shelf, and `height` to track the maximum height of books on the shelf. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Cumulative Travel Time</b></div>
+                            <div class=""> <b>8 : Inner Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        travel[j] <span style="color:#666">+=</span> travel[j <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> i; j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; j<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Accumulate travel times by adding the previous stop&#39;s travel time to the current stop&#39;s travel time. </div>
+                            <div class=""> An inner loop starts from `i` and iterates backwards through the books, calculating the possible configurations of books on the current shelf. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Garbage Collection for Each Type</b></div>
+                            <div class=""> <b>9 : Width Accumulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">c</span> : <span style="color:#b44">&#34;PGM&#34;</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> books[j][<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through the string &#39;PGM&#39; to check for the last occurrence of each garbage type (P, G, M). </div>
+                            <div class=""> The width of the book at index `j` is added to the `sum` variable to calculate the total width of the books placed on the current shelf. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Check Last Occurrence</b></div>
+                            <div class=""> <b>10 : Width Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(last[c])
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;</span> shelfWidth) <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if there is a last occurrence for the garbage type `c`. </div>
+                            <div class=""> If the total width `sum` exceeds the shelf width `shelfWidth`, the loop breaks because no more books can fit on the current shelf. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Add Travel Time</b></div>
+                            <div class=""> <b>11 : Height Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">+=</span> travel[last[c] <span style="color:#666">-</span> <span style="color:#666">1</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a last occurrence exists, add the corresponding travel time to the total collection time. </div>
+                            <div class=""> If the current configuration of books fits on the shelf, the maximum height of the books on the shelf is updated. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class=""> <b>12 : Max Height Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                height <span style="color:#666">=</span> max(height, books[j][<span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the total time for garbage collection, which includes both the garbage sizes and travel times. </div>
+                            <div class=""> The `height` variable is updated to be the maximum of the current `height` and the height of the book at index `j`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Dynamic Programming Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> min(dp[j] <span style="color:#666">+</span> height, dp[i<span style="color:#666">+</span><span style="color:#666">1</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The DP array is updated by comparing the current minimum height with the new height calculated by placing the books from `j` to `i` on the same shelf. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[n];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the minimum height required to store all books, which is stored in `dp[n]` after the loops complete. </div>
                         </div>
                     
                 </div>
@@ -699,16 +726,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the `garbage` array.</div>
-                        <div class=""> <b>Average Case:</b> O(n), where n is the length of the `garbage` array.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the length of the `garbage` array.</div> 
-                        <div class=""> <b>Description:</b> The algorithm processes each house and each travel time at most once, so the time complexity is O(n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n^2)</div>
+                        <div class=""> <b>Average Case:</b> O(n^2)</div>
+                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n^2) due to the dynamic programming approach where for each book, we check all previous books to calculate the optimal placement.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the number of houses.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of houses, due to the storage needed for the garbage types and travel times.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the garbage array and travel array.</div>    
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) because we use a dynamic programming array to store the minimum heights for up to `n` books.</div>    
                     </div>
 
                 </div>

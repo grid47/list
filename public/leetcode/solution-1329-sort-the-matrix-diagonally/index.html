@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array nums and an integer x. Find the minimum absolute difference between two elements in the array such that their indices are at least x apart. </div>
+<div class=""> You are given a matrix <code>mat</code> of integers with dimensions <code>m x n</code>. A matrix diagonal is a sequence of matrix elements that start from some cell in the topmost row or leftmost column and go diagonally towards the bottom-right corner. Your task is to sort each matrix diagonal in ascending order and return the resulting matrix. </div>
 
 
 
@@ -359,53 +359,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array nums and an integer x. The array nums has length n, and the integer x satisfies 0 &lt;= x &lt; n.</div>
-                        <div class=""> <b>Example:</b> nums = [7, 9, 5, 3], x = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of a 2D integer matrix `mat` of dimensions `m x n`.</div>
+                        <div class=""> <b>Example:</b> For example, given mat = [[5, 9, 3], [8, 6, 1], [7, 4, 2]], the task is to sort each diagonal of this matrix.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= x &lt; nums.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= mat[i][j] &lt;= 100</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum absolute difference between two elements that are at least x indices apart.</div>
-                        <div class=""> <b>Example:</b> Output: 0</div>
+                        <div class=""> <b>Output:</b> The output should be the matrix where each diagonal is sorted in ascending order.</div>
+                        <div class=""> <b>Example:</b> For mat = [[5, 9, 3], [8, 6, 1], [7, 4, 2]], the output would be [[1, 3, 2], [4, 5, 1], [7, 6, 9]].</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • The output should be a single integer representing the minimum absolute difference.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find two elements in the array that are at least x indices apart and minimize the absolute difference between them.</div>
+                        <div class=""> <b>Goal:</b> Sort the elements along each diagonal of the matrix in ascending order while keeping the relative positions of the diagonals unchanged.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through the array starting from index x.</div>
+                                <div style="margin-left: 20px;"> • 1. Identify all diagonals in the matrix.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Maintain a sorted set of elements within the range of x indices apart.</div>
+                                <div style="margin-left: 20px;"> • 2. For each diagonal, store the elements and sort them in ascending order.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. For each new element, calculate the absolute difference with the closest elements in the sorted set.</div>
+                                <div style="margin-left: 20px;"> • 3. Replace the original elements of each diagonal with the sorted values.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Keep track of the minimum absolute difference.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the modified matrix.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The length of nums is bounded by 10^5, and the values of nums and x are constrained as mentioned.</div>
+                        <div class=""> <b>Goal:</b> The input matrix `mat` will have at least one row and one column, and the matrix values are constrained by the size limits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= x &lt; nums.length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= mat[i][j] &lt;= 100</div>
                             
                         </div>
                     </div>        
@@ -413,15 +407,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array is not empty, and the integer x is valid as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • The matrix is not empty, and each element is an integer between 1 and 100.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [7, 9, 5, 3], x = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The minimum absolute difference occurs between nums[0] = 7 and nums[3] = 7, both of which are at least 2 indices apart. The absolute difference is 0, which is the minimum.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: mat = [[5, 9, 3], [8, 6, 1], [7, 4, 2]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The diagonals are [5], [9, 8], [3, 6, 7], [1, 4], and [2]. After sorting each diagonal, we get the matrix [[1, 3, 2], [4, 5, 1], [7, 6, 9]].</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: mat = [[10, 21, 30], [4, 15, 24], [5, 6, 23]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The diagonals are [10], [21, 4], [30, 15, 5], [24, 6], and [23]. After sorting each diagonal, we get the matrix [[4, 15, 23], [5, 21, 30], [10, 6, 24]].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +443,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can use a sorted set to efficiently compute the minimum absolute difference between elements that are at least x indices apart.</div>
+                        <div class=""> <b>Approach:</b> The algorithm extracts the elements along each diagonal, sorts them, and then places the sorted values back in the matrix, preserving the original structure of the matrix.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires checking the difference between elements that are at least x indices apart.</div>
+                                <div style="margin-left: 20px;"> • Each diagonal is independent and can be sorted individually.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A sorted set or tree can help efficiently find the minimum difference.</div>
+                                <div style="margin-left: 20px;"> • We need to identify and extract diagonals before sorting them and placing the sorted values back into the matrix.</div>
                             
                         </div>
                     </div>
@@ -462,11 +460,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Use a set or map to maintain elements within the valid range of indices.</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the matrix to extract all the diagonals.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each new element, find its closest neighbors using binary search or the upper and lower bounds.</div>
+                                <div style="margin-left: 20px;"> • 2. Sort each diagonal independently.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Calculate and update the minimum difference.</div>
+                                <div style="margin-left: 20px;"> • 3. Replace the original diagonal elements with the sorted ones.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Return the resulting matrix.</div>
                             
                         </div>
                     </div>
@@ -475,22 +475,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input will never be empty as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • An empty matrix will not be provided based on the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For large arrays, the algorithm should efficiently handle up to 10^5 elements.</div>
+                                <div style="margin-left: 20px;"> • The matrix could be as large as 100x100, but the solution should still be efficient.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When all elements in the array are identical, the minimum difference is 0.</div>
+                                <div style="margin-left: 20px;"> • When all elements in a diagonal are the same, the diagonal will remain unchanged after sorting.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle arrays with up to 10^5 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The matrix has at least one row and column, and each element is between 1 and 100.</div>
                             
                         </div>                                                                        
                     </div>
@@ -507,27 +507,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Code Block</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Matrix Dimensions Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Priority Queue Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Outer Loop - Row Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Set Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Inner Loop - Column Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Upper Bound Search</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Push Diagonal Element into Queue</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Reprocess Matrix with Sorted Diagonals</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Minimum Difference Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Set Sorted Diagonal Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Replace Element with Sorted Value</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Minimum Difference Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop the Used Element</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Sorted Matrix</button>
                     
                 </div>
 
@@ -536,18 +536,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minAbsoluteDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x; i <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">&amp;&amp;</span> res <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>    s.insert(nums[i <span style="color:#666">-</span> x]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> s.upper_bound(nums[i]);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (it <span style="color:#666">!=</span> begin(s))
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, nums[i] <span style="color:#666">-</span> <span style="color:#666">*</span>prev(it));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (it <span style="color:#666">!=</span> end(s))
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, <span style="color:#666">*</span>it <span style="color:#666">-</span> nums[i]);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> diagonalSort(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        mp[i<span style="color:#666">-</span>j].push(mat[i][j]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        mat[i][j] <span style="color:#666">=</span> mp[i<span style="color:#666">-</span>j].top();
+</span></span><span style="display:flex;"><span>        mp[i<span style="color:#666">-</span>j].pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mat;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -555,113 +556,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Code Block</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minAbsoluteDifference</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> diagonalSort(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function definition begins, accepting a vector of integers and an integer &#39;x&#39; as parameters. </div>
+                            <div class=""> This line declares the &#39;diagonalSort&#39; function that takes a 2D matrix &#39;mat&#39; as input and returns the matrix with diagonals sorted in ascending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Declaration</b></div>
+                            <div class=""> <b>2 : Matrix Dimensions Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A set &#39;s&#39; is declared to store unique integers encountered during the loop, which will help in efficiently finding the closest values. </div>
+                            <div class=""> The dimensions of the matrix are calculated, where &#39;m&#39; is the number of rows and &#39;n&#39; is the number of columns. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Priority Queue Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;res&#39; is initialized to the maximum integer value to track the minimum absolute difference found during the loop. </div>
+                            <div class=""> A map &#39;mp&#39; is declared where the keys represent the diagonals (calculated by the difference &#39;i-j&#39;), and the values are priority queues that store the diagonal elements in ascending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Loop</b></div>
+                            <div class=""> <b>4 : Outer Loop - Row Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x; i <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">&amp;&amp;</span> res <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop starts from index &#39;x&#39; to the end of the &#39;nums&#39; vector. The loop continues as long as the &#39;res&#39; is greater than 0, ensuring that the minimum difference will always decrease. </div>
+                            <div class=""> The outer loop iterates over each row of the matrix. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Set Insertion</b></div>
+                            <div class=""> <b>5 : Inner Loop - Column Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s.insert(nums[i <span style="color:#666">-</span> x]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Insert the element at index &#39;i-x&#39; into the set &#39;s&#39; to keep track of previous elements within the range of &#39;x&#39;. </div>
+                            <div class=""> The inner loop iterates over each column in the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Upper Bound Search</b></div>
+                            <div class=""> <b>6 : Push Diagonal Element into Queue</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> s.upper_bound(nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[i<span style="color:#666">-</span>j].push(mat[i][j]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function &#39;upper_bound&#39; is used to find the first element in the set &#39;s&#39; that is greater than &#39;nums[i]&#39;. </div>
+                            <div class=""> The element at position (i, j) is pushed into the priority queue corresponding to the diagonal (i-j). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Condition Check</b></div>
+                            <div class=""> <b>7 : Reprocess Matrix with Sorted Diagonals</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (it <span style="color:#666">!=</span> begin(s))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the iterator &#39;it&#39; is not pointing to the first element in the set, indicating that a smaller element exists. </div>
+                            <div class=""> The second loop starts to reprocess the matrix and fill each diagonal with sorted elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Minimum Difference Update</b></div>
+                            <div class=""> <b>8 : Set Sorted Diagonal Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, nums[i] <span style="color:#666">-</span> <span style="color:#666">*</span>prev(it));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a smaller element exists, update &#39;res&#39; with the minimum of the current &#39;res&#39; and the absolute difference between &#39;nums[i]&#39; and the largest smaller element. </div>
+                            <div class=""> This inner loop iterates through each column of the current row to replace the matrix elements with the sorted elements from the corresponding priority queue. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Condition Check</b></div>
+                            <div class=""> <b>9 : Replace Element with Sorted Value</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (it <span style="color:#666">!=</span> end(s))
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mat[i][j] <span style="color:#666">=</span> mp[i<span style="color:#666">-</span>j].top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if &#39;it&#39; is not pointing to the end of the set, indicating that a larger element exists. </div>
+                            <div class=""> The top element (smallest element) from the priority queue for the current diagonal is placed into the matrix at position (i, j). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Minimum Difference Update</b></div>
+                            <div class=""> <b>10 : Pop the Used Element</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, <span style="color:#666">*</span>it <span style="color:#666">-</span> nums[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[i<span style="color:#666">-</span>j].pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a larger element exists, update &#39;res&#39; with the minimum of the current &#39;res&#39; and the absolute difference between the larger element and &#39;nums[i]&#39;. </div>
+                            <div class=""> After placing the smallest element into the matrix, it is removed from the priority queue for the current diagonal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Return Statement</b></div>
+                            <div class=""> <b>11 : Return Sorted Matrix</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mat;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the final minimum absolute difference found. </div>
+                            <div class=""> The sorted matrix is returned after all diagonals have been processed and updated. </div>
                         </div>
                     
                 </div>
@@ -681,16 +682,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The algorithm requires sorting and binary search, making the time complexity O(n log n), where n is the size of the input array.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n * log(m))</div>
+                        <div class=""> <b>Average Case:</b> O(m * n * log(m))</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n * log(m))</div> 
+                        <div class=""> <b>Description:</b> The best, average, and worst cases all involve sorting each diagonal, which requires sorting a maximum of m elements.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of the elements in the set or map.</div>    
+                        <div class=""> <b>Best Case:</b> O(m * n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(m * n) due to storing the diagonals and the original matrix.</div>    
                     </div>
 
                 </div>

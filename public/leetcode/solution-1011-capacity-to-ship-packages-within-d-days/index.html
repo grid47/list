@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 28, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    8 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given an integer array nums. The array is considered beautiful if it satisfies the following conditions: the length of nums is even, and for every index i that is even (i % 2 == 0), nums[i] should not be equal to nums[i + 1]. You can remove any number of elements from nums to make it beautiful. Your goal is to return the minimum number of elements that need to be removed to make the array beautiful. </div>
+<div class=""> You are tasked with shipping packages using a ship with a limited weight capacity. Each package has a given weight and must be shipped in order within a specified number of days. Your objective is to determine the minimum weight capacity of the ship that allows all the packages to be shipped within the given days, without exceeding the ship&rsquo;s weight capacity on any single day. </div>
 
 
 
@@ -358,47 +358,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a 0-indexed integer array nums.</div>
-                        <div class=""> <b>Example:</b> nums = [4, 4, 6, 7, 8, 9]</div>
+                        <div class=""> <b>Input:</b> The input consists of two components: an array of integers representing the weights of the packages, and an integer representing the number of days available to ship all the packages.</div>
+                        <div class=""> <b>Example:</b> weights = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], days = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= days &lt;= weights.length &lt;= 5 * 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= weights[i] &lt;= 500</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of elements to delete from nums to make it beautiful.</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> The output should be a single integer representing the minimum ship capacity required to ship all packages within the given days.</div>
+                        <div class=""> <b>Example:</b> Output: 15</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array may have duplicates that need to be removed.</div>
+                                <div style="margin-left: 20px;"> • The result should be an integer representing the minimum weight capacity.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the minimum number of deletions required to make the array beautiful.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the least weight capacity of the ship that ensures all the packages are shipped within the given days without exceeding the capacity each day.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and identify the elements that need to be removed.</div>
+                                <div style="margin-left: 20px;"> • Use binary search to determine the minimum ship capacity.</div>
                             
-                                <div style="margin-left: 20px;"> • Check for pairs of adjacent elements where nums[i] == nums[i &#43; 1] and ensure the length remains even.</div>
+                                <div style="margin-left: 20px;"> • Start with a lower bound of the heaviest package weight and an upper bound that is the sum of all package weights.</div>
                             
-                                <div style="margin-left: 20px;"> • Count the number of deletions required and return the result.</div>
+                                <div style="margin-left: 20px;"> • For each mid value (representing a ship&#39;s weight capacity), simulate shipping the packages within the given days and check if it&#39;s feasible to ship them all without exceeding the capacity each day.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure the input is within the defined range and handle the array efficiently.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution handles the input size efficiently and produces the correct result within the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of packages can be up to 50,000, so the solution must be optimized to handle large inputs.</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The weight of each package is between 1 and 500.</div>
                             
                         </div>
                     </div>        
@@ -406,17 +406,23 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The array may contain duplicate elements.</div>
-                            
-                                <div style="margin-left: 20px;"> • The array must be modified by deletion of elements only.</div>
+                                <div style="margin-left: 20px;"> • The packages must be shipped in the given order, meaning they cannot be rearranged.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [4, 4, 6, 7, 8, 9]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this input, the first two elements are the same, so one of them must be deleted. The final beautiful array will be [4, 6, 7, 8, 9]. Hence, the minimum number of deletions required is 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: weights = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], days = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the minimum ship capacity needed is 15, as the packages can be distributed across the days as follows: (1, 2, 3, 4, 5) on day 1, (6, 7) on day 2, (8) on day 3, (9) on day 4, and (10) on day 5. The total weight each day does not exceed 15, and all packages are shipped within 5 days.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: weights = [3, 2, 2, 4, 1, 4], days = 3</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this input, a ship capacity of 6 is enough to ship all the packages within 3 days. The packages can be shipped as follows: (3, 2) on day 1, (2, 4) on day 2, and (1, 4) on day 3.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: weights = [1, 2, 3, 1, 1], days = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this case, the minimum ship capacity is 3, which is sufficient to ship the packages within 4 days as follows: (1) on day 1, (2) on day 2, (3) on day 3, and (1, 1) on day 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -440,18 +446,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, we need to find and remove adjacent duplicate elements in the array while ensuring the final array length is even.</div>
+                        <div class=""> <b>Approach:</b> We use a binary search approach to find the minimum ship capacity that allows all packages to be shipped within the given days. The key observation is that the ship&#39;s capacity should be between the heaviest package and the sum of all package weights. We simulate the loading process for each candidate capacity to check if it&#39;s feasible to ship the packages within the given days.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Adjacent duplicates should be deleted to meet the criteria of a beautiful array.</div>
-                            
-                                <div style="margin-left: 20px;"> • After deletion, the array should still maintain an even length.</div>
+                                <div style="margin-left: 20px;"> • A binary search is suitable because we&#39;re searching for a minimum value (ship capacity) in a range, and we can test the feasibility for any candidate capacity.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a greedy approach to iterate through the array, checking adjacent elements, and remove them when necessary.</div>
+                                <div style="margin-left: 20px;"> • By checking whether it&#39;s feasible to ship the packages with a given capacity, we can adjust our search space accordingly to find the minimum required capacity.</div>
                             
                         </div>
                     </div>
@@ -459,11 +463,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and check if the current element equals the next one.</div>
+                                <div style="margin-left: 20px;"> • 1. Set the lower bound of the search space to the maximum weight in the &#39;weights&#39; array.</div>
                             
-                                <div style="margin-left: 20px;"> • If they are equal, increment the deletion count and skip the next element.</div>
+                                <div style="margin-left: 20px;"> • 2. Set the upper bound to the sum of all weights in the &#39;weights&#39; array.</div>
                             
-                                <div style="margin-left: 20px;"> • Ensure that the final array has an even length by adjusting the result if needed.</div>
+                                <div style="margin-left: 20px;"> • 3. Perform binary search between the lower and upper bounds.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. For each mid value in the search, simulate the loading process and check if it&#39;s possible to ship all packages within the given days.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. If it&#39;s possible, adjust the upper bound; otherwise, adjust the lower bound.</div>
                             
                         </div>
                     </div>
@@ -472,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • An empty array is considered beautiful by definition.</div>
+                                <div style="margin-left: 20px;"> • The problem specifies that the input will never be empty.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays with up to 100,000 elements.</div>
+                                <div style="margin-left: 20px;"> • The solution should be efficient enough to handle the largest input sizes, up to 50,000 packages.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array may have all elements identical, or no duplicates at all.</div>
+                                <div style="margin-left: 20px;"> • If all package weights are the same, the solution will still work by distributing them evenly across the days.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the input size is within the constraints and handle edge cases appropriately.</div>
+                                <div style="margin-left: 20px;"> • The weight of each package must be between 1 and 500.</div>
                             
                         </div>                                                                        
                     </div>
@@ -508,11 +516,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Over Weights</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Max Weight Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Midpoint Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Mid Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Tracking Shipments</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Iterating Through Weights</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Capacity Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Increment Day Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Adjust Search Bounds</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Right Bound</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return Minimum Capacity</button>
                     
                 </div>
 
@@ -521,12 +545,21 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDeletion</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">==</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">-</span> ans) <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) ans<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">+</span> (nums.size() <span style="color:#666">-</span> ans) <span style="color:#666">%</span> <span style="color:#666">2</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shipWithinDays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> weights, <span style="color:#0b0;font-weight:bold">int</span> days) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> <span style="color:#666">0</span>, right <span style="color:#666">=</span> <span style="color:#666">25000000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">w</span>: weights)
+</span></span><span style="display:flex;"><span>    left <span style="color:#666">=</span> max(left, w);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(left <span style="color:#666">&lt;</span> right) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> (left <span style="color:#666">+</span> right) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> need <span style="color:#666">=</span><span style="color:#666">1</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span>  weights.size() <span style="color:#666">&amp;&amp;</span> need <span style="color:#666">&lt;=</span> days; cur <span style="color:#666">+=</span> weights[i<span style="color:#666">++</span>])
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> weights[i] <span style="color:#666">&gt;</span> mid)
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> <span style="color:#666">0</span>, need<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(need <span style="color:#666">&gt;</span> days) left <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> right <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> left;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -537,50 +570,130 @@
                             <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDeletion</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shipWithinDays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> weights, <span style="color:#0b0;font-weight:bold">int</span> days) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function declaration for `minDeletion`, which takes a vector of integers `nums` and returns an integer representing the minimum deletions required. </div>
+                            <div class=""> Declares the function `shipWithinDays` which takes a vector of integers `weights` representing the weights of packages and an integer `days` indicating the number of days within which the packages must be shipped. The function returns the minimum weight capacity required to ship all packages within the given days. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> <span style="color:#666">0</span>, right <span style="color:#666">=</span> <span style="color:#666">25000000</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `ans` is initialized to 0. This will keep track of the number of deletions made to ensure the array alternates. </div>
+                            <div class=""> Initializes the binary search bounds. `left` represents the minimum possible weight capacity (starting from 0), and `right` is the maximum possible weight capacity (25000000, an arbitrary large number). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop</b></div>
+                            <div class=""> <b>3 : Loop Over Weights</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">w</span>: weights)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through the array `nums`, stopping at the second-to-last element to compare each element with the next one. </div>
+                            <div class=""> Iterates over each weight `w` in the `weights` vector to determine the maximum weight. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Conditional Check</b></div>
+                            <div class=""> <b>4 : Max Weight Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">==</span> nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> (i <span style="color:#666">-</span> ans) <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) ans<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    left <span style="color:#666">=</span> max(left, w);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This conditional checks if two consecutive elements are equal and if the difference between the current index `i` and `ans` is even. If both conditions are true, it increments `ans` to indicate a necessary deletion. </div>
+                            <div class=""> Updates the `left` variable to store the maximum weight found in the `weights` vector. This ensures the minimum weight capacity (`left`) is at least the largest single package weight. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Return Statement</b></div>
+                            <div class=""> <b>5 : Midpoint Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">+</span> (nums.size() <span style="color:#666">-</span> ans) <span style="color:#666">%</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(left <span style="color:#666">&lt;</span> right) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the result by adding the number of deletions (`ans`) to the parity correction, which ensures the final array has an even number of elements after deletions. </div>
+                            <div class=""> Initiates a binary search loop where the search space is narrowed down by calculating the midpoint `mid` between `left` and `right`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Mid Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> (left <span style="color:#666">+</span> right) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the midpoint `mid` between the current values of `left` and `right`. This midpoint represents the current guess for the minimum weight capacity. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Tracking Shipments</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> need <span style="color:#666">=</span> <span style="color:#666">1</span>, cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes two variables: `need` tracks the number of days required to ship the packages, and `cur` tracks the current cumulative weight of the packages being shipped on a single day. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Iterating Through Weights</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span>  weights.size() <span style="color:#666">&amp;&amp;</span> need <span style="color:#666">&lt;=</span> days; cur <span style="color:#666">+=</span> weights[i<span style="color:#666">++</span>])
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterates through the `weights` vector, adding each weight to the current day&#39;s total (`cur`). If the total exceeds `mid`, a new day is started by resetting `cur` to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Capacity Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> weights[i] <span style="color:#666">&gt;</span> mid)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Checks if adding the current weight `weights[i]` to `cur` exceeds the current midpoint `mid`. If so, a new day is required, and the `cur` variable is reset to 0. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Increment Day Count</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">=</span> <span style="color:#666">0</span>, need<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the `need` counter, which tracks the number of days required to ship the packages, as a new day is needed to accommodate the current weight. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Adjust Search Bounds</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(need <span style="color:#666">&gt;</span> days) left <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the number of days required exceeds the given `days`, it means the current weight capacity `mid` is too low. Thus, `left` is adjusted to `mid &#43; 1`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Update Right Bound</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> right <span style="color:#666">=</span> mid;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the number of days is within the limit, it means the current capacity `mid` might be sufficient, so the right bound `right` is adjusted to `mid`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return Minimum Capacity</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> left;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the final value of `left`, which represents the minimum weight capacity required to ship the packages within the given number of days. </div>
                         </div>
                     
                 </div>
@@ -600,16 +713,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) where n is the length of the input array, as we only iterate through the array once.</div>
-                        <div class=""> <b>Average Case:</b> O(n) where n is the length of the input array.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) where n is the length of the input array.</div> 
-                        <div class=""> <b>Description:</b> The solution processes the array in a single pass.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log W)</div>
+                        <div class=""> <b>Average Case:</b> O(n log W)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log W)</div> 
+                        <div class=""> <b>Description:</b> Where n is the number of packages and W is the sum of all package weights. The binary search runs in O(log W) and for each mid value, we simulate the shipping process in O(n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) for the space used during the iteration.</div>
-                        <div class=""> <b>Worst Case:</b> O(1) for the space used during the iteration.</div> 
-                        <div class=""> <b>Description:</b> The solution only uses a constant amount of extra space.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since we only need a few variables to track the bounds and the current ship load during the simulation.</div>    
                     </div>
 
                 </div>

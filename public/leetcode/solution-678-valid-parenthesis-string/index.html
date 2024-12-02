@@ -298,7 +298,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1248s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1247s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/678.webp" 
            alt="A string of parentheses being validated, with valid ones glowing softly and invalid ones fading away." 
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a string <code>s</code>. You need to determine the number of valid ways to split <code>s</code> into two non-empty substrings such that the number of distinct letters in the left and right substrings is the same. </div>
+<div class=""> Given a string consisting of &lsquo;(&rsquo;, &lsquo;)&rsquo;, and &lsquo;<em>&rsquo;, determine if the string is valid according to the following rules. &lsquo;</em>&rsquo; can be treated as a left parenthesis, a right parenthesis, or an empty string. </div>
 
 
 
@@ -372,47 +372,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A string `s` consisting of lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> s = &#39;abacb&#39;</div>
+                        <div class=""> <b>Input:</b> The input is a string containing only &#39;(&#39;, &#39;)&#39;, and &#39;*&#39; characters.</div>
+                        <div class=""> <b>Example:</b> &#34;(*)&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • s[i] is either &#39;(&#39;, &#39;)&#39;, or &#39;*&#39;</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the total number of valid splits where the number of distinct letters in both substrings is equal.</div>
-                        <div class=""> <b>Example:</b> For s = &#39;abacb&#39;, the output is 3.</div>
+                        <div class=""> <b>Output:</b> The output should be true if the string is valid, otherwise false.</div>
+                        <div class=""> <b>Example:</b> true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output is the number of valid splits.</div>
+                                <div style="margin-left: 20px;"> • The output will be a boolean value, either true or false.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Count the number of valid splits based on distinct letters in both substrings.</div>
+                        <div class=""> <b>Goal:</b> Efficiently validate the string using a stack to account for both parentheses and &#39;*&#39; characters.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Track the distinct letters in the left and right parts of the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the string character by character.</div>
                             
-                                <div style="margin-left: 20px;"> • For each possible split of the string, compare the distinct letters in the two parts.</div>
+                                <div style="margin-left: 20px;"> • 2. Use two stacks: one for tracking &#39;(&#39; characters and one for tracking &#39;*&#39; characters.</div>
                             
-                                <div style="margin-left: 20px;"> • If the distinct letters in both parts are equal, increment the count.</div>
+                                <div style="margin-left: 20px;"> • 3. If a &#39;)&#39; is encountered, check if there is a matching &#39;(&#39; or &#39;*&#39; to balance it.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. After traversal, check if all &#39;(&#39; have corresponding &#39;)&#39; or &#39;*&#39; to balance them.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string can have up to 10^5 characters, so the solution needs to be efficient.</div>
+                        <div class=""> <b>Goal:</b> The constraints ensure that the problem remains manageable within time and space limits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The length of the string s is between 1 and 100.</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The string contains only the characters &#39;(&#39;, &#39;)&#39;, and &#39;*&#39;.</div>
                             
                         </div>
                     </div>        
@@ -420,19 +422,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string is not empty and contains at least one character.</div>
+                                <div style="margin-left: 20px;"> • All parentheses are balanced by either another parenthesis or a &#39;*&#39; character.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;abacb&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid splits are (&#39;aba&#39;, &#39;cb&#39;). Both have 2 distinct letters.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> &#34;(*)&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, &#39;*&#39; can be treated as either a &#39;(&#39; or a &#39;)&#39;, making the string valid.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;abcd&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid split is (&#39;ab&#39;, &#39;cd&#39;), both having 2 distinct letters.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> &#34;(*))&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string is valid because &#39;*&#39; can be treated as &#39;(&#39;, and the remaining parentheses are balanced.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +458,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, track the number of distinct letters in both left and right substrings at each split.</div>
+                        <div class=""> <b>Approach:</b> We can use two stacks to track the positions of parentheses and &#39;*&#39; characters, ensuring the string remains valid.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A split is valid if the distinct letters in both parts are the same.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that the parentheses are properly balanced, with &#39;*&#39; acting as a wildcard.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use two counters to track distinct letters on both sides of the split as we iterate through the string.</div>
+                                <div style="margin-left: 20px;"> • Using two stacks will allow us to handle matching of both &#39;(&#39; and &#39;)&#39; while also utilizing &#39;*&#39; as a flexible placeholder.</div>
                             
                         </div>
                     </div>
@@ -473,11 +475,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create two sets to track the distinct letters in the left and right parts of the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through the string to check for &#39;(&#39; and &#39;)&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over the string and for each position, split the string into left and right.</div>
+                                <div style="margin-left: 20px;"> • 2. Track positions of &#39;(&#39; and &#39;*&#39; using stacks.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the number of distinct letters in both parts is the same and count the valid splits.</div>
+                                <div style="margin-left: 20px;"> • 3. For each &#39;)&#39;, attempt to match it with a &#39;(&#39; from the stack. If none is available, use &#39;*&#39; if possible.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. After the loop, check if there are any unmatched &#39;(&#39; characters left.</div>
                             
                         </div>
                     </div>
@@ -486,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty strings are allowed, as the string must have at least one character.</div>
+                                <div style="margin-left: 20px;"> • An empty string is considered valid.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution needs to efficiently handle large inputs up to 10^5 characters.</div>
+                                <div style="margin-left: 20px;"> • The string length can be up to 100, which is manageable within the time constraints.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All characters in the string are the same.</div>
+                                <div style="margin-left: 20px;"> • A string consisting only of &#39;*&#39; characters is valid because &#39;*&#39; can be treated as empty, &#39;(&#39; or &#39;)&#39;.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should run in linear time relative to the length of the string.</div>
+                                <div style="margin-left: 20px;"> • Ensure efficient handling of edge cases with &#39;*&#39; characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,29 +522,41 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Container Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Populate Right Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Increment Right Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Counter Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Iterate for Splits</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Increment Left Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Decrement Right Map</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Else Block</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Remove Zero Count from Right</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Check for Equal Map Sizes</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Stack Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Block End</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Stack Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Stack Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Return</button>
                     
                 </div>
 
@@ -549,22 +565,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSplits</span>(string s) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left, right;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        right[s[i]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkValidString</span>(string s) {
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk, str;
 </span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        left[s[i]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        right[s[i]]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(right[s[i]] <span style="color:#666">==</span> <span style="color:#666">0</span>) right.erase(s[i]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left.size() <span style="color:#666">==</span> right.size()) cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>)
+</span></span><span style="display:flex;"><span>            str.push(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>)
+</span></span><span style="display:flex;"><span>            stk.push(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty())
+</span></span><span style="display:flex;"><span>            stk.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>str.empty()) str.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>str.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">&lt;</span> str.top()) {
+</span></span><span style="display:flex;"><span>        str.pop();
+</span></span><span style="display:flex;"><span>        stk.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -572,123 +593,183 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Method Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numSplits</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkValidString</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `numSplits` which takes a string `s` as input and returns an integer, representing the number of valid splits where the number of unique characters in both parts is the same. </div>
+                            <div class=""> Define the method &#39;checkValidString&#39; that takes a string s and checks whether it contains a valid combination of parentheses and stars. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Map Initialization</b></div>
+                            <div class=""> <b>2 : Container Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left, right;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk, str;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two maps `left` and `right` are initialized to store the frequency of characters in the left and right parts of the string during the iterations. </div>
+                            <div class=""> Initialize two stacks: one for holding indices of &#39;(&#39; (stk) and another for holding indices of &#39;*&#39; (str). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Size Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This line calculates the size of the string `s` and stores it in variable `n`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>4 : Populate Right Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop iterates through the string `s`, and in each iteration, it increments the frequency of the character `s[i]` in the `right` map, representing the frequency of characters in the right part. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>5 : Increment Right Map</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        right[s[i]]<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments the count of character `s[i]` in the `right` map. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Counter Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The counter `cnt` is initialized to zero. It will store the number of valid splits where the number of unique characters in both left and right parts is the same. </div>
+                            <div class=""> Initialize a counter variable (cnt), although it&#39;s not used in the current implementation. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Iterate for Splits</b></div>
+                            <div class=""> <b>4 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through the string again. In each iteration, it updates the `left` and `right` maps to reflect the changes as characters are moved from the right to the left part of the string. </div>
+                            <div class=""> Start a loop to iterate through each character of the string s. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Increment Left Map</b></div>
+                            <div class=""> <b>5 : Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        left[s[i]]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increments the frequency of character `s[i]` in the `left` map as the character is considered part of the left substring. </div>
+                            <div class=""> Check if the current character is a &#39;*&#39; character. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Decrement Right Map</b></div>
+                            <div class=""> <b>6 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        right[s[i]]<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            str.push(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Decrements the frequency of character `s[i]` in the `right` map as the character is now considered part of the left substring. </div>
+                            <div class=""> If the character is &#39;*&#39;, push its index onto the &#39;str&#39; stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Remove Zero Count from Right</b></div>
+                            <div class=""> <b>7 : Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(right[s[i]] <span style="color:#666">==</span> <span style="color:#666">0</span>) right.erase(s[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the frequency of character `s[i]` in the `right` map becomes zero, it is removed from the map. </div>
+                            <div class=""> Check if the current character is an opening parenthesis &#39;(&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Check for Equal Map Sizes</b></div>
+                            <div class=""> <b>8 : Stack Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left.size() <span style="color:#666">==</span> right.size()) cnt<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.push(i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the number of unique characters in the left and right parts (i.e., the size of the `left` and `right` maps) is equal, it means this split is valid, and the counter `cnt` is incremented. </div>
+                            <div class=""> If the character is &#39;(&#39;, push its index onto the &#39;stk&#39; stack. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Result</b></div>
+                            <div class=""> <b>9 : Else Block</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the final value of `cnt`, which represents the number of valid splits where the number of unique characters in both parts is equal. </div>
+                            <div class=""> Else, when the character is a closing parenthesis &#39;)&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty())
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the &#39;stk&#39; stack is not empty, indicating there is an unmatched &#39;(&#39; available. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Stack Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element of the &#39;stk&#39; stack, matching this &#39;)&#39; with an earlier &#39;(&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(<span style="color:#666">!</span>str.empty()) str.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the &#39;stk&#39; stack is empty, check if there is an unmatched &#39;*&#39; character. Pop the &#39;*&#39; from the &#39;str&#39; stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If neither &#39;(&#39; nor &#39;*&#39; are available to match with the closing &#39;)&#39;, return false indicating an invalid string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Block End</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> End of the &#39;else&#39; block for processing closing parentheses. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Loop</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>str.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">&lt;</span> str.top()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Use a while loop to match any remaining &#39;(&#39; in the &#39;stk&#39; stack with &#39;*&#39; in the &#39;str&#39; stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Stack Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        str.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element of the &#39;str&#39; stack to match it with the remaining &#39;(&#39; in the &#39;stk&#39; stack. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Stack Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pop the top element of the &#39;stk&#39; stack, effectively matching this &#39;(&#39; with a &#39;*&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return true if the &#39;stk&#39; stack is empty (all &#39;(&#39; have been matched) or false if any unmatched &#39;(&#39; remain. </div>
                         </div>
                     
                 </div>
@@ -711,13 +792,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The solution processes each character once, thus the time complexity is O(n), where n is the length of the string.</div>                                               
+                        <div class=""> <b>Description:</b> Both the best and worst case scenarios involve traversing the string once, making the time complexity O(n).</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space required to store the distinct letters for each split.</div>    
+                        <div class=""> <b>Description:</b> In the worst case, we may need to store all the parentheses in the stack, which takes O(n) space.</div>    
                     </div>
 
                 </div>

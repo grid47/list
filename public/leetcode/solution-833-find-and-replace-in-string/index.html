@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given two non-increasing 0-indexed integer arrays <code>nums1</code> and <code>nums2</code>. A pair of indices <code>(i, j)</code> is valid if both <code>i &lt;= j</code> and <code>nums1[i] &lt;= nums2[j]</code>. The distance of the pair is <code>j - i</code>. You need to return the maximum distance of any valid pair <code>(i, j)</code>. If there are no valid pairs, return 0. </div>
+<div class=""> You are given a string s and k replacement operations. Each replacement operation consists of an index, a source substring, and a target substring. For each operation, check if the source substring occurs at the given index in s. If it does, replace the substring with the target. All operations are performed simultaneously, meaning they do not affect each other&rsquo;s indexing. The task is to return the modified string after all operations are applied. </div>
 
 
 
@@ -360,49 +360,57 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two non-increasing 0-indexed integer arrays `nums1` and `nums2`.</div>
-                        <div class=""> <b>Example:</b> [50,30,5,4,1], [100,20,10,10,5]</div>
+                        <div class=""> <b>Input:</b> The input consists of a string s and three arrays: indices, sources, and targets. Each element in indices represents the starting position of a source substring in s, and each corresponding element in sources is the substring to replace. The corresponding element in targets is the substring to replace sources with.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#39;hello&#39;, indices = [0, 3], sources = [&#39;he&#39;, &#39;lo&#39;], targets = [&#39;hi&#39;, &#39;ya&#39;]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length, nums2.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1[i], nums2[j] &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • k == indices.length == sources.length == targets.length</div>
                             
-                                <div style="margin-left: 20px;"> • Both nums1 and nums2 are non-increasing arrays.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= indices[i] &lt; s.length</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= sources[i].length, targets[i].length &lt;= 50</div>
+                            
+                                <div style="margin-left: 20px;"> • s consists of only lowercase English letters</div>
+                            
+                                <div style="margin-left: 20px;"> • sources[i] and targets[i] consist of only lowercase English letters</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the maximum distance of any valid pair `(i, j)`.</div>
-                        <div class=""> <b>Example:</b> 2</div>
+                        <div class=""> <b>Output:</b> The output is the modified string after performing all replacement operations on s simultaneously.</div>
+                        <div class=""> <b>Example:</b> Output: &#39;hiya&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result should be the string after all replacements have been applied, without affecting the indexing of subsequent replacements.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find the maximum distance between valid pairs where `i &lt;= j` and `nums1[i] &lt;= nums2[j]`.</div>
+                        <div class=""> <b>Goal:</b> The goal is to apply all k replacements to the string s and return the final modified string. Each replacement should be checked, and if the source substring matches at the specified index, it should be replaced by the target substring.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use a two-pointer or binary search approach to efficiently find the maximum distance.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Create a list of index-source-target triples to store the replacement operations.</div>
                             
-                                <div style="margin-left: 20px;"> • For each element in `nums1`, use binary search or a pointer to find the largest index `j` where `nums2[j]` is greater than or equal to `nums1[i]`.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Sort the replacement operations in descending order of their indices to ensure replacements do not interfere with each other.</div>
                             
-                                <div style="margin-left: 20px;"> • Track the maximum distance `j - i`.</div>
+                                <div style="margin-left: 20px;"> • Step 3: For each operation, check if the source substring matches the substring at the given index in s. If it does, replace it with the target.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Return the final string after all replacements have been applied.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The arrays `nums1` and `nums2` must be non-increasing. The input sizes can be as large as 10^5.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the replacement operations do not overlap, and that each operation is applied only if the source substring matches at the specified index in the original string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1.length, nums2.length &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums1[i], nums2[j] &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • Both nums1 and nums2 are non-increasing arrays.</div>
+                                <div style="margin-left: 20px;"> • The replacement operations are guaranteed to not overlap.</div>
                             
                         </div>
                     </div>        
@@ -410,15 +418,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input arrays will always follow the given constraints of being non-increasing.</div>
+                                <div style="margin-left: 20px;"> • The input string s and the replacement arrays are valid according to the constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [50,30,5,4,1], [100,20,10,10,5]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid pairs are `(0,0)`, `(2,2)`, `(2,3)`, `(2,4)`, `(3,3)`, `(3,4)`, and `(4,4)`. The pair `(2,4)` has the maximum distance, which is `2`.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;hello&#39;, indices = [0, 3], sources = [&#39;he&#39;, &#39;lo&#39;], targets = [&#39;hi&#39;, &#39;ya&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, &#39;he&#39; at index 0 is replaced by &#39;hi&#39;, and &#39;lo&#39; at index 3 is replaced by &#39;ya&#39;, resulting in the string &#39;hiya&#39;.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#39;abcd&#39;, indices = [0, 2], sources = [&#39;a&#39;, &#39;cd&#39;], targets = [&#39;eee&#39;, &#39;ffff&#39;]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Here, &#39;a&#39; at index 0 is replaced by &#39;eee&#39;, and &#39;cd&#39; at index 2 is replaced by &#39;ffff&#39;, resulting in &#39;eeebffff&#39;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +454,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve this problem, a binary search or two-pointer technique can be used to find the largest valid distance between pairs from `nums1` and `nums2`.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to apply each replacement operation in such a way that no two replacements interfere with each other. This can be done by sorting the replacement operations in descending order of their indices and performing the replacements sequentially.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to find a valid pair `(i, j)` where `nums1[i] &lt;= nums2[j]` and `i &lt;= j`.</div>
+                                <div style="margin-left: 20px;"> • We need to ensure that replacements are applied without changing the index positions of subsequent operations.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • The problem can be solved efficiently using binary search or a two-pointer technique to avoid checking each pair explicitly.</div>
+                                <div style="margin-left: 20px;"> • Sorting the operations by their indices in descending order will allow us to apply the replacements from the end of the string to the beginning, preventing overlap.</div>
                             
                         </div>
                     </div>
@@ -459,11 +471,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Iterate through each element `i` in `nums1`.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Parse the input and create a list of tuples containing the index, source, and target.</div>
                             
-                                <div style="margin-left: 20px;"> • For each `i`, find the largest `j` in `nums2` such that `nums2[j] &gt;= nums1[i]` using binary search or two pointers.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Sort the list of operations in descending order of indices to prevent affecting subsequent replacements.</div>
                             
-                                <div style="margin-left: 20px;"> • Track the maximum value of `j - i`.</div>
+                                <div style="margin-left: 20px;"> • Step 3: For each replacement operation, check if the source matches the substring at the specified index. If it does, replace it with the target.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Return the modified string after all replacements have been applied.</div>
                             
                         </div>
                     </div>
@@ -472,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input arrays will always contain at least one element.</div>
+                                <div style="margin-left: 20px;"> • An empty string for s or empty arrays for indices, sources, or targets should not occur as per the problem constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle large inputs efficiently, as `nums1.length` and `nums2.length` can go up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle large inputs where s has up to 1000 characters and k is up to 100.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where the arrays have only one element.</div>
+                                <div style="margin-left: 20px;"> • Ensure that all source substrings are non-overlapping and fit within the string boundaries.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution can handle the non-increasing nature of the arrays.</div>
+                                <div style="margin-left: 20px;"> • The solution should efficiently handle the maximum input size.</div>
                             
                         </div>                                                                        
                     </div>
@@ -506,37 +520,25 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Parameter Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 For Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Push to Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Looping</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sort</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 For Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 String Manipulation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Conditional Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 String Replacement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Variable Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Variable Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
                 </div>
 
@@ -545,33 +547,30 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums1.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i, r <span style="color:#666">=</span> nums2.size() <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> target <span style="color:#666">=</span> nums1[i]; <span style="color:#080;font-style:italic">// find largest index which satisfies target &lt;= nums[i]
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">&lt;</span> nums2[mid]) {
-</span></span><span style="display:flex;"><span>                    j <span style="color:#666">=</span> mid;
-</span></span><span style="display:flex;"><span>                    l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">&gt;</span> nums2[mid]) {
-</span></span><span style="display:flex;"><span>                    r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">==</span> nums2[mid]) {
-</span></span><span style="display:flex;"><span>                    j <span style="color:#666">=</span> mid;
-</span></span><span style="display:flex;"><span>                    l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; j - i;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            
-</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> max(ans, j <span style="color:#666">-</span> i);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">findReplaceString</span>(string s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> indices, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> sources, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> targets) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    string s
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    indices - arr of int
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    src       arr of str
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    tgt       arr of str
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    */</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ind;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> indices.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        ind.push_back({indices[i], i});
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    sort(ind.rbegin(), ind.rend());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ind) {
+</span></span><span style="display:flex;"><span>        string src <span style="color:#666">=</span> sources[it.second], tgt <span style="color:#666">=</span> targets[it.second];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.substr(it.first, src.size()) <span style="color:#666">==</span> src)
+</span></span><span style="display:flex;"><span>            s <span style="color:#666">=</span> s.substr(<span style="color:#666">0</span>, it.first) <span style="color:#666">+</span> tgt <span style="color:#666">+</span> s.substr(it.first<span style="color:#666">+</span> src.size());
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -582,170 +581,110 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxDistance</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">findReplaceString</span>(string s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> indices, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> sources, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> targets) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `maxDistance` which takes two input vectors `nums1` and `nums2`. </div>
+                            <div class=""> Define the function &#39;findReplaceString&#39; which takes four arguments: a string &#39;s&#39; and vectors for indices, source substrings, and target replacements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Parameter Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string s
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `ans` to store the maximum distance found, starting with a value of 0. </div>
+                            <div class=""> Declares the string variable &#39;s&#39; that will be processed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Looping</b></div>
+                            <div class=""> <b>3 : Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums1.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ind;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop to iterate through each element `i` of the `nums1` array. </div>
+                            <div class=""> Declares a vector &#39;ind&#39; to store pairs of indices and their respective positions for sorting. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : For Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i, r <span style="color:#666">=</span> nums2.size() <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> indices.size(); i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes variables `l` (left pointer) to `i`, `r` (right pointer) to the last index of `nums2`, and `j` (the index of the largest valid `nums2` element) to `i`. </div>
+                            <div class=""> Iterates over the &#39;indices&#39; vector to process each index and associate it with its position. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Assignment</b></div>
+                            <div class=""> <b>5 : Push to Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> target <span style="color:#666">=</span> nums1[i]; <span style="color:#080;font-style:italic">// find largest index which satisfies target &lt;= nums1[i]
-</span></span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ind.push_back({indices[i], i});
+</span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Sets `target` to `nums1[i]`, which is the current element from `nums1` that we need to find a match for in `nums2`. </div>
+                            <div class=""> Pushes the pair of index and its position into the &#39;ind&#39; vector for sorting. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Looping</b></div>
+                            <div class=""> <b>6 : Sort</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(ind.rbegin(), ind.rend());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a while loop to perform binary search on `nums2`. </div>
+                            <div class=""> Sorts the &#39;ind&#39; vector in reverse order to ensure replacements happen from the end of the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Calculation</b></div>
+                            <div class=""> <b>7 : For Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ind) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculates the middle index `mid` for the binary search range [l, r]. </div>
+                            <div class=""> Iterates over the sorted pairs of indices to perform replacements in the string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Conditional Check</b></div>
+                            <div class=""> <b>8 : String Manipulation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">&lt;</span> nums2[mid]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string src <span style="color:#666">=</span> sources[it.second], tgt <span style="color:#666">=</span> targets[it.second];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current target from `nums1` is less than the value at `nums2[mid]`. </div>
+                            <div class=""> Extracts the corresponding source and target strings based on the current index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Variable Update</b></div>
+                            <div class=""> <b>9 : Conditional Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    j <span style="color:#666">=</span> mid;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s.substr(it.first, src.size()) <span style="color:#666">==</span> src)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates `j` to `mid` because we found a larger value that satisfies `target &lt;= nums2[mid]`. </div>
+                            <div class=""> Checks if the substring of &#39;s&#39; at the current position matches the source string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Variable Update</b></div>
+                            <div class=""> <b>10 : String Replacement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s <span style="color:#666">=</span> s.substr(<span style="color:#666">0</span>, it.first) <span style="color:#666">+</span> tgt <span style="color:#666">+</span> s.substr(it.first<span style="color:#666">+</span> src.size());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves the left pointer `l` to the right of `mid` to continue searching for a larger index. </div>
+                            <div class=""> Performs the replacement of the source substring with the target string. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Conditional Check</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(target <span style="color:#666">&gt;</span> nums2[mid]) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current target is greater than `nums2[mid]`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Variable Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves the right pointer `r` to the left of `mid` since `nums2[mid]` is too large. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(target <span style="color:#666">==</span> nums2[mid]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the current target is equal to `nums2[mid]`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Variable Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    j <span style="color:#666">=</span> mid;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Updates `j` to `mid` since we found an exact match for `target`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Variable Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Moves the left pointer `l` to the right to continue searching for larger valid indices. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Variable Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> max(ans, j <span style="color:#666">-</span> i);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Updates `ans` with the maximum distance found between `i` and `j`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Return</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the maximum distance found between indices from `nums1` and `nums2`. </div>
+                            <div class=""> Returns the modified string after all replacements. </div>
                         </div>
                     
                 </div>
@@ -765,16 +704,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log n) in the worst case, where n is the length of the input arrays, due to binary search or two-pointer traversal.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(k log k &#43; n), where k is the number of replacement operations and n is the length of the string s.</div>
+                        <div class=""> <b>Average Case:</b> O(k log k &#43; n), where k is the number of operations and n is the length of the string.</div>
+                        <div class=""> <b>Worst Case:</b> O(k log k &#43; n), which occurs when all operations need to be checked and applied to the entire string.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the sorting of the operations, followed by the sequential replacement checks.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as we are using a constant amount of extra space apart from the input arrays.</div>    
+                        <div class=""> <b>Best Case:</b> O(k), if no additional space is required beyond the input data.</div>
+                        <div class=""> <b>Worst Case:</b> O(k), as we store the indices, sources, and targets in arrays, which are of size k.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is primarily determined by the storage of the replacement operations.</div>    
                     </div>
 
                 </div>

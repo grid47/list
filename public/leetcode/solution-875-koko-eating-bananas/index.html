@@ -307,7 +307,7 @@
 
 
 
-<div class=""> You are given a string consisting of lowercase English letters and an integer k. Your task is to convert the string into an integer by replacing each letter with its corresponding position in the alphabet (where &lsquo;a&rsquo; = 1, &lsquo;b&rsquo; = 2, &hellip;, &lsquo;z&rsquo; = 26), and then repeatedly sum its digits k times. The final result is the integer obtained after performing the digit sum operation k times. </div>
+<div class=""> Koko loves to eat bananas and there are multiple piles of bananas. Each pile has a certain number of bananas. Koko can decide how many bananas she wants to eat per hour, and each hour she can choose any pile to eat from. If the pile contains fewer bananas than her chosen rate, she finishes that pile and moves to another pile. Koko needs to finish all the bananas before the guards return in h hours. You need to determine the minimum number of bananas per hour Koko should eat in order to finish all piles within the given time. </div>
 
 
 
@@ -358,53 +358,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a string s of lowercase English letters and an integer k. The string s represents the word to be converted into an integer, and k represents the number of times the digit sum operation should be performed.</div>
-                        <div class=""> <b>Example:</b> s = &#34;abcd&#34;, k = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of integers where each integer represents the number of bananas in a pile, and an integer h representing the total hours Koko has to finish the bananas.</div>
+                        <div class=""> <b>Example:</b> Input: piles = [4, 10, 7, 13], h = 6</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= piles.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • piles.length &lt;= h &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= piles[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the integer obtained after performing the digit sum operation on the string&#39;s converted integer representation k times.</div>
-                        <div class=""> <b>Example:</b> Output: 7</div>
+                        <div class=""> <b>Output:</b> Return the minimum integer k such that Koko can eat all the bananas within h hours. If no such integer exists, return 0.</div>
+                        <div class=""> <b>Example:</b> Output: 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result should be a single integer.</div>
+                                <div style="margin-left: 20px;"> • The output should be a single integer representing the minimum speed Koko needs to eat the bananas.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to convert each character in the string to its respective position in the alphabet, then repeatedly sum the digits of the resulting integer k times to get the final result.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the minimum number of bananas per hour, k, that allows Koko to eat all the bananas within h hours.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Step 1: Convert each character in the string to its corresponding number in the alphabet.</div>
+                                <div style="margin-left: 20px;"> • Perform a binary search on the possible eating speeds from 1 to the maximum number of bananas in any pile.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Concatenate the numbers to form a large integer.</div>
+                                <div style="margin-left: 20px;"> • For each candidate eating speed k, calculate the total number of hours Koko would take to eat all piles at that speed.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Perform the digit sum operation on the integer k times.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Return the resulting integer after k digit sum operations.</div>
+                                <div style="margin-left: 20px;"> • If the total hours exceed h, increase the speed; otherwise, try a smaller speed until you find the minimum k.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints ensure that the input string is of manageable length, and the number of transformations (k) is small.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle a variety of pile sizes and eating speeds efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= piles.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 10</div>
+                                <div style="margin-left: 20px;"> • piles.length &lt;= h &lt;= 10^9</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase English letters</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= piles[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>        
@@ -412,21 +410,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string will contain only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The input array piles is non-empty and contains positive integers.</div>
                             
-                                <div style="margin-left: 20px;"> • The value of k will be at least 1.</div>
+                                <div style="margin-left: 20px;"> • Koko&#39;s eating speed is adjustable and the goal is to minimize it while ensuring all bananas are eaten within h hours.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;abcd&#34;, k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;abcd&#39; is converted to &#39;1234&#39;. First, we sum the digits: 1&#43;2&#43;3&#43;4 = 10. Then, we sum the digits of 10: 1&#43;0 = 1. After 2 transformations, the result is 1.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [4, 10, 7, 13], h = 6</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The minimum speed Koko needs to eat all bananas in 6 hours is 8 bananas per hour, as at this speed she can finish all piles within the given time.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: s = &#34;aaa&#34;, k = 1</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The string &#39;aaa&#39; becomes &#39;111&#39;. Summing the digits gives: 1&#43;1&#43;1 = 3. After 1 transformation, the result is 3.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: piles = [5, 15, 12, 30], h = 4</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The minimum speed Koko needs to eat all bananas in 4 hours is 15 bananas per hour.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -450,18 +448,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach is to first map the letters of the string to their respective numeric values based on their position in the alphabet, and then perform digit sum transformations k times.</div>
+                        <div class=""> <b>Approach:</b> We will use binary search to find the optimal eating speed. This allows us to efficiently find the minimum speed that allows Koko to finish eating within the given time limit.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to map each letter to its respective position in the alphabet.</div>
-                            
-                                <div style="margin-left: 20px;"> • After forming the integer from these positions, we will repeatedly sum the digits.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved efficiently with binary search since the relationship between speed and time is monotonic (higher speed leads to fewer hours).</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This is a simple string manipulation and digit sum problem that can be solved in a straightforward manner using basic operations.</div>
+                                <div style="margin-left: 20px;"> • We need to carefully calculate the total time for each speed and adjust the search range based on whether it is sufficient to eat all bananas.</div>
                             
                         </div>
                     </div>
@@ -469,13 +465,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Convert each character to its corresponding position in the alphabet.</div>
+                                <div style="margin-left: 20px;"> • Define the search range for k, starting from 1 to the maximum number of bananas in any pile.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: Concatenate the numeric values to form a large integer.</div>
+                                <div style="margin-left: 20px;"> • For each candidate k, calculate the total number of hours required by iterating through the piles and calculating the hours for each pile.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Perform the digit sum transformation k times.</div>
-                            
-                                <div style="margin-left: 20px;"> • Step 4: Return the final integer after k transformations.</div>
+                                <div style="margin-left: 20px;"> • Adjust the search range based on whether the total hours exceed the given limit h.</div>
                             
                         </div>
                     </div>
@@ -484,22 +478,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Empty string input is not valid as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • If piles is empty, return 0 since there are no bananas to eat.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string has a length close to the upper limit (100 characters), the solution should efficiently handle the large number formed.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle large inputs, with pile sizes and hours potentially reaching up to 10^9.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Single character strings should return a simple transformation result.</div>
+                                <div style="margin-left: 20px;"> • If piles has only one element, the answer will simply be that element divided by the hours.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that k is within the valid range of 1 to 10.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle inputs with up to 10^4 piles and large integer values within the specified range.</div>
                             
                         </div>                                                                        
                     </div>
@@ -520,25 +514,21 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop over String</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Binary Search Step</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Summing Digits</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop for Reduction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 For Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 While Loop for Digit Summation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Digit Summation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update n</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update n</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
                 </div>
 
@@ -547,20 +537,18 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getLucky</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    string tmp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : s) tmp <span style="color:#666">+=</span> to_string(c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : tmp) n <span style="color:#666">+=</span> c <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> k; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> next <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (n) {
-</span></span><span style="display:flex;"><span>            next <span style="color:#666">+=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>            n <span style="color:#666">/=</span> <span style="color:#666">10</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> next;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minEatingSpeed</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles, <span style="color:#0b0;font-weight:bold">int</span> H) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> <span style="color:#666">1000000000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> h <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: piles)
+</span></span><span style="display:flex;"><span>            h <span style="color:#666">+=</span> ceil((<span style="color:#0b0;font-weight:bold">double</span>) x <span style="color:#666">/</span> k);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(h <span style="color:#666">&gt;</span> H)   l <span style="color:#666">=</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>        r <span style="color:#666">=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -571,120 +559,100 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getLucky</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minEatingSpeed</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles, <span style="color:#0b0;font-weight:bold">int</span> H) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function definition begins with the input parameters: &#39;s&#39; (a string) and &#39;k&#39; (an integer) representing the number of iterations for the digit reduction process. </div>
+                            <div class=""> The function `minEatingSpeed` takes two inputs: a vector of integers `piles` representing the number of bananas in each pile, and an integer `H` representing the total number of hours available. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string tmp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> <span style="color:#666">1000000000</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A string &#39;tmp&#39; is initialized to store the numeric string derived from the input string &#39;s&#39;. </div>
+                            <div class=""> The variables `l` and `r` represent the lower and upper bounds for the possible eating speeds. `l` starts at 0 and `r` is set to a very large number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop over String</b></div>
+                            <div class=""> <b>3 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : s) tmp <span style="color:#666">+=</span> to_string(c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each character of the input string &#39;s&#39; is converted to a corresponding number (&#39;a&#39; -&gt; 1, &#39;b&#39; -&gt; 2, ..., &#39;z&#39; -&gt; 26) and appended to &#39;tmp&#39;. </div>
+                            <div class=""> A `while` loop is used to perform the binary search, which continues as long as the lower bound is less than or equal to the upper bound. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Binary Search Step</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable &#39;n&#39; is initialized to 0. It will hold the sum of the digits in the string &#39;tmp&#39;. </div>
+                            <div class=""> The midpoint `k` is calculated as the average of `l` and `r` (the current lower and upper bounds of the eating speed). This is the candidate eating speed to check. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Summing Digits</b></div>
+                            <div class=""> <b>5 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : tmp) n <span style="color:#666">+=</span> c <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> h <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The digits in the string &#39;tmp&#39; are summed up and stored in the variable &#39;n&#39;. Each character is converted to its numeric value using &#39;c - &#39;0&#39;. </div>
+                            <div class=""> A variable `h` is initialized to 0. This will track the total number of hours required to eat all the piles at the current speed `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop for Reduction</b></div>
+                            <div class=""> <b>6 : For Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> k; <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: piles)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is initiated that will run &#39;k&#39; times, reducing the sum &#39;n&#39; by repeatedly summing its digits. </div>
+                            <div class=""> A `for` loop iterates over each pile `x` in the `piles` array, calculating how many hours it would take to eat that pile at speed `k`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Variable Initialization</b></div>
+                            <div class=""> <b>7 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> next <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            h <span style="color:#666">+=</span> ceil((<span style="color:#0b0;font-weight:bold">double</span>) x <span style="color:#666">/</span> k);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A temporary variable &#39;next&#39; is initialized to accumulate the sum of the digits of &#39;n&#39;. </div>
+                            <div class=""> For each pile `x`, the number of hours required to eat the pile at speed `k` is calculated using `ceil((double) x / k)`, and the result is added to `h`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : While Loop for Digit Summation</b></div>
+                            <div class=""> <b>8 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(h <span style="color:#666">&gt;</span> H)   l <span style="color:#666">=</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A while loop is used to reduce &#39;n&#39; by summing its digits. The loop continues until &#39;n&#39; becomes 0. </div>
+                            <div class=""> If the total number of hours `h` exceeds the available hours `H`, it means the speed `k` is too slow, so the lower bound `l` is increased to `k &#43; 1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Digit Summation</b></div>
+                            <div class=""> <b>9 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            next <span style="color:#666">+=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>        r <span style="color:#666">=</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The last digit of &#39;n&#39; is added to &#39;next&#39;. </div>
+                            <div class=""> If the total number of hours `h` is within the allowed limit `H`, it means the speed `k` may be valid, so the upper bound `r` is decreased to `k - 1`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update n</b></div>
+                            <div class=""> <b>10 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            n <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The last digit of &#39;n&#39; is removed by performing integer division by 10. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Update n</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">=</span> next;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> &#39;n&#39; is updated to &#39;next&#39;, which is the sum of the digits of the previous &#39;n&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> The final reduced value of &#39;n&#39; is returned after &#39;k&#39; iterations. </div>
+                            <div class=""> Once the binary search loop finishes, the variable `l` contains the minimum eating speed that allows all piles to be eaten within `H` hours. This value is returned. </div>
                         </div>
                     
                 </div>
@@ -704,16 +672,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) where n is the length of the string.</div>
-                        <div class=""> <b>Average Case:</b> O(n * k) where n is the length of the string and k is the number of digit sum operations.</div>
-                        <div class=""> <b>Worst Case:</b> O(n * k), the worst-case time complexity occurs when the input string is large and k is at its maximum value.</div> 
-                        <div class=""> <b>Description:</b> The time complexity depends on both the string length and the number of times the transformation is performed.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log M)</div>
+                        <div class=""> <b>Average Case:</b> O(n log M)</div>
+                        <div class=""> <b>Worst Case:</b> O(n log M)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log M), where n is the number of piles and M is the maximum number of bananas in any pile.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), if we use constant space for digit summing operations.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), as we need space for storing the converted string and the intermediate results.</div> 
-                        <div class=""> <b>Description:</b> The space complexity depends on the length of the input string and the storage required for intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant since only a few variables are used to track the process.</div>    
                     </div>
 
                 </div>

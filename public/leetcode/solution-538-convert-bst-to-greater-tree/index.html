@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 14, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given a class <code>FizzBuzz</code> that has four methods: <code>fizz()</code>, <code>buzz()</code>, <code>fizzbuzz()</code>, and <code>number()</code>. These methods are executed by four different threads. The goal is to output a sequence of numbers from 1 to <code>n</code> with special rules: if the number is divisible by 3 and 5, print &lsquo;fizzbuzz&rsquo;; if divisible by 3 but not 5, print &lsquo;fizz&rsquo;; if divisible by 5 but not 3, print &lsquo;buzz&rsquo;; otherwise, print the number. </div>
+<div class=""> Given the root of a Binary Search Tree (BST), convert it into a Greater Tree where every node’s value is replaced by the sum of all greater node values in the BST plus its original value. </div>
 
 
 
@@ -372,45 +372,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer `n`, representing the length of the sequence.</div>
-                        <div class=""> <b>Example:</b> Input: n = 10</div>
+                        <div class=""> <b>Input:</b> Each input consists of a binary search tree represented by its root. The nodes of the tree contain integer values.</div>
+                        <div class=""> <b>Example:</b> Input: root = [5, 2, 13]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the tree is in the range [0, 10^4].</div>
+                            
+                                <div style="margin-left: 20px;"> • Each node value is an integer within the range [-10^4, 10^4].</div>
+                            
+                                <div style="margin-left: 20px;"> • All node values are unique.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a list of values where each value corresponds to the number or one of the words &#39;fizz&#39;, &#39;buzz&#39;, or &#39;fizzbuzz&#39;.</div>
-                        <div class=""> <b>Example:</b> Output: [1, 2, &#39;fizz&#39;, 4, &#39;buzz&#39;, &#39;fizz&#39;, 7, 8, &#39;fizz&#39;, &#39;buzz&#39;]</div>
+                        <div class=""> <b>Output:</b> Return the root of the binary search tree after transforming it into the Greater Tree.</div>
+                        <div class=""> <b>Example:</b> Output: [18, 20, 13]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The sequence should follow the correct order and the rules for &#39;fizz&#39;, &#39;buzz&#39;, and &#39;fizzbuzz&#39;.</div>
+                                <div style="margin-left: 20px;"> • The output should be a valid Binary Search Tree where each node’s value is the sum of all greater node values plus its original value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to implement the `FizzBuzz` class such that each method is responsible for printing the appropriate output based on the current number.</div>
+                        <div class=""> <b>Goal:</b> Transform the BST into a Greater Tree by updating each node&#39;s value.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Create the `FizzBuzz` class with an initializer for the number `n`.</div>
+                                <div style="margin-left: 20px;"> • Perform a reverse inorder traversal (right, node, left) to access nodes in descending order.</div>
                             
-                                <div style="margin-left: 20px;"> • Use synchronization (mutexes) to coordinate the threads for each method.</div>
+                                <div style="margin-left: 20px;"> • Accumulate the sum of node values greater than the current node’s value.</div>
                             
-                                <div style="margin-left: 20px;"> • Ensure the correct method is called based on whether the number is divisible by 3, 5, or both.</div>
+                                <div style="margin-left: 20px;"> • Update the current node&#39;s value by adding the accumulated sum.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution should correctly handle small to moderate values of `n`, and ensure thread synchronization.</div>
+                        <div class=""> <b>Goal:</b> The input tree must be a valid binary search tree (BST) with unique values.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • The tree is a valid BST.</div>
                             
-                                <div style="margin-left: 20px;"> • Handle synchronization correctly between the threads.</div>
+                                <div style="margin-left: 20px;"> • The values of the nodes are unique.</div>
+                            
+                                <div style="margin-left: 20px;"> • The tree contains between 0 and 10^4 nodes.</div>
                             
                         </div>
                     </div>        
@@ -418,17 +424,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each method (`fizz`, `buzz`, `fizzbuzz`, `number`) will be executed by a separate thread.</div>
-                            
-                                <div style="margin-left: 20px;"> • The order of printing is important and must follow the rules for &#39;fizz&#39;, &#39;buzz&#39;, and &#39;fizzbuzz&#39;.</div>
+                                <div style="margin-left: 20px;"> • The input tree is a valid Binary Search Tree.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: n = 7</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sequence from 1 to 7 will output: [1, 2, &#39;fizz&#39;, 4, &#39;buzz&#39;, &#39;fizz&#39;, 7]. &#39;fizz&#39; is printed for multiples of 3, &#39;buzz&#39; for multiples of 5, and the rest are the numbers themselves.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [5, 2, 13]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, after transforming the BST into a Greater Tree, the node with value 5 becomes 18, the node with value 2 becomes 20, and the node with value 13 stays the same.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -452,16 +456,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will solve this by using multithreading and synchronization. Each thread will be responsible for printing a particular output based on the current number in the sequence.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we need to traverse the BST in descending order and update each node’s value with the sum of all greater node values.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to ensure the threads run in the correct order without race conditions.</div>
+                                <div style="margin-left: 20px;"> • We can solve this problem efficiently by using a reverse inorder traversal of the BST.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Mutexes will help synchronize the output, ensuring that the numbers are printed in the correct order and with the correct labels.</div>
+                                <div style="margin-left: 20px;"> • In reverse inorder traversal, we visit the right child first, then the node itself, followed by the left child. This way, we encounter the largest nodes first.</div>
                             
                         </div>
                     </div>
@@ -469,11 +473,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Define the `FizzBuzz` class with methods `fizz()`, `buzz()`, `fizzbuzz()`, and `number()`.</div>
+                                <div style="margin-left: 20px;"> • Initialize a global variable to keep track of the cumulative sum of the values of the nodes visited.</div>
                             
-                                <div style="margin-left: 20px;"> • Use mutexes to lock and unlock the threads based on the divisibility conditions (3, 5, or both).</div>
+                                <div style="margin-left: 20px;"> • Perform reverse inorder traversal: first visit the right child, then the node, and finally the left child.</div>
                             
-                                <div style="margin-left: 20px;"> • Each method prints its corresponding value based on the current number, ensuring that the sequence follows the rules.</div>
+                                <div style="margin-left: 20px;"> • For each node, add the cumulative sum to its value and update the cumulative sum.</div>
                             
                         </div>
                     </div>
@@ -482,22 +486,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `n` is 1, the output should just be [1].</div>
+                                <div style="margin-left: 20px;"> • If the input tree is empty, return null.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For larger values of `n` (up to 50), ensure that the solution works within the time limits.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution can handle trees with up to 10^4 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `n` is a multiple of both 3 and 5, &#39;fizzbuzz&#39; should be printed.</div>
+                                <div style="margin-left: 20px;"> • Handle trees with negative node values correctly.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle synchronization properly to avoid race conditions between threads.</div>
+                                <div style="margin-left: 20px;"> • The tree is guaranteed to be a valid binary search tree.</div>
                             
                         </div>                                                                        
                     </div>
@@ -514,41 +518,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 variable declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 synchronization primitives</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 access specifier</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 constructor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 mutex lock</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 mutex lock</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 mutex lock</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 variable initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 variable assignment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 function definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Node Value Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Sum Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 mutex lock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 conditional check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 function call</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 iterator increment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 conditional check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 mutex unlock</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 conditional check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Recursive Call</button>
                     
                 </div>
 
@@ -557,112 +549,23 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n, i;
-</span></span><span style="display:flex;"><span>mutex f, b, fz, num;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>FizzBuzz(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    f.lock();
-</span></span><span style="display:flex;"><span>    b.lock();
-</span></span><span style="display:flex;"><span>    fz.lock();
-</span></span><span style="display:flex;"><span>    i <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> convertBST(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    convert(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// printFizz() outputs &#34;fizz&#34;.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fizz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFizz) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>        f.lock();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)            
-</span></span><span style="display:flex;"><span>        printFizz();
-</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;            
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span><span style="color:#666">==</span> <span style="color:#666">0</span>  <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// printBuzz() outputs &#34;buzz&#34;.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">buzz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printBuzz) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>        b.lock();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)            
-</span></span><span style="display:flex;"><span>        printBuzz();
-</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span><span style="color:#666">==</span> <span style="color:#666">0</span>  <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// printFizzBuzz() outputs &#34;fizzbuzz&#34;.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>	<span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fizzbuzz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFizzBuzz) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>        fz.lock();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)
-</span></span><span style="display:flex;"><span>        printFizzBuzz();
-</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// printNumber(x) outputs &#34;x&#34;, where x is an integer.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">number</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>        num.lock();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)
-</span></span><span style="display:flex;"><span>        printNumber(i);
-</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            fz.unlock();
-</span></span><span style="display:flex;"><span>            f.unlock();
-</span></span><span style="display:flex;"><span>            b.unlock();
-</span></span><span style="display:flex;"><span>            num.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">convert</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    convert(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>val <span style="color:#666">+=</span> sum;
+</span></span><span style="display:flex;"><span>    sum <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    convert(root<span style="color:#666">-&gt;</span>left);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -670,183 +573,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : variable declaration</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n, i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines variables `n` (the range limit) and `i` (the current number being processed). </div>
+                            <div class=""> Defines the `Solution` class which will contain the method to convert a BST to a Greater Tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : synchronization primitives</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mutex f, b, fz, num;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares mutex objects to control thread synchronization for fizz, buzz, fizzbuzz, and number printing. </div>
+                            <div class=""> Declares an integer variable `sum` and initializes it to 0. This variable will store the cumulative sum during the traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : access specifier</b></div>
+                            <div class=""> <b>3 : Access Modifier</b></div>
                             <div class="">
                                 
                                 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Marks the following members of the class as publicly accessible. </div>
+                            <div class=""> Indicates the start of the public access modifier, making the following methods accessible from outside the class. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : constructor</b></div>
+                            <div class=""> <b>4 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FizzBuzz(<span style="color:#0b0;font-weight:bold">int</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">convertBST</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the constructor, initializing the range limit `n` and locking the mutexes. </div>
+                            <div class=""> Defines the `convertBST` method which takes the root of a Binary Search Tree as input and returns the root of the converted Greater Tree. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : mutex lock</b></div>
+                            <div class=""> <b>5 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    f.lock();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    convert(root);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Locks the mutex for the `fizz` thread to ensure controlled execution. </div>
+                            <div class=""> Calls the private helper method `convert` to perform the conversion on the BST. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : mutex lock</b></div>
+                            <div class=""> <b>6 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    b.lock();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Locks the mutex for the `buzz` thread to prevent premature execution. </div>
+                            <div class=""> Returns the root of the modified BST (now a Greater Tree) after the conversion. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : mutex lock</b></div>
+                            <div class=""> <b>7 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    fz.lock();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">convert</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Locks the mutex for the `fizzbuzz` thread to maintain synchronization. </div>
+                            <div class=""> Defines the helper method `convert`, which is used to recursively traverse the tree and accumulate the sum of node values. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : variable initialization</b></div>
+                            <div class=""> <b>8 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    i <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the iterator variable `i` to start processing from 1. </div>
+                            <div class=""> Checks if the current node is null. If so, the function returns without doing anything. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : variable assignment</b></div>
+                            <div class=""> <b>9 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    convert(root<span style="color:#666">-&gt;</span>right);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Assigns the range limit `n` to the instance variable of the class. </div>
+                            <div class=""> Recursively calls the `convert` method on the right subtree to process all nodes in the right subtree first (reverse inorder traversal). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : function definition</b></div>
+                            <div class=""> <b>10 : Node Value Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fizz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFizz) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>val <span style="color:#666">+=</span> sum;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `fizz` function, which uses a lambda to print &#39;fizz&#39; when appropriate. </div>
+                            <div class=""> Adds the current value of `sum` to the node&#39;s value. This ensures each node&#39;s value is updated with the cumulative sum of all greater nodes. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : loop</b></div>
+                            <div class=""> <b>11 : Sum Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sum <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>val;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Begins a loop that iterates through numbers from 1 to `n`. </div>
+                            <div class=""> Updates the `sum` variable to the current node&#39;s value, so it can be used by subsequent nodes in the traversal. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : mutex lock</b></div>
+                            <div class=""> <b>12 : Recursive Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        f.lock();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    convert(root<span style="color:#666">-&gt;</span>left);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Locks the mutex for the `fizz` thread before executing its logic. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : conditional check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)            
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the current number is within the range limit before printing. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : function call</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        printFizz();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Executes the function to print &#39;fizz&#39;. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : iterator increment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i<span style="color:#666">++</span>;            
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Increments the iterator to move to the next number. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : conditional check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span><span style="color:#666">==</span> <span style="color:#666">0</span>  <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the current number is divisible by both 3 and 5. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : mutex unlock</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            fz.unlock();
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Unlocks the `fizzbuzz` mutex if the number is divisible by both 3 and 5. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : conditional check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the number is divisible only by 3. </div>
+                            <div class=""> Recursively calls the `convert` method on the left subtree to process all nodes in the left subtree after updating the current node. </div>
                         </div>
                     
                 </div>
@@ -869,13 +712,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) as each number from 1 to `n` is processed once.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we perform a single traversal of the tree, visiting each node once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) since only a constant amount of space is used for synchronization and variables.</div>    
+                        <div class=""> <b>Best Case:</b> O(h)</div>
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h), where h is the height of the tree. This accounts for the recursive stack in a depth-first traversal.</div>    
                     </div>
 
                 </div>

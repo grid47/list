@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are given a binary tree with three nodes: the root, its left child, and its right child. Determine whether the value of the root node is equal to the sum of the values of its two children. </div>
+<div class=""> You are given a list of query strings and a pattern. A query string matches the pattern if you can insert lowercase English letters into the pattern such that it becomes the query string. Each character from the pattern must be placed in order without changing its relative positions, and you may not add any characters that are not in the pattern. </div>
 
 
 
@@ -361,51 +361,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a binary tree with exactly three nodes: a root node, a left child, and a right child. Each node contains an integer value.</div>
-                        <div class=""> <b>Example:</b> Input: root = [7, 3, 4]</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of query strings and a string pattern.</div>
+                        <div class=""> <b>Example:</b> queries = [&#34;ABCdEF&#34;, &#34;AbCdEFG&#34;, &#34;ACE&#34;, &#34;AcEfG&#34;, &#34;AcdFEG&#34;], pattern = &#34;ACE&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The binary tree always has three nodes: root, left child, and right child.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= pattern.length, queries.length &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • -100 &lt;= Node.val &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= queries[i].length &lt;= 100</div>
+                            
+                                <div style="margin-left: 20px;"> • queries[i] and pattern consist of English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a boolean value indicating whether the value of the root node is equal to the sum of the values of its two children.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> The output is a boolean array where each element indicates whether the corresponding query string matches the pattern or not.</div>
+                        <div class=""> <b>Example:</b> Output: [true, true, true, false, false]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output should be either true or false.</div>
+                                <div style="margin-left: 20px;"> • The output array must contain a boolean value for each query string.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Check if the sum of the values of the left and right children equals the value of the root node.</div>
+                        <div class=""> <b>Goal:</b> We need to check if we can insert lowercase letters into the pattern in a way that the pattern becomes the query string. This can be done by scanning both the pattern and query string simultaneously and ensuring the pattern&#39;s characters appear in the same order in the query.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Access the value of the root node.</div>
+                                <div style="margin-left: 20px;"> • 1. For each query, iterate through the characters of the query and the pattern simultaneously.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Access the values of the left and right child nodes.</div>
+                                <div style="margin-left: 20px;"> • 2. Check if each character in the query matches the corresponding character in the pattern, skipping over any lowercase characters in the query.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Compute the sum of the left and right child node values.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Compare the computed sum with the value of the root node.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return true if they are equal; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • 3. If all characters in the pattern are matched in order, return true for that query; otherwise, return false.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The binary tree structure is fixed with exactly three nodes, and all node values fall within the specified range.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the solution works efficiently for the given input size.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree will always consist of three nodes: root, left child, and right child.</div>
-                            
-                                <div style="margin-left: 20px;"> • Node values are integers within the range -100 to 100.</div>
+                                <div style="margin-left: 20px;"> • The solution should be able to handle up to 100 queries, each up to 100 characters long.</div>
                             
                         </div>
                     </div>        
@@ -413,21 +409,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The binary tree input will always be valid with three nodes.</div>
-                            
-                                <div style="margin-left: 20px;"> • No additional nodes or structures are present in the input.</div>
+                                <div style="margin-left: 20px;"> • The pattern and query strings consist only of uppercase and lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [7, 3, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The value of the root is 7, and the sum of the left and right children is 3 &#43; 4 = 7. Since they are equal, the output is true.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [8, 5, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The value of the root is 8, and the sum of the left and right children is 5 &#43; 2 = 7. Since they are not equal, the output is false.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: queries = [&#34;ABCdEF&#34;, &#34;AbCdEFG&#34;, &#34;ACE&#34;, &#34;AcEfG&#34;, &#34;AcdFEG&#34;], pattern = &#34;ACE&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, &#39;ABCdEF&#39; can be formed by inserting &#39;B&#39; and &#39;D&#39; into the pattern &#39;ACE&#39;, so the output is true. &#39;AbCdEF&#39; can be formed by inserting &#39;b&#39;, &#39;C&#39; and &#39;G&#39;, so the output is true. &#39;ACE&#39; is already equal to the pattern, so the output is true. &#39;AcEfG&#39; doesn&#39;t match the pattern because of extra characters in the middle, so the output is false. &#39;AcdFEG&#39; doesn&#39;t match because of extra characters and incorrect ordering, so the output is false.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -451,18 +441,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves simple arithmetic comparisons to validate the relationship between the root and its children.</div>
+                        <div class=""> <b>Approach:</b> The approach is to use a two-pointer technique to check if the characters of the pattern appear in the correct order in each query string, allowing for lowercase characters to be inserted.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The tree is small with only three nodes, so the logic is straightforward.</div>
-                            
-                                <div style="margin-left: 20px;"> • The problem only requires basic comparison of integer values.</div>
+                                <div style="margin-left: 20px;"> • We can utilize two pointers, one for the pattern and one for the query string, to verify if the pattern characters appear in the correct order in the query.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Accessing and comparing node values directly should be sufficient to solve this problem efficiently.</div>
+                                <div style="margin-left: 20px;"> • By iterating through the query string and matching characters from the pattern, we can determine if the pattern is a subsequence of the query.</div>
                             
                         </div>
                     </div>
@@ -470,13 +458,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Retrieve the values of the root, left child, and right child.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a pointer for the pattern and for each query.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Compute the sum of the left and right child node values.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through the characters of the query and the pattern.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Compare the computed sum to the root node value.</div>
+                                <div style="margin-left: 20px;"> • 3. For each character in the query, if it matches the current character in the pattern, move the pattern pointer to the next character.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return true if they match; otherwise, return false.</div>
+                                <div style="margin-left: 20px;"> • 4. If all characters in the pattern are matched in the query in order, return true for that query, otherwise return false.</div>
                             
                         </div>
                     </div>
@@ -485,24 +473,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable, as the input always contains three nodes.</div>
+                                <div style="margin-left: 20px;"> • If the query or pattern is empty, return false.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Not applicable, as the input size is fixed to three nodes.</div>
+                                <div style="margin-left: 20px;"> • If there are large numbers of queries or very long query strings, the algorithm should still perform efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All node values are zeros, e.g., root = [0, 0, 0].</div>
-                            
-                                <div style="margin-left: 20px;"> • The root value is negative, and its children sum to match it.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where the query contains only lowercase letters or the pattern contains only uppercase letters.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure comparisons handle both negative and positive integers correctly.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles edge cases, such as patterns and queries with special characters.</div>
                             
                         </div>                                                                        
                     </div>
@@ -521,7 +507,35 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Call</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Result Collection</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Statement</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Helper Function Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Looping</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Character Comparison</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Index Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Continue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Condition Check</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Early Return</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return Statement</button>
                     
                 </div>
 
@@ -530,8 +544,37 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkTree</span>(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (root<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val)<span style="color:#666">+</span>(root<span style="color:#666">-&gt;</span>right<span style="color:#666">-&gt;</span>val)<span style="color:#666">==</span>root<span style="color:#666">-&gt;</span>val;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> camelMatch(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> queries, string pattern) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">q</span>: queries) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> ret <span style="color:#666">=</span> match(q, pattern);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        res.push_back(ret);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">match</span>(string q, string p) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> p.size()<span style="color:#666">&amp;&amp;</span>q[i] <span style="color:#666">==</span> p[j]) {
+</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(q[i] <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;A&#39;</span> <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>           q[i] <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;Z&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;               
+</span></span><span style="display:flex;"><span>           
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> j <span style="color:#666">==</span> p.size();
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -542,20 +585,160 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkTree</span>(TreeNode<span style="color:#666">*</span> root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> camelMatch(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> queries, string pattern) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the &#39;checkTree&#39; function that takes a pointer to the root of a binary tree and returns a boolean value. </div>
+                            <div class=""> Define the function `camelMatch` which takes a list of queries and a string pattern to check if the queries match the camelCase pattern. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Return Statement</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (root<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val)<span style="color:#666">+</span>(root<span style="color:#666">-&gt;</span>right<span style="color:#666">-&gt;</span>val)<span style="color:#666">==</span>root<span style="color:#666">-&gt;</span>val;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns &#39;true&#39; if the sum of the values of the left and right children of the root node equals the root&#39;s value; otherwise, returns &#39;false&#39;. </div>
+                            <div class=""> Initialize a result vector `res` to store boolean values indicating whether each query matches the pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>3 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">q</span>: queries) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate over each string in the `queries` list. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>4 : Function Call</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> ret <span style="color:#666">=</span> match(q, pattern);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Call the helper function `match` to check if the query string `q` matches the pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>5 : Result Collection</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(ret);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the result of the `match` function (true or false) into the `res` vector. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>6 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return the result vector containing the match status for each query. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Helper Function Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">match</span>(string q, string p) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Define the helper function `match` to check if a single query string matches the camelCase pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initialize an index `j` to track the position in the pattern string `p`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Looping</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Iterate over each character in the query string `q`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Character Comparison</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> p.size()<span style="color:#666">&amp;&amp;</span>q[i] <span style="color:#666">==</span> p[j]) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the current character in `q` matches the current character in `p`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Index Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the index `j` to move to the next character in the pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Continue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Continue to the next iteration of the loop if the characters match. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }<span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(q[i] <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;A&#39;</span> <span style="color:#666">&amp;&amp;</span> 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Check if the character in `q` is an uppercase letter. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Condition Check</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>           q[i] <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;Z&#39;</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Ensure the character is within the range of uppercase letters. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Early Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;               
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return `false` if an uppercase letter in `q` is encountered that doesn&#39;t match the pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> j <span style="color:#666">==</span> p.size();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Return `true` if all characters in the pattern have been matched; otherwise, return `false`. </div>
                         </div>
                     
                 </div>
@@ -575,16 +758,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant because the binary tree always contains exactly three nodes.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(m * n) where m is the number of queries and n is the length of each query. In the worst case, we need to compare each query string with the pattern.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The solution uses constant space as no additional memory is required beyond the input.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(1) because we are using only a few additional variables for the two pointers and the result.</div>    
                     </div>
 
                 </div>

@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 22, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given an array of integers called nums. A mountain triplet consists of three indices (i, j, k) such that i &lt; j &lt; k, nums[i] &lt; nums[j], and nums[k] &lt; nums[j]. Your task is to return the minimum possible sum of any such mountain triplet. If no such triplet exists, return -1. </div>
+<div class=""> Given a string s, find the size of the longest substring containing each vowel (&lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, &lsquo;u&rsquo;) an even number of times. </div>
 
 
 
@@ -360,47 +360,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an integer array nums of length n.</div>
-                        <div class=""> <b>Example:</b> nums = [7, 4, 8, 5, 2]</div>
+                        <div class=""> <b>Input:</b> The input consists of a single string s, containing only lowercase English letters.</div>
+                        <div class=""> <b>Example:</b> s = &#39;amazingtime&#39;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= nums.length &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 5 * 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase English letters.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum sum of a valid mountain triplet (i, j, k), or -1 if no such triplet exists.</div>
-                        <div class=""> <b>Example:</b> For the input [7, 4, 8, 5, 2], the output should be 14.</div>
+                        <div class=""> <b>Output:</b> Return the size of the longest substring where each vowel (&#39;a&#39;, &#39;e&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;) appears an even number of times.</div>
+                        <div class=""> <b>Example:</b> 6</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be a single integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to identify the minimum sum of a valid mountain triplet in the array.</div>
+                        <div class=""> <b>Goal:</b> To find the longest substring where vowels appear an even number of times.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array with three pointers: one for the left part (i), one for the peak (j), and one for the right part (k).</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string while keeping track of the count of each vowel.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if the triplet formed by the indices (i, j, k) satisfies the mountain condition: nums[i] &lt; nums[j] and nums[k] &lt; nums[j].</div>
+                                <div style="margin-left: 20px;"> • Use a bitmask to represent the count of each vowel appearing in the string so far.</div>
                             
-                                <div style="margin-left: 20px;"> • If the condition holds, calculate the sum of nums[i] &#43; nums[j] &#43; nums[k], and track the minimum sum found.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the minimum sum if any valid triplet is found, or -1 if no such triplet exists.</div>
+                                <div style="margin-left: 20px;"> • Track the first occurrence of each bitmask in a map and calculate the longest substring where the bitmask repeats.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array size and values are within manageable limits for a brute force solution.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution is efficient enough for large input sizes.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 3 &lt;= nums.length &lt;= 50</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 50</div>
+                                <div style="margin-left: 20px;"> • The string length will be at most 500,000.</div>
                             
                         </div>
                     </div>        
@@ -408,17 +406,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input will always have at least three numbers.</div>
-                            
-                                <div style="margin-left: 20px;"> • The solution should work for all values within the given constraints.</div>
+                                <div style="margin-left: 20px;"> • The string is non-empty and contains only lowercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [7, 4, 8, 5, 2]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the mountain triplet (1, 2, 3) is valid because 4 &lt; 8 and 5 &lt; 8. The sum of this triplet is 7 &#43; 8 &#43; 5 = 14, which is the minimum sum.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;amazingtime&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The longest substring &#39;amazi&#39; contains two &#39;a&#39;s and two &#39;i&#39;s, so both appear an even number of times.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;applepie&#39;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The substring &#39;appl&#39; contains an even number of &#39;e&#39;s, so the result is 5.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -442,16 +442,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves brute force checking of all triplets (i, j, k) to find the smallest valid sum.</div>
+                        <div class=""> <b>Approach:</b> We use a bitmask to track the parity of the vowel counts as we traverse the string. Each vowel corresponds to a unique bit, allowing us to efficiently check when all vowels appear an even number of times.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to check every combination of triplets that satisfy the mountain condition.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved efficiently using a bitmask representation for vowel counts.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A brute-force solution will work within the problem&#39;s constraints since the array size is relatively small.</div>
+                                <div style="margin-left: 20px;"> • A bitmask will allow us to track which vowels have appeared an odd or even number of times, enabling efficient substring length calculations.</div>
                             
                         </div>
                     </div>
@@ -459,15 +459,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to store the minimum sum as INT_MAX.</div>
+                                <div style="margin-left: 20px;"> • Initialize a map to store the first occurrence of each bitmask.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array using three nested loops to generate all possible triplets (i, j, k).</div>
+                                <div style="margin-left: 20px;"> • Iterate through the string, updating the bitmask each time a vowel is encountered.</div>
                             
-                                <div style="margin-left: 20px;"> • For each triplet, check if it satisfies the condition: nums[i] &lt; nums[j] and nums[k] &lt; nums[j].</div>
-                            
-                                <div style="margin-left: 20px;"> • If the condition holds, calculate the sum and update the minimum sum if the current sum is smaller.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the minimum sum if a valid triplet is found, otherwise return -1.</div>
+                                <div style="margin-left: 20px;"> • If a bitmask repeats, calculate the length of the substring between the first occurrence and the current position.</div>
                             
                         </div>
                     </div>
@@ -476,22 +472,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will always have at least three elements.</div>
+                                <div style="margin-left: 20px;"> • If the string is empty, return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should work efficiently within the given constraints, which are n &lt;= 50.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the algorithm runs efficiently even for strings of maximum length (500,000).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider the case where no valid triplet exists in the array.</div>
+                                <div style="margin-left: 20px;"> • Strings with no vowels should return the length of the entire string.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All values of nums will be between 1 and 50.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle up to 500,000 characters efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -508,21 +504,49 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Triple Nested Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Triple Nested Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Triple Nested Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Conditional Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Map Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Map Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Empty Line</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Base Case</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop Iteration</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Character Processing</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Empty Line</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Bitwise Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Bitwise Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Check for Previous Bitmask</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Update Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Store First Occurrence</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Store First Occurrence</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Result</button>
                     
                 </div>
 
@@ -531,18 +555,31 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans<span style="color:#666">=</span>INT_MAX;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n<span style="color:#666">-</span><span style="color:#666">2</span>;i<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j<span style="color:#666">=</span>i<span style="color:#666">+</span><span style="color:#666">1</span>;j<span style="color:#666">&lt;</span>n<span style="color:#666">-</span><span style="color:#666">1</span>;j<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k<span style="color:#666">=</span>j<span style="color:#666">+</span><span style="color:#666">1</span>;k<span style="color:#666">&lt;</span>n;k<span style="color:#666">++</span>){
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> nums[j] <span style="color:#666">&amp;&amp;</span> nums[k] <span style="color:#666">&lt;</span> nums[j]) ans <span style="color:#666">=</span> min(ans,nums[i]<span style="color:#666">+</span>nums[j]<span style="color:#666">+</span>nums[k]);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findTheLongestSubstring</span>(string s) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> id <span style="color:#666">=</span> {
+</span></span><span style="display:flex;"><span>        {<span style="color:#b44">&#39;a&#39;</span> , <span style="color:#666">1</span>},
+</span></span><span style="display:flex;"><span>        {<span style="color:#b44">&#39;e&#39;</span> , <span style="color:#666">2</span>},
+</span></span><span style="display:flex;"><span>        {<span style="color:#b44">&#39;i&#39;</span> , <span style="color:#666">3</span>},
+</span></span><span style="display:flex;"><span>        {<span style="color:#b44">&#39;o&#39;</span> , <span style="color:#666">4</span>},
+</span></span><span style="display:flex;"><span>        {<span style="color:#b44">&#39;u&#39;</span> , <span style="color:#666">5</span>},
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, msk <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> id[s[i]];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">!=</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        msk <span style="color:#666">^=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> x);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(msk)) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[msk]);
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        mp[msk] <span style="color:#666">=</span> i;}
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (ans<span style="color:#666">==</span>INT_MAX <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span>ans);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -550,83 +587,223 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findTheLongestSubstring</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `minimumSum` which takes a vector of integers `nums` and returns the minimum sum of three distinct elements satisfying the given conditions. </div>
+                            <div class=""> The function &#39;findTheLongestSubstring&#39; takes a string &#39;s&#39; and aims to find the longest substring that contains an even number of each vowel. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span>nums.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> id <span style="color:#666">=</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `n` with the size of the input vector `nums`. </div>
+                            <div class=""> A map &#39;id&#39; is initialized to associate vowels (&#39;a&#39;, &#39;e&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;) with unique integer values to track their occurrence status. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Variable Initialization</b></div>
+                            <div class=""> <b>3 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans<span style="color:#666">=</span>INT_MAX;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        {<span style="color:#b44">&#39;a&#39;</span> , <span style="color:#666">1</span>},
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes `ans` to `INT_MAX` to represent the initial state where no valid triplet has been found. </div>
+                            <div class=""> Maps the vowel &#39;a&#39; to the value 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Triple Nested Loop</b></div>
+                            <div class=""> <b>4 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>n<span style="color:#666">-</span><span style="color:#666">2</span>;i<span style="color:#666">++</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        {<span style="color:#b44">&#39;e&#39;</span> , <span style="color:#666">2</span>},
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts the outer loop, iterating through each element of the vector except the last two. </div>
+                            <div class=""> Maps the vowel &#39;e&#39; to the value 2. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Triple Nested Loop</b></div>
+                            <div class=""> <b>5 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j<span style="color:#666">=</span>i<span style="color:#666">+</span><span style="color:#666">1</span>;j<span style="color:#666">&lt;</span>n<span style="color:#666">-</span><span style="color:#666">1</span>;j<span style="color:#666">++</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        {<span style="color:#b44">&#39;i&#39;</span> , <span style="color:#666">3</span>},
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts the second loop, iterating through the elements of the vector starting from the element after `i`. </div>
+                            <div class=""> Maps the vowel &#39;i&#39; to the value 3. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Triple Nested Loop</b></div>
+                            <div class=""> <b>6 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k<span style="color:#666">=</span>j<span style="color:#666">+</span><span style="color:#666">1</span>;k<span style="color:#666">&lt;</span>n;k<span style="color:#666">++</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        {<span style="color:#b44">&#39;o&#39;</span> , <span style="color:#666">4</span>},
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts the third loop, iterating through the elements of the vector starting from the element after `j`. </div>
+                            <div class=""> Maps the vowel &#39;o&#39; to the value 4. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Conditional Check</b></div>
+                            <div class=""> <b>7 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> nums[j] <span style="color:#666">&amp;&amp;</span> nums[k] <span style="color:#666">&lt;</span> nums[j]) ans <span style="color:#666">=</span> min(ans,nums[i]<span style="color:#666">+</span>nums[j]<span style="color:#666">+</span>nums[k]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        {<span style="color:#b44">&#39;u&#39;</span> , <span style="color:#666">5</span>},
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if `nums[i]` is smaller than `nums[j]` and `nums[k]` is smaller than `nums[j]`, and if true, updates `ans` with the minimum sum of the triplet. </div>
+                            <div class=""> Maps the vowel &#39;u&#39; to the value 5. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
+                            <div class=""> <b>8 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (ans<span style="color:#666">==</span>INT_MAX <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span>ans);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the value of `ans`, which is either the minimum sum found or `-1` if no valid triplet exists. </div>
+                            <div class=""> The map initialization completes the vowel-to-value mappings. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, msk <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Two integer variables &#39;res&#39; and &#39;msk&#39; are initialized. &#39;res&#39; will store the length of the longest valid substring, and &#39;msk&#39; will track the bitwise state of vowel occurrences. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Map Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A map &#39;mp&#39; is initialized to store the first occurrence index of each bitmask &#39;msk&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Empty Line</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> 
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> An empty line used for separation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Base Case</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The map &#39;mp&#39; is initialized with the bitmask value 0 mapping to -1. This serves as the base case, representing an even number of vowels before any characters are processed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Loop Iteration</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> A loop is initiated to iterate over each character in the input string &#39;s&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Character Processing</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> id[s[i]];
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Each character &#39;s[i]&#39; is checked in the map &#39;id&#39;. The corresponding value is stored in &#39;x&#39;. If the character is a vowel, &#39;x&#39; will be non-zero. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Empty Line</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> An empty line for separation. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Bitwise Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">!=</span> <span style="color:#666">0</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If &#39;x&#39; is non-zero (meaning the character is a vowel), the bitwise XOR operation is performed on &#39;msk&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Bitwise Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        msk <span style="color:#666">^=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> x);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This operation flips the bit corresponding to the vowel found at &#39;s[i]&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>18 : Check for Previous Bitmask</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(msk)) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The code checks if the current bitmask &#39;msk&#39; has been seen before by checking the map &#39;mp&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>19 : Update Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[msk]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the bitmask has been seen before, the length of the valid substring is updated by calculating the difference between the current index &#39;i&#39; and the stored index of the previous occurrence of &#39;msk&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Store First Occurrence</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the bitmask has not been seen before, the current index &#39;i&#39; is stored in the map &#39;mp&#39; with &#39;msk&#39; as the key. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Store First Occurrence</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[msk] <span style="color:#666">=</span> i;}
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Store the current index &#39;i&#39; as the first occurrence of the bitmask &#39;msk&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> The function returns the value of &#39;res&#39;, which is the length of the longest substring with an even number of vowels. </div>
                         </div>
                     
                 </div>
@@ -646,16 +823,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^3)</div>
-                        <div class=""> <b>Average Case:</b> O(n^3)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^3)</div> 
-                        <div class=""> <b>Description:</b> The algorithm checks every combination of triplets, which results in a cubic time complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The algorithm runs in linear time, where n is the length of the input string.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> No additional space is required apart from a few variables to track the minimum sum.</div>    
+                        <div class=""> <b>Worst Case:</b> O(32)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant, as we only store bitmask values and the first occurrences of these bitmasks.</div>    
                     </div>
 
                 </div>

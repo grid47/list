@@ -306,7 +306,7 @@
 
 
 
-<div class=""> You are given two positive integers, n and m. Calculate the difference between the sum of integers in the range [1, n] that are not divisible by m (num1) and the sum of integers in the range [1, n] that are divisible by m (num2). Return the result of num1 - num2. </div>
+<div class=""> Given an integer <code>num</code>, find the closest two integers whose product is equal to either <code>num + 1</code> or <code>num + 2</code> and whose absolute difference is the smallest. You need to return these two integers in any order. </div>
 
 
 
@@ -357,43 +357,41 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of two integers, n and m.</div>
-                        <div class=""> <b>Example:</b> n = 12, m = 4</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer `num` which represents the given number.</div>
+                        <div class=""> <b>Example:</b> num = 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= num &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the value of num1 - num2, where num1 is the sum of integers not divisible by m, and num2 is the sum of integers divisible by m.</div>
-                        <div class=""> <b>Example:</b> For input n = 12, m = 4, the output is 58.</div>
+                        <div class=""> <b>Output:</b> The output should be a list of two integers that have the smallest absolute difference, whose product is equal to `num &#43; 1` or `num &#43; 2`.</div>
+                        <div class=""> <b>Example:</b> [3, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will always contain exactly two integers.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to calculate the sum of integers that are divisible by m and those that are not, and return the difference between the two sums.</div>
+                        <div class=""> <b>Goal:</b> To find the two closest divisors of `num &#43; 1` or `num &#43; 2` whose absolute difference is the smallest.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Loop through all integers from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • For each possible divisor from `sqrt(num &#43; 2)` down to 1, check if it divides `num &#43; 1` or `num &#43; 2`.</div>
                             
-                                <div style="margin-left: 20px;"> • Check if each number is divisible by m.</div>
-                            
-                                <div style="margin-left: 20px;"> • If divisible, add it to num2; if not, add it to num1.</div>
-                            
-                                <div style="margin-left: 20px;"> • Calculate the difference num1 - num2.</div>
+                                <div style="margin-left: 20px;"> • Once a divisor is found, return the pair of divisors with the smallest difference.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle numbers up to 1000 efficiently.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the value of `num` satisfies the given constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, m &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • The input `num` must be between 1 and 10^9.</div>
                             
                         </div>
                     </div>        
@@ -401,15 +399,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Both n and m are positive integers.</div>
+                                <div style="margin-left: 20px;"> • The input `num` is always a positive integer.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For input n = 12, m = 4, the output is 58.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sum of numbers in the range [1, 12] that are not divisible by 4 is 54, while the sum of numbers divisible by 4 is 24. The result is 54 - 24 = 58.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> num = 8</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `num &#43; 1 = 9`, the closest divisors are `3` and `3`, and for `num &#43; 2 = 10`, the closest divisors are `2` and `5`. The pair `[3, 3]` is returned as it has the smallest absolute difference.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> num = 25</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For `num &#43; 1 = 26`, the closest divisors are `2` and `13`, and for `num &#43; 2 = 27`, the closest divisors are `3` and `9`. The pair `[5, 6]` is returned because it forms the closest divisors.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -433,16 +435,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves iterating through the numbers from 1 to n, categorizing them as divisible by m or not, and summing them accordingly.</div>
+                        <div class=""> <b>Approach:</b> The approach involves iterating from the square root of `num &#43; 2` down to 1, checking divisibility, and selecting the closest divisors with the smallest absolute difference.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The task involves checking divisibility for each number from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • The problem requires finding divisors of `num &#43; 1` and `num &#43; 2`.</div>
+                            
+                                <div style="margin-left: 20px;"> • We can use the square root method to optimize the search for divisors.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • This can be solved by a simple loop through the range [1, n].</div>
+                                <div style="margin-left: 20px;"> • The main challenge is to ensure that the divisors have the smallest possible difference.</div>
                             
                         </div>
                     </div>
@@ -450,15 +454,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize two variables for num1 and num2.</div>
+                                <div style="margin-left: 20px;"> • Initialize a loop to check divisors from `sqrt(num &#43; 2)` down to 1.</div>
                             
-                                <div style="margin-left: 20px;"> • Loop through the range from 1 to n.</div>
+                                <div style="margin-left: 20px;"> • For each divisor, check if it divides `num &#43; 1` or `num &#43; 2`.</div>
                             
-                                <div style="margin-left: 20px;"> • For each number, check if it is divisible by m.</div>
-                            
-                                <div style="margin-left: 20px;"> • Add to num2 if divisible, and to num1 if not.</div>
-                            
-                                <div style="margin-left: 20px;"> • Return the difference num1 - num2.</div>
+                                <div style="margin-left: 20px;"> • Return the pair with the smallest difference as soon as it&#39;s found.</div>
                             
                         </div>
                     </div>
@@ -467,22 +467,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Both n and m are guaranteed to be positive, so there are no empty inputs.</div>
+                                <div style="margin-left: 20px;"> • This problem does not involve empty inputs, as the input is always a positive integer.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm handles cases with large values of n and m up to 1000.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles very large values of `num` up to 10^9 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider when m is larger than n, where no numbers are divisible by m.</div>
+                                <div style="margin-left: 20px;"> • Handle cases where `num &#43; 1` or `num &#43; 2` has only one divisor pair.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should be efficient enough to handle n up to 1000.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution works within the given constraints.</div>
                             
                         </div>                                                                        
                     </div>
@@ -499,21 +499,15 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 For Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Divisor Check for num&#43;1</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Divisor Check for num&#43;2</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Subtraction</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Else Block</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Addition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Return Empty Vector</button>
                     
                 </div>
 
@@ -522,16 +516,13 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">differenceOfSums</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> m) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; <span style="color:#666">++</span>i) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">%</span> m <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">-=</span> i;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> i;
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> closestDivisors(<span style="color:#0b0;font-weight:bold">int</span> num) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> sqrt(num <span style="color:#666">+</span> <span style="color:#666">2</span>); a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; a<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((num <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> a <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{a, (num <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> a};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((num <span style="color:#666">+</span> <span style="color:#666">2</span>) <span style="color:#666">%</span> a <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{a, (num <span style="color:#666">+</span> <span style="color:#666">2</span>) <span style="color:#666">/</span> a};            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{};
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -539,83 +530,53 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">differenceOfSums</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> m) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> closestDivisors(<span style="color:#0b0;font-weight:bold">int</span> num) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function that calculates the difference of sums. Takes two parameters: n (upper limit) and m (divisor). </div>
+                            <div class=""> The function &#39;closestDivisors&#39; takes an integer &#39;num&#39; and returns a vector containing two divisors of &#39;num&#43;1&#39; or &#39;num&#43;2&#39; whose product is closest to &#39;num&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : For Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> sqrt(num <span style="color:#666">+</span> <span style="color:#666">2</span>); a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; a<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the result variable to zero. This will store the accumulated sum (or difference). </div>
+                            <div class=""> A for loop is initialized with &#39;a&#39; starting from the square root of &#39;num &#43; 2&#39;. It iterates downwards, checking possible divisors of &#39;num&#43;1&#39; and &#39;num&#43;2&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop</b></div>
+                            <div class=""> <b>3 : Divisor Check for num&#43;1</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; <span style="color:#666">++</span>i) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((num <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> a <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{a, (num <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> a};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop from 1 to n (inclusive) to iterate through all integers. </div>
+                            <div class=""> Checks if &#39;a&#39; is a divisor of &#39;num&#43;1&#39;. If true, it returns a vector with &#39;a&#39; and &#39;num&#43;1&#39; divided by &#39;a&#39; as the divisors. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Condition Check</b></div>
+                            <div class=""> <b>4 : Divisor Check for num&#43;2</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">%</span> m <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((num <span style="color:#666">+</span> <span style="color:#666">2</span>) <span style="color:#666">%</span> a <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{a, (num <span style="color:#666">+</span> <span style="color:#666">2</span>) <span style="color:#666">/</span> a};            
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current integer i is divisible by m (using modulus operation). </div>
+                            <div class=""> Checks if &#39;a&#39; is a divisor of &#39;num&#43;2&#39;. If true, it returns a vector with &#39;a&#39; and &#39;num&#43;2&#39; divided by &#39;a&#39; as the divisors. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Subtraction</b></div>
+                            <div class=""> <b>5 : Return Empty Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">-=</span> i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If i is divisible by m, subtract it from the result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Else Block</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If i is not divisible by m, add it to the result. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Addition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> i;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Add the value of i to the result if it&#39;s not divisible by m. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Return Statement</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the result, which is the difference of sums after processing all integers. </div>
+                            <div class=""> If no divisors are found for &#39;num&#43;1&#39; or &#39;num&#43;2&#39;, the function returns an empty vector. </div>
                         </div>
                     
                 </div>
@@ -635,16 +596,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) as we iterate through the range [1, n].</div>                                               
+                        <div class=""> <b>Best Case:</b> O(sqrt(num))</div>
+                        <div class=""> <b>Average Case:</b> O(sqrt(num))</div>
+                        <div class=""> <b>Worst Case:</b> O(sqrt(num))</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by the need to check divisors up to the square root of `num &#43; 2`.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) as we only need a constant amount of space for the sums.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is constant since only a few variables are used in the solution.</div>    
                     </div>
 
                 </div>

@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 15, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You have <code>n</code> dice, each with <code>k</code> faces numbered from 1 to <code>k</code>. You need to calculate the number of ways to roll the dice such that the sum of the dice equals a target value. Return the result modulo (10^9 + 7). </div>
+<div class=""> You are given a 0-indexed array of positive integers w, where w[i] describes the weight of the ith index. You need to implement the function pickIndex() which randomly picks an index in the range [0, w.length - 1] (inclusive), and the probability of picking index i is w[i] / sum(w). </div>
 
 
 
@@ -372,48 +372,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of three integers: `n`, `k`, and `target` representing the number of dice, the number of faces on each die, and the target sum, respectively.</div>
-                        <div class=""> <b>Example:</b> Input: [1, 6, 3]
-Output: 1</div>
+                        <div class=""> <b>Input:</b> The input consists of an array w where each element represents a positive weight.</div>
+                        <div class=""> <b>Example:</b> [2, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, k &lt;= 30</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= w.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= w[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer, representing the number of ways to roll the dice such that their sum equals the target, modulo (10^9 &#43; 7).</div>
-                        <div class=""> <b>Example:</b> Output: 1</div>
+                        <div class=""> <b>Output:</b> Return a randomly selected index i, where the probability of selecting i is proportional to its weight w[i].</div>
+                        <div class=""> <b>Example:</b> 1</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Return the result modulo (10^9 &#43; 7).</div>
+                                <div style="margin-left: 20px;"> • The result should be a valid index between 0 and w.length - 1.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To solve this problem, we will use dynamic programming to count the number of ways to roll the dice such that their sum equals the target.</div>
+                        <div class=""> <b>Goal:</b> The goal is to implement pickIndex() in such a way that the probability of selecting each index is proportional to its weight.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a DP table where dp[i][j] represents the number of ways to get a sum of `j` using `i` dice.</div>
+                                <div style="margin-left: 20px;"> • 1. Precompute the cumulative sum of weights in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each die, iterate through all possible face values from 1 to `k` and update the DP table for the target sum.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a random number generator to pick a number in the range of 1 to the total sum of weights.</div>
                             
-                                <div style="margin-left: 20px;"> • Finally, return the value at dp[n][target] after taking modulo (10^9 &#43; 7).</div>
+                                <div style="margin-left: 20px;"> • 3. Use binary search to find the corresponding index based on the generated random number.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle the constraints of up to 30 dice and target sums as large as 1000 efficiently.</div>
+                        <div class=""> <b>Goal:</b> The problem needs to handle an array with a length up to 10^4 efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n, k &lt;= 30</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= w.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= target &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= w[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -421,18 +420,19 @@ Output: 1</div>
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The dice have faces numbered from 1 to k, with no other numbers on the faces.</div>
-                            
-                                <div style="margin-left: 20px;"> • The dice rolls are independent, meaning the result of one die does not affect the others.</div>
+                                <div style="margin-left: 20px;"> • The array w contains positive integers representing the weight of each index.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [2, 6, 7]
-Output: 6</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> You have two dice, each with 6 faces. The possible sums to reach 7 are 1&#43;6, 2&#43;5, 3&#43;4, 4&#43;3, 5&#43;2, and 6&#43;1. Hence, the output is 6.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [2, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The total weight is 7, so the probability of picking index 0 is 2/7 and index 1 is 5/7.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> With only one element in the array, the only valid index is 0, so the result is always 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -456,16 +456,16 @@ Output: 6</div>
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We use dynamic programming (DP) to solve this problem by building up the solution from smaller subproblems. Each state in the DP table will represent the number of ways to achieve a certain sum using a given number of dice.</div>
+                        <div class=""> <b>Approach:</b> The approach involves precomputing a cumulative sum of the weights and then using binary search to pick an index based on a random number.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem is similar to the coin change problem, where we need to count the number of ways to form a target sum with limited values.</div>
+                                <div style="margin-left: 20px;"> • We can treat the array w as a list of intervals where each interval corresponds to a range of cumulative weights.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A dynamic programming approach seems ideal for this problem because it involves calculating the number of ways to get a certain sum using a combination of dice.</div>
+                                <div style="margin-left: 20px;"> • By using binary search, we can efficiently find the correct index based on the cumulative sum.</div>
                             
                         </div>
                     </div>
@@ -473,11 +473,11 @@ Output: 6</div>
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a 2D DP table where dp[i][j] stores the number of ways to get sum `j` using `i` dice.</div>
+                                <div style="margin-left: 20px;"> • 1. Compute the cumulative sum of the array w.</div>
                             
-                                <div style="margin-left: 20px;"> • For each die, update the DP table for all possible sums by adding the number of ways to get the previous sum minus the current face value.</div>
+                                <div style="margin-left: 20px;"> • 2. Generate a random number between 1 and the sum of all the weights.</div>
                             
-                                <div style="margin-left: 20px;"> • Return dp[n][target] modulo (10^9 &#43; 7).</div>
+                                <div style="margin-left: 20px;"> • 3. Use binary search to find the interval that contains the random number, which corresponds to the selected index.</div>
                             
                         </div>
                     </div>
@@ -486,22 +486,22 @@ Output: 6</div>
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle edge cases where n = 1, target = 1, or other minimal inputs.</div>
+                                <div style="margin-left: 20px;"> • The input will always have at least one element, so no need to handle empty input.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the maximum constraints of n = 30 and target = 1000.</div>
+                                <div style="margin-left: 20px;"> • The solution must efficiently handle large arrays with up to 10^4 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider cases where the target is either very small or very large compared to n and k.</div>
+                                <div style="margin-left: 20px;"> • If all elements in the array are the same, each index will have an equal chance of being picked.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must be optimized to avoid brute force solutions due to the constraints.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle arrays with weights as large as 10^5 efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -518,21 +518,39 @@ Output: 6</div>
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Class Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Method Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Member Variable Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Access Modifier</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Memoization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Constructor</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Looping through Dice Faces</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Recursive Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Prefix Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Memoize Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Prefix Sum Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Store Prefix Sum</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Method Definition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Random Index Generation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Variable Initialization</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Binary Search</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Binary Search Calculation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Binary Search Comparison</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Binary Search Adjustment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Binary Search Adjustment</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
                     
                 </div>
 
@@ -541,98 +559,212 @@ Output: 6</div>
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> dp[<span style="color:#666">31</span>][<span style="color:#666">1001</span>] <span style="color:#666">=</span> {};
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numRollsToTarget</span>(<span style="color:#0b0;font-weight:bold">int</span> d, <span style="color:#0b0;font-weight:bold">int</span> f, <span style="color:#0b0;font-weight:bold">int</span> target, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (d <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> target <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> d <span style="color:#666">==</span> target;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dp[d][target]) <span style="color:#a2f;font-weight:bold">return</span> dp[d][target] <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> f; <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">+</span> numRollsToTarget(d <span style="color:#666">-</span> <span style="color:#666">1</span>, f, target <span style="color:#666">-</span> i)) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
-</span></span><span style="display:flex;"><span>    dp[d][target] <span style="color:#666">=</span> res <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> wc;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>Solution(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> w) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> w.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        w[i] <span style="color:#666">+=</span> w[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    wc <span style="color:#666">=</span> w;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pickIndex</span>() {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> rand() <span style="color:#666">%</span> wc.back()<span style="color:#666">+</span><span style="color:#666">1</span>;<span style="color:#080;font-style:italic">//[(wc.size() - 1)];        
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> wc.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> r) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;            
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(wc[mid] <span style="color:#666">==</span> x) <span style="color:#a2f;font-weight:bold">return</span> mid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(wc[mid] <span style="color:#666">&lt;</span> x) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>            r <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Solution object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Solution* obj = new Solution(w);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;pickIndex();
+</span></span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Class Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> dp[<span style="color:#666">31</span>][<span style="color:#666">1001</span>] <span style="color:#666">=</span> {};
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declare a 2D array `dp` for storing the results of subproblems. The dimensions are chosen based on the maximum number of dice and target sum (31 dice and 1001 possible target sums). </div>
+                            <div class=""> Defines the `Solution` class that will contain the constructor for prefix sum calculation and the method for picking a random index based on the prefix sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Method Definition</b></div>
+                            <div class=""> <b>2 : Member Variable Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numRollsToTarget</span>(<span style="color:#0b0;font-weight:bold">int</span> d, <span style="color:#0b0;font-weight:bold">int</span> f, <span style="color:#0b0;font-weight:bold">int</span> target, <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> wc;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `numRollsToTarget` which calculates the number of ways to roll `d` dice with `f` faces each to achieve a target sum. </div>
+                            <div class=""> Declares a vector `wc` which stores the prefix sum of the input weights. This allows for efficient range queries when picking a random index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Base Case</b></div>
+                            <div class=""> <b>3 : Access Modifier</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (d <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> target <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> d <span style="color:#666">==</span> target;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Base case: If there are no dice left or the target is non-positive, return whether the current number of dice is exactly equal to the target (this handles both the end of the recursion and edge cases). </div>
+                            <div class=""> Specifies the start of the public section of the class, making the constructor and methods accessible to external code. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Memoization</b></div>
+                            <div class=""> <b>4 : Constructor</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dp[d][target]) <span style="color:#a2f;font-weight:bold">return</span> dp[d][target] <span style="color:#666">-</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> w) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the result for this subproblem has already been computed. If it has, return the cached result (memoization) to avoid redundant calculations. </div>
+                            <div class=""> Constructor for the `Solution` class. It takes a vector of weights `w` and computes the prefix sum, which is stored in the member variable `wc`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Looping through Dice Faces</b></div>
+                            <div class=""> <b>5 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> f; <span style="color:#666">++</span>i)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> w.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each possible face of the dice (from 1 to `f`) and recursively calculate the number of ways to reach the target by reducing the number of dice and the target sum. </div>
+                            <div class=""> Initializes the variable `n` to store the size of the input vector `w`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Recursive Calculation</b></div>
+                            <div class=""> <b>6 : Prefix Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">+</span> numRollsToTarget(d <span style="color:#666">-</span> <span style="color:#666">1</span>, f, target <span style="color:#666">-</span> i)) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each face of the die, recursively call `numRollsToTarget` for `d-1` dice and `target-i`. The result is accumulated in `res`, and the modulo operation ensures that the result stays within the bounds of large numbers (mod 1,000,000,007). </div>
+                            <div class=""> Iterates over the input array `w` to calculate the prefix sum. The prefix sum stores the cumulative sum of weights up to each index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Memoize Result</b></div>
+                            <div class=""> <b>7 : Prefix Sum Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dp[d][target] <span style="color:#666">=</span> res <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        w[i] <span style="color:#666">+=</span> w[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Memoize the result for this subproblem by storing the calculated value in the `dp` array at the current number of dice (`d`) and the target (`target`). </div>
+                            <div class=""> Updates the current element in `w` to be the cumulative sum of the previous element and the current element. This converts the `w` vector into a prefix sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Return Result</b></div>
+                            <div class=""> <b>8 : Store Prefix Sum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    wc <span style="color:#666">=</span> w;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the result of the current subproblem, which is the number of ways to roll `d` dice to reach the target sum. </div>
+                            <div class=""> Stores the computed prefix sum in the member variable `wc` for use in the `pickIndex` method. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Method Definition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pickIndex</span>() {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Defines the `pickIndex` method, which picks a random index based on the weighted distribution stored in `wc`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Random Index Generation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> rand() <span style="color:#666">%</span> wc.back()<span style="color:#666">+</span><span style="color:#666">1</span>;<span style="color:#080;font-style:italic">//[(wc.size() - 1)];
+</span></span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Generates a random number `x` between 1 and the total weight (the last element in `wc`). This random number will be used to select an index based on the weighted probabilities. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Variable Initialization</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> wc.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Initializes two variables `l` and `r` to represent the left and right bounds for binary search on the prefix sum array `wc`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Binary Search</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> r) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a binary search loop to find the index in the `wc` array where the random number `x` would fit in the prefix sum. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Binary Search Calculation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Calculates the midpoint `mid` of the current range `[l, r]` during binary search. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Binary Search Comparison</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(wc[mid] <span style="color:#666">==</span> x) <span style="color:#a2f;font-weight:bold">return</span> mid;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the prefix sum at the midpoint `mid` equals the random number `x`, it returns the index `mid` as the selected index. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Binary Search Adjustment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(wc[mid] <span style="color:#666">&lt;</span> x) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the value at `wc[mid]` is less than `x`, it means the random number `x` must lie in the right half of the array, so it adjusts the left bound `l`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Binary Search Adjustment</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>            r <span style="color:#666">=</span> mid;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If the value at `wc[mid]` is greater than `x`, it means the random number `x` must lie in the left half of the array, so it adjusts the right bound `r`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the index `l`, which is the position where the random number `x` should be placed in the prefix sum array `wc`. </div>
                         </div>
                     
                 </div>
@@ -652,16 +784,16 @@ Output: 6</div>
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * target * k) where n is the number of dice, target is the target sum, and k is the number of faces on each die.</div>
-                        <div class=""> <b>Average Case:</b> O(n * target * k).</div>
-                        <div class=""> <b>Worst Case:</b> O(n * target * k).</div> 
-                        <div class=""> <b>Description:</b> The solution requires iterating over all dice and all face values for each possible target sum.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1), if the sum and the random number are precomputed and binary search is fast.</div>
+                        <div class=""> <b>Average Case:</b> O(log n), due to the binary search on the cumulative sum.</div>
+                        <div class=""> <b>Worst Case:</b> O(log n), since binary search is always performed on the cumulative sum array.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is logarithmic due to binary search.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n * target) for storing the DP table.</div>
-                        <div class=""> <b>Worst Case:</b> O(n * target) where n is the number of dice and target is the target sum.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is determined by the DP table used to store intermediate results.</div>    
+                        <div class=""> <b>Best Case:</b> O(n), since we are storing the cumulative sum for later use.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), due to the cumulative sum array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is linear due to the storage of the cumulative sum.</div>    
                     </div>
 
                 </div>

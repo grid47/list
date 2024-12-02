@@ -297,7 +297,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode1123s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode1124s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/409.webp" 
            alt="A string where the longest palindrome is highlighted, with characters mirroring in a soft glow." 
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Design a system that processes daily stock price quotes and computes the price span for the current day. The price span for a day is defined as the maximum number of consecutive days (including today) where the price of the stock was less than or equal to today&rsquo;s price. </div>
+<div class=""> Given a string consisting of lowercase and/or uppercase English letters, find the length of the longest palindrome that can be constructed from the letters in the string. Letters are case-sensitive. </div>
 
 
 
@@ -371,52 +371,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a sequence of operations where a &#39;next&#39; operation receives the stock price of the current day.</div>
-                        <div class=""> <b>Example:</b> Input: [&#34;StockSpanner&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;]
-[[], [120], [95], [100], [90], [130], [125]]</div>
+                        <div class=""> <b>Input:</b> The input is a string s consisting of lowercase and/or uppercase English letters.</div>
+                        <div class=""> <b>Example:</b> For s = &#39;aabbcc&#39;, the longest palindrome is &#39;abccba&#39;, with a length of 6.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= price &lt;= 100000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • At most 10000 calls to the &#39;next&#39; function.</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase and/or uppercase English letters only.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> For each &#39;next&#39; operation, output the price span for the provided stock price.</div>
-                        <div class=""> <b>Example:</b> Output: [null, 1, 1, 2, 1, 5, 2]</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest palindrome that can be formed with the characters from the string.</div>
+                        <div class=""> <b>Example:</b> For s = &#39;xyzxy&#39;, the longest palindrome is &#39;xyzxy&#39;, with a length of 5.</div>
                         <div class=""> <b>Constraints:</b>                        
-                            
-                                <div style="margin-left: 20px;"> • Output is an integer for each &#39;next&#39; operation, except the initialization which outputs null.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Compute the price span efficiently using a stack-based approach.</div>
+                        <div class=""> <b>Goal:</b> To determine the maximum length of the palindrome that can be formed using the characters of the given string.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Maintain a stack of price-span pairs.</div>
+                                <div style="margin-left: 20px;"> • 1. Count the frequency of each character in the string.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each new price, pop elements from the stack if they are less than or equal to the current price.</div>
+                                <div style="margin-left: 20px;"> • 2. Add the maximum even occurrences of characters to the result.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Sum the spans of the popped elements and include today&#39;s span (1).</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. Push the current price and its computed span onto the stack.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the span for the current day.</div>
+                                <div style="margin-left: 20px;"> • 3. If any character has an odd count, add one extra character to the center of the palindrome.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Constraints ensure efficient processing and valid input ranges.</div>
+                        <div class=""> <b>Goal:</b> The input string will consist of lowercase and/or uppercase English letters, and its length will be between 1 and 2000.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Prices are guaranteed to be positive integers.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 2000</div>
                             
-                                <div style="margin-left: 20px;"> • The number of operations is capped at 10^4.</div>
+                                <div style="margin-left: 20px;"> • s consists of lowercase and/or uppercase English letters only.</div>
                             
                         </div>
                     </div>        
@@ -424,25 +417,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input price is always a valid integer within the given range.</div>
-                            
-                                <div style="margin-left: 20px;"> • The operations will always follow the sequence provided in the example.</div>
+                                <div style="margin-left: 20px;"> • The input string contains only valid lowercase and/or uppercase English letters.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#34;StockSpanner&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;, &#34;next&#34;]
-[[], [90], [85], [95], [85], [110], [105]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Output: [null, 1, 1, 3, 1, 5, 2]
-Explanation: The span for each price is computed as follows:
-1. [90]: Span = 1
-2. [85]: Span = 1
-3. [95]: Span = 3 (90, 85, 95)
-4. [85]: Span = 1
-5. [110]: Span = 5 (90, 85, 95, 85, 110)
-6. [105]: Span = 2 (110, 105)</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> For s = &#39;aabbcc&#39;, the longest palindrome is &#39;abccba&#39;, which has a length of 6.</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The palindrome is formed by choosing pairs of characters and placing one in the first half and one in the second half of the palindrome. Since all characters appear an even number of times, all can be used to form a palindrome.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -466,18 +449,18 @@ Explanation: The span for each price is computed as follows:
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a stack-based approach to efficiently compute the span for each day&#39;s stock price.</div>
+                        <div class=""> <b>Approach:</b> Count the frequency of each character, then determine the maximum palindrome length that can be formed by using even counts of characters and adding one extra character if any odd counts are present.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Brute force computation for each day&#39;s span would result in O(n^2) time complexity.</div>
+                                <div style="margin-left: 20px;"> • A palindrome reads the same forward and backward. To form the longest possible palindrome, we need to use pairs of characters.</div>
                             
-                                <div style="margin-left: 20px;"> • We can optimize using a stack to track previous prices and spans.</div>
+                                <div style="margin-left: 20px;"> • If there are characters with odd occurrences, we can place one of them in the center of the palindrome.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A stack allows us to efficiently manage and compute spans by keeping track of relevant previous days.</div>
+                                <div style="margin-left: 20px;"> • We need to iterate through the string, count the occurrences of each character, and then determine how many pairs we can form.</div>
                             
                         </div>
                     </div>
@@ -485,15 +468,13 @@ Explanation: The span for each price is computed as follows:
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Initialize an empty stack to store pairs of (price, span).</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through the string and count the occurrences of each character.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each price, pop all elements from the stack with a price less than or equal to the current price.</div>
+                                <div style="margin-left: 20px;"> • 2. For each character, add the largest even number of occurrences to the result.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Add their spans to a running total.</div>
+                                <div style="margin-left: 20px;"> • 3. If any character has an odd count, increment the result by 1 (for the center of the palindrome).</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Include today&#39;s span (1) and push the (price, span) pair onto the stack.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. Return the computed span for the current price.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the result as the length of the longest palindrome.</div>
                             
                         </div>
                     </div>
@@ -502,24 +483,20 @@ Explanation: The span for each price is computed as follows:
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No empty inputs, as &#39;next&#39; operations always receive a valid price.</div>
-                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handles maximum constraints with 10^4 operations and prices up to 10^5.</div>
+                                <div style="margin-left: 20px;"> • If the string is very large, ensure the solution can handle up to 2000 characters efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Test cases with consecutive equal prices.</div>
-                            
-                                <div style="margin-left: 20px;"> • Test cases with strictly increasing or decreasing prices.</div>
+                                <div style="margin-left: 20px;"> • If the string consists of only one character, the length of the palindrome is 1.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Input adheres to constraints and does not exceed operational limits.</div>
+                                <div style="margin-left: 20px;"> • Handle both uppercase and lowercase letters correctly since they are case-sensitive.</div>
                             
                         </div>                                                                        
                     </div>
@@ -536,23 +513,23 @@ Explanation: The span for each price is computed as follows:
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Access Specifier</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Constructor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Constructor Body</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Insertion</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Boolean Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Update Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Pop Stack</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Odd Frequency Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Push Stack</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Palindrome Length Calculation</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
                     
@@ -563,133 +540,121 @@ Explanation: The span for each price is computed as follows:
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>StockSpanner() {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>(<span style="color:#0b0;font-weight:bold">int</span> price) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>cp.empty() <span style="color:#666">&amp;&amp;</span> cp.top().first <span style="color:#666">&lt;=</span> price) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> cp.top().second;
-</span></span><span style="display:flex;"><span>        cp.pop();
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestPalindrome</span>(string s) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s)
+</span></span><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> odd <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> mp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(val <span style="color:#666">%</span> <span style="color:#666">2</span>) odd <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (val<span style="color:#666">/</span><span style="color:#666">2</span>) <span style="color:#666">*</span> <span style="color:#666">2</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    cp.push(make_pair(price, res));
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> odd<span style="color:#666">?</span> res <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your StockSpanner object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * StockSpanner* obj = new StockSpanner();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;next(price);
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Access Specifier</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestPalindrome</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the access specifier for the following class methods and variables, making them accessible outside the class. </div>
+                            <div class=""> Define the function `longestPalindrome` which takes a string `s` and returns the length of the longest possible palindrome that can be formed using its characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Constructor</b></div>
+                            <div class=""> <b>2 : Map Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>StockSpanner() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Constructor for the StockSpanner class. Initializes the stack and prepares the object. </div>
+                            <div class=""> Initialize a `map` named `mp` that stores the frequency of each character in the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Constructor Body</b></div>
+                            <div class=""> <b>3 : Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Placeholder for constructor body if needed in the future. </div>
+                            <div class=""> Iterate through each character `x` in the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Function Definition</b></div>
+                            <div class=""> <b>4 : Map Insertion</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>(<span style="color:#0b0;font-weight:bold">int</span> price) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the next method, which calculates the span of stock prices for the current price. </div>
+                            <div class=""> For each character `x`, increment its count in the `map` `mp`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Variable Initialization</b></div>
+                            <div class=""> <b>5 : Boolean Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> odd <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the result variable to 1, which represents the span of the current stock price. </div>
+                            <div class=""> Initialize a boolean variable `odd` to track if there&#39;s any character with an odd frequency. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Loop</b></div>
+                            <div class=""> <b>6 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>cp.empty() <span style="color:#666">&amp;&amp;</span> cp.top().first <span style="color:#666">&lt;=</span> price) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a loop that pops elements from the stack as long as the stack is not empty and the stock price is greater than the top element of the stack. </div>
+                            <div class=""> Initialize an integer variable `res` to accumulate the total length of the palindrome formed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Update Result</b></div>
+                            <div class=""> <b>7 : Map Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> cp.top().second;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> mp) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the result by adding the span value of the top element of the stack. </div>
+                            <div class=""> Iterate through each entry in the `map` `mp`, where `key` is the character and `val` is its frequency. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Pop Stack</b></div>
+                            <div class=""> <b>8 : Odd Frequency Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cp.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(val <span style="color:#666">%</span> <span style="color:#666">2</span>) odd <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops the top element from the stack, as its span has been added to the result. </div>
+                            <div class=""> If the frequency of a character is odd, set the `odd` flag to `true`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Push Stack</b></div>
+                            <div class=""> <b>9 : Palindrome Length Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    cp.push(make_pair(price, res));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (val<span style="color:#666">/</span><span style="color:#666">2</span>) <span style="color:#666">*</span> <span style="color:#666">2</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the current stock price and its corresponding span into the stack. </div>
+                            <div class=""> For each character, add the largest even number less than or equal to its frequency to `res`. This represents the part of the palindrome that can be used symmetrically on both sides. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>10 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> odd<span style="color:#666">?</span> res <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the calculated span for the current stock price. </div>
+                            <div class=""> If there was at least one character with an odd frequency, add 1 to `res` (since we can place exactly one odd character in the middle of the palindrome). Otherwise, return `res` as is. </div>
                         </div>
                     
                 </div>
@@ -709,16 +674,16 @@ Explanation: The span for each price is computed as follows:
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) per operation when most prices are decreasing.</div>
-                        <div class=""> <b>Average Case:</b> O(1) amortized per operation due to stack operations.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for n operations, where all elements are popped once.</div> 
-                        <div class=""> <b>Description:</b> Each element is pushed and popped from the stack at most once.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the string, because we only need to iterate through the string once to count the characters and once more to calculate the palindrome length.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1), when prices decrease consistently.</div>
-                        <div class=""> <b>Worst Case:</b> O(n), where n is the number of operations.</div> 
-                        <div class=""> <b>Description:</b> Stack space depends on the number of elements stored.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since we only need to store the frequency of characters, which is constant for the 26 lowercase and 26 uppercase English letters.</div>    
                     </div>
 
                 </div>

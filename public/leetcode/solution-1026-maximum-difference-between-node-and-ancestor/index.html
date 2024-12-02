@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 27, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -308,7 +308,7 @@
 
 
 
-<div class=""> Design an ATM machine that can handle deposits and withdrawals of five denominations: $20, $50, $100, $200, and $500. When withdrawing, the machine always tries to use the highest denominations available first. Implement methods to deposit money and withdraw specified amounts. </div>
+<div class=""> You are given the root of a binary tree. Your task is to find the maximum absolute difference between the values of two nodes, where one node is an ancestor of the other. Specifically, you need to find the largest value of |a.val - b.val|, where node a is an ancestor of node b. </div>
 
 
 
@@ -359,62 +359,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of operations performed on the ATM, including deposits and withdrawals.</div>
-                        <div class=""> <b>Example:</b> Input
-[&#34;ATM&#34;, &#34;deposit&#34;, &#34;withdraw&#34;, &#34;deposit&#34;, &#34;withdraw&#34;, &#34;withdraw&#34;]
-[[], [[1,2,3,0,1]], [250], [[0,1,0,1,2]], [570], [1000]]</div>
+                        <div class=""> <b>Input:</b> The input consists of the root of a binary tree, where each node contains a value representing an integer.</div>
+                        <div class=""> <b>Example:</b> root = [5, 3, 8, 1, 4, null, 9]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • banknotesCount.length == 5</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= number of nodes &lt;= 5000</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= banknotesCount[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= amount &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • At most 5000 calls in total to withdraw and deposit.</div>
-                            
-                                <div style="margin-left: 20px;"> • Sum of banknotesCount[i] in all deposits doesn&#39;t exceed 10^9.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= 105</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Output the result of each operation: null for deposits, an array of withdrawn banknotes for successful withdrawals, or [-1] if a withdrawal cannot be fulfilled.</div>
-                        <div class=""> <b>Example:</b> Output
-[null, null, [0,0,2,0,0], null, [-1], [-1]]</div>
+                        <div class=""> <b>Output:</b> The output should be a single integer representing the maximum absolute difference between the values of two nodes, where one is an ancestor of the other.</div>
+                        <div class=""> <b>Example:</b> Output: 8</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • For successful withdrawals, the output array must be of length 5 and reflect the denominations used in the order $20, $50, $100, $200, $500.</div>
-                            
-                                <div style="margin-left: 20px;"> • If a withdrawal cannot be fulfilled, output [-1].</div>
+                                <div style="margin-left: 20px;"> • The absolute difference is calculated between two nodes, where one node is an ancestor of the other.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Simulate the ATM operations while adhering to the constraints of prioritizing higher denominations for withdrawals.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the maximum difference between values of two nodes in a binary tree where one is an ancestor of the other. This can be done by recursively traversing the tree and tracking the minimum and maximum values encountered along the path.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize the ATM with five denominations and their counts set to 0.</div>
+                                <div style="margin-left: 20px;"> • 1. Start by recursively visiting each node of the tree.</div>
                             
-                                <div style="margin-left: 20px;"> • For deposits, update the count of each denomination.</div>
+                                <div style="margin-left: 20px;"> • 2. Track the minimum and maximum values encountered on the path from the root to the current node.</div>
                             
-                                <div style="margin-left: 20px;"> • For withdrawals, calculate the maximum possible banknotes of each denomination that can be used while satisfying the total amount.</div>
+                                <div style="margin-left: 20px;"> • 3. Calculate the difference between the current node&#39;s value and the tracked minimum and maximum values.</div>
                             
-                                <div style="margin-left: 20px;"> • If the amount cannot be withdrawn exactly, return [-1] without modifying the ATM&#39;s state.</div>
+                                <div style="margin-left: 20px;"> • 4. Return the maximum difference found.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Conditions that must be followed during deposit and withdrawal operations.</div>
+                        <div class=""> <b>Goal:</b> Ensure the solution is efficient given the constraints of the problem.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Deposits add to the current count of banknotes in the ATM.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle a tree with up to 5000 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • Withdrawals must minimize the number of notes used by prioritizing larger denominations.</div>
-                            
-                                <div style="margin-left: 20px;"> • Withdrawals are only allowed if the exact amount can be fulfilled using the available banknotes.</div>
+                                <div style="margin-left: 20px;"> • Node values must be between 0 and 105.</div>
                             
                         </div>
                     </div>        
@@ -422,21 +409,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The ATM starts with no banknotes.</div>
+                                <div style="margin-left: 20px;"> • The tree is a valid binary tree with at least two nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • Withdrawals are rejected if the exact amount cannot be formed.</div>
-                            
-                                <div style="margin-left: 20px;"> • Deposits do not specify the order of operations; they directly add banknotes to the ATM.</div>
+                                <div style="margin-left: 20px;"> • Each node has a value between 0 and 105.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input
-[&#34;ATM&#34;, &#34;deposit&#34;, &#34;withdraw&#34;, &#34;deposit&#34;, &#34;withdraw&#34;, &#34;withdraw&#34;]
-[[], [[1,1,0,0,1]], [300], [[0,0,2,1,0]], [750], [70]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> 1. ATM is initialized. 2. Deposit adds $20 (1), $50 (1), and $500 (1). 3. Withdraw 300 uses $50 (1) and $500 (1). 4. Deposit adds $100 (2) and $200 (1). 5. Withdraw 750 fails as exact denominations are not available. 6. Withdraw 70 fails as $20 and $50 cannot fulfill the amount.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [5, 3, 8, 1, 4, null, 9]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the maximum difference occurs between nodes 5 and 1, yielding a difference of 8. Hence, the output is 8.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: root = [10, 5, 15, 3, 7, null, 20]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the maximum difference is between nodes 10 and 3, yielding a difference of 7. Thus, the output is 7.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,20 +447,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Use a greedy algorithm for withdrawals and maintain a dynamic count of banknotes for deposits.</div>
+                        <div class=""> <b>Approach:</b> The approach uses a depth-first search (DFS) strategy to traverse the tree while keeping track of the maximum and minimum values encountered along the path from the root to each node.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The withdrawal process must prioritize larger denominations to minimize the number of notes used.</div>
-                            
-                                <div style="margin-left: 20px;"> • Deposits are straightforward additions to the banknotes count.</div>
-                            
-                                <div style="margin-left: 20px;"> • Edge cases include failed withdrawals when exact change cannot be made.</div>
+                                <div style="margin-left: 20px;"> • The problem involves traversing a binary tree and calculating the maximum and minimum differences for every path.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • A greedy approach works well for this problem since we prioritize larger denominations first.</div>
+                                <div style="margin-left: 20px;"> • A depth-first search approach is appropriate because it allows us to visit all nodes while keeping track of necessary values (min and max).</div>
                             
                         </div>
                     </div>
@@ -481,13 +464,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize an array to store the count of each denomination.</div>
+                                <div style="margin-left: 20px;"> • 1. Perform a DFS traversal on the tree, starting from the root.</div>
                             
-                                <div style="margin-left: 20px;"> • For deposits, iterate through the input array and add each count to the respective denomination.</div>
+                                <div style="margin-left: 20px;"> • 2. At each node, compute the difference between its value and the tracked minimum and maximum values.</div>
                             
-                                <div style="margin-left: 20px;"> • For withdrawals, start from the highest denomination and calculate the maximum number of notes that can be used without exceeding the required amount.</div>
+                                <div style="margin-left: 20px;"> • 3. Propagate the minimum and maximum values down the tree as you visit the child nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • Update the ATM&#39;s state if the withdrawal is successful, or return [-1] if it fails.</div>
+                                <div style="margin-left: 20px;"> • 4. At each node, compute the maximum of the difference between the node&#39;s value and both the minimum and maximum values encountered so far.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Return the maximum difference after visiting all nodes.</div>
                             
                         </div>
                     </div>
@@ -496,24 +481,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Withdrawal amount is 0.</div>
+                                <div style="margin-left: 20px;"> • If the tree has fewer than two nodes, return 0 (this case is assumed to be invalid per problem constraints).</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Maximum banknotes or amounts near the upper limit of constraints.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should efficiently handle trees with up to 5000 nodes.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Withdrawal amount equals the value of one denomination.</div>
-                            
-                                <div style="margin-left: 20px;"> • Withdrawal amount cannot be exactly fulfilled.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution handles cases where all node values are the same (resulting in a difference of 0).</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Withdrawal fails if any single denomination required exceeds its count in the ATM.</div>
+                                <div style="margin-left: 20px;"> • The tree must be valid, and each node must have a value between 0 and 105.</div>
                             
                         </div>                                                                        
                     </div>
@@ -530,35 +513,19 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Constructor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Vector Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Helper Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Deposit Method</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Base Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Update Maximum</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Vector Operations</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Update Minimum</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Withdraw Method</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Mathematical Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Conditional Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Variable Assignment</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Mathematical Operations</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 End of Method</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Recursive Traversal</button>
                     
                 </div>
 
@@ -567,225 +534,89 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> note;
-</span></span><span style="display:flex;"><span>ATM() {
-</span></span><span style="display:flex;"><span>    note.resize(<span style="color:#666">5</span>, <span style="color:#666">0</span>);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxAncestorDiff</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(root, root<span style="color:#666">-&gt;</span>val, root<span style="color:#666">-&gt;</span>val);
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">deposit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">5</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        note[i] <span style="color:#666">+=</span> cnt[i];
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">helper</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> mx, <span style="color:#0b0;font-weight:bold">int</span> mn) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">-</span> mn;
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> max(mx, node<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    mn <span style="color:#666">=</span> min(mn, node<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(helper(node<span style="color:#666">-&gt;</span>left, mx, mn), helper(node<span style="color:#666">-&gt;</span>right, mx, mn));
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> withdraw(<span style="color:#0b0;font-weight:bold">int</span> amnt) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt500 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt200 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt100 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt50 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt20 <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> taken <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> <span style="color:#666">500</span>) {
-</span></span><span style="display:flex;"><span>        cnt500 <span style="color:#666">=</span> amnt <span style="color:#666">/</span> <span style="color:#666">500</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt500 <span style="color:#666">&gt;</span> note[<span style="color:#666">4</span>]) {
-</span></span><span style="display:flex;"><span>            cnt500 <span style="color:#666">=</span> note[<span style="color:#666">4</span>];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        amnt <span style="color:#666">-=</span> (cnt500 <span style="color:#666">*</span> <span style="color:#666">500</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> <span style="color:#666">200</span>) {
-</span></span><span style="display:flex;"><span>        cnt200 <span style="color:#666">=</span> amnt <span style="color:#666">/</span> <span style="color:#666">200</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt200 <span style="color:#666">&gt;</span> note[<span style="color:#666">3</span>]) {
-</span></span><span style="display:flex;"><span>            cnt200 <span style="color:#666">=</span> note[<span style="color:#666">3</span>];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        amnt <span style="color:#666">-=</span> (cnt200 <span style="color:#666">*</span> <span style="color:#666">200</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> <span style="color:#666">100</span>) {
-</span></span><span style="display:flex;"><span>        cnt100 <span style="color:#666">=</span> amnt <span style="color:#666">/</span> <span style="color:#666">100</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt100 <span style="color:#666">&gt;</span> note[<span style="color:#666">2</span>]) {
-</span></span><span style="display:flex;"><span>            cnt100 <span style="color:#666">=</span> note[<span style="color:#666">2</span>];                
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        amnt <span style="color:#666">-=</span> (cnt100 <span style="color:#666">*</span> <span style="color:#666">100</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> <span style="color:#666">50</span>) {
-</span></span><span style="display:flex;"><span>        cnt50 <span style="color:#666">=</span> amnt <span style="color:#666">/</span> <span style="color:#666">50</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt50 <span style="color:#666">&gt;</span> note[<span style="color:#666">1</span>]) {
-</span></span><span style="display:flex;"><span>            cnt50 <span style="color:#666">=</span> note[<span style="color:#666">1</span>];                                
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        amnt <span style="color:#666">-=</span> (cnt50 <span style="color:#666">*</span> <span style="color:#666">50</span>);
-</span></span><span style="display:flex;"><span>    }        
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> <span style="color:#666">20</span>) {
-</span></span><span style="display:flex;"><span>        cnt20 <span style="color:#666">=</span> amnt <span style="color:#666">/</span> <span style="color:#666">20</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt20 <span style="color:#666">&gt;</span> note[<span style="color:#666">0</span>]) {
-</span></span><span style="display:flex;"><span>            cnt20 <span style="color:#666">=</span> note[<span style="color:#666">0</span>];                                
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        amnt <span style="color:#666">-=</span> (cnt20 <span style="color:#666">*</span> <span style="color:#666">20</span>);
-</span></span><span style="display:flex;"><span>    }       
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{<span style="color:#666">-</span><span style="color:#666">1</span>};
-</span></span><span style="display:flex;"><span>    note[<span style="color:#666">4</span>] <span style="color:#666">-=</span> cnt500;
-</span></span><span style="display:flex;"><span>    note[<span style="color:#666">3</span>] <span style="color:#666">-=</span> cnt200;
-</span></span><span style="display:flex;"><span>    note[<span style="color:#666">2</span>] <span style="color:#666">-=</span> cnt100;
-</span></span><span style="display:flex;"><span>    note[<span style="color:#666">1</span>] <span style="color:#666">-=</span> cnt50;
-</span></span><span style="display:flex;"><span>    note[<span style="color:#666">0</span>] <span style="color:#666">-=</span> cnt20;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{cnt20, cnt50, cnt100, cnt200, cnt500};
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your ATM object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * ATM* obj = new ATM();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;deposit(banknotesCount);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * vector&lt;int&gt; param_2 = obj-&gt;withdraw(amount);
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> note;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxAncestorDiff</span>(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line declares a vector `note` to store the count of each denomination of banknotes in the ATM. </div>
+                            <div class=""> Define the function `maxAncestorDiff` which takes the root of the tree and calculates the maximum ancestor-descendant difference. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Constructor</b></div>
+                            <div class=""> <b>2 : Function Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ATM() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">helper</span>(root, root<span style="color:#666">-&gt;</span>val, root<span style="color:#666">-&gt;</span>val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Constructor for the ATM class, initializing the `note` vector with 5 elements, all set to 0, representing the initial count of banknotes. </div>
+                            <div class=""> Call the helper function with the root node and initialize both the maximum (`mx`) and minimum (`mn`) values to the root&#39;s value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Vector Operations</b></div>
+                            <div class=""> <b>3 : Helper Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    note.resize(<span style="color:#666">5</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">helper</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> mx, <span style="color:#0b0;font-weight:bold">int</span> mn) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `resize` function ensures that the `note` vector has 5 elements, each initialized to 0, which corresponds to the 5 types of banknotes. </div>
+                            <div class=""> Define the helper function which recursively traverses the tree, updating the maximum and minimum values and computing the maximum difference. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Deposit Method</b></div>
+                            <div class=""> <b>4 : Base Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">deposit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">-</span> mn;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `deposit` function allows depositing banknotes into the ATM by taking an input vector `cnt` containing the number of banknotes of each type. </div>
+                            <div class=""> If the current node is null, return the difference between the maximum and minimum values encountered so far. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Loop</b></div>
+                            <div class=""> <b>5 : Update Maximum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">5</span>; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mx <span style="color:#666">=</span> max(mx, node<span style="color:#666">-&gt;</span>val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop iterating through the 5 types of banknotes in the ATM. </div>
+                            <div class=""> Update the maximum value (`mx`) with the current node&#39;s value if it is larger. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Vector Operations</b></div>
+                            <div class=""> <b>6 : Update Minimum</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        note[i] <span style="color:#666">+=</span> cnt[i];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mn <span style="color:#666">=</span> min(mn, node<span style="color:#666">-&gt;</span>val);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each denomination, the number of banknotes deposited is added to the respective index in the `note` vector. </div>
+                            <div class=""> Update the minimum value (`mn`) with the current node&#39;s value if it is smaller. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Withdraw Method</b></div>
+                            <div class=""> <b>7 : Recursive Traversal</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> withdraw(<span style="color:#0b0;font-weight:bold">int</span> amnt) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(helper(node<span style="color:#666">-&gt;</span>left, mx, mn), helper(node<span style="color:#666">-&gt;</span>right, mx, mn));
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `withdraw` function handles withdrawal requests by calculating how many banknotes of each denomination are needed to meet the requested amount. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt500 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt200 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt100 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt50 <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt20 <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Initialization of counters for each denomination (500, 200, 100, 50, 20) of banknotes. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Variable Initialization</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> taken <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> A variable `taken` is initialized to keep track of the total amount taken during the withdrawal process. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(amnt <span style="color:#666">&gt;=</span> <span style="color:#666">500</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the requested amount is greater than or equal to 500, the highest denomination. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Mathematical Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt500 <span style="color:#666">=</span> amnt <span style="color:#666">/</span> <span style="color:#666">500</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Calculates how many 500 denomination notes can be dispensed. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Conditional Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt500 <span style="color:#666">&gt;</span> note[<span style="color:#666">4</span>]) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Checks if the available number of 500 denomination notes is sufficient to fulfill the request. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Variable Assignment</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt500 <span style="color:#666">=</span> note[<span style="color:#666">4</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Sets the count of 500 denomination notes to the available number in the ATM. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Mathematical Operations</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        amnt <span style="color:#666">-=</span> (cnt500 <span style="color:#666">*</span> <span style="color:#666">500</span>);
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Deducts the withdrawn amount from the total requested amount. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : End of Method</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>{cnt20, cnt50, cnt100, cnt200, cnt500};
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the withdrawal is successful, the function returns the number of each denomination dispensed. </div>
+                            <div class=""> Recursively calculate the maximum difference for the left and right subtrees, and return the maximum of the two results. </div>
                         </div>
                     
                 </div>
@@ -805,16 +636,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) for deposit; O(1) for withdrawal with sufficient notes.</div>
-                        <div class=""> <b>Average Case:</b> O(5) for both operations due to the fixed denominations.</div>
-                        <div class=""> <b>Worst Case:</b> O(5) for withdrawal when denominations need to be checked sequentially.</div> 
-                        <div class=""> <b>Description:</b> Both operations are efficient as they involve a constant number of denominations.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the number of nodes in the tree, since we visit each node once during the DFS traversal.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1) since only a fixed array of length 5 is used.</div> 
-                        <div class=""> <b>Description:</b> Space usage is minimal as only an array of size 5 is maintained for denominations.</div>    
+                        <div class=""> <b>Worst Case:</b> O(h)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(h), where h is the height of the tree, due to the space used by the recursion stack. In the worst case (unbalanced tree), h can be O(n).</div>    
                     </div>
 
                 </div>

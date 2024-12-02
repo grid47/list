@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 2, 2024
                                     <i class="far fa-clock clock"></i>
-                                    7 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -321,7 +321,7 @@
 
 
 
-<div class=""> You are given an integer array bloomDay, an integer m, and an integer k. Your goal is to form m bouquets using exactly k adjacent flowers. Each flower blooms on a particular day. Determine the minimum number of days required to form m bouquets, or return -1 if it is impossible. </div>
+<div class=""> You are given a sorted integer array nums. Determine if it is possible to split nums into one or more subsequences such that each subsequence is a consecutive increasing sequence and each subsequence has a length of 3 or more. </div>
 
 
 
@@ -372,53 +372,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an integer array bloomDay, and integers m and k.</div>
-                        <div class=""> <b>Example:</b> [2, 5, 3, 4, 1], m = 3, k = 2</div>
+                        <div class=""> <b>Input:</b> The input consists of a sorted integer array nums.</div>
+                        <div class=""> <b>Example:</b> nums = [1, 2, 3, 3, 4, 5]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= bloomDay.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= bloomDay[i] &lt;= 10^9</div>
+                                <div style="margin-left: 20px;"> • -1000 &lt;= nums[i] &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m &lt;= 10^6</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= bloomDay.length</div>
+                                <div style="margin-left: 20px;"> • nums is sorted in non-decreasing order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be a single integer representing the minimum number of days required to form m bouquets, or -1 if it is impossible.</div>
-                        <div class=""> <b>Example:</b> 4</div>
+                        <div class=""> <b>Output:</b> Return true if it is possible to split nums into valid subsequences, otherwise return false.</div>
+                        <div class=""> <b>Example:</b> true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The result is guaranteed to be a valid integer.</div>
+                                <div style="margin-left: 20px;"> • The output is a boolean value indicating whether the split is possible.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to determine the minimum number of days to wait in order to be able to make m bouquets.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check if it is possible to form valid subsequences of length 3 or more, where each subsequence is a consecutive increasing sequence.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Perform a binary search on the number of days, starting with the lowest possible day and checking if it&#39;s feasible to form m bouquets in that time.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a map to count occurrences of each number in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • To check if m bouquets can be formed by a certain day, count the number of adjacent flowers that bloom by that day, and see if you can form m bouquets with k flowers each.</div>
+                                <div style="margin-left: 20px;"> • 2. Track the subsequences that can be extended with the current number.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Ensure that each number is either added to an existing subsequence or starts a new valid subsequence of at least length 3.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem requires the use of a binary search algorithm to efficiently find the solution, ensuring that the solution can handle the large input sizes.</div>
+                        <div class=""> <b>Goal:</b> The input array is sorted, and the length of the array is between 1 and 10^4. The integer values are between -1000 and 1000.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= bloomDay.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= bloomDay[i] &lt;= 10^9</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= m &lt;= 10^6</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= bloomDay.length</div>
+                                <div style="margin-left: 20px;"> • -1000 &lt;= nums[i] &lt;= 1000</div>
                             
                         </div>
                     </div>        
@@ -426,17 +422,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The flowers bloom on specific days and can only be used once for a bouquet.</div>
+                                <div style="margin-left: 20px;"> • The input array is always sorted in non-decreasing order.</div>
                             
-                                <div style="margin-left: 20px;"> • The flowers must be adjacent to form a bouquet.</div>
+                                <div style="margin-left: 20px;"> • The length of the array is within the specified limits.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [2, 5, 3, 4, 1], m = 3, k = 2</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After 4 days, we can make 3 bouquets of 2 adjacent flowers. The solution works by checking if it&#39;s possible to make the bouquets by each day in the binary search process.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 2, 3, 3, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The array can be split into two subsequences: [1, 2, 3] and [3, 4, 5], both of which are valid.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 2, 3, 4, 4, 5]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is impossible to split this array into valid subsequences, as the subsequence starting with the second 4 cannot be extended to form a valid sequence.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -460,16 +460,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves performing a binary search on the number of days. For each day, we check if it&#39;s possible to make the required bouquets by counting the number of adjacent blooming flowers.</div>
+                        <div class=""> <b>Approach:</b> This problem can be solved by tracking the frequency of each element and ensuring that each number is placed in an appropriate subsequence.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires determining if it is possible to make m bouquets by checking different days in a binary search approach.</div>
+                                <div style="margin-left: 20px;"> • We can use a frequency map to keep track of the remaining numbers.</div>
+                            
+                                <div style="margin-left: 20px;"> • Subsequences should only be extended if the previous number is part of a valid subsequence.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Binary search helps us efficiently find the minimum number of days, reducing the number of checks.</div>
+                                <div style="margin-left: 20px;"> • We need to carefully manage how we form and extend subsequences to meet the requirement that all subsequences have at least 3 elements.</div>
                             
                         </div>
                     </div>
@@ -477,11 +479,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Start with a binary search over the possible number of days.</div>
+                                <div style="margin-left: 20px;"> • 1. Use a hash map to track the number of remaining occurrences of each number.</div>
                             
-                                <div style="margin-left: 20px;"> • For each mid-point day in the search, check if m bouquets can be made using the function isValid.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a second map to track how many subsequences can be extended with the current number.</div>
                             
-                                <div style="margin-left: 20px;"> • If m bouquets can be made, try searching for a smaller number of days, otherwise search for a larger number of days.</div>
+                                <div style="margin-left: 20px;"> • 3. For each number, try to place it in an existing subsequence or start a new subsequence if possible.</div>
                             
                         </div>
                     </div>
@@ -490,22 +492,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the array is empty, return -1 as no bouquets can be made.</div>
+                                <div style="margin-left: 20px;"> • There will be no empty arrays, as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles arrays with up to 10^5 elements efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle arrays of size up to 10^4 efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If m is 0 or k is greater than the total number of flowers, return -1.</div>
+                                <div style="margin-left: 20px;"> • Arrays where consecutive numbers repeat can be tricky, but the solution will handle them by extending or starting new subsequences.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must be efficient enough to handle the upper limit of input size.</div>
+                                <div style="margin-left: 20px;"> • Ensure the number of subsequences is managed correctly to meet the length 3 constraint.</div>
                             
                         </div>                                                                        
                     </div>
@@ -522,49 +524,37 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Method</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Left Count Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Reset Counter</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Skip Processed Numbers</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Reset Counter</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Left Count Decrement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Increment Bouquets</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Check Existing Subsequence</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Extend Subsequence</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 End Subsequence with Current Number</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Method</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Check for New Subsequence</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Start New Subsequence</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 New Subsequence Continuation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 End New Subsequence</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Binary Search</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return False</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mid Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Result Update</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Adjust Search Bounds</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Else Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Adjust Search Bounds</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Return True</button>
                     
                 </div>
 
@@ -573,39 +563,28 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">isValid</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>bloom, <span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> mid, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> bough <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPossible</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left, end;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> bloom.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(bloom[i] <span style="color:#666">&gt;</span> mid) {
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">++</span>cnt <span style="color:#666">&gt;=</span> k) {
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>            bough<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(bough <span style="color:#666">&gt;=</span> m) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: nums)
+</span></span><span style="display:flex;"><span>        left[num]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bloom, <span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> bloom.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((<span style="color:#0b0;font-weight:bold">long</span>)m <span style="color:#666">*</span> k <span style="color:#666">&gt;</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span>, result;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isValid(bloom, m, mid, k)) {
-</span></span><span style="display:flex;"><span>            result <span style="color:#666">=</span> mid;
-</span></span><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: nums) { <span style="color:#080;font-style:italic">// nums is in increasing order
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(left[num] <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        left[num]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(end[num <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            end[num <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            end[num]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(left[num <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> left[num <span style="color:#666">+</span> <span style="color:#666">2</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            left[num <span style="color:#666">+</span> <span style="color:#666">1</span>]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            left[num <span style="color:#666">+</span> <span style="color:#666">2</span>]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            end [num <span style="color:#666">+</span> <span style="color:#666">2</span>]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -613,223 +592,163 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Method</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">isValid</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>bloom, <span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> mid, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPossible</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This function checks if it&#39;s possible to make `m` bouquets with at least `k` adjacent flowers blooming on or before day `mid`. </div>
+                            <div class=""> This is the function definition for `isPossible`, which takes a vector of integers `nums` and returns a boolean value indicating whether it&#39;s possible to split the array into consecutive subsequences. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> bough <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left, end;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Two variables are initialized: `bough` to count the number of bouquets and `cnt` to track the number of consecutive blooming flowers. </div>
+                            <div class=""> Two hash maps `left` and `end` are initialized. `left` tracks the count of available elements, and `end` tracks the number of subsequences ending at a specific number. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Loop Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> bloom.size(); i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: nums)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over the `bloom` array to check the blooming status of each flower. </div>
+                            <div class=""> Iterate over each number in the `nums` array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Condition</b></div>
+                            <div class=""> <b>4 : Left Count Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(bloom[i] <span style="color:#666">&gt;</span> mid) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        left[num]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the flower blooms after day `mid`, we reset the counter (`cnt = 0`) since no more flowers can be added to the current bouquet. </div>
+                            <div class=""> For each number, increment the count in the `left` map to indicate that this number is available for building subsequences. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Reset Counter</b></div>
+                            <div class=""> <b>5 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: nums) { <span style="color:#080;font-style:italic">// nums is in increasing order
+</span></span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Resetting the counter (`cnt`) ensures we start counting the next set of consecutive flowers. </div>
+                            <div class=""> This is the second loop that iterates through the numbers in `nums`. It processes each number in increasing order to check if it can be added to a subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Condition</b></div>
+                            <div class=""> <b>6 : Skip Processed Numbers</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(<span style="color:#666">++</span>cnt <span style="color:#666">&gt;=</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left[num] <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `cnt` reaches `k`, we have enough consecutive flowers to form a bouquet, so we increment the bouquet count (`bough&#43;&#43;`). </div>
+                            <div class=""> If the number has already been used in a subsequence (i.e., `left[num] == 0`), skip processing it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Reset Counter</b></div>
+                            <div class=""> <b>7 : Left Count Decrement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        left[num]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Resetting the counter (`cnt`) to 0 after forming a bouquet. </div>
+                            <div class=""> Decrement the count of the current number in `left` because it is being used to form a subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Increment Bouquets</b></div>
+                            <div class=""> <b>8 : Check Existing Subsequence</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bough<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(end[num <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> We increment the `bough` count when a bouquet is formed with `k` consecutive flowers. </div>
+                            <div class=""> If there is a subsequence ending with `num - 1`, extend that subsequence by adding the current `num` to it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return</b></div>
+                            <div class=""> <b>9 : Extend Subsequence</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(bough <span style="color:#666">&gt;=</span> m) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            end[num <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If we have formed at least `m` bouquets, return `true` to indicate that it&#39;s possible to form the bouquets within the given conditions. </div>
+                            <div class=""> Decrement the count of subsequences ending with `num - 1` since we are now using `num` to extend it. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return</b></div>
+                            <div class=""> <b>10 : End Subsequence with Current Number</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            end[num]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If fewer than `m` bouquets were formed, return `false` to indicate that it&#39;s not possible to meet the requirement. </div>
+                            <div class=""> Increment the count of subsequences ending with `num` after adding it to an existing subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Method</b></div>
+                            <div class=""> <b>11 : Check for New Subsequence</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDays</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bloom, <span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> k) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(left[num <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> left[num <span style="color:#666">+</span> <span style="color:#666">2</span>] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The `minDays` function finds the minimum day on which at least `m` bouquets can be made, each with `k` adjacent blooming flowers. </div>
+                            <div class=""> If no subsequence can be extended with the current number, check if we can start a new subsequence with `num`, `num &#43; 1`, and `num &#43; 2`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Variable Initialization</b></div>
+                            <div class=""> <b>12 : Start New Subsequence</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> bloom.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            left[num <span style="color:#666">+</span> <span style="color:#666">1</span>]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The size of the `bloom` array is stored in `n`, representing the total number of flowers. </div>
+                            <div class=""> Decrement the count of `num &#43; 1` in `left` as it&#39;s being used to start a new subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Condition</b></div>
+                            <div class=""> <b>13 : New Subsequence Continuation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((<span style="color:#0b0;font-weight:bold">long</span>)m <span style="color:#666">*</span> k <span style="color:#666">&gt;</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            left[num <span style="color:#666">+</span> <span style="color:#666">2</span>]<span style="color:#666">--</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the total number of flowers is less than `m * k`, it is impossible to form `m` bouquets, so the function returns `-1`. </div>
+                            <div class=""> Decrement the count of `num &#43; 2` in `left` as it&#39;s also being used to continue the new subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Variable Initialization</b></div>
+                            <div class=""> <b>14 : End New Subsequence</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span>, result;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            end [num <span style="color:#666">+</span> <span style="color:#666">2</span>]<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize the binary search bounds: `l` is the minimum day (1), `r` is a large upper bound (1e9), and `result` will hold the answer. </div>
+                            <div class=""> Increment the count of subsequences ending with `num &#43; 2` to mark the successful creation of a new subsequence. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Binary Search</b></div>
+                            <div class=""> <b>15 : Return False</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start the binary search loop, which continues as long as the lower bound `l` is less than or equal to the upper bound `r`. </div>
+                            <div class=""> If neither extending an existing subsequence nor starting a new one is possible, return `false` to indicate that it&#39;s not possible to split the array into consecutive subsequences. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Mid Calculation</b></div>
+                            <div class=""> <b>16 : Return True</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the middle point `mid` between `l` and `r` to check the possibility of forming `m` bouquets within `mid` days. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(isValid(bloom, m, mid, k)) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Check if it&#39;s possible to form `m` bouquets within `mid` days using the `isValid` function. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Result Update</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            result <span style="color:#666">=</span> mid;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If it&#39;s possible to form `m` bouquets within `mid` days, update the `result` with `mid` and continue searching for smaller values of `mid`. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Adjust Search Bounds</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adjust the upper bound `r` to `mid - 1` to search for smaller days that might still work. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Else Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If it&#39;s not possible to form `m` bouquets within `mid` days, we need to increase the day count. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Adjust Search Bounds</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Adjust the lower bound `l` to `mid &#43; 1` to search for larger days. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>22 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return the result, which is the minimum day when at least `m` bouquets can be made. </div>
+                            <div class=""> If the loop completes without returning `false`, return `true`, indicating that the array can be split into consecutive subsequences. </div>
                         </div>
                     
                 </div>
@@ -849,16 +768,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log(max(bloomDay))) for the binary search and validation check.</div>
-                        <div class=""> <b>Average Case:</b> O(n log(max(bloomDay)))</div>
-                        <div class=""> <b>Worst Case:</b> O(n log(max(bloomDay)))</div> 
-                        <div class=""> <b>Description:</b> The time complexity is dominated by the binary search step and the validation step, both of which are O(n).</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) as we process each element in the array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n) for storing the bloomDay array.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the input array.</div>    
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage needed for the frequency and subsequence maps.</div>    
                     </div>
 
                 </div>

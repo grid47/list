@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Oct 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
                     
                     <div class="article-post">
-                        <h2 id="hahahugoshortcode140s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+                        <h2 id="hahahugoshortcode138s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
       <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/130.webp" 
            alt="A grid of cells gently surrounded by a calming border of light, with certain areas being &#39;captured." 
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> Design and implement a queue using only two stacks. The queue should support the basic operations of a normal queue: enqueue, dequeue, peek, and checking if the queue is empty. </div>
+<div class=""> You are given an m x n matrix board containing letters &lsquo;X&rsquo; and &lsquo;O&rsquo;. Capture all regions that are surrounded by &lsquo;X&rsquo;. A region is captured if it is surrounded by &lsquo;X&rsquo; cells and cannot reach the edges of the board. </div>
 
 
 
@@ -373,44 +373,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of several function calls to manipulate the queue. Each call is an operation on the queue object.</div>
-                        <div class=""> <b>Example:</b> Input: [&#34;MyQueue&#34;, &#34;enqueue&#34;, &#34;enqueue&#34;, &#34;peek&#34;, &#34;dequeue&#34;, &#34;empty&#34;]
-[[], [5], [10], [], [], []]</div>
+                        <div class=""> <b>Input:</b> The input is an m x n matrix containing &#39;X&#39; and &#39;O&#39;. Each element represents a cell of the board.</div>
+                        <div class=""> <b>Example:</b> [[&#39;X&#39;,&#39;X&#39;,&#39;X&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;O&#39;,&#39;O&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;X&#39;,&#39;O&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;O&#39;,&#39;X&#39;,&#39;X&#39;]]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= x &lt;= 9</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 200</div>
                             
-                                <div style="margin-left: 20px;"> • At most 100 calls will be made to enqueue, dequeue, peek, and empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • All dequeue and peek operations are valid.</div>
+                                <div style="margin-left: 20px;"> • board[i][j] is either &#39;X&#39; or &#39;O&#39;.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output will be the result of the operations performed on the queue.</div>
-                        <div class=""> <b>Example:</b> Output: [null, null, null, 5, 5, false]</div>
+                        <div class=""> <b>Output:</b> The output is a matrix where all &#39;O&#39; regions that are surrounded by &#39;X&#39; cells are captured by replacing &#39;O&#39; with &#39;X&#39;.</div>
+                        <div class=""> <b>Example:</b> [[&#39;X&#39;,&#39;X&#39;,&#39;X&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;X&#39;,&#39;X&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;X&#39;,&#39;X&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;O&#39;,&#39;X&#39;,&#39;X&#39;]]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output will be a modified version of the input board with captured &#39;O&#39; regions.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to use two stacks to simulate the FIFO behavior of a queue.</div>
+                        <div class=""> <b>Goal:</b> The goal is to capture the regions of &#39;O&#39; surrounded by &#39;X&#39;.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Use two stacks: s1 for enqueue operations and s2 for dequeue operations.</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the entire board to identify &#39;O&#39; cells on the borders (edges).</div>
                             
-                                <div style="margin-left: 20px;"> • For enqueue, push elements to s1.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a depth-first search (DFS) to mark the &#39;O&#39; cells connected to the borders as safe.</div>
                             
-                                <div style="margin-left: 20px;"> • For dequeue and peek, transfer elements from s1 to s2 if s2 is empty, then perform the operation on s2.</div>
+                                <div style="margin-left: 20px;"> • 3. After the traversal, replace all remaining &#39;O&#39; cells (surrounded regions) with &#39;X&#39;.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Restore all &#39;O&#39; cells marked as safe back to &#39;O&#39;.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The queue should be implemented using two stacks, and the operations must adhere to stack limitations (push, pop, peek).</div>
+                        <div class=""> <b>Goal:</b> The board will always have at least 1 row and 1 column.</div>
                         <div class=""> <b>Steps:</b>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 200</div>
+                            
+                                <div style="margin-left: 20px;"> • board[i][j] is &#39;X&#39; or &#39;O&#39;.</div>
                             
                         </div>
                     </div>        
@@ -418,18 +423,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input will consist of valid function calls for the queue.</div>
-                            
-                                <div style="margin-left: 20px;"> • The operations enqueue, dequeue, peek, and empty will be called sequentially.</div>
+                                <div style="margin-left: 20px;"> • The input will always be a valid matrix where m and n are within the specified constraints.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [&#34;MyQueue&#34;, &#34;enqueue&#34;, &#34;enqueue&#34;, &#34;peek&#34;, &#34;dequeue&#34;, &#34;empty&#34;]
-[[], [5], [10], [], [], []]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> After pushing 5 and 10, the queue is [5, 10]. Peek returns 5, dequeue returns 5, and empty returns false because the queue is not empty.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[&#39;X&#39;,&#39;X&#39;,&#39;X&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;O&#39;,&#39;O&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;X&#39;,&#39;O&#39;,&#39;X&#39;], [&#39;X&#39;,&#39;O&#39;,&#39;X&#39;,&#39;X&#39;]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, &#39;O&#39;s that are surrounded by &#39;X&#39;s (not touching the edge) are captured and turned into &#39;X&#39;s.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> [[&#39;X&#39;]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> This board has no &#39;O&#39;s, so no cells are captured and the board remains unchanged.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,18 +459,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We will simulate the FIFO behavior of a queue using two stacks. The idea is to use one stack (s1) for storing incoming elements and the other stack (s2) for serving the front of the queue.</div>
+                        <div class=""> <b>Approach:</b> Use depth-first search (DFS) to mark all &#39;O&#39; cells connected to the borders, then modify the matrix accordingly.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A queue is a FIFO data structure, which means the first element added is the first one to be removed.</div>
+                                <div style="margin-left: 20px;"> • The &#39;O&#39; cells on the borders and connected to them are safe, and need to be preserved.</div>
                             
-                                <div style="margin-left: 20px;"> • Stacks are LIFO, meaning the last element added is the first one to be removed.</div>
+                                <div style="margin-left: 20px;"> • The remaining &#39;O&#39; cells are surrounded and need to be captured.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • To simulate a queue, we can use two stacks: one to hold the incoming elements and the other to hold the elements in reverse order when needed for dequeue or peek.</div>
+                                <div style="margin-left: 20px;"> • The problem can be solved efficiently by marking the border-connected &#39;O&#39; cells as safe using DFS, and then replacing all remaining &#39;O&#39;s with &#39;X&#39;.</div>
                             
                         </div>
                     </div>
@@ -472,13 +478,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create two stacks, s1 for enqueue and s2 for dequeue.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through the board and perform DFS from any &#39;O&#39; cells found on the borders.</div>
                             
-                                <div style="margin-left: 20px;"> • For push operations, simply push the element to stack s1.</div>
+                                <div style="margin-left: 20px;"> • 2. Mark the connected &#39;O&#39; cells as safe by changing them to a temporary value, like &#39;1&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • For pop or peek operations, check if s2 is empty. If it is, transfer all elements from s1 to s2, and then pop or peek the top of s2.</div>
+                                <div style="margin-left: 20px;"> • 3. After completing the DFS, iterate through the board again to replace all &#39;O&#39; cells with &#39;X&#39;.</div>
                             
-                                <div style="margin-left: 20px;"> • If s2 is not empty, perform the operation directly on s2.</div>
+                                <div style="margin-left: 20px;"> • 4. Restore the safe &#39;O&#39; cells (those marked &#39;1&#39;) back to &#39;O&#39;.</div>
                             
                         </div>
                     </div>
@@ -487,22 +493,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The queue should handle the case where no elements are added and operations like pop or peek are called.</div>
+                                <div style="margin-left: 20px;"> • If the board is empty or contains only &#39;X&#39;, no changes are made.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should be able to handle a maximum of 100 function calls efficiently.</div>
+                                <div style="margin-left: 20px;"> • The algorithm should be efficient enough to handle the maximum constraints of m, n &lt;= 200.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The queue will return null for push operations as they don&#39;t have an output.</div>
+                                <div style="margin-left: 20px;"> • If the board contains no &#39;O&#39; cells, no modifications will occur.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The operations must be implemented using only stack operations.</div>
+                                <div style="margin-left: 20px;"> • The board will contain at least one row and one column.</div>
                             
                         </div>                                                                        
                     </div>
@@ -519,45 +525,49 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Data Structures</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Constructor</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Matrix Dimensions</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Push Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Push Logic</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Inner Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Pop Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Boundary Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Pop Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 O Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Transfer Elements</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 DFS Call</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Move Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Second Outer Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Pop Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Second Inner Loop Iteration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 O Replacement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Removal</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Mark X</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Pop Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Restore O</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Peek Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Restore O</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Peek Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 DFS Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Peek Transfer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Base Case Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Move Element for Peek</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 DFS Exit Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Pop Element for Peek</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Statement</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Peek Value</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Mark as Visited</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Empty Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Recursive DFS Calls</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Check Empty</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Recursive DFS Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Recursive DFS Calls</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Recursive DFS Calls</button>
                     
                 </div>
 
@@ -566,253 +576,256 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s1, s2;
-</span></span><span style="display:flex;"><span>MyQueue() {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">solve</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">-</span> <span style="color:#666">1</span><span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">-</span><span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;O&#39;</span>)
+</span></span><span style="display:flex;"><span>                dfs(board, i, j);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;O&#39;</span>)
+</span></span><span style="display:flex;"><span>            board[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;X&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>)
+</span></span><span style="display:flex;"><span>            board[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;O&#39;</span>;
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">push</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>    s1.push(x);
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> 
+</span></span><span style="display:flex;"><span>       j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#b44">&#39;O&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pop</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s2.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty()) {
-</span></span><span style="display:flex;"><span>            s2.push(s1.top());
-</span></span><span style="display:flex;"><span>            s1.pop();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> s2.top();
-</span></span><span style="display:flex;"><span>    s2.pop();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">peek</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s2.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty()) {
-</span></span><span style="display:flex;"><span>            s2.push(s1.top());
-</span></span><span style="display:flex;"><span>            s1.pop();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s2.top();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">empty</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s1.empty() <span style="color:#666">&amp;&amp;</span> s2.empty();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your MyQueue object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * MyQueue* obj = new MyQueue();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;push(x);
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_2 = obj-&gt;pop();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_3 = obj-&gt;peek();
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_4 = obj-&gt;empty();
-</span></span></span></code></pre></div>
+</span></span></code></pre></div>
                         </div>
                     </div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Data Structures</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s1, s2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">solve</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares two stacks `s1` and `s2` to simulate the behavior of a queue. `s1` is used to push new elements, and `s2` is used for popping and peeking elements. </div>
+                            <div class=""> Define the function `solve` that takes a 2D grid `board` as input and modifies it in-place to solve the problem. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Constructor</b></div>
+                            <div class=""> <b>2 : Matrix Dimensions</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MyQueue() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Constructor for the `MyQueue` class. Initializes the two stacks `s1` and `s2`. </div>
+                            <div class=""> Get the dimensions of the grid: `m` represents the number of rows and `n` represents the number of columns. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Push Operation</b></div>
+                            <div class=""> <b>3 : Outer Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">push</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `push` function to insert an element into the queue. </div>
+                            <div class=""> Start an outer loop to iterate over each row of the board. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Push Logic</b></div>
+                            <div class=""> <b>4 : Inner Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s1.push(x);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pushes the element `x` onto stack `s1`. </div>
+                            <div class=""> Start an inner loop to iterate over each column of the current row. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Pop Operation</b></div>
+                            <div class=""> <b>5 : Boundary Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pop</span>() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">-</span> <span style="color:#666">1</span><span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">-</span><span style="color:#666">1</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `pop` function to remove and return the front element of the queue. </div>
+                            <div class=""> Check if the current position is at the border of the grid (first or last row/column). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Pop Condition</b></div>
+                            <div class=""> <b>6 : O Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s2.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;O&#39;</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if `s2` is empty. If it is, we need to transfer elements from `s1` to `s2` to maintain the correct order. </div>
+                            <div class=""> Check if the current cell is &#39;O&#39;, indicating a potential region to explore. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Transfer Elements</b></div>
+                            <div class=""> <b>7 : DFS Call</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                dfs(board, i, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Transfers all elements from `s1` to `s2`, reversing their order to simulate queue behavior. </div>
+                            <div class=""> Call the `dfs` function to perform Depth-First Search and mark all connected &#39;O&#39;s starting from the current cell. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Move Element</b></div>
+                            <div class=""> <b>8 : Second Outer Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s2.push(s1.top());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves the top element from `s1` to `s2`. </div>
+                            <div class=""> Start the second iteration over the rows of the grid to modify the cells based on DFS results. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Pop Element</b></div>
+                            <div class=""> <b>9 : Second Inner Loop Iteration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s1.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops the element from `s1` after moving it to `s2`. </div>
+                            <div class=""> Iterate over the columns of each row in the second pass. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Pop Value</b></div>
+                            <div class=""> <b>10 : O Replacement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> s2.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;O&#39;</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Gets the top element from `s2` (the front element of the queue). </div>
+                            <div class=""> Check if the current cell is &#39;O&#39; that was not connected to the border (should be surrounded by &#39;X&#39;). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Pop Removal</b></div>
+                            <div class=""> <b>11 : Mark X</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    s2.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            board[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;X&#39;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Removes the top element from `s2`, effectively popping the front element of the queue. </div>
+                            <div class=""> Change the isolated &#39;O&#39; to &#39;X&#39; since it is surrounded by &#39;X&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Return Pop Value</b></div>
+                            <div class=""> <b>12 : Restore O</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the popped element from the queue. </div>
+                            <div class=""> Check if the current cell was marked as &#39;1&#39; during the DFS, indicating it is part of a border-connected region. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Peek Operation</b></div>
+                            <div class=""> <b>13 : Restore O</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">peek</span>() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            board[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;O&#39;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `peek` function to return the front element of the queue without removing it. </div>
+                            <div class=""> Restore the &#39;O&#39; at this position since it was connected to the border. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Peek Condition</b></div>
+                            <div class=""> <b>14 : DFS Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s2.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if `s2` is empty. If so, we transfer elements from `s1` to `s2`. </div>
+                            <div class=""> Define the `dfs` function that performs Depth-First Search to explore connected regions of &#39;O&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Peek Transfer</b></div>
+                            <div class=""> <b>15 : Base Case Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty()) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> 
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Transfers elements from `s1` to `s2` to maintain the queue&#39;s order. </div>
+                            <div class=""> Check if the current position is out of bounds of the grid. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Move Element for Peek</b></div>
+                            <div class=""> <b>16 : DFS Exit Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s2.push(s1.top());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#b44">&#39;O&#39;</span>)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves the top element from `s1` to `s2`. </div>
+                            <div class=""> Check if the current cell is not &#39;O&#39; (i.e., already visited or not a valid cell for DFS). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Pop Element for Peek</b></div>
+                            <div class=""> <b>17 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            s1.pop();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Pops the element from `s1` after moving it to `s2`. </div>
+                            <div class=""> Exit the DFS function if the base case is met. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Peek Value</b></div>
+                            <div class=""> <b>18 : Mark as Visited</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s2.top();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the top element from `s2`, which is the front element of the queue. </div>
+                            <div class=""> Mark the current cell as visited by changing it to &#39;1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Empty Operation</b></div>
+                            <div class=""> <b>19 : Recursive DFS Calls</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">empty</span>() {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the `empty` function to check if the queue is empty. </div>
+                            <div class=""> Recursively call `dfs` to explore the cell below the current one. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>20 : Check Empty</b></div>
+                            <div class=""> <b>20 : Recursive DFS Calls</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s1.empty() <span style="color:#666">&amp;&amp;</span> s2.empty();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns `true` if both `s1` and `s2` are empty, indicating that the queue is empty. </div>
+                            <div class=""> Recursively call `dfs` to explore the cell to the right of the current one. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Recursive DFS Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call `dfs` to explore the cell above the current one. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Recursive DFS Calls</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Recursively call `dfs` to explore the cell to the left of the current one. </div>
                         </div>
                     
                 </div>
@@ -832,16 +845,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Average Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n) when transferring elements from s1 to s2 during pop or peek operations.</div> 
-                        <div class=""> <b>Description:</b> While the pop and peek operations may take O(n) in the worst case, the overall complexity is amortized to O(1) for each operation over time.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(m * n), where m is the number of rows and n is the number of columns.</div>
+                        <div class=""> <b>Average Case:</b> O(m * n), since we traverse all cells at least once.</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n), since we may need to explore all cells in the matrix.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear with respect to the size of the board.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) when no elements are stored in the queue.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) because the queue can hold up to n elements.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n), where n is the number of elements in the queue.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), if no extra space is used (except for temporary marking).</div>
+                        <div class=""> <b>Worst Case:</b> O(m * n), since we might use extra space for the DFS stack in the worst case.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is dependent on the recursion depth of DFS, but in practice it is O(m * n).</div>    
                     </div>
 
                 </div>

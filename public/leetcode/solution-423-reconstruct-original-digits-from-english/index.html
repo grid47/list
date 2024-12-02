@@ -281,7 +281,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 25, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given a square matrix of integers, your task is to find the minimum sum of any falling path through the matrix. A falling path starts at any element in the first row and chooses the next element from the row directly below it, which can be either directly below, diagonally left, or diagonally right. </div>
+<div class=""> You are given a string representing an out-of-order English representation of digits from 0 to 9. Your task is to rearrange the characters of the string in such a way that you can extract the digits in ascending order. The string will only contain valid letters corresponding to the English representations of digits. </div>
 
 
 
@@ -371,47 +371,52 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given an n x n matrix, where each element represents a value. You need to find the falling path with the minimum sum.</div>
-                        <div class=""> <b>Example:</b> Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]</div>
+                        <div class=""> <b>Input:</b> The input is a string s that contains characters representing the out-of-order English words for digits 0-9.</div>
+                        <div class=""> <b>Example:</b> Input: s = &#34;enionzotwo&#34;
+</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • n == matrix.length == matrix[i].length</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • s[i] is one of the characters from a predefined set representing the letters in digit words.</div>
                             
-                                <div style="margin-left: 20px;"> • -100 &lt;= matrix[i][j] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The input string will always be valid and contain only characters from the English digit words.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum sum of a falling path.</div>
-                        <div class=""> <b>Example:</b> Output: 13</div>
+                        <div class=""> <b>Output:</b> The output should be a string containing the digits, sorted in ascending order, as a result of extracting the digits from the input string.</div>
+                        <div class=""> <b>Example:</b> Output: &#34;012&#34;</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix will always be a square.</div>
+                                <div style="margin-left: 20px;"> • The output string should contain the digits in ascending order.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the falling path with the minimum sum, update the matrix values row by row, adding the smallest possible sum from the previous row to the current row.</div>
+                        <div class=""> <b>Goal:</b> The goal is to extract the digits from the scrambled string based on their English word representations, utilizing the distinct characters in each word to identify and count the digits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Start from the second row and update each element by adding the minimum of the three possible elements from the previous row (directly above, diagonally left, diagonally right).</div>
+                                <div style="margin-left: 20px;"> • Identify the distinct characters that can be used to determine the presence of certain digits (e.g., &#39;z&#39; for zero, &#39;w&#39; for two, etc.).</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Once the matrix is updated, the minimum sum will be the smallest value in the last row.</div>
+                                <div style="margin-left: 20px;"> • Count the occurrences of each character in the input string.</div>
+                            
+                                <div style="margin-left: 20px;"> • Using the character counts, determine how many of each digit appears in the string.</div>
+                            
+                                <div style="margin-left: 20px;"> • Rebuild the string by adding the digits in ascending order.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input matrix will always be a square with integer values.</div>
+                        <div class=""> <b>Goal:</b> The problem is constrained by the size of the input string and the valid characters it can contain.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The input string has a maximum length of 100,000 characters.</div>
                             
-                                <div style="margin-left: 20px;"> • -100 &lt;= matrix[i][j] &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • All characters in the string are part of the set of letters that correspond to the English words for the digits.</div>
                             
                         </div>
                     </div>        
@@ -419,19 +424,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The matrix is square, and all elements are integers.</div>
+                                <div style="margin-left: 20px;"> • The input string will always be valid and contain only the necessary letters to form digit words.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> To get the minimum falling path sum, start with any element in the first row, and for each subsequent row, pick the minimum value from the adjacent elements in the previous row. For this example, the minimum sum is 13, which is the path [1, 5, 7].</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: matrix = [[-19,57],[-40,-5]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this example, the minimum falling path sum is -59, which follows the path [-19, -40].</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: Input: s = &#34;owoztneoer&#34;</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the string contains the letters for the words &#39;zero&#39;, &#39;one&#39;, and &#39;two&#39;. Extracting these gives the digits &#39;0&#39;, &#39;1&#39;, and &#39;2&#39;, resulting in the output &#34;012&#34;.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -455,16 +456,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We solve the problem using dynamic programming by updating the matrix to store the minimum path sum at each position. This allows us to compute the minimum sum in a bottom-up manner.</div>
+                        <div class=""> <b>Approach:</b> We solve the problem by counting the occurrences of specific characters that are unique to certain digits. This allows us to determine the number of each digit and then sort them in ascending order.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem can be solved efficiently using dynamic programming, where each element in the matrix is updated to represent the minimum falling path sum up to that point.</div>
+                                <div style="margin-left: 20px;"> • Certain digits have unique characters that can help identify them (e.g., &#39;z&#39; for zero, &#39;w&#39; for two).</div>
+                            
+                                <div style="margin-left: 20px;"> • Once we identify and count the digits, we can arrange them in ascending order.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By using dynamic programming, we avoid recalculating the same subproblems multiple times, making the solution more efficient.</div>
+                                <div style="margin-left: 20px;"> • Using the frequency of characters, we can iteratively determine which digits are present in the string and construct the result.</div>
                             
                         </div>
                     </div>
@@ -472,11 +475,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Step 1: Traverse the matrix starting from the second row.</div>
+                                <div style="margin-left: 20px;"> • Initialize a count array for each character in the string.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 2: For each element in the current row, add the minimum of the three possible elements from the previous row (directly above, diagonally left, diagonally right).</div>
+                                <div style="margin-left: 20px;"> • Use distinct characters that can uniquely identify digits (e.g., &#39;z&#39; for &#39;zero&#39;, &#39;w&#39; for &#39;two&#39;) to find the frequency of each digit.</div>
                             
-                                <div style="margin-left: 20px;"> • Step 3: Once the matrix is updated, the result will be the minimum value in the last row.</div>
+                                <div style="margin-left: 20px;"> • For each identified digit, decrement the counts of the characters that make up that digit.</div>
+                            
+                                <div style="margin-left: 20px;"> • Repeat the process for all digits and construct the result by appending the corresponding digits.</div>
                             
                         </div>
                     </div>
@@ -485,22 +490,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix will not be empty, as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • The input string will not be empty, as per the constraints.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should handle matrices up to 100x100 efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large strings with many repeated characters, ensure that the solution is efficient enough to handle the input size.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm should work for matrices with negative numbers and ensure the minimum path sum is correctly calculated.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution correctly handles inputs with all digits from 0 to 9.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The matrix is always square, which simplifies the implementation.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle inputs with a length up to 100,000 characters efficiently.</div>
                             
                         </div>                                                                        
                     </div>
@@ -517,23 +522,35 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Matrix Size</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Word List Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Outer Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Number List Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Inner Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Distinct Character List Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Left Bound Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Count Array Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Initialize Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Result String Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Final Row Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Character Frequency Count</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Minimum Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Main Loop for Digit Construction</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Count Extraction</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Character Removal</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Character Frequency Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Digit Addition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Result Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Result Sorting</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Return Statement</button>
                     
                 </div>
 
@@ -542,25 +559,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minFallingPathSum</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mtx.size(), n <span style="color:#666">=</span> mtx[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> max(j <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> min(j <span style="color:#666">+</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        mtx[i][j] <span style="color:#666">+=</span> min(mtx[i<span style="color:#666">-</span> <span style="color:#666">1</span>][l], min(mtx[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j], mtx[i <span style="color:#666">-</span> <span style="color:#666">1</span>][r]));
-</span></span><span style="display:flex;"><span>
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">originalDigits</span>(string s) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> words <span style="color:#666">=</span> {<span style="color:#b44">&#34;zero&#34;</span>, <span style="color:#b44">&#34;two&#34;</span>, <span style="color:#b44">&#34;four&#34;</span>, <span style="color:#b44">&#34;six&#34;</span>, <span style="color:#b44">&#34;eight&#34;</span>, <span style="color:#b44">&#34;one&#34;</span>, <span style="color:#b44">&#34;three&#34;</span>, <span style="color:#b44">&#34;five&#34;</span>, <span style="color:#b44">&#34;seven&#34;</span>, <span style="color:#b44">&#34;nine&#34;</span>};
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">2</span>, <span style="color:#666">4</span>, <span style="color:#666">6</span>, <span style="color:#666">8</span>, <span style="color:#666">1</span>, <span style="color:#666">3</span>, <span style="color:#666">5</span>, <span style="color:#666">7</span>, <span style="color:#666">9</span>};
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> distinct_char <span style="color:#666">=</span> {<span style="color:#b44">&#39;z&#39;</span>, <span style="color:#b44">&#39;w&#39;</span>, <span style="color:#b44">&#39;u&#39;</span>, <span style="color:#b44">&#39;x&#39;</span>, <span style="color:#b44">&#39;g&#39;</span>, <span style="color:#b44">&#39;o&#39;</span>, <span style="color:#b44">&#39;r&#39;</span>, <span style="color:#b44">&#39;f&#39;</span>, <span style="color:#b44">&#39;v&#39;</span>, <span style="color:#b44">&#39;i&#39;</span>};
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> counts(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    string result;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : s){ counts[ch<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;}
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">10</span>; i<span style="color:#666">++</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> counts[distinct_char[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> words[i].size(); j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            counts[words[i][j]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">-=</span> count;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(count<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>            result <span style="color:#666">+=</span> to_string(nums[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> mtx[m <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> min(res, mtx[m <span style="color:#666">-</span> <span style="color:#666">1</span>][j]);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    sort(result.begin(), result.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -568,93 +582,153 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minFallingPathSum</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">originalDigits</span>(string s) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;minFallingPathSum&#39;, which takes a matrix &#39;mtx&#39; and returns the minimum sum of a falling path. </div>
+                            <div class=""> This line declares the function `originalDigits`, which accepts a string `s` as input and will return a string containing the digits formed from the characters in `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Matrix Size</b></div>
+                            <div class=""> <b>2 : Word List Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mtx.size(), n <span style="color:#666">=</span> mtx[<span style="color:#666">0</span>].size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> words <span style="color:#666">=</span> {<span style="color:#b44">&#34;zero&#34;</span>, <span style="color:#b44">&#34;two&#34;</span>, <span style="color:#b44">&#34;four&#34;</span>, <span style="color:#b44">&#34;six&#34;</span>, <span style="color:#b44">&#34;eight&#34;</span>, <span style="color:#b44">&#34;one&#34;</span>, <span style="color:#b44">&#34;three&#34;</span>, <span style="color:#b44">&#34;five&#34;</span>, <span style="color:#b44">&#34;seven&#34;</span>, <span style="color:#b44">&#34;nine&#34;</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Store the number of rows &#39;m&#39; and columns &#39;n&#39; in the matrix &#39;mtx&#39;. </div>
+                            <div class=""> This line initializes a vector `words` that contains the string representations of the numbers 0 to 9. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Outer Loop</b></div>
+                            <div class=""> <b>3 : Number List Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">2</span>, <span style="color:#666">4</span>, <span style="color:#666">6</span>, <span style="color:#666">8</span>, <span style="color:#666">1</span>, <span style="color:#666">3</span>, <span style="color:#666">5</span>, <span style="color:#666">7</span>, <span style="color:#666">9</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each row starting from the second row (index 1), as the first row does not require modification. </div>
+                            <div class=""> Here, a vector `nums` is initialized with the digits corresponding to the numbers represented in the `words` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Inner Loop</b></div>
+                            <div class=""> <b>4 : Distinct Character List Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> distinct_char <span style="color:#666">=</span> {<span style="color:#b44">&#39;z&#39;</span>, <span style="color:#b44">&#39;w&#39;</span>, <span style="color:#b44">&#39;u&#39;</span>, <span style="color:#b44">&#39;x&#39;</span>, <span style="color:#b44">&#39;g&#39;</span>, <span style="color:#b44">&#39;o&#39;</span>, <span style="color:#b44">&#39;r&#39;</span>, <span style="color:#b44">&#39;f&#39;</span>, <span style="color:#b44">&#39;v&#39;</span>, <span style="color:#b44">&#39;i&#39;</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each column &#39;j&#39; in the current row &#39;i&#39;. </div>
+                            <div class=""> This vector `distinct_char` contains the distinct characters that help identify each number from 0 to 9 in the string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Left Bound Calculation</b></div>
+                            <div class=""> <b>5 : Count Array Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> max(j <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> counts(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calculate the index &#39;l&#39; of the left cell. If &#39;j - 1&#39; is less than 0, set &#39;l&#39; to 0 to prevent out-of-bounds access. </div>
+                            <div class=""> This initializes a vector `counts` of size 26 to store the frequency of each character in the input string `s`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Initialize Result</b></div>
+                            <div class=""> <b>6 : Result String Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> mtx[m <span style="color:#666">-</span> <span style="color:#666">1</span>][<span style="color:#666">0</span>];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string result;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize &#39;res&#39; to the value of the first element in the last row of the matrix, which will be used to track the minimum sum. </div>
+                            <div class=""> A string `result` is initialized to store the final digits that will be returned. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Final Row Loop</b></div>
+                            <div class=""> <b>7 : Character Frequency Count</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : s){ counts[ch<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;}
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loop through each element in the last row of the matrix to find the minimum value. </div>
+                            <div class=""> This loop iterates over each character in the string `s` and increments its corresponding count in the `counts` array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Minimum Result</b></div>
+                            <div class=""> <b>8 : Main Loop for Digit Construction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> min(res, mtx[m <span style="color:#666">-</span> <span style="color:#666">1</span>][j]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">10</span>; i<span style="color:#666">++</span>){
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update &#39;res&#39; to the minimum value between the current &#39;res&#39; and the current element in the last row of the matrix. </div>
+                            <div class=""> This loop iterates over the 10 digits (0-9), processing each one by identifying the number of occurrences of its distinct characters. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Result</b></div>
+                            <div class=""> <b>9 : Count Extraction</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> counts[distinct_char[i]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the minimum falling path sum from the top to the bottom of the matrix. </div>
+                            <div class=""> This line extracts the count of the distinct character associated with the current digit, which indicates how many times this digit can be formed from `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Character Removal</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> words[i].size(); j<span style="color:#666">++</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop iterates over each character in the corresponding word (e.g., &#39;zero&#39;, &#39;one&#39;) for the current digit. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Character Frequency Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            counts[words[i][j]<span style="color:#666">-</span><span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">-=</span> count;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This updates the `counts` array by decrementing the frequency of each character in the current digit&#39;s word, as those characters are now used. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Digit Addition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(count<span style="color:#666">--</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop adds the current digit to the `result` string as many times as it was identified in the input string `s`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Result Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            result <span style="color:#666">+=</span> to_string(nums[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line converts the current digit (from `nums[i]`) to a string and appends it to the `result` string. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Result Sorting</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(result.begin(), result.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This sorts the `result` string in ascending order to ensure the digits are returned in a lexicographically sorted order. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> result;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This returns the final string `result`, which contains the digits in sorted order. </div>
                         </div>
                     
                 </div>
@@ -674,16 +748,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n^2)</div>
-                        <div class=""> <b>Average Case:</b> O(n^2)</div>
-                        <div class=""> <b>Worst Case:</b> O(n^2)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n^2), where n is the number of rows (or columns) in the matrix, as we traverse each element once and update it based on the previous row.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the input string.</div>
+                        <div class=""> <b>Average Case:</b> O(n), as we process each character in the string and identify digits in a single pass.</div>
+                        <div class=""> <b>Worst Case:</b> O(n), as the solution requires only a few linear scans over the input string.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we only process the string a constant number of times.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1), as we update the matrix in place and do not use any extra space.</div>    
+                        <div class=""> <b>Best Case:</b> O(1), since the space complexity does not depend on the input size.</div>
+                        <div class=""> <b>Worst Case:</b> O(1), as the space used for counting the characters is constant.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant because we only need a fixed amount of space to store the counts of characters.</div>    
                     </div>
 
                 </div>

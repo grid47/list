@@ -283,7 +283,7 @@
                                     <i class="far fa-star"></i>
                                     Sep 22, 2024
                                     <i class="far fa-clock clock"></i>
-                                    6 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -322,7 +322,7 @@
 
 
 
-<div class=""> You are given the root of a binary tree, where each node contains a value between 0 and 25, corresponding to letters from &lsquo;a&rsquo; to &lsquo;z&rsquo;. Your task is to find the lexicographically smallest string that can be formed by traversing from a leaf node to the root node, using the values in each node as letters. </div>
+<div class=""> Given an array of integers, determine if there exists a subsequence of three integers nums[i], nums[j], nums[k] where i &lt; j &lt; k and nums[i] &lt; nums[k] &lt; nums[j]. Return true if such a subsequence exists, otherwise return false. </div>
 
 
 
@@ -373,45 +373,45 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of the root of a binary tree, where each node has an integer value in the range [0, 25].</div>
-                        <div class=""> <b>Example:</b> root = [0, 1, 2, 3, 4, 3, 4]</div>
+                        <div class=""> <b>Input:</b> The input is an array of integers.</div>
+                        <div class=""> <b>Example:</b> nums = [4, 1, 5, 3]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The number of nodes in the tree is between 1 and 8500.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= n &lt;= 2 * 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= 25.</div>
+                                <div style="margin-left: 20px;"> • -10^9 &lt;= nums[i] &lt;= 10^9</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output should be the lexicographically smallest string that starts from a leaf node and ends at the root.</div>
-                        <div class=""> <b>Example:</b> Output: &#34;dbd&#34;</div>
+                        <div class=""> <b>Output:</b> Return a boolean indicating whether a 132 subsequence exists in the array.</div>
+                        <div class=""> <b>Example:</b> Output: true</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The string must be constructed by following the path from a leaf node to the root.</div>
+                                <div style="margin-left: 20px;"> • The result should be a boolean indicating whether the pattern exists.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to traverse the binary tree from each leaf node to the root, constructing strings and determining the lexicographically smallest one.</div>
+                        <div class=""> <b>Goal:</b> The goal is to check for the existence of a subsequence that satisfies the condition nums[i] &lt; nums[k] &lt; nums[j].</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Traverse the tree recursively from root to leaf nodes.</div>
+                                <div style="margin-left: 20px;"> • 1. Iterate through the array from right to left, keeping track of a potential 132 pattern.</div>
                             
-                                <div style="margin-left: 20px;"> • At each leaf node, generate the corresponding string by adding the character of the node to the string.</div>
-                            
-                                <div style="margin-left: 20px;"> • Compare the generated string with the current smallest string and update accordingly.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a stack to keep track of numbers and find a valid pattern by checking if nums[i] &lt; nums[k] &lt; nums[j].</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle the constraints efficiently given the possible size of the binary tree.</div>
+                        <div class=""> <b>Goal:</b> Handle large inputs efficiently with O(n) complexity.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number of nodes is between 1 and 8500, so a recursive solution with backtracking will be efficient enough.</div>
+                                <div style="margin-left: 20px;"> • The array length can be as large as 200,000.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element of the array can be as large as 10^9 or as small as -10^9.</div>
                             
                         </div>
                     </div>        
@@ -419,17 +419,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The tree is a binary tree with no cycles.</div>
-                            
-                                <div style="margin-left: 20px;"> • The tree contains at least one node (i.e., the root is not null).</div>
+                                <div style="margin-left: 20px;"> • The input array is not empty.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> root = [0, 1, 2, 3, 4, 3, 4]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this example, the binary tree has leaf nodes with values corresponding to &#39;d&#39;, &#39;b&#39;, and &#39;d&#39;. The lexicographically smallest string is formed by starting from the leaf &#39;d&#39; and traversing back to the root, resulting in &#39;dbd&#39;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [1, 2, 3, 4]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> No valid subsequence exists because the elements are in increasing order, which doesn&#39;t form a 132 pattern.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [6, 3, 4, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> A valid 132 pattern exists in the subsequence [3, 4, 1], where 3 &lt; 1 &lt; 4.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -453,16 +455,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves recursively traversing the tree and constructing strings from leaf nodes to the root while keeping track of the lexicographically smallest string.</div>
+                        <div class=""> <b>Approach:</b> We can use a stack to efficiently check if a valid 132 subsequence exists, iterating through the array from right to left.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We need to traverse each path from a leaf to the root and compare the strings lexicographically.</div>
+                                <div style="margin-left: 20px;"> • We need to check for the pattern nums[i] &lt; nums[k] &lt; nums[j] efficiently.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • Using recursion allows us to easily explore all paths from leaf to root and compare the strings efficiently.</div>
+                                <div style="margin-left: 20px;"> • The stack can help by maintaining the potential nums[k] and allowing quick comparisons for nums[i].</div>
                             
                         </div>
                     </div>
@@ -470,11 +472,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize a variable to store the lexicographically smallest string.</div>
+                                <div style="margin-left: 20px;"> • 1. Start from the rightmost element and iterate backwards.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a recursive function to explore each node and append its value as a character to the string.</div>
+                                <div style="margin-left: 20px;"> • 2. Maintain a stack of numbers where each number is greater than the one before it.</div>
                             
-                                <div style="margin-left: 20px;"> • At each leaf node, compare the constructed string with the current smallest string and update if necessary.</div>
+                                <div style="margin-left: 20px;"> • 3. Check if the current element is smaller than the top of the stack (potential nums[k]). If it is, return true.</div>
                             
                         </div>
                     </div>
@@ -483,22 +485,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle the case where the tree has only one node.</div>
+                                <div style="margin-left: 20px;"> • If the array has less than 3 elements, the answer is false.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the maximum number of nodes efficiently.</div>
+                                <div style="margin-left: 20px;"> • Handle large arrays efficiently, making sure the solution scales with input size up to 2 * 10^5.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Consider trees with values representing letters near the boundaries of the alphabet, such as &#39;a&#39; (0) or &#39;z&#39; (25).</div>
+                                <div style="margin-left: 20px;"> • Arrays with only increasing or decreasing values should return false.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the algorithm runs efficiently for a large number of nodes and is optimized for recursion.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution runs in O(n) time for large inputs.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,25 +517,29 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Recursive Call</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Data Structure Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Helper Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Base Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Pattern Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Leaf Node Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Answer</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Stack Operations</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Recursive Call for Left Child</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Stack Operations</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Recursive Call for Right Child</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Stack Push</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Stack Operations</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
                 </div>
 
@@ -542,19 +548,27 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;~&#34;</span>;
-</span></span><span style="display:flex;"><span>string <span style="color:#00a000">smallestFromLeaf</span>(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    recur(root, <span style="color:#b44">&#34;&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">recur</span>(TreeNode<span style="color:#666">*</span> node, string s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>left <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>right) {
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, <span style="color:#0b0;font-weight:bold">char</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>) <span style="color:#666">+</span> s);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">find132pattern</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums[i] <span style="color:#666">&lt;</span> prv) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> nums[i] <span style="color:#666">&gt;</span> stk.top()) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            prv <span style="color:#666">=</span> stk.top();
+</span></span><span style="display:flex;"><span>            stk.pop();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        stk.push(nums[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    cout <span style="color:#666">&lt;&lt;</span> node<span style="color:#666">-&gt;</span>val<span style="color:#666">&lt;&lt;</span><span style="color:#b44">&#39;\n&#39;</span>;
-</span></span><span style="display:flex;"><span>    recur(node<span style="color:#666">-&gt;</span>left,  <span style="color:#0b0;font-weight:bold">char</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>) <span style="color:#666">+</span> s);
-</span></span><span style="display:flex;"><span>    recur(node<span style="color:#666">-&gt;</span>right, <span style="color:#0b0;font-weight:bold">char</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>) <span style="color:#666">+</span> s);  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -562,103 +576,123 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Variable Initialization</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;~&#34;</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">find132pattern</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `ans` to `~`, which will be used to store the smallest string found from a leaf to the root during the traversal. </div>
+                            <div class=""> Defines the `find132pattern` function that takes a vector `nums` and returns a boolean indicating whether a 132 pattern exists in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Function Definition</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">smallestFromLeaf</span>(TreeNode<span style="color:#666">*</span> root) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `smallestFromLeaf`, which takes the root node of a binary tree and returns the lexicographically smallest string from a leaf node to the root. </div>
+                            <div class=""> Initializes variable `n` to store the size of the input array `nums`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Recursive Call</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    recur(root, <span style="color:#b44">&#34;&#34;</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> INT_MIN;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Calls the helper function `recur` to start the recursive traversal of the tree. The empty string `&#34;&#34;` is passed as the initial path. </div>
+                            <div class=""> Initializes the variable `prv` to `INT_MIN`, which will be used to store the potential third element of the 132 pattern. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Return Result</b></div>
+                            <div class=""> <b>4 : Data Structure Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Returns the variable `ans`, which contains the lexicographically smallest string from a leaf node to the root after the recursion completes. </div>
+                            <div class=""> Initializes a stack `stk` to help track the second element of the 132 pattern and assist in checking the 132 pattern. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Helper Function Definition</b></div>
+                            <div class=""> <b>5 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">recur</span>(TreeNode<span style="color:#666">*</span> node, string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the helper function `recur`, which performs the recursive traversal of the binary tree, building the string path from the leaf to the root. </div>
+                            <div class=""> Starts a loop that iterates over the array `nums` from the last element to the first, checking potential 132 patterns in reverse. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Base Case</b></div>
+                            <div class=""> <b>6 : Pattern Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums[i] <span style="color:#666">&lt;</span> prv) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current node is null, which is the base case for recursion. If the node is null, the function returns without doing anything. </div>
+                            <div class=""> Checks if the current element `nums[i]` is smaller than `prv` (which represents the third element of the pattern). If true, a 132 pattern is found and the function returns `true`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Leaf Node Check</b></div>
+                            <div class=""> <b>7 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>left <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>right) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> nums[i] <span style="color:#666">&gt;</span> stk.top()) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current node is a leaf node (both left and right children are null). If it&#39;s a leaf, the function proceeds to check and update the answer. </div>
+                            <div class=""> Enters a while loop to pop elements from the stack `stk` as long as the current element `nums[i]` is larger than the top of the stack, updating `prv` to the popped values. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Update Answer</b></div>
+                            <div class=""> <b>8 : Stack Operations</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, <span style="color:#0b0;font-weight:bold">char</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>) <span style="color:#666">+</span> s);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            prv <span style="color:#666">=</span> stk.top();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the `ans` variable with the lexicographically smaller string between the current `ans` and the string formed by adding the current node&#39;s value (converted to a character) to the path `s`. </div>
+                            <div class=""> Updates the value of `prv` to the top element of the stack, representing the second element of a potential 132 pattern. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Recursive Call for Left Child</b></div>
+                            <div class=""> <b>9 : Stack Operations</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    recur(node<span style="color:#666">-&gt;</span>left,  <span style="color:#0b0;font-weight:bold">char</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>) <span style="color:#666">+</span> s);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            stk.pop();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively calls the `recur` function for the left child of the current node, passing the current node&#39;s value (converted to a character) prepended to the string path `s`. </div>
+                            <div class=""> Pops the top element from the stack, as it can no longer be part of a valid 132 pattern with the current element `nums[i]`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Recursive Call for Right Child</b></div>
+                            <div class=""> <b>10 : Stack Push</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    recur(node<span style="color:#666">-&gt;</span>right, <span style="color:#0b0;font-weight:bold">char</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> <span style="color:#b44">&#39;a&#39;</span>) <span style="color:#666">+</span> s);  
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Recursively calls the `recur` function for the right child of the current node, prepending the current node&#39;s value (converted to a character) to the string path `s`. </div>
+                            <div class=""> Ends the while loop. All elements in the stack that are smaller than `nums[i]` have been removed. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Stack Operations</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        stk.push(nums[i]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Pushes the current element `nums[i]` onto the stack, which may be used as a potential second element in a future 132 pattern. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns `false` if no 132 pattern was found after checking all elements. </div>
                         </div>
                     
                 </div>
@@ -678,16 +712,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n) where n is the number of nodes, as each node is visited once.</div>
-                        <div class=""> <b>Average Case:</b> O(n) where n is the number of nodes, as each node contributes to a string comparison.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) where n is the number of nodes, since we visit each node in the tree once.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the number of nodes in the tree, due to the tree traversal.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n)</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) because we iterate over the array once and perform constant-time stack operations.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) if the tree is very shallow or balanced.</div>
-                        <div class=""> <b>Worst Case:</b> O(h) where h is the height of the tree, due to recursion stack space.</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(h), where h is the height of the tree, due to recursion.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the stack, which stores up to n elements in the worst case.</div>    
                     </div>
 
                 </div>

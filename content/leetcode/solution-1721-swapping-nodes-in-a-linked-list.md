@@ -15,6 +15,7 @@ youtube = "KUTRaNOzmoo"
 youtube_upload_date="2023-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi/KUTRaNOzmoo/maxresdefault.jpg"
 comments = true
+index = 762
 +++
 
 

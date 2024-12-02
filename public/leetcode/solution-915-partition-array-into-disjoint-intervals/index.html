@@ -298,7 +298,7 @@
 
 
 
-<div class=""> You are given an array of digit strings <code>nums</code> and a target digit string <code>target</code>. Count the number of valid pairs of indices <code>(i, j)</code> where <code>i != j</code> such that the concatenation of <code>nums[i]</code> and <code>nums[j]</code> equals <code>target</code>. </div>
+<div class=""> Given an integer array <code>nums</code>, partition it into two contiguous subarrays, <code>left</code> and <code>right</code>, such that all elements in <code>left</code> are less than or equal to all elements in <code>right</code>. The size of <code>left</code> should be as small as possible, and both subarrays must be non-empty. Your task is to return the length of the <code>left</code> subarray after performing such a partition. </div>
 
 
 
@@ -349,57 +349,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of an array `nums` of digit strings and a target digit string `target`.</div>
-                        <div class=""> <b>Example:</b> nums = [&#34;123&#34;, &#34;4&#34;, &#34;12&#34;, &#34;34&#34;], target = &#34;1234&#34;</div>
+                        <div class=""> <b>Input:</b> You are given a list of integers `nums`.</div>
+                        <div class=""> <b>Example:</b> Input: nums = [2, 5, 3, 7, 6]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i].length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= nums[i] &lt;= 10^6</div>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= target.length &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • nums[i] and target consist of digits.</div>
+                                <div style="margin-left: 20px;"> • There is at least one valid answer for the given input.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of valid pairs of indices `(i, j)` where `i != j` such that `nums[i] &#43; nums[j] == target`.</div>
-                        <div class=""> <b>Example:</b> Output: 2</div>
+                        <div class=""> <b>Output:</b> Return the length of the `left` subarray after partitioning the array as described.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The valid pairs must not have the same index for both `i` and `j`.</div>
+                                <div style="margin-left: 20px;"> • The output should be an integer representing the length of the `left` subarray.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to find all pairs of strings `nums[i]` and `nums[j]` such that their concatenation equals the target.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the smallest size of `left` where all elements in `left` are less than or equal to all elements in `right`.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Create a frequency map to count occurrences of strings in `nums` that are smaller than `target` in length.</div>
+                                <div style="margin-left: 20px;"> • Keep track of the maximum value encountered in the `left` subarray as you iterate through the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Loop through the frequency map and check if the prefix of `target` matches each string in `nums`.</div>
+                                <div style="margin-left: 20px;"> • If an element in the array is less than the maximum value of the `left`, update the partition point to include the previous elements in `left`.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If a valid prefix is found, find the corresponding suffix in the `nums` array and update the count of valid pairs.</div>
+                                <div style="margin-left: 20px;"> • Once the partitioning is done, the size of `left` gives the required result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The constraints on the input values.</div>
+                        <div class=""> <b>Goal:</b> The input array must have at least two elements, and there is always a valid partitioning.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The array `nums` has a length between 2 and 10^5.</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i].length &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • 2 &lt;= target.length &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • nums[i] and target consist of digits.</div>
-                            
-                                <div style="margin-left: 20px;"> • nums[i] and target do not have leading zeros.</div>
+                                <div style="margin-left: 20px;"> • The values in `nums` are between 0 and 10^6.</div>
                             
                         </div>
                     </div>        
@@ -407,21 +399,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • All strings in `nums` and the `target` contain only digits and are non-empty.</div>
-                            
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle arrays with up to 100 elements.</div>
+                                <div style="margin-left: 20px;"> • The array will always contain a valid partitioning where the condition is satisfied.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [&#34;123&#34;, &#34;4&#34;, &#34;12&#34;, &#34;34&#34;], target = &#34;1234&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The valid pairs are (0, 1) for &#34;123&#34; &#43; &#34;4&#34; and (2, 3) for &#34;12&#34; &#43; &#34;34&#34;.</div>                                
-                                <br/>
-                            
-                                <div style="margin-left: 20px;"> • <b>Input:</b> nums = [&#34;1&#34;, &#34;1&#34;, &#34;1&#34;], target = &#34;11&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are 6 valid pairs: (0, 1), (1, 0), (0, 2), (2, 0), (1, 2), (2, 1).</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [2, 5, 3, 7, 6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> For this array, the optimal partition is `left = [2, 5, 3]` and `right = [7, 6]`. The length of `left` is 3, so the answer is 3.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +431,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We can solve this problem by checking each pair of strings in `nums` and checking if their concatenation equals `target`.</div>
+                        <div class=""> <b>Approach:</b> We need to find the smallest `left` subarray such that all elements in `left` are less than or equal to all elements in `right`. This can be done by tracking the maximum value in `left` and ensuring that the next element in the array is greater than or equal to this maximum value.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Using a frequency map allows us to efficiently check pairs.</div>
+                                <div style="margin-left: 20px;"> • We can iterate through the array while keeping track of the maximum element in the left subarray.</div>
+                            
+                                <div style="margin-left: 20px;"> • Once we find an element smaller than the maximum of the left subarray, we need to extend the left subarray to include that element.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By checking for valid prefixes and suffixes, we avoid the need for checking every possible pair of strings.</div>
+                                <div style="margin-left: 20px;"> • This approach involves linear traversal through the array, making it efficient enough for the input size constraints.</div>
                             
                         </div>
                     </div>
@@ -462,11 +450,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Create a frequency map to count how many times each string appears in `nums`.</div>
+                                <div style="margin-left: 20px;"> • Initialize `max_i` and `cur` to the first element in the array.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each string in `nums`, check if it is a valid prefix of the target string and find the matching suffix.</div>
+                                <div style="margin-left: 20px;"> • Iterate through the array, updating `cur` and checking if the current element violates the partition condition.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Count the number of valid pairs.</div>
+                                <div style="margin-left: 20px;"> • Once a violation is detected, adjust the partition point and return the size of the left subarray.</div>
                             
                         </div>
                     </div>
@@ -475,22 +463,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If `nums` is empty, return 0.</div>
+                                <div style="margin-left: 20px;"> • The input array is guaranteed to have at least two elements, so no need to handle empty arrays.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Make sure the solution handles arrays of size 100 efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large inputs, the solution must be efficient with a time complexity of O(n).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the `target` contains very large values or repetitive patterns, the solution should still work efficiently.</div>
+                                <div style="margin-left: 20px;"> • If all elements are the same, the entire array could be in the `left` subarray.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Avoid out-of-bounds errors and make sure the solution handles all possible cases.</div>
+                                <div style="margin-left: 20px;"> • The constraints ensure that there is always a valid partition, so no need to handle invalid cases.</div>
                             
                         </div>                                                                        
                     </div>
@@ -507,25 +495,25 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Over Input</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Variable Assignment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Iterating Through Frequencies</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Prefix Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Self-Pair Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Variable Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Count Self-Pairs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Variable Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Else Case</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Count Valid Pairs</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Variable Update</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
@@ -536,20 +524,19 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfPairs</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> nums, string target) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> freq;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">num</span> : nums) <span style="color:#a2f;font-weight:bold">if</span>(num.size() <span style="color:#666">&lt;</span> target.size()) freq[num]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [s, frq]<span style="color:#666">:</span> freq) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(target.find(s) <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s <span style="color:#666">+</span> s <span style="color:#666">==</span> target) 
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> frq <span style="color:#666">*</span> (frq <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>
-</span></span><span style="display:flex;"><span>            res  <span style="color:#666">+=</span> frq <span style="color:#666">*</span> freq[target.substr(s.size())];
-</span></span><span style="display:flex;"><span>        }
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">partitionDisjoint</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> max_i, cur, ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    max_i <span style="color:#666">=</span> cur <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> max_i) {
+</span></span><span style="display:flex;"><span>            max_i <span style="color:#666">=</span> cur;
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (nums[i] <span style="color:#666">&gt;</span> cur)
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> nums[i];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -557,113 +544,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numOfPairs</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> nums, string target) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">partitionDisjoint</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This defines the function &#39;numOfPairs&#39;, which takes a vector of strings &#39;nums&#39; and a target string &#39;target&#39;. It will return the number of valid pairs of strings that concatenate to form the target string. </div>
+                            <div class=""> This is the declaration of the function &#39;partitionDisjoint&#39;, which takes a vector of integers as input. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> freq;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes an unordered map &#39;freq&#39; to store the frequency of strings in &#39;nums&#39; that are shorter than the target string. </div>
+                            <div class=""> Initializes the variable &#39;n&#39; to store the size of the &#39;nums&#39; array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Over Input</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">num</span> : nums) <span style="color:#a2f;font-weight:bold">if</span>(num.size() <span style="color:#666">&lt;</span> target.size()) freq[num]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> max_i, cur, ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through each string in &#39;nums&#39;. If the string&#39;s size is smaller than the target string, it increases its frequency in the &#39;freq&#39; map. </div>
+                            <div class=""> Declares three variables: &#39;max_i&#39; for tracking the maximum value, &#39;cur&#39; for the current element, and &#39;ans&#39; for the partition index, initialized to 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Variable Initialization</b></div>
+                            <div class=""> <b>4 : Variable Assignment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    max_i <span style="color:#666">=</span> cur <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This initializes an integer &#39;res&#39; to store the final result, which will be the count of valid pairs. </div>
+                            <div class=""> Assigns the first element of the array to both &#39;max_i&#39; and &#39;cur&#39; as the initial values. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Iterating Through Frequencies</b></div>
+                            <div class=""> <b>5 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [s, frq]<span style="color:#666">:</span> freq) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates over each entry in the &#39;freq&#39; map, where &#39;s&#39; is the string and &#39;frq&#39; is its frequency. </div>
+                            <div class=""> Starts a loop iterating through the array from the second element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Prefix Check</b></div>
+                            <div class=""> <b>6 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(target.find(s) <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> max_i) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the string &#39;s&#39; is a prefix of the target string (i.e., &#39;s&#39; starts at the beginning of the target string). </div>
+                            <div class=""> Checks if the current element is smaller than the previously tracked maximum value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Self-Pair Check</b></div>
+                            <div class=""> <b>7 : Variable Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s <span style="color:#666">+</span> s <span style="color:#666">==</span> target) 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            max_i <span style="color:#666">=</span> cur;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This checks if the string &#39;s&#39; repeated twice matches the target string. </div>
+                            <div class=""> Updates the &#39;max_i&#39; to be the current element &#39;cur&#39; if a smaller element is found. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Count Self-Pairs</b></div>
+                            <div class=""> <b>8 : Variable Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#666">+=</span> frq <span style="color:#666">*</span> (frq <span style="color:#666">-</span> <span style="color:#666">1</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This adds the number of valid self-pairs to the result. If &#39;s &#43; s == target&#39;, the number of pairs is calculated using the formula &#39;frq * (frq - 1)&#39;, where &#39;frq&#39; is the frequency of &#39;s&#39;. </div>
+                            <div class=""> Updates the partition index &#39;ans&#39; to the current position &#39;i &#43; 1&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Else Case</b></div>
+                            <div class=""> <b>9 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (nums[i] <span style="color:#666">&gt;</span> cur)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This else statement handles the case where &#39;s&#39; is a prefix but not equal to the target string when repeated. </div>
+                            <div class=""> If the current element is larger than the current element &#39;cur&#39;, we update &#39;cur&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Count Valid Pairs</b></div>
+                            <div class=""> <b>10 : Variable Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res  <span style="color:#666">+=</span> frq <span style="color:#666">*</span> freq[target.substr(s.size())];
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#666">=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This adds to the result the number of valid pairs where the remaining part of the target string (after removing &#39;s&#39;) can be found in the &#39;freq&#39; map. </div>
+                            <div class=""> Updates the &#39;cur&#39; variable to hold the current element if it&#39;s greater than the previous &#39;cur&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This returns the result &#39;res&#39;, which is the total count of valid pairs of strings that concatenate to form the target string. </div>
+                            <div class=""> Returns the partition index &#39;ans&#39;. </div>
                         </div>
                     
                 </div>
@@ -683,16 +670,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n * m)</div>
-                        <div class=""> <b>Worst Case:</b> O(n * m)</div> 
-                        <div class=""> <b>Description:</b> We iterate through the array of strings and use a frequency map to find matching pairs, where `n` is the number of strings and `m` is the average length of strings.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n) where n is the length of the array</div>
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is linear because we traverse the array once while keeping track of the partition.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the size of the frequency map, which stores strings from the `nums` array.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is constant since we only need a few extra variables to track the current maximum and partition point.</div>    
                     </div>
 
                 </div>

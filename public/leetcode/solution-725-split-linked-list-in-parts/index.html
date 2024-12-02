@@ -318,7 +318,7 @@
 
 
 
-<div class=""> Given a string s, determine the minimum number of deletions needed to make s &lsquo;good&rsquo;. A string is &lsquo;good&rsquo; if no two characters have the same frequency. </div>
+<div class=""> Given the head of a singly linked list and an integer k, split the linked list into k consecutive parts. The parts should have as equal size as possible, with no two parts differing by more than one element. Some parts may be null. </div>
 
 
 
@@ -369,47 +369,53 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> A string s.</div>
-                        <div class=""> <b>Example:</b> s = &#39;abc&#39;</div>
+                        <div class=""> <b>Input:</b> The input consists of a singly linked list and an integer k.</div>
+                        <div class=""> <b>Example:</b> Input: head = [1, 2, 3], k = 5</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The number of nodes in the list is between 0 and 1000.</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= Node.val &lt;= 1000</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 50</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the minimum number of deletions needed to make the string good.</div>
-                        <div class=""> <b>Example:</b> Output: 3</div>
+                        <div class=""> <b>Output:</b> The output is an array of k parts, where each part is a singly linked list. Some parts may be null if there aren&#39;t enough nodes to split the list into k parts.</div>
+                        <div class=""> <b>Example:</b> Output: [[1], [2], [3], [], []]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The parts should appear in the order of the original linked list.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To find the minimum number of deletions needed, first calculate the frequency of each character in the string. Then, identify and delete characters with duplicate frequencies.</div>
+                        <div class=""> <b>Goal:</b> The goal is to split the given linked list into k consecutive parts of as equal size as possible.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Count the frequency of each character in the string.</div>
+                                <div style="margin-left: 20px;"> • 1. Calculate the total number of nodes in the linked list.</div>
                             
-                                <div style="margin-left: 20px;"> • Use a set to track the frequencies that have already been used.</div>
+                                <div style="margin-left: 20px;"> • 2. Determine the base size of each part and the extra nodes that should be distributed.</div>
                             
-                                <div style="margin-left: 20px;"> • If a frequency is repeated, decrement it and count the deletion.</div>
+                                <div style="margin-left: 20px;"> • 3. Iterate through the linked list, splitting it into parts and linking each part accordingly.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the total number of deletions.</div>
+                                <div style="margin-left: 20px;"> • 4. If there are more parts than nodes, append null parts.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The string length can be up to 100,000 characters, and it contains only lowercase English letters.</div>
+                        <div class=""> <b>Goal:</b> The constraints define the input limits.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • The linked list has between 0 and 1000 nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • Node values are in the range [0, 1000].</div>
+                            
+                                <div style="margin-left: 20px;"> • 1 &lt;= k &lt;= 50.</div>
                             
                         </div>
                     </div>        
@@ -417,15 +423,17 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string will always be a valid non-empty string containing lowercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The linked list is non-empty, unless specified.</div>
+                            
+                                <div style="margin-left: 20px;"> • The value of k is always valid.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> s = &#39;abc&#39;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Each character in the string &#39;abc&#39; appears once, so no deletions are needed.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: [1, 2, 3], k = 5</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The linked list [1, 2, 3] is split into 5 parts, with the first three parts containing the elements 1, 2, and 3, respectively, and the last two parts being null.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,18 +457,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves counting the frequency of each character in the string and ensuring that no two characters have the same frequency by removing characters where necessary.</div>
+                        <div class=""> <b>Approach:</b> The approach involves calculating the total number of nodes and then distributing them across k parts in such a way that the parts are as evenly sized as possible.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • We can use a frequency map to track how many times each character appears.</div>
-                            
-                                <div style="margin-left: 20px;"> • We need to track the frequencies that have already been used to avoid duplicates.</div>
+                                <div style="margin-left: 20px;"> • We need to distribute the nodes across the parts while maintaining the relative order.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • To solve this, we need to use a set to keep track of the frequencies we&#39;ve seen so far and ensure no duplicates.</div>
+                                <div style="margin-left: 20px;"> • If there are more parts than nodes, we need to append null parts.</div>
                             
                         </div>
                     </div>
@@ -468,13 +474,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Count the frequency of each character in the string using a hash map.</div>
+                                <div style="margin-left: 20px;"> • 1. Traverse the linked list to determine its total length.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the frequencies in descending order.</div>
+                                <div style="margin-left: 20px;"> • 2. Divide the length by k to get the base size of each part, and calculate the remainder for extra nodes.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the frequencies, and if a frequency has already been used, decrement it and increase the deletion count.</div>
+                                <div style="margin-left: 20px;"> • 3. Traverse the list again, splitting the nodes into parts. For each part, append any extra nodes from the remainder.</div>
                             
-                                <div style="margin-left: 20px;"> • Return the total deletion count after processing all frequencies.</div>
+                                <div style="margin-left: 20px;"> • 4. If there are more parts than nodes, append null parts to the result.</div>
                             
                         </div>
                     </div>
@@ -483,22 +489,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string is not empty as per the constraints.</div>
+                                <div style="margin-left: 20px;"> • If the linked list is empty, the output will be k null parts.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle strings with lengths up to 100,000.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution handles large lists with up to 1000 nodes efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • When all characters in the string are the same, the only possible deletion is reducing the frequency to 1.</div>
+                                <div style="margin-left: 20px;"> • Consider cases where k is larger than the number of nodes in the list.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution handles the upper constraint where s.length is up to 100,000.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution works within the given constraints of up to 1000 nodes and 50 parts.</div>
                             
                         </div>                                                                        
                     </div>
@@ -517,41 +523,57 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Size Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Pointer Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Frequency Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Frequency Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Array Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Pointer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Array Population</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Sorting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Array Size Update</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Container Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Set Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pointer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Deletion Count Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Frequency Access</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Check for Duplicates</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Frequency Reduction</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Pointer Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Deletion Increment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Variable Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Insert Frequency</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Pointer Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Variable Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Pointer Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="22"> 22 Pointer Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="23"> 23 Pointer Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="24"> 24 Condition</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="25"> 25 Operation</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="26"> 26 Variable Update</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="27"> 27 Return</button>
                     
                 </div>
 
@@ -560,28 +582,40 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDeletions</span>(string s) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n<span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s)
-</span></span><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> arr;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
-</span></span><span style="display:flex;"><span>        arr.push_back({it.second, it.first});
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>ListNode<span style="color:#666">*&gt;</span> splitListToParts(ListNode<span style="color:#666">*</span> head, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> temp <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(temp) {
+</span></span><span style="display:flex;"><span>        len<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        temp <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    sort(arr.begin(), arr.end());
-</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> arr.size();
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> del <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> arr[i].first;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(tmp <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> cnt.count(tmp)) {
-</span></span><span style="display:flex;"><span>            tmp<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>            del<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numNodes <span style="color:#666">=</span> len<span style="color:#666">/</span>k;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ext <span style="color:#666">=</span> len <span style="color:#666">%</span> k;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>ListNode<span style="color:#666">*&gt;</span> res;
+</span></span><span style="display:flex;"><span>    temp <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(temp) {
+</span></span><span style="display:flex;"><span>        res.push_back(temp);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> curLen <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(curLen <span style="color:#666">&lt;</span> numNodes) {
+</span></span><span style="display:flex;"><span>            temp <span style="color:#666">=</span>  temp<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            curLen<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tmp <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) cnt.insert(tmp);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ext <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> len <span style="color:#666">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>            temp <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            ext<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> x <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        temp<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>        temp <span style="color:#666">=</span> x;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> del;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(len <span style="color:#666">&lt;</span> k) {
+</span></span><span style="display:flex;"><span>        res.push_back(<span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>        len<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -592,190 +626,270 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDeletions</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>ListNode<span style="color:#666">*&gt;</span> splitListToParts(ListNode<span style="color:#666">*</span> head, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This line defines the function `minDeletions` that takes a string `s` and returns the minimum number of deletions required to make the frequency of each character in `s` unique. </div>
+                            <div class=""> Defines a function that splits a linked list into k parts. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Map Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A map `mp` is declared to store the frequency of each character in the string `s`. </div>
+                            <div class=""> Initializes the length of the linked list to zero. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Size Calculation</b></div>
+                            <div class=""> <b>3 : Pointer Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> temp <span style="color:#666">=</span> head;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `n` is initialized to the size of the string `s` to track the length of the string. </div>
+                            <div class=""> Initializes a temporary pointer &#39;temp&#39; to the head of the linked list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Frequency Calculation</b></div>
+                            <div class=""> <b>4 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(temp) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is used to iterate over each character `x` in the string `s`. </div>
+                            <div class=""> Starts a while loop to traverse the linked list and calculate its length. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Frequency Update</b></div>
+                            <div class=""> <b>5 : Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        len<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character `x`, its frequency is incremented in the map `mp`. </div>
+                            <div class=""> Increments the length of the linked list for each node encountered. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Array Initialization</b></div>
+                            <div class=""> <b>6 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> arr;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        temp <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A vector `arr` is declared to store pairs of frequency and corresponding character. </div>
+                            <div class=""> Moves the temporary pointer to the next node in the linked list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Map Iteration</b></div>
+                            <div class=""> <b>7 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numNodes <span style="color:#666">=</span> len<span style="color:#666">/</span>k;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is used to iterate over each element `it` in the frequency map `mp`. </div>
+                            <div class=""> Calculates the number of nodes in each part, ignoring any remainder. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Array Population</b></div>
+                            <div class=""> <b>8 : Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        arr.push_back({it.second, it.first});
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ext <span style="color:#666">=</span> len <span style="color:#666">%</span> k;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each frequency and character pair from the map `mp` is added to the vector `arr`, where `it.second` is the frequency and `it.first` is the character. </div>
+                            <div class=""> Calculates the number of extra nodes to distribute across the parts. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Sorting</b></div>
+                            <div class=""> <b>9 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(arr.begin(), arr.end());
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The vector `arr` is sorted based on the frequencies of the characters in ascending order. </div>
+                            <div class=""> Initializes a counter variable &#39;i&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Array Size Update</b></div>
+                            <div class=""> <b>10 : Container Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    n <span style="color:#666">=</span> arr.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>ListNode<span style="color:#666">*&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `n` is updated to the size of the vector `arr`. </div>
+                            <div class=""> Initializes a vector to store the resulting k parts of the linked list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Set Initialization</b></div>
+                            <div class=""> <b>11 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    temp <span style="color:#666">=</span> head;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A set `cnt` is declared to track the unique frequencies that have been assigned. </div>
+                            <div class=""> Resets the temporary pointer to the head of the linked list. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>12 : Deletion Count Initialization</b></div>
+                            <div class=""> <b>12 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> del <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(temp) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The variable `del` is initialized to 0, which will keep track of the number of deletions made. </div>
+                            <div class=""> Starts a while loop to process the nodes of the linked list and split them into k parts. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>13 : Loop</b></div>
+                            <div class=""> <b>13 : Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(temp);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A loop is used to iterate over the sorted array `arr`. </div>
+                            <div class=""> Adds the current node to the result vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>14 : Frequency Access</b></div>
+                            <div class=""> <b>14 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> arr[i].first;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> curLen <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The frequency of the current character is accessed from the first element of the pair in `arr`. </div>
+                            <div class=""> Initializes a variable to track the length of the current part. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>15 : Check for Duplicates</b></div>
+                            <div class=""> <b>15 : Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(tmp <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> cnt.count(tmp)) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(curLen <span style="color:#666">&lt;</span> numNodes) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> A while loop checks if the frequency `tmp` already exists in the set `cnt`. If it does, the frequency is reduced. </div>
+                            <div class=""> Starts a loop to traverse the nodes in the current part. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>16 : Frequency Reduction</b></div>
+                            <div class=""> <b>16 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            tmp<span style="color:#666">--</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            temp <span style="color:#666">=</span>  temp<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If a duplicate frequency is found, the frequency `tmp` is reduced by 1. </div>
+                            <div class=""> Moves the temporary pointer to the next node in the current part. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>17 : Deletion Increment</b></div>
+                            <div class=""> <b>17 : Variable Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            del<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            curLen<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each time a frequency is reduced to avoid duplicates, the deletion count `del` is incremented. </div>
+                            <div class=""> Increments the length of the current part. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>18 : Insert Frequency</b></div>
+                            <div class=""> <b>18 : Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tmp <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) cnt.insert(tmp);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ext <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> len <span style="color:#666">&gt;</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the frequency `tmp` is still greater than 0 after the while loop, it is inserted into the set `cnt` to ensure it is unique. </div>
+                            <div class=""> Checks if there are remaining extra nodes to be distributed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>19 : Return Statement</b></div>
+                            <div class=""> <b>19 : Pointer Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> del;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            temp <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> The function returns the total number of deletions `del` made to ensure all frequencies are unique. </div>
+                            <div class=""> Moves the temporary pointer to the next node to account for the extra nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>20 : Variable Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ext<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrements the count of remaining extra nodes. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>21 : Pointer Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> x <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Stores the next node after the current node in the variable &#39;x&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>22 : Pointer Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        temp<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Sets the next pointer of the current node to NULL to end the current part. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>23 : Pointer Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        temp <span style="color:#666">=</span> x;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Moves the temporary pointer to the next node, which is stored in &#39;x&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>24 : Condition</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(len <span style="color:#666">&lt;</span> k) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Starts a loop to handle the case where there are fewer nodes than k. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>25 : Operation</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(<span style="color:#a2f">NULL</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Adds NULL to the result vector to represent an empty part. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>26 : Variable Update</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        len<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increments the length to match the number of k parts. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>27 : Return</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Returns the resulting vector containing k parts of the linked list. </div>
                         </div>
                     
                 </div>
@@ -796,15 +910,15 @@
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n log n) because we need to sort the frequencies of the characters.</div>                                               
+                        <div class=""> <b>Average Case:</b> O(n)</div>
+                        <div class=""> <b>Worst Case:</b> O(n)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the number of nodes in the linked list, as we traverse the list twice.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the space used for storing the character frequencies and the set of frequencies.</div>    
+                        <div class=""> <b>Best Case:</b> O(k)</div>
+                        <div class=""> <b>Worst Case:</b> O(k)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(k), as we store the k parts in an array.</div>    
                     </div>
 
                 </div>

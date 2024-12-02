@@ -300,7 +300,7 @@
 
 
 
-<div class=""> You are given a 0-indexed integer array &rsquo;nums&rsquo; and an integer &rsquo;threshold&rsquo;. Find the length of the longest subarray of &rsquo;nums&rsquo; that satisfies the following conditions: (1) &rsquo;nums[l]&rsquo; is even, (2) the elements alternate between even and odd, and (3) all elements in the subarray are &lt;= threshold. </div>
+<div class=""> Given an integer array <code>arr</code> and a target value <code>target</code>, return the integer value such that when all integers larger than this value are replaced by the value itself, the sum of the array is as close as possible to the target. If there is a tie, return the smallest such integer. </div>
 
 
 
@@ -351,49 +351,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You will be given an array of integers, &#39;nums&#39;, and a threshold integer.</div>
-                        <div class=""> <b>Example:</b> nums = [1, 4, 3, 2, 7], threshold = 5</div>
+                        <div class=""> <b>Input:</b> The input consists of an integer array `arr` and an integer `target`.</div>
+                        <div class=""> <b>Example:</b> Input: arr = [5, 10, 3], target = 12</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= threshold &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i], target &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the length of the longest subarray satisfying the conditions.</div>
-                        <div class=""> <b>Example:</b> For nums = [1, 4, 3, 2, 7] and threshold = 5, the output is 4.</div>
+                        <div class=""> <b>Output:</b> Return the integer value that minimizes the absolute difference between the sum of the modified array and the target value.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Return the length of the longest valid subarray.</div>
+                                <div style="margin-left: 20px;"> • Return an integer representing the optimal value.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Find the longest subarray that satisfies all three conditions: starting with an even number, alternating between even and odd, and all elements &lt;= threshold.</div>
+                        <div class=""> <b>Goal:</b> Find the optimal integer value for modifying the array to match the target sum as closely as possible.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and check the conditions for each potential subarray.</div>
+                                <div style="margin-left: 20px;"> • Sort the array `arr` to make the process of finding the best value more efficient.</div>
                             
-                                <div style="margin-left: 20px;"> • Track the length of valid subarrays and update the result when a longer valid subarray is found.</div>
+                                <div style="margin-left: 20px;"> • Calculate the sum of the array and adjust the larger values to be equal to the current candidate value.</div>
+                            
+                                <div style="margin-left: 20px;"> • Track the closest sum to the target, and in case of a tie, return the smallest value.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The array length is between 1 and 100. All array elements are between 1 and 100, and the threshold is also between 1 and 100.</div>
+                        <div class=""> <b>Goal:</b> Handle large input sizes efficiently while ensuring the modified array&#39;s sum is as close as possible to the target.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr.length &lt;= 10^4</div>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= nums[i] &lt;= 100</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= threshold &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr[i], target &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -401,15 +399,25 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input array will have at least one element.</div>
+                                <div style="margin-left: 20px;"> • The array `arr` consists of positive integers.</div>
+                            
+                                <div style="margin-left: 20px;"> • The input is valid, and constraints are adhered to.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For nums = [1, 4, 3, 2, 7] and threshold = 5</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> We are looking for the longest subarray that starts with an even number, alternates between even and odd numbers, and has all numbers &lt;= 5. The valid subarray is [4, 3, 2, 7], which satisfies all conditions, and its length is 4.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [5, 10, 3], target = 12</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> When using the value 3, the array becomes [3, 3, 3], which gives a sum of 9. This is the closest sum to the target of 12.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [1, 2, 3], target = 6</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Using the value 2, the array becomes [2, 2, 2], which exactly matches the target sum of 6.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr = [100, 200, 300], target = 350</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> Using the value 150, the array becomes [150, 150, 150], which gives a sum of 450. This is the closest sum to the target of 350.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -433,18 +441,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The solution involves iterating over the array, checking for subarrays that meet the required conditions, and keeping track of the longest valid subarray.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem efficiently, we can consider sorting the array and finding the best integer by modifying the array&#39;s sum iteratively. This approach ensures that we calculate the closest sum without having to examine all possible values exhaustively.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The subarray must start with an even number and alternate between even and odd numbers.</div>
+                                <div style="margin-left: 20px;"> • The array&#39;s sum will be affected by replacing values larger than a given candidate with that candidate.</div>
                             
-                                <div style="margin-left: 20px;"> • We need to check if all numbers in the subarray are &lt;= threshold.</div>
+                                <div style="margin-left: 20px;"> • Sorting the array will allow for efficient modification of the array as we check each potential candidate.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • To find the longest valid subarray, we can iterate through the array while checking if the current subarray meets the conditions.</div>
+                                <div style="margin-left: 20px;"> • We can use a greedy approach, adjusting values larger than the candidate and tracking the sum&#39;s proximity to the target.</div>
                             
                         </div>
                     </div>
@@ -452,11 +460,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize variables to track the longest valid subarray.</div>
+                                <div style="margin-left: 20px;"> • Sort the array to make it easier to modify values larger than the current candidate.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate through the array and check if the conditions are met for each subarray.</div>
+                                <div style="margin-left: 20px;"> • For each potential value (candidate), compute the sum of the modified array.</div>
                             
-                                <div style="margin-left: 20px;"> • For each valid subarray, update the result if it is longer than the previous longest subarray.</div>
+                                <div style="margin-left: 20px;"> • Track the difference between the modified sum and the target. Return the candidate that minimizes this difference.</div>
                             
                         </div>
                     </div>
@@ -465,22 +473,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input array will always have at least one element.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees that `arr` will contain at least one element.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The array is small enough (up to 100 elements) that the solution can handle it in a reasonable amount of time.</div>
+                                <div style="margin-left: 20px;"> • The solution must handle large arrays efficiently, ensuring time complexity remains manageable.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • All elements in the array may be odd or even, and the threshold may be larger than the maximum element in the array.</div>
+                                <div style="margin-left: 20px;"> • If all values in the array are larger than the target, adjust all values to be equal to the target.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the subarrays are contiguous and that all elements satisfy the threshold condition.</div>
+                                <div style="margin-left: 20px;"> • The solution must work within the time limits for inputs of size up to 10^4.</div>
                             
                         </div>                                                                        
                     </div>
@@ -499,25 +507,23 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Sorting</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 For Loop Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Size and Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Threshold Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 First Alternating Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Target Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Alternating Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Condition Check</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Alternating Subarray Continuation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Intermediate Result Calculation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Element Greater Than Threshold</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Condition for Increment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Reset Counter After Invalid Element</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Increment Result</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Update Result</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Final Result</button>
                     
                 </div>
 
@@ -526,19 +532,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestAlternatingSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> n, <span style="color:#0b0;font-weight:bold">int</span> threshold) {
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>; l <span style="color:#666">&lt;</span> n.size(); <span style="color:#666">++</span>l) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n[l] <span style="color:#666">&lt;=</span> threshold)
-</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> cnt <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span>
-</span></span><span style="display:flex;"><span>            n[l] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>            n[l] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> n[l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">?</span> n[l] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">:</span> cnt <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
-</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> max(res, cnt);
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findBestValue</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>    sort(A.begin(), A.end());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> A.size(), i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> target <span style="color:#666">&gt;</span> A[i] <span style="color:#666">*</span> (n <span style="color:#666">-</span> i)) {
+</span></span><span style="display:flex;"><span>        target <span style="color:#666">-=</span> A[i<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> A[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> target <span style="color:#666">/</span> (n <span style="color:#666">-</span> i);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (target <span style="color:#666">-</span> res <span style="color:#666">*</span> (n <span style="color:#666">-</span> i) <span style="color:#666">&gt;</span> (res <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (n <span style="color:#666">-</span> i) <span style="color:#666">-</span> target)
+</span></span><span style="display:flex;"><span>        res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>  }
 </span></span></code></pre></div>
                         </div>
                     </div>
@@ -548,110 +557,100 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestAlternatingSubarray</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> n, <span style="color:#0b0;font-weight:bold">int</span> threshold) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findBestValue</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A, <span style="color:#0b0;font-weight:bold">int</span> target) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function `longestAlternatingSubarray`, which takes a vector of integers `n` and an integer `threshold` as input and returns the length of the longest alternating subarray. </div>
+                            <div class=""> This is the function header where the function is defined. The input parameters are &#39;A&#39; (a vector of integers) and &#39;target&#39; (the target sum to be achieved). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Sorting</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(A.begin(), A.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initializes the variable `res` to 0, which will store the length of the longest alternating subarray found during the loop. </div>
+                            <div class=""> Sorts the input vector &#39;A&#39; in non-decreasing order. Sorting helps in efficiently calculating the optimal value to achieve the target sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : For Loop Setup</b></div>
+                            <div class=""> <b>3 : Size and Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>; l <span style="color:#666">&lt;</span> n.size(); <span style="color:#666">++</span>l) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> A.size(), i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Starts a for loop with index `l` to iterate through the array `n`. It also initializes a counter `cnt` to track the length of the current alternating subarray. </div>
+                            <div class=""> Initializes &#39;n&#39; with the size of array &#39;A&#39; and &#39;i&#39; to 0 to start iterating from the beginning of the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Threshold Check</b></div>
+                            <div class=""> <b>4 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n[l] <span style="color:#666">&lt;=</span> threshold)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> target <span style="color:#666">&gt;</span> A[i] <span style="color:#666">*</span> (n <span style="color:#666">-</span> i)) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current element `n[l]` is less than or equal to the specified `threshold`. If it is, the element can be considered for the alternating subarray. </div>
+                            <div class=""> This while loop continues reducing the target by subtracting elements from &#39;A&#39; until the remaining target cannot be further reduced by multiplying the current element with the remaining number of elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : First Alternating Element</b></div>
+                            <div class=""> <b>5 : Target Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> cnt <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        target <span style="color:#666">-=</span> A[i<span style="color:#666">++</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If `cnt` is 0 (i.e., the first element of a potential alternating subarray), it checks whether the current element is even. If it is even, it sets `cnt` to 1 to start the subarray. </div>
+                            <div class=""> This line reduces the target by subtracting the current element &#39;A[i]&#39; and then increments &#39;i&#39; to move to the next element. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Alternating Check</b></div>
+                            <div class=""> <b>6 : Condition Check</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            n[l] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">:</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> A[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if the current element is even (i.e., `n[l] % 2 == 0`). If so, `cnt` is initialized to 1. </div>
+                            <div class=""> Checks if all elements have been processed. If &#39;i&#39; equals &#39;n&#39;, it means the target is achieved or exhausted, and the last element of the array &#39;A[n-1]&#39; is returned. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Alternating Subarray Continuation</b></div>
+                            <div class=""> <b>7 : Intermediate Result Calculation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            n[l] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> n[l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">?</span> n[l] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">:</span> cnt <span style="color:#666">+</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> target <span style="color:#666">/</span> (n <span style="color:#666">-</span> i);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element is part of an alternating subarray, it checks if the element has the same parity (odd/even) as the previous element. If it alternates correctly, it increments `cnt`; otherwise, it resets `cnt` to start a new alternating subarray. </div>
+                            <div class=""> Calculates the intermediate result &#39;res&#39; by dividing the remaining target by the number of elements left after &#39;i&#39;. This gives an estimate of the value to set for the remaining elements. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Element Greater Than Threshold</b></div>
+                            <div class=""> <b>8 : Condition for Increment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (target <span style="color:#666">-</span> res <span style="color:#666">*</span> (n <span style="color:#666">-</span> i) <span style="color:#666">&gt;</span> (res <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (n <span style="color:#666">-</span> i) <span style="color:#666">-</span> target)
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current element exceeds the threshold, it resets the counter `cnt` because the element cannot be part of the alternating subarray. </div>
+                            <div class=""> Checks if the difference between the current target and the product of &#39;res&#39; and the number of remaining elements is greater than the difference between &#39;(res &#43; 1)&#39; and the target. If so, it indicates that increasing &#39;res&#39; will yield a value closer to the target. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Reset Counter After Invalid Element</b></div>
+                            <div class=""> <b>9 : Increment Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res<span style="color:#666">++</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Resets the counter `cnt` to 0 if the current element is greater than the threshold, indicating the end of a potential alternating subarray. </div>
+                            <div class=""> If the above condition is true, increment &#39;res&#39; by 1 to bring it closer to the optimal value. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Update Result</b></div>
+                            <div class=""> <b>10 : Return Final Result</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#666">=</span> max(res, cnt);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Updates the result `res` to the maximum value between the current longest alternating subarray length (`res`) and the current subarray length (`cnt`). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Return Result</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Returns the result `res`, which contains the length of the longest alternating subarray found in the array `n`. </div>
+                            <div class=""> Returns the computed value &#39;res&#39; which is the optimal value that makes the sum closest to the target. </div>
                         </div>
                     
                 </div>
@@ -671,16 +670,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n), where n is the length of the input array.</div>
-                        <div class=""> <b>Average Case:</b> O(n).</div>
-                        <div class=""> <b>Worst Case:</b> O(n).</div> 
-                        <div class=""> <b>Description:</b> We iterate through the array once, checking the conditions for each element, which results in linear time complexity.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n) - Sorting the array is the most time-consuming operation.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n) - Sorting dominates the complexity.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n) - Sorting and the subsequent evaluation for each candidate value.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(n log n) due to sorting the array.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1).</div>
-                        <div class=""> <b>Worst Case:</b> O(1).</div> 
-                        <div class=""> <b>Description:</b> We only need a few variables to store the current subarray length and the result, so the space complexity is constant.</div>    
+                        <div class=""> <b>Best Case:</b> O(n) - Space complexity remains O(n) for the sorted array.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) - Space complexity is O(n) for storing the sorted array.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to storing the array after sorting.</div>    
                     </div>
 
                 </div>

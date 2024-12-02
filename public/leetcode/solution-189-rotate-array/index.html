@@ -320,7 +320,7 @@
 
 
 
-<div class=""> Given a string consisting of lowercase and/or uppercase English letters, find the length of the longest palindrome that can be constructed from the letters in the string. Letters are case-sensitive. </div>
+<div class=""> You are given an integer array nums. Your task is to rotate the array to the right by k steps, where k is a non-negative integer. </div>
 
 
 
@@ -371,45 +371,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input is a string s consisting of lowercase and/or uppercase English letters.</div>
-                        <div class=""> <b>Example:</b> For s = &#39;aabbcc&#39;, the longest palindrome is &#39;abccba&#39;, with a length of 6.</div>
+                        <div class=""> <b>Input:</b> The input consists of an array of integers nums and an integer k.</div>
+                        <div class=""> <b>Example:</b> nums = [10, 20, 30, 40, 50, 60, 70], k = 2</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 2000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase and/or uppercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • -231 &lt;= nums[i] &lt;= 231 - 1</div>
+                            
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the length of the longest palindrome that can be formed with the characters from the string.</div>
-                        <div class=""> <b>Example:</b> For s = &#39;xyzxy&#39;, the longest palindrome is &#39;xyzxy&#39;, with a length of 5.</div>
+                        <div class=""> <b>Output:</b> The output is the rotated array after shifting its elements k steps to the right.</div>
+                        <div class=""> <b>Example:</b> [60, 70, 10, 20, 30, 40, 50]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output array should be the result of rotating the input array by k steps.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To determine the maximum length of the palindrome that can be formed using the characters of the given string.</div>
+                        <div class=""> <b>Goal:</b> The goal is to rotate the array in-place by shifting its elements to the right by k steps.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Count the frequency of each character in the string.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Calculate k modulo the length of the array to handle cases where k is larger than the array size.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Add the maximum even occurrences of characters to the result.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Reverse the entire array.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If any character has an odd count, add one extra character to the center of the palindrome.</div>
+                                <div style="margin-left: 20px;"> • Step 3: Reverse the first k elements of the array.</div>
+                            
+                                <div style="margin-left: 20px;"> • Step 4: Reverse the remaining elements from k to the end of the array.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The input string will consist of lowercase and/or uppercase English letters, and its length will be between 1 and 2000.</div>
+                        <div class=""> <b>Goal:</b> The problem constraints ensure that the input array size and the value of k are within reasonable bounds.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 2000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= nums.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • s consists of lowercase and/or uppercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • 0 &lt;= k &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -417,15 +423,15 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The input string contains only valid lowercase and/or uppercase English letters.</div>
+                                <div style="margin-left: 20px;"> • The input array will always contain at least one element.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For s = &#39;aabbcc&#39;, the longest palindrome is &#39;abccba&#39;, which has a length of 6.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The palindrome is formed by choosing pairs of characters and placing one in the first half and one in the second half of the palindrome. Since all characters appear an even number of times, all can be used to form a palindrome.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: nums = [10, 20, 30, 40, 50, 60, 70], k = 2</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The list is [10, 20, 30, 40, 50, 60, 70]. After rotating 2 steps to the right, the array becomes [60, 70, 10, 20, 30, 40, 50].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -449,18 +455,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> Count the frequency of each character, then determine the maximum palindrome length that can be formed by using even counts of characters and adding one extra character if any odd counts are present.</div>
+                        <div class=""> <b>Approach:</b> The approach involves rotating the array using an in-place algorithm by reversing the array in segments.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • A palindrome reads the same forward and backward. To form the longest possible palindrome, we need to use pairs of characters.</div>
-                            
-                                <div style="margin-left: 20px;"> • If there are characters with odd occurrences, we can place one of them in the center of the palindrome.</div>
+                                <div style="margin-left: 20px;"> • The key observation is that rotating the array can be efficiently done by reversing sections of the array.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We need to iterate through the string, count the occurrences of each character, and then determine how many pairs we can form.</div>
+                                <div style="margin-left: 20px;"> • Reversing the entire array and then reversing parts of it is an effective approach to achieve the desired rotation.</div>
                             
                         </div>
                     </div>
@@ -468,13 +472,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Iterate through the string and count the occurrences of each character.</div>
+                                <div style="margin-left: 20px;"> • Step 1: Calculate k modulo the array length to handle rotations larger than the array size.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. For each character, add the largest even number of occurrences to the result.</div>
+                                <div style="margin-left: 20px;"> • Step 2: Reverse the entire array.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If any character has an odd count, increment the result by 1 (for the center of the palindrome).</div>
+                                <div style="margin-left: 20px;"> • Step 3: Reverse the first k elements.</div>
                             
-                                <div style="margin-left: 20px;"> • 4. Return the result as the length of the longest palindrome.</div>
+                                <div style="margin-left: 20px;"> • Step 4: Reverse the remaining elements after k.</div>
                             
                         </div>
                     </div>
@@ -483,20 +487,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
+                                <div style="margin-left: 20px;"> • If the input array is empty, no rotation is needed.</div>
+                            
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string is very large, ensure the solution can handle up to 2000 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • For large input arrays, ensure that the solution handles up to 10^5 elements efficiently.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string consists of only one character, the length of the palindrome is 1.</div>
+                                <div style="margin-left: 20px;"> • If k is zero, the array remains unchanged.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle both uppercase and lowercase letters correctly since they are case-sensitive.</div>
+                                <div style="margin-left: 20px;"> • The array will always contain at least one element.</div>
                             
                         </div>                                                                        
                     </div>
@@ -515,23 +521,27 @@
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Map Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Modulo Operation</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Reverse Array</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Map Insertion</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Reverse First Segment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Boolean Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Reverse Second Segment</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Helper Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Map Iteration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Odd Frequency Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Swap Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Palindrome Length Calculation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Swap Elements</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Swap Elements</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Update Indices</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Update Indices</button>
                     
                 </div>
 
@@ -540,17 +550,22 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestPalindrome</span>(string s) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s)
-</span></span><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> odd <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> mp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(val <span style="color:#666">%</span> <span style="color:#666">2</span>) odd <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (val<span style="color:#666">/</span><span style="color:#666">2</span>) <span style="color:#666">*</span> <span style="color:#666">2</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">rotate</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    k <span style="color:#666">=</span> k <span style="color:#666">%</span> nums.size();
+</span></span><span style="display:flex;"><span>    rev(nums, <span style="color:#666">0</span>, nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    rev(nums, <span style="color:#666">0</span>, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    rev(nums, k, nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">rev</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> nums[i];
+</span></span><span style="display:flex;"><span>        nums[i] <span style="color:#666">=</span> nums[j];
+</span></span><span style="display:flex;"><span>        nums[j] <span style="color:#666">=</span> tmp;
+</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#666">--</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> odd<span style="color:#666">?</span> res <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -561,100 +576,120 @@
                             <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestPalindrome</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">rotate</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function `longestPalindrome` which takes a string `s` and returns the length of the longest possible palindrome that can be formed using its characters. </div>
+                            <div class=""> Define the function &#39;rotate&#39; which takes a vector of integers &#39;nums&#39; and an integer &#39;k&#39;, and rotates the array to the right by &#39;k&#39; steps. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Map Initialization</b></div>
+                            <div class=""> <b>2 : Modulo Operation</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    k <span style="color:#666">=</span> k <span style="color:#666">%</span> nums.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a `map` named `mp` that stores the frequency of each character in the string `s`. </div>
+                            <div class=""> Adjust &#39;k&#39; by taking the modulo with the size of the array. This ensures that if &#39;k&#39; is larger than the array size, it will rotate the array the correct number of times. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Iteration</b></div>
+                            <div class=""> <b>3 : Reverse Array</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s)
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    rev(nums, <span style="color:#666">0</span>, nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each character `x` in the string `s`. </div>
+                            <div class=""> Reverse the entire array to facilitate the rotating process. This step prepares the array for further segment reversals. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Map Insertion</b></div>
+                            <div class=""> <b>4 : Reverse First Segment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[x]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    rev(nums, <span style="color:#666">0</span>, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character `x`, increment its count in the `map` `mp`. </div>
+                            <div class=""> Reverse the first &#39;k&#39; elements of the array. This step begins the transformation toward the rotated array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Boolean Initialization</b></div>
+                            <div class=""> <b>5 : Reverse Second Segment</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> odd <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    rev(nums, k, nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize a boolean variable `odd` to track if there&#39;s any character with an odd frequency. </div>
+                            <div class=""> Reverse the remaining elements from index &#39;k&#39; to the end of the array. This completes the rotation process. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Variable Initialization</b></div>
+                            <div class=""> <b>6 : Helper Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">rev</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize an integer variable `res` to accumulate the total length of the palindrome formed. </div>
+                            <div class=""> Define the helper function &#39;rev&#39; which reverses a segment of the array between indices &#39;i&#39; and &#39;j&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Map Iteration</b></div>
+                            <div class=""> <b>7 : While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> mp) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> j) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate through each entry in the `map` `mp`, where `key` is the character and `val` is its frequency. </div>
+                            <div class=""> Start a while loop that runs until the indices &#39;i&#39; and &#39;j&#39; meet, which will swap elements in the array. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Odd Frequency Check</b></div>
+                            <div class=""> <b>8 : Swap Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(val <span style="color:#666">%</span> <span style="color:#666">2</span>) odd <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> nums[i];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the frequency of a character is odd, set the `odd` flag to `true`. </div>
+                            <div class=""> Store the element at index &#39;i&#39; in a temporary variable &#39;tmp&#39; to prepare for the swap. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Palindrome Length Calculation</b></div>
+                            <div class=""> <b>9 : Swap Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (val<span style="color:#666">/</span><span style="color:#666">2</span>) <span style="color:#666">*</span> <span style="color:#666">2</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nums[i] <span style="color:#666">=</span> nums[j];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> For each character, add the largest even number less than or equal to its frequency to `res`. This represents the part of the palindrome that can be used symmetrically on both sides. </div>
+                            <div class=""> Replace the element at index &#39;i&#39; with the element at index &#39;j&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Return Statement</b></div>
+                            <div class=""> <b>10 : Swap Elements</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> odd<span style="color:#666">?</span> res <span style="color:#666">+</span> <span style="color:#666">1</span><span style="color:#666">:</span> res;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        nums[j] <span style="color:#666">=</span> tmp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If there was at least one character with an odd frequency, add 1 to `res` (since we can place exactly one odd character in the middle of the palindrome). Otherwise, return `res` as is. </div>
+                            <div class=""> Replace the element at index &#39;j&#39; with the value stored in &#39;tmp&#39;, completing the swap. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Update Indices</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Increment the index &#39;i&#39; to move towards the middle of the segment. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Update Indices</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        j<span style="color:#666">--</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> Decrement the index &#39;j&#39; to move towards the middle of the segment. </div>
                         </div>
                     
                 </div>
@@ -677,13 +712,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the string, because we only need to iterate through the string once to count the characters and once more to calculate the palindrome length.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the array, as each reversal operation involves iterating through the array once.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(1)</div>
                         <div class=""> <b>Worst Case:</b> O(1)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(1) since we only need to store the frequency of characters, which is constant for the 26 lowercase and 26 uppercase English letters.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(1), as the solution only requires a constant amount of extra space.</div>    
                     </div>
 
                 </div>

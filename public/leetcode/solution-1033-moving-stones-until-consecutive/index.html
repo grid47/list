@@ -272,7 +272,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 26, 2024
                                     <i class="far fa-clock clock"></i>
-                                    8 min read
+                                    5 min read
                                 </span>					
                             </div>
                         </div>			
@@ -299,7 +299,7 @@
 
 
 
-<div class=""> You are given a 0-indexed grid of size <code>m x n</code>. Some cells in the grid are occupied by guards, and some by walls. A guard can observe all cells in the four cardinal directions (north, east, south, and west) from its position unless blocked by a wall or another guard. A cell is considered guarded if at least one guard can see it. Your task is to determine the number of cells that are unoccupied and are not guarded. </div>
+<div class=""> You are given three stones located at different positions on the X-axis. The positions are represented by three distinct integers <code>a</code>, <code>b</code>, and <code>c</code>. In one move, you can pick a stone from either of the two endpoints (the smallest or the largest position) and move it to any unoccupied position between the two endpoints. The game ends when all three stones are positioned at three consecutive spots on the X-axis. Your task is to determine the minimum and maximum number of moves required to reach this configuration. </div>
 
 
 
@@ -350,61 +350,49 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of the grid dimensions `m` and `n`, followed by two lists: `guards` and `walls`. The `guards` list contains the positions of guards, and the `walls` list contains the positions of walls in the grid.</div>
-                        <div class=""> <b>Example:</b> m = 5, n = 5, guards = [[0,0],[2,2],[4,4]], walls = [[1,1],[3,3]]</div>
+                        <div class=""> <b>Input:</b> You are given three distinct integers `a`, `b`, and `c` representing the positions of the stones.</div>
+                        <div class=""> <b>Example:</b> a = 3, b = 6, c = 10</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= m, n &lt;= 10^5</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= a, b, c &lt;= 100</div>
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= m * n &lt;= 10^5</div>
-                            
-                                <div style="margin-left: 20px;"> • 1 &lt;= guards.length, walls.length &lt;= 5 * 10^4</div>
-                            
-                                <div style="margin-left: 20px;"> • 2 &lt;= guards.length &#43; walls.length &lt;= m * n</div>
-                            
-                                <div style="margin-left: 20px;"> • guards[i].length == walls[j].length == 2</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= rowi, rowj &lt; m</div>
-                            
-                                <div style="margin-left: 20px;"> • 0 &lt;= coli, colj &lt; n</div>
-                            
-                                <div style="margin-left: 20px;"> • All positions in guards and walls are unique.</div>
+                                <div style="margin-left: 20px;"> • a, b, and c have different values.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return the number of unoccupied and unguarded cells in the grid.</div>
-                        <div class=""> <b>Example:</b> Output: 12</div>
+                        <div class=""> <b>Output:</b> Return an array of length 2 where the first element represents the minimum number of moves and the second element represents the maximum number of moves required to make the stones occupy three consecutive positions.</div>
+                        <div class=""> <b>Example:</b> Output: [1, 2]</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The answer must include both the minimum and maximum number of moves.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> To count the number of cells that are neither occupied by walls nor guarded by any guard.</div>
+                        <div class=""> <b>Goal:</b> The goal is to calculate the minimum and maximum number of moves to position the stones at three consecutive positions.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize a grid of size `m x n` with all values set to 0 (indicating unoccupied and unguarded cells).</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the positions of the stones to identify the smallest, middle, and largest values.</div>
                             
-                                <div style="margin-left: 20px;"> • Mark the cells occupied by walls with a 1.</div>
+                                <div style="margin-left: 20px;"> • 2. If the difference between the largest and smallest values is 2, no moves are needed (i.e., the stones are already in consecutive positions).</div>
                             
-                                <div style="margin-left: 20px;"> • Mark the cells occupied by guards with a 3.</div>
+                                <div style="margin-left: 20px;"> • 3. To find the minimum moves, check if the middle stone is already adjacent to one of the endpoints (this would require only one move). Otherwise, two moves are needed.</div>
                             
-                                <div style="margin-left: 20px;"> • For each guard, mark the cells in the four cardinal directions (north, south, east, and west) as guarded, until a wall or another guard is encountered.</div>
-                            
-                                <div style="margin-left: 20px;"> • After processing all guards, count the number of cells that are neither occupied by walls nor guarded.</div>
+                                <div style="margin-left: 20px;"> • 4. To find the maximum moves, subtract 2 from the difference between the largest and smallest stone positions, as that will give the number of available positions between them.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Ensure that the solution handles large grid sizes and a significant number of guards and walls efficiently.</div>
+                        <div class=""> <b>Goal:</b> Ensure that the solution is efficient, given the problem constraints.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The grid size can be very large (up to 10^5), so an efficient solution is required.</div>
+                                <div style="margin-left: 20px;"> • The positions of the stones are always distinct.</div>
                             
-                                <div style="margin-left: 20px;"> • Handle cases where there are no guards or no walls.</div>
+                                <div style="margin-left: 20px;"> • The number of moves must be computed accurately for both the minimum and maximum cases.</div>
                             
                         </div>
                     </div>        
@@ -412,21 +400,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • Each guard can only guard cells in the four cardinal directions, and no diagonal observation is allowed.</div>
-                            
-                                <div style="margin-left: 20px;"> • If a guard is at a position, it is not considered unguarded by itself.</div>
+                                <div style="margin-left: 20px;"> • The positions of the stones are provided in distinct integers and are guaranteed to be within the specified bounds.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> m = 5, n = 5, guards = [[0,0],[2,2],[4,4]], walls = [[1,1],[3,3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The guards will guard cells in the four cardinal directions unless blocked by a wall. After processing the guards and walls, the remaining unguarded and unoccupied cells are counted.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 1, b = 3, c = 7</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the stones are at positions 1, 3, and 7. The minimum number of moves is 1: move the stone from position 7 to 4. The maximum number of moves is 2: move the stone from position 7 to 5, then move the stone from position 5 to 4.</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> m = 4, n = 4, guards = [[0,0]], walls = [[1,1], [3,3]]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The grid has walls at (1,1) and (3,3), and a guard at (0,0). After marking the guarded cells, we count the unguarded ones.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: a = 4, b = 5, c = 6</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the stones are already at consecutive positions, so no moves are needed. The minimum and maximum number of moves are both 0.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -450,18 +436,16 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The problem can be solved efficiently by using a grid to keep track of the state of each cell and iterating through each guard to mark the cells they can observe.</div>
+                        <div class=""> <b>Approach:</b> The solution involves sorting the stone positions and then checking the differences between them to determine the possible moves.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Each guard can influence a significant number of cells, so the solution needs to efficiently track the influence of each guard.</div>
-                            
-                                <div style="margin-left: 20px;"> • Walls block the guard&#39;s vision, so they need to be taken into account while marking guarded cells.</div>
+                                <div style="margin-left: 20px;"> • Sorting the positions of the stones is a good first step to simplify the calculation of the number of moves.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a grid to represent the state of each cell and iteratively mark the cells guarded by each guard. We can then count the unguarded cells.</div>
+                                <div style="margin-left: 20px;"> • After sorting, we can quickly determine if the stones are already in consecutive positions or if any moves are necessary.</div>
                             
                         </div>
                     </div>
@@ -469,13 +453,13 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Create a grid to represent the m x n grid.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the positions of the stones to easily identify the smallest, middle, and largest positions.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over each wall and mark the corresponding cells in the grid.</div>
+                                <div style="margin-left: 20px;"> • 2. If the difference between the largest and smallest positions is 2, return [0, 0] as no moves are needed.</div>
                             
-                                <div style="margin-left: 20px;"> • Iterate over each guard and mark the cells in all four directions as guarded, stopping at walls or other guards.</div>
+                                <div style="margin-left: 20px;"> • 3. For the minimum number of moves, check the distance between the middle stone and the endpoints to determine if only one move is needed, otherwise, two moves.</div>
                             
-                                <div style="margin-left: 20px;"> • Finally, count the unoccupied and unguarded cells in the grid and return the result.</div>
+                                <div style="margin-left: 20px;"> • 4. For the maximum number of moves, subtract 2 from the difference between the largest and smallest positions.</div>
                             
                         </div>
                     </div>
@@ -484,22 +468,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If there are no guards, all cells except walls are unguarded.</div>
+                                <div style="margin-left: 20px;"> • There will always be three distinct positions given, so empty inputs are not possible.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that the solution can handle grids with a large number of cells (up to 10^5) efficiently.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle the constraints efficiently, but the problem size is small (only 3 positions).</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the grid is completely surrounded by walls or contains no guards, the number of unguarded cells is easy to determine.</div>
+                                <div style="margin-left: 20px;"> • If the positions are already consecutive, the result will be [0, 0].</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle large inputs efficiently by processing guards and walls in an optimized manner.</div>
+                                <div style="margin-left: 20px;"> • The problem guarantees distinct positions, so no need to handle repeated values.</div>
                             
                         </div>                                                                        
                     </div>
@@ -516,47 +500,15 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Grid Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Initialize Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Walls Placement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Sort Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Mark Walls</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Check Consecutive Case</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Guards Placement</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Mark Guards</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Guard Influence Calculation</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Get Guard Coordinates</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Guard Influence Right</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Mark Right Influence</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Guard Influence Left</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Mark Left Influence</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Guard Influence Down</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Mark Down Influence</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Guard Influence Up</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Mark Up Influence</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Count Unguarded Cells</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="18"> 18 Iterate Grid</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="19"> 19 Iterate Grid Columns</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="20"> 20 Count Unguarded Cells</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="21"> 21 Return Count</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Calculate Moves</button>
                     
                 </div>
 
@@ -565,44 +517,15 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countUnguarded</span>(<span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> guards, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> walls) {
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> numMovesStones(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s {a, b, c};
+</span></span><span style="display:flex;"><span>    sort(s.begin(), s.end());
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[<span style="color:#666">2</span>]<span style="color:#666">-</span>s[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#666">0</span>, <span style="color:#666">0</span>};
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: walls) {
-</span></span><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: guards) {
-</span></span><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">3</span>;
-</span></span><span style="display:flex;"><span>    }        
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: guards) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> y <span style="color:#666">+</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            grid[x][i] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> y <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span><span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            grid[x][i] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        }            
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x <span style="color:#666">+</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            grid[i][y] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            grid[i][y] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// grid[x][y] = 3;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {min(s[<span style="color:#666">1</span>]<span style="color:#666">-</span> s[<span style="color:#666">0</span>], s[<span style="color:#666">2</span>]<span style="color:#666">-</span>s[<span style="color:#666">1</span>]) <span style="color:#666">&lt;=</span> <span style="color:#666">2</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">2</span>, s[<span style="color:#666">2</span>] <span style="color:#666">-</span> s[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#666">2</span> };
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -610,213 +533,53 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Declaration</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countUnguarded</span>(<span style="color:#0b0;font-weight:bold">int</span> m, <span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> guards, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> walls) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> numMovesStones(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This is the function signature where the input parameters `m` and `n` represent the dimensions of the grid, while `guards` and `walls` represent the locations of the guards and walls, respectively. </div>
+                            <div class=""> Define the function `numMovesStones` that calculates the minimum and maximum moves to align stones. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Grid Initialization</b></div>
+                            <div class=""> <b>2 : Initialize Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> grid(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s {a, b, c};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Here, we create a grid with `m` rows and `n` columns, initializing all values to 0, representing empty cells. </div>
+                            <div class=""> Initialize a vector `s` to store the stone positions. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Walls Placement</b></div>
+                            <div class=""> <b>3 : Sort Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: walls) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(s.begin(), s.end());
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through the walls&#39; positions and marks them on the grid. </div>
+                            <div class=""> Sort the vector `s` to arrange stone positions in ascending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Mark Walls</b></div>
+                            <div class=""> <b>4 : Check Consecutive Case</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[<span style="color:#666">2</span>]<span style="color:#666">-</span>s[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#666">0</span>, <span style="color:#666">0</span>};
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Each wall&#39;s position is marked with a value of 1 on the grid, indicating that the cell is blocked. </div>
+                            <div class=""> Check if the stones are already consecutive. If so, return {0, 0} as no moves are needed. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Guards Placement</b></div>
+                            <div class=""> <b>5 : Calculate Moves</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: guards) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {min(s[<span style="color:#666">1</span>]<span style="color:#666">-</span> s[<span style="color:#666">0</span>], s[<span style="color:#666">2</span>]<span style="color:#666">-</span>s[<span style="color:#666">1</span>]) <span style="color:#666">&lt;=</span> <span style="color:#666">2</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">2</span>, s[<span style="color:#666">2</span>] <span style="color:#666">-</span> s[<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#666">2</span> };
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> This loop iterates through the guards&#39; positions and places them on the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>6 : Mark Guards</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">3</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each guard&#39;s position is marked with a value of 3 on the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>7 : Guard Influence Calculation</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: guards) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop processes each guard&#39;s position to mark all cells in its line of sight as guarded. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>8 : Get Guard Coordinates</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>];
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Here, we extract the coordinates `x` and `y` of the current guard. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>9 : Guard Influence Right</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> y <span style="color:#666">+</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop marks cells to the right of the guard as being in its line of sight, stopping at walls or other guards. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>10 : Mark Right Influence</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[x][i] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each cell in the guard&#39;s rightward line of sight is marked with a 2 to indicate it is under guard surveillance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>11 : Guard Influence Left</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> y <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[x][i] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">--</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop marks cells to the left of the guard as being in its line of sight. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Mark Left Influence</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[x][i] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each cell in the guard&#39;s leftward line of sight is marked with a 2 to indicate it is under guard surveillance. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Guard Influence Down</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x <span style="color:#666">+</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">++</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop marks cells below the guard as being in its line of sight. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Mark Down Influence</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[i][y] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each cell in the guard&#39;s downward line of sight is marked with a 2. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Guard Influence Up</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> x <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> grid[i][y] <span style="color:#666">!=</span> <span style="color:#666">3</span>; i<span style="color:#666">--</span>) {
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop marks cells above the guard as being in its line of sight. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>16 : Mark Up Influence</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            grid[i][y] <span style="color:#666">=</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Each cell in the guard&#39;s upward line of sight is marked with a 2. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>17 : Count Unguarded Cells</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> We initialize a counter `cnt` to track the number of unguarded cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>18 : Iterate Grid</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop iterates through each row of the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>19 : Iterate Grid Columns</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> This loop iterates through each column of the grid. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>20 : Count Unguarded Cells</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) cnt<span style="color:#666">++</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the cell is not a wall (1) or a guard (3), we increment the counter for unguarded cells. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>21 : Return Count</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Finally, the function returns the count of unguarded cells. </div>
+                            <div class=""> Return the minimum and maximum moves required based on the distances between the stones. </div>
                         </div>
                     
                 </div>
@@ -836,16 +599,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Average Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is linear in terms of the number of cells in the grid, as we process each guard and wall individually.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Average Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(1) as sorting three elements is constant time.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(m * n)</div>
-                        <div class=""> <b>Worst Case:</b> O(m * n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is proportional to the size of the grid, as we store the state of each cell.</div>    
+                        <div class=""> <b>Best Case:</b> O(1)</div>
+                        <div class=""> <b>Worst Case:</b> O(1)</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(1) since we are only using a constant amount of extra space.</div>    
                     </div>
 
                 </div>

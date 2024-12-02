@@ -280,7 +280,7 @@
                                     <i class="far fa-star"></i>
                                     Jul 22, 2024
                                     <i class="far fa-clock clock"></i>
-                                    5 min read
+                                    7 min read
                                 </span>					
                             </div>
                         </div>			
@@ -307,12 +307,7 @@
 
 
 
-<div class=""> <p>You have a set containing all positive integers starting from 1. You need to implement a class SmallestInfiniteSet that has the following methods:</p>
-<ul>
-<li>SmallestInfiniteSet() Initializes the set to contain all positive integers starting from 1.</li>
-<li>popSmallest() Removes and returns the smallest integer in the set.</li>
-<li>addBack(int num) Adds a positive integer num back into the set, if it’s not already present in the set.</li>
-</ul> </div>
+<div class=""> You are given two numbers represented in base -2. Each number is given as an array of binary digits (0s and 1s), where the most significant bit is at the beginning of the array. Your task is to add these two numbers together and return the result in the same format, as an array of 0s and 1s in base -2, without leading zeros. </div>
 
 
 
@@ -363,48 +358,55 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a list of method calls on the SmallestInfiniteSet class.</div>
-                        <div class=""> <b>Example:</b> Input: [&#34;SmallestInfiniteSet&#34;, &#34;addBack&#34;, &#34;popSmallest&#34;, &#34;popSmallest&#34;, &#34;popSmallest&#34;] 
-Output: [null, null, 1, 2, 3]</div>
+                        <div class=""> <b>Input:</b> The input consists of two arrays, arr1 and arr2, each representing a number in base -2. The arrays contain binary digits, where arr1[i] and arr2[i] are either 0 or 1, and there are no leading zeros in either array.</div>
+                        <div class=""> <b>Example:</b> Input: arr1 = [1, 0, 1], arr2 = [1, 1]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= num &lt;= 1000</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr1.length, arr2.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • At most 1000 calls will be made in total to popSmallest and addBack.</div>
+                                <div style="margin-left: 20px;"> • arr1[i] and arr2[i] are 0 or 1</div>
+                            
+                                <div style="margin-left: 20px;"> • arr1 and arr2 have no leading zeros</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> The output consists of the return values of the method calls in the input sequence.</div>
-                        <div class=""> <b>Example:</b> [null, null, 1, 2, 3]</div>
+                        <div class=""> <b>Output:</b> The output should be an array of binary digits representing the sum of the two input numbers in base -2, with no leading zeros.</div>
+                        <div class=""> <b>Example:</b> Output: [1, 0, 0, 0]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The output list will contain the return values of each operation in the order they were executed.</div>
+                                <div style="margin-left: 20px;"> • The output should be a binary array representing the sum of the numbers in base -2.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to design a set data structure that efficiently supports removing the smallest element and adding an element back into the set if it&#39;s not already there.</div>
+                        <div class=""> <b>Goal:</b> To add two numbers in base -2 and return the result in base -2 format without leading zeros.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Initialize an empty set and maintain a counter to track the smallest number.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a carry variable to store any carryover during the addition process.</div>
                             
-                                <div style="margin-left: 20px;"> • For each popSmallest operation, check if the set is non-empty and pop the smallest number from the set.</div>
+                                <div style="margin-left: 20px;"> • 2. Traverse both arrays from the least significant bit to the most significant bit.</div>
                             
-                                <div style="margin-left: 20px;"> • For each addBack operation, ensure the number is less than the current counter and not already in the set before adding it back.</div>
+                                <div style="margin-left: 20px;"> • 3. Add the corresponding bits from both arrays along with the carry, and store the result in the result array.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. If the sum of bits results in a carry, update the carry variable.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Continue this process until all bits have been added, and ensure the result array has no leading zeros.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem constraints ensure that the solution handles a maximum of 1000 calls to popSmallest and addBack.</div>
+                        <div class=""> <b>Goal:</b> The input arrays should be of valid lengths and contain binary digits only. The arrays should not contain leading zeros, except when the array represents zero.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • The number to be added back should be a positive integer.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= arr1.length, arr2.length &lt;= 1000</div>
                             
-                                <div style="margin-left: 20px;"> • The set must efficiently support operations up to 1000 times.</div>
+                                <div style="margin-left: 20px;"> • arr1[i] and arr2[i] are 0 or 1</div>
+                            
+                                <div style="margin-left: 20px;"> • arr1 and arr2 have no leading zeros</div>
                             
                         </div>
                     </div>        
@@ -412,15 +414,21 @@ Output: [null, null, 1, 2, 3]</div>
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The smallest number in the set is always the first positive integer not yet removed or added back.</div>
+                                <div style="margin-left: 20px;"> • The input arrays represent valid binary numbers in base -2.</div>
+                            
+                                <div style="margin-left: 20px;"> • The solution should handle arrays of varying lengths efficiently.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> [&#34;SmallestInfiniteSet&#34;, &#34;addBack&#34;, &#34;popSmallest&#34;, &#34;popSmallest&#34;, &#34;popSmallest&#34;]</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The sequence of operations ensures that the smallest integers are popped and numbers can be re-added as needed.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr1 = [1, 0, 1], arr2 = [1, 1]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number represented by arr1 is 5 and the number represented by arr2 is 3. Their sum is 8, which is represented as [1, 0, 0, 0] in base -2.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: arr1 = [1, 0, 1], arr2 = [0]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> The number represented by arr1 is 5 and arr2 is 0. The sum is 5, represented as [1, 0, 1].</div>                                
                                 <br/>
                             
                     </div>                         
@@ -444,16 +452,18 @@ Output: [null, null, 1, 2, 3]</div>
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> To solve the problem, maintain an ongoing counter to track the smallest number not yet popped. Use a set to store numbers that are added back to the infinite set.</div>
+                        <div class=""> <b>Approach:</b> We can solve this problem by simulating the addition of binary digits with base -2. The carry needs to be handled as we traverse through the arrays, and the result should be constructed accordingly.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The set should handle duplicate insertions gracefully and should always prioritize the smallest available number.</div>
+                                <div style="margin-left: 20px;"> • Each array is a representation of a number in base -2, and we need to perform addition similarly to binary addition, but with negative powers of 2.</div>
+                            
+                                <div style="margin-left: 20px;"> • We need to handle carries properly, as base -2 has alternating signs for powers of 2.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • We can use a counter variable that tracks the smallest number, along with a set to track any numbers that are added back to the infinite set.</div>
+                                <div style="margin-left: 20px;"> • The solution should process each digit from least significant to most significant and adjust for carries using the base -2 arithmetic.</div>
                             
                         </div>
                     </div>
@@ -461,11 +471,17 @@ Output: [null, null, 1, 2, 3]</div>
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Initialize the counter to 1 and an empty set.</div>
+                                <div style="margin-left: 20px;"> • 1. Initialize a carry variable to track carryover during the addition.</div>
                             
-                                <div style="margin-left: 20px;"> • For each addBack operation, add the number to the set if it&#39;s less than the counter and not already present.</div>
+                                <div style="margin-left: 20px;"> • 2. Use two indices to traverse the input arrays arr1 and arr2 from right to left (from least significant bit).</div>
                             
-                                <div style="margin-left: 20px;"> • For each popSmallest operation, either return the smallest number in the set or the current counter value and increment the counter.</div>
+                                <div style="margin-left: 20px;"> • 3. Add the corresponding digits from both arrays along with the carry.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Store the result of the sum modulo 2 in the result array and calculate the new carry value by dividing the sum by 2 and negating it.</div>
+                            
+                                <div style="margin-left: 20px;"> • 5. Continue until both arrays have been fully processed and no carry remains.</div>
+                            
+                                <div style="margin-left: 20px;"> • 6. Ensure that the result array does not contain leading zeros.</div>
                             
                         </div>
                     </div>
@@ -474,22 +490,22 @@ Output: [null, null, 1, 2, 3]</div>
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • No edge cases related to empty inputs, as the set is always initialized and can be called multiple times.</div>
+                                <div style="margin-left: 20px;"> • Both input arrays cannot be empty. Each array must represent a valid binary number in base -2.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem must handle up to 1000 operations efficiently.</div>
+                                <div style="margin-left: 20px;"> • Ensure that the solution is efficient and handles arrays with lengths up to 1000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Handle the case where a number is added back multiple times or when the set has large numbers.</div>
+                                <div style="margin-left: 20px;"> • If one of the input arrays represents zero, the other array should be returned as the result.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works with at most 1000 operations.</div>
+                                <div style="margin-left: 20px;"> • The solution should handle arrays of varying lengths and ensure correct handling of carries.</div>
                             
                         </div>                                                                        
                     </div>
@@ -506,17 +522,29 @@ Output: [null, null, 1, 2, 3]</div>
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Code Block</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
                     
                         <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Result Vector Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Update Maximum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Main While Loop</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Accumulate Sum</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Adding from First Vector</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Return Result</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Adding from Second Vector</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Store Result Bit</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Update Carry</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Remove Leading Zeros</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Back Zeros</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Reverse Result</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Return Statement</button>
                     
                 </div>
 
@@ -525,13 +553,19 @@ Output: [null, null, 1, 2, 3]</div>
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">fillCups</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span>: A) {
-</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(a, mx);
-</span></span><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> a;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> addNegabinary(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> carry <span style="color:#666">=</span> <span style="color:#666">0</span>, i <span style="color:#666">=</span> arr1.size() <span style="color:#666">-</span><span style="color:#666">1</span>, j <span style="color:#666">=</span> arr2.size() <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(carry <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) carry <span style="color:#666">+=</span> arr1[i<span style="color:#666">--</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) carry <span style="color:#666">+=</span> arr2[j<span style="color:#666">--</span>];
+</span></span><span style="display:flex;"><span>        res.push_back(carry<span style="color:#666">&amp;</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        carry <span style="color:#666">=</span> <span style="color:#666">-</span>(carry<span style="color:#666">&gt;&gt;</span><span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(mx, (sum <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>); 
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(res.size() <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> res.back() <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        res.pop_back();
+</span></span><span style="display:flex;"><span>    reverse(res.begin(), res.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -539,63 +573,123 @@ Output: [null, null, 1, 2, 3]</div>
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Code Block</b></div>
+                            <div class=""> <b>1 : Function Definition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">fillCups</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> A) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> addNegabinary(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr2) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Define the function &#39;fillCups&#39; that takes a vector of integers A, representing the number of cups of each type. </div>
+                            <div class=""> This line defines the function `addNegabinary` that takes two vectors `arr1` and `arr2`, representing binary numbers in negabinary format, and returns the result of their sum as a vector. </div>
                         </div>
                     
                         <div class="step-slide">
                             <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> carry <span style="color:#666">=</span> <span style="color:#666">0</span>, i <span style="color:#666">=</span> arr1.size() <span style="color:#666">-</span><span style="color:#666">1</span>, j <span style="color:#666">=</span> arr2.size() <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize variables: &#39;mx&#39; to store the maximum cup count, and &#39;sum&#39; to store the total sum of all cups. </div>
+                            <div class=""> This line initializes the carry variable to store the carry during addition. It also initializes indices `i` and `j` to point to the last elements of `arr1` and `arr2`, respectively. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop</b></div>
+                            <div class=""> <b>3 : Result Vector Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">a</span>: A) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterate over each element in the vector &#39;A&#39;, which represents the cup counts. </div>
+                            <div class=""> This line initializes the vector `res` which will store the result of the negabinary sum. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Update Maximum</b></div>
+                            <div class=""> <b>4 : Main While Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mx <span style="color:#666">=</span> max(a, mx);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(carry <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Update the maximum cup count &#39;mx&#39; with the current value &#39;a&#39; if it is greater than the current maximum. </div>
+                            <div class=""> This loop continues until there are no more digits left to add in either of the input vectors or there is no carry left. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Accumulate Sum</b></div>
+                            <div class=""> <b>5 : Adding from First Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        sum <span style="color:#666">+=</span> a;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) carry <span style="color:#666">+=</span> arr1[i<span style="color:#666">--</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Add the current cup count &#39;a&#39; to the total sum. </div>
+                            <div class=""> This line adds the current digit from `arr1` to the carry (if `i` is valid), and then decrements the index `i`. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Return Result</b></div>
+                            <div class=""> <b>6 : Adding from Second Vector</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">max</span>(mx, (sum <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) carry <span style="color:#666">+=</span> arr2[j<span style="color:#666">--</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the maximum of the &#39;mx&#39; (maximum cup count) or half of the total cups, rounded up, representing the minimum number of moves required. </div>
+                            <div class=""> This line adds the current digit from `arr2` to the carry (if `j` is valid), and then decrements the index `j`. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>7 : Store Result Bit</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.push_back(carry<span style="color:#666">&amp;</span><span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line adds the least significant bit of `carry` to the result vector `res`. The bit is obtained by performing a bitwise AND operation with 1. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>8 : Update Carry</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        carry <span style="color:#666">=</span> <span style="color:#666">-</span>(carry<span style="color:#666">&gt;&gt;</span><span style="color:#666">1</span>);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line updates the carry for the next iteration by right-shifting the carry by one position (effectively dividing by 2) and then negating the result, as negabinary uses base -2. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>9 : Remove Leading Zeros</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(res.size() <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> res.back() <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This loop removes leading zeros from the result vector `res` by checking if the last element is 0 and the vector has more than one element. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Pop Back Zeros</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        res.pop_back();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line removes the last element of the result vector, which is a leading zero. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Reverse Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    reverse(res.begin(), res.end());
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line reverses the result vector `res` so that the digits are in the correct order, as the least significant bit was added first. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Return Statement</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> This line returns the final result vector `res`, which contains the negabinary sum of the input vectors. </div>
                         </div>
                     
                 </div>
@@ -615,16 +709,16 @@ Output: [null, null, 1, 2, 3]</div>
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) when the set is empty and we simply pop the counter value.</div>
-                        <div class=""> <b>Average Case:</b> O(1) for both popSmallest and addBack operations as they involve constant time checks.</div>
-                        <div class=""> <b>Worst Case:</b> O(log n) when adding back numbers to the set and when removing from the set.</div> 
-                        <div class=""> <b>Description:</b> The time complexity is constant for most operations, but adding numbers back involves managing the set.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(max(m, n))</div>
+                        <div class=""> <b>Average Case:</b> O(max(m, n))</div>
+                        <div class=""> <b>Worst Case:</b> O(max(m, n))</div> 
+                        <div class=""> <b>Description:</b> The time complexity is O(max(m, n)) because we process each digit of both arrays at most once.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1) if no numbers are added back.</div>
-                        <div class=""> <b>Worst Case:</b> O(n) where n is the number of numbers added back to the set.</div> 
-                        <div class=""> <b>Description:</b> Space complexity depends on the number of elements in the set.</div>    
+                        <div class=""> <b>Best Case:</b> O(max(m, n))</div>
+                        <div class=""> <b>Worst Case:</b> O(max(m, n))</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(max(m, n)) due to the space required to store the result array.</div>    
                     </div>
 
                 </div>

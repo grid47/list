@@ -310,7 +310,7 @@
 
 
 
-<div class=""> You are given a string consisting of lowercase English letters. You must remove one letter from the string so that the frequency of all remaining letters is equal. Return true if it is possible to achieve this by removing exactly one letter, otherwise return false. </div>
+<div class=""> You are given a list of integers representing the number of hours worked each day. A day is considered tiring if the number of hours worked is strictly greater than 8. A well-performing interval is an interval of days where the number of tiring days is strictly larger than the number of non-tiring days. Your task is to return the length of the longest well-performing interval. </div>
 
 
 
@@ -361,47 +361,47 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> You are given a string word consisting of lowercase English letters.</div>
-                        <div class=""> <b>Example:</b> word = &#34;abcc&#34;</div>
+                        <div class=""> <b>Input:</b> You are given a list of integers representing the number of hours worked per day. The length of the list is between 1 and 10,000.</div>
+                        <div class=""> <b>Example:</b> Input: hours = [9,9,6,0,6,6,9]</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 2 &lt;= word.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • The number of elements in hours is between 1 and 10,000.</div>
                             
-                                <div style="margin-left: 20px;"> • word consists of lowercase English letters only.</div>
+                                <div style="margin-left: 20px;"> • Each integer in hours is between 0 and 16.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return true if it is possible to remove one letter so that all remaining letters have equal frequency, otherwise return false.</div>
-                        <div class=""> <b>Example:</b> Output: true</div>
+                        <div class=""> <b>Output:</b> Return the length of the longest well-performing interval.</div>
+                        <div class=""> <b>Example:</b> Output: 3</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The output should be an integer representing the length of the longest well-performing interval.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> Determine if it is possible to remove one letter so that all remaining characters have equal frequencies.</div>
+                        <div class=""> <b>Goal:</b> The goal is to find the longest interval where the number of tiring days is greater than the number of non-tiring days.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1. Count the frequency of each letter in the string.</div>
+                                <div style="margin-left: 20px;"> • Traverse the list and calculate a score where tiring days are scored as &#43;1 and non-tiring days as -1.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Count how many times each frequency appears in the string.</div>
+                                <div style="margin-left: 20px;"> • Track the cumulative score and use a map to store the earliest index for each score.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. If there are more than two distinct frequencies, return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If there is only one frequency, check if all letters have this frequency or if one letter appears once (removable).</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. If the two frequencies differ by 1 and one letter has that frequency, it can be removed to balance frequencies, return true.</div>
+                                <div style="margin-left: 20px;"> • For each score, check if a previous score exists that satisfies the condition of a well-performing interval, and update the result.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The solution must handle strings of size up to 100 efficiently.</div>
+                        <div class=""> <b>Goal:</b> You must ensure that the solution works for a list with up to 10,000 elements efficiently.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Ensure the solution works within time limits for string lengths up to 100.</div>
+                                <div style="margin-left: 20px;"> • The input list will contain between 1 and 10,000 elements.</div>
+                            
+                                <div style="margin-left: 20px;"> • Each element in the input list is an integer between 0 and 16.</div>
                             
                         </div>
                     </div>        
@@ -409,19 +409,21 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The string will always contain at least 2 characters.</div>
+                                <div style="margin-left: 20px;"> • The input list is non-empty.</div>
+                            
+                                <div style="margin-left: 20px;"> • The length of the list will be between 1 and 10,000.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word = &#34;abcc&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> By removing the last &#39;c&#39;, the frequency of &#39;a&#39;, &#39;b&#39;, and &#39;c&#39; becomes equal (1 for each). Hence, the answer is true.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hours = [9,9,6,0,6,6,9]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, the longest well-performing interval is [9,9,6], as there are 2 tiring days (9,9) and 1 non-tiring day (6).</div>                                
                                 <br/>
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: word = &#34;aazz&#34;</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> It is impossible to remove one letter and make the frequency of all characters equal because the frequencies of &#39;a&#39; and &#39;z&#39; differ, and neither can be reduced to equal the other.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Input: hours = [6,6,6]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> There are no tiring days in this list, so there is no well-performing interval.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -445,16 +447,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> We need to check if it&#39;s possible to remove one character so that the frequencies of all remaining characters are equal. This can be done by analyzing the frequency distribution of characters in the string.</div>
+                        <div class=""> <b>Approach:</b> To solve this problem, we will traverse the list and calculate a running score, updating the result whenever we encounter a well-performing interval. We will use a map to track the first occurrence of each cumulative score.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem requires checking how frequencies of characters are distributed.</div>
+                                <div style="margin-left: 20px;"> • We can track the number of tiring and non-tiring days using a cumulative score.</div>
+                            
+                                <div style="margin-left: 20px;"> • By using a map to store the first occurrence of each cumulative score, we can efficiently calculate the length of well-performing intervals.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • By counting frequencies and the frequency of frequencies, we can easily determine if removing a letter will balance the remaining frequencies.</div>
+                                <div style="margin-left: 20px;"> • We can optimize the solution by processing the list in a single pass and using the map to keep track of the earliest index for each score.</div>
                             
                         </div>
                     </div>
@@ -462,15 +466,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1. Use a hash map to store the frequency of each character in the string.</div>
+                                <div style="margin-left: 20px;"> • Initialize the score to 0 and the result to 0.</div>
                             
-                                <div style="margin-left: 20px;"> • 2. Use a second map to count how many times each frequency appears.</div>
+                                <div style="margin-left: 20px;"> • Loop through the list and update the score based on whether the current day&#39;s hours are tiring or not.</div>
                             
-                                <div style="margin-left: 20px;"> • 3. Analyze the frequencies: if more than two distinct frequencies exist, return false.</div>
-                            
-                                <div style="margin-left: 20px;"> • 4. If only one frequency exists, check if the string consists of identical letters or if one letter appears once.</div>
-                            
-                                <div style="margin-left: 20px;"> • 5. If two frequencies exist and differ by 1, check if the letter with the higher frequency occurs only once.</div>
+                                <div style="margin-left: 20px;"> • For each score, check if it has been seen before. If it has, update the result by calculating the length of the interval from the first occurrence to the current day.</div>
                             
                         </div>
                     </div>
@@ -479,22 +479,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The problem guarantees that word will have at least 2 characters.</div>
+                                <div style="margin-left: 20px;"> • If the list is empty, return 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution should efficiently handle strings of length 100.</div>
+                                <div style="margin-left: 20px;"> • Ensure the solution efficiently handles large inputs, up to 10,000 elements.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Check for cases where only one letter appears multiple times and all others appear once.</div>
+                                <div style="margin-left: 20px;"> • If all days are non-tiring, return 0.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Ensure that time complexity is O(n) for counting frequencies.</div>
+                                <div style="margin-left: 20px;"> • The solution should be able to handle lists with a maximum length of 10,000.</div>
                             
                         </div>                                                                        
                     </div>
@@ -511,35 +511,27 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Definition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Data Structure Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Data Structure Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Variable Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Frequency Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Data Structure</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Frequency Counting</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Loop Start</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Validation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Score Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Iterator Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Result Update (Positive Score)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Iterator Setup</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Else Condition</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Iterator Adjustment</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Map Update</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Result Update (Negative Score)</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Condition Check</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Final Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Final Condition</button>
-                    
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Final Condition</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Return Statement</button>
                     
                 </div>
 
@@ -548,28 +540,26 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">equalFrequency</span>(string word) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp2;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span>: word)  mp[c]<span style="color:#666">++</span>;
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestWPI</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> hours) {
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">m</span>: mp)  mp2[m.second]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> hours.size(), res <span style="color:#666">=</span> <span style="color:#666">0</span>, score <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        score <span style="color:#666">+=</span> (hours[i] <span style="color:#666">&gt;</span> <span style="color:#666">8</span>) <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(score <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)res <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>  (<span style="color:#666">!</span>mp.count(score))    mp[score] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>  (mp.count(score <span style="color:#666">-</span> <span style="color:#666">1</span>)) res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[score <span style="color:#666">-</span><span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp2.size() <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;::</span>iterator it1 <span style="color:#666">=</span> mp2.begin();
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;::</span>iterator it2 <span style="color:#666">=</span> mp2.begin();
-</span></span><span style="display:flex;"><span>    it2<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp2.size() <span style="color:#666">==</span> <span style="color:#666">1</span>){
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.size() <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> it1<span style="color:#666">-&gt;</span>first <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>   
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(it1<span style="color:#666">-&gt;</span>first <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> it1<span style="color:#666">-&gt;</span>second <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(it1<span style="color:#666">-&gt;</span>first <span style="color:#666">==</span> it2<span style="color:#666">-&gt;</span>first<span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> it2<span style="color:#666">-&gt;</span>second <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -577,153 +567,113 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Definition</b></div>
+                            <div class=""> <b>1 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">equalFrequency</span>(string word) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestWPI</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> hours) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Defines the function &#39;equalFrequency&#39; which accepts a string and returns a boolean value indicating whether it is possible to equalize the frequency of characters in the string. </div>
+                            <div class=""> This function `longestWPI` takes a vector of integers representing working hours for each day and returns the length of the longest well-performing interval (WPI). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Data Structure Initialization</b></div>
+                            <div class=""> <b>2 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares an unordered map &#39;mp&#39; to store the frequency count of each character in the word. </div>
+                            <div class=""> This line is for initialization and spacing in the code. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Data Structure Initialization</b></div>
+                            <div class=""> <b>3 : Variable Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp2;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> hours.size(), res <span style="color:#666">=</span> <span style="color:#666">0</span>, score <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Declares a map &#39;mp2&#39; to store how many times each frequency appears. </div>
+                            <div class=""> This line initializes the size of the `hours` array (`n`), the result variable `res` to store the length of the longest WPI, and the `score` to track the cumulative score as the loop progresses. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Frequency Counting</b></div>
+                            <div class=""> <b>4 : Data Structure</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span>: word)  mp[c]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Loops through each character in the word, incrementing its count in the map &#39;mp&#39;. </div>
+                            <div class=""> Declares a map `mp` to store the first occurrence of each score value and its corresponding index. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Frequency Counting</b></div>
+                            <div class=""> <b>5 : Loop Start</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">m</span>: mp)  mp2[m.second]<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Iterates over the map &#39;mp&#39; to fill &#39;mp2&#39; with the frequency of each frequency. </div>
+                            <div class=""> Begins the loop to iterate through each element of the `hours` vector. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Validation</b></div>
+                            <div class=""> <b>6 : Score Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp2.size() <span style="color:#666">&gt;</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        score <span style="color:#666">+=</span> (hours[i] <span style="color:#666">&gt;</span> <span style="color:#666">8</span>) <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If there are more than two different frequencies, return false as it is impossible to make the frequencies equal by removing or modifying one character. </div>
+                            <div class=""> This line updates the cumulative `score`. If the working hours for the day are greater than 8, the score is incremented by 1, otherwise, it is decremented by 1. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Iterator Setup</b></div>
+                            <div class=""> <b>7 : Result Update (Positive Score)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;::</span>iterator it1 <span style="color:#666">=</span> mp2.begin();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(score <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)res <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates an iterator &#39;it1&#39; pointing to the beginning of the &#39;mp2&#39; map. </div>
+                            <div class=""> If the cumulative score is greater than 0, the result `res` is updated to the length of the current interval (`i &#43; 1`). </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Iterator Setup</b></div>
+                            <div class=""> <b>8 : Else Condition</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;::</span>iterator it2 <span style="color:#666">=</span> mp2.begin();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Creates another iterator &#39;it2&#39; also pointing to the beginning of the &#39;mp2&#39; map. </div>
+                            <div class=""> If the cumulative score is not greater than 0, the code enters the else block to process the map of scores. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Iterator Adjustment</b></div>
+                            <div class=""> <b>9 : Map Update</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    it2<span style="color:#666">++</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>  (<span style="color:#666">!</span>mp.count(score))    mp[score] <span style="color:#666">=</span> i;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Moves the second iterator &#39;it2&#39; to the second element in the &#39;mp2&#39; map. </div>
+                            <div class=""> If the map doesn&#39;t already contain the current score, the score and its corresponding index are added to the map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>10 : Condition Check</b></div>
+                            <div class=""> <b>10 : Result Update (Negative Score)</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp2.size() <span style="color:#666">==</span> <span style="color:#666">1</span>){
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>  (mp.count(score <span style="color:#666">-</span> <span style="color:#666">1</span>)) res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> mp[score <span style="color:#666">-</span><span style="color:#666">1</span>]);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Checks if there is only one frequency in &#39;mp2&#39;, indicating all characters have the same frequency. </div>
+                            <div class=""> If the map contains the previous score (`score - 1`), the result `res` is updated to the maximum value between the current result and the length of the interval between the current index and the index stored in the map. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>11 : Condition Check</b></div>
+                            <div class=""> <b>11 : Return Statement</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.size() <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">||</span> it1<span style="color:#666">-&gt;</span>first <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If there is only one character or all characters have a frequency of 1, return true (it is possible to equalize frequencies). </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>12 : Condition Check</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If neither of the previous conditions are met, return false. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>13 : Final Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(it1<span style="color:#666">-&gt;</span>first <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> it1<span style="color:#666">-&gt;</span>second <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the frequency of 1 appears exactly once, return true as it can be equalized by removing a single character. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>14 : Final Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(it1<span style="color:#666">-&gt;</span>first <span style="color:#666">==</span> it2<span style="color:#666">-&gt;</span>first<span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> it2<span style="color:#666">-&gt;</span>second <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> If the difference between the two frequencies is 1 and the second frequency occurs exactly once, return true. </div>
-                        </div>
-                    
-                        <div class="step-slide">
-                            <div class=""> <b>15 : Final Condition</b></div>
-                            <div class="">
-                                
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div>                                
-                            </div>
-                            <div class=""> Return false if none of the conditions for equalizing the frequencies are met. </div>
+                            <div class=""> Returns the result, which is the length of the longest well-performing interval (WPI). </div>
                         </div>
                     
                 </div>
@@ -746,13 +696,13 @@
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Average Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The time complexity is O(n) where n is the length of the string, as we need to traverse the string and perform frequency analysis.</div>                                               
+                        <div class=""> <b>Description:</b> The time complexity is O(n), where n is the length of the input list, as we only make a single pass through the list.</div>                                               
                     </div>
 
                     <div class="step-slide">
                         <div class=""> <b>Best Case:</b> O(n)</div>
                         <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the two hash maps used for counting character and frequency distributions.</div>    
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage required for the map to track the first occurrence of each cumulative score.</div>    
                     </div>
 
                 </div>

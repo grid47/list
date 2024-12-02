@@ -282,7 +282,7 @@
                                     <i class="far fa-star"></i>
                                     Jun 24, 2024
                                     <i class="far fa-clock clock"></i>
-                                    4 min read
+                                    6 min read
                                 </span>					
                             </div>
                         </div>			
@@ -309,7 +309,7 @@
 
 
 
-<div class=""> You are given a binary string s containing at least one &lsquo;1&rsquo;. Your task is to rearrange the bits in such a way that the resulting binary number is the largest possible odd binary number that can be formed from the given bits. A binary number is odd if its least significant bit (last bit) is &lsquo;1&rsquo;. The resulting binary number may contain leading zeros. </div>
+<div class=""> You are given a list of events where each event is represented by a pair [startDay, endDay]. Your task is to find the maximum number of events you can attend, ensuring that you attend only one event per day. </div>
 
 
 
@@ -360,45 +360,51 @@
                 <div class="steps-slides" id="stepsSlides-Problem">
 
                     <div class="step-slide">
-                        <div class=""> <b>Input:</b> The input consists of a binary string s containing only &#39;0&#39; and &#39;1&#39; characters. The string will contain at least one &#39;1&#39;.</div>
-                        <div class=""> <b>Example:</b> s = &#34;100&#34;</div>
+                        <div class=""> <b>Input:</b> The input consists of a list of events, where each event is represented by a pair of integers indicating the start and end day of the event.</div>
+                        <div class=""> <b>Example:</b> For example, [[1, 2], [2, 3], [3, 4]] where each pair represents an event that lasts from start to end day.</div>
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= events.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • s contains only &#39;0&#39; and &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • events[i].length == 2</div>
                             
-                                <div style="margin-left: 20px;"> • s contains at least one &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= startDay[i] &lt;= endDay[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Output:</b> Return a string representing the largest odd binary number that can be created from the given binary string.</div>
-                        <div class=""> <b>Example:</b> For input s = &#34;100&#34;, the output is &#34;010&#34;.</div>
+                        <div class=""> <b>Output:</b> The output should be a single integer representing the maximum number of events you can attend.</div>
+                        <div class=""> <b>Example:</b> For the input [[1, 2], [2, 3], [3, 4]], the output should be 3.</div>
                         <div class=""> <b>Constraints:</b>                        
+                            
+                                <div style="margin-left: 20px;"> • The result will always be a non-negative integer.</div>
                             
                         </div>
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The goal is to rearrange the bits in such a way that the resulting binary number is the largest odd binary number possible.</div>
+                        <div class=""> <b>Goal:</b> The goal is to maximize the number of events that can be attended by scheduling them on non-overlapping days.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • Identify and place the &#39;1&#39; in the last position to ensure the binary number is odd.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the events based on their start day. If two events start on the same day, sort by the end day.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the remaining bits in descending order to form the largest possible binary number.</div>
+                                <div style="margin-left: 20px;"> • 2. Use a priority queue (min-heap) to keep track of the end days of events that are currently active.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Iterate through the days and for each day, add any events that start on that day and remove events that have ended.</div>
+                            
+                                <div style="margin-left: 20px;"> • 4. Track the maximum number of events that can be attended at any point in time.</div>
                             
                         </div>
                     </div>                      
 
                     <div class="step-slide">
-                        <div class=""> <b>Goal:</b> The problem requires a rearrangement of the bits while keeping the last bit &#39;1&#39; to ensure the binary number is odd.</div>
+                        <div class=""> <b>Goal:</b> The solution should handle large inputs efficiently, and the result should fit within a 32-bit integer.</div>
                         <div class=""> <b>Steps:</b>
                             
-                                <div style="margin-left: 20px;"> • 1 &lt;= s.length &lt;= 100</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= events.length &lt;= 10^5</div>
                             
-                                <div style="margin-left: 20px;"> • The string contains at least one &#39;1&#39;.</div>
+                                <div style="margin-left: 20px;"> • 1 &lt;= startDay[i] &lt;= endDay[i] &lt;= 10^5</div>
                             
                         </div>
                     </div>        
@@ -406,15 +412,19 @@
                     <div class="step-slide">
                         <div class=""> <b>Assumptions:</b>
                             
-                                <div style="margin-left: 20px;"> • The binary string contains at least one &#39;1&#39;, ensuring that a valid odd binary number can be created.</div>
+                                <div style="margin-left: 20px;"> • Events do not overlap by default, but they may share common days.</div>
                             
                         </div>
                     </div>     
                     
                     <div class="step-slide">
                             
-                                <div style="margin-left: 20px;"> • <b>Input:</b> For input s = &#34;100&#34;, the output is &#34;010&#34;.</div>
-                                <div style="margin-left: 20px;"> • <b>Explanation:</b> To create the largest odd binary number, the &#39;1&#39; must be placed in the last position. The remaining bits &#39;10&#39; can be rearranged as &#34;01&#34;, resulting in the binary number &#34;010&#34;.</div>                                
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 1: [[1, 2], [2, 3], [3, 4]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, you can attend all three events by selecting one event per day.</div>                                
+                                <br/>
+                            
+                                <div style="margin-left: 20px;"> • <b>Input:</b> Example 2: [[1, 2], [2, 3], [3, 4], [1, 2]]</div>
+                                <div style="margin-left: 20px;"> • <b>Explanation:</b> In this case, you can attend all four events by choosing the best days.</div>                                
                                 <br/>
                             
                     </div>                         
@@ -438,18 +448,18 @@
                 <div class="steps-slides" id="stepsSlides-Approach">
                     
                     <div class="step-slide">
-                        <div class=""> <b>Approach:</b> The approach involves rearranging the bits of the binary string to maximize the resulting odd binary number by ensuring the last bit is &#39;1&#39; and sorting the remaining bits in descending order.</div>
+                        <div class=""> <b>Approach:</b> The approach involves sorting the events and using a priority queue to keep track of the events and manage overlaps efficiently.</div>
                     </div>
                     
                     <div class="step-slide">
                         <div class=""> <b>Observations:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The last bit must always be &#39;1&#39; for the binary number to be odd.</div>
+                                <div style="margin-left: 20px;"> • Sorting the events by start day helps in managing overlaps.</div>
                             
-                                <div style="margin-left: 20px;"> • The remaining bits should be sorted to form the largest possible number.</div>
+                                <div style="margin-left: 20px;"> • Using a priority queue allows us to quickly remove events that have ended.</div>
                             
                             
-                                <div style="margin-left: 20px;"> • If the binary string has more than one &#39;1&#39;, we need to place one &#39;1&#39; at the end and arrange the rest of the bits in descending order.</div>
+                                <div style="margin-left: 20px;"> • We should aim to minimize the number of overlapping events while maximizing the number of events we can attend.</div>
                             
                         </div>
                     </div>
@@ -457,9 +467,11 @@
                     <div class="step-slide">
                         <div class=""> <b>Steps:</b>                        
                             
-                                <div style="margin-left: 20px;"> • Find all the &#39;1&#39;s and move one to the last position.</div>
+                                <div style="margin-left: 20px;"> • 1. Sort the events by start day, and by end day if start days are equal.</div>
                             
-                                <div style="margin-left: 20px;"> • Sort the remaining bits (the &#39;1&#39;s and &#39;0&#39;s) in descending order to form the largest binary number.</div>
+                                <div style="margin-left: 20px;"> • 2. Iterate through each day and process the events using a priority queue to manage ongoing events.</div>
+                            
+                                <div style="margin-left: 20px;"> • 3. Count the number of events that can be attended by tracking the minimum end time.</div>
                             
                         </div>
                     </div>
@@ -468,22 +480,22 @@
                     <div class="step-slide">
                         <div class=""> <b>Empty Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The input string is guaranteed to contain at least one &#39;1&#39;, so no need to handle empty inputs.</div>
+                                <div style="margin-left: 20px;"> • No events: The result should be 0.</div>
                             
                         </div>
                         <div class=""> <b>Large Inputs:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The solution must handle input strings of length up to 100 characters efficiently.</div>
+                                <div style="margin-left: 20px;"> • Handling up to 10^5 events efficiently without performance degradation.</div>
                             
                         </div>
                         <div class=""> <b>Special Values:</b>                        
                             
-                                <div style="margin-left: 20px;"> • If the string already ends with &#39;1&#39;, only sorting the remaining bits is necessary.</div>
+                                <div style="margin-left: 20px;"> • Events that start and end on the same day: Handle these events appropriately.</div>
                             
                         </div>       
                         <div class=""> <b>Constraints:</b>                        
                             
-                                <div style="margin-left: 20px;"> • The algorithm must ensure that the result is the largest odd binary number possible.</div>
+                                <div style="margin-left: 20px;"> • The solution should run in O(n log n) time due to sorting.</div>
                             
                         </div>                                                                        
                     </div>
@@ -500,23 +512,39 @@
                 <div class="step-problem-guide-tags" id="stepButtons">
                     <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="0"> Code </button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Function Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="1"> 1 Comparator Function</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Variable Initialization</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="2"> 2 Comparator Logic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Loop Start</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="3"> 3 Comparator Logic</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Condition Check</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="4"> 4 Function Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Swap Operation</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="5"> 5 Event Count Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Increment Index</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="6"> 6 Sort Events</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Condition Check for Last Character</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="7"> 7 Priority Queue Declaration</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Final Swap</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="8"> 8 Counter Initialization</button>
                     
-                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Return Statement</button>
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="9"> 9 Day Loop</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="10"> 10 Pop Expired Events</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="11"> 11 Pop Expired Event</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="12"> 12 Add New Events</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="13"> 13 Push Event to Queue</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="14"> 14 Attend Event</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="15"> 15 Pop Attended Event</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="16"> 16 Increment Event Count</button>
+                    
+                        <button class="step-problem-guide-tag" id="step-problem-guide-tag-Steps" data-slide="17"> 17 Return Result</button>
                     
                 </div>
 
@@ -525,18 +553,33 @@
                     <div class="step-slide">
                         <div class=""> 
                             
-                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">maximumOddBinaryNumber</span>(string s) {
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, sz <span style="color:#666">=</span> s.size();
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>;j <span style="color:#666">&lt;</span> sz <span style="color:#666">-</span> <span style="color:#666">1</span>; <span style="color:#666">++</span>j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) {
-</span></span><span style="display:flex;"><span>        swap(s[j], s[i]);
-</span></span><span style="display:flex;"><span>        <span style="color:#666">++</span>i;
-</span></span><span style="display:flex;"><span>    } 
+                            <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>];
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(s.back() <span style="color:#666">!=</span> <span style="color:#b44">&#39;1&#39;</span>) 
-</span></span><span style="display:flex;"><span>    swap(s[sz <span style="color:#666">-</span> <span style="color:#666">1</span>], s[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxEvents</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> e) {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> e.size();
+</span></span><span style="display:flex;"><span>    sort(e.begin(), e.end(), cmp);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">1</span>; d <span style="color:#666">&lt;=</span> <span style="color:#666">100000</span>; d<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> pq.top() <span style="color:#666">&lt;</span> d) {
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> e[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> d) {
+</span></span><span style="display:flex;"><span>            pq.push(e[i<span style="color:#666">++</span>][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div>
                         </div>
@@ -544,93 +587,173 @@
 
                     
                         <div class="step-slide">
-                            <div class=""> <b>1 : Function Start</b></div>
+                            <div class=""> <b>1 : Comparator Function</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">maximumOddBinaryNumber</span>(string s) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">cmp</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start of the function definition for maximumOddBinaryNumber. </div>
+                            <div class=""> We define a comparator function to sort the events. If two events have the same start day, they are sorted by their end day in ascending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>2 : Variable Initialization</b></div>
+                            <div class=""> <b>2 : Comparator Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, sz <span style="color:#666">=</span> s.size();
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">1</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Initialize index &#39;i&#39; to 0 and calculate the size of the string &#39;s&#39;. </div>
+                            <div class=""> If two events start on the same day, we return true if the first event ends earlier than the second. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>3 : Loop Start</b></div>
+                            <div class=""> <b>3 : Comparator Logic</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>;j <span style="color:#666">&lt;</span> sz <span style="color:#666">-</span> <span style="color:#666">1</span>; <span style="color:#666">++</span>j) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>];
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Start a loop that iterates over each character of the string, except the last one. </div>
+                            <div class=""> If the start days are different, we return true if the first event starts earlier than the second. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>4 : Condition Check</b></div>
+                            <div class=""> <b>4 : Function Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) {
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxEvents</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> e) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the current character at position &#39;j&#39; is &#39;1&#39;. </div>
+                            <div class=""> The &#39;maxEvents&#39; function is declared, which takes a vector of events, each represented as a pair of start and end days. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>5 : Swap Operation</b></div>
+                            <div class=""> <b>5 : Event Count Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        swap(s[j], s[i]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> e.size();
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the current character is &#39;1&#39;, swap it with the character at index &#39;i&#39;. </div>
+                            <div class=""> We initialize &#39;n&#39; to the number of events, which is the size of the vector &#39;e&#39;. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>6 : Increment Index</b></div>
+                            <div class=""> <b>6 : Sort Events</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#666">++</span>i;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    sort(e.begin(), e.end(), cmp);
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Increment the index &#39;i&#39; after swapping. </div>
+                            <div class=""> We sort the events by their start day (and end day if the start days are equal) using the &#39;cmp&#39; comparator. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>7 : Condition Check for Last Character</b></div>
+                            <div class=""> <b>7 : Priority Queue Declaration</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(s.back() <span style="color:#666">!=</span> <span style="color:#b44">&#39;1&#39;</span>) 
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Check if the last character of the string is not &#39;1&#39;. </div>
+                            <div class=""> We declare a priority queue to store the end days of events, sorted in ascending order. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>8 : Final Swap</b></div>
+                            <div class=""> <b>8 : Counter Initialization</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    swap(s[sz <span style="color:#666">-</span> <span style="color:#666">1</span>], s[i <span style="color:#666">-</span> <span style="color:#666">1</span>]);
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> If the last character is not &#39;1&#39;, swap it with the character at index &#39;i - 1&#39;. </div>
+                            <div class=""> We initialize two variables: &#39;i&#39; to track the index of events and &#39;cnt&#39; to count the number of events that can be attended. </div>
                         </div>
                     
                         <div class="step-slide">
-                            <div class=""> <b>9 : Return Statement</b></div>
+                            <div class=""> <b>9 : Day Loop</b></div>
                             <div class="">
                                 
-                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> s;
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">1</span>; d <span style="color:#666">&lt;=</span> <span style="color:#666">100000</span>; d<span style="color:#666">++</span>) {
 </span></span></code></pre></div>                                
                             </div>
-                            <div class=""> Return the modified string which now represents the maximum odd binary number. </div>
+                            <div class=""> We loop over each day from 1 to 100000, representing the possible days on which an event can take place. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>10 : Pop Expired Events</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> pq.top() <span style="color:#666">&lt;</span> d) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We remove events from the priority queue that have already ended before the current day &#39;d&#39;. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>11 : Pop Expired Event</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We remove the event with the earliest end day from the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>12 : Add New Events</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> e[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> d) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We add all events starting on the current day &#39;d&#39; to the priority queue. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>13 : Push Event to Queue</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.push(e[i<span style="color:#666">++</span>][<span style="color:#666">1</span>]);
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We push the end day of the current event into the priority queue and move to the next event. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>14 : Attend Event</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> If there are events available to attend, we proceed to attend one. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>15 : Pop Attended Event</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            pq.pop();
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We pop the event with the earliest end day from the priority queue, as it is the event we will attend. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>16 : Increment Event Count</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We increment the event count as we have successfully attended an event. </div>
+                        </div>
+                    
+                        <div class="step-slide">
+                            <div class=""> <b>17 : Return Result</b></div>
+                            <div class="">
+                                
+                                <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span></code></pre></div>                                
+                            </div>
+                            <div class=""> We return the total count of events that can be attended. </div>
                         </div>
                     
                 </div>
@@ -650,16 +773,16 @@
                 <div class="steps-slides" id="stepsSlides-Complexity">
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(n log n)</div>
-                        <div class=""> <b>Average Case:</b> O(n log n)</div>
-                        <div class=""> <b>Worst Case:</b> O(n log n)</div> 
-                        <div class=""> <b>Description:</b> Sorting the bits requires O(n log n) time where n is the length of the string.</div>                                               
+                        <div class=""> <b>Best Case:</b> O(n log n) for sorting the events.</div>
+                        <div class=""> <b>Average Case:</b> O(n log n) due to sorting and priority queue operations.</div>
+                        <div class=""> <b>Worst Case:</b> O(n log n), where n is the number of events.</div> 
+                        <div class=""> <b>Description:</b> The time complexity is dominated by sorting the events.</div>                                               
                     </div>
 
                     <div class="step-slide">
-                        <div class=""> <b>Best Case:</b> O(1)</div>
-                        <div class=""> <b>Worst Case:</b> O(n)</div> 
-                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the need for sorting the string.</div>    
+                        <div class=""> <b>Best Case:</b> O(1) if there are no events.</div>
+                        <div class=""> <b>Worst Case:</b> O(n) for the priority queue and input storage.</div> 
+                        <div class=""> <b>Description:</b> The space complexity is O(n) due to the storage of events and the priority queue.</div>    
                     </div>
 
                 </div>
